@@ -26,7 +26,12 @@ const faqs = [
   {
     question: "Et si ça ne me convient pas ?",
     answer:
-      "Remboursement intégral sans question dans les 14 jours suivant l'achat. Aucune condition, aucune démarche compliquée.",
+      "Remboursement intégral sans question dans les 14 jours suivant l'achat. Aucune condition, aucune démarche compliquée. Un simple email suffit.",
+  },
+  {
+    question: "Le contenu sera-t-il mis à jour quand l'IA évolue ?",
+    answer:
+      "Oui. L'abonnement à 4,90€/mois donne accès aux mises à jour continues. La méthode de base (PACO) reste valable quelle que soit l'évolution des outils — c'est sa force.",
   },
 ];
 
@@ -39,13 +44,8 @@ export function FAQSection() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5 reveal">Questions fréquentes</p>
           <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight tracking-tight text-navy mb-5 reveal">
-            Tout ce que vous
-            <br />
-            voulez savoir
+            Vous vous demandez peut-être…
           </h2>
-          <p className="text-[1.05rem] text-muted max-w-[540px] leading-relaxed reveal">
-            Une question absente ? Écrivez-nous directement.
-          </p>
         </div>
         <div className="flex flex-col">
           {faqs.map((item, i) => (
