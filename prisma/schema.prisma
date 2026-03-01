@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String    @id @default(cuid())
+  supabaseId         String?   @unique // lien avec Supabase Auth
+  email              String    @unique
+  name               String?
+  role               Role      @default(STUDENT)
+  stripeId           String?   @unique
+  subscriptionStatus String?
+  createdAt          DateTime  @default(now())
+
+  progress           UserProgress[]
+  prompts            Prompt[]
+  subscription       Subscription?
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+model Module {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  order       Int      @unique
+  videoUrl    String?  // Mux playback URL
+  pdfUrl      String?  // Supabase Storage URL
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  lessons     Lesson[]
+  quizzes     Quiz[]
+  progress    UserProgress[]
+}
+
+model Lesson {
+  id       String @id @default(cuid())
+  moduleId String
+  title    String
+  order    Int
+
+  module   Module @relation(fields: [moduleId], references: [id])
+}
+
+model UserProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  moduleId    String
+  completed   Boolean  @default(false)
+  quizScore   Int?
+  badgeEarned Boolean  @default(false)
+  completedAt DateTime?
+
+  user        User     @relation(fields: [userId], references: [id])
+  module      Module   @relation(fields: [moduleId], references: [id])
+
+  @@unique([userId, moduleId])
+}
+
+model Quiz {
+  id        String         @id @default(cuid())
+  moduleId  String
+
+  module    Module         @relation(fields: [moduleId], references: [id])
+  questions QuizQuestion[]
+}
+
+model QuizQuestion {
+  id           String  @id @default(cuid())
+  quizId       String
+  question     String
+  options      Json
+  correctIndex Int
+
+  quiz         Quiz    @relation(fields: [quizId], references: [id])
+}
+
+model Prompt {
+  id        String   @id @default(cuid())
+  userId    String?  // null = prompt partagé (bibliothèque admin)
+  title     String
+  content   String
+  category  String?  // marketing | rh | ux | it | général
+  isShared  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Subscription {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  stripeSubscriptionId String   @unique
+  stripePriceId        String
+  status               String
+  currentPeriodEnd     DateTime
+  createdAt            DateTime @default(now())
+
+  user                 User     @relation(fields: [userId], references: [id])
+}
+
