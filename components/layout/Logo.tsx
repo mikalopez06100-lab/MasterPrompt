@@ -8,6 +8,8 @@ type LogoProps = {
 };
 
 // Logo avec icône + nom + slogan (format horizontal)
+const logoUrl = process.env.NEXT_PUBLIC_LOGO_URL || "/logo.png";
+
 const sizes = {
   sm: { width: 140, height: 48 },
   md: { width: 180, height: 62 },
@@ -18,7 +20,7 @@ export function Logo({ href = "/", className = "", size = "md" }: LogoProps) {
   const { width, height } = sizes[size];
   const img = (
     <Image
-      src="/logo.png"
+      src={logoUrl}
       alt="Master Prompt — Apprenez à parler à l'IA"
       width={width}
       height={height}

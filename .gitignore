@@ -18,6 +18,9 @@ out
 .DS_Store
 *.pem
 
+# vidéo hero (servie depuis Supabase Storage)
+/public/videos/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

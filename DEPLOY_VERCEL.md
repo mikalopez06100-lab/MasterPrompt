@@ -38,8 +38,14 @@ git push -u origin main
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Ta clé anon Supabase | Non |
 | `SUPABASE_SERVICE_ROLE_KEY` | Ta clé service_role Supabase | Oui |
 | `NEXT_PUBLIC_APP_URL` | **https://ton-domaine.com** (ou l’URL Vercel en attendant) | Non |
+| `NEXT_PUBLIC_LOGO_URL` | URL du logo (Supabase Storage, ex. `https://…supabase.co/storage/v1/object/public/assets/logo.png`) — optionnel | Non |
+| `NEXT_PUBLIC_HERO_VIDEO_URL` | URL de la vidéo hero (Supabase Storage, ex. `…/assets/videos/bienvenue.mp4`) — optionnel | Non |
 
 Tu peux copier/coller depuis ton `.env.local`, puis **modifier** `NEXT_PUBLIC_APP_URL` une fois le domaine en place (voir étape 4).
+
+**Médias (Supabase Storage, bucket `assets`) :**
+- **Logo :** placer le fichier dans `public/logo.png`, puis `node scripts/upload-logo-to-supabase.mjs`. Définir `NEXT_PUBLIC_LOGO_URL` sur Vercel (ou laisser vide pour le logo local).
+- **Vidéo hero :** placer la vidéo dans `public/videos/bienvenue.mp4`, puis `node scripts/upload-hero-video-to-supabase.mjs`. Définir `NEXT_PUBLIC_HERO_VIDEO_URL` sur Vercel (ou laisser vide pour la vidéo locale).
 
 6. Clique sur **Deploy**. Attends la fin du build.
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LandingNav } from "@/components/landing/LandingNav";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { EmailSignupBlock } from "@/components/landing/EmailSignupBlock";
+import { HeroVideo } from "@/components/landing/HeroVideo";
 
 const MODULES = [
   { tag: "Fondamentaux", title: "Comprendre l'IA et le Prompt Engineering", desc: "Les bases concrètes pour comprendre comment fonctionne l'IA — et pourquoi vos prompts actuels donnent des résultats décevants." },
@@ -35,15 +36,7 @@ export default function LandingPage() {
           Master Prompt est la méthode pratique pour maîtriser l&apos;IA dans votre business — sans jargon, sans prise de tête.
         </p>
 
-        {/* Video placeholder */}
-        <div className="max-w-[760px] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-black aspect-video mb-10">
-          <div className="w-full h-full bg-gradient-to-br from-navy to-navy-2 flex flex-col items-center justify-center gap-5 cursor-pointer">
-            <div className="w-[72px] h-[72px] rounded-full bg-primary flex items-center justify-center shadow-[0_0_0_12px_rgba(37,99,235,0.15)] hover:scale-105 transition-transform">
-              <svg className="w-7 h-7 fill-white ml-1" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" /></svg>
-            </div>
-            <p className="text-sm text-white/50">Présentation de la formation — 55 secondes</p>
-          </div>
-        </div>
+        <HeroVideo />
 
         <div className="flex flex-wrap items-center justify-center gap-0 border-t border-white/10 pt-10 mt-6">
           {[
