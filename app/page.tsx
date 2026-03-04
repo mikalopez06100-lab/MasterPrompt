@@ -5,13 +5,42 @@ import { EmailSignupBlock } from "@/components/landing/EmailSignupBlock";
 import { HeroVideo } from "@/components/landing/HeroVideo";
 
 const MODULES = [
-  { tag: "Fondamentaux", title: "Comprendre l'IA et le Prompt Engineering", desc: "Les bases concrètes pour comprendre comment fonctionne l'IA — et pourquoi vos prompts actuels donnent des résultats décevants." },
-  { tag: "Méthode", title: "La méthode PACO — Fondamentaux du prompt efficace", desc: "Le seul framework dont vous avez besoin. Structurez chaque demande pour obtenir un résultat utilisable dès la première tentative." },
-  { tag: "Cas d'usage", title: "Communication & Marketing", desc: "Emails, posts réseaux sociaux, pages de vente, biographies, newsletters — des templates directement réutilisables dans votre communication." },
-  { tag: "Cas d'usage", title: "Gestion & Productivité", desc: "Devis, comptes-rendus, plans d'action, analyse de données, organisation — tout ce qui mange votre temps au quotidien." },
-  { tag: "Pratique", title: "Ateliers pratiques et simulations", desc: "Vous pratiquez sur des cas réels avec l'éditeur de prompts intégré. Retour immédiat sur vos résultats. Pas de théorie — de l'application." },
-  { tag: "Avancé", title: "Enchaînements IA — vers l'automatisation", desc: "Comment combiner plusieurs prompts pour créer des flux de travail sans outil technique. L'IA commence à travailler pour vous, pas avec vous.", new: true },
-  { tag: "Éthique & Autonomie", title: "Limites, protection des données et veille continue", desc: "Ce que vous ne devez jamais confier à une IA. RGPD, confidentialité, hallucinations — protégez votre business. Et restez à jour sans y passer des heures." },
+  {
+    tag: "Fondamentaux",
+    title: "Comprendre l'IA et le Prompt Engineering",
+    desc: "Les bases pour comprendre pourquoi vos prompts actuels donnent des résultats décevants.",
+  },
+  {
+    tag: "Méthode",
+    title: "La méthode PACO — le seul framework dont vous avez besoin",
+    desc: "Structurez chaque demande pour obtenir un résultat utilisable dès la première tentative.",
+  },
+  {
+    tag: "Cas d'usage",
+    title: "Communication & Marketing",
+    desc: "Emails, posts réseaux sociaux, pages de vente, newsletters — des templates directement réutilisables.",
+  },
+  {
+    tag: "Cas d'usage",
+    title: "Gestion & Productivité",
+    desc: "Devis, comptes-rendus, plans d'action — tout ce qui mange votre temps chaque semaine.",
+  },
+  {
+    tag: "Pratique",
+    title: "Ateliers pratiques et simulations",
+    desc: "Vous pratiquez sur des cas réels avec l'éditeur intégré. Application directe, retour immédiat.",
+  },
+  {
+    tag: "Avancé",
+    title: "Enchaînements IA — vers l'automatisation",
+    desc: "Combinez plusieurs prompts pour créer des flux de travail sans outil technique.",
+    new: true,
+  },
+  {
+    tag: "Éthique & Autonomie",
+    title: "Limites, RGPD et veille continue",
+    desc: "Ce que vous ne devez jamais confier à une IA. Et comment rester à jour sans y passer des heures.",
+  },
 ];
 
 export default function LandingPage() {
@@ -20,91 +49,240 @@ export default function LandingPage() {
       <LandingNav />
 
       {/* HERO */}
-      <section className="bg-navy py-16 md:py-20 px-4 md:px-8 text-center">
-        <div className="inline-flex items-center gap-2 bg-primary/20 text-blue-200 border border-primary/30 py-1.5 px-4 rounded-full text-xs font-semibold uppercase tracking-wide mb-8">
-          <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-blink" />
-          Lancement bientôt — Prix early bird disponible
-        </div>
-        <h1 className="font-heading text-3xl md:text-4xl lg:text-[3.8rem] font-black leading-[1.08] tracking-tight text-white mb-5 max-w-[700px] mx-auto">
-          Vous utilisez l&apos;IA.
-          <br />
-          Mais pas comme
-          <br />
-          <em className="italic text-sand">vous le devriez.</em>
-        </h1>
-        <p className="text-[1.05rem] text-white/50 max-w-[520px] mx-auto mb-10 leading-relaxed">
-          Master Prompt est la méthode pratique pour maîtriser l&apos;IA dans votre business — sans jargon, sans prise de tête.
-        </p>
-
-        <HeroVideo />
-
-        <div className="flex flex-wrap items-center justify-center gap-0 border-t border-white/10 pt-10 mt-6">
-          {[
-            { num: "7", label: "Modules progressifs" },
-            { num: "4h", label: "De formation pratique" },
-            { num: "19€", label: "Prix de lancement" },
-            { num: "14j", label: "Remboursement garanti" },
-          ].map((s, i) => (
-            <div key={i} className="px-6 md:px-10 py-4 border-r border-white/10 last:border-r-0 text-center">
-              <div className="font-heading text-2xl font-black text-white leading-none">{s.num}</div>
-              <div className="text-xs text-white/40 mt-1">{s.label}</div>
+      <section className="bg-navy py-16 md:py-20 px-4 md:px-8">
+        <div className="max-w-[1020px] mx-auto grid grid-cols-1 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.9fr)] gap-10 md:gap-14 items-center">
+          {/* Left */}
+          <div>
+            <div className="inline-flex items-center gap-2 bg-primary/20 text-blue-200 border border-primary/30 py-1.5 px-4 rounded-full text-[0.7rem] font-semibold uppercase tracking-[0.18em] mb-5">
+              <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-blink" />
+              Lancement bientôt · Places limitées
             </div>
-          ))}
+            <h1 className="font-heading text-3xl md:text-4xl lg:text-[3.6rem] font-black leading-[1.04] tracking-tight text-white mb-4">
+              Vous utilisez l&apos;IA.
+              <br />
+              Mais pas comme
+              <br />
+              <em className="italic text-sand">vous le devriez.</em>
+            </h1>
+            <p className="text-[1.02rem] text-white/55 max-w-[480px] leading-relaxed mb-6">
+              La méthode concrète pour maîtriser l&apos;IA dans votre business — 7 modules, zéro jargon, des résultats dès la
+              première semaine.
+            </p>
+
+            {/* Social proof */}
+            <div className="flex items-center gap-4">
+              <div className="flex -space-x2">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-9 h-9 rounded-full border-2 border-navy bg-gradient-to-br from-sand to-primary/70 text-[0.7rem] font-heading font-black text-navy flex items-center justify-center"
+                  >
+                    MP
+                  </div>
+                ))}
+              </div>
+              <div className="text-left">
+                <span className="text-[0.75rem] text-amber-300 tracking-[0.18em] font-semibold uppercase block">
+                  ★★★★★
+                </span>
+                <p className="text-[0.8rem] text-white/55">
+                  <span className="font-semibold text-white">+200 entrepreneurs</span> sur la liste d&apos;attente.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right hero card */}
+          <div id="form-main">
+            <div className="bg-gradient-to-br from-[#1a2535] to-[#111827] border border-white/10 rounded-2xl p-6 md:p-7 shadow-[0_40px_100px_rgba(0,0,0,0.5)] relative overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-200 to-emerald-400" />
+
+              <div className="flex items-center gap-3 pb-4 mb-4 border-b border-white/10">
+                <div className="w-[52px] h-[52px] rounded-full border-2 border-amber-300/60 shadow-[0_0_0_4px_rgba(245,158,11,0.12)] bg-navy-2 flex items-center justify-center font-heading font-black text-amber-300 text-[1.1rem]">
+                  ML
+                </div>
+                <div>
+                  <div className="text-[0.9rem] font-semibold text-white">Michaël Lopez</div>
+                  <div className="text-[0.75rem] text-white/40">Entrepreneur · 25 ans d&apos;expérience</div>
+                </div>
+              </div>
+
+              <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-200 text-[0.7rem] font-semibold uppercase tracking-[0.16em] rounded-full py-1 px-3 mb-3">
+                🎁 100% Gratuit — sans CB
+              </div>
+              <div className="font-heading text-[1.15rem] font-bold text-white leading-snug mb-1.5">
+                Recevez vos 10 prompts essentiels
+              </div>
+              <div className="text-[0.8rem] text-white/45 mb-4">Utilisables immédiatement dans votre business.</div>
+
+              <ul className="space-y-1.5 mb-4 text-[0.8rem] text-white/70">
+                {[
+                  "Email de prospection",
+                  "Post LinkedIn / Instagram",
+                  "Relance client sans réponse",
+                  "Description de service",
+                  "+ 6 autres templates métier",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="w-4 h-4 rounded-full bg-emerald-500 flex items-center justify-center text-[0.6rem] font-black text-white">
+                      ✓
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <EmailSignupBlock
+                inputId="email-hero"
+                buttonText="Recevoir les 10 prompts gratuitement →"
+                buttonGreen
+                successMessage="✓ Votre PDF est en route ! Vérifiez votre boîte mail."
+              />
+              <div className="mt-3 bg-amber-500/5 border border-amber-500/30 rounded-md p-2.5 flex gap-2 items-start">
+                <span className="text-sm">🚀</span>
+                <p className="text-[0.75rem] text-amber-100/90 leading-relaxed">
+                  + accès au <strong className="text-amber-200">prix de lancement à 49€</strong> (au lieu de 97€).
+                </p>
+              </div>
+              <p className="text-[0.7rem] text-white/25 text-center mt-3">
+                🔒 Sans spam · Désabonnement en 1 clic
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats bar */}
+        <div className="mt-10 border-t border-white/10">
+          <div className="flex flex-wrap items-center justify-center gap-0">
+            {[
+              { num: "7", label: "Modules" },
+              { num: "4h", label: "De formation" },
+              { num: "49€", label: "Prix lancement" },
+              { num: "14j", label: "Remboursé si déçu" },
+            ].map((s, i) => (
+              <div
+                key={s.label}
+                className={`px-6 md:px-10 py-4 text-center border-white/10 ${
+                  i < 3 ? "border-r" : "border-r-0"
+                }`}
+              >
+                <div className="font-heading text-2xl font-black text-white leading-none">{s.num}</div>
+                <div className="text-[0.72rem] text-white/40 uppercase tracking-[0.12em] mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* TRUST */}
       <div className="bg-white border-y border-border py-5 px-4 flex flex-wrap items-center justify-center gap-8">
         <span className="text-sm text-muted flex items-center gap-2">🔐 Paiement sécurisé Stripe</span>
-        <span className="text-sm text-muted flex items-center gap-2">🛡️ Satisfait ou remboursé 14 jours</span>
+        <span className="text-sm text-muted flex items-center gap-2">🛡️ Remboursé sous 14 jours</span>
         <span className="text-sm text-muted flex items-center gap-2">🇫🇷 Formation 100% en français</span>
         <span className="text-sm text-muted flex items-center gap-2">⚡ Accès immédiat après paiement</span>
       </div>
 
-      {/* HONEST + PDF FORM */}
-      <section id="form-main" className="bg-white py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">Soyons honnêtes</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-6">
-            Est-ce que je peux
+      {/* VIDEO SECTION */}
+      <section className="bg-navy py-16 md:py-20">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8 text-center">
+          <div className="inline-block bg-amber-500/10 border border-amber-500/30 text-amber-200 text-[0.7rem] font-semibold uppercase tracking-[0.16em] rounded-full py-1 px-3 mb-4">
+            Regardez cette vidéo en premier
+          </div>
+          <h2 className="font-heading text-2xl md:text-[2.2rem] font-black text-white leading-tight mb-2">
+            Apprenez à parler à l&apos;IA.
             <br />
-            être direct avec vous ?
+            <span className="text-amber-300">En 55 secondes.</span>
           </h2>
-          <div className="bg-white border border-border rounded-2xl p-8 md:p-10 mb-10">
-            <p className="text-base leading-relaxed text-navy mb-4">
-              Vous utilisez peut-être déjà ChatGPT ou Claude. Et les résultats sont souvent… décevants. Trop génériques. Pas adaptés à votre activité. Vous reformulez cinq fois la même demande pour finalement faire vous-même ce que vous vouliez déléguer à l&apos;IA.
-            </p>
-            <p className="text-base leading-relaxed text-navy mb-4">
-              <strong className="text-navy">Le problème, ce n&apos;est pas l&apos;IA.</strong> C&apos;est la façon dont vous lui parlez.
-            </p>
-            <p className="text-base leading-relaxed text-navy mb-4">
-              L&apos;IA ne lit pas dans les pensées. Elle produit exactement ce qu&apos;on lui demande — ni plus, ni moins. Et la plupart des entrepreneurs ne savent pas comment formuler cette demande correctement.
-            </p>
-            <p className="text-base leading-relaxed text-navy">
-              <strong className="text-navy">Ce n&apos;est pas un problème de compétence. C&apos;est un problème de méthode.</strong> Et une méthode, ça s&apos;apprend. Pas en semaines — en quelques heures.
+          <p className="text-[0.95rem] text-white/45 max-w-[460px] mx-auto mb-6">
+            Une courte vidéo pour comprendre l&apos;approche Master Prompt avant de découvrir le programme.
+          </p>
+          <HeroVideo />
+        </div>
+      </section>
+
+      {/* PROBLEM */}
+      <section className="bg-ivory py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-coral-600 mb-4">Le vrai problème</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-6">
+            L&apos;IA ne vous déçoit pas.
+            <br />
+            <span className="italic text-coral-600">Vos prompts, si.</span>
+          </h2>
+          <div className="border-l-4 border-amber-400 bg-amber-50 rounded-r-xl p-4 md:p-5 mb-8">
+            <p className="text-[1rem] font-semibold text-gray-800 leading-relaxed">
+              Le problème, ce n&apos;est pas l&apos;IA. C&apos;est la façon dont vous lui parlez. L&apos;IA produit exactement ce
+              qu&apos;on lui demande — ni plus, ni moins.
             </p>
           </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              {
+                emoji: "😤",
+                title: "Résultats génériques",
+                text: "Vous demandez, l'IA répond… mais c'est inutilisable. Vous passez plus de temps à corriger qu'à utiliser.",
+              },
+              {
+                emoji: "⏱️",
+                title: "Perte de temps",
+                text: "5 reformulations pour un email. Au final, vous le faites vous-même — et l'IA n'a servi à rien.",
+              },
+              {
+                emoji: "😰",
+                title: "Vous vous sentez dépassé",
+                text: "Vos concurrents produisent du contenu à une vitesse incompréhensible. Pas vous. Pas encore.",
+              },
+            ].map((card, i) => (
+              <div key={card.title} className="bg-white border border-gray-200 rounded-2xl p-4 md:p-5">
+                <div className="text-2xl mb-2">{card.emoji}</div>
+                <h3 className="text-[0.95rem] font-semibold text-gray-800 mb-1">{card.title}</h3>
+                <p className="text-[0.82rem] text-gray-600 leading-relaxed">{card.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4 mt-12">Commencez maintenant — gratuitement</p>
-          <h2 className="font-heading text-xl md:text-2xl font-black leading-tight text-navy mb-4">
+      {/* PDF + FORM */}
+      <section className="bg-white py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-4">
+            Commencez maintenant — c&apos;est gratuit
+          </p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-3">
             Recevez les 10 prompts essentiels
             <br />
-            <em className="italic text-primary">pour votre business</em>
+            <span className="italic text-emerald-600">pour votre business</span>
           </h2>
-          <p className="text-[1.05rem] text-muted leading-relaxed mb-6">
-            10 prompts prêts à copier-coller, adaptés à 5 catégories métier. Utilisables immédiatement dans ChatGPT, Claude ou Gemini.
+          <p className="text-[0.97rem] text-muted leading-relaxed mb-6">
+            10 prompts prêts à copier-coller, adaptés à 5 catégories métier. Utilisables aujourd&apos;hui dans ChatGPT, Claude
+            ou Gemini.
           </p>
-          <div className="bg-gradient-to-br from-navy to-navy-2 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 mb-6 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-44 h-44 bg-primary/10 rounded-full" />
-            <div className="w-14 h-[70px] bg-primary rounded-md flex items-center justify-center text-2xl flex-shrink-0 shadow-lg">📄</div>
-            <div className="flex-1 relative z-10">
-              <p className="text-[0.7rem] uppercase tracking-wider text-blue-200 font-semibold mb-1">Guide PDF · 12 pages</p>
-              <p className="font-heading font-bold text-white leading-snug">10 Prompts Essentiels pour les Entrepreneurs</p>
-              <p className="text-xs text-white/40 mt-1">Commercial · Marketing · Productivité · Communication · Stratégie</p>
+
+          <div className="bg-gradient-to-br from-emerald-900 to-emerald-800 rounded-2xl p-6 md:p-7 grid gap-4 md:grid-cols-[auto,1fr,auto] items-center mb-6 relative overflow-hidden shadow-[0_24px_70px_rgba(6,78,59,0.6)]">
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/5" />
+            <div className="w-[58px] h-[72px] rounded-lg bg-white/10 flex items-center justify-center text-2xl shadow-[4px_4px_0_rgba(0,0,0,0.2)] relative z-10">
+              📄
             </div>
-            <span className="bg-emerald-600 text-white py-2 px-4 rounded-full text-xs font-bold whitespace-nowrap relative z-10">GRATUIT</span>
+            <div className="relative z-10">
+              <p className="text-[0.7rem] uppercase tracking-[0.18em] text-emerald-200 font-semibold mb-1">
+                Guide PDF gratuit · 12 pages
+              </p>
+              <p className="font-heading text-[1.1rem] font-bold text-white leading-snug">
+                10 Prompts Essentiels pour les Entrepreneurs
+              </p>
+              <p className="text-[0.75rem] text-emerald-100/70 mt-1">
+                Commercial · Marketing · Productivité · Communication · Stratégie
+              </p>
+            </div>
+            <div className="relative z-10 flex md:justify-end">
+              <span className="inline-flex items-center bg-white text-emerald-900 text-[0.78rem] font-extrabold px-4 py-2 rounded-full shadow">
+                GRATUIT
+              </span>
+            </div>
           </div>
-          <div className="bg-ivory-2 border border-border rounded-card p-6 md:p-8">
+
+          <div className="bg-ivory-2 border border-border rounded-card p-6 md:p-7">
             <label className="block text-sm font-semibold text-navy mb-3">Où envoyer votre guide ?</label>
             <EmailSignupBlock
               inputId="email-1"
@@ -112,10 +290,10 @@ export default function LandingPage() {
               buttonGreen
               successMessage="✓ Votre PDF est en route ! Vérifiez votre boîte mail."
               afterNote={
-                <div className="mt-4 p-4 bg-primary-light rounded-lg flex items-start gap-2">
+                <div className="mt-4 p-4 bg-sky-50 border border-sky-200 rounded-lg flex items-start gap-2">
                   <span className="flex-shrink-0">🚀</span>
-                  <p className="text-sm text-navy-2 leading-relaxed">
-                    Vous bénéficiez aussi du <strong>prix early bird à 19,90€</strong> lors du lancement (au lieu de 49€).
+                  <p className="text-sm text-sky-900 leading-relaxed">
+                    + accès au <strong>prix de lancement à 49€</strong> lors du lancement (au lieu de 97€).
                   </p>
                 </div>
               }
@@ -125,63 +303,44 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* PROBLEM */}
-      <section className="bg-navy py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-white/35 mb-4">Ce que vous vivez probablement</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-black text-white leading-tight mb-8">
-            Vous vous reconnaissez
-            <br />
-            dans l&apos;une de ces <em className="italic text-sand">situations ?</em>
-          </h2>
-          <div className="space-y-4">
-            {[
-              "Vous demandez à l'IA, elle répond… mais c'est tellement générique que vous passez plus de temps à corriger qu'à utiliser.",
-              "Vous reformulez la même demande 4 ou 5 fois. Au final, vous le faites vous-même — et l'IA n'a servi à rien.",
-              "Vos concurrents semblent produire du contenu, des devis, des emails à une vitesse incompréhensible. Pas vous. Pas encore.",
-              "Vous avez regardé des dizaines de tutoriels YouTube sur l'IA. Vous avez tout compris… mais rien ne s'applique concrètement à votre activité.",
-            ].map((text, i) => (
-              <div key={i} className="flex gap-4 p-4 bg-white/5 border border-white/5 rounded-xl">
-                <span className="text-red-400 font-bold flex-shrink-0">→</span>
-                <p className="text-sm text-white/80 leading-relaxed">{text}</p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <a href="#form-main" className="inline-block w-full max-w-[480px] bg-emerald-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:bg-emerald-700 transition-colors">
-              Recevoir les 10 prompts gratuitement →
-            </a>
-            <p className="text-xs text-white/30 mt-2">PDF gratuit · Utilisable immédiatement</p>
-          </div>
-        </div>
-      </section>
-
       {/* COMPARISON */}
-      <section className="bg-ivory-2 border-y border-border py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8">
+      <section className="bg-ivory py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
           <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">La différence en pratique</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-10">
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-8">
             Seul vs avec
             <br />
-            <em className="italic text-primary">une méthode</em>
+            <span className="italic">une méthode.</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="rounded-2xl overflow-hidden border border-red-200">
               <div className="bg-red-100 text-red-900 px-5 py-3 font-bold text-sm">❌ Sans méthode</div>
-              <div className="bg-red-50 border border-red-200 border-t-0 rounded-b-xl p-5 space-y-3">
-                {["Résultats génériques inutilisables", "5 reformulations pour un seul email", "Frustration qui pousse à abandonner", "L'IA ne comprend pas votre activité", "Vous gagnez… 10 minutes par semaine"].map((t, i) => (
-                  <div key={i} className="flex gap-2 text-sm text-red-900">
+              <div className="bg-red-50 p-5 space-y-2.5 border-t border-red-200/70">
+                {[
+                  "Résultats inutilisables, trop génériques",
+                  "5 reformulations pour un seul email",
+                  "Frustration · abandon de l'IA",
+                  "L'IA ne connaît pas votre business",
+                  "10 minutes gagnées par semaine",
+                ].map((t) => (
+                  <div key={t} className="flex items-start gap-2 text-[0.82rem] text-red-900">
                     <span>✗</span>
                     <span>{t}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-xl overflow-hidden">
+            <div className="rounded-2xl overflow-hidden border border-emerald-200">
               <div className="bg-emerald-100 text-emerald-900 px-5 py-3 font-bold text-sm">✓ Avec Master Prompt</div>
-              <div className="bg-emerald-50 border border-emerald-200 border-t-0 rounded-b-xl p-5 space-y-3">
-                {["Résultats utilisables dès la première tentative", "Un prompt → un résultat. Sans reformuler.", "L'IA devient votre vrai assistant quotidien", "Templates adaptés à votre business", "Vous récupérez 1 à 2 heures par semaine"].map((t, i) => (
-                  <div key={i} className="flex gap-2 text-sm text-emerald-900">
+              <div className="bg-emerald-50 p-5 space-y-2.5 border-t border-emerald-200/70">
+                {[
+                  "Résultats utilisables dès la 1re tentative",
+                  "Un prompt → un résultat. Sans reformuler.",
+                  "L'IA devient votre vrai assistant",
+                  "Templates adaptés à votre activité",
+                  "1 à 2 heures récupérées chaque semaine",
+                ].map((t) => (
+                  <div key={t} className="flex items-start gap-2 text-[0.82rem] text-emerald-900">
                     <span>✓</span>
                     <span>{t}</span>
                   </div>
@@ -193,138 +352,326 @@ export default function LandingPage() {
       </section>
 
       {/* MODULES */}
-      <section id="programme" className="bg-white py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">Le programme</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-4">
+      <section id="programme" className="bg-navy-2 py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-4">Le programme</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-white mb-3">
             7 modules pour passer
             <br />
-            de l&apos;hésitation à la <em className="italic text-primary">maîtrise</em>
+            de l&apos;hésitation à la <span className="italic text-amber-300">maîtrise</span>
           </h2>
-          <p className="text-[1.05rem] text-muted leading-relaxed mb-10">
-            Une progression pensée pour les entrepreneurs et indépendants. Pas de théorie inutile — uniquement ce qui s&apos;applique à votre business dès aujourd&apos;hui.
+          <p className="text-[0.95rem] text-white/50 leading-relaxed mb-8">
+            Pas de théorie inutile. Uniquement ce qui s&apos;applique à votre business dès aujourd&apos;hui.
           </p>
-          <div className="space-y-0 border-t border-border">
+          <div className="space-y-0 border-t border-white/10">
             {MODULES.map((m, i) => (
-              <div key={i} className="py-8 border-b border-border grid grid-cols-1 md:grid-cols-[48px_1fr] gap-6">
-                <div className="w-12 h-12 rounded-xl bg-primary-light flex items-center justify-center font-heading font-black text-primary text-sm flex-shrink-0">
+              <div
+                key={m.title}
+                className="py-7 border-b border-white/10 grid grid-cols-1 md:grid-cols-[52px,1fr] gap-5 items-start"
+              >
+                <div
+                  className={[
+                    "w-[52px] h-[52px] rounded-xl flex items-center justify-center font-heading font-black text-sm flex-shrink-0",
+                    i === 0
+                      ? "bg-amber-500/10 text-amber-300"
+                      : i === 1
+                      ? "bg-sky-500/10 text-sky-300"
+                      : i === 2
+                      ? "bg-emerald-500/10 text-emerald-300"
+                      : i === 3
+                      ? "bg-violet-500/10 text-violet-300"
+                      : i === 4
+                      ? "bg-orange-500/10 text-orange-300"
+                      : i === 5
+                      ? "bg-red-500/10 text-red-300"
+                      : "bg-slate-500/10 text-slate-300",
+                  ].join(" ")}
+                >
                   {String(i + 1).padStart(2, "0")}
                 </div>
                 <div>
-                  <span className="inline-block text-[0.68rem] font-bold uppercase tracking-wider text-primary bg-primary-light px-2 py-0.5 rounded mb-2">{m.tag}</span>
-                  {m.new && <span className="inline-block text-[0.65rem] font-bold uppercase text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded ml-2">Nouveau</span>}
-                  <h3 className="text-base font-semibold text-navy mb-1 leading-snug">{m.title}</h3>
-                  <p className="text-sm text-muted leading-relaxed">{m.desc}</p>
+                  <div className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-white/40 mb-1">
+                    {m.tag}
+                  </div>
+                  <h3 className="text-[0.98rem] font-semibold text-white mb-1.5 leading-snug">
+                    {m.title}{" "}
+                    {m.new && (
+                      <span className="inline-block align-middle ml-1 px-1.5 py-[1px] rounded bg-emerald-500/15 text-emerald-300 text-[0.63rem] font-bold uppercase tracking-[0.09em]">
+                        Nouveau
+                      </span>
+                    )}
+                  </h3>
+                  <p className="text-[0.83rem] text-white/55 leading-relaxed">{m.desc}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="text-center mt-10">
-            <a href="#form-main" className="inline-block w-full max-w-[480px] bg-emerald-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:bg-emerald-700 transition-colors">
+            <a
+              href="#form-main"
+              className="inline-block w-full max-w-[420px] bg-amber-400 text-navy font-semibold text-[0.98rem] py-4 px-6 rounded-xl shadow-lg hover:bg-amber-300 transition-colors"
+            >
               Recevoir les 10 prompts gratuitement →
             </a>
-            <p className="text-xs text-muted mt-2">PDF gratuit · + accès early bird à 19,90€</p>
+            <p className="text-xs text-white/40 mt-2">PDF gratuit · + early bird à 49€</p>
           </div>
         </div>
       </section>
 
       {/* OUTCOMES */}
-      <section className="bg-navy py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-white/35 mb-4">Ce que vous aurez à la fin</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-black text-white leading-tight mb-10">
-            À la fin de la formation,
+      <section className="bg-white py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-violet-600 mb-4">À la fin de la formation</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black text-navy leading-tight mb-8">
+            Vous repartez avec
             <br />
-            <em className="italic text-sand">vous repartez avec ça</em>
+            <span className="italic text-violet-600">tout ça.</span>
           </h2>
           <div className="space-y-4">
             {[
-              { text: "Une méthode claire et reproductible pour formuler n'importe quelle demande à l'IA et obtenir un résultat utilisable immédiatement.", strong: "Une méthode claire et reproductible" },
-              { text: "Une bibliothèque de templates prêts à copier-coller pour vos emails, vos posts, vos devis, vos comptes-rendus.", strong: "Une bibliothèque de templates" },
-              { text: "1 à 2 heures gagnées par semaine sur des tâches que l'IA peut faire à votre place — si vous lui parlez correctement.", strong: "1 à 2 heures gagnées par semaine" },
-              { text: "Vos premiers enchaînements IA fonctionnels — des flux simples qui travaillent pour vous sans intervention technique.", strong: "Vos premiers enchaînements IA" },
-              { text: "La confiance de savoir exactement comment utiliser l'IA dans votre activité, aujourd'hui et demain.", strong: "La confiance" },
-            ].map((item, i) => (
-              <div key={i} className="flex gap-4 p-4 bg-white/5 border border-white/5 rounded-xl">
-                <span className="text-primary font-bold flex-shrink-0">→</span>
-                <p className="text-sm text-white/90 leading-relaxed"><strong className="text-white">{item.strong}</strong> {item.text.replace(item.strong, "").trim()}</p>
+              "Une méthode claire et reproductible pour formuler n'importe quelle demande à l'IA — et obtenir un résultat utilisable immédiatement.",
+              "Une bibliothèque de 50+ templates métier prêts à copier-coller pour vos emails, posts, devis et comptes-rendus.",
+              "1 à 2 heures récupérées chaque semaine sur des tâches répétitives que l'IA peut faire à votre place.",
+              "Vos premiers enchaînements IA fonctionnels — des flux simples qui travaillent sans intervention technique.",
+              "La confiance de savoir exactement comment utiliser l'IA dans votre activité — aujourd'hui et demain.",
+            ].map((text, i) => (
+              <div
+                key={text}
+                className="flex gap-4 p-4 bg-white border border-gray-200 rounded-xl hover:border-emerald-300 hover:shadow-sm transition"
+              >
+                <span className="text-emerald-500 font-bold flex-shrink-0 text-[1.1rem] mt-[1px]">→</span>
+                <p className="text-[0.9rem] text-gray-700 leading-relaxed">
+                  <strong className="text-gray-900">{text.split("—")[0].trim()}</strong>
+                  {text.includes("—") ? ` —${text.split("—")[1]}` : ""}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PRICING */}
-      <section id="tarif" className="bg-ivory py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">Tarif</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-4">
-            Un investissement qui se
+      {/* TESTIMONIALS */}
+      <section className="bg-ivory py-20 md:py-24 border-y border-border">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-4">Ils l&apos;ont testé</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-6">
+            Ce qu&apos;ils disent
             <br />
-            rentabilise en <em className="italic text-primary">une semaine</em>
+            <span className="italic">après la formation.</span>
           </h2>
-          <p className="text-[1.05rem] text-muted leading-relaxed mb-8">
-            Si vous gagnez seulement 1h par semaine grâce à Master Prompt — c&apos;est une estimation conservatrice — la formation est rentabilisée en quelques jours.
-          </p>
-          <div className="bg-white border-2 border-border rounded-2xl p-8 md:p-10 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-blue-400" />
-            <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 py-1.5 px-4 rounded-full text-xs font-bold mb-6">
-              🚀 Offre de lancement
-            </div>
-            <p className="text-sm text-muted-light line-through mb-1">Valeur normale : 49€</p>
-            <div className="font-heading text-5xl font-black text-navy leading-none mb-2">
-              <sup className="text-2xl align-super">€</sup>19<span className="text-3xl">,90</span>
-            </div>
-            <p className="text-sm text-muted mb-8 pb-8 border-b border-border">
-              Accès complet à vie à la formation<br />
-              puis <strong className="text-navy">4,90€/mois</strong> (optionnel) — mises à jour & outils SaaS
-            </p>
-            <ul className="space-y-3 mb-8">
-              {["7 modules vidéo complets", "Éditeur de prompts interactif", "Bibliothèque de templates métier", "PDF & ressources téléchargeables", "Quiz & exercices pratiques", "Badges de progression", "Mises à jour continues incluses"].map((f, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm">
-                  <span className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-[0.6rem] font-black flex-shrink-0">✓</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <div className="bg-ivory-2 border border-border rounded-card p-6">
-              <label className="block text-sm font-semibold text-navy mb-3">Rejoindre la liste d&apos;attente — prix early bird garanti</label>
-              <EmailSignupBlock
-                inputId="email-2"
-                buttonText="Réserver ma place à 19,90€ →"
-                buttonGreen
-                successMessage="✓ Parfait ! Vous serez parmi les premiers informés du lancement."
-              />
-              <p className="text-xs text-muted text-center mt-3">🛡️ Satisfait ou remboursé 14 jours · Sans condition</p>
-            </div>
-          </div>
-          <div className="flex gap-4 p-6 bg-amber-100 border border-amber-200 rounded-xl mt-8">
-            <span className="text-2xl flex-shrink-0">⏳</span>
-            <p className="text-sm text-amber-900 leading-relaxed">
-              Le prix de 19,90€ est exclusivement réservé aux personnes sur la liste d&apos;attente. <strong>Après le lancement, le prix revient à 49€.</strong> Sans nouvelle promotion avant plusieurs mois.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {[
+              {
+                quote:
+                  "Avant, 30 minutes pour un post LinkedIn. Avec la méthode PACO, 3 minutes. J'ai récupéré 2 heures par semaine sur mon activité.",
+                name: "Marie-Claire D.",
+                role: "Consultante RH indépendante",
+              },
+              {
+                quote:
+                  "J'ai enfin compris pourquoi mes prompts donnaient des résultats médiocres. Le Module 2 seul vaut le prix de la formation.",
+                name: "Antoine R.",
+                role: "Graphiste freelance · Marseille",
+              },
+              {
+                quote:
+                  "En 4 heures de formation, j'ai appris plus que dans 6 mois de tutoriels YouTube. Et ça s'applique directement à mon business.",
+                name: "Sophie M.",
+                role: "Coach certifiée · Paris",
+              },
+              {
+                quote:
+                  "Je pensais ne pas avoir le niveau. Mais le cours est clair, progressif, et j'ai rédigé mon premier email de prospection en 4 minutes.",
+                name: "Laurent P.",
+                role: "Artisan plombier indépendant",
+              },
+            ].map((t, i) => (
+              <div key={t.name} className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                <div className="text-amber-400 text-[0.8rem] tracking-[0.18em] mb-2">★★★★★</div>
+                <p className="text-[0.88rem] text-gray-700 italic leading-relaxed mb-4">"{t.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-[0.7rem] font-semibold text-gray-600">
+                    {t.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </div>
+                  <div>
+                    <div className="text-[0.9rem] font-semibold text-gray-900">{t.name}</div>
+                    <div className="text-[0.78rem] text-gray-500">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="bg-ivory-2 border-y border-border py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary mb-6">Ils l&apos;ont testé</p>
-          <div className="bg-white border border-border rounded-2xl p-8 md:p-10 relative">
-            <span className="absolute top-4 left-6 font-heading text-6xl text-primary-light opacity-40">"</span>
-            <p className="font-heading text-lg italic leading-relaxed text-navy mb-6 pt-4">
-              &quot;Avant, je passais 30 minutes à essayer de faire écrire un post LinkedIn à ChatGPT. Avec la méthode apprise ici, j&apos;obtiens quelque chose d&apos;utilisable en 3 minutes. J&apos;ai récupéré facilement 2 heures par semaine sur mon activité.&quot;
-            </p>
-            <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-full bg-primary-light flex items-center justify-center font-heading font-bold text-primary">
-                MC
+      {/* ABOUT */}
+      <section className="bg-white py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-4">
+            Qui est derrière Master Prompt ?
+          </p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-navy mb-4">
+            Un entrepreneur qui parle
+            <br />
+            <span className="italic">à des entrepreneurs.</span>
+          </h2>
+          <div className="grid md:grid-cols-[auto,1fr] gap-6 md:gap-8 mt-6 bg-ivory rounded-2xl border border-border p-6 md:p-8 items-start">
+            <div className="text-center">
+              <div className="w-[110px] h-[110px] rounded-full mx-auto border-[3px] border-amber-400 shadow-[0_0_0_6px_rgba(245,158,11,0.1)] bg-gray-200 flex items-center justify-center font-heading font-black text-amber-500 text-2xl">
+                ML
               </div>
-              <div>
-                <p className="font-semibold text-navy">Marie-Claire D.</p>
-                <p className="text-sm text-muted">Consultante RH indépendante — 12 ans d&apos;expérience</p>
+              <div className="mt-2">
+                <div className="text-[0.95rem] font-semibold text-navy">Michaël Lopez</div>
+                <div className="text-[0.78rem] text-muted mt-0.5">Nice · Côte d&apos;Azur</div>
+                <div className="flex flex-wrap justify-center gap-1 mt-2">
+                  <span className="text-[0.7rem] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700">
+                    25 ans d&apos;expérience
+                  </span>
+                </div>
               </div>
             </div>
+            <div>
+              <p className="text-[0.97rem] font-semibold text-navy leading-relaxed mb-3">
+                "Je ne suis pas développeur. Je suis entrepreneur depuis 2004 — et c&apos;est exactement pour ça que j&apos;ai
+                créé Master Prompt."
+              </p>
+              <p className="text-[0.9rem] text-muted leading-relaxed mb-2">
+                Co-fondateur, directeur commercial, chef de projet, maître d&apos;œuvre, marchand de biens — j&apos;ai créé
+                et dirigé plusieurs entreprises dans des secteurs très différents. Pendant des années, j&apos;ai utilisé
+                l&apos;IA comme tout le monde : avec frustration.
+              </p>
+              <p className="text-[0.9rem] text-muted leading-relaxed">
+                Quand j&apos;ai compris la méthode pour structurer mes demandes, tout a changé.{" "}
+                <strong className="text-navy">
+                  J&apos;ai construit cette formation pour les entrepreneurs comme moi
+                </strong>{" "}
+                — ceux qui ont des choses concrètes à faire et pas de temps à perdre.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRICING */}
+      <section id="tarif" className="bg-navy-2 py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-4">Tarif</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-white mb-3">
+            Rentabilisé
+            <br />
+            <span className="italic text-amber-300">en une semaine.</span>
+          </h2>
+          <p className="text-[0.95rem] text-white/55 leading-relaxed mb-7">
+            1h récupérée par semaine = formation remboursée en quelques jours. Et c&apos;est une estimation conservatrice.
+          </p>
+          <div className="bg-navy border border-white/10 rounded-2xl p-7 md:p-8 relative overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-400 via-amber-200 to-emerald-400" />
+            <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/35 text-amber-200 text-[0.72rem] font-semibold rounded-full py-1 px-3 mb-5">
+              🚀 Offre de lancement
+            </div>
+            <p className="text-[0.88rem] text-white/35 line-through mb-1">Prix normal : 97€</p>
+            <div className="font-heading text-[3.5rem] md:text-[4.2rem] font-black text-white leading-none mb-1">
+              <sup className="text-2xl align-super">€</sup>49
+            </div>
+            <p className="text-[0.82rem] text-white/45 border-b border-white/10 pb-4 mb-5">
+              Accès complet à vie · puis <strong className="text-white/80">4,90€/mois</strong> optionnel (mises à jour &amp;
+              outils SaaS)
+            </p>
+            <ul className="space-y-2.5 mb-6">
+              {[
+                "7 modules vidéo progressifs",
+                "Éditeur de prompts interactif",
+                "Bibliothèque de 50+ templates métier",
+                "PDF & ressources téléchargeables",
+                "Quiz & exercices pratiques",
+                "Badges de progression",
+                "Mises à jour à vie",
+              ].map((f) => (
+                <li key={f} className="flex items-center gap-2 text-[0.9rem] text-white/80">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center text-emerald-300 text-[0.65rem] font-black">
+                    ✓
+                  </span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="bg-navy/60 border border-white/15 rounded-card p-5 mb-4">
+              <label className="block text-sm font-semibold text-white mb-3">
+                Rejoindre la liste d&apos;attente — prix de lancement garanti
+              </label>
+              <EmailSignupBlock
+                inputId="email-2"
+                buttonText="Réserver ma place à 49€ →"
+                buttonGreen
+                successMessage="✓ Parfait ! Vous serez parmi les premiers informés du lancement."
+              />
+              <p className="text-[0.72rem] text-white/30 text-center mt-3">
+                🛡️ Satisfait ou remboursé 14 jours · Sans condition
+              </p>
+            </div>
+            <div className="mt-4 p-4 bg-amber-500/5 border border-amber-500/25 rounded-xl flex gap-3 items-start">
+              <span className="text-[1.1rem]">⏳</span>
+              <p className="text-[0.86rem] text-white/70 leading-relaxed">
+                Le prix de 49€ est réservé aux inscrits sur la liste d&apos;attente.{" "}
+                <strong className="text-amber-200">Après le lancement, la formation revient à 97€.</strong> Sans nouvelle
+                promotion avant plusieurs mois.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BONUS */}
+      <section className="bg-gradient-to-br from-[#1a1200] to-[#0B1220] py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-4">Inclus dans la formation</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black leading-tight text-white mb-6">
+            5 bonus pour aller
+            <br />
+            <span className="italic text-amber-300">encore plus loin</span>
+          </h2>
+          <div className="space-y-4">
+            {[
+              {
+                emoji: "📄",
+                title: "Bonus #1 — Guide PDF \"10 Prompts Essentiels\"",
+                desc: "Les 10 prompts les plus utiles pour les entrepreneurs, prêts à copier-coller. Utilisables avant même de commencer la formation.",
+              },
+              {
+                emoji: "📚",
+                title: "Bonus #2 — Bibliothèque de 50+ templates métier",
+                desc: "Emails, posts, devis, comptes-rendus — une collection classée par catégorie et mise à jour régulièrement.",
+              },
+              {
+                emoji: "⚡",
+                title: "Bonus #3 — Éditeur de prompts interactif",
+                desc: "Testez, affinez et sauvegardez vos prompts directement dans la plateforme. Votre bibliothèque personnelle.",
+              },
+              {
+                emoji: "🔄",
+                title: "Bonus #4 — Mises à jour à vie",
+                desc: "L'IA évolue vite. La formation aussi. Chaque nouveauté pertinente est ajoutée et communiquée.",
+              },
+              {
+                emoji: "🛡️",
+                title: "Bonus #5 — Garantie 14 jours",
+                desc: "Si ça ne vous convient pas, un email et vous êtes intégralement remboursé. Sans question. Je prends le risque à votre place.",
+              },
+            ].map((b, i) => (
+              <div
+                key={b.title}
+                className="flex gap-3 p-4 md:p-5 border border-white/10 rounded-2xl bg-white/5 hover:border-amber-300/40 transition"
+              >
+                <span className="text-[1.6rem] mt-1 flex-shrink-0">{b.emoji}</span>
+                <div>
+                  <h3 className="text-[0.95rem] font-semibold text-white mb-1">{b.title}</h3>
+                  <p className="text-[0.82rem] text-white/55 leading-relaxed">{b.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -332,20 +679,29 @@ export default function LandingPage() {
       <FAQSection />
 
       {/* FINAL CTA */}
-      <section className="bg-navy py-20 md:py-28">
-        <div className="max-w-[740px] mx-auto px-4 md:px-8 text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-white/35 mb-4">C&apos;est gratuit. C&apos;est maintenant.</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-black text-white max-w-[560px] mx-auto mb-4">
+      <section className="bg-navy py-20 md:py-24">
+        <div className="max-w-[760px] mx-auto px-4 md:px-8 text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-white/35 mb-4">
+            C&apos;est gratuit. C&apos;est maintenant.
+          </p>
+          <h2 className="font-heading text-2xl md:text-3xl font-black text-white max-w-[560px] mx-auto mb-3">
             Repartez avec vos
             <br />
-            <em className="italic text-sand">10 prompts essentiels</em>
+            <span className="italic text-emerald-300">10 prompts essentiels</span>
           </h2>
-          <p className="text-white/50 max-w-[480px] mx-auto mb-8">
-            Un PDF de 12 pages, utilisable immédiatement dans ChatGPT, Claude ou Gemini.
-            <br />
-            <span className="text-white/30 text-sm">+ accès prioritaire à l&apos;offre de lancement à 19,90€</span>
+          <p className="text-white/55 max-w-[460px] mx-auto mb-6 text-[0.96rem]">
+            PDF de 12 pages · Utilisable immédiatement dans ChatGPT, Claude ou Gemini.
           </p>
-          <div className="max-w-[460px] mx-auto text-left">
+          <div className="mb-4">
+            <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-full px-4 py-1.5">
+              <span className="text-sm">🚀</span>
+              <span className="text-[0.8rem] text-amber-200">
+                Formation disponible au lancement à <strong>49€</strong>{" "}
+                <span className="text-white/30 line-through">97€</span>
+              </span>
+            </div>
+          </div>
+          <div className="max-w-[430px] mx-auto text-left bg-navy-2 border border-white/10 rounded-2xl p-6">
             <label className="block text-sm font-semibold text-white mb-3">Où envoyer votre guide ?</label>
             <EmailSignupBlock
               inputId="email-3"
@@ -353,7 +709,7 @@ export default function LandingPage() {
               buttonGreen
               successMessage="✓ Votre PDF est en route ! Vérifiez votre boîte mail."
             />
-            <p className="text-xs text-white/30 text-center mt-3">🔒 Sans spam · Désabonnement en 1 clic</p>
+            <p className="text-[0.7rem] text-white/30 text-center mt-3">🔒 Sans spam · Désabonnement en 1 clic</p>
           </div>
         </div>
       </section>
@@ -361,15 +717,23 @@ export default function LandingPage() {
       {/* FOOTER */}
       <div className="bg-white border-t border-border py-5 px-4 flex flex-wrap items-center justify-center gap-6">
         <span className="text-sm text-muted">🔐 Paiement sécurisé Stripe</span>
-        <span className="text-sm text-muted">🛡️ Remboursement 14 jours</span>
+        <span className="text-sm text-muted">🛡️ Remboursé 14 jours</span>
         <span className="text-sm text-muted">🇫🇷 Formation 100% en français</span>
       </div>
-      <footer className="bg-[#070E16] py-8 px-4 md:px-8 flex flex-wrap items-center justify-between gap-4">
-        <div className="font-heading font-black text-white/30">MasterPrompt</div>
+      <footer className="bg-[#050b14] py-8 px-4 md:px-8 flex flex-wrap items-center justify-between gap-4">
+        <div className="font-heading font-black text-white/25">
+          Master<span className="text-amber-400/60">Prompt</span>
+        </div>
         <div className="flex gap-6">
-          <Link href="#" className="text-xs text-white/20 hover:text-white/40">Mentions légales</Link>
-          <Link href="#" className="text-xs text-white/20 hover:text-white/40">Confidentialité</Link>
-          <Link href="#" className="text-xs text-white/20 hover:text-white/40">Contact</Link>
+          <Link href="#" className="text-xs text-white/25 hover:text-white/50">
+            Mentions légales
+          </Link>
+          <Link href="#" className="text-xs text-white/25 hover:text-white/50">
+            Confidentialité
+          </Link>
+          <Link href="#" className="text-xs text-white/25 hover:text-white/50">
+            Contact
+          </Link>
         </div>
         <div className="text-xs text-white/20">© 2025 Master Prompt</div>
       </footer>

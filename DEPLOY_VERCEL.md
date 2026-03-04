@@ -49,6 +49,20 @@ Tu peux copier/coller depuis ton `.env.local`, puis **modifier** `NEXT_PUBLIC_AP
 
 6. Clique sur **Deploy**. Attends la fin du build.
 
+### 2.1. Rendre le déploiement public (désactiver la connexion Vercel)
+
+Par défaut, Vercel peut protéger certains déploiements (Vercel Authentication / Password Protection) et demander une connexion Vercel.
+
+1. Dans ton projet Vercel : onglet **Settings**.
+2. Dans le menu de gauche, ouvre **Deployment Protection** (ou **Security** → **Deployment Protection**).
+3. Pour l’environnement **Production** :
+   - Désactive **Vercel Authentication**.
+   - Désactive **Password Protection** si elle est activée.
+4. Sauvegarde.  
+
+Ton site (URL `*.vercel.app` + domaine personnalisé) devient alors accessible **sans connexion Vercel**.  
+Tu peux laisser la protection activée pour les déploiements **Preview** si tu veux que seuls toi / ton équipe y aient accès.
+
 ---
 
 ## 3. Vérifier le déploiement

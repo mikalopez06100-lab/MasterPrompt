@@ -21,17 +21,12 @@ const faqs = [
   {
     question: "À quoi sert l'abonnement à 4,90€/mois ?",
     answer:
-      "L'abonnement est 100% optionnel. Il donne accès aux mises à jour continues de la formation, aux nouveaux templates et à l'éditeur de prompts SaaS. La formation de base reste accessible à vie avec les 19,90€ initiaux.",
+      "L'abonnement est 100% optionnel. Il donne accès aux mises à jour continues de la formation, aux nouveaux templates et à l'éditeur de prompts SaaS. La formation de base reste accessible à vie avec les 49€ initiaux.",
   },
   {
     question: "Et si ça ne me convient pas ?",
     answer:
       "Remboursement intégral sans question dans les 14 jours suivant l'achat. Aucune condition, aucune démarche compliquée. Un simple email suffit.",
-  },
-  {
-    question: "Le contenu sera-t-il mis à jour quand l'IA évolue ?",
-    answer:
-      "Oui. L'abonnement à 4,90€/mois donne accès aux mises à jour continues. La méthode de base (PACO) reste valable quelle que soit l'évolution des outils — c'est sa force.",
   },
 ];
 
