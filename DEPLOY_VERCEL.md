@@ -31,21 +31,42 @@ git push -u origin main
 
 ### Variables à renseigner sur Vercel
 
-| Nom | Valeur | Secret |
-|-----|--------|--------|
-| `DATABASE_URL` | Ta même URL Postgres Supabase (celle de `.env`) | Oui |
-| `NEXT_PUBLIC_SUPABASE_URL` | `https://vgdspxhuqdfilrkhipvx.supabase.co` | Non |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Ta clé anon Supabase | Non |
-| `SUPABASE_SERVICE_ROLE_KEY` | Ta clé service_role Supabase | Oui |
-| `NEXT_PUBLIC_APP_URL` | **https://ton-domaine.com** (ou l’URL Vercel en attendant) | Non |
-| `NEXT_PUBLIC_LOGO_URL` | URL du logo (Supabase Storage, ex. `https://…supabase.co/storage/v1/object/public/assets/logo.png`) — optionnel | Non |
-| `NEXT_PUBLIC_HERO_VIDEO_URL` | URL de la vidéo hero (Supabase Storage, ex. `…/assets/videos/bienvenue.mp4`) — optionnel | Non |
+Copie **toutes** les variables ci-dessous dans **Settings → Environment Variables** (Production + Preview si besoin). Tu peux reprendre les valeurs de ton `.env.local` en adaptant celles qui dépendent de l’environnement (URL du site, secrets).
 
-Tu peux copier/coller depuis ton `.env.local`, puis **modifier** `NEXT_PUBLIC_APP_URL` une fois le domaine en place (voir étape 4).
+| Nom | Exemple de valeur / description | Secret ? | Obligatoire |
+|-----|----------------------------------|----------|-------------|
+| `DATABASE_URL` | URL Postgres Supabase (ex. `postgresql://postgres:xxx@db.xxx.supabase.co:5432/postgres`) | Oui | Oui |
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://vgdspxhuqdfilrkhipvx.supabase.co` (ton projet Supabase) | Non | Oui |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clé « anon » / public Supabase | Non | Oui |
+| `SUPABASE_SERVICE_ROLE_KEY` | Clé « service_role » Supabase (Settings → API) | Oui | Oui |
+| `NEXTAUTH_URL` | En prod : `https://masterprompt.fr` (ou ton URL Vercel) — sans slash final | Non | Si NextAuth utilisé |
+| `NEXTAUTH_SECRET` | Secret fort (ex. `openssl rand -base64 32`) | Oui | Si NextAuth utilisé |
+| `NEXT_PUBLIC_APP_URL` | URL du site : `https://masterprompt.fr` ou `https://ton-projet.vercel.app` | Non | Recommandé (auth, liens) |
+| `NEXT_PUBLIC_LOGO_URL` | URL du logo (ex. `https://…supabase.co/storage/v1/object/public/assets/logo.png`) | Non | Optionnel |
+| `NEXT_PUBLIC_HERO_VIDEO_URL` | URL de la vidéo hero (ex. `…/assets/videos/bienvenue.mp4`) | Non | Optionnel |
+| `RESEND_API_KEY` | Clé API Resend (envoi email + PDF) | Oui | Oui (pour le formulaire PDF) |
+| `FROM_EMAIL` | `Master Prompt <info@masterprompt.fr>` | Non | Oui (pour le formulaire PDF) |
+| `LEAD_MAGNET_PDF_URL` | URL publique du PDF (ex. `https://…supabase.co/…/pdfs/master-prompt-10-prompts-essentiels.pdf`) | Non | Oui (pour le formulaire PDF) |
+
+**Optionnel — Firebase** (uniquement si tu utilises l’API `/api/media/intro-video`) :
+
+| Nom | Description | Secret ? |
+|-----|--------------|----------|
+| `FIREBASE_PROJECT_ID` | ID du projet Firebase | Non |
+| `FIREBASE_CLIENT_EMAIL` | Email du compte de service Firebase | Non |
+| `FIREBASE_PRIVATE_KEY` | Clé privée du compte de service (guillemets, `\n` pour les retours à la ligne) | Oui |
+| `FIREBASE_STORAGE_BUCKET` | Nom du bucket Storage (ex. `ton-projet.appspot.com`) | Non |
+| `FIREBASE_INTRO_VIDEO_PATH` | Chemin du fichier (ex. `videos/master-prompt-intro.mp4`) | Non |
+
+Tu peux copier/coller depuis ton `.env.local`, puis **modifier** `NEXTAUTH_URL` et `NEXT_PUBLIC_APP_URL` pour mettre l’URL de production (ex. `https://masterprompt.fr`) une fois le domaine en place (voir étape 4).
+
+**Checklist Vercel — noms des variables à créer :**  
+`DATABASE_URL` · `NEXT_PUBLIC_SUPABASE_URL` · `NEXT_PUBLIC_SUPABASE_ANON_KEY` · `SUPABASE_SERVICE_ROLE_KEY` · `NEXTAUTH_URL` · `NEXTAUTH_SECRET` · `NEXT_PUBLIC_APP_URL` · `NEXT_PUBLIC_LOGO_URL` · `NEXT_PUBLIC_HERO_VIDEO_URL` · `RESEND_API_KEY` · `FROM_EMAIL` · `LEAD_MAGNET_PDF_URL`
 
 **Médias (Supabase Storage, bucket `assets`) :**
 - **Logo :** placer le fichier dans `public/logo.png`, puis `node scripts/upload-logo-to-supabase.mjs`. Définir `NEXT_PUBLIC_LOGO_URL` sur Vercel (ou laisser vide pour le logo local).
 - **Vidéo hero :** placer la vidéo dans `public/videos/bienvenue.mp4`, puis `node scripts/upload-hero-video-to-supabase.mjs`. Définir `NEXT_PUBLIC_HERO_VIDEO_URL` sur Vercel (ou laisser vide pour la vidéo locale).
+- **PDF lead magnet :** le PDF est déjà uploadé sur Supabase ; l’URL est dans `LEAD_MAGNET_PDF_URL` (voir `.env.local`). Pour mettre à jour le PDF plus tard : placer le fichier dans `public/pdfs/master-prompt-10-prompts-essentiels.pdf`, puis `node scripts/upload-lead-pdf-to-supabase.mjs`. Pour la config email (Resend, domaine, Vercel), voir **GUIDE-DEBUTANT-EMAIL-PDF.md**.
 
 6. Clique sur **Deploy**. Attends la fin du build.
 

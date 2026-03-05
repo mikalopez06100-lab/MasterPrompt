@@ -109,3 +109,12 @@ model Subscription {
   user                 User     @relation(fields: [userId], references: [id])
 }
 
+// Leads landing page (formulaire PDF gratuit) — 1 envoi PDF par email
+model Lead {
+  id         String    @id @default(cuid())
+  email      String    @unique
+  source     String?   // id du bloc formulaire ex: email-hero, email-1, email-2
+  pdfSentAt  DateTime? // date d’envoi du PDF (évite doublons)
+  createdAt  DateTime  @default(now())
+}
+
