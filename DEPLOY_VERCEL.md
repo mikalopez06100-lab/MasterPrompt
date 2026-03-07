@@ -35,7 +35,7 @@ Copie **toutes** les variables ci-dessous dans **Settings → Environment Variab
 
 | Nom | Exemple de valeur / description | Secret ? | Obligatoire |
 |-----|----------------------------------|----------|-------------|
-| `DATABASE_URL` | URL Postgres Supabase (ex. `postgresql://postgres:xxx@db.xxx.supabase.co:5432/postgres`) | Oui | Oui |
+| `DATABASE_URL` | **Sur Vercel : utilise l’URL « pooler » (port 6543), pas la directe (5432).** Voir ci‑dessous. | Oui | Oui |
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://vgdspxhuqdfilrkhipvx.supabase.co` (ton projet Supabase) | Non | Oui |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clé « anon » / public Supabase | Non | Oui |
 | `SUPABASE_SERVICE_ROLE_KEY` | Clé « service_role » Supabase (Settings → API) | Oui | Oui |
@@ -59,6 +59,31 @@ Copie **toutes** les variables ci-dessous dans **Settings → Environment Variab
 | `FIREBASE_INTRO_VIDEO_PATH` | Chemin du fichier (ex. `videos/master-prompt-intro.mp4`) | Non |
 
 Tu peux copier/coller depuis ton `.env.local`, puis **modifier** `NEXTAUTH_URL` et `NEXT_PUBLIC_APP_URL` pour mettre l’URL de production (ex. `https://masterprompt.fr`) une fois le domaine en place (voir étape 4).
+
+**Important — `DATABASE_URL` sur Vercel (éviter « Can't reach database server »)**  
+La connexion directe (port **5432**) échoue souvent depuis Vercel. Utilise le **pooler** (port **6543**).
+
+**Option A — Modification rapide (souvent suffisante)**  
+Tu as déjà une `DATABASE_URL` du type :  
+`postgresql://postgres:XXX@db.vgdspxhuqdfilrkhipvx.supabase.co:5432/postgres`  
+→ Sur Vercel, modifie cette variable et **remplace uniquement** `:5432` par **`:6543`** (le reste reste identique).  
+Exemple : `...@db.vgdspxhuqdfilrkhipvx.supabase.co:6543/postgres`  
+Puis **Save** et **Redeploy**.
+
+**Option B — Récupérer l’URL depuis le dashboard Supabase**  
+1. Va sur **https://supabase.com/dashboard** et ouvre ton projet.
+2. En haut à droite de la page du projet, clique sur le bouton **« Connect »** (et non pas dans Project Settings).
+3. Dans la fenêtre qui s’ouvre, choisis **« Transaction »** (ou le mode qui affiche le port **6543**).
+4. Copie l’**URI** affichée (elle contient `:6543`).
+5. Colle-la dans Vercel → **Settings** → **Environment Variables** → `DATABASE_URL`, puis **Save** et **Redeploy**.
+
+Tu peux garder l’URL en 5432 dans ton `.env.local` pour le dev local.
+
+**Si tu as toujours « Can't reach database server » avec le port 6543 :**  
+1. **Projet en pause ?** Sur **https://supabase.com/dashboard**, ouvre ton projet. Si tu voys « Project is paused » ou « Restore project », clique pour **réactiver** le projet (gratuit, mais inactif après ~7 jours sans utilisation).  
+2. **Utiliser l’URL exacte du pooler** : dans le dashboard Supabase, bouton **Connect** (en haut) → mode **Transaction** → copie l’**URI** affichée. Certains projets utilisent un hôte du type `aws-0-[region].pooler.supabase.com:6543` au lieu de `db.xxx.supabase.co:6543`. Colle cette URI dans `DATABASE_URL` sur Vercel.  
+3. **Caractères spéciaux dans le mot de passe** : si ton mot de passe contient `!`, `@`, `#`, etc., encode-les dans l’URL : `!` → `%21`, `@` → `%40`, `#` → `%23`.  
+4. **Prisma + pooler** : ajoute `?pgbouncer=true` à la fin de l’URL (ex. `.../postgres?pgbouncer=true`) pour éviter les erreurs avec le mode Transaction.
 
 **Checklist Vercel — noms des variables à créer :**  
 `DATABASE_URL` · `NEXT_PUBLIC_SUPABASE_URL` · `NEXT_PUBLIC_SUPABASE_ANON_KEY` · `SUPABASE_SERVICE_ROLE_KEY` · `NEXTAUTH_URL` · `NEXTAUTH_SECRET` · `NEXT_PUBLIC_APP_URL` · `NEXT_PUBLIC_LOGO_URL` · `NEXT_PUBLIC_HERO_VIDEO_URL` · `RESEND_API_KEY` · `FROM_EMAIL` · `LEAD_MAGNET_PDF_URL`
