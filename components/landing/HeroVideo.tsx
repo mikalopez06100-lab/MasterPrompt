@@ -2,7 +2,10 @@
 
 import { useRef, useState } from "react";
 
-const VIDEO_SRC = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/videos/bienvenue.mp4";
+// URL en dur pour que la vidéo s'affiche en prod (Vercel) sans dépendre de l'env
+const VIDEO_SRC =
+  process.env.NEXT_PUBLIC_HERO_VIDEO_URL ||
+  "https://vgdspxhuqdfilrkhipvx.supabase.co/storage/v1/object/public/assets/videos/bienvenue.mp4";
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
