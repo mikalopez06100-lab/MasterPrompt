@@ -4,19 +4,24 @@ import { FAQSection } from "@/components/landing/FAQSection";
 import { EmailSignupBlock } from "@/components/landing/EmailSignupBlock";
 import { HeroVideo } from "@/components/landing/HeroVideo";
 
-// Avatars par défaut — 1re vignette = photo projet (public/avatars), puis ui-avatars.com
+// Vignettes « +200 entrepreneurs » (gauche) — URLs en dur pour que ça marche en prod (Vercel)
 const DEFAULT_AVATAR_URLS = [
-  "/avatars/photo-profil-1.png",
-  "https://ui-avatars.com/api/?name=Marie+D&size=72&background=1E3A5F&color=93C5FD&rounded=true",
-  "https://ui-avatars.com/api/?name=Thomas+L&size=72&background=0D1B2A&color=F59E0B&rounded=true",
-  "https://ui-avatars.com/api/?name=Sophie+M&size=72&background=1E40AF&color=E0E7FF&rounded=true",
-  "https://ui-avatars.com/api/?name=Alex+R&size=72&background=065F46&color=6EE7B7&rounded=true",
+  "https://vgdspxhuqdfilrkhipvx.supabase.co/storage/v1/object/public/assets/avatars/vignette-1.png",
+  "https://vgdspxhuqdfilrkhipvx.supabase.co/storage/v1/object/public/assets/avatars/vignette-2.png",
+  "https://vgdspxhuqdfilrkhipvx.supabase.co/storage/v1/object/public/assets/avatars/vignette-3.png",
+  "https://vgdspxhuqdfilrkhipvx.supabase.co/storage/v1/object/public/assets/avatars/vignette-4.png",
+  "https://vgdspxhuqdfilrkhipvx.supabase.co/storage/v1/object/public/assets/avatars/vignette-5.png",
 ];
 
+// Photo du fondateur (Michaël Lopez) — à côté du nom à droite
+const FONDATEUR_AVATAR = "/avatars/photo-profil-1.png";
+
 function SocialProofAvatars() {
+  const custom = process.env.NEXT_PUBLIC_SOCIAL_AVATARS;
   const urls =
-    typeof process.env.NEXT_PUBLIC_SOCIAL_AVATARS === "string"
-      ? process.env.NEXT_PUBLIC_SOCIAL_AVATARS.split(",")
+    typeof custom === "string" && custom.trim().length > 0
+      ? custom
+          .split(",")
           .map((u) => u.trim())
           .filter(Boolean)
           .slice(0, 5)
@@ -129,8 +134,9 @@ export default function LandingPage() {
               <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-200 to-emerald-400" />
 
               <div className="flex items-center gap-3 pb-4 mb-4 border-b border-white/10">
-                <div className="w-[52px] h-[52px] rounded-full border-2 border-amber-300/60 shadow-[0_0_0_4px_rgba(245,158,11,0.12)] bg-navy-2 flex items-center justify-center font-heading font-black text-amber-300 text-[1.1rem]">
-                  ML
+                <div className="w-[52px] h-[52px] rounded-full border-2 border-amber-300/60 shadow-[0_0_0_4px_rgba(245,158,11,0.12)] overflow-hidden flex-shrink-0 bg-navy-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={FONDATEUR_AVATAR} alt="" className="w-full h-full object-cover" width={52} height={52} />
                 </div>
                 <div>
                   <div className="text-[0.9rem] font-semibold text-white">Michaël Lopez</div>
@@ -551,8 +557,9 @@ export default function LandingPage() {
           </h2>
           <div className="grid md:grid-cols-[auto,1fr] gap-6 md:gap-8 mt-6 bg-ivory rounded-2xl border border-border p-6 md:p-8 items-start">
             <div className="text-center">
-              <div className="w-[110px] h-[110px] rounded-full mx-auto border-[3px] border-amber-400 shadow-[0_0_0_6px_rgba(245,158,11,0.1)] bg-gray-200 flex items-center justify-center font-heading font-black text-amber-500 text-2xl">
-                ML
+              <div className="w-[110px] h-[110px] rounded-full mx-auto border-[3px] border-amber-400 shadow-[0_0_0_6px_rgba(245,158,11,0.1)] overflow-hidden bg-gray-200">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={FONDATEUR_AVATAR} alt="Michaël Lopez" className="w-full h-full object-cover" width={110} height={110} />
               </div>
               <div className="mt-2">
                 <div className="text-[0.95rem] font-semibold text-navy">Michaël Lopez</div>
