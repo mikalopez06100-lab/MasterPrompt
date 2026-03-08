@@ -4,6 +4,56 @@ import { FAQSection } from "@/components/landing/FAQSection";
 import { EmailSignupBlock } from "@/components/landing/EmailSignupBlock";
 import { HeroVideo } from "@/components/landing/HeroVideo";
 
+// Avatars par défaut — 1re vignette = photo projet (public/avatars), puis ui-avatars.com
+const DEFAULT_AVATAR_URLS = [
+  "/avatars/photo-profil-1.png",
+  "https://ui-avatars.com/api/?name=Marie+D&size=72&background=1E3A5F&color=93C5FD&rounded=true",
+  "https://ui-avatars.com/api/?name=Thomas+L&size=72&background=0D1B2A&color=F59E0B&rounded=true",
+  "https://ui-avatars.com/api/?name=Sophie+M&size=72&background=1E40AF&color=E0E7FF&rounded=true",
+  "https://ui-avatars.com/api/?name=Alex+R&size=72&background=065F46&color=6EE7B7&rounded=true",
+];
+
+function SocialProofAvatars() {
+  const urls =
+    typeof process.env.NEXT_PUBLIC_SOCIAL_AVATARS === "string"
+      ? process.env.NEXT_PUBLIC_SOCIAL_AVATARS.split(",")
+          .map((u) => u.trim())
+          .filter(Boolean)
+          .slice(0, 5)
+      : DEFAULT_AVATAR_URLS;
+  if (urls.length === 0) return null;
+  return (
+    <div className="flex items-center gap-4">
+      <div className="flex -space-x-2">
+        {urls.map((src, i) => (
+          <div
+            key={i}
+            className="w-9 h-9 rounded-full border-2 border-navy bg-navy overflow-hidden flex-shrink-0 ring-2 ring-navy"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt=""
+              className="w-full h-full object-cover"
+              width={36}
+              height={36}
+              loading="eager"
+            />
+          </div>
+        ))}
+      </div>
+      <div className="text-left">
+        <span className="text-[0.75rem] text-amber-300 tracking-[0.18em] font-semibold uppercase block">
+          ★★★★★
+        </span>
+        <p className="text-[0.8rem] text-white/55">
+          <span className="font-semibold text-white">+200 entrepreneurs</span> sur la liste d&apos;attente.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 const MODULES = [
   {
     tag: "Fondamentaux",
@@ -69,27 +119,8 @@ export default function LandingPage() {
               première semaine.
             </p>
 
-            {/* Social proof */}
-            <div className="flex items-center gap-4">
-              <div className="flex -space-x2">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full border-2 border-navy bg-gradient-to-br from-sand to-primary/70 text-[0.7rem] font-heading font-black text-navy flex items-center justify-center"
-                  >
-                    MP
-                  </div>
-                ))}
-              </div>
-              <div className="text-left">
-                <span className="text-[0.75rem] text-amber-300 tracking-[0.18em] font-semibold uppercase block">
-                  ★★★★★
-                </span>
-                <p className="text-[0.8rem] text-white/55">
-                  <span className="font-semibold text-white">+200 entrepreneurs</span> sur la liste d&apos;attente.
-                </p>
-              </div>
-            </div>
+            {/* Social proof — vignettes photo de profils (images toujours chargées) */}
+            <SocialProofAvatars />
           </div>
 
           {/* Right hero card */}
