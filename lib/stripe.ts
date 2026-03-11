@@ -4,7 +4,6 @@ if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error("STRIPE_SECRET_KEY manquant dans les variables d'environnement");
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2023-10-16",
-});
+// On laisse Stripe utiliser la version d'API par défaut liée au SDK installé
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
