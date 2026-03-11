@@ -145,3 +145,30 @@ Si l’email n’arrive pas ou est vide, dis-moi exactement ce que tu vois (mess
 3. **Tester** : remplis le formulaire sur le site en prod et vérifie ta boîte mail.
 
 Si tu bloques à une étape précise, dis-moi **le numéro de l’étape** et **le message exact** que tu vois (ou une capture), et on fait l’étape ensemble.
+
+---
+
+# Variables d’environnement (rappel)
+
+**À ne pas faire :** taper `NOM_VARIABLE="valeur"` dans PowerShell comme une commande — ça ne définit pas la variable pour l’app.
+
+**À faire :** ouvrir le fichier **`.env.local`** (ou `.env`) à la racine du projet dans Cursor, et ajouter une ligne par variable, par exemple :
+
+```env
+NEXT_PUBLIC_SOCIAL_AVATARS="https://exemple.com/photo1.jpg,https://exemple.com/photo2.jpg"
+```
+
+Sauvegarde le fichier. Au prochain démarrage du site (`npm run dev`), la variable sera prise en compte.
+
+---
+
+# Si `npx prisma db push` affiche « Authentication failed »
+
+Prisma lit le fichier **`.env`** (pas `.env.local`) pour se connecter à la base.
+
+1. Va sur **https://supabase.com/dashboard** → ton projet → **Project Settings** (icône engrenage) → **Database**.
+2. Dans **Connection string**, choisis **URI** et **Session** (port 5432).
+3. Copie l’URL affichée (elle contient le mot de passe).
+4. Ouvre le fichier **`.env`** à la racine de `MasterPrompt` et remplace les lignes `DIRECT_URL` et `DATABASE_URL` par cette URL (chaque variable doit avoir la même valeur pour le `db push`).  
+   Si le mot de passe contient `!`, `@` ou `#`, encode-les dans l’URL : `!` → `%21`, `@` → `%40`, `#` → `%23`.
+5. Sauvegarde, puis relance : `npx prisma db push`.

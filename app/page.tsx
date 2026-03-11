@@ -636,18 +636,27 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
-            <div className="bg-navy/60 border border-white/15 rounded-card p-5 mb-4">
-              <label className="block text-sm font-semibold text-white mb-3">
-                Rejoindre la liste d&apos;attente — prix de lancement garanti
-              </label>
-              <EmailSignupBlock
-                inputId="email-2"
-                buttonText="Réserver ma place à 49€ →"
-                buttonGreen
-                successMessage="✓ Parfait ! Vous serez parmi les premiers informés du lancement."
-              />
-              <p className="text-[0.72rem] text-white/30 text-center mt-3">
-                🛡️ Satisfait ou remboursé 14 jours · Sans condition
+            <div className="bg-navy/60 border border-white/15 rounded-card p-5 mb-4 space-y-4">
+              <div>
+                <p className="block text-sm font-semibold text-white mb-1">
+                  Accès immédiat à la formation
+                </p>
+                <p className="text-[0.8rem] text-white/60">
+                  Pas de compte à créer, paiement sécurisé par Stripe.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  href="/billing"
+                  className="inline-flex w-full items-center justify-center rounded-md bg-amber-400 px-4 py-3 text-sm font-semibold text-navy shadow-sm hover:bg-amber-300 transition-colors"
+                >
+                  Payer maintenant 49€ et accéder à la formation →
+                </Link>
+              </div>
+
+              <p className="text-[0.72rem] text-white/30 text-center mt-1">
+                🔐 Paiement sécurisé Stripe · 🛡️ Satisfait ou remboursé 14 jours
               </p>
             </div>
             <div className="mt-4 p-4 bg-amber-500/5 border border-amber-500/25 rounded-xl flex gap-3 items-start">

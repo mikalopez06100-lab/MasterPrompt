@@ -65,7 +65,7 @@ Ensuite on pourra brancher **Supabase Auth** (Magic Link + Google) et retirer Ne
 
 ### E. Contenu et polish
 
-- **Seed** des 6 modules en base (déjà prévus dans le brief).
+- **Seed** des 7 modules en base (déjà prévus dans le brief).
 - États vides, squelettes de chargement, messages d’erreur.
 - Tests manuels sur les parcours principaux.
 

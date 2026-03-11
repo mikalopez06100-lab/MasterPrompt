@@ -13,7 +13,6 @@ export const config = {
     "/exercises/:path*",
     "/library/:path*",
     "/progress/:path*",
-    "/billing/:path*",
     "/admin/:path*",
     "/auth/callback",
   ],
