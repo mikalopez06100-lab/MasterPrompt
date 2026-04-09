@@ -1,20 +1,20 @@
-/* Page de paiement simple avec Stripe Checkout + code promo */
-
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 
-export default function BillingPage() {
+function BillingPageContent() {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
-  const [promoCode, setPromoCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const status = searchParams.get("status");
+  const next = searchParams.get("next");
 
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setStatusMessage(null);
     setLoading(true);
 
     try {
@@ -23,7 +23,6 @@ export default function BillingPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email.trim() || undefined,
-          promoCode: promoCode.trim() || undefined,
         }),
       });
 
@@ -50,13 +49,13 @@ export default function BillingPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 animate-fade-in">
       <h1 className="font-heading text-3xl font-bold tracking-tight text-slate-900">
-        Paiement Master Prompt
+        Commander Master Prompt
       </h1>
 
       <div className="card p-8 space-y-6">
         <div>
           <p className="text-sm uppercase tracking-[0.16em] text-slate-500 font-semibold mb-2">
-            Offre de lancement
+            Offre de lancement — Précommande
           </p>
           <div className="flex items-baseline gap-2">
             <span className="text-4xl font-heading font-bold text-slate-900">
@@ -65,8 +64,9 @@ export default function BillingPage() {
             <span className="text-sm text-slate-400 line-through">97€</span>
           </div>
           <p className="mt-2 text-sm text-slate-500">
-            Accès complet à la formation Master Prompt. Paiement unique via
-            Stripe.
+            Vous réservez dès maintenant votre accès à la formation Master
+            Prompt au tarif de lancement. L&apos;accès complet à la plateforme
+            sera ouvert en avant-première aux personnes ayant précommandé.
           </p>
         </div>
 
@@ -76,9 +76,22 @@ export default function BillingPage() {
               {error}
             </p>
           )}
-          {statusMessage && (
-            <p className="rounded-md bg-emerald-50 border border-emerald-200 px-3 py-2 text-sm text-emerald-800">
-              {statusMessage}
+          {status === "success" && (
+            <div className="rounded-md bg-emerald-50 border border-emerald-200 px-3 py-3 text-sm text-emerald-900 space-y-2">
+              <p className="font-medium">Paiement confirme. Votre acces est active.</p>
+              <p>
+                Prochaine etape: connectez-vous pour acceder a la plateforme.
+              </p>
+              {next === "login" && (
+                <Link href="/login?callbackUrl=/dashboard" className="inline-flex text-emerald-900 underline underline-offset-2 font-semibold">
+                  Se connecter a la plateforme
+                </Link>
+              )}
+            </div>
+          )}
+          {status === "cancelled" && (
+            <p className="rounded-md bg-amber-50 border border-amber-200 px-3 py-2 text-sm text-amber-900">
+              Paiement annule. Vous pouvez reessayer quand vous voulez.
             </p>
           )}
 
@@ -95,24 +108,8 @@ export default function BillingPage() {
               placeholder="vous@exemple.com"
             />
             <p className="text-xs text-slate-400">
-              L&apos;email utilisé pour recevoir le reçu et l&apos;accès.
-            </p>
-          </div>
-
-          <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-slate-700">
-              Code promo (optionnel)
-            </label>
-            <input
-              type="text"
-              value={promoCode}
-              onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-              placeholder="PROMO10"
-            />
-            <p className="text-xs text-slate-400">
-              Saisissez le code fourni (s&apos;il y en a un). Il sera vérifié
-              côté Stripe.
+              L&apos;email utilisé pour recevoir votre reçu et, dès l&apos;ouverture,
+              vos identifiants d&apos;accès à la formation.
             </p>
           </div>
 
@@ -121,16 +118,27 @@ export default function BillingPage() {
             disabled={loading}
             className="mt-4 w-full rounded-md bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? "Redirection vers Stripe…" : "Payer maintenant avec Stripe"}
+            {loading
+              ? "Redirection vers Stripe…"
+              : "Valider ma précommande à 49€"}
           </button>
 
           <p className="mt-3 text-xs text-slate-400 text-center">
             Paiement sécurisé Stripe · TVA incluse · Vous serez redirigé vers
-            une page de paiement sécurisée.
+            une page de paiement sécurisée. Accès à la formation dès son
+            ouverture officielle (vous serez prévenu par email en priorité).
           </p>
         </form>
       </div>
     </div>
+  );
+}
+
+export default function BillingPage() {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-2xl p-8 text-sm text-slate-500">Chargement...</div>}>
+      <BillingPageContent />
+    </Suspense>
   );
 }
 

@@ -2,9 +2,11 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { CourseForm } from "../course-form";
 import { prisma } from "@/lib/db";
+import { assertAdminUser } from "@/lib/admin-auth";
 
 async function createModule(formData: FormData) {
   "use server";
+  await assertAdminUser();
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
   const slug =

@@ -2,11 +2,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { CourseForm } from "../course-form";
+import { assertAdminUser } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
 async function updateModule(formData: FormData) {
   "use server";
+  await assertAdminUser();
   const id = String(formData.get("id") ?? "").trim();
   if (!id) return;
   const { prisma } = await import("@/lib/db");

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { BUILTIN_PROMPTS } from "@/lib/prompt-library";
 
 interface ScoreResult {
   clarity: number;
@@ -10,6 +11,21 @@ interface ScoreResult {
   feedback: string;
   suggestions: { text: string; type: string }[];
 }
+
+interface ClaudeRewriteResult {
+  rewrittenPrompt: string;
+  rationale: string;
+  quickTips: string[];
+}
+
+const PERSONA_OPTIONS = [
+  { value: "general", label: "General business" },
+  { value: "marketing", label: "Marketing" },
+  { value: "commercial", label: "Commercial / Vente" },
+  { value: "rh", label: "Ressources humaines" },
+  { value: "ux", label: "UX / Produit" },
+  { value: "it", label: "Tech / IT" },
+];
 
 function ScoreBar({
   label,
@@ -44,8 +60,24 @@ export default function EditorPage() {
   const router = useRouter();
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const [rewriting, setRewriting] = useState(false);
   const [saving, setSaving] = useState(false);
   const [result, setResult] = useState<ScoreResult | null>(null);
+  const [rewriteTarget, setRewriteTarget] = useState(
+    "Rendre le prompt plus clair et orienté résultat business"
+  );
+  const [persona, setPersona] = useState("general");
+  const [rewrite, setRewrite] = useState<ClaudeRewriteResult | null>(null);
+  const [rewriteError, setRewriteError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const templateId = params.get("template");
+    if (!templateId) return;
+    const template = BUILTIN_PROMPTS.find((p) => p.id === templateId);
+    if (!template) return;
+    setContent((prev) => (prev.trim().length === 0 ? template.content : prev));
+  }, []);
 
   const analyze = async () => {
     if (!content.trim()) return;
@@ -79,6 +111,30 @@ export default function EditorPage() {
     }
   };
 
+  const rewriteWithClaude = async () => {
+    if (!content.trim()) return;
+    setRewriting(true);
+    setRewrite(null);
+    setRewriteError(null);
+    try {
+      const res = await fetch("/api/prompts/rewrite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content, target: rewriteTarget, persona }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setRewriteError(data.error || "Impossible de retravailler ce prompt.");
+        return;
+      }
+      setRewrite(data);
+    } catch {
+      setRewriteError("Une erreur est survenue. Merci de reessayer.");
+    } finally {
+      setRewriting(false);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-3xl space-y-6 animate-fade-in">
       <h1 className="font-heading text-3xl font-bold tracking-tight text-slate-900">
@@ -103,6 +159,13 @@ export default function EditorPage() {
             className="btn-primary disabled:opacity-50 disabled:hover:translate-y-0"
           >
             {loading ? "Analyse…" : "Analyser mon prompt"}
+          </button>
+          <button
+            onClick={rewriteWithClaude}
+            disabled={rewriting || !content.trim()}
+            className="rounded-button border-2 border-primary/20 bg-primary/5 px-4 py-2.5 text-sm font-semibold text-primary transition-all hover:bg-primary/10 disabled:opacity-50"
+          >
+            {rewriting ? "Claude retravaille..." : "Retravailler avec Claude"}
           </button>
           <button
             onClick={save}
@@ -132,6 +195,76 @@ export default function EditorPage() {
             <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-slate-600">
               {result.suggestions.map((s, i) => (
                 <li key={i}>{s.text}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
+      <div className="card space-y-4">
+        <h2 className="font-heading text-lg font-semibold text-slate-900">
+          Objectif de retravail (Claude)
+        </h2>
+        <div className="space-y-1.5">
+          <label className="block text-sm font-medium text-slate-700">
+            Persona metier
+          </label>
+          <select
+            value={persona}
+            onChange={(e) => setPersona(e.target.value)}
+            className="w-full rounded-button border-2 border-slate-200 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          >
+            {PERSONA_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <input
+          value={rewriteTarget}
+          onChange={(e) => setRewriteTarget(e.target.value)}
+          className="w-full rounded-button border-2 border-slate-200 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          placeholder="Ex: Version plus persuasive pour une page de vente"
+        />
+        {rewriteError && (
+          <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+            {rewriteError}
+          </p>
+        )}
+      </div>
+
+      {rewrite && (
+        <div className="card animate-slide-up space-y-4">
+          <div className="mb-1 h-1 w-12 rounded-full bg-gradient-to-r from-primary to-primary-light" />
+          <h2 className="font-heading text-lg font-semibold text-slate-900">
+            Proposition Claude
+          </h2>
+          <textarea
+            value={rewrite.rewrittenPrompt}
+            onChange={(e) =>
+              setRewrite((prev) =>
+                prev ? { ...prev, rewrittenPrompt: e.target.value } : prev
+              )
+            }
+            rows={8}
+            className="w-full resize-y rounded-button border-2 border-slate-200 px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          />
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => setContent(rewrite.rewrittenPrompt)}
+              className="btn-primary"
+            >
+              Remplacer mon prompt par cette version
+            </button>
+          </div>
+          <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
+            {rewrite.rationale}
+          </p>
+          {rewrite.quickTips.length > 0 && (
+            <ul className="list-inside list-disc space-y-1 text-sm text-slate-600">
+              {rewrite.quickTips.map((tip, i) => (
+                <li key={i}>{tip}</li>
               ))}
             </ul>
           )}

@@ -1,14 +1,17 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { requireSupabasePublicConfig } from "./env";
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: { headers: request.headers },
   });
 
+  const { url, anonKey } = requireSupabasePublicConfig();
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    url,
+    anonKey,
     {
       cookies: {
         getAll() {
@@ -27,7 +30,7 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const protectedPaths = ["/dashboard", "/editor", "/courses", "/exercises", "/library", "/progress", "/admin"];
+  const protectedPaths = ["/dashboard", "/editor", "/courses", "/exercises", "/library", "/progress", "/billing", "/account", "/admin"];
   const isProtected = protectedPaths.some((p) => request.nextUrl.pathname.startsWith(p));
   if (isProtected && !user) {
     const url = request.nextUrl.clone();

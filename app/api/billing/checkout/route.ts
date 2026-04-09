@@ -3,13 +3,20 @@ import { stripe } from "@/lib/stripe";
 
 export async function POST(request: Request) {
   try {
+    if (!stripe) {
+      return NextResponse.json(
+        { error: "Stripe n'est pas configuré côté serveur." },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json().catch(() => ({}));
-    const promoCode: string | undefined = body.promoCode?.trim() || undefined;
     const email: string | undefined = body.email?.trim() || undefined;
 
     const priceId = process.env.STRIPE_PRICE_ONE_TIME;
     const productId = process.env.STRIPE_PRODUCT_ONE_TIME;
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3003";
+    const requestOrigin = new URL(request.url).origin;
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || requestOrigin || "http://localhost:3003";
 
     if (!priceId && !productId) {
       return NextResponse.json(
@@ -18,39 +25,16 @@ export async function POST(request: Request) {
       );
     }
 
-    let promotionCodeId: string | undefined;
-
-    if (promoCode) {
-      const promotionCodes = await stripe.promotionCodes.list({
-        code: promoCode,
-        active: true,
-        limit: 1,
-      });
-
-      const promotion = promotionCodes.data[0];
-
-      if (!promotion) {
-        return NextResponse.json(
-          { error: "Code promo invalide ou expiré." },
-          { status: 400 }
-        );
-      }
-
-      promotionCodeId = promotion.id;
-    }
-
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
       line_items: [
         priceId
           ? {
-              // Si un prix est configuré, on l'utilise tel quel
               price: priceId,
               quantity: 1,
             }
           : {
-              // Sinon on construit la ligne à partir du produit + montant fixe
               price_data: {
                 currency: "eur",
                 product: productId!,
@@ -59,11 +43,10 @@ export async function POST(request: Request) {
               quantity: 1,
             },
       ],
-      success_url: `${appUrl}/billing?status=success`,
+      success_url: `${appUrl}/billing?status=success&next=login`,
       cancel_url: `${appUrl}/billing?status=cancelled`,
       customer_email: email,
-      allow_promotion_codes: true,
-      discounts: promotionCodeId ? [{ promotion_code: promotionCodeId }] : undefined,
+      allow_promotion_codes: true, // le code promo est saisi sur la page Stripe
     });
 
     if (!session.url) {
@@ -74,12 +57,14 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ url: session.url });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Erreur Stripe Checkout:", error);
-    return NextResponse.json(
-      { error: "Erreur lors de la création de la session de paiement." },
-      { status: 500 }
-    );
+    const message =
+      typeof error === "object" && error !== null && "message" in error
+        ? String((error as any).message)
+        : "Erreur lors de la création de la session de paiement.";
+
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 

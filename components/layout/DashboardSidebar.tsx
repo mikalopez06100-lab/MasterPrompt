@@ -10,6 +10,7 @@ import {
   Library,
   TrendingUp,
   CreditCard,
+  User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/layout/Logo";
@@ -22,6 +23,7 @@ const nav = [
   { href: "/library", label: "Bibliothèque", icon: Library },
   { href: "/progress", label: "Progression", icon: TrendingUp },
   { href: "/billing", label: "Abonnement", icon: CreditCard },
+  { href: "/account", label: "Mon compte", icon: User },
 ];
 
 export function DashboardSidebar() {

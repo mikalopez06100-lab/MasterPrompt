@@ -1,16 +1,13 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { getPrismaUserFromSupabase } from "@/lib/auth-server";
 import { Logo } from "@/components/layout/Logo";
+import { requireAdminPageUser } from "@/lib/admin-auth";
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getPrismaUserFromSupabase();
-  if (!user) redirect("/login");
-  if (user.role !== "ADMIN") redirect("/dashboard");
+  await requireAdminPageUser();
 
   return (
     <div className="flex h-screen bg-slate-100">
@@ -33,6 +30,42 @@ export default async function AdminLayout({
             className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
           >
             Cours
+          </Link>
+          <Link
+            href="/admin/prompts"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          >
+            Bibliotheque prompts
+          </Link>
+          <Link
+            href="/admin/users"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          >
+            Utilisateurs
+          </Link>
+          <Link
+            href="/admin/progress"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          >
+            Progression
+          </Link>
+          <Link
+            href="/admin/exercises"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          >
+            Exercices
+          </Link>
+          <Link
+            href="/admin/subscriptions"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          >
+            Abonnements
+          </Link>
+          <Link
+            href="/admin/leads"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          >
+            Leads
           </Link>
         </nav>
         <Link

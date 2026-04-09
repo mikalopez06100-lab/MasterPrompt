@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { isEmailInAdminAllowlist } from "@/lib/admin-email";
 
 export async function getSupabaseUser() {
   const supabase = await createClient();
@@ -22,6 +23,7 @@ export async function getPrismaUserFromSupabase() {
 export async function ensurePrismaUser(supabaseUser: SupabaseUser) {
   const email = supabaseUser.email?.toLowerCase().trim();
   if (!email) return null;
+  const shouldBeAdmin = isEmailInAdminAllowlist(email);
 
   const existing = await prisma.user.findFirst({
     where: {
@@ -33,10 +35,15 @@ export async function ensurePrismaUser(supabaseUser: SupabaseUser) {
   });
 
   if (existing) {
-    if (existing.supabaseId !== supabaseUser.id) {
+    const needsRoleUpdate = shouldBeAdmin && existing.role !== "ADMIN";
+    if (existing.supabaseId !== supabaseUser.id || needsRoleUpdate) {
       await prisma.user.update({
         where: { id: existing.id },
-        data: { supabaseId: supabaseUser.id, name: supabaseUser.user_metadata?.name ?? existing.name },
+        data: {
+          supabaseId: supabaseUser.id,
+          name: supabaseUser.user_metadata?.name ?? existing.name,
+          role: shouldBeAdmin ? "ADMIN" : existing.role,
+        },
       });
     }
     return prisma.user.findUnique({ where: { id: existing.id } });
@@ -47,7 +54,7 @@ export async function ensurePrismaUser(supabaseUser: SupabaseUser) {
       supabaseId: supabaseUser.id,
       email,
       name: supabaseUser.user_metadata?.name ?? email.split("@")[0],
-      role: "STUDENT",
+      role: shouldBeAdmin ? "ADMIN" : "STUDENT",
     },
   });
 }

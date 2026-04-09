@@ -8,6 +8,7 @@ import { createClient } from "@supabase/supabase-js";
 import { readFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { resolveSupabaseUrl } from "./supabase-env.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -27,7 +28,7 @@ function loadEnvLocal() {
 
 loadEnvLocal();
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const url = resolveSupabaseUrl();
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!url || !serviceKey) {

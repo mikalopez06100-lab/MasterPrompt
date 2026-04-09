@@ -1,14 +1,19 @@
 # Configuration Supabase Auth (Magic Link + Google)
 
+**Projet utilisé par l’app :** `https://vgdspxhuqdfilrkhipvx.supabase.co` (référence `vgdspxhuqdfilrkhipvx`).
+
 L’auth Supabase est en place. Pour que la connexion fonctionne, configure les URLs de redirection dans le dashboard Supabase.
 
 ## 1. URL de redirection (obligatoire)
 
 1. Va sur **Supabase** → ton projet → **Authentication** → **URL Configuration**.
-2. Dans **Redirect URLs**, ajoute :
+2. Dans **Site URL**, mets :
+   - En prod : `https://www.masterprompt.fr`
+3. Dans **Redirect URLs**, ajoute :
    - En local : `http://localhost:3003/auth/callback`
-   - En prod : `https://ton-domaine.vercel.app/auth/callback`
-3. Enregistre.
+   - En prod : `https://www.masterprompt.fr/auth/callback`
+   - (recommande) `https://masterprompt.fr/auth/callback`
+4. Enregistre.
 
 ## 2. Google OAuth (optionnel)
 

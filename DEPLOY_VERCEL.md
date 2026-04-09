@@ -29,9 +29,16 @@ git push -u origin main
 4. Vercel détecte Next.js : ne change rien au **Framework Preset**.
 5. **Environment Variables** : ajoute **toutes** les variables ci-dessous (pour **Production**, **Preview** et **Development** si tu veux les mêmes partout).
 
+### Projet Supabase à utiliser
+
+Un seul projet pour Master Prompt en production : **`vgdspxhuqdfilrkhipvx`** → `https://vgdspxhuqdfilrkhipvx.supabase.co`.  
+Si l’intégration Vercel a lié un autre projet (ex. suspendu ou test), supprime-le ou remplace les variables par celles de ce projet.
+
 ### Variables à renseigner sur Vercel
 
 Copie **toutes** les variables ci-dessous dans **Settings → Environment Variables** (Production + Preview si besoin). Tu peux reprendre les valeurs de ton `.env.local` en adaptant celles qui dépendent de l’environnement (URL du site, secrets).
+
+**Alias (optionnel)** : l’app lit aussi `DATABASE_SUPABASE_URL` et `NEXT_PUBLIC_DATABASE_SUPABASE_ANON_KEY` si les noms `NEXT_PUBLIC_SUPABASE_*` ne sont pas définis (quickstart intégration Supabase sur Vercel). Préfère tout de même les noms standard pour éviter la confusion.
 
 | Nom | Exemple de valeur / description | Secret ? | Obligatoire |
 |-----|----------------------------------|----------|-------------|

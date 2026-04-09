@@ -1,9 +1,9 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY manquant dans les variables d'environnement");
-}
-
-// On laisse Stripe utiliser la version d'API par défaut liée au SDK installé
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// En build (notamment sur Vercel), les variables d'env ne sont pas toujours présentes.
+// On évite donc de throw au moment de l'import et on gère l'erreur dans les routes.
+export const stripe =
+  process.env.STRIPE_SECRET_KEY != null && process.env.STRIPE_SECRET_KEY !== ""
+    ? new Stripe(process.env.STRIPE_SECRET_KEY)
+    : null;
 

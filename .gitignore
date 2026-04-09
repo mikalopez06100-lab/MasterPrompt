@@ -44,3 +44,7 @@ next-env.d.ts
 prisma/migrations/**/migration_lock.toml
 prisma/dev.db
 prisma/dev.db-journal
+
+# Source PDF / extrait v4 (regen: npm run build:v4-prompts -- <chemin.pdf>)
+masterprompt-bibliotheque-strategique-v4.pdf
+lib/strategic-v4-extracted.txt

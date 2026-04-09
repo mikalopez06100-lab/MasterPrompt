@@ -216,7 +216,7 @@ export default function LandingPage() {
         <span className="text-sm text-muted flex items-center gap-2">🔐 Paiement sécurisé Stripe</span>
         <span className="text-sm text-muted flex items-center gap-2">🛡️ Remboursé sous 14 jours</span>
         <span className="text-sm text-muted flex items-center gap-2">🇫🇷 Formation 100% en français</span>
-        <span className="text-sm text-muted flex items-center gap-2">⚡ Accès immédiat après paiement</span>
+        <span className="text-sm text-muted flex items-center gap-2">⏳ Accès en avant-première dès l&apos;ouverture</span>
       </div>
 
       {/* VIDEO SECTION */}
@@ -603,7 +603,8 @@ export default function LandingPage() {
             <span className="italic text-amber-300">en une semaine.</span>
           </h2>
           <p className="text-[0.95rem] text-white/55 leading-relaxed mb-7">
-            1h récupérée par semaine = formation remboursée en quelques jours. Et c&apos;est une estimation conservatrice.
+            1h récupérée par semaine = formation remboursée en quelques jours. Vous réservez aujourd&apos;hui votre accès en
+            avant-première au tarif de lancement.
           </p>
           <div className="bg-navy border border-white/10 rounded-2xl p-7 md:p-8 relative overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
             <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-400 via-amber-200 to-emerald-400" />
@@ -615,8 +616,8 @@ export default function LandingPage() {
               <sup className="text-2xl align-super">€</sup>49
             </div>
             <p className="text-[0.82rem] text-white/45 border-b border-white/10 pb-4 mb-5">
-              Accès complet à vie · puis <strong className="text-white/80">4,90€/mois</strong> optionnel (mises à jour &amp;
-              outils SaaS)
+              Précommande au tarif de lancement. Accès complet à vie dès l&apos;ouverture officielle de la formation, puis{" "}
+              <strong className="text-white/80">4,90€/mois</strong> optionnel (mises à jour &amp; outils SaaS).
             </p>
             <ul className="space-y-2.5 mb-6">
               {[
@@ -639,10 +640,10 @@ export default function LandingPage() {
             <div className="bg-navy/60 border border-white/15 rounded-card p-5 mb-4 space-y-4">
               <div>
                 <p className="block text-sm font-semibold text-white mb-1">
-                  Accès immédiat à la formation
+                  Réserver votre accès en avant-première
                 </p>
                 <p className="text-[0.8rem] text-white/60">
-                  Pas de compte à créer, paiement sécurisé par Stripe.
+                  Paiement unique sécurisé par Stripe. Vous serez prévenu(e) en priorité dès l&apos;ouverture de la formation.
                 </p>
               </div>
 
@@ -651,7 +652,7 @@ export default function LandingPage() {
                   href="/billing"
                   className="inline-flex w-full items-center justify-center rounded-md bg-amber-400 px-4 py-3 text-sm font-semibold text-navy shadow-sm hover:bg-amber-300 transition-colors"
                 >
-                  Payer maintenant 49€ et accéder à la formation →
+                  Valider ma précommande à 49€ →
                 </Link>
               </div>
 
