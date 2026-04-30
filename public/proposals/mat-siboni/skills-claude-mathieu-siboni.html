@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills Claude — Plan d'équipement Mathieu Siboni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574;
+  --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed; --chart-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.04);
+  --shadow: 0 1px 3px rgba(10, 37, 64, 0.06), 0 1px 2px rgba(10, 37, 64, 0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; border-left: 1px solid var(--border); }
+.toc li { margin-bottom: 4px; }
+.toc a { display: block; padding: 6px 16px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; transition: all 0.15s; }
+.toc a:hover { color: var(--text-primary); border-left-color: var(--accent); }
+.main { max-width: 920px; }
+.cover { padding: 64px 0 48px; border-bottom: 2px solid var(--text-primary); margin-bottom: 64px; }
+.cover-kicker { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 24px; }
+.cover h1 { font-size: 3rem; line-height: 1.1; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.02em; }
+.cover-sub { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; max-width: 720px; }
+.cover-meta { display: flex; gap: 32px; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap; }
+.cover-meta span strong { color: var(--text-primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; font-weight: 600; }
+section { margin-bottom: 96px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; }
+h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin: 32px 0 12px 0; }
+h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 16px 0 8px 0; }
+p { margin-bottom: 16px; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
+.card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 8px; font-weight: 600; }
+.kpi-value { font-size: 2.25rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; display: block; }
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 24px 0; }
+.callout strong { color: var(--text-primary); }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout-info { border-color: var(--info); background: var(--info-soft); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 24px 0; }
+.data-table th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+.data-table td { padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.skill-card { background: var(--bg-card); border: 2px solid var(--text-primary); border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
+.skill-card.priority-1 { border-color: var(--accent); }
+.skill-header { background: var(--text-primary); color: white; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.skill-card.priority-1 .skill-header { background: var(--accent-dark); }
+.skill-header h3 { color: white; margin: 0; font-size: 1.25rem; }
+.skill-header .skill-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.75; }
+.skill-body { padding: 28px 32px; }
+.skill-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 16px 0 24px 0; padding: 16px; background: var(--bg-subtle); border-radius: 6px; font-size: 0.875rem; }
+.skill-meta dt { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+.skill-meta dd { color: var(--text-primary); font-weight: 600; }
+.skill-flow { background: var(--bg-subtle); padding: 16px 20px; border-radius: 6px; margin: 16px 0; font-size: 0.9rem; font-family: var(--font-mono); color: var(--text-body); border-left: 3px solid var(--accent); }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; background: var(--bg-subtle); color: var(--text-muted); margin: 2px; }
+.tag-existing { background: var(--success-soft); color: var(--success); border: 1px solid #86efac; }
+.tag-new { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #f5d8b8; }
+.tag-skip { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border); }
+.tag-priority-1 { background: var(--danger-soft); color: var(--danger); font-weight: 600; }
+.tag-priority-2 { background: var(--warning-soft); color: var(--warning); font-weight: 600; }
+.tag-priority-3 { background: var(--info-soft); color: var(--info); font-weight: 600; }
+@media print {
+  body { background: white; }
+  .layout { display: block; max-width: 720px; padding: 24px; }
+  .toc { display: none; }
+  .card, .skill-card { break-inside: avoid; box-shadow: none; }
+  section { margin-bottom: 48px; }
+  .cover { padding-top: 0; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#exec">Résumé exécutif</a></li>
+      <li><a href="#existants">01 · Skills déjà créés</a></li>
+      <li><a href="#nouveaux">02 · Skills à créer</a></li>
+      <li><a href="#nogo">03 · Ce qu'on ne créera pas</a></li>
+      <li><a href="#sprints">04 · Plan de création</a></li>
+      <li><a href="#methodo">05 · Méthodologie</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+    <header class="cover">
+      <div class="cover-kicker">Plan d'équipement Skills Claude — Accompagnement Premium</div>
+      <h1>Skills Claude pour Mathieu Siboni</h1>
+      <p class="cover-sub">Cartographie des skills à mobiliser et à créer pour rendre Mathieu autonome dans l'utilisation quotidienne de Claude — production de contenu, pitch presse, briefs logistique, dossiers sponsors et tri des sollicitations.</p>
+      <div class="cover-meta">
+        <span><strong>Client</strong>Mathieu Siboni</span>
+        <span><strong>Périmètre</strong>Outils Claude personnalisés</span>
+        <span><strong>Date</strong>Avril 2026</span>
+        <span><strong>Préparé par</strong>Master Prompt</span>
+      </div>
+    </header>
+
+    <!-- EXEC -->
+    <section id="exec">
+      <header class="section-header">
+        <span class="kicker">Résumé exécutif</span>
+        <h2>Le constat en une page</h2>
+        <p class="lead">Pourquoi équiper Mathieu de skills dédiés et pas se contenter de prompts au coup par coup.</p>
+      </header>
+
+      <p>Configurer Claude pour Mathieu et lui apprendre à l'utiliser ne suffit pas. Sans skills dédiés, chaque session repart de zéro : Mathieu doit reformuler son contexte, sa voix, ses contraintes — à chaque post Instagram, chaque pitch presse, chaque réponse à un sponsor. C'est un coût cognitif quotidien qui finit par décourager l'usage. Les skills résolvent ce problème en encapsulant <em>une fois pour toutes</em> le savoir-faire métier (brand voice, formats attendus, garde-fous, exemples) et le rendent invocable en une phrase.</p>
+
+      <div class="card-row">
+        <div class="kpi">
+          <span class="kpi-label">Skills existants pertinents</span>
+          <span class="kpi-value">4</span>
+          <span class="kpi-sub">À mobiliser dès maintenant</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Skills à créer pour Mathieu</span>
+          <span class="kpi-value">5</span>
+          <span class="kpi-sub">Spécifiques personal branding sportif</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Effort total de création</span>
+          <span class="kpi-value">~12 h</span>
+          <span class="kpi-sub">2-3 h par skill avec test/itération</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Délai de déploiement complet</span>
+          <span class="kpi-value">10 sem</span>
+          <span class="kpi-sub">4 sprints alignés sur la roadmap</span>
+        </div>
+      </div>
+
+      <div class="callout callout-accent">
+        <strong>Logique d'arbitrage.</strong> Un skill se justifie quand le besoin est <em>récurrent</em> (au moins hebdomadaire) ET <em>spécifique</em> (formats, voix, contraintes propres à Mathieu). Une demande ponctuelle ne mérite pas un skill — un bon prompt suffit. Tout ce qui est listé ci-dessous coche les deux cases.
+      </div>
+    </section>
+
+    <!-- EXISTANTS -->
+    <section id="existants">
+      <header class="section-header">
+        <span class="kicker">Bloc 01</span>
+        <h2>Skills déjà créés — directement applicables</h2>
+        <p class="lead">Inventaire des skills Master Prompt existants et leur usage dans le contexte Mathieu.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Skill existant</th><th>Statut</th><th>Usage Mathieu</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>marketing-communication-strategy</strong></td>
+            <td><span class="tag tag-existing">À mobiliser</span></td>
+            <td>Vient d'être utilisée pour le livrable positioning + landing. À réutiliser à chaque revue stratégique trimestrielle (T1 2027 par exemple, post-saison).</td>
+          </tr>
+          <tr>
+            <td><strong>ia-automation-implementation</strong></td>
+            <td><span class="tag tag-existing">À mobiliser</span></td>
+            <td>Vient d'être utilisée pour le plan P1 fédé. À réutiliser pour cadrer les automatisations P3 (Rookie Camps) en saison 2027 et celles de la production documentaire P4.</td>
+          </tr>
+          <tr>
+            <td><strong>audit-site-web</strong></td>
+            <td><span class="tag tag-existing">À planifier J+90</span></td>
+            <td>Une fois mathieusiboni.fr en ligne, audit complet : SEO Google + citabilité dans ChatGPT/Claude/Perplexity à l'approche des JO 2030 (point critique pour la visibilité presse internationale).</td>
+          </tr>
+          <tr>
+            <td><strong>humanizer</strong></td>
+            <td><span class="tag tag-existing">À systématiser</span></td>
+            <td><strong>Critique.</strong> À chaîner systématiquement après tout contenu généré (posts, pitchs, dossiers). Un coach Équipe de France qui poste du Claude brut détectable = mort réputationnelle. Ce skill est une assurance.</td>
+          </tr>
+          <tr>
+            <td><span style="color: var(--text-muted);">business-model-analysis</span></td>
+            <td><span class="tag tag-skip">Skip</span></td>
+            <td>Mathieu n'a pas de business model à analyser sur ce périmètre. Son P1 (fédé) est une prestation, son P2 (personal branding) est un asset, pas un produit.</td>
+          </tr>
+          <tr>
+            <td><span style="color: var(--text-muted);">cinemark-script-analysis</span></td>
+            <td><span class="tag tag-skip">Skip</span></td>
+            <td>Hors sujet. Skill réservée à Cinémark Azur.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-info">
+        <strong>Adaptations à prévoir sur l'existant.</strong> Aucune réécriture nécessaire des 4 skills mobilisables. Ils sont assez génériques pour s'adapter au contexte Mathieu sans modification. Le seul effort est pédagogique : apprendre à Mathieu <em>quand</em> les invoquer.
+      </div>
+    </section>
+
+    <!-- NOUVEAUX -->
+    <section id="nouveaux">
+      <header class="section-header">
+        <span class="kicker">Bloc 02</span>
+        <h2>Skills à créer pour l'écosystème Siboni</h2>
+        <p class="lead">Cinq skills spécifiques classés par ROI immédiat décroissant.</p>
+      </header>
+
+      <!-- SKILL 1 -->
+      <div class="skill-card priority-1">
+        <header class="skill-header">
+          <div>
+            <span class="skill-tag">Skill #1 · ROI immédiat maximum</span>
+            <h3>siboni-content-paco</h3>
+          </div>
+          <span class="tag tag-priority-1">Priorité absolue</span>
+        </header>
+        <div class="skill-body">
+          <p><strong>Objet.</strong> Génération de contenu personal branding (Instagram + LinkedIn) aligné sur les 3 piliers stratégiques (Coulisses haute performance / Route JO 2030 / Berceau Isola), respectant la brand voice « Direct · Technique · Ancré », évitant le jargon coaching américain.</p>
+
+          <dl class="skill-meta">
+            <div><dt>Input attendu</dt><dd>Brief 3 lignes + photo/contexte</dd></div>
+            <div><dt>Output produit</dt><dd>Post FR (+EN si demandé) + 2 variations A/B</dd></div>
+            <div><dt>Volume cible</dt><dd>20 productions/sem en saison</dd></div>
+            <div><dt>Couplage</dt><dd>Chaîné systématiquement avec humanizer</dd></div>
+          </dl>
+
+          <h4>Pourquoi c'est prioritaire</h4>
+          <p>Sans ce skill, le calendrier éditorial (3-4 IG/sem + 1 LinkedIn/sem) est ingérable pour Mathieu. Chaque post lui prendrait 20-30 minutes de cadrage prompt. Avec le skill, on tombe à 3-5 minutes par post. C'est la différence entre une cadence éditoriale tenue et un compte qui meurt après 4 semaines.</p>
+
+          <h4>Garde-fous intégrés</h4>
+          <p>Le skill bloque par construction : (1) toute mention de NOVATEK/TECHNIC HOME, (2) tout vocabulaire de jargon US (« mindset », « champion lifestyle »), (3) tout contenu sur des athlètes mineurs sans validation explicite, (4) toute promesse de transformation magique. Trois interdits explicites dans la spec du skill.</p>
+        </div>
+      </div>
+
+      <!-- SKILL 2 -->
+      <div class="skill-card">
+        <header class="skill-header">
+          <div>
+            <span class="skill-tag">Skill #2 · Earned media</span>
+            <h3>siboni-pitch-presse</h3>
+          </div>
+          <span class="tag tag-priority-1">Priorité haute</span>
+        </header>
+        <div class="skill-body">
+          <p><strong>Objet.</strong> Production de pitchs presse structurés pour les médias cibles (L'Équipe, France 3 PACA, Snowsurf, Snow Avant, Onboard, Cannes Radio), avec angle, accroche, hook factuel, propositions de format (interview, papier, plateau) et bio courte.</p>
+
+          <dl class="skill-meta">
+            <div><dt>Input attendu</dt><dd>Actualité (résultat athlète, sélection, événement) + média visé</dd></div>
+            <div><dt>Output produit</dt><dd>Email pitch personnalisé + relance J+5 + relance J+12</dd></div>
+            <div><dt>Volume cible</dt><dd>~24 pitchs/an pour 6 articles publiés</dd></div>
+            <div><dt>KPI direct</dt><dd>Articles publiés (cible 6/an)</dd></div>
+          </dl>
+
+          <h4>Pourquoi c'est prioritaire</h4>
+          <p>L'earned media est l'un des 3 canaux core du Bullseye. Mathieu n'a ni le réflexe ni le formalisme du pitch presse — sans skill, il ne pitchera pas, ou pitchera mal. Un pitch mal calibré = brûlage d'un contact journaliste pour 6 mois. Le skill encode les codes du métier (objet court, hook en 1 ligne, angle clair, exclusivité éventuelle, contact direct).</p>
+        </div>
+      </div>
+
+      <!-- SKILL 3 -->
+      <div class="skill-card">
+        <header class="skill-header">
+          <div>
+            <span class="skill-tag">Skill #3 · Pont vers automatisation</span>
+            <h3>siboni-brief-deplacement</h3>
+          </div>
+          <span class="tag tag-priority-2">Priorité moyenne</span>
+        </header>
+        <div class="skill-body">
+          <p><strong>Objet.</strong> Version manuelle (interactive Claude) de l'Auto #1 du plan P1. Mathieu donne lieu / dates / nb athlètes / contraintes, le skill produit le brief structuré : suggestions hôtels (logique), plan repas, plan transport, email fédé pré-rédigé.</p>
+
+          <dl class="skill-meta">
+            <div><dt>Input attendu</dt><dd>Lieu, dates, nb athlètes, contraintes</dd></div>
+            <div><dt>Output produit</dt><dd>Brief logistique + email fédé pré-rédigé</dd></div>
+            <div><dt>Volume cible</dt><dd>~25 déplacements/saison</dd></div>
+            <div><dt>Évolution</dt><dd>Remplacé par Auto #1 (Make+APIs) à J+50</dd></div>
+          </dl>
+
+          <h4>Pourquoi c'est utile</h4>
+          <p>Pont opérationnel entre le démarrage de l'accompagnement (J+5) et la mise en production de l'automatisation Make complète (J+50). Sur ces 45 jours, Mathieu a au moins 4-5 déplacements à organiser. Sans skill, il les fait à la main. Avec le skill, il gagne déjà 60-70 % du temps. Et une fois Auto #1 en prod, le skill reste utile pour les cas tordus / non standards.</p>
+        </div>
+      </div>
+
+      <!-- SKILL 4 -->
+      <div class="skill-card">
+        <header class="skill-header">
+          <div>
+            <span class="skill-tag">Skill #4 · Conversion sponsors</span>
+            <h3>siboni-dossier-sponsor</h3>
+          </div>
+          <span class="tag tag-priority-2">Priorité moyenne</span>
+        </header>
+        <div class="skill-body">
+          <p><strong>Objet.</strong> Production d'un dossier de partenariat sur-mesure pour une marque snow (boards, textile, lunettes, casques, énergétique). Adapté au persona Karim brand manager. Contient : présentation Mathieu, audience, axes d'activation, KPIs proposés, livrables, fourchette budget indicative.</p>
+
+          <dl class="skill-meta">
+            <div><dt>Input attendu</dt><dd>Nom de la marque + axe d'activation envisagé</dd></div>
+            <div><dt>Output produit</dt><dd>Dossier 6-8 pages structuré (PDF-ready)</dd></div>
+            <div><dt>Volume cible</dt><dd>~10 dossiers/an (3 RDV cibles trimestriels)</dd></div>
+            <div><dt>Distinct du dossier de presse</dt><dd>Personnalisé par marque vs générique</dd></div>
+          </dl>
+
+          <h4>Pourquoi ça compte</h4>
+          <p>Le dossier de presse générique fait passer un RDV. Le dossier sur-mesure fait basculer en signature. Ce skill évite à Mathieu de réinventer la roue à chaque marque démarchée. Il intègre une bibliothèque interne d'axes d'activation par catégorie de marque (board → ambassadorat technique, textile → contenu lifestyle ancré, énergétique → contenu performance).</p>
+        </div>
+      </div>
+
+      <!-- SKILL 5 -->
+      <div class="skill-card">
+        <header class="skill-header">
+          <div>
+            <span class="skill-tag">Skill #5 · Pivot funnel</span>
+            <h3>siboni-reponse-sollicitation</h3>
+          </div>
+          <span class="tag tag-priority-3">Priorité progressive</span>
+        </header>
+        <div class="skill-body">
+          <p><strong>Objet.</strong> Tri et qualification des sollicitations entrantes (formulaires landing : athlète/parent, marque, média). Score de qualification 1-5, recommandation d'action (décliner / précisions / RDV / prioriser), projet de réponse adaptée au type.</p>
+
+          <dl class="skill-meta">
+            <div><dt>Input attendu</dt><dd>Contenu d'un formulaire reçu</dd></div>
+            <div><dt>Output produit</dt><dd>Score + recommandation + draft de réponse</dd></div>
+            <div><dt>Volume cible</dt><dd>~25 sollicitations/mois à terme</dd></div>
+            <div><dt>NSM impacté</dt><dd>Conversion sollicitation → opportunité signée</dd></div>
+          </dl>
+
+          <h4>Pourquoi à activer plus tard</h4>
+          <p>Inutile de créer ce skill avant que le site soit en ligne et que les premiers formulaires arrivent (J+45). Une fois le flux d'entrée actif, ce skill devient le pivot opérationnel pour atteindre la cible NSM (6-8 opportunités qualifiées/mois) sans noyer Mathieu sous le bruit de fond. Garde-fou : la décision finale (signer / décliner) reste humaine — le skill ne fait que pré-mâcher.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NO-GO -->
+    <section id="nogo">
+      <header class="section-header">
+        <span class="kicker">Bloc 03</span>
+        <h2>Ce qu'on ne créera pas — et pourquoi</h2>
+        <p class="lead">Discipline de l'arbitrage : mieux vaut 5 skills excellents que 12 skills moyens.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Skill non retenue</th><th>Raison de l'écartement</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Génération de plan d'entraînement</strong></td>
+            <td><strong>Risque juridique et éthique disproportionné.</strong> Domaine sensible touchant à la santé d'athlètes parfois mineurs. Mathieu doit rester l'unique source sur le contenu technique d'entraînement. L'IA peut aider à structurer ses notes, jamais à produire le plan. Refus catégorique.</td>
+          </tr>
+          <tr>
+            <td><strong>Analyse vidéo de figures freestyle</strong></td>
+            <td>L'expertise technique de Mathieu est précisément ce qui le rend rare et valorisable. La déléguer à l'IA dévalue son positionnement. Skill contre-productive stratégiquement.</td>
+          </tr>
+          <tr>
+            <td><strong>Chatbot site public</strong></td>
+            <td>Volume de questions trop faible pour justifier. 80 % des chatbots sont des échecs produit. Les 3 formulaires différenciés du site couvrent déjà la qualification entrante. Doublon inutile.</td>
+          </tr>
+          <tr>
+            <td><strong>Veille presse automatisée snowboard</strong></td>
+            <td>Une simple Google Alert + une newsletter sectorielle (Snowsurf weekly) suffisent. Pas besoin d'un skill dédié pour ça.</td>
+          </tr>
+          <tr>
+            <td><strong>Génération de stories Instagram</strong></td>
+            <td>Les stories sont par essence du temps réel et de l'authentique. Les générer à l'IA tue leur valeur. Mathieu poste ses stories lui-même, point.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warning">
+        <strong>Principe directeur.</strong> Un skill créé sans usage récurrent est un skill mort qui pollue le workspace. Chaque skill ajoutée doit avoir au moins 1 invocation par semaine en saison, sinon elle ne mérite pas d'exister. La sobriété de l'arsenal est un signe de maturité, pas de manque.
+      </div>
+    </section>
+
+    <!-- SPRINTS -->
+    <section id="sprints">
+      <header class="section-header">
+        <span class="kicker">Bloc 04</span>
+        <h2>Plan de création — 4 sprints</h2>
+        <p class="lead">Séquence d'implémentation alignée sur la roadmap personal branding et fédé.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Sprint</th><th>Skill</th><th>Délai</th><th>Effort</th><th>Justification du timing</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Sprint 1<br>Semaine 1</strong></td>
+            <td><strong>siboni-content-paco</strong> + chaînage <em>humanizer</em></td>
+            <td>J+7</td>
+            <td>~3 h</td>
+            <td>Débloque immédiatement la cadence éditoriale. Sans ce skill, le démarrage de la stratégie de contenu (J+10) est irréaliste.</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 1<br>Semaine 1</strong></td>
+            <td><strong>siboni-brief-deplacement</strong> (version skill manuelle)</td>
+            <td>J+10</td>
+            <td>~2 h</td>
+            <td>Soulage immédiatement la charge admin avant que l'Auto #1 (Make+APIs) soit prête à J+50. ROI dès la première semaine.</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 2<br>Semaine 3</strong></td>
+            <td><strong>siboni-pitch-presse</strong></td>
+            <td>J+20</td>
+            <td>~3 h</td>
+            <td>Aligné sur la phase 3 de la roadmap personal branding (premiers pitchs presse à J+50). Skill prête, premiers pitchs envoyés dans la foulée.</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 3<br>Semaine 6</strong></td>
+            <td><strong>siboni-reponse-sollicitation</strong></td>
+            <td>J+45</td>
+            <td>~2 h</td>
+            <td>Aligné sur la mise en ligne du site (J+45) qui va générer les premiers formulaires. Inutile de créer avant.</td>
+          </tr>
+          <tr>
+            <td><strong>Sprint 4<br>Semaine 10</strong></td>
+            <td><strong>siboni-dossier-sponsor</strong></td>
+            <td>J+75</td>
+            <td>~3 h</td>
+            <td>Aligné sur le démarrage prospection sponsors (J+85). Le dossier de presse générique doit être finalisé d'abord.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card-row">
+        <div class="kpi"><span class="kpi-label">Effort total création</span><span class="kpi-value">~13 h</span><span class="kpi-sub">5 skills sur 10 semaines</span></div>
+        <div class="kpi"><span class="kpi-label">Heures économisées / sem</span><span class="kpi-value">~6 h</span><span class="kpi-sub">Une fois les 5 skills déployées</span></div>
+        <div class="kpi"><span class="kpi-label">Payback effort création</span><span class="kpi-value">~3 sem</span><span class="kpi-sub">Au tarif horaire d'opportunité de Mathieu</span></div>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>Lecture stratégique.</strong> Les 13 heures investies dans la création des skills sont amorties en 3 semaines de saison. Mais le vrai gain n'est pas comptable : c'est la <em>tenue</em> de la stratégie. Sans skills, Mathieu abandonne la cadence éditoriale en 4 semaines (cas observé chez 80 % des solopreneurs). Avec les skills, la cadence devient soutenable, et la régularité construit l'autorité.
+      </div>
+    </section>
+
+    <!-- METHODO -->
+    <section id="methodo">
+      <header class="section-header">
+        <span class="kicker">Bloc 05</span>
+        <h2>Méthodologie de création</h2>
+        <p class="lead">Comment chaque skill est construite, testée et livrée.</p>
+      </header>
+
+      <h3>Process de création (par skill)</h3>
+      <table class="data-table">
+        <thead><tr><th>Étape</th><th>Activité</th><th>Durée</th><th>Owner</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Cadrage de l'intent (qui invoque, quand, avec quel input, quel output attendu)</td><td>30 min</td><td>Master Prompt + Mathieu</td></tr>
+          <tr><td>2</td><td>Rédaction du draft skill (SKILL.md + références annexes si besoin)</td><td>1 h</td><td>Master Prompt</td></tr>
+          <tr><td>3</td><td>Création de 5 prompts de test représentatifs</td><td>20 min</td><td>Master Prompt</td></tr>
+          <tr><td>4</td><td>Tests + analyse des sorties</td><td>30 min</td><td>Master Prompt + Mathieu</td></tr>
+          <tr><td>5</td><td>Itération sur la skill (corrections, ajout d'exemples, contre-exemples)</td><td>30 min</td><td>Master Prompt</td></tr>
+          <tr><td>6</td><td>Livraison + formation Mathieu (10-15 min de demo)</td><td>15 min</td><td>Master Prompt</td></tr>
+        </tbody>
+      </table>
+
+      <p>Compter ~3 h par skill incluant le test/itération. Le skill est livré dans le workspace Claude de Mathieu et documenté dans Notion (1 page par skill : objet, input, output, exemples).</p>
+
+      <h3>Outil d'aide à la création</h3>
+      <p>Utilisation du skill <span style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 2px 6px; border-radius: 3px;">/mnt/skills/examples/skill-creator/SKILL.md</span> pour structurer chaque création. Ce skill encode les bonnes pratiques Anthropic : description précise pour le triggering, structure SKILL.md normée, références annexes pour les contenus longs.</p>
+
+      <h3>Maintenance & gouvernance</h3>
+      <table class="data-table">
+        <thead><tr><th>Cadence</th><th>Action</th><th>Owner</th></tr></thead>
+        <tbody>
+          <tr><td>Hebdomadaire</td><td>Mathieu signale les outputs décevants ou les besoins non couverts</td><td>Mathieu</td></tr>
+          <tr><td>Mensuelle</td><td>Master Prompt revue les skills et itère sur les feedbacks</td><td>Master Prompt</td></tr>
+          <tr><td>Trimestrielle</td><td>Audit du portefeuille de skills (skills sous-utilisées à supprimer ? nouvelles skills à créer ?)</td><td>Master Prompt + Mathieu</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-accent">
+        <strong>Principe d'autonomisation.</strong> L'objectif final de l'accompagnement n'est pas que Mathieu dépende de Master Prompt à vie. À 12 mois, Mathieu doit être capable d'invoquer ses skills sans aide, de signaler les manques, et idéalement de créer lui-même des micro-skills pour des besoins ponctuels. La création des 5 skills initiales est aussi un apprentissage par l'exemple.
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

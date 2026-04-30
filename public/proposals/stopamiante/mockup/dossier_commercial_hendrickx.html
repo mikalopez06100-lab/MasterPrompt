@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop Amiante × IA — Dossier de proposition · MasterPrompt</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Cohérence avec la maquette refonte stopamiante.fr
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --paper:        #F4F0E8;
+  --paper-deep:   #EAE4D6;
+  --ink:          #0E1116;
+  --ink-soft:     #2A2E36;
+  --muted:        #6E6A5E;
+  --line:         #1C1E23;
+  --hairline:     rgba(14,17,22,0.12);
+
+  --red:          #C33A1E;
+  --red-deep:     #8A2614;
+  --amber:        #E8A317;
+  --amber-deep:   #C4861C;
+  --green:        #2F5F3C;
+
+  --dark:         #0A0D12;
+  --dark-soft:    #141820;
+
+  --serif:     'Fraunces', 'Times New Roman', serif;
+  --sans:      'IBM Plex Sans', system-ui, sans-serif;
+  --mono:      'IBM Plex Mono', 'Courier New', monospace;
+
+  --gutter:    clamp(24px, 5vw, 64px);
+  --container: 1200px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--red); color: var(--paper); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COVER PAGE
+   ═══════════════════════════════════════════════════════════════════════ */
+.cover {
+  min-height: 100vh;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 80px var(--gutter) 60px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 8px;
+  background: var(--red);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 10%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--red) 0%, transparent 60%);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.cover__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.cover__tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding-top: 6px;
+  border-top: 2px solid var(--red);
+  display: inline-block;
+}
+.cover__issuer {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244,240,232,0.5);
+  text-align: right;
+  line-height: 1.5;
+}
+.cover__issuer strong { color: var(--amber); font-weight: 600; }
+
+.cover__main {
+  align-self: center;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+.cover__kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 28px;
+}
+.cover__title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--paper);
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 0;
+  margin-bottom: 32px;
+}
+.cover__title em {
+  font-style: italic;
+  color: var(--red);
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  font-weight: 400;
+}
+.cover__lead {
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgba(244,240,232,0.85);
+  max-width: 680px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.cover__meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+.cover__meta-item {
+  padding-right: 24px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.cover__meta-item:last-child { border-right: none; }
+.cover__meta-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244,240,232,0.5);
+  margin-bottom: 8px;
+}
+.cover__meta-value {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.cover__meta-value strong { color: var(--amber); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION STRUCTURE
+   ═══════════════════════════════════════════════════════════════════════ */
+section.chapter {
+  padding: 90px var(--gutter);
+  border-bottom: 1px solid var(--hairline);
+}
+section.chapter--dark {
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+section.chapter--deep {
+  background: var(--paper-deep);
+}
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.chapter-head {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 56px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--ink);
+}
+section.chapter--dark .chapter-head {
+  border-bottom-color: rgba(255,255,255,0.15);
+}
+.chapter-num {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--red);
+  padding-top: 8px;
+  border-top: 2px solid var(--red);
+  align-self: start;
+  text-transform: uppercase;
+}
+.chapter-kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+section.chapter--dark .chapter-kicker {
+  color: rgba(244,240,232,0.55);
+}
+.chapter-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 68px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+section.chapter--dark .chapter-title {
+  color: var(--paper);
+}
+.chapter-title em {
+  font-style: italic;
+  color: var(--red);
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+}
+
+.lead {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--ink-soft);
+  max-width: 860px;
+  margin-bottom: 40px;
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+}
+section.chapter--dark .lead { color: rgba(244,240,232,0.9); }
+
+p.body {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  max-width: 860px;
+}
+section.chapter--dark p.body { color: rgba(244,240,232,0.8); }
+p.body strong { color: var(--ink); font-weight: 600; }
+section.chapter--dark p.body strong { color: var(--paper); }
+
+h3.section-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 50px 0 20px;
+  color: var(--ink);
+}
+section.chapter--dark h3.section-title { color: var(--paper); }
+
+h4.subsection {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 36px 0 14px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DIAGNOSTIC TABLE — CHAPTER 1
+   ═══════════════════════════════════════════════════════════════════════ */
+.diag-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+.diag-card {
+  background: var(--paper-deep);
+  padding: 28px 30px;
+  border-left: 3px solid var(--red);
+  position: relative;
+}
+.diag-card__num {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+.diag-card__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.diag-card__text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.diag-card__hours {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 4px 10px;
+  background: var(--ink);
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Big number display */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin: 48px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.stat-item {
+  padding: 32px 24px;
+  border-right: 1px solid var(--hairline);
+}
+.stat-item:last-child { border-right: none; }
+.stat-item__num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--red);
+  margin-bottom: 8px;
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+}
+.stat-item__num sup {
+  font-size: 0.38em;
+  color: var(--amber-deep);
+  vertical-align: super;
+  margin-left: 2px;
+  font-weight: 500;
+}
+.stat-item__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TOOL CARDS — CHAPTER 3
+   ═══════════════════════════════════════════════════════════════════════ */
+.tool-card {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.tool-card__header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 28px 36px;
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+.tool-card__header--featured {
+  background: var(--red);
+}
+.tool-card__num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--amber);
+  letter-spacing: -0.03em;
+}
+.tool-card__header--featured .tool-card__num { color: var(--paper); }
+.tool-card__title-block {
+  min-width: 0;
+}
+.tool-card__tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: rgba(232,163,23,0.15);
+  color: var(--amber);
+  margin-bottom: 8px;
+  border: 1px solid rgba(232,163,23,0.3);
+}
+.tool-card__header--featured .tool-card__tag {
+  background: rgba(255,255,255,0.18);
+  color: var(--paper);
+  border-color: rgba(255,255,255,0.25);
+}
+.tool-card__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+.tool-card__impact {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber);
+  text-align: right;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.tool-card__impact strong {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.tool-card__body {
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+}
+.tool-card__desc p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.tool-card__desc p strong { color: var(--ink); font-weight: 600; }
+
+.tool-card__specs {
+  background: var(--paper-deep);
+  padding: 22px 24px;
+  border-left: 3px solid var(--amber);
+}
+.tool-card__specs h5 {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--hairline);
+}
+.spec-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  font-size: 13px;
+  line-height: 1.4;
+  border-bottom: 1px dashed rgba(14,17,22,0.08);
+}
+.spec-line:last-child { border-bottom: none; }
+.spec-line__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  min-width: 85px;
+}
+.spec-line__value { text-align: right; font-weight: 500; color: var(--ink); }
+.spec-line__value strong { color: var(--red); font-weight: 700; }
+
+.tool-card__deliv {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
+}
+.tool-card__deliv h6 {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.tool-card__deliv ul {
+  list-style: none;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.tool-card__deliv li {
+  padding: 3px 0 3px 14px;
+  position: relative;
+}
+.tool-card__deliv li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--amber-deep);
+}
+
+/* Secondary cluster (smaller) */
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+.cluster-card {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  padding: 26px 28px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cluster-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.cluster-card__num {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.cluster-card__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.cluster-card__text {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROADMAP TIMELINE — CHAPTER 4
+   ═══════════════════════════════════════════════════════════════════════ */
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 40px;
+  border-top: 2px solid var(--amber);
+}
+.roadmap-step {
+  padding: 30px 26px 30px 0;
+  border-right: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+}
+.roadmap-step:last-child { border-right: none; padding-right: 0; }
+.roadmap-step + .roadmap-step { padding-left: 26px; }
+
+.roadmap-step__phase {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+.roadmap-step__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--paper);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.roadmap-step__title em {
+  font-style: italic;
+  color: var(--amber);
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+}
+.roadmap-step__duration {
+  display: inline-block;
+  background: var(--amber);
+  color: var(--ink);
+  padding: 3px 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+}
+.roadmap-step__deliv {
+  list-style: none;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(244,240,232,0.85);
+}
+.roadmap-step__deliv li {
+  padding: 6px 0 6px 16px;
+  position: relative;
+  border-bottom: 1px dashed rgba(244,240,232,0.08);
+}
+.roadmap-step__deliv li:last-child { border-bottom: none; }
+.roadmap-step__deliv li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PRICING SECTION — CHAPTER 5
+   ═══════════════════════════════════════════════════════════════════════ */
+.price-intro {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 36px 40px;
+  margin-bottom: 40px;
+  position: relative;
+}
+.price-intro::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 4px;
+  background: var(--amber);
+}
+.price-intro__kicker {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.price-intro__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--paper);
+  max-width: 780px;
+  letter-spacing: -0.01em;
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 40px 0;
+}
+.price-card {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.price-card--featured {
+  background: var(--ink);
+  color: var(--paper);
+  position: relative;
+}
+.price-card--featured::after {
+  content: 'RECOMMANDÉ';
+  position: absolute;
+  top: -12px; right: 20px;
+  background: var(--red);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 4px 10px;
+}
+
+.price-card__tier {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+.price-card--featured .price-card__tier { color: var(--amber); }
+
+.price-card__name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+.price-card--featured .price-card__name { color: var(--paper); }
+
+.price-card__amount {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+}
+.price-card--featured .price-card__amount { color: var(--paper); }
+.price-card__amount small {
+  font-size: 0.4em;
+  color: var(--muted);
+  font-weight: 400;
+  font-style: italic;
+  margin-left: 4px;
+}
+
+.price-card__what {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--hairline);
+}
+.price-card--featured .price-card__what {
+  color: rgba(244,240,232,0.5);
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.price-card__list {
+  list-style: none;
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+.price-card__list li {
+  padding: 8px 0 8px 22px;
+  position: relative;
+  color: var(--ink-soft);
+  border-bottom: 1px dashed var(--hairline);
+}
+.price-card--featured .price-card__list li {
+  color: rgba(244,240,232,0.85);
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+.price-card__list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  font-weight: 700;
+  color: var(--red);
+  font-size: 13px;
+}
+.price-card--featured .price-card__list li::before { color: var(--amber); }
+
+.price-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: var(--red);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.2s;
+  align-self: flex-start;
+  width: 100%;
+  text-align: center;
+}
+.price-card__cta:hover { background: var(--red-deep); }
+.price-card--featured .price-card__cta {
+  background: var(--amber);
+  color: var(--ink);
+}
+.price-card--featured .price-card__cta:hover { background: var(--amber-deep); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROI TABLE
+   ═══════════════════════════════════════════════════════════════════════ */
+.roi-table {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  margin-top: 36px;
+}
+.roi-header, .roi-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 24px;
+  padding: 16px 0;
+  align-items: center;
+}
+.roi-header {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--hairline);
+}
+.roi-row {
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.roi-row:last-child { border-bottom: none; }
+.roi-row strong { color: var(--ink); font-weight: 600; }
+.roi-row__metric {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.roi-row__val {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+.roi-row__val--red { color: var(--red); font-weight: 600; }
+.roi-row__val--green { color: var(--green); font-weight: 700; }
+.roi-total {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 20px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+.roi-total__label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.roi-total__value {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  line-height: 1;
+}
+.roi-total__value em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CALL TO ACTION FINAL
+   ═══════════════════════════════════════════════════════════════════════ */
+.closing {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 100px var(--gutter);
+  position: relative;
+  overflow: hidden;
+}
+.closing::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -80px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--red) 0%, transparent 55%);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.closing__container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.closing__title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(42px, 5.5vw, 78px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin-bottom: 28px;
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+}
+.closing__title em {
+  font-style: italic;
+  color: var(--amber);
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+}
+.closing__lead {
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(244,240,232,0.8);
+  margin-bottom: 36px;
+  max-width: 720px;
+}
+.closing__commits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.closing__commit {
+  padding: 24px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.closing__commit:last-child { border-right: none; }
+.closing__commit-num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--amber);
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+}
+.closing__commit-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(244,240,232,0.75);
+}
+.closing__commit-text strong { color: var(--paper); font-weight: 600; }
+
+.closing__cta-block {
+  background: var(--red);
+  padding: 40px 44px;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: center;
+}
+.closing__cta-block h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.closing__cta-block p {
+  color: rgba(255,255,255,0.85);
+  font-size: 14.5px;
+}
+.closing__cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 18px 28px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: transform 0.2s;
+}
+.closing__cta-button:hover { transform: translateX(4px); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════════ */
+footer.doc-footer {
+  background: var(--dark);
+  color: rgba(244,240,232,0.6);
+  padding: 50px var(--gutter) 30px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.doc-footer__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.doc-footer__brand {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.doc-footer__brand em {
+  font-style: italic;
+  color: var(--amber);
+}
+.doc-footer__desc {
+  max-width: 340px;
+  font-size: 12.5px;
+  margin-bottom: 16px;
+}
+.doc-footer__col h5 {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.doc-footer__col p {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(244,240,232,0.75);
+  line-height: 1.6;
+}
+.doc-footer__col strong { color: var(--paper); }
+.doc-footer__legal {
+  max-width: var(--container);
+  margin: 20px auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: rgba(244,240,232,0.4);
+  letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   QUOTE — Callouts editorial
+   ═══════════════════════════════════════════════════════════════════════ */
+.callout {
+  background: var(--paper-deep);
+  border-left: 3px solid var(--amber);
+  padding: 24px 30px;
+  margin: 32px 0;
+}
+.callout__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber-deep);
+  margin-bottom: 8px;
+}
+.callout__text {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.callout__text em { font-style: italic; color: var(--red); }
+
+/* Critical box — legal note */
+.critical-box {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-left: 4px solid var(--red);
+}
+.critical-box__label {
+  display: inline-block;
+  background: var(--red);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 3px 9px;
+  margin-bottom: 12px;
+}
+.critical-box__text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(244,240,232,0.9);
+}
+.critical-box__text strong { color: var(--amber); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .cover__meta { grid-template-columns: repeat(2, 1fr); gap: 20px 0; }
+  .cover__meta-item { border-right: none; }
+  .cover__meta-item:nth-child(1), .cover__meta-item:nth-child(2) {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+  }
+  .diag-grid { grid-template-columns: 1fr; }
+  .tool-card__body { grid-template-columns: 1fr; gap: 24px; }
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--hairline); }
+  .roadmap { grid-template-columns: 1fr; }
+  .roadmap-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); padding: 30px 0; }
+  .roadmap-step + .roadmap-step { padding-left: 0; }
+  .roadmap-step:last-child { border-bottom: none; }
+  .price-grid { grid-template-columns: 1fr; }
+  .cluster-grid { grid-template-columns: 1fr; }
+  .chapter-head { grid-template-columns: 100px 1fr; gap: 24px; }
+  .doc-footer__inner { grid-template-columns: 1fr; gap: 30px; }
+  .closing__commits { grid-template-columns: 1fr; }
+  .closing__commit { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .closing__commit:last-child { border-bottom: none; }
+  .closing__cta-block { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  section.chapter { padding: 60px var(--gutter); }
+  .cover { padding: 60px var(--gutter) 40px; }
+  .chapter-head { grid-template-columns: 1fr; gap: 8px; }
+  .tool-card__header { grid-template-columns: 44px 1fr; gap: 14px; padding: 22px 24px; }
+  .tool-card__num { font-size: 42px; }
+  .tool-card__title { font-size: 22px; }
+  .tool-card__impact { grid-column: 1 / -1; text-align: left; margin-top: 10px; }
+  .tool-card__body { padding: 24px; }
+  .tool-card__specs { padding: 18px; }
+  .stat-row { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--hairline); }
+  .stat-item:last-child { border-bottom: none; }
+  .roi-header { display: none; }
+  .roi-row { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+  .roi-row > * { padding-left: 0; }
+  .closing__cta-block { padding: 30px 24px; }
+}
+
+/* Print */
+@media print {
+  body { font-size: 11pt; }
+  .cover { min-height: auto; page-break-after: always; }
+  section.chapter { page-break-inside: auto; padding: 40px; }
+  .tool-card { page-break-inside: avoid; }
+  .closing__cta-block { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     COUVERTURE
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="cover">
+  <div class="cover__top">
+    <span class="cover__tag">Dossier de proposition · Confidentiel</span>
+    <div class="cover__issuer">
+      Émis par <strong>MasterPrompt</strong><br>
+      Avril 2026 · Version 1.0<br>
+      Destinataire : M. Philippe Hendrickx
+    </div>
+  </div>
+
+  <div class="cover__main">
+    <div class="cover__kicker">Pack IA — Stop Amiante · Post-reprise</div>
+    <h1 class="cover__title">
+      Transformer<br>27 ans de métier<br>en <em>infrastructure IA</em>.
+    </h1>
+    <p class="cover__lead">
+      Un plan d'automatisation ciblé pour les postes chronophages de
+      Stop Amiante — veille réglementaire, analyse d'appels d'offres,
+      extraction de RAAT, rédaction de plans de retrait, préservation
+      du savoir d'équipe. Cadré, chiffré, déployable en phases.
+    </p>
+  </div>
+
+  <div class="cover__meta">
+    <div class="cover__meta-item">
+      <div class="cover__meta-label">Contexte</div>
+      <div class="cover__meta-value">Reprise<br>avril 2026</div>
+    </div>
+    <div class="cover__meta-item">
+      <div class="cover__meta-label">Ambition</div>
+      <div class="cover__meta-value"><strong>Déploiement</strong><br>national</div>
+    </div>
+    <div class="cover__meta-item">
+      <div class="cover__meta-label">Horizon</div>
+      <div class="cover__meta-value">90 jours<br>pour le socle</div>
+    </div>
+    <div class="cover__meta-item">
+      <div class="cover__meta-label">Investissement</div>
+      <div class="cover__meta-value">À partir de<br><strong>2 400 €</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CHAPITRE 1 — DIAGNOSTIC
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-num">Chap. 01 — Diagnostic</div>
+      <div>
+        <div class="chapter-kicker">Les postes qui coûtent cher et ne sont pas automatisés</div>
+        <h2 class="chapter-title">Où se cachent <em>les heures perdues</em><br>chez Stop Amiante.</h2>
+      </div>
+    </div>
+
+    <p class="lead">
+      Le désamiantage est un métier normé, documenté, réglementé. Ce qui devrait
+      être une force est aujourd'hui un poste de coût humain caché : plusieurs
+      journées-homme par semaine absorbées par la lecture de documents,
+      la veille réglementaire et la rédaction de livrables standardisés.
+    </p>
+
+    <p class="body">
+      Sur les bases d'observation du secteur et des 27 années d'expérience de
+      la nouvelle direction chez SNADEC Environnement et SMADEC Monaco, les
+      principaux gisements d'automatisation se concentrent sur cinq postes
+      récurrents. Chaque poste est aujourd'hui traité manuellement, par
+      des profils qualifiés — encadrants techniques, chargés d'affaires,
+      dirigeant — dont le temps vaut cher.
+    </p>
+
+    <div class="diag-grid">
+      <div class="diag-card">
+        <div class="diag-card__num">POSTE 01</div>
+        <h3 class="diag-card__title">Veille réglementaire continue</h3>
+        <p class="diag-card__text">
+          Legifrance, JO, arrêtés DGT, INRS, OPPBTP, normes AFNOR
+          (NF X 46-010, 46-011, 43-050), jurisprudence — à lire, trier,
+          résumer, diffuser. Évolutions européennes depuis la directive
+          2009/148/CE révisée fin 2023, obligations 2026 en cascade.
+        </p>
+        <span class="diag-card__hours">2 à 4 h / semaine</span>
+      </div>
+
+      <div class="diag-card">
+        <div class="diag-card__num">POSTE 02</div>
+        <h3 class="diag-card__title">Monitoring des appels d'offres</h3>
+        <p class="diag-card__text">
+          BOAMP, TED, plateformes dématérialisées régionales.
+          Détection des marchés pertinents, scoring, décision
+          « je réponds / je ne réponds pas ». Le canal commercial
+          n°1 d'une entreprise de désamiantage.
+        </p>
+        <span class="diag-card__hours">3 à 6 h / semaine</span>
+      </div>
+
+      <div class="diag-card">
+        <div class="diag-card__num">POSTE 03</div>
+        <h3 class="diag-card__title">Lecture et extraction de RAAT</h3>
+        <p class="diag-card__text">
+          Chaque chantier démarre par un rapport de repérage de 40 à 200
+          pages. Extraction manuelle des matériaux repérés, localisations,
+          états de conservation. Prérequis à tout devis.
+        </p>
+        <span class="diag-card__hours">1 à 3 h / chantier</span>
+      </div>
+
+      <div class="diag-card">
+        <div class="diag-card__num">POSTE 04</div>
+        <h3 class="diag-card__title">Analyse de DCE marchés publics</h3>
+        <p class="diag-card__text">
+          Dossiers de consultation de 200 à 800 pages (RC, CCAP, CCTP,
+          BPU, plans, diagnostics). Lecture complète pour décider de répondre,
+          identifier les clauses piégeuses, structurer le mémoire technique.
+        </p>
+        <span class="diag-card__hours">4 à 8 h / DCE</span>
+      </div>
+
+      <div class="diag-card">
+        <div class="diag-card__num">POSTE 05</div>
+        <h3 class="diag-card__title">Rédaction plans de retrait et mémoires</h3>
+        <p class="diag-card__text">
+          Plans de retrait (SS3), modes opératoires (SS4), mémoires
+          techniques, propositions commerciales. Documents à 80 %
+          standardisés mais rédigés intégralement à la main à chaque
+          fois.
+        </p>
+        <span class="diag-card__hours">6 à 12 h / dossier</span>
+      </div>
+
+      <div class="diag-card">
+        <div class="diag-card__num">POSTE 06</div>
+        <h3 class="diag-card__title">Capital de connaissance interne</h3>
+        <p class="diag-card__text">
+          1 500 chantiers réalisés, mais aucune base interrogeable.
+          Quand un nouveau salarié arrive ou qu'un encadrant part,
+          la mémoire disparaît. Risque critique après une reprise
+          capitalistique.
+        </p>
+        <span class="diag-card__hours">Coût caché massif</span>
+      </div>
+    </div>
+
+    <h3 class="section-title">Ce que ces heures représentent en volume annuel</h3>
+    <p class="body">
+      Pour une entreprise à 10-19 salariés traitant un flux typique de 40 à
+      80 dossiers par an (devis, réponses à AO, exécutions), les postes listés
+      ci-dessus consomment entre <strong>800 et 1 400 heures cumulées par an</strong>, toutes
+      réparties sur des profils qualifiés. À 60 €/h coût complet chargé
+      (moyenne encadrant technique + chargé d'affaires + part dirigeant), on
+      est sur <strong>une enveloppe de 50 000 à 85 000 € annuels</strong> en coût humain
+      directement attaquable par automatisation.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-item__num">800<sup>+</sup></div>
+        <div class="stat-item__label">Heures qualifiées<br>annuelles attaquables</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__num">50<sup>k€</sup></div>
+        <div class="stat-item__label">Enveloppe coût humain<br>récupérable (estimation basse)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__num">3à6</div>
+        <div class="stat-item__label">Semaines de build<br>pour le socle prioritaire</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__num">2,4<sup>k€</sup></div>
+        <div class="stat-item__label">Ticket d'entrée<br>pour démarrer</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout__label">Le principe directeur</div>
+      <p class="callout__text">
+        L'IA <em>prépare et propose</em>. L'humain certifié <em>valide et signe</em>.
+        On ne cherche pas à remplacer le savoir-faire d'un encadrant technique
+        ou d'un chargé d'affaires — on lui rend ses heures.
+      </p>
+    </div>
+
+    <div class="critical-box">
+      <div class="critical-box__label">⚠ Garde-fou métier</div>
+      <p class="critical-box__text">
+        <strong>Ce qui relève de la responsabilité pénale du dirigeant, de la signature
+        du plan de retrait, ou de l'engagement contractuel auprès de l'inspection
+        du travail ne doit JAMAIS être automatisé en sortie directe</strong> — cadre
+        R4412-129 sq. du Code du travail et norme NF X 46-010. Les outils proposés
+        dans ce dossier produisent systématiquement des <em>drafts structurés à
+        valider humainement</em>, jamais des livrables exécutoires.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CHAPITRE 2 — PRINCIPE
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="chapter chapter--deep">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-num">Chap. 02 — Approche</div>
+      <div>
+        <div class="chapter-kicker">Méthode de déploiement par vagues</div>
+        <h2 class="chapter-title">Pas un chatbot.<br><em>Une infrastructure.</em></h2>
+      </div>
+    </div>
+
+    <p class="lead">
+      Les projets IA qui fonctionnent en PME ne sont pas des gadgets d'interface.
+      Ce sont des flux automatisés, discrets, qui fonctionnent en arrière-plan
+      et livrent des résultats structurés dans les outils que l'équipe utilise
+      déjà — email, Notion, Google Drive, CRM.
+    </p>
+
+    <h4 class="subsection">Les quatre principes de conception</h4>
+
+    <p class="body">
+      <strong>1. Un outil = un poste de travail.</strong> Chaque brique résout un
+      problème concret, mesurable, isolable. Pas de plateforme
+      monolithique « tout-en-un » qui prend six mois à livrer et qu'on
+      n'utilise jamais. On déploie, on mesure, on itère.
+    </p>
+
+    <p class="body">
+      <strong>2. Intégration dans vos outils existants.</strong> Pas de nouvelle
+      interface à apprendre. Les sorties arrivent dans Gmail, Slack, Notion,
+      Drive, ou un dashboard léger selon le cas. L'équipe continue de
+      travailler comme avant — elle récupère juste les heures gagnées.
+    </p>
+
+    <p class="body">
+      <strong>3. Transparence et traçabilité.</strong> Chaque livrable IA inclut ses
+      sources, ses hypothèses, ses limites. Un encadrant qui valide un plan
+      de retrait pré-rédigé doit pouvoir remonter à la source (texte
+      réglementaire cité, précédent interne référencé) en un clic.
+    </p>
+
+    <p class="body">
+      <strong>4. Conformité métier.</strong> Données sensibles hébergées sur
+      infrastructure européenne (OVH, Scaleway, Hetzner). Pas d'entraînement
+      de modèles tiers sur les documents internes. Traçabilité complète
+      des traitements. Conforme RGPD et aux exigences des marchés publics.
+    </p>
+
+    <h3 class="section-title">La stack technique, en clair</h3>
+
+    <p class="body">
+      Pour un dirigeant qui n'a pas à être ingénieur : la combinaison utilisée
+      repose sur des briques open-source et des services éprouvés. Pas de
+      dépendance à une plateforme propriétaire. Le code et les prompts vous
+      appartiennent. Vous pouvez changer de prestataire à tout moment — le
+      système continue de fonctionner.
+    </p>
+
+    <div class="cluster-grid">
+      <div class="cluster-card">
+        <div class="cluster-card__num">ORCHESTRATION</div>
+        <h4 class="cluster-card__title">n8n — self-hosted</h4>
+        <p class="cluster-card__text">
+          Moteur d'automatisation open-source, hébergé sur vos serveurs.
+          Alternative ouverte à Zapier ou Make, sans limite de volume ni
+          dépendance cloud américain. Tous les flux de veille, scoring
+          et notifications passent par là.
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">MODÈLES DE LANGAGE</div>
+        <h4 class="cluster-card__title">Claude (Anthropic) + Mistral</h4>
+        <p class="cluster-card__text">
+          Claude pour l'analyse documentaire complexe et la rédaction
+          juridique. Mistral (français, hébergement européen) pour les
+          tâches sensibles. Pas de ChatGPT en production sur des données
+          confidentielles de marchés publics.
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">BASE DOCUMENTAIRE</div>
+        <h4 class="cluster-card__title">Notion + Supabase (RAG)</h4>
+        <p class="cluster-card__text">
+          Notion pour le travail quotidien de l'équipe (pipelines AO,
+          fiches chantiers). Supabase en arrière-plan pour indexer les
+          documents et permettre la recherche sémantique dans le capital
+          de connaissance.
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">HÉBERGEMENT</div>
+        <h4 class="cluster-card__title">OVH ou Scaleway (France)</h4>
+        <p class="cluster-card__text">
+          Serveurs localisés en France. Données jamais envoyées hors UE.
+          Certifications ISO 27001 et HDS disponibles selon besoin.
+          Conforme aux clauses de confidentialité des marchés publics
+          sensibles.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CHAPITRE 3 — OUTILS PRIORITAIRES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-num">Chap. 03 — Outils prioritaires</div>
+      <div>
+        <div class="chapter-kicker">Quatre briques à haut impact, ordonnées par ROI</div>
+        <h2 class="chapter-title">Les quatre<br><em>leviers</em> à déployer.</h2>
+      </div>
+    </div>
+
+    <p class="lead">
+      Sur l'ensemble du catalogue identifié, quatre outils ressortent nettement
+      en priorité — par impact commercial immédiat, par faisabilité technique,
+      et par effet de levier sur les dossiers suivants. Ils forment le socle
+      cohérent recommandé pour les 90 premiers jours.
+    </p>
+
+    <!-- OUTIL 1 — AO MONITOR (featured) -->
+    <div class="tool-card">
+      <div class="tool-card__header tool-card__header--featured">
+        <div class="tool-card__num">01</div>
+        <div class="tool-card__title-block">
+          <span class="tool-card__tag">Priorité absolue · Démo rapide</span>
+          <h3 class="tool-card__title">Radar Appels d'Offres</h3>
+        </div>
+        <div class="tool-card__impact">
+          <strong>+3 AO qualifiés/sem.</strong>
+          Flux commercial
+        </div>
+      </div>
+      <div class="tool-card__body">
+        <div class="tool-card__desc">
+          <p>
+            Un agent autonome qui surveille en continu BOAMP, TED Europa, et les
+            principales plateformes dématérialisées (AWS-Achat, Marches-Sécurisés,
+            Achatpublic). Il filtre automatiquement sur les marchés comportant
+            un <strong>lot désamiantage, déplombage ou curage</strong>, scorant chaque opportunité
+            selon vos critères : zone géographique, montant, typologie MOA,
+            complexité technique, probabilité de réponse pertinente.
+          </p>
+          <p>
+            Chaque lundi matin, vous recevez <strong>un email structuré</strong> avec les
+            appels d'offres pertinents de la semaine, classés par priorité, avec
+            une fiche de synthèse en 10 lignes pour chacun : objet, MOA, date
+            limite, montant, critères principaux, lien vers le dossier complet.
+            Les AO à haute priorité déclenchent une notification immédiate.
+          </p>
+          <p>
+            <strong>Effet de levier :</strong> c'est le carburant commercial de l'entreprise.
+            Passer de 0 à 3 AO qualifiés hebdomadaires détectés automatiquement,
+            c'est déjà un équivalent de poste commercial — sans le coût.
+          </p>
+        </div>
+        <div class="tool-card__specs">
+          <h5>Fiche technique</h5>
+          <div class="spec-line">
+            <span class="spec-line__label">Effort build</span>
+            <span class="spec-line__value">5-7 jours</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Go-live</span>
+            <span class="spec-line__value"><strong>Semaine 2</strong></span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Stack</span>
+            <span class="spec-line__value">n8n + BOAMP RSS<br>+ Claude + Notion</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Coût run</span>
+            <span class="spec-line__value">~30 €/mois</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">ROI estimé</span>
+            <span class="spec-line__value"><strong>3-6 h/sem économisées</strong></span>
+          </div>
+          <div class="tool-card__deliv">
+            <h6>Livrables</h6>
+            <ul>
+              <li>Flux n8n déployé sur serveur client</li>
+              <li>Pipeline Notion AO pré-configuré</li>
+              <li>Email de synthèse hebdomadaire</li>
+              <li>Alertes push AO urgents</li>
+              <li>Dashboard scoring mensuel</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTIL 2 — RAAT EXTRACTOR -->
+    <div class="tool-card">
+      <div class="tool-card__header">
+        <div class="tool-card__num">02</div>
+        <div class="tool-card__title-block">
+          <span class="tool-card__tag">Gain de productivité quotidien</span>
+          <h3 class="tool-card__title">Extracteur RAAT</h3>
+        </div>
+        <div class="tool-card__impact">
+          <strong>2 h / chantier</strong>
+          Temps libéré
+        </div>
+      </div>
+      <div class="tool-card__body">
+        <div class="tool-card__desc">
+          <p>
+            Vous déposez un rapport de repérage amiante avant travaux (RAAT) dans
+            un dossier partagé. En moins de deux minutes, l'outil en extrait
+            automatiquement : <strong>liste des matériaux amiantés repérés, localisations,
+            états de conservation (libre/lié/friable), types de fibres identifiés</strong>.
+            Le tout est restitué dans un tableau structuré prêt à être basculé
+            vers le devis ou le plan de retrait.
+          </p>
+          <p>
+            Utilise la capacité multimodale de Claude pour lire directement les
+            PDF, même scannés, même avec des annotations manuscrites. Gère les
+            RAAT rédigés par les principaux diagnostiqueurs du marché (AC Environnement,
+            Polyexpert, Ecalis, Veritas, Apave, Socotec…).
+          </p>
+          <p>
+            <strong>Extension prévue :</strong> calcul automatique du coût indicatif selon la
+            grille tarifaire interne + pré-remplissage du dossier de réponse.
+          </p>
+        </div>
+        <div class="tool-card__specs">
+          <h5>Fiche technique</h5>
+          <div class="spec-line">
+            <span class="spec-line__label">Effort build</span>
+            <span class="spec-line__value">4-6 jours</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Go-live</span>
+            <span class="spec-line__value"><strong>Semaine 3-4</strong></span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Stack</span>
+            <span class="spec-line__value">Claude vision<br>+ Zapier ou n8n<br>+ Google Drive</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Coût run</span>
+            <span class="spec-line__value">~40 €/mois<br>(selon volume)</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">ROI estimé</span>
+            <span class="spec-line__value"><strong>2 h × 40 dossiers/an<br>= 80 h/an</strong></span>
+          </div>
+          <div class="tool-card__deliv">
+            <h6>Livrables</h6>
+            <ul>
+              <li>Pipeline d'extraction automatique</li>
+              <li>Template de sortie structuré</li>
+              <li>Watch-folder Google Drive</li>
+              <li>Documentation opérateur</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTIL 3 — VEILLE -->
+    <div class="tool-card">
+      <div class="tool-card__header">
+        <div class="tool-card__num">03</div>
+        <div class="tool-card__title-block">
+          <span class="tool-card__tag">Sécurité réglementaire</span>
+          <h3 class="tool-card__title">Agent de Veille Réglementaire</h3>
+        </div>
+        <div class="tool-card__impact">
+          <strong>3 h / semaine</strong>
+          Temps libéré
+        </div>
+      </div>
+      <div class="tool-card__body">
+        <div class="tool-card__desc">
+          <p>
+            Un agent qui surveille en permanence les sources réglementaires qui
+            vous concernent : Legifrance (API officielle gratuite), Journal Officiel,
+            arrêtés de la Direction Générale du Travail, circulaires ministérielles,
+            publications INRS et OPPBTP, normes AFNOR applicables au traitement
+            de l'amiante et du plomb.
+          </p>
+          <p>
+            Livrable : une <strong>newsletter interne hebdomadaire</strong> envoyée chaque
+            lundi matin, avec les évolutions classées en trois niveaux : <strong>impact
+            immédiat</strong> (nécessite une action dans le mois), <strong>à surveiller</strong>
+            (entrée en vigueur prévue à moyen terme), <strong>informatif</strong> (contexte).
+            Chaque entrée inclut un résumé de 3-5 lignes, la source, et les
+            implications opérationnelles concrètes.
+          </p>
+          <p>
+            <strong>Option experte :</strong> extension vers la jurisprudence (Cour de cassation,
+            Conseil d'État) avec focus sur les décisions amiante — utile pour
+            alimenter le discours commercial et argumenter face aux MOA hésitants.
+          </p>
+        </div>
+        <div class="tool-card__specs">
+          <h5>Fiche technique</h5>
+          <div class="spec-line">
+            <span class="spec-line__label">Effort build</span>
+            <span class="spec-line__value">3-5 jours</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Go-live</span>
+            <span class="spec-line__value"><strong>Semaine 4-5</strong></span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Stack</span>
+            <span class="spec-line__value">n8n + API Legifrance<br>+ Claude + Brevo</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Coût run</span>
+            <span class="spec-line__value">~20 €/mois</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">ROI estimé</span>
+            <span class="spec-line__value"><strong>~150 h/an<br>+ sécurité juridique</strong></span>
+          </div>
+          <div class="tool-card__deliv">
+            <h6>Livrables</h6>
+            <ul>
+              <li>Flux de surveillance automatique</li>
+              <li>Newsletter hebdo configurée</li>
+              <li>Archive interne consultable</li>
+              <li>Alertes urgentes par Slack/email</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTIL 4 — DCE ANALYZER -->
+    <div class="tool-card">
+      <div class="tool-card__header">
+        <div class="tool-card__num">04</div>
+        <div class="tool-card__title-block">
+          <span class="tool-card__tag">Levier de réponse AO</span>
+          <h3 class="tool-card__title">Analyseur de DCE</h3>
+        </div>
+        <div class="tool-card__impact">
+          <strong>6 h / DCE</strong>
+          Temps libéré
+        </div>
+      </div>
+      <div class="tool-card__body">
+        <div class="tool-card__desc">
+          <p>
+            Vous uploadez un dossier de consultation (200-800 pages typique :
+            RC, CCAP, CCTP, BPU, plans, diagnostics annexes). L'outil produit
+            en 10 minutes une <strong>synthèse exécutive de 3-5 pages</strong> : critères
+            de jugement et pondération, clauses contractuelles inhabituelles,
+            spécificités techniques du lot désamiantage, contraintes site
+            occupé, métrologie exigée, filière déchets imposée, incohérences
+            entre pièces.
+          </p>
+          <p>
+            En parallèle, il <strong>génère un premier draft de mémoire technique</strong>
+            structuré selon les critères du DCE, intégrant des passages types
+            de votre base documentaire (references, méthodologie, moyens). Un
+            humain retravaille le draft — typiquement 30 % de réécriture — et
+            signe.
+          </p>
+          <p>
+            <strong>Décision go/no-go objectivée :</strong> l'outil produit aussi une note
+            de synthèse « risque × opportunité » qui aide à arbitrer en 5 minutes
+            si le marché mérite une réponse complète ou non. Précieux en période
+            de charge.
+          </p>
+        </div>
+        <div class="tool-card__specs">
+          <h5>Fiche technique</h5>
+          <div class="spec-line">
+            <span class="spec-line__label">Effort build</span>
+            <span class="spec-line__value">7-10 jours</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Go-live</span>
+            <span class="spec-line__value"><strong>Semaine 7-9</strong></span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Stack</span>
+            <span class="spec-line__value">Claude + RAG interne<br>+ pipeline n8n<br>+ Notion output</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">Coût run</span>
+            <span class="spec-line__value">~60 €/mois<br>(selon volume)</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-line__label">ROI estimé</span>
+            <span class="spec-line__value"><strong>6 h × 25 DCE/an<br>= 150 h/an</strong></span>
+          </div>
+          <div class="tool-card__deliv">
+            <h6>Livrables</h6>
+            <ul>
+              <li>Pipeline d'analyse automatique</li>
+              <li>Template fiche de synthèse DCE</li>
+              <li>Générateur de draft mémoire</li>
+              <li>Base des références interconnectée</li>
+              <li>Scoring go/no-go paramétrable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Les outils complémentaires, en vagues 2 et 3</h3>
+
+    <p class="body">
+      Au-delà du socle prioritaire, le catalogue complet couvre des briques
+      plus spécialisées à déployer une fois les quatre premières stabilisées.
+      Elles bénéficient de l'infrastructure déjà en place et coûtent moins à
+      chaque ajout.
+    </p>
+
+    <div class="cluster-grid">
+      <div class="cluster-card">
+        <div class="cluster-card__num">VAGUE 2 — CLUSTER SAVOIR</div>
+        <h4 class="cluster-card__title">Base de connaissance interne (RAG)</h4>
+        <p class="cluster-card__text">
+          Indexation de 1 500 chantiers passés, plans de retrait validés,
+          rapports de mesures, courriers types. Recherche sémantique
+          instantanée : « Comment avons-nous traité X en 2023 ? ». Capital
+          intellectuel préservé, résistant aux départs, transmissible aux
+          nouveaux arrivants.
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">VAGUE 2 — CLUSTER RÉDACTION</div>
+        <h4 class="cluster-card__title">Assistant plans de retrait SS3/SS4</h4>
+        <p class="cluster-card__text">
+          Draft à 80 % produit à partir du RAAT extrait + base des plans
+          validés + typologie de chantier. L'encadrant complète les
+          spécificités, valide, signe. Gain direct : 60-70 % du temps de
+          rédaction, sans compromettre la responsabilité.
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">VAGUE 2 — CLUSTER OPÉRATIONNEL</div>
+        <h4 class="cluster-card__title">Analyse photos chantier + CR</h4>
+        <p class="cluster-card__text">
+          Dictée vocale sur terrain + photos → transcription Whisper,
+          structuration Claude → compte-rendu formaté pour dossier de
+          restitution. Détection automatique de non-conformités visuelles
+          (EPI, confinement, conditionnement déchets).
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">VAGUE 3 — CLUSTER SPÉCIALISATIONS</div>
+        <h4 class="cluster-card__title">Agents par typologie bâtiment</h4>
+        <p class="cluster-card__text">
+          Écoles/ERP, hôpitaux, industrie ICPE, navires (Convention Hong
+          Kong 2009, entrée en vigueur 26 juin 2025), aéronautique, ferroviaire.
+          Chaque typologie a sa jurisprudence et ses spécificités. Un agent
+          dédié par filière stratégique.
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">VAGUE 3 — CLUSTER COMMERCIAL</div>
+        <h4 class="cluster-card__title">Qualification leads + veille concurrence</h4>
+        <p class="cluster-card__text">
+          Scoring automatique des prospects entrants site, routage CRM,
+          relances intelligentes. Veille des sites concurrents (Provence
+          Dépollution, IRIS Environnement, grandes structures nationales)
+          et des marchés qu'ils remportent.
+        </p>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-card__num">VAGUE 3 — CLUSTER BSDA</div>
+        <h4 class="cluster-card__title">Pré-remplissage Trackdéchets</h4>
+        <p class="cluster-card__text">
+          Bordereaux de suivi déchets amiantés pré-remplis automatiquement à
+          partir du chantier en cours et de l'historique. Gain direct sur le
+          quotidien administratif, réduction du risque d'erreur de saisie.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CHAPITRE 4 — ROADMAP
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="chapter chapter--dark">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-num">Chap. 04 — Calendrier</div>
+      <div>
+        <div class="chapter-kicker">Déploiement en trois phases sur 90 jours</div>
+        <h2 class="chapter-title">Trois vagues,<br><em>cadrées dans le temps</em>.</h2>
+      </div>
+    </div>
+
+    <p class="lead">
+      Chaque phase livre des outils opérationnels à la fin de son horizon. Pas
+      d'effet tunnel. Le socle est utilisable dès la semaine 4, et chaque vague
+      ajoute de la valeur sans perturber ce qui fonctionne déjà.
+    </p>
+
+    <div class="roadmap">
+      <div class="roadmap-step">
+        <div class="roadmap-step__phase">Phase 01</div>
+        <h4 class="roadmap-step__title">Socle <em>prioritaire</em></h4>
+        <span class="roadmap-step__duration">Semaines 1 — 4</span>
+        <ul class="roadmap-step__deliv">
+          <li>Cadrage détaillé (ateliers 2 × ½ j)</li>
+          <li>Setup infrastructure n8n + Notion</li>
+          <li>Radar AO — déploiement + calibrage</li>
+          <li>Extracteur RAAT — v1 opérationnelle</li>
+          <li>Formation équipe (1 j)</li>
+          <li>Première synthèse AO livrée</li>
+        </ul>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-step__phase">Phase 02</div>
+        <h4 class="roadmap-step__title">Veille &amp; <em>analyse DCE</em></h4>
+        <span class="roadmap-step__duration">Semaines 5 — 9</span>
+        <ul class="roadmap-step__deliv">
+          <li>Agent veille réglementaire — déploiement</li>
+          <li>Newsletter hebdo activée</li>
+          <li>Analyseur DCE — v1 testée sur 3 dossiers</li>
+          <li>Base documentaire initiale indexée</li>
+          <li>Calibrage scoring go/no-go</li>
+          <li>Premier draft mémoire technique IA</li>
+        </ul>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-step__phase">Phase 03</div>
+        <h4 class="roadmap-step__title">Mesure &amp; <em>consolidation</em></h4>
+        <span class="roadmap-step__duration">Semaines 10 — 13</span>
+        <ul class="roadmap-step__deliv">
+          <li>Monitoring KPI (heures gagnées, AO détectés, qualité)</li>
+          <li>Ajustements prompts et scoring</li>
+          <li>Documentation complète stack et procédures</li>
+          <li>Passation opérationnelle complète</li>
+          <li>Point roadmap vague 2 (plans retrait, RAG chantiers)</li>
+          <li>Rapport final 90 jours + projection ROI réel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CHAPITRE 5 — OFFRE & PRIX
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="chapter chapter--deep">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-num">Chap. 05 — Offre</div>
+      <div>
+        <div class="chapter-kicker">Trois formats d'engagement</div>
+        <h2 class="chapter-title">Un format<br>pour <em>chaque niveau</em> de besoin.</h2>
+      </div>
+    </div>
+
+    <div class="price-intro">
+      <div class="price-intro__kicker">Principe commercial</div>
+      <h3 class="price-intro__title">
+        Vous payez pour un résultat, pas pour des heures. Chaque format livre
+        des outils opérationnels et documentés à la fin de la période.
+      </h3>
+    </div>
+
+    <div class="price-grid">
+
+      <!-- PACK DÉCOUVERTE -->
+      <div class="price-card">
+        <div class="price-card__tier">Format 01</div>
+        <h3 class="price-card__name">Pack Découverte</h3>
+        <div class="price-card__amount">97 €<small>/ forfait one-shot</small></div>
+        <div class="price-card__what">1 atelier · 1 livrable démo</div>
+        <ul class="price-card__list">
+          <li>Atelier de cadrage 1 h en visio</li>
+          <li>Démo live Radar AO sur vos mots-clés</li>
+          <li>Livraison sous 48 h d'une synthèse AO du mois courant</li>
+          <li>Roadmap personnalisée 90 jours</li>
+          <li>Offre chiffrée pour aller plus loin</li>
+        </ul>
+        <a href="#contact" class="price-card__cta">Tester la démarche →</a>
+      </div>
+
+      <!-- PACK LANCEMENT (featured) -->
+      <div class="price-card price-card--featured">
+        <div class="price-card__tier">Format 02</div>
+        <h3 class="price-card__name">Pack Lancement IA</h3>
+        <div class="price-card__amount">397 €<small>/ forfait one-shot</small></div>
+        <div class="price-card__what">5 jours · 1 outil livré en production</div>
+        <ul class="price-card__list">
+          <li>Cadrage détaillé (½ j)</li>
+          <li>Build complet du Radar AO ou Extracteur RAAT</li>
+          <li>Setup infrastructure n8n sur votre compte</li>
+          <li>Formation équipe 1 × 2 h</li>
+          <li>Documentation technique et opérateur</li>
+          <li>30 jours de suivi post-mise en production</li>
+          <li>Base pour déployer les autres outils ensuite</li>
+        </ul>
+        <a href="#contact" class="price-card__cta">Démarrer en 5 jours →</a>
+      </div>
+
+      <!-- PACK 90 JOURS -->
+      <div class="price-card">
+        <div class="price-card__tier">Format 03</div>
+        <h3 class="price-card__name">Accompagnement 90 jours</h3>
+        <div class="price-card__amount">2 400 €<small>/ forfait global</small></div>
+        <div class="price-card__what">3 phases · 4 outils livrés</div>
+        <ul class="price-card__list">
+          <li>Les 4 outils prioritaires du chapitre 3</li>
+          <li>Infrastructure complète n8n + Notion + RAG</li>
+          <li>Ateliers cadrage × 3 phases</li>
+          <li>Formation équipe × 2 jours cumulés</li>
+          <li>Rapport d'impact 30 / 60 / 90 jours</li>
+          <li>Roadmap vague 2 incluse (plans retrait, RAG complet)</li>
+          <li>Support prioritaire 90 jours</li>
+          <li>Tarif préférentiel pour les vagues suivantes</li>
+        </ul>
+        <a href="#contact" class="price-card__cta">Déployer le socle complet →</a>
+      </div>
+    </div>
+
+    <h3 class="section-title">Chiffrage ROI sur 12 mois</h3>
+
+    <p class="body">
+      Projection conservatrice basée sur une activité typique de Stop Amiante
+      (40 devis, 25 DCE traités, 10-19 salariés) et sur les gains unitaires
+      estimés des quatre outils prioritaires du format 90 jours.
+    </p>
+
+    <div class="roi-table">
+      <div class="roi-header">
+        <div>Poste</div>
+        <div>Heures libérées/an</div>
+        <div>Coût humain évité</div>
+        <div>Gain commercial</div>
+      </div>
+      <div class="roi-row">
+        <div class="roi-row__metric">Radar Appels d'Offres</div>
+        <div class="roi-row__val">~200 h</div>
+        <div class="roi-row__val">~12 000 €</div>
+        <div class="roi-row__val roi-row__val--green">+2 AO gagnés</div>
+      </div>
+      <div class="roi-row">
+        <div class="roi-row__metric">Extracteur RAAT</div>
+        <div class="roi-row__val">~80 h</div>
+        <div class="roi-row__val">~4 800 €</div>
+        <div class="roi-row__val">réactivité devis</div>
+      </div>
+      <div class="roi-row">
+        <div class="roi-row__metric">Veille réglementaire</div>
+        <div class="roi-row__val">~150 h</div>
+        <div class="roi-row__val">~9 000 €</div>
+        <div class="roi-row__val">sécurité juridique</div>
+      </div>
+      <div class="roi-row">
+        <div class="roi-row__metric">Analyseur DCE</div>
+        <div class="roi-row__val">~150 h</div>
+        <div class="roi-row__val">~9 000 €</div>
+        <div class="roi-row__val roi-row__val--green">+ taux de conversion AO</div>
+      </div>
+      <div class="roi-row">
+        <div class="roi-row__metric"><strong>Total 12 mois</strong></div>
+        <div class="roi-row__val roi-row__val--red"><strong>~580 h</strong></div>
+        <div class="roi-row__val roi-row__val--red"><strong>~35 000 €</strong></div>
+        <div class="roi-row__val roi-row__val--green"><strong>+ 100-300 k€ CA potentiel</strong></div>
+      </div>
+    </div>
+
+    <div class="roi-total">
+      <div>
+        <div class="roi-total__label">Retour sur investissement estimé</div>
+        <div class="roi-total__value">Coûts récupérés <em>dès la 7-10ᵉ semaine</em></div>
+      </div>
+    </div>
+
+    <p class="body" style="margin-top: 32px; font-size: 13px; color: var(--muted); font-style: italic;">
+      Hypothèses de calcul disponibles en annexe sur demande. Ces projections
+      ne tiennent compte que du coût humain directement récupéré et du gain
+      commercial sur les AO détectés. Elles n'intègrent pas le gain de qualité
+      réglementaire, la sécurité juridique renforcée, ni la valeur de la base
+      de connaissance indexée.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CHAPITRE 6 — PROFIL PRESTATAIRE
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="chapter">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-num">Chap. 06 — Qui construit</div>
+      <div>
+        <div class="chapter-kicker">Ingénierie IA appliquée aux TPE/PME francophones</div>
+        <h2 class="chapter-title">MasterPrompt,<br><em>le prestataire</em>.</h2>
+      </div>
+    </div>
+
+    <p class="lead">
+      MasterPrompt est la structure de conseil et de mise en œuvre que je dirige —
+      Michaël Lopez, entrepreneur polymathe basé sur la Côte d'Azur. 25 ans
+      d'expérience en architecture, maîtrise d'œuvre, conception 3D et
+      marchand de biens, auxquels s'ajoute une spécialisation récente mais
+      intensive en ingénierie IA pour solopreneurs et TPE/PME.
+    </p>
+
+    <h3 class="section-title">Ce que vous achetez, concrètement</h3>
+
+    <p class="body">
+      <strong>Un prestataire qui parle bâtiment, pas uniquement IA.</strong> J'ai passé
+      ma carrière sur des chantiers, des permis de construire, des maîtrises
+      d'œuvre, des marchés publics. Je lis un CCTP, je comprends un DTU, je
+      sais ce qu'est un lot désamiantage dans un marché public — je n'aurai
+      pas besoin que vous me l'expliquiez. Le langage de l'entreprise sera
+      le mien dès le premier atelier.
+    </p>
+
+    <p class="body">
+      <strong>Un exécutant qui livre des outils, pas des slides.</strong> Chaque projet
+      MasterPrompt se conclut par un actif concret qui tourne en production
+      sur votre infrastructure, documenté pour votre équipe, transférable
+      à un autre prestataire si vous le souhaitez. Pas de dépendance
+      cachée à mon accompagnement.
+    </p>
+
+    <p class="body">
+      <strong>Un interlocuteur unique, pas une agence.</strong> Vous parlez au même
+      humain du premier atelier jusqu'au rapport des 90 jours. Ce qui est
+      dit est fait, sans passer par un chef de projet intermédiaire.
+    </p>
+
+    <div class="callout">
+      <div class="callout__label">Garantie</div>
+      <p class="callout__text">
+        Si le Format 02 « Pack Lancement IA » (397 €) ne livre pas l'outil
+        fonctionnel en production à l'issue des 5 jours, le forfait est
+        <em>intégralement remboursé</em>. Engagement écrit au lancement.
+      </p>
+    </div>
+
+    <h3 class="section-title">Pourquoi maintenant — pour Stop Amiante</h3>
+
+    <p class="body">
+      Vous arrivez sur un actif où tout est à reconstruire, avec un capital
+      de 1 500 chantiers à exploiter, un CV de dirigeant qui pèse, et un
+      marché national à attaquer. Les 90 premiers jours post-reprise sont
+      <strong>l'unique fenêtre où l'on peut installer des fondations durables</strong>
+      sans que l'héritage en frein. Passée cette fenêtre, la structure
+      reprend son rythme et les changements deviennent plus lourds à introduire.
+    </p>
+
+    <p class="body">
+      Le timing n'est donc pas neutre. Mieux vaut investir 2 400 € pour
+      construire le socle IA pendant que l'équipe apprend à travailler
+      sous la nouvelle direction que d'attendre 18 mois et devoir tout
+      superposer à une organisation qui aura pris ses habitudes.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CLOSING — APPEL À L'ACTION
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="closing" id="contact">
+  <div class="closing__container">
+    <h2 class="closing__title">
+      Prochaine étape :<br>
+      <em>un atelier</em> de cadrage<br>d'une heure.
+    </h2>
+    <p class="closing__lead">
+      Avant tout engagement, je vous propose de confirmer l'alignement sur
+      un atelier d'une heure en visio. Objectif : vous démontrer la démarche
+      sur vos propres données, présenter le Radar AO en live sur vos mots-clés,
+      et chiffrer une roadmap personnalisée. Offert — parce que je préfère
+      que vous voyiez plutôt que vous croyiez sur parole.
+    </p>
+
+    <div class="closing__commits">
+      <div class="closing__commit">
+        <div class="closing__commit-num">01</div>
+        <div class="closing__commit-text">
+          <strong>Atelier 1 h offert</strong> en visio, à un créneau qui vous arrange.
+          Pas de vente, pas de déroulé commercial lourd — un vrai échange métier.
+        </div>
+      </div>
+      <div class="closing__commit">
+        <div class="closing__commit-num">02</div>
+        <div class="closing__commit-text">
+          <strong>Démo Radar AO live</strong> sur vos mots-clés préférés, avec un
+          premier relevé d'opportunités du mois courant livré sous 48 h.
+        </div>
+      </div>
+      <div class="closing__commit">
+        <div class="closing__commit-num">03</div>
+        <div class="closing__commit-text">
+          <strong>Roadmap personnalisée</strong> — vous repartez avec un plan
+          chiffré, que vous choisissiez de poursuivre avec MasterPrompt ou
+          un autre prestataire.
+        </div>
+      </div>
+    </div>
+
+    <div class="closing__cta-block">
+      <div>
+        <h3>Prendre rendez-vous pour l'atelier de cadrage</h3>
+        <p>Créneau en visio 1 h · offert · sans engagement</p>
+      </div>
+      <a href="mailto:mika.lopez.06100@gmail.com?subject=Atelier%20IA%20Stop%20Amiante" class="closing__cta-button">
+        Prendre contact →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════════════════ -->
+<footer class="doc-footer">
+  <div class="doc-footer__inner">
+    <div>
+      <div class="doc-footer__brand">Master<em>Prompt</em></div>
+      <p class="doc-footer__desc">
+        Ingénierie IA appliquée aux TPE/PME francophones. Outils concrets,
+        déployés sur votre infrastructure, documentés pour votre équipe.
+      </p>
+    </div>
+
+    <div class="doc-footer__col">
+      <h5>Prestataire</h5>
+      <p>
+        <strong>Michaël Lopez</strong><br>
+        MasterPrompt<br>
+        Nice, Côte d'Azur
+      </p>
+    </div>
+
+    <div class="doc-footer__col">
+      <h5>Destinataire</h5>
+      <p>
+        <strong>M. Philippe Hendrickx</strong><br>
+        SAS STOP AMIANTE<br>
+        Saint-Alexandre (30)
+      </p>
+    </div>
+  </div>
+
+  <div class="doc-footer__legal">
+    <div>Document confidentiel · Ne pas diffuser hors destinataire</div>
+    <div>Émis le 19/04/2026 · V1.0</div>
+  </div>
+</footer>
+
+</body>
+</html>

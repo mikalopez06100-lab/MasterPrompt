@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratégie de Positionnement & Communication — Mathieu Siboni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574;
+  --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed; --chart-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.04);
+  --shadow: 0 1px 3px rgba(10, 37, 64, 0.06), 0 1px 2px rgba(10, 37, 64, 0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; border-left: 1px solid var(--border); }
+.toc li { margin-bottom: 4px; }
+.toc a { display: block; padding: 6px 16px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; transition: all 0.15s; }
+.toc a:hover { color: var(--text-primary); border-left-color: var(--accent); }
+.main { max-width: 920px; }
+.cover { padding: 64px 0 48px; border-bottom: 2px solid var(--text-primary); margin-bottom: 64px; }
+.cover-kicker { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 24px; }
+.cover h1 { font-size: 3rem; line-height: 1.1; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.02em; }
+.cover-sub { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; max-width: 700px; }
+.cover-meta { display: flex; gap: 32px; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap; }
+.cover-meta span strong { color: var(--text-primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; font-weight: 600; }
+section { margin-bottom: 96px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; }
+h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin: 32px 0 12px 0; }
+h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 16px 0 8px 0; }
+p { margin-bottom: 16px; }
+p + p { margin-top: 0; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
+.card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 8px; font-weight: 600; }
+.kpi-value { font-size: 2.5rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; display: block; }
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 24px 0; }
+.callout strong { color: var(--text-primary); }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 24px 0; }
+.data-table th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+.data-table td { padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.score-badge { display: inline-flex; align-items: baseline; gap: 4px; padding: 8px 16px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.score-value { font-size: 1.75rem; font-weight: 700; }
+.score-label { font-size: 0.875rem; opacity: 0.7; }
+.score-good { background: var(--success-soft); color: var(--success); }
+.score-medium { background: var(--warning-soft); color: var(--warning); }
+.score-poor { background: var(--danger-soft); color: var(--danger); }
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.chart-caption { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px; }
+.proof-list { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0; list-style: none; }
+.proof-list li { padding: 12px 16px; background: var(--bg-subtle); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; font-size: 0.95rem; }
+.proof-list li strong { color: var(--text-primary); }
+.persona-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.persona-header { background: var(--text-primary); color: white; padding: 16px 24px; }
+.persona-header h4 { color: white; margin: 0; font-size: 1.125rem; }
+.persona-header span { font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; }
+.persona-body { padding: 20px 24px; font-size: 0.875rem; }
+.persona-body dt { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 12px; }
+.persona-body dd { margin-bottom: 8px; color: var(--text-body); }
+.persona-body dd:first-of-type { margin-top: 0; }
+.pos-quote { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--text-primary); padding: 24px 32px; border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; margin: 24px 0; line-height: 1.5; }
+.tagline { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-primary); font-weight: 400; text-align: center; padding: 32px; border: 2px solid var(--text-primary); border-radius: 8px; margin: 24px 0; letter-spacing: -0.01em; }
+.dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+@media (max-width: 700px) { .dos-donts { grid-template-columns: 1fr; } }
+.do-card, .dont-card { padding: 20px; border-radius: 8px; }
+.do-card { background: var(--success-soft); border: 1px solid #bbf7d0; }
+.dont-card { background: var(--danger-soft); border: 1px solid #fecaca; }
+.do-card h4 { color: var(--success); }
+.dont-card h4 { color: var(--danger); }
+.do-card ul, .dont-card ul { list-style: none; font-size: 0.875rem; }
+.do-card li, .dont-card li { padding: 6px 0; }
+.do-card li::before { content: '✓ '; font-weight: 700; color: var(--success); }
+.dont-card li::before { content: '✕ '; font-weight: 700; color: var(--danger); }
+@media print {
+  body { background: white; }
+  .layout { display: block; max-width: 720px; padding: 24px; }
+  .toc { display: none; }
+  .card, .chart-card { break-inside: avoid; box-shadow: none; }
+  section { margin-bottom: 48px; }
+  .cover { padding-top: 0; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#exec">Résumé exécutif</a></li>
+      <li><a href="#diagnostic">01 · Diagnostic actuel</a></li>
+      <li><a href="#positioning">02 · Positionnement</a></li>
+      <li><a href="#personas">03 · Personas & JTBD</a></li>
+      <li><a href="#journey">04 · Parcours opportunités</a></li>
+      <li><a href="#bullseye">05 · Mix de canaux</a></li>
+      <li><a href="#contenu">06 · Stratégie de contenu</a></li>
+      <li><a href="#funnel">07 · Funnel d'autorité</a></li>
+      <li><a href="#landing">08 · Brief landing page</a></li>
+      <li><a href="#roadmap">09 · Roadmap 90 jours</a></li>
+      <li><a href="#kpi">10 · KPIs & score</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+    <!-- COVER -->
+    <header class="cover">
+      <div class="cover-kicker">Stratégie de positionnement & communication — Personal Branding</div>
+      <h1>Mathieu Siboni</h1>
+      <p class="cover-sub">Du palmarès dispersé au récit olympique 2030. Construire le personal branding d'un coach français de haut niveau dans son berceau historique : Isola 2000.</p>
+      <div class="cover-meta">
+        <span><strong>Client</strong>Mathieu Siboni</span>
+        <span><strong>Mission</strong>Personal Branding & Landing Page</span>
+        <span><strong>Date</strong>Avril 2026</span>
+        <span><strong>Préparé par</strong>Master Prompt</span>
+      </div>
+    </header>
+
+    <!-- EXEC SUMMARY -->
+    <section id="exec">
+      <header class="section-header">
+        <span class="kicker">Résumé exécutif</span>
+        <h2>Le constat en une page</h2>
+        <p class="lead">Pourquoi la communication actuelle de Mathieu sous-vend son palmarès, et le tournant à prendre dans les 12 prochains mois.</p>
+      </header>
+
+      <div class="card-row">
+        <div class="kpi">
+          <span class="kpi-label">Carrière athlète</span>
+          <span class="kpi-value">17 ans</span>
+          <span class="kpi-sub">Équipe de France · alpin & freestyle</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Médailles olympiques formées</span>
+          <span class="kpi-value">2</span>
+          <span class="kpi-sub">Pereira (Argent 2018) · Ramoin (Bronze 2010)</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Score positionnement actuel</span>
+          <span class="kpi-value">31<small style="font-size: 1rem; color: var(--text-muted);">/100</small></span>
+          <span class="kpi-sub">Audit avant refonte</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Runway JO Alpes 2030</span>
+          <span class="kpi-value">4 ans</span>
+          <span class="kpi-sub">Fenêtre stratégique unique</span>
+        </div>
+      </div>
+
+      <div class="callout callout-danger">
+        <strong>Verdict.</strong> Mathieu a un palmarès qui justifierait un personal branding niveau Tony Estanguet. Il a la communication d'un moniteur indépendant. Le delta perçu/réel est massif. CV truffé de fautes en anglais sur le PDF diffusé, signature « Swiss Expert » non substantiable, email Gmail générique, aucun site, narrative d'expertise éclatée entre quatre disciplines (alpin, freestyle, BX, coaching). Pour un coach qui prétend préparer la prochaine génération olympique 2030, c'est éliminatoire. La dispersion entrepreneuriale (centre d'entraînement, shop, société de construction) ajoute du flou : qui est-il vraiment ?
+      </div>
+
+      <p>La fenêtre de tir est exceptionnelle : <strong>les Jeux Olympiques d'hiver 2030 auront lieu dans les Alpes françaises</strong>, et Isola 2000 — où Mathieu a grandi, formé, et où il vit aujourd'hui — est le berceau historique du snowboard français. Cet alignement géographique, biographique et chronologique ne se reproduira pas. Soit Mathieu en fait l'arc narratif central des 4 prochaines années, soit quelqu'un d'autre prend la place de référent médiatique du snowboard freestyle français à l'approche des JO.</p>
+
+      <p>La stratégie recommandée tient en trois mouvements : <strong>resserrer le positionnement</strong> autour d'une catégorie défendable (« coach olympique snowboard, écosystème performance »), <strong>concentrer la communication</strong> sur deux canaux maîtres (Instagram et LinkedIn, avec calage presse régionale et spécialisée en earned), et <strong>construire un funnel d'autorité</strong> qui convertit la visibilité en opportunités B2B (sponsors, fédérations étrangères, médias, marques). Le funnel ne vend pas un produit : il qualifie des opportunités, dont le P3 (camps), le P4 (documentaire) et les sponsors privés sont les sorties.</p>
+
+      <div class="callout callout-accent">
+        <strong>North Star Metric retenue : nombre d'opportunités qualifiées par mois</strong> (sponsor, média, fédération, prise de parole, partenariat marque, sollicitation événement). Cible 12 mois : passer de ~1 à 6-8 par mois. Pas de KPI vanity (followers, likes) — ce qui compte est ce qui se monétise.
+      </div>
+    </section>
+
+    <!-- DIAGNOSTIC -->
+    <section id="diagnostic">
+      <header class="section-header">
+        <span class="kicker">Bloc 01</span>
+        <h2>Diagnostic de la communication actuelle</h2>
+        <p class="lead">Inventaire honnête des actifs de marque existants et des angles morts.</p>
+      </header>
+
+      <h3>Actifs existants (à exploiter)</h3>
+      <table class="data-table">
+        <thead><tr><th>Actif</th><th>État</th><th>Potentiel</th></tr></thead>
+        <tbody>
+          <tr><td>Palmarès athlète (17 ans Équipe de France)</td><td>Documenté mais éclaté</td><td>Élevé — fondation crédibilité</td></tr>
+          <tr><td>Coaching Pereira (Argent 2018) & Ramoin (Bronze 2010)</td><td>Mentionné mais sans dossier</td><td>Très élevé — preuve absolue</td></tr>
+          <tr><td>Coach actuel Groupe France Freestyle (FFS)</td><td>Légitime mais sous-communiqué</td><td>Élevé — autorité institutionnelle</td></tr>
+          <tr><td>Mission Équipe de Chine pour JO Pékin 2022</td><td>Reportage France 3 PACA</td><td>Élevé — angle international</td></tr>
+          <tr><td>Vice-Président club Back to Back</td><td>Mention CV uniquement</td><td>Moyen — ancrage territorial</td></tr>
+          <tr><td>Compte Instagram @mathieusiboni · 2 200 abonnés</td><td>Bio claire mais contenu irrégulier</td><td>Moyen — base à structurer</td></tr>
+          <tr><td>LinkedIn 423 connexions</td><td>Profil basique, peu activé</td><td>Élevé pour le B2B (sponsors, fédés)</td></tr>
+          <tr><td>Centre ISTC + shop 1MPREVU</td><td>Existants, peu visibles</td><td>Moyen — actif local</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Angles morts (à neutraliser avant tout lancement)</h3>
+      <div class="callout callout-warning">
+        <strong>Angle mort #1 — Crédibilité documentaire défaillante.</strong> CV diffusé en anglais avec fautes (« racersʼs », « fluide move », « 1rst »). Pour un coach présenté à des fédérations étrangères, sponsors internationaux ou médias, ce document est un refus. À refondre intégralement (FR + EN, deux versions une pleine + une dossier de presse 2 pages).
+      </div>
+      <div class="callout callout-warning">
+        <strong>Angle mort #2 — Identité numérique inexistante.</strong> Pas de domaine personnel (mathieusiboni.com / .fr non possédé), email <span style="font-family: monospace;">sibonimathieu@gmail.com</span>, aucune landing page. Un journaliste qui cherche « Mathieu Siboni snowboard » ne tombe sur rien d'officiel. À régler en priorité absolue avant toute campagne.
+      </div>
+      <div class="callout callout-warning">
+        <strong>Angle mort #3 — Positionnement éclaté entre quatre métiers.</strong> Coach FFS, président ISTC, gérant 1MPREVU, gérant NOVATEK HABITAT (construction). Cette dispersion lue depuis l'extérieur dilue l'expertise. La société de construction ne doit JAMAIS apparaître dans les supports de personal branding sportif — elle dilue le message. À cloisonner.
+      </div>
+      <div class="callout callout-warning">
+        <strong>Angle mort #4 — Tension narrative non assumée.</strong> Sa crédibilité olympique majeure (Pereira, Ramoin) est en <em>boardercross</em>. Son rôle FFS actuel est en <em>freestyle</em>. Sans clarification, c'est perçu comme incohérent. Soit on assume « Coach polyvalent toutes glisses snowboard de haut niveau » (plus large mais défendable), soit on fait du freestyle le focus principal en mentionnant le BX comme socle de transferts. Recommandation : la première option, car elle valorise sa rareté.
+      </div>
+    </section>
+
+    <!-- POSITIONING -->
+    <section id="positioning">
+      <header class="section-header">
+        <span class="kicker">Bloc 02</span>
+        <h2>Positionnement stratégique — Framework Dunford</h2>
+        <p class="lead">Une déclaration de positionnement polarisante, défendable, exprimable en une phrase.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Axe Dunford</th><th>Réponse stratégique</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Compétitive alternatives</strong></td>
+            <td>(1) Autres coachs FFS (peu visibles individuellement) · (2) Centres d'entraînement institutionnels (Tignes, La Plagne) · (3) Coachs étrangers spécialisés (USA, Suisse) · (4) Le statu quo : club + fédé sans coach perso</td>
+          </tr>
+          <tr>
+            <td><strong>Unique attributes</strong></td>
+            <td>Polyvalence rare alpin + freestyle + boardercross issue de 17 ans en équipe de France ; track record olympique <em>confirmé</em> (Pereira Ar. 2018, Ramoin Br. 2010) ; expérience internationale (Équipe Chine JO 2022) ; ancrage Isola 2000 — berceau du snowboard français ; double casquette athlète-entrepreneur (centre + shop)</td>
+          </tr>
+          <tr>
+            <td><strong>Value</strong></td>
+            <td>Pour un athlète à fort potentiel : un coach qui maîtrise <em>l'écosystème complet</em> de la performance (technique, mental, logistique, équipement, sponsors), capable de porter au podium olympique — preuves au compteur. Pour une fédération étrangère : un coach français capable d'opérer à l'international avec une méthodologie éprouvée.</td>
+          </tr>
+          <tr>
+            <td><strong>Best-fit customers</strong></td>
+            <td>Athlètes U16-U23 à fort potentiel + leur entourage (parents/club) en quête d'un coach perso pour passer un palier ; fédérations étrangères (Asie, Moyen-Orient) en construction de programme olympique ; marques snow et sponsors recherchant un référent expert ; producteurs/médias cherchant un narrateur expert pour l'angle JO 2030</td>
+          </tr>
+          <tr>
+            <td><strong>Market category</strong></td>
+            <td><strong>« Coach olympique snowboard — écosystème performance »</strong>. Pas « moniteur de snow », pas « préparateur ». La catégorie revendique un niveau et un périmètre, et exclut explicitement les niveaux loisir/initiation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Déclaration de positionnement (forme longue)</h3>
+      <div class="pos-quote">
+        Pour les athlètes de snowboard à fort potentiel et les fédérations qui préparent les Jeux Olympiques d'hiver, Mathieu Siboni est <strong>le coach français qui a déjà porté deux athlètes au podium olympique</strong> et qui prépare aujourd'hui la prochaine génération du Groupe France Freestyle. Issu de 17 ans en Équipe de France comme athlète et formé au berceau historique du snowboard français — Isola 2000 — il combine l'expertise technique, la maîtrise mentale et l'écosystème opérationnel que seul un coach ayant vécu la haute performance des deux côtés peut offrir. À l'approche des JO 2030 dans les Alpes françaises, il est l'interlocuteur naturel des athlètes ambitieux, des fédérations internationales en construction et des marques qui veulent associer leur nom au snowboard de podium.
+      </div>
+
+      <h3>Tagline (3 options à arbitrer)</h3>
+      <div class="card-row">
+        <div class="card" style="text-align: center;">
+          <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px;">Option A — Émotionnelle</p>
+          <p style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-primary); margin: 0;">D'Isola 2000 au podium olympique.</p>
+        </div>
+        <div class="card" style="text-align: center; border: 2px solid var(--accent);">
+          <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-dark); margin-bottom: 8px;">Option B — Recommandée</p>
+          <p style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-primary); margin: 0;">Coach olympique. <br>Berceau d'Isola.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px;">Option C — Projective</p>
+          <p style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-primary); margin: 0;">Forger les médaillés de 2030.</p>
+        </div>
+      </div>
+
+      <h3>Unique Selling Proposition (1 phrase)</h3>
+      <div class="tagline">
+        Le seul coach français de Groupe France ayant déjà porté deux athlètes au podium olympique en snowboard, formé au berceau du snowboard français.
+      </div>
+
+      <h3>5 Proof Points à mettre en avant</h3>
+      <ul class="proof-list">
+        <li><strong>Argent olympique 2018 (Pyeongchang)</strong> — Julia Pereira de Sousa, formée au club Back to Back d'Isola 2000.</li>
+        <li><strong>Bronze olympique 2010 (Vancouver)</strong> — Tony Ramoin, club Back to Back d'Isola 2000.</li>
+        <li><strong>17 ans en Équipe de France</strong> comme athlète professionnel, disciplines alpin et freestyle, code FIS 1390010.</li>
+        <li><strong>Coach Groupe France Snowboard Freestyle (FFS)</strong> depuis 2021, en préparation des JO 2030.</li>
+        <li><strong>Mission internationale Équipe de Chine</strong> pour préparation JO Pékin 2022 (recrutement officiel par la fédération chinoise, reportage France 3 PACA).</li>
+      </ul>
+
+      <h3>Brand voice — 3 attributs</h3>
+      <p><strong>Direct · Technique · Ancré.</strong> Pas de discours motivationnel à la américaine, pas de jargon coaching néo-libéral, pas de selfies poseurs. Un coach qui parle de la matière (technique, neige, mental, données), qui s'adresse à des gens du métier sans condescendance ni vulgarisation forcée.</p>
+
+      <div class="dos-donts">
+        <div class="do-card">
+          <h4>À FAIRE</h4>
+          <ul>
+            <li>Parler technique avec précision (vocabulaire FIS, disciplines)</li>
+            <li>Citer les athlètes par leur prénom et leur palmarès factuel</li>
+            <li>Ancrer dans Isola 2000 et le club Back to Back</li>
+            <li>Parler en français pour la base, en anglais professionnel pour l'international</li>
+            <li>Montrer la matière du métier (entraînement, neige, glace, données)</li>
+            <li>Tenir une régularité éditoriale au tempo réel de la saison</li>
+          </ul>
+        </div>
+        <div class="dont-card">
+          <h4>À NE PAS FAIRE</h4>
+          <ul>
+            <li>Mélanger personal branding sportif et activité construction (NOVATEK)</li>
+            <li>Poster des selfies sans contexte ou stories de vacances génériques</li>
+            <li>Utiliser le vocabulaire « mindset / champion / lifestyle » américain</li>
+            <li>Diffuser un CV avec fautes ou auto-titres non substantiables</li>
+            <li>Promettre des transformations magiques (« je fais de tout le monde un médaillé »)</li>
+            <li>Communiquer hors saison sans calendrier (silence radio = oubli)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAS -->
+    <section id="personas">
+      <header class="section-header">
+        <span class="kicker">Bloc 03</span>
+        <h2>Personas stratégiques & Jobs-To-Be-Done</h2>
+        <p class="lead">Quatre personas hiérarchisés. La stratégie se concentre sur les deux premiers, les autres sont tactiques.</p>
+      </header>
+
+      <div class="card-row">
+        <div class="persona-card">
+          <div class="persona-header">
+            <span>Persona principal · 50 % du focus</span>
+            <h4>Marc & Sophie · Parents d'athlète U18</h4>
+          </div>
+          <div class="persona-body">
+            <dt>Démographie</dt><dd>40-55 ans · CSP+ · zone alpine ou Île-de-France · enfant 14-18 ans en pôle espoir ou club fédéral</dd>
+            <dt>Contexte d'achat</dt><dd>Leur enfant atteint un palier (sélection nationale, blessure, démotivation, basculement disciplinaire). Cherchent un coach perso ou un stage intensif. Décision conjointe avec l'enfant et le club.</dd>
+            <dt>JTBD functional</dt><dd>Trouver un coach qui complémente le club et fasse passer le palier technique précis (rotation, ligne, pression).</dd>
+            <dt>JTBD emotional</dt><dd>Être rassurés que leur investissement (financier, scolaire, familial) ne sera pas gâché par un mauvais accompagnement.</dd>
+            <dt>JTBD social</dt><dd>Pouvoir dire « il/elle est suivi par le coach de Pereira » dans le réseau snow.</dd>
+            <dt>Pains</dt><dd>(1) Peur de la blessure mal gérée (2) Doute sur la légitimité des coachs « privés » (3) Coût élevé sans garantie de résultat</dd>
+            <dt>Déclencheur</dt><dd>Performance contre-décevante en compétition · sélection ratée · changement de discipline</dd>
+            <dt>Sources</dt><dd>Bouche-à-oreille club · Instagram athlètes · forums snow FR · recommandation entraîneur club</dd>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-header">
+            <span>Persona principal · 30 % du focus</span>
+            <h4>Karim · Brand Manager marque snow</h4>
+          </div>
+          <div class="persona-body">
+            <dt>Firmographie</dt><dd>30-45 ans · brand / marketing manager · marque snow (boards, textile, lunettes, casques, énergétique) · budget partenariat 20-200 K€/an</dd>
+            <dt>Contexte d'achat</dt><dd>Cherche un référent expert pour ambassadorat, contenu authentique, événement, validation produit. Prépare la saison budget Q3-Q4 pour activation hiver suivant.</dd>
+            <dt>JTBD functional</dt><dd>Sécuriser un visage crédible pour la marque, ancré dans un récit fort (JO 2030 pour les marques françaises).</dd>
+            <dt>JTBD emotional</dt><dd>Ne pas se planter sur un ambassadeur qui ne tient pas ses promesses ou crée un risque réputationnel.</dd>
+            <dt>JTBD social</dt><dd>Rapporter à sa direction un contrat « stratégique » et pas juste opportuniste.</dd>
+            <dt>Pains</dt><dd>(1) Influenceurs sans légitimité technique (2) Ambassadeurs disponibles seulement en saison (3) Difficulté à prouver le ROI activation</dd>
+            <dt>Déclencheur</dt><dd>Cycle budget annuel · approche JO · besoin de reciblage sur niche premium</dd>
+            <dt>Sources</dt><dd>LinkedIn · réseau ISPO/SnowAvant · presse spécialisée · recommandation pair</dd>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-header">
+            <span>Persona secondaire · 15 % du focus</span>
+            <h4>Antoine · Producteur/Journaliste sportif</h4>
+          </div>
+          <div class="persona-body">
+            <dt>Profil</dt><dd>Producteur audiovisuel · journaliste presse spécialisée · responsable contenu chaîne sport · 35-50 ans</dd>
+            <dt>Contexte</dt><dd>Cherche un narrateur expert sur la route des JO 2030 : interviews, plateaux, contenu série, documentaire</dd>
+            <dt>JTBD</dt><dd>Sourcer un expert qui parle bien, qui a du fond, et qui n'est pas déjà sur tous les plateaux</dd>
+            <dt>Déclencheur</dt><dd>Échéance éditoriale liée aux compétitions internationales · annonces FFS · approche JO</dd>
+            <dt>Sources</dt><dd>Presse spécialisée · LinkedIn · réseau FFS · earned media régional</dd>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-header">
+            <span>Persona secondaire · 5 % du focus</span>
+            <h4>Wei · Officiel fédération étrangère</h4>
+          </div>
+          <div class="persona-body">
+            <dt>Profil</dt><dd>Directeur technique national · fédération asiatique, moyen-orientale ou émergente · construction de programme olympique</dd>
+            <dt>Contexte</dt><dd>Recherche un coach étranger expérimenté pour structurer une équipe nationale ou un stage long</dd>
+            <dt>JTBD</dt><dd>Sécuriser un transfert de méthode internationale crédible pour son cycle olympique</dd>
+            <dt>Déclencheur</dt><dd>Approche d'un cycle olympique · résultats décevants · arrivée d'un nouveau DTN</dd>
+            <dt>Sources</dt><dd>Réseau FIS · LinkedIn · recommandation officielle · presse anglophone</dd>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-accent">
+        <strong>Conséquence stratégique.</strong> 80 % de l'effort va sur Marc & Sophie (Instagram + earned media + témoignages athlètes) et Karim (LinkedIn + dossier sponsors structuré). Antoine et Wei sont touchés en effet de bord par la même stratégie de contenu, sans surcharge.
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="journey">
+      <header class="section-header">
+        <span class="kicker">Bloc 04</span>
+        <h2>Parcours d'opportunités (et non parcours d'achat)</h2>
+        <p class="lead">Mathieu ne vend pas un produit en self-service. Il convertit la visibilité en sollicitations qualifiées.</p>
+      </header>
+
+      <p>Contrairement à un funnel e-commerce classique, le parcours de Mathieu est un <strong>parcours d'autorité B2B</strong> : la visibilité génère des sollicitations directes, qui sont ensuite filtrées et qualifiées en opportunités contractuelles. Le rôle de la communication est donc moins de convertir des paniers que de <strong>construire une réputation qui fait venir les opportunités</strong>.</p>
+
+      <div class="chart-card">
+        <div class="chart-title">Parcours en 5 étapes — du contact initial à l'opportunité signée</div>
+        <p class="chart-caption">Chaque étape a sa friction propre et le contenu/canal qui la neutralise.</p>
+        <svg viewBox="0 0 920 280" xmlns="http://www.w3.org/2000/svg" role="img">
+          <!-- 5 colonnes -->
+          <g font-family="Inter" font-size="11" fill="var(--text-muted)" text-anchor="middle">
+            <text x="92" y="20" font-weight="600" fill="var(--text-primary)">1 · DÉCOUVERTE</text>
+            <text x="276" y="20" font-weight="600" fill="var(--text-primary)">2 · CRÉDIBILISATION</text>
+            <text x="460" y="20" font-weight="600" fill="var(--text-primary)">3 · CONTACT</text>
+            <text x="644" y="20" font-weight="600" fill="var(--text-primary)">4 · QUALIFICATION</text>
+            <text x="828" y="20" font-weight="600" fill="var(--text-primary)">5 · OPPORTUNITÉ</text>
+          </g>
+          <!-- Boites étape -->
+          <g>
+            <rect x="20" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="204" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="388" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="572" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="756" y="40" width="144" height="100" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2" rx="6"/>
+          </g>
+          <!-- Contenus -->
+          <g font-family="Inter" font-size="10.5" fill="var(--text-body)">
+            <text x="32" y="60">• Instagram (sport)</text>
+            <text x="32" y="76">• Earned media</text>
+            <text x="32" y="92">• Recherche Google</text>
+            <text x="32" y="108">• Bouche-à-oreille</text>
+            <text x="32" y="124">• Mentions athlètes</text>
+
+            <text x="216" y="60">• Site officiel</text>
+            <text x="216" y="76">• LinkedIn pro</text>
+            <text x="216" y="92">• Dossier presse</text>
+            <text x="216" y="108">• Témoignages</text>
+            <text x="216" y="124">• Photos / vidéos</text>
+
+            <text x="400" y="60">• Formulaire site</text>
+            <text x="400" y="76">• DM Instagram</text>
+            <text x="400" y="92">• InMail LinkedIn</text>
+            <text x="400" y="108">• Email direct</text>
+            <text x="400" y="124">• Recommandation</text>
+
+            <text x="584" y="60">• Brief 30 min</text>
+            <text x="584" y="76">• Vérif fit projet</text>
+            <text x="584" y="92">• Ref check</text>
+            <text x="584" y="108">• Devis cadre</text>
+            <text x="584" y="124">• Conditions</text>
+
+            <text x="768" y="60">• Sponsor signé</text>
+            <text x="768" y="76">• Stage privé</text>
+            <text x="768" y="92">• Mission fédé</text>
+            <text x="768" y="108">• Itw / docu</text>
+            <text x="768" y="124">• Mandat marque</text>
+          </g>
+          <!-- Friction -->
+          <g font-family="Inter" font-size="10" fill="var(--danger)">
+            <text x="92" y="170" text-anchor="middle">Friction : invisibilité</text>
+            <text x="92" y="184" text-anchor="middle" font-style="italic">SEO inexistant</text>
+            <text x="276" y="170" text-anchor="middle">Friction : pas de site officiel</text>
+            <text x="276" y="184" text-anchor="middle" font-style="italic">CV avec fautes</text>
+            <text x="460" y="170" text-anchor="middle">Friction : pas de point d'entrée</text>
+            <text x="460" y="184" text-anchor="middle" font-style="italic">email gmail</text>
+            <text x="644" y="170" text-anchor="middle">Friction : pas de process</text>
+            <text x="644" y="184" text-anchor="middle" font-style="italic">qualification ad hoc</text>
+          </g>
+          <!-- Levers -->
+          <g font-family="Inter" font-size="10" fill="var(--success)">
+            <text x="92" y="220" text-anchor="middle">Levier : posts saisonniers</text>
+            <text x="92" y="234" text-anchor="middle" font-style="italic">+ presse régionale</text>
+            <text x="276" y="220" text-anchor="middle">Levier : landing page + CV pro</text>
+            <text x="276" y="234" text-anchor="middle" font-style="italic">+ dossier presse</text>
+            <text x="460" y="220" text-anchor="middle">Levier : formulaire ciblé</text>
+            <text x="460" y="234" text-anchor="middle" font-style="italic">par type sollicitation</text>
+            <text x="644" y="220" text-anchor="middle">Levier : grille tarifaire interne</text>
+            <text x="644" y="234" text-anchor="middle" font-style="italic">+ template devis</text>
+            <text x="828" y="220" text-anchor="middle" font-weight="600" fill="var(--text-primary)">Cible : 6-8 / mois</text>
+            <text x="828" y="234" text-anchor="middle" font-style="italic">vs ~1 aujourd'hui</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- BULLSEYE -->
+    <section id="bullseye">
+      <header class="section-header">
+        <span class="kicker">Bloc 05</span>
+        <h2>Mix d'acquisition — Méthode Bullseye</h2>
+        <p class="lead">Trois canaux core, deux canaux promising, le reste écarté avec raison.</p>
+      </header>
+
+      <div class="chart-card">
+        <div class="chart-title">Bullseye — concentration des canaux</div>
+        <p class="chart-caption">70 % de l'effort sur le bullseye, 25 % sur le promising, 5 % d'expérimentation, jamais d'omnicanal dispersif.</p>
+        <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cercles concentriques -->
+          <circle cx="300" cy="230" r="200" fill="var(--chart-1)" opacity="0.06" stroke="var(--border)"/>
+          <circle cx="300" cy="230" r="135" fill="var(--chart-1)" opacity="0.12" stroke="var(--border)"/>
+          <circle cx="300" cy="230" r="70" fill="var(--accent)" opacity="0.7" stroke="var(--accent-dark)"/>
+          <!-- Labels rings -->
+          <g font-family="Inter" font-size="10" font-weight="600" fill="var(--text-muted)" text-anchor="middle" letter-spacing="0.5">
+            <text x="300" y="55">LONGTAIL — écartés volontairement</text>
+            <text x="300" y="115">PROMISING — à tester</text>
+            <text x="300" y="170" fill="var(--text-primary)">CORE</text>
+          </g>
+          <!-- Core canaux -->
+          <g font-family="Inter" font-size="11" font-weight="600" fill="var(--text-primary)" text-anchor="middle">
+            <text x="300" y="230">Instagram</text>
+            <text x="300" y="248">+ LinkedIn</text>
+            <text x="300" y="266">+ Earned PR</text>
+          </g>
+          <!-- Promising -->
+          <g font-family="Inter" font-size="11" fill="var(--text-body)">
+            <circle cx="180" cy="170" r="6" fill="var(--chart-2)"/><text x="195" y="174">YouTube longue forme</text>
+            <circle cx="180" cy="290" r="6" fill="var(--chart-2)"/><text x="195" y="294">Podcasts invité</text>
+          </g>
+          <!-- Longtail -->
+          <g font-family="Inter" font-size="10" fill="var(--text-muted)">
+            <circle cx="120" cy="80" r="4" fill="var(--chart-muted)"/><text x="132" y="84">TikTok</text>
+            <circle cx="480" cy="80" r="4" fill="var(--chart-muted)"/><text x="492" y="84">SEO blog</text>
+            <circle cx="120" cy="380" r="4" fill="var(--chart-muted)"/><text x="132" y="384">SEA Google Ads</text>
+            <circle cx="480" cy="380" r="4" fill="var(--chart-muted)"/><text x="492" y="384">Newsletter</text>
+            <circle cx="300" cy="425" r="4" fill="var(--chart-muted)"/><text x="312" y="429">Salons grand public</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3>Détail des canaux retenus</h3>
+      <table class="data-table">
+        <thead><tr><th>Canal</th><th>Nature</th><th>Persona ciblé</th><th>Effort/mois</th><th>KPI</th></tr></thead>
+        <tbody>
+          <tr style="background: var(--accent-soft);"><td><strong>Instagram @mathieusiboni</strong></td><td>Owned (organique)</td><td>Marc & Sophie · futurs athlètes</td><td>3-4 posts + 2 reels + stories saison</td><td>Reach + DM qualifiés / mois</td></tr>
+          <tr style="background: var(--accent-soft);"><td><strong>LinkedIn (profil + posts)</strong></td><td>Owned (organique)</td><td>Karim · Antoine · Wei</td><td>1 post / sem + commentaires ciblés</td><td>Connexions qualifiées + InMails reçus</td></tr>
+          <tr style="background: var(--accent-soft);"><td><strong>Earned media (presse)</strong></td><td>Earned</td><td>Tous personas (autorité)</td><td>1-2 angles / trimestre</td><td>Articles publiés en médias snow / régionaux / nationaux</td></tr>
+          <tr><td>YouTube longue forme</td><td>Owned (à tester)</td><td>Marc & Sophie · Antoine</td><td>1 vidéo / 6 sem (route vers JO 2030)</td><td>Watch time + abonnés</td></tr>
+          <tr><td>Podcasts invité</td><td>Earned</td><td>Antoine · Karim</td><td>1 invitation / 6 sem</td><td>Mentions + redirections vers site</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Canaux explicitement écartés (avec raison)</h3>
+      <div class="card">
+        <p><strong>TikTok</strong> — Audience trop jeune et trop loisir, peu de retour sur sponsors haut de gamme et fédérations. Coût de production élevé pour ROI flou. À reconsidérer après 2027 si profil athlète émerge.</p>
+        <p><strong>SEO / blog</strong> — Mathieu n'a ni la capacité de production ni l'intention de produire 30 articles. Le ROI SEO sur la requête « coach snowboard » est de toute façon faible (volume bas). Concentrer sur la marque personnelle.</p>
+        <p><strong>SEA / Google Ads</strong> — Pas de produit avec funnel direct à acheter. Brûler un budget en search sans tunnel = jeter de l'argent.</p>
+        <p><strong>Newsletter dédiée</strong> — Trop tôt. À envisager seulement quand le contenu organique aura généré 2 000+ contacts qualifiés.</p>
+        <p><strong>Salons grand public (Snow Avant, Foires)</strong> — Coût/temps disproportionné. Ses cibles ne sont pas en B2C grand public.</p>
+      </div>
+    </section>
+
+    <!-- CONTENU -->
+    <section id="contenu">
+      <header class="section-header">
+        <span class="kicker">Bloc 06</span>
+        <h2>Stratégie de contenu — Modèle PESO</h2>
+        <p class="lead">Trois piliers de contenu, jamais plus, alignés sur le calendrier de la saison.</p>
+      </header>
+
+      <h3>Trois piliers de contenu (à 33 % chacun)</h3>
+      <table class="data-table">
+        <thead><tr><th>Pilier</th><th>Angle narratif</th><th>Formats prioritaires</th><th>Pour qui ?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Coulisses haute performance</strong></td><td>Méthodes d'entraînement, anecdotes athlètes, geste technique, préparation mentale, choix logistiques. La matière du métier.</td><td>Reels Instagram (entraînement), photos athlètes en action, posts LinkedIn explicatifs</td><td>Marc & Sophie · Antoine</td></tr>
+          <tr><td><strong>2. Route vers JO 2030</strong></td><td>L'arc narratif des 4 ans. Échéances FIS, sélections, préparation, signaux faibles, athlètes français à suivre. Mathieu en narrateur expert.</td><td>Posts LinkedIn analyse, interviews podcast, articles presse, lives saison</td><td>Karim · Antoine · Wei</td></tr>
+          <tr><td><strong>3. Berceau Isola 2000</strong></td><td>Héritage du snowboard français, club Back to Back, identité territoriale, écosystème ISTC + 1MPREVU. Différenciateur unique.</td><td>Photos paysages + neige, portraits anciens, repères historiques (1985), reportages locaux</td><td>Marc & Sophie · Karim · presse régionale</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Calendrier éditorial réaliste (calibré sur sa bande passante)</h3>
+      <table class="data-table">
+        <thead><tr><th>Cadence</th><th>Format</th><th>Pilier dominant</th><th>Effort estimé</th></tr></thead>
+        <tbody>
+          <tr><td>3-4 / sem (Instagram)</td><td>Stories saison + 1 post / sem + 1 reel / sem</td><td>Coulisses (hiver) · Berceau (été)</td><td>~1h / sem en saison · 30min hors saison</td></tr>
+          <tr><td>1 / sem (LinkedIn)</td><td>Post analyse ou retour expérience (300-500 mots)</td><td>Route JO 2030 + Coulisses</td><td>~30 min / post</td></tr>
+          <tr><td>1 / mois</td><td>Newsletter sponsors / presse (envoi push pas opt-in)</td><td>Mix</td><td>1h / mois</td></tr>
+          <tr><td>1 / trimestre</td><td>Angle de presse pitché à la presse (FFS, France 3, L'Équipe)</td><td>Route JO 2030</td><td>2h / trimestre + relations presse</td></tr>
+          <tr><td>1 / semestre</td><td>Vidéo longue forme YouTube (10-15 min)</td><td>Coulisses ou Berceau</td><td>1 journée tournage + 1 jour montage</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warning">
+        <strong>Réalisme.</strong> Mathieu ne tiendra pas seul ce calendrier. La production de contenu doit être <em>captée</em> sur le terrain (par lui ou par un photographe-vidéaste de son réseau Isola/club) puis traitée en différé. La contractualisation d'un photographe à la journée (200-400 € / journée) est un investissement central et non optionnel.
+      </div>
+
+      <h3>Matrice PESO</h3>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Définition</th><th>Actions concrètes Mathieu</th><th>Budget</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Paid</strong></td><td>Médias achetés</td><td>Aucune dépense paid au lancement. À réenvisager Q4 2026 si campagne sponsoring active.</td><td>0 €/mois</td></tr>
+          <tr><td><strong>Earned</strong></td><td>Couverture médiatique gratuite</td><td>Pitchs presse trimestriels (FFS news, L'Équipe, France 3, presse spécialisée Snowsurf). Cible : 6 articles / an.</td><td>0 € (effort temps)</td></tr>
+          <tr><td><strong>Shared</strong></td><td>Social organique</td><td>Instagram + LinkedIn (canaux core)</td><td>~200 €/mois (photographe ponctuel)</td></tr>
+          <tr><td><strong>Owned</strong></td><td>Plateformes contrôlées</td><td>Site mathieusiboni.fr (landing), email pro, dossier de presse PDF</td><td>~80 €/an (hébergement + domaine)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FUNNEL -->
+    <section id="funnel">
+      <header class="section-header">
+        <span class="kicker">Bloc 07</span>
+        <h2>Funnel d'autorité — TOFU / MOFU / BOFU adapté</h2>
+        <p class="lead">Le funnel ne convertit pas un panier. Il convertit la visibilité en sollicitations qualifiées.</p>
+      </header>
+
+      <div class="chart-card">
+        <div class="chart-title">Funnel d'autorité — projection 12 mois</div>
+        <p class="chart-caption">De la portée organique à l'opportunité signée. Les volumes sont des cibles de fin Q4 2026.</p>
+        <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Trapèzes funnel -->
+          <polygon points="50,40 650,40 580,110 120,110" fill="var(--chart-1)" opacity="0.85"/>
+          <polygon points="120,120 580,120 510,200 190,200" fill="var(--chart-2)" opacity="0.85"/>
+          <polygon points="190,210 510,210 440,290 260,290" fill="var(--chart-3)" opacity="0.95"/>
+          <polygon points="260,300 440,300 380,370 320,370" fill="var(--accent-dark)" opacity="0.95"/>
+          <!-- Labels -->
+          <g font-family="Inter" font-size="13" fill="white" font-weight="600" text-anchor="middle">
+            <text x="350" y="78">TOFU · Portée organique mensuelle</text>
+            <text x="350" y="95">~ 30 000 personnes touchées (Reach IG + LI + earned)</text>
+            <text x="350" y="155">MOFU · Visiteurs site / DM / InMail</text>
+            <text x="350" y="172">~ 800 / mois (taux 2,7 %)</text>
+            <text x="350" y="245">BOFU · Sollicitations qualifiées</text>
+            <text x="350" y="262">~ 25 / mois (taux 3 %)</text>
+            <text x="350" y="338">Opportunités signées</text>
+            <text x="350" y="355">~ 6-8 / mois (taux 30 %)</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3>Trois leviers de conversion à activer en priorité</h3>
+      <div class="card">
+        <h4>1. Page « Travaillons ensemble » avec 3 chemins clairs</h4>
+        <p>Sur la landing, ne pas mettre un formulaire générique. Trois CTA distincts vers trois formulaires : <em>Athlète / parent</em>, <em>Marque / sponsor</em>, <em>Média / production</em>. Chaque chemin pose les bonnes questions de qualification dès le formulaire (budget, échéance, type de mission). Cela filtre naturellement les sollicitations non qualifiées et accélère le tri.</p>
+      </div>
+      <div class="card">
+        <h4>2. Dossier de presse PDF téléchargeable</h4>
+        <p>Document de 6-8 pages, FR + EN, structuré : palmarès, athlètes formés, écosystème, citations presse, contacts. Téléchargeable contre email, hébergé sur le site. Devient le document de référence envoyé en réponse aux sollicitations médias et sponsors. Sert aussi de proof de sérieux pour Marc & Sophie.</p>
+      </div>
+      <div class="card">
+        <h4>3. Témoignages vidéo athlètes (3 max)</h4>
+        <p>Trois vidéos courtes (60-90 sec) avec : (a) un parent d'athlète U18, (b) un athlète actuel du Groupe France, (c) un témoignage international si Chine 2018-19 mobilisable. Format vertical pour Instagram, horizontal pour landing. Coût ~600-1000 € pour les 3.</p>
+      </div>
+    </section>
+
+    <!-- LANDING -->
+    <section id="landing">
+      <header class="section-header">
+        <span class="kicker">Bloc 08</span>
+        <h2>Brief landing page — mathieusiboni.fr</h2>
+        <p class="lead">Architecture de la landing page perso. Brief technique fourni séparément en .md pour Cursor.</p>
+      </header>
+
+      <h3>Architecture des sections (de haut en bas)</h3>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Section</th><th>Contenu clé</th><th>CTA</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Hero</td><td>Photo Mathieu en environnement neige · Tagline « Coach olympique. Berceau d'Isola. » · Sous-titre USP · Logos FFS / FIS / clubs en bas (proof bar)</td><td>« Travaillons ensemble »</td></tr>
+          <tr><td>2</td><td>Palmarès clé (4 KPIs)</td><td>17 ans Équipe de France · 2 médailles olympiques formées · Coach Groupe France actuel · Mission Équipe de Chine</td><td>—</td></tr>
+          <tr><td>3</td><td>Le récit</td><td>Texte court 200 mots — l'enfant d'Isola 2000 devenu athlète puis coach. Image : photo enfant + photo coach actuelle.</td><td>« Lire le dossier complet (PDF) »</td></tr>
+          <tr><td>4</td><td>Athlètes formés</td><td>3 cards : Pereira (Argent 2018) · Ramoin (Bronze 2010) · Merken (champion FR). Photo + résultat principal + 1 phrase.</td><td>—</td></tr>
+          <tr><td>5</td><td>Domaines d'expertise</td><td>4 colonnes : Coaching haut niveau · Préparation olympique · Stages internationaux · Conseil expertise médias/marques</td><td>« En savoir plus » par expertise</td></tr>
+          <tr><td>6</td><td>Témoignages vidéo</td><td>3 vidéos en grille (parent, athlète, international)</td><td>—</td></tr>
+          <tr><td>7</td><td>Dans les médias</td><td>Logos + extraits (France 3 PACA, Cannes Radio, presse spécialisée à venir)</td><td>« Dossier de presse → »</td></tr>
+          <tr><td>8</td><td>Trois chemins de contact</td><td>3 cards : Athlète/parent · Marque/sponsor · Média/production. Chacun mène vers un formulaire dédié.</td><td>3 CTA différenciés</td></tr>
+          <tr><td>9</td><td>Footer</td><td>Coordonnées · réseaux · mentions légales · choix langue FR/EN</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-accent">
+        <strong>Stack technique recommandée.</strong> Next.js 14 (App Router) + Tailwind sur Vercel, formulaires connectés à Brevo (cohérent avec ta stack Master Prompt). Vidéos hébergées sur Mux pour le streaming. Domaine <span style="font-family: monospace;">mathieusiboni.fr</span> à acquérir en priorité (<span style="font-family: monospace;">.com</span> en backup). Brief Cursor complet livré en fichier <span style="font-family: monospace;">.md</span> séparé.
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <header class="section-header">
+        <span class="kicker">Bloc 09</span>
+        <h2>Roadmap 90 jours</h2>
+        <p class="lead">Trois phases : assainir, déployer, amplifier.</p>
+      </header>
+
+      <h3>Phase 1 — Assainir (J1 → J30)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>Coût</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Acquérir mathieusiboni.fr + .com + email pro</td><td>Mathieu</td><td>J3</td><td>~30 €/an</td><td>Domaines actifs</td></tr>
+          <tr><td>Refonte CV FR + EN (deux versions : 1 page + dossier de presse 6 pages)</td><td>Master Prompt + Mathieu</td><td>J7</td><td>Inclus accompagnement</td><td>2 documents validés</td></tr>
+          <tr><td>Shooting photo professionnel (portrait + action neige)</td><td>Mathieu + photographe</td><td>J14</td><td>500-800 €</td><td>20 photos exploitables</td></tr>
+          <tr><td>Refonte profil LinkedIn (bandeau + bio + premier post pilier)</td><td>Master Prompt + Mathieu</td><td>J10</td><td>Inclus</td><td>Profil refait + 1er post live</td></tr>
+          <tr><td>Refonte bio + grille Instagram cohérente sur 9 derniers posts</td><td>Mathieu</td><td>J14</td><td>0 €</td><td>Bio + grille refaites</td></tr>
+          <tr><td>Brief Cursor landing page envoyé + dev démarré</td><td>Master Prompt + dev</td><td>J7</td><td>Inclus</td><td>Brief reçu, dev kickoff</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Phase 2 — Déployer (J31 → J60)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>Coût</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Mise en ligne mathieusiboni.fr v1</td><td>Dev + Mathieu</td><td>J45</td><td>~80 €/an hébergement</td><td>Site online avec 3 formulaires actifs</td></tr>
+          <tr><td>Captation 3 témoignages vidéo (1 parent, 1 athlète, 1 international)</td><td>Mathieu + vidéaste</td><td>J50</td><td>600-1000 €</td><td>3 vidéos prêtes</td></tr>
+          <tr><td>Premier pitch presse (angle JO 2030 + parcours)</td><td>Mathieu</td><td>J50</td><td>0 €</td><td>3 pitchs envoyés à L'Équipe / France 3 / Snowsurf</td></tr>
+          <tr><td>Démarrer cadence LinkedIn (1 post/sem)</td><td>Mathieu</td><td>J35</td><td>0 €</td><td>4 posts publiés</td></tr>
+          <tr><td>Démarrer cadence Instagram (3-4 posts/sem)</td><td>Mathieu + photographe</td><td>J35</td><td>~200 €/mois photographe ponctuel</td><td>~16 posts publiés</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Phase 3 — Amplifier (J61 → J90)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>Coût</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>1ère apparition presse confirmée</td><td>Mathieu</td><td>J75</td><td>0 €</td><td>1 article publié</td></tr>
+          <tr><td>1ère vidéo longue forme YouTube (15 min)</td><td>Mathieu + vidéaste</td><td>J85</td><td>500-700 €</td><td>Vidéo en ligne</td></tr>
+          <tr><td>Audit funnel (taux conversion landing, formulaires reçus)</td><td>Master Prompt</td><td>J90</td><td>Inclus</td><td>Rapport mensuel + ajustements</td></tr>
+          <tr><td>Démarrer pitch sponsors (3 marques cibles)</td><td>Mathieu + dossier presse</td><td>J85</td><td>0 €</td><td>3 RDV obtenus</td></tr>
+          <tr><td>Démarrer prospection podcasts (5 cibles)</td><td>Mathieu</td><td>J90</td><td>0 €</td><td>1 invitation acceptée</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Budget total des 90 jours</h3>
+      <div class="card-row">
+        <div class="kpi"><span class="kpi-label">Investissement total</span><span class="kpi-value">~2 800 €</span><span class="kpi-sub">Domaine + photo + vidéo + photographe</span></div>
+        <div class="kpi"><span class="kpi-label">Charge horaire Mathieu</span><span class="kpi-value">~6 h/sem</span><span class="kpi-sub">Production + relations presse</span></div>
+        <div class="kpi"><span class="kpi-label">Charge horaire Master Prompt</span><span class="kpi-value">~40 h</span><span class="kpi-sub">Sur les 90 jours</span></div>
+      </div>
+    </section>
+
+    <!-- KPI -->
+    <section id="kpi">
+      <header class="section-header">
+        <span class="kicker">Bloc 10</span>
+        <h2>KPIs & Score de viabilité</h2>
+        <p class="lead">North Star Metric, KPIs secondaires, score /100 décomposé.</p>
+      </header>
+
+      <h3>North Star Metric</h3>
+      <div class="callout callout-accent">
+        <strong>Sollicitations qualifiées par mois.</strong> Cible J+90 : 3 / mois · Cible J+180 : 5 / mois · Cible J+365 : 6-8 / mois. <strong>Excluant les sollicitations grand public et le bruit de fond.</strong> Une sollicitation qualifiée se définit comme : émetteur identifié + projet précisé + budget ou contexte > 1 K€ d'enjeu.
+      </div>
+
+      <h3>KPIs secondaires (revue mensuelle)</h3>
+      <table class="data-table">
+        <thead><tr><th>KPI</th><th>Mesure</th><th>Cible J+90</th><th>Cible J+365</th></tr></thead>
+        <tbody>
+          <tr><td>Reach Instagram mensuel</td><td>Insights IG natifs</td><td>10 000 / mois</td><td>50 000 / mois</td></tr>
+          <tr><td>Visiteurs uniques landing</td><td>Plausible / Vercel Analytics</td><td>500 / mois</td><td>3 000 / mois</td></tr>
+          <tr><td>Téléchargements dossier de presse</td><td>Brevo</td><td>20</td><td>200</td></tr>
+          <tr><td>Articles presse / an</td><td>Veille manuelle</td><td>1</td><td>6</td></tr>
+          <tr><td>Connexions LinkedIn qualifiées</td><td>LinkedIn Premium</td><td>+150</td><td>+1 000</td></tr>
+          <tr><td>Taux conversion visiteur → formulaire</td><td>Plausible + Brevo</td><td>2 %</td><td>3,5 %</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Score de viabilité de la stratégie</h3>
+      <div class="card">
+        <table class="data-table">
+          <thead><tr><th>Sous-score</th><th>Pondération</th><th>Note</th><th>Justification</th></tr></thead>
+          <tbody>
+            <tr><td>Clarté du positionnement</td><td>20</td><td><strong>17/20</strong></td><td>Polarisant et défendable, articulé sur preuves olympiques solides</td></tr>
+            <tr><td>Adéquation persona / canaux</td><td>20</td><td><strong>16/20</strong></td><td>IG + LI = bons canaux, presse spécialisée bien identifiée</td></tr>
+            <tr><td>Réalisme des moyens</td><td>20</td><td><strong>13/20</strong></td><td>Risque tenu : capacité de production de Mathieu en saison limitée. Photographe contractualisé indispensable.</td></tr>
+            <tr><td>Mécanique de funnel & conversion</td><td>15</td><td><strong>12/15</strong></td><td>3 chemins de contact + dossier presse + témoignages = funnel cohérent</td></tr>
+            <tr><td>Différenciation du contenu</td><td>15</td><td><strong>13/15</strong></td><td>Combo Isola 2000 + JO 2030 + 2 médailles = très différencié</td></tr>
+            <tr><td>Mesurabilité</td><td>10</td><td><strong>8/10</strong></td><td>NSM clair, KPIs traçables, attribution lisible</td></tr>
+          </tbody>
+        </table>
+        <div style="text-align: center; margin-top: 32px;">
+          <span class="score-badge score-good"><span class="score-value">79</span><span class="score-label">/ 100</span></span>
+          <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.875rem;">Stratégie solide. À ajuster sur l'axe « Réalisme des moyens » via contractualisation photographe + cadrage mensuel.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>Conclusion stratégique.</strong> Mathieu a tous les ingrédients pour devenir <em>la voix française du snowboard de podium en route vers les JO 2030</em>. Les 90 prochains jours servent à assainir l'identité numérique, mettre en place le système de captation d'opportunités, et démarrer la régularité éditoriale. À 12 mois, l'ambition est de transformer ~30 000 personnes touchées en 6-8 sollicitations qualifiées par mois — le seuil à partir duquel les opportunités sponsors, médias et stages internationaux financent organiquement la suite de l'aventure JO 2030.
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

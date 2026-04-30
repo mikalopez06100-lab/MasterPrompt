@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratégie Marketing & Communication — Leslie de Nice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page:#fafafa;--bg-card:#ffffff;--bg-subtle:#f1f5f9;
+  --border:#e2e8f0;--border-strong:#cbd5e1;
+  --text-primary:#0a2540;--text-body:#1a202c;--text-muted:#64748b;--text-inverse:#ffffff;
+  --accent:#d4a574;--accent-dark:#a67c4f;--accent-soft:#faf3e8;
+  --success:#15803d;--success-soft:#f0fdf4;
+  --warning:#b45309;--warning-soft:#fffbeb;
+  --danger:#b91c1c;--danger-soft:#fef2f2;
+  --info:#0369a1;--info-soft:#f0f9ff;
+  --chart-1:#0a2540;--chart-2:#0ea5e9;--chart-3:#d4a574;
+  --chart-4:#15803d;--chart-5:#b91c1c;--chart-6:#7c3aed;
+  --font-sans:'Inter',-apple-system,sans-serif;
+  --font-serif:'Source Serif 4',Georgia,serif;
+  --shadow-sm:0 1px 2px rgba(10,37,64,.04);
+  --shadow:0 1px 3px rgba(10,37,64,.06),0 1px 2px rgba(10,37,64,.04);
+  --radius:8px;--radius-lg:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);background:var(--bg-page);color:var(--text-body);font-size:1rem;line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{color:var(--info);}strong{font-weight:600;}
+.layout{display:grid;grid-template-columns:220px 1fr;max-width:1240px;margin:0 auto;gap:48px;padding:48px;}
+.main{min-width:0;}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:24px;}.toc{display:none;}}
+.toc{position:sticky;top:32px;align-self:start;font-size:.8rem;}
+.toc-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;}
+.toc ul{list-style:none;}
+.toc ul li{margin-bottom:6px;}
+.toc ul li a{color:var(--text-muted);transition:color .2s;text-decoration:none;}
+.toc ul li a:hover,.toc ul li a.active{color:var(--text-primary);font-weight:600;}
+.toc ul li a.active{border-left:2px solid var(--accent);padding-left:8px;}
+.toc-sep{height:1px;background:var(--border);margin:16px 0;}
+/* COVER */
+.cover{background:var(--text-primary);color:var(--text-inverse);padding:72px 64px;border-radius:var(--radius-lg);margin-bottom:48px;}
+.cover-kicker{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
+.cover h1{font-size:2.8rem;font-weight:700;line-height:1.1;margin-bottom:16px;}
+.cover h1 em{font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);}
+.cover-meta{margin-top:40px;display:flex;gap:40px;flex-wrap:wrap;}
+.cover-meta-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:4px;}
+.cover-meta-value{font-size:.95rem;font-weight:500;}
+.cover-score-block{margin-top:40px;padding:24px 32px;background:rgba(255,255,255,.08);border-radius:var(--radius);border:1px solid rgba(255,255,255,.12);display:inline-flex;align-items:center;gap:24px;}
+/* SECTION */
+section{margin-bottom:64px;padding-top:32px;}
+.section-header{margin-bottom:40px;padding-bottom:24px;border-bottom:2px solid var(--text-primary);}
+.kicker{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px;}
+.section-header h2{font-size:1.75rem;color:var(--text-primary);margin:0 0 12px;font-weight:700;line-height:1.2;}
+.section-header .lead{font-size:1.05rem;color:var(--text-muted);}
+/* CARDS */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;box-shadow:var(--shadow-sm);margin-bottom:20px;}
+.card h3{font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:12px;}
+.card h4{font-size:.88rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;}
+@media(max-width:700px){.card-grid-2,.card-grid-3{grid-template-columns:1fr;}}
+/* KPI */
+.kpi-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;flex:1;min-width:160px;box-shadow:var(--shadow-sm);}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);display:block;margin-bottom:6px;}
+.kpi-value{font-size:2rem;font-weight:700;color:var(--text-primary);display:block;line-height:1;font-variant-numeric:tabular-nums;}
+.kpi-note{font-size:.78rem;color:var(--text-muted);margin-top:6px;}
+/* CALLOUTS */
+.callout{padding:14px 20px;border-left:4px solid var(--text-primary);background:var(--bg-subtle);border-radius:0 var(--radius) var(--radius) 0;margin:20px 0;font-size:.9rem;}
+.callout strong{display:block;margin-bottom:4px;}
+.callout-warning{border-color:var(--warning);background:var(--warning-soft);}
+.callout-success{border-color:var(--success);background:var(--success-soft);}
+.callout-danger{border-color:var(--danger);background:var(--danger-soft);}
+.callout-accent{border-color:var(--accent);background:var(--accent-soft);}
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:16px 0;}
+.data-table th{text-align:left;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-size:.72rem;padding:10px 14px;border-bottom:2px solid var(--text-primary);}
+.data-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text-body);vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr.highlight td{background:var(--accent-soft);}
+/* SCORE */
+.score-badge{display:inline-flex;align-items:baseline;gap:4px;padding:6px 14px;border-radius:var(--radius);font-variant-numeric:tabular-nums;}
+.score-value{font-size:1.6rem;font-weight:700;}
+.score-label{font-size:.82rem;opacity:.7;}
+.score-good{background:var(--success-soft);color:var(--success);}
+.score-medium{background:var(--warning-soft);color:var(--warning);}
+.score-poor{background:var(--danger-soft);color:var(--danger);}
+/* CHART */
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow-sm);}
+.chart-card h4{font-size:.95rem;font-weight:700;color:var(--text-primary);margin-bottom:4px;}
+.chart-caption{font-size:.8rem;color:var(--text-muted);margin-bottom:16px;}
+/* PERSONA CARDS */
+.persona-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);}
+.persona-header{background:var(--text-primary);color:var(--text-inverse);padding:20px 24px;}
+.persona-header .persona-name{font-size:1.2rem;font-weight:700;margin-bottom:4px;}
+.persona-header .persona-tagline{font-size:.85rem;opacity:.7;font-family:var(--font-serif);font-style:italic;}
+.persona-body{padding:20px 24px;}
+.persona-section{margin-bottom:16px;}
+.persona-section-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-dark);margin-bottom:6px;}
+.persona-section ul{list-style:none;font-size:.83rem;}
+.persona-section ul li{padding:3px 0;border-bottom:1px solid var(--border);color:var(--text-body);}
+.persona-section ul li:last-child{border-bottom:none;}
+.persona-tag{display:inline-block;background:var(--bg-subtle);border:1px solid var(--border);border-radius:100px;padding:2px 10px;font-size:.75rem;margin:2px;color:var(--text-muted);}
+/* JOURNEY */
+.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:24px 0;overflow-x:auto;}
+.journey-step{padding:16px;border-left:3px solid var(--border);min-width:160px;}
+.journey-step:nth-child(1){border-left-color:#0ea5e9;}
+.journey-step:nth-child(2){border-left-color:#d4a574;}
+.journey-step:nth-child(3){border-left-color:#15803d;}
+.journey-step:nth-child(4){border-left-color:#7c3aed;}
+.journey-step:nth-child(5){border-left-color:#0a2540;}
+.journey-step h5{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.journey-step .j-label{font-size:.72rem;font-weight:600;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+.journey-step p{font-size:.8rem;color:var(--text-body);margin-bottom:8px;}
+.journey-step .j-friction{font-size:.78rem;color:var(--danger);border-top:1px solid var(--border);padding-top:6px;}
+/* ROADMAP */
+.roadmap-table tr td:first-child{font-weight:600;color:var(--text-primary);}
+/* GANTT */
+.gantt{font-size:.8rem;}
+.gantt-row{display:grid;grid-template-columns:200px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);align-items:center;}
+.gantt-row:last-child{border-bottom:none;}
+.gantt-label{font-size:.82rem;color:var(--text-body);}
+.gantt-bar-wrap{display:flex;gap:4px;}
+.gantt-block{height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:white;}
+/* PESO */
+.peso-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.peso-card{border:1px solid var(--border);border-radius:var(--radius);padding:20px;background:var(--bg-card);}
+.peso-card h5{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+.peso-P h5{color:#b91c1c;} .peso-E h5{color:#15803d;} .peso-S h5{color:#0369a1;} .peso-O h5{color:#7c3aed;}
+.peso-card ul{list-style:none;font-size:.82rem;}
+.peso-card ul li{padding:4px 0;border-bottom:1px solid var(--border);}
+.peso-card ul li:last-child{border-bottom:none;}
+/* BUDGET DONUT LEGEND */
+.budget-legend{display:flex;flex-direction:column;gap:10px;margin-left:24px;}
+.budget-item{display:flex;align-items:center;gap:10px;font-size:.82rem;}
+.budget-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+/* GEO GRID */
+.geo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
+.geo-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px;background:var(--bg-card);}
+.geo-card h5{font-size:.82rem;font-weight:700;color:var(--text-primary);margin-bottom:6px;}
+.geo-card p{font-size:.78rem;color:var(--text-muted);}
+.geo-card .geo-tag{display:inline-block;padding:2px 8px;background:var(--bg-subtle);border-radius:4px;font-size:.72rem;font-weight:600;color:var(--text-muted);margin-bottom:6px;}
+/* CONTENT PILLARS */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
+.pillar{border-top:4px solid var(--border);border:1px solid var(--border);border-radius:var(--radius);padding:20px;background:var(--bg-card);}
+.pillar:nth-child(1){border-top-color:#0a2540;}
+.pillar:nth-child(2){border-top-color:#d4a574;}
+.pillar:nth-child(3){border-top-color:#0ea5e9;}
+.pillar h5{font-size:.85rem;font-weight:700;color:var(--text-primary);margin-bottom:8px;}
+.pillar-pct{font-size:1.8rem;font-weight:700;line-height:1;margin-bottom:4px;}
+.pillar ul{list-style:none;font-size:.8rem;margin-top:10px;}
+.pillar ul li{padding:4px 0;border-bottom:1px solid var(--border);color:var(--text-muted);}
+.pillar ul li:last-child{border-bottom:none;}
+/* FUNNEL */
+.funnel{display:flex;flex-direction:column;gap:6px;margin:24px 0;}
+.funnel-stage{display:flex;align-items:center;gap:16px;}
+.funnel-bar{height:40px;border-radius:4px;display:flex;align-items:center;padding:0 16px;font-size:.82rem;font-weight:600;color:white;transition:width .3s;}
+.funnel-meta{font-size:.78rem;color:var(--text-muted);flex-shrink:0;}
+/* PRINT */
+@media print{
+  body{background:white;}
+  .toc{display:none;}
+  .layout{grid-template-columns:1fr;padding:0;max-width:720px;}
+  .cover{border-radius:0;}
+  .card,.chart-card,.persona-card{break-inside:avoid;box-shadow:none;}
+  .page-break{page-break-after:always;}
+}
+@page{size:A4;margin:16mm 14mm;}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- TOC -->
+<nav class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ul>
+    <li><a href="#exec">Résumé exécutif</a></li>
+    <li><a href="#positionnement">Positionnement</a></li>
+    <li><a href="#personas">Personas & JTBD</a></li>
+    <li><a href="#journey">Customer Journey</a></li>
+    <li><a href="#geo">Stratégie géographique</a></li>
+    <li><a href="#canaux">Mix d'acquisition</a></li>
+    <li><a href="#contenu">Communication & Contenu</a></li>
+    <li><a href="#funnel">Funnel & Commercial</a></li>
+    <li><a href="#roadmap">Roadmap 90 jours</a></li>
+    <li><a href="#kpis">Budget & KPIs</a></li>
+    <li><a href="#annexes">Annexes</a></li>
+  </ul>
+  <div class="toc-sep"></div>
+  <div style="font-size:.75rem;color:var(--text-muted);">Score stratégie<br>
+    <strong style="font-size:1.2rem;color:var(--warning);">71 / 100</strong>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- COVER -->
+<div class="cover" id="top">
+  <div class="cover-kicker">Stratégie Marketing & Communication · Avril 2026</div>
+  <h1>Leslie <em>de Nice</em><br>Plan d'Acquisition & Communication</h1>
+  <div class="cover-meta">
+    <div><div class="cover-meta-label">Objectif</div><div class="cover-meta-value">8–10 prestations / semaine</div></div>
+    <div><div class="cover-meta-label">Budget mensuel</div><div class="cover-meta-value">0–150 €</div></div>
+    <div><div class="cover-meta-label">Horizon</div><div class="cover-meta-value">90 jours</div></div>
+    <div><div class="cover-meta-label">Consultant</div><div class="cover-meta-value">Michaël Lopez · LM Consulting</div></div>
+  </div>
+  <div class="cover-score-block">
+    <div>
+      <div style="font-size:3.8rem;font-weight:700;color:#f9c74f;line-height:1;">71</div>
+      <div style="font-size:.8rem;opacity:.6;margin-top:2px;">/ 100</div>
+    </div>
+    <div>
+      <div style="font-size:1.05rem;font-weight:600;">Stratégie solide</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,.6);margin-top:4px;">GO avec 2 conditions opérationnelles</div>
+    </div>
+  </div>
+</div>
+
+<!-- RÉSUMÉ EXÉCUTIF -->
+<section id="exec">
+  <div class="section-header">
+    <span class="kicker">Résumé exécutif</span>
+    <h2>Ce que cette stratégie fait — et ce qu'elle refuse de faire.</h2>
+    <p class="lead">Objectif clair : remplir un planning de 8 à 10 prestations semaine en maximisant la densité géographique des créneaux. Pas de plan omnicanal. Pas de budget publicitaire. Une concentration totale sur 3 canaux.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">NSM — North Star Metric</span>
+      <strong class="kpi-value" style="font-size:1.2rem;">Clients mensuels actifs</strong>
+      <p class="kpi-note">Cible : 8 clients stables en M6, 10 en M9</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">CA mensuel cible plein régime</span>
+      <strong class="kpi-value">5 800 €</strong>
+      <p class="kpi-note">8,5 moy × 150 € × 4,5 semaines + ~400 € réceptions</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Budget marketing mensuel</span>
+      <strong class="kpi-value">50–150 €</strong>
+      <p class="kpi-note">Quasi-zéro phase 1. Légère impression/visuels prescripteurs.</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Canaux core retenus</span>
+      <strong class="kpi-value">3</strong>
+      <p class="kpi-note">Referral structuré · Instagram · Prescription médicale</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Déclaration de positionnement (synthèse)</h3>
+    <p style="font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:var(--text-primary);line-height:1.7;border-left:4px solid var(--accent);padding-left:20px;margin:12px 0;">
+      "Pour les familles actives de la Côte d'Azur qui n'ont plus le temps de cuisiner sans renoncer à la qualité, Leslie de Nice est la seule cheffe privée à domicile championne du monde qui transforme votre cuisine en 3 heures chrono — à 75 € nets grâce au crédit d'impôt SAP."
+    </p>
+  </div>
+
+  <div class="callout callout-accent">
+    <strong>Le point de bascule de toute cette stratégie.</strong> L'objectif de 8–10 prestations/semaine n'est pas un objectif marketing classique : c'est un problème logistique autant que commercial. Remplir ce planning de manière rentable exige de concentrer les clients par secteur géographique. Cette contrainte doit guider chaque décision d'acquisition : on ne cherche pas "des clients", on cherche "des clients dans le bon secteur, au bon moment". C'est un changement de paradigme complet par rapport à une stratégie marketing standard.
+  </div>
+
+  <div class="card-grid-3">
+    <div class="card" style="border-top:3px solid var(--success);">
+      <h4 style="color:var(--success);">Ce qui va marcher</h4>
+      <ul style="list-style:none;font-size:.84rem;">
+        <li style="padding:7px 0;border-bottom:1px solid var(--border);">Bouche à oreille dans les réseaux CSP+ niçois — effet de cluster naturel</li>
+        <li style="padding:7px 0;border-bottom:1px solid var(--border);">Prescripteurs médicaux = flux entrant qualifié à CAC quasi nul</li>
+        <li style="padding:7px 0;">L'argument SAP à 75 € net est imbattable en closing — nul besoin d'en dire plus</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--danger);">
+      <h4 style="color:var(--danger);">Ce qui ne marchera pas</h4>
+      <ul style="list-style:none;font-size:.84rem;">
+        <li style="padding:7px 0;border-bottom:1px solid var(--border);">TikTok/YouTube : trop gourmand en production pour une personne solo</li>
+        <li style="padding:7px 0;border-bottom:1px solid var(--border);">Google Ads / Meta Ads : budget insuffisant pour un test significatif, CPL trop élevé</li>
+        <li style="padding:7px 0;">Newsletter / emailing : pas de liste existante. Prématuré avant 50+ contacts qualifiés</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--warning);">
+      <h4 style="color:var(--warning);">Conditions de succès</h4>
+      <ul style="list-style:none;font-size:.84rem;">
+        <li style="padding:7px 0;border-bottom:1px solid var(--border);">Statut SAP confirmé avant tout lancement (l'argument tombe sans)</li>
+        <li style="padding:7px 0;border-bottom:1px solid var(--border);">Planning géographique structuré dès le 1er client (ne jamais accepter un client en rupture de zone)</li>
+        <li style="padding:7px 0;">3 posts Instagram/semaine sans exception pendant 90 jours minimum</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONNEMENT -->
+<section id="positionnement" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 01</span>
+    <h2>Positionnement stratégique</h2>
+    <p class="lead">Framework April Dunford — 5 dimensions. Baseline. USP. Proof points. Brand voice.</p>
+  </div>
+
+  <div class="card">
+    <h3>Les 5 dimensions du positionnement (Dunford)</h3>
+    <table class="data-table">
+      <thead><tr><th>Dimension</th><th>Réponse</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Alternatives concurrentielles</strong><br><span style="font-size:.8rem;color:var(--text-muted);">Que ferait le client si Leslie n'existait pas ?</span></td>
+          <td>Continuer à cuisiner soi-même (épuisant, chronophage), acheter des plats tout-prêts (qualité médiocre), HelloFresh (client cuisine encore), appeler une assistante ménagère non qualifiée culinairement. Dans tous les cas : aucune de ces options ne combine qualité cheffe formée + personnalisation + avantage fiscal SAP.</td>
+        </tr>
+        <tr>
+          <td><strong>2. Attributs uniques</strong><br><span style="font-size:.8rem;color:var(--text-muted);">Ce que les alternatives n'ont pas</span></td>
+          <td>
+            <span style="display:inline-block;margin:2px;padding:3px 10px;background:var(--bg-subtle);border-radius:100px;font-size:.8rem;font-weight:600;">Titre champion du monde farcis niçois 2025</span>
+            <span style="display:inline-block;margin:2px;padding:3px 10px;background:var(--bg-subtle);border-radius:100px;font-size:.8rem;font-weight:600;">Agrément SAP → 50% crédit d'impôt</span>
+            <span style="display:inline-block;margin:2px;padding:3px 10px;background:var(--bg-subtle);border-radius:100px;font-size:.8rem;font-weight:600;">Cuisine dans l'environnement du client</span>
+            <span style="display:inline-block;margin:2px;padding:3px 10px;background:var(--bg-subtle);border-radius:100px;font-size:.8rem;font-weight:600;">Menu entièrement personnalisé (allergies, régimes)</span>
+            <span style="display:inline-block;margin:2px;padding:3px 10px;background:var(--bg-subtle);border-radius:100px;font-size:.8rem;font-weight:600;">Ancrage terroir niçois authentique</span>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>3. Valeur résultante</strong><br><span style="font-size:.8rem;color:var(--text-muted);">Bénéfice client mesurable</span></td>
+          <td>3 heures/semaine récupérées. Repas 100 % maison, cuisinés par une cheffe certifiée mondialement. Zéro compromis qualité. À 75 € nets pour le client après crédit d'impôt — soit moins cher que 3 livraisons Deliveroo.</td>
+        </tr>
+        <tr>
+          <td><strong>4. Meilleur client</strong><br><span style="font-size:.8rem;color:var(--text-muted);">Pour qui cette valeur compte le plus</span></td>
+          <td>Couple actif 35–55 ans, double revenus (4 000 €+/mois net foyer), enfants à charge, Nice ou proche banlieue résidentielle, sensible à la qualité des produits, allergique à la restauration industrielle, contribuable imposable au-delà de la TMI 30 % (sinon le crédit d'impôt a moins d'impact).</td>
+        </tr>
+        <tr>
+          <td><strong>5. Catégorie de marché</strong><br><span style="font-size:.8rem;color:var(--text-muted);">Comment se présenter pour maximiser la valeur perçue</span></td>
+          <td><strong>Cheffe privée à domicile</strong> — pas "prestataire de batch cooking" (trop utilitaire, évoque les cuisines de sous-traitance). La catégorie "cheffe privée" porte implicitement une notion de service sur mesure, de compétence élevée, et de relation de confiance. C'est la bonne catégorie pour ce positionnement premium sans luxe.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-grid-2">
+    <div class="card">
+      <h3>Baseline & USP</h3>
+      <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:16px;">La baseline est sur la landing page et tous les supports. L'USP est le message de closing.</p>
+      <div style="margin-bottom:20px;padding:16px;background:var(--text-primary);border-radius:var(--radius);color:white;">
+        <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;">Baseline recommandée</div>
+        <div style="font-family:var(--font-serif);font-style:italic;font-size:1.3rem;line-height:1.3;">Votre semaine cuisinée. Votre cuisine.</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.6);margin-top:6px;">Ou variante : "La cheffe du monde dans votre cuisine."</div>
+      </div>
+      <div style="padding:14px;background:var(--accent-soft);border-radius:var(--radius);border:1px solid var(--accent);">
+        <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-dark);margin-bottom:6px;">USP — 1 phrase de closing</div>
+        <p style="font-size:.88rem;font-weight:600;color:var(--text-primary);">"La seule cheffe à domicile championne du monde à Nice — à 75 € nets grâce au crédit d'impôt."</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>5 Proof Points</h3>
+      <ul style="list-style:none;font-size:.84rem;">
+        <li style="padding:9px 0;border-bottom:1px solid var(--border);">🏆 <strong>Championne du monde de farcis niçois 2025</strong> — titre obtenu, non usurpé, vérifiable</li>
+        <li style="padding:9px 0;border-bottom:1px solid var(--border);">🧾 <strong>Agréée Service à la Personne</strong> → 50 % crédit d'impôt légalement certifié</li>
+        <li style="padding:9px 0;border-bottom:1px solid var(--border);">🍽 <strong>Personnalisation totale</strong> : allergies, régimes, préférences — sans frais supplémentaires</li>
+        <li style="padding:9px 0;border-bottom:1px solid var(--border);">📍 <strong>Ancrage local Côte d'Azur</strong> : produits de saison, producteurs locaux, recettes du terroir</li>
+        <li style="padding:9px 0;"><strong>3h chrono</strong> : 5 à 7 plats cuisinés, étiquetés, rangés — cuisine rendue propre</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Brand Voice -->
+  <div class="card">
+    <h3>Brand Voice & Tone — Règles opérationnelles</h3>
+    <div class="card-grid-3">
+      <div style="padding:16px;background:var(--bg-subtle);border-radius:var(--radius);">
+        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-dark);margin-bottom:8px;">Attribut 1 — Experte sans arrogance</div>
+        <p style="font-size:.82rem;color:var(--text-body);margin-bottom:8px;">Elle sait ce qu'elle fait. Elle ne le crie pas.</p>
+        <p style="font-size:.78rem;color:var(--success);"><strong>✓ Dire :</strong> "Ce bouillon, je le fais mijoter 4 heures."</p>
+        <p style="font-size:.78rem;color:var(--danger);"><strong>✗ Éviter :</strong> "Mon savoir-faire unique vous garantit l'excellence."</p>
+      </div>
+      <div style="padding:16px;background:var(--bg-subtle);border-radius:var(--radius);">
+        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-dark);margin-bottom:8px;">Attribut 2 — Chaleureuse mais concise</div>
+        <p style="font-size:.82rem;color:var(--text-body);margin-bottom:8px;">Le ton d'une amie qui cuisine bien — pas d'une marque.</p>
+        <p style="font-size:.78rem;color:var(--success);"><strong>✓ Dire :</strong> "Lundi matin, votre frigo vous remerciera."</p>
+        <p style="font-size:.78rem;color:var(--danger);"><strong>✗ Éviter :</strong> "Chez Leslie de Nice, nous mettons tout notre cœur."</p>
+      </div>
+      <div style="padding:16px;background:var(--bg-subtle);border-radius:var(--radius);">
+        <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-dark);margin-bottom:8px;">Attribut 3 — Ancrée & concrète</div>
+        <p style="font-size:.82rem;color:var(--text-body);margin-bottom:8px;">Nommer les plats, les quartiers, les marchés. Jamais de généralités.</p>
+        <p style="font-size:.78rem;color:var(--success);"><strong>✓ Dire :</strong> "Ratatouille du marché du Cours Saleya, blanquette, gratin dauphinois."</p>
+        <p style="font-size:.78rem;color:var(--danger);"><strong>✗ Éviter :</strong> "Des plats sains et équilibrés pour toute la famille."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAS -->
+<section id="personas">
+  <div class="section-header">
+    <span class="kicker">Bloc 02</span>
+    <h2>Personas stratégiques & Jobs-To-Be-Done</h2>
+    <p class="lead">1 persona principal, 2 secondaires (prescripteurs). Maximum. Au-delà c'est de la dispersion.</p>
+  </div>
+
+  <!-- Persona Principal -->
+  <div class="persona-card" style="margin-bottom:20px;">
+    <div class="persona-header" style="background:var(--text-primary);">
+      <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;">PERSONA PRINCIPAL — 80% de l'effort d'acquisition</div>
+      <div class="persona-name">Sophie & Julien M., 41 et 44 ans</div>
+      <div class="persona-tagline">"Double revenus, deux enfants, un frigo vide à 19h30."</div>
+    </div>
+    <div class="persona-body">
+      <div class="card-grid-2">
+        <div>
+          <div class="persona-section">
+            <div class="persona-section-label">Profil</div>
+            <ul>
+              <li>Chef de projet (elle) + directeur commercial (lui)</li>
+              <li>Revenu foyer : 7 000–9 000 €/mois net</li>
+              <li>2 enfants : 8 et 12 ans</li>
+              <li>Propriétaires — Cimiez / Fabron / Carré d'Or / Saint-Isidore</li>
+              <li>TMI : 41 %. Crédit d'impôt SAP très pertinent.</li>
+            </ul>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Contexte d'achat</div>
+            <ul>
+              <li>Décide après un épisode de "semaine chaos" (resto × 4, plats surgelés)</li>
+              <li>Cherche sur Instagram ou via recommandation d'une amie</li>
+              <li>Décision partagée couple — Sophie est souvent initiatrice</li>
+              <li>Budget mensuel loisirs/confort : ~400–600 €</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="persona-section">
+            <div class="persona-section-label">Jobs-To-Be-Done</div>
+            <ul>
+              <li><strong>Fonctionnel :</strong> Avoir des repas faits maison disponibles toute la semaine sans effort</li>
+              <li><strong>Émotionnel :</strong> Ne plus ressentir la culpabilité parentale de "pas assez bien nourrir les enfants"</li>
+              <li><strong>Social :</strong> Être la famille "organisée qui mange bien" — pas celle qui commande Pizza Hut le mercredi soir</li>
+            </ul>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Déclencheur d'achat précis</div>
+            <ul>
+              <li>Post Instagram d'une amie qui montre le contenu du frigo rempli par Leslie</li>
+              <li>Une pédiatre qui mentionne le service en consultation</li>
+              <li>Un dimanche soir d'épuisement où cuisiner est impossible</li>
+            </ul>
+          </div>
+          <div class="persona-section">
+            <div class="persona-section-label">Objections classiques</div>
+            <ul>
+              <li>"C'est cher." → 75 € nets SAP = moins cher que 3 Deliveroo</li>
+              <li>"J'ai pas de grande cuisine." → Leslie s'adapte à tout équipement standard</li>
+              <li>"Et si les enfants n'aiment pas ?" → Menu établi avec la famille avant chaque session</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personas secondaires -->
+  <div class="card-grid-2">
+    <div class="persona-card">
+      <div class="persona-header" style="background:#374151;">
+        <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af;margin-bottom:6px;">PERSONA SECONDAIRE 1 — Prescripteur médical</div>
+        <div class="persona-name">Dr. Isabelle V., pédiatre / nutritionniste</div>
+        <div class="persona-tagline">"Elle voit 20 familles épuisées par semaine."</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-section">
+          <div class="persona-section-label">JTBD prescripteur</div>
+          <ul>
+            <li><strong>Fonctionnel :</strong> Recommander une solution concrète à des parents débordés qui "ne savent plus quoi donner à manger"</li>
+            <li><strong>Social :</strong> Être un médecin qui apporte des solutions pratiques, pas seulement des ordonnances</li>
+          </ul>
+        </div>
+        <div class="persona-section">
+          <div class="persona-section-label">Comment l'activer</div>
+          <ul>
+            <li>Rendez-vous de présentation 15 min avec plaquette simple</li>
+            <li>Lui fournir des cartes de visite à distribuer aux parents</li>
+            <li>Inviter à goûter lors d'une session</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-header" style="background:#374151;">
+        <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af;margin-bottom:6px;">PERSONA SECONDAIRE 2 — Parent d'un nouveau-né</div>
+        <div class="persona-name">Léa, 32 ans, 1er enfant 3 mois</div>
+        <div class="persona-tagline">"Elle n'a plus les mains libres ni l'énergie."</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-section">
+          <div class="persona-section-label">JTBD</div>
+          <ul>
+            <li><strong>Fonctionnel :</strong> Manger correctement alors qu'elle ne peut plus cuisiner</li>
+            <li><strong>Émotionnel :</strong> Se sentir prise en charge à un moment de vulnérabilité</li>
+          </ul>
+        </div>
+        <div class="persona-section">
+          <div class="persona-section-label">Canal d'entrée</div>
+          <ul>
+            <li>Offert en cadeau de naissance par les proches (gift card)</li>
+            <li>Prescrit par sage-femme / puéricultrice</li>
+            <li>Segment: acheteur ≠ utilisatrice (les parents offrent, Léa consomme)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER JOURNEY -->
+<section id="journey" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 03</span>
+    <h2>Customer Journey — De l'inconnue à l'abonnée</h2>
+    <p class="lead">5 étapes. Points de friction identifiés. Actions recommandées par étape.</p>
+  </div>
+
+  <div class="journey">
+    <div class="journey-step">
+      <h5 style="color:#0ea5e9;">Awareness</h5>
+      <div class="j-label">Question client</div>
+      <p>"Est-ce que ça existe vraiment, quelqu'un qui vient cuisiner chez moi ?"</p>
+      <div class="j-label">Touchpoints</div>
+      <p>Post Instagram d'une amie · Mention d'un prescripteur · Reels batch cooking</p>
+      <div class="j-friction">⚠ Friction : le concept est peu connu. Le 1er contact doit rendre l'offre immédiatement compréhensible.</div>
+    </div>
+    <div class="journey-step">
+      <h5 style="color:#d4a574;">Consideration</h5>
+      <div class="j-label">Question client</div>
+      <p>"Combien ça coûte vraiment ? Et elle fait quoi exactement ?"</p>
+      <div class="j-label">Touchpoints</div>
+      <p>Landing page · Profil Instagram · DM ou WhatsApp de renseignement</p>
+      <div class="j-friction">⚠ Friction : l'argument SAP doit apparaître avant le prix brut. Si elle voit 150€ avant de voir 75€ net, 40% des prospects décrochent.</div>
+    </div>
+    <div class="journey-step">
+      <h5 style="color:#15803d;">Decision</h5>
+      <div class="j-label">Question client</div>
+      <p>"Est-ce que je lui fais confiance pour être dans ma cuisine ?"</p>
+      <div class="j-label">Touchpoints</div>
+      <p>Appel découverte 20 min · Première session Découverte 195€ · Avis clients</p>
+      <div class="j-friction">⚠ Friction : la confiance est la barrière principale dans un service "intrusif" (quelqu'un chez soi). Preuve sociale et titre champion sont les leviers.</div>
+    </div>
+    <div class="journey-step">
+      <h5 style="color:#7c3aed;">Onboarding</h5>
+      <div class="j-label">Question client</div>
+      <p>"Est-ce que ça valait le coup ? Est-ce que je recommence ?"</p>
+      <div class="j-label">Touchpoints</div>
+      <p>Session Découverte → satisfaction → proposition Mensuel dans les 48h</p>
+      <div class="j-friction">⚠ Friction : si la proposition d'abonnement mensuel n'est pas faite dans les 48h, la fenêtre de conversion se referme. Ne pas attendre que le client revienne.</div>
+    </div>
+    <div class="journey-step">
+      <h5 style="color:#0a2540;">Fidélisation & Referral</h5>
+      <div class="j-label">Question client</div>
+      <p>"Est-ce que je continue ? Est-ce que j'en parle autour de moi ?"</p>
+      <div class="j-label">Touchpoints</div>
+      <p>Qualité constante · Débrief mensuel · Demande de recommandation à M+2</p>
+      <div class="j-friction">⚠ Friction : le client satisfait ne recommande pas spontanément. Il faut lui demander explicitement, avec un cadre (réduction, geste commercial pour le filleul).</div>
+    </div>
+  </div>
+
+  <div class="callout callout-warning">
+    <strong>Point de friction critique n°1 : la fenêtre de conversion post-Découverte.</strong> La session Découverte est une vitrine commerciale, pas juste une prestation. Dans les 48h qui suivent, Leslie doit envoyer un message personnalisé avec les plats réalisés, un résumé de la session et la proposition d'abonnement mensuel. Ce message doit être semi-automatisé (cf. skill IA à venir). Sans cette relance structurée, le taux de conversion Découverte → Mensuel sera inférieur à 30%.
+  </div>
+</section>
+
+<!-- GÉOGRAPHIE — SECTION SPÉCIFIQUE -->
+<section id="geo">
+  <div class="section-header">
+    <span class="kicker">Bloc 03 bis — Spécifique à ce business</span>
+    <h2>Stratégie géographique — Le planning de la semaine</h2>
+    <p class="lead">8 à 10 prestations/semaine avec 2 matin + 1 après-midi : l'organisation par zone n'est pas une option, c'est la condition de rentabilité.</p>
+  </div>
+
+  <div class="callout callout-accent">
+    <strong>Pourquoi c'est un enjeu marketing.</strong> L'acquisition classique dit "trouver des clients". Ici, il faut "trouver des clients dans la bonne zone, au bon créneau". Accepter un client en rupture de zone pour "ne pas refuser" coûte 45 min de trajet aller × 2 = 1h30 non facturée, soit 37,50 € perdus par prestation. Sur 4 semaines, une mauvaise décision de zone détruit 150 € de marge. Le refus sélectif de certains clients est un acte stratégique, pas un échec commercial.
+  </div>
+
+  <div class="card">
+    <h3>Modèle de découpage géographique recommandé</h3>
+    <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:20px;">Sur la base d'une journée à 2 créneaux matin (8h-11h, 11h30-14h30) et 1 créneau après-midi (15h-18h), le découpage par zones permet d'enchaîner les prestations sans perte de temps de déplacement.</p>
+    <div class="geo-grid">
+      <div class="geo-card">
+        <div class="geo-tag">Zone A — Lundi</div>
+        <h5>Cimiez · Gairaut · Saint-Isidore</h5>
+        <p>Résidentiel aisé, familles établies. Cible principale : couple CSP+. 2 matins + 1 après-midi = 3 prestations.</p>
+      </div>
+      <div class="geo-card">
+        <div class="geo-tag">Zone B — Mardi</div>
+        <h5>Carré d'Or · Promenade · Fleurs</h5>
+        <p>Résidents principaux patrimoniaux, appartements haussmanniens. 3 prestations. Créneau après-midi peut être Saint-Jean-Cap-Ferrat si demande.</p>
+      </div>
+      <div class="geo-card">
+        <div class="geo-tag">Zone C — Mercredi</div>
+        <h5>Fabron · Saint-Augustin · aéroport</h5>
+        <p>Zone résidentielle ouest. Profils cadres en déplacement fréquent = clients qui ont besoin du service même en leur absence courte.</p>
+      </div>
+      <div class="geo-card">
+        <div class="geo-tag">Zone D — Jeudi</div>
+        <h5>Antibes · Juan-les-Pins · Villeneuve-Loubet</h5>
+        <p>Extension ouest. À activer seulement quand les zones A/B/C sont saturées. Délai de remplissage estimé : M6-M9.</p>
+      </div>
+      <div class="geo-card">
+        <div class="geo-tag">Zone E — Vendredi</div>
+        <h5>Beaulieu · Villefranche · Saint-Jean-Cap-Ferrat</h5>
+        <p>Résidents secondaires aisés, profils internationaux. Tarif premium possible (+20%). Disponibilité plus saisonnière (sept–mai). Activer dès M3 pour positionnement premium.</p>
+      </div>
+      <div class="geo-card">
+        <div class="geo-tag">Zone F — Flexible</div>
+        <h5>Réceptions & Événements</h5>
+        <p>Hors planning standard. Sur devis 350–600 €. Pas de contrainte géographique mais tarif compensant le déplacement. 2/mois max pour ne pas empiéter sur le planning hebdo.</p>
+      </div>
+    </div>
+    <div class="callout callout-success" style="margin-top:8px;">
+      <strong>Règle d'or du planning.</strong> Ne jamais accepter une demande hors zone sans vérifier si un second client dans la même zone peut être trouvé dans les 15 jours. Si non, proposer la date suivante dans la zone correspondante. Cette discipline, bien expliquée au client ("je travaille par secteur pour garantir votre créneau chaque semaine"), est perçue comme un signe d'organisation professionnelle, pas un refus.
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <h4>Planning cible à plein régime — 10 prestations / semaine</h4>
+    <p class="chart-caption">2 créneaux matin + 1 créneau après-midi × 4 jours actifs (lundi–jeudi). Vendredi réservé réceptions ou zone premium Est.</p>
+    <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;">
+      <!-- Headers -->
+      <g font-family="Inter" font-size="11" font-weight="700" fill="#64748b">
+        <text x="10" y="20">Créneau</text>
+        <text x="120" y="20" text-anchor="middle">Lundi</text>
+        <text x="230" y="20" text-anchor="middle">Mardi</text>
+        <text x="340" y="20" text-anchor="middle">Mercredi</text>
+        <text x="450" y="20" text-anchor="middle">Jeudi</text>
+        <text x="560" y="20" text-anchor="middle">Vendredi</text>
+      </g>
+      <!-- Row headers -->
+      <g font-family="Inter" font-size="10" fill="#94a3b8">
+        <text x="10" y="65">8h–11h</text>
+        <text x="10" y="125">11h30–14h30</text>
+        <text x="10" y="185">15h–18h</text>
+      </g>
+      <!-- Blocks - Lundi -->
+      <rect x="70" y="40" width="100" height="40" rx="4" fill="#0ea5e9"/><text x="120" y="65" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Cimiez</text>
+      <rect x="70" y="100" width="100" height="40" rx="4" fill="#0ea5e9"/><text x="120" y="125" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Gairaut</text>
+      <rect x="70" y="160" width="100" height="40" rx="4" fill="#0a2540" opacity=".6"/><text x="120" y="185" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Saint-Isidore</text>
+      <!-- Mardi -->
+      <rect x="180" y="40" width="100" height="40" rx="4" fill="#d4a574"/><text x="230" y="65" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Carré d'Or</text>
+      <rect x="180" y="100" width="100" height="40" rx="4" fill="#d4a574"/><text x="230" y="125" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Promenade</text>
+      <rect x="180" y="160" width="100" height="40" rx="4" fill="#a67c4f"/><text x="230" y="185" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Cap Ferrat opt.</text>
+      <!-- Mercredi -->
+      <rect x="290" y="40" width="100" height="40" rx="4" fill="#15803d"/><text x="340" y="65" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Fabron</text>
+      <rect x="290" y="100" width="100" height="40" rx="4" fill="#15803d"/><text x="340" y="125" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">St-Augustin</text>
+      <rect x="290" y="160" width="100" height="40" rx="4" fill="#0a2540" opacity=".5"/><text x="340" y="185" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Libre / Rempla.</text>
+      <!-- Jeudi -->
+      <rect x="400" y="40" width="100" height="40" rx="4" fill="#7c3aed"/><text x="450" y="65" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Antibes</text>
+      <rect x="400" y="100" width="100" height="40" rx="4" fill="#7c3aed"/><text x="450" y="125" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Juan-les-Pins</text>
+      <rect x="400" y="160" width="100" height="40" rx="4" fill="#5b21b6"/><text x="450" y="185" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Villeneuve-L.</text>
+      <!-- Vendredi -->
+      <rect x="510" y="40" width="100" height="40" rx="4" fill="#b45309"/><text x="560" y="65" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Beaulieu/VF</text>
+      <rect x="510" y="100" width="100" height="40" rx="4" fill="#b45309"/><text x="560" y="125" font-family="Inter" font-size="10" font-weight="600" fill="white" text-anchor="middle">Cap Ferrat</text>
+      <rect x="510" y="160" width="100" height="40" rx="4" fill="#f9c74f"/><text x="560" y="185" font-family="Inter" font-size="10" font-weight="600" fill="#1a202c" text-anchor="middle">Réception / Off</text>
+    </svg>
+    <p style="font-size:.78rem;color:var(--text-muted);margin-top:12px;">Note : le vendredi est la journée premium/flexible. Au démarrage, elle sera souvent vide — c'est normal. Ne pas la remplir avec des clients hors-zone pour "compenser".</p>
+  </div>
+</section>
+
+<!-- MIX D'ACQUISITION -->
+<section id="canaux" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 04</span>
+    <h2>Mix d'acquisition — Framework Bullseye</h2>
+    <p class="lead">3 canaux core. 2 à tester. Le reste : ne pas lancer. Budget quasi-nul — discipline d'exécution maximale.</p>
+  </div>
+
+  <div class="chart-card">
+    <h4>Bullseye — Canaux d'acquisition prioritaires</h4>
+    <p class="chart-caption">Cercle central = 70 % de l'énergie. Anneau intermédiaire = 20 %. Zone externe = ne pas toucher dans les 90 jours.</p>
+    <svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block;margin:0 auto;">
+      <!-- Outer ring : longtail -->
+      <circle cx="300" cy="190" r="175" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+      <!-- Middle ring : promising -->
+      <circle cx="300" cy="190" r="120" fill="#faf3e8" stroke="#d4a574" stroke-width="1.5"/>
+      <!-- Core -->
+      <circle cx="300" cy="190" r="65" fill="#0a2540"/>
+
+      <!-- CORE labels -->
+      <text x="300" y="168" font-family="Inter" font-size="11" font-weight="700" fill="white" text-anchor="middle">CORE</text>
+      <text x="300" y="185" font-family="Inter" font-size="10" fill="#d4a574" text-anchor="middle">Referral structuré</text>
+      <text x="300" y="200" font-family="Inter" font-size="10" fill="#9ca3af" text-anchor="middle">Instagram organique</text>
+      <text x="300" y="215" font-family="Inter" font-size="10" fill="#9ca3af" text-anchor="middle">Prescription médicale</text>
+
+      <!-- PROMISING labels -->
+      <text x="300" y="106" font-family="Inter" font-size="10" fill="#a67c4f" text-anchor="middle" font-weight="600">PROMISING</text>
+      <text x="185" y="135" font-family="Inter" font-size="10" fill="#a67c4f" text-anchor="middle">Google My Business</text>
+      <text x="415" y="135" font-family="Inter" font-size="10" fill="#a67c4f" text-anchor="middle">Gift card naissance</text>
+
+      <!-- LONGTAIL labels -->
+      <g font-family="Inter" font-size="10" fill="#94a3b8">
+        <text x="80" y="80" text-anchor="middle">TikTok</text>
+        <text x="160" y="50" text-anchor="middle">YouTube</text>
+        <text x="300" y="30" text-anchor="middle">LinkedIn</text>
+        <text x="440" y="50" text-anchor="middle">Meta Ads</text>
+        <text x="520" y="80" text-anchor="middle">Google Ads</text>
+        <text x="555" y="190" text-anchor="middle">SEO blog</text>
+        <text x="520" y="300" text-anchor="middle">Marketplace</text>
+        <text x="440" y="340" text-anchor="middle">Newsletter</text>
+        <text x="300" y="360" text-anchor="middle">Podcast</text>
+        <text x="160" y="340" text-anchor="middle">Salons</text>
+        <text x="80" y="300" text-anchor="middle">Affiliation</text>
+        <text x="45" y="190" text-anchor="middle">Outbound</text>
+      </g>
+      <!-- Ring labels -->
+      <text x="140" y="260" font-family="Inter" font-size="9" fill="#94a3b8" font-weight="600">LONGTAIL — 90J NE PAS LANCER</text>
+    </svg>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Canal</th>
+        <th>Cercle</th>
+        <th>Budget/mois</th>
+        <th>KPI cible</th>
+        <th>Justification</th>
+        <th>Owner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight">
+        <td><strong>Referral structuré</strong><br><span style="font-size:.78rem;color:var(--text-muted);">Programme parrainage client</span></td>
+        <td><span style="background:#0a2540;color:white;padding:2px 8px;border-radius:4px;font-size:.72rem;">Core</span></td>
+        <td>0 €<br><span style="font-size:.78rem;color:var(--text-muted);">(-15 € remise filleul)</span></td>
+        <td>2 nouveaux clients/mois via referral</td>
+        <td>CAC = 0. Les clients CSP+ niçois se recommandent entre eux dans les mêmes réseaux sociaux et les mêmes quartiers. 1 client satisfait = potentiellement 3–5 contacts dans le même rayon géographique.</td>
+        <td>Leslie</td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>Instagram organique</strong><br><span style="font-size:.78rem;color:var(--text-muted);">@leslie.de.nice, 3 posts/sem</span></td>
+        <td><span style="background:#0a2540;color:white;padding:2px 8px;border-radius:4px;font-size:.72rem;">Core</span></td>
+        <td>0 €<br><span style="font-size:.78rem;color:var(--text-muted);">(temps : ~2h/sem)</span></td>
+        <td>500 abonnés à M3 · 1 200 à M6 · 2 DM/sem qualifiés</td>
+        <td>Vitrine produit irremplaçable. Un frigo plein photographié chez un client = le meilleur argumentaire commercial qui soit. Le titre "Championne du monde" en bio donne une raison de suivre immédiate.</td>
+        <td>Leslie</td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>Prescription médicale</strong><br><span style="font-size:.78rem;color:var(--text-muted);">Pédiatres, nutritionnistes, sages-femmes</span></td>
+        <td><span style="background:#0a2540;color:white;padding:2px 8px;border-radius:4px;font-size:.72rem;">Core</span></td>
+        <td>30–50 €<br><span style="font-size:.78rem;color:var(--text-muted);">(impression plaquettes)</span></td>
+        <td>5 prescripteurs actifs à M3 · 15 à M12</td>
+        <td>Flux entrant ultra-qualifié. Un pédiatre qui voit 15 familles/jour peut générer 3–5 leads/mois à CAC quasi nul. C'est le canal le plus sous-estimé et le plus défendable sur la durée.</td>
+        <td>Leslie + Michaël</td>
+      </tr>
+      <tr>
+        <td><strong>Google My Business</strong><br><span style="font-size:.78rem;color:var(--text-muted);">Fiche locale optimisée</span></td>
+        <td><span style="background:var(--accent);color:var(--text-inverse);padding:2px 8px;border-radius:4px;font-size:.72rem;">Promising</span></td>
+        <td>0 €<br><span style="font-size:.78rem;color:var(--text-muted);">(setup 1h)</span></td>
+        <td>10 vues/mois · 2 appels/mois</td>
+        <td>"Cheffe privée à domicile Nice" est une requête rare mais à forte intention d'achat. GMB gratuit, zéro budget, long terme. Complémentaire à Instagram sans cannibalisme.</td>
+        <td>Leslie (setup M1)</td>
+      </tr>
+      <tr>
+        <td><strong>Gift card naissance</strong><br><span style="font-size:.78rem;color:var(--text-muted);">Offre cadeau physique/digitale</span></td>
+        <td><span style="background:var(--accent);color:var(--text-inverse);padding:2px 8px;border-radius:4px;font-size:.72rem;">Promising</span></td>
+        <td>20 €<br><span style="font-size:.78rem;color:var(--text-muted);">(design visuel)</span></td>
+        <td>3 gift cards/mois dès M4</td>
+        <td>Segment "cadeau de naissance CSP+" : budget moyen 150–250 €, forte valeur émotionnelle, acheteur différent de l'utilisatrice. Canal à activer au M4 après avoir stabilisé le planning récurrent.</td>
+        <td>Leslie + Michaël</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-danger">
+    <strong>Ce que cette stratégie refuse de faire — et pourquoi.</strong> TikTok, YouTube, Meta Ads, Google Ads : tous nécessitent soit une production vidéo intensive (TikTok/YouTube = 3–5h/vidéo en solo), soit un budget minimum de 300–500€/mois pour avoir un signal statistique (Ads). Leslie n'a ni la bande passante ni le budget. Lancer ces canaux avec des moyens insuffisants produit des résultats médiocres et consomme l'énergie dont elle a besoin pour la qualité de ses prestations. Ces canaux sont un "plus tard" — après M12, si le planning est plein et qu'elle a une assistante.
+  </div>
+</section>
+
+<!-- COMMUNICATION & CONTENU -->
+<section id="contenu">
+  <div class="section-header">
+    <span class="kicker">Bloc 05</span>
+    <h2>Stratégie de communication & Contenu</h2>
+    <p class="lead">Modèle PESO. 3 piliers de contenu. Calendrier éditorial calibré sur la capacité réelle d'une personne solo.</p>
+  </div>
+
+  <!-- PESO -->
+  <div class="peso-grid">
+    <div class="peso-card peso-P">
+      <h5>PAID — 30 €/mois max</h5>
+      <ul>
+        <li>Impression de 50 plaquettes prescripteurs (20 €)</li>
+        <li>Boost ponctuel d'un post Instagram lors d'un événement fort (titre, record, etc.) — 10 €</li>
+        <li>Cartes de visite premium (setup unique ~30 €)</li>
+        <li><strong>Aucun paid ads</strong> avant M12</li>
+      </ul>
+    </div>
+    <div class="peso-card peso-E">
+      <h5>EARNED — Priorité PR locale</h5>
+      <ul>
+        <li>Article Nice-Matin sur le titre de championne du monde</li>
+        <li>Mention dans un magazine local lifestyle Côte d'Azur</li>
+        <li>Partage par un compte influent niçois (foodie, parent, médecin)</li>
+        <li>Avis Google/Instagram de clients satisfaits (à demander systématiquement)</li>
+      </ul>
+    </div>
+    <div class="peso-card peso-S">
+      <h5>SHARED — Instagram 3x/semaine</h5>
+      <ul>
+        <li>Posts feed : plats finis, frigos remplis, marchés locaux</li>
+        <li>Stories : process en temps réel (épluchage, mijotage, rangement)</li>
+        <li>Reels courts (30–45s) : before/after frigo, recette vedette</li>
+        <li>Partage des photos clients (avec accord) = UGC gratuit</li>
+      </ul>
+    </div>
+    <div class="peso-card peso-O">
+      <h5>OWNED — Landing page + DM WhatsApp</h5>
+      <ul>
+        <li>Landing page leslie-de-nice.fr : conversion directe, argument SAP visible</li>
+        <li>Processus DM → WhatsApp → appel découverte → réservation</li>
+        <li>Liste clients : messages WhatsApp hebdo (menu de la semaine suggéré)</li>
+        <li>Pas de newsletter avant 100 contacts qualifiés</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3 Piliers -->
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="kicker">Pilier 1 — 50 % du contenu</div>
+      <div class="pillar-pct">Le frigo rempli</div>
+      <p style="font-size:.83rem;color:var(--text-muted);">Résultats concrets : ce qu'elle a cuisiné, pour qui, en combien de temps. Le before/after frigo est le contenu le plus partagé du batch cooking. Preuve de valeur immédiate.</p>
+      <ul>
+        <li>Photo 5–7 plats étiquetés</li>
+        <li>"Semaine de Sophie : ratatouille, blanquette…"</li>
+        <li>Frigo avant / après (avec accord client)</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="kicker">Pilier 2 — 30 % du contenu</div>
+      <div class="pillar-pct">La cheffe de Nice</div>
+      <p style="font-size:.83rem;color:var(--text-muted);">Son identité, son terroir, son titre. Contenu d'autorité et de confiance. Humanise la marque. Seul contenu qui peut déclencher de la PR earned (journalistes, comptes locaux).</p>
+      <ul>
+        <li>Coulisses du marché Cours Saleya</li>
+        <li>Le titre champion : comment c'est arrivé</li>
+        <li>Une recette niçoise authentique par mois</li>
+      </ul>
+    </div>
+    <div class="pillar">
+      <div class="kicker">Pilier 3 — 20 % du contenu</div>
+      <div class="pillar-pct">L'argument économique</div>
+      <p style="font-size:.83rem;color:var(--text-muted);">L'avantage fiscal SAP expliqué simplement. Ce pilier convertit les curieux en acheteurs. À utiliser avec parcimonie pour ne pas sonner "commercial", mais efficace en Reels éducatifs.</p>
+      <ul>
+        <li>"3 sessions chez moi = 225 € nets après CI"</li>
+        <li>Calcul visuel : Deliveroo × 4 vs Leslie × 1</li>
+        <li>FAQ SAP en format carrousel</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Calendrier éditorial -->
+  <div class="card">
+    <h3>Calendrier éditorial type — 1 semaine</h3>
+    <table class="data-table">
+      <thead><tr><th>Jour</th><th>Format</th><th>Pilier</th><th>Exemple de contenu</th><th>Temps estimé</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Lundi</strong></td>
+          <td>Post feed (photo)</td>
+          <td>Frigo rempli (P1)</td>
+          <td>"Le frigo de Martine pour cette semaine. 6 plats, 3h. Ratatouille du Saleya, gratin, poulet rôti…"</td>
+          <td>20 min</td>
+        </tr>
+        <tr>
+          <td><strong>Mercredi</strong></td>
+          <td>Reel 30–45s</td>
+          <td>La cheffe / process (P2)</td>
+          <td>Time-lapse de la découpe légumes + résultat final. Musique tendance, texte "3h de travail → 7 repas"</td>
+          <td>40 min</td>
+        </tr>
+        <tr>
+          <td><strong>Vendredi</strong></td>
+          <td>Stories (3–5)</td>
+          <td>Variable</td>
+          <td>Sondage "que mettez-vous dans votre ratatouille ?" · Photo marché · CTA "DM pour votre semaine"</td>
+          <td>15 min</td>
+        </tr>
+        <tr style="background:var(--bg-subtle);">
+          <td colspan="4"><strong>Total hebdomadaire</strong></td>
+          <td><strong>75 min</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout callout-accent" style="margin-top:16px;">
+      <strong>Règle de contenu n°1.</strong> Ne jamais publier un plat sans sa mise en contexte. "Ratatouille" ne vend rien. "La ratatouille de Sophie — faite avec les courgettes du Cours Saleya, mijotée 2h, pour ses 4 repas de la semaine" vend l'expérience complète. Chaque post doit répondre à la question implicite du prospect : "Est-ce que c'est vraiment fait maison avec de bons produits ?"
+    </div>
+  </div>
+</section>
+
+<!-- FUNNEL COMMERCIAL -->
+<section id="funnel">
+  <div class="section-header">
+    <span class="kicker">Bloc 06</span>
+    <h2>Funnel & Stratégie commerciale</h2>
+    <p class="lead">TOFU → MOFU → BOFU. Taux de conversion estimés. Séquences de closing. Top 3 leviers de conversion.</p>
+  </div>
+
+  <div class="chart-card">
+    <h4>Funnel TOFU → MOFU → BOFU — Taux de conversion estimés</h4>
+    <p class="chart-caption">Hypothèse : 500 abonnés Instagram actifs à M3. Taux de conversion calibrés sur marché services premium B2C.</p>
+    <div class="funnel">
+      <div class="funnel-stage">
+        <div class="funnel-bar" style="background:#0ea5e9;width:100%;">TOFU — Audience Instagram / Prescripteurs</div>
+        <div class="funnel-meta">500 abonnés actifs · 1 000 impressions/sem</div>
+      </div>
+      <div class="funnel-stage" style="padding-left:40px;">
+        <div class="funnel-bar" style="background:#0ea5e9;opacity:.8;width:80%;">Curieux (follows, saves, vues stories)</div>
+        <div class="funnel-meta">80 % → 400 "engagés"</div>
+      </div>
+      <div class="funnel-stage" style="padding-left:80px;">
+        <div class="funnel-bar" style="background:#d4a574;width:40%;">MOFU — DM / visite landing page</div>
+        <div class="funnel-meta">5 % → ~20 contacts/mois</div>
+      </div>
+      <div class="funnel-stage" style="padding-left:120px;">
+        <div class="funnel-bar" style="background:#d4a574;opacity:.8;width:30%;">Appel découverte 20 min</div>
+        <div class="funnel-meta">60 % → ~12 appels/mois</div>
+      </div>
+      <div class="funnel-stage" style="padding-left:160px;">
+        <div class="funnel-bar" style="background:#15803d;width:20%;">BOFU — Session Découverte 195€</div>
+        <div class="funnel-meta">50 % → ~6 premières sessions/mois</div>
+      </div>
+      <div class="funnel-stage" style="padding-left:200px;">
+        <div class="funnel-bar" style="background:#0a2540;width:14%;">Client Mensuel récurrent</div>
+        <div class="funnel-meta">65 % → ~4 nouveaux clients/mois</div>
+      </div>
+    </div>
+    <p style="font-size:.8rem;color:var(--text-muted);margin-top:12px;">À 4 nouveaux clients/mois, le planning de 8–10 est atteint en M3 (avec rétention ≥ 80%). Le churn est le risque principal à surveiller.</p>
+  </div>
+
+  <div class="card">
+    <h3>Séquences commerciales — 3 moments clés</h3>
+
+    <div style="margin-bottom:24px;">
+      <h4>Séquence 1 — DM → Appel découverte (conversion : 60 %)</h4>
+      <table class="data-table" style="font-size:.82rem;">
+        <tr><td><strong>J0 — Message entrant</strong></td><td>Ne jamais répondre par un lien ou un prix direct. Répondre : "Avec plaisir ! Pour vous présenter le service en 20 min et voir si c'est fait pour vous, vous êtes disponible cette semaine ?" → Qualifier zone géographique dès ce message.</td></tr>
+        <tr><td><strong>J0+1h — Relance si pas de réponse</strong></td><td>Message automatisé (cf. skill IA) : "Je voulais m'assurer que vous aviez bien reçu ma réponse 🙂 Quelle zone de Nice ?" → Filtrage géographique immédiat.</td></tr>
+        <tr><td><strong>J1 — Appel découverte</strong></td><td>Script 20 min : contexte famille (nb personnes, âges, régimes) · Jours / créneaux souhaités · Zone · Présentation du forfait · Argument SAP systématique · Proposition d'une session Découverte dans les 7 jours.</td></tr>
+      </table>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <h4>Séquence 2 — Post session Découverte → Mensuel (objectif : 65% de conversion)</h4>
+      <table class="data-table" style="font-size:.82rem;">
+        <tr><td><strong>J0 (jour de la session)</strong></td><td>Photo des plats réalisés envoyée par WhatsApp au client dans l'heure suivant la fin de la prestation. Message court : "Voilà votre semaine ! C'était un plaisir de cuisiner chez vous 😊"</td></tr>
+        <tr><td><strong>J0+48h</strong></td><td>Message de suivi : "Comment s'est passée votre semaine ? Est-ce que vous avez eu le temps de tout goûter ?" → Écoute des retours → Proposition : "Si le concept vous convient, je peux vous réserver un créneau fixe chaque [jour]. Le tarif mensuel est 150€/semaine — soit 75€ nets après crédit d'impôt."</td></tr>
+        <tr><td><strong>J0+7 si pas de réponse</strong></td><td>Unique relance : "Je finalise mon planning pour le mois prochain — je garde votre créneau du [jour] ?"</td></tr>
+      </table>
+    </div>
+
+    <div>
+      <h4>Séquence 3 — Client mensuel → Referral (objectif : 1 recommandation active par client en M+3)</h4>
+      <table class="data-table" style="font-size:.82rem;">
+        <tr><td><strong>M+2</strong></td><td>Après 2 mois de prestations régulières : "Vous semblez satisfaite — est-ce que vous connaissez quelqu'un dans votre entourage qui pourrait bénéficier du service ?" Pas d'incentive financière dans un premier temps : la demande directe suffit dans un réseau CSP+.</td></tr>
+        <tr><td><strong>M+3</strong></td><td>Si referral transmis : geste commercial sur la prochaine session (remise 15 € ou petite attention culinaire). Geste symbolique mais mémorable.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card-grid-3" style="margin-top:8px;">
+    <div class="card" style="border-top:3px solid var(--success);">
+      <h4 style="color:var(--success);">Levier n°1 — Preuve sociale contextualisée</h4>
+      <p style="font-size:.84rem;">Un avis Google ou Instagram avec photo du frigo rempli et prénom + quartier ("Marie, Cimiez") convertit 3× plus qu'un avis générique. Demander à chaque client un avis contextualisé dès le 2e mois.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--success);">
+      <h4 style="color:var(--success);">Levier n°2 — Argument SAP en tête</h4>
+      <p style="font-size:.84rem;">Sur la landing page et en appel découverte, l'argument SAP doit précéder le prix. Format : "75 € nets après crédit d'impôt" avant "150 € la session". L'ordre des mots fait toute la différence sur l'objection prix.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--success);">
+      <h4 style="color:var(--success);">Levier n°3 — Relance 48h systématique</h4>
+      <p style="font-size:.84rem;">La proposition d'abonnement faite dans les 48h post-Découverte convertit à 65% estimé. Faite à J+7, elle tombe à 30%. Ce délai est le KPI commercial le plus important à respecter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP 90 JOURS -->
+<section id="roadmap" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 07</span>
+    <h2>Roadmap marketing 90 jours</h2>
+    <p class="lead">3 phases. Actions séquencées avec owner, coût, KPI de validation, dépendances.</p>
+  </div>
+
+  <div class="card">
+    <h3>Phase 1 — J1 à J30 : Fondations & Quick Wins</h3>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Coût</th><th>KPI de validation</th><th>Dépendance</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Confirmer agrément SAP</strong> et l'afficher comme argument n°1 sur landing page et bio Instagram</td>
+          <td>Leslie</td>
+          <td>0 €</td>
+          <td>Mention SAP visible sur tous les supports</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Corriger la landing page</strong> : argument SAP en premier, pricing corrigé (195/150/devis), zone géographique précisée</td>
+          <td>Michaël</td>
+          <td>0 €</td>
+          <td>Page mise en ligne, lien fonctionnel</td>
+          <td>Action 1</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Lancer Instagram 3×/semaine</strong> (lundi photo frigo, mercredi reel, vendredi stories)</td>
+          <td>Leslie</td>
+          <td>0 €</td>
+          <td>3 posts/semaine sans exception pendant 4 semaines</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Créer le script d'appel découverte</strong> (20 min, qualification géographique, argument SAP, closing)</td>
+          <td>Michaël + Leslie</td>
+          <td>0 €</td>
+          <td>Script testé sur 3 prospects réels</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>Ouvrir fiche Google My Business</strong> : catégorie "Cuisinier à domicile", zone Nice, photos, description SAP</td>
+          <td>Leslie</td>
+          <td>0 €</td>
+          <td>Fiche publiée et validée</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>Identifier 5 prescripteurs cibles</strong> dans un rayon de 3 km des zones A et B (pédiatres, nutritionnistes)</td>
+          <td>Michaël + Leslie</td>
+          <td>0 €</td>
+          <td>Liste de 5 noms avec adresse et téléphone</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Phase 2 — J31 à J60 : Systèmes pérennes</h3>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Coût</th><th>KPI de validation</th><th>Dépendance</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>7</td>
+          <td><strong>Visiter les 5 prescripteurs</strong> : présentation 15 min + plaquette + cartes de visite. Objectif : 3 actifs.</td>
+          <td>Leslie</td>
+          <td>50 € (impression)</td>
+          <td>3 prescripteurs confirment qu'ils vont mentionner le service</td>
+          <td>Action 6</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><strong>Formaliser le contrat abonnement mensuel</strong> (1 page, engagement sur 4 sessions, résiliation avec préavis 2 sem)</td>
+          <td>Michaël</td>
+          <td>0 €</td>
+          <td>3 premiers clients signent un contrat mensuel</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><strong>Construire la bibliothèque de recettes Phase 1</strong> : 40 recettes catégorisées (saison, régime, durée), avec liste de courses associée</td>
+          <td>Leslie + Michaël (IA)</td>
+          <td>0 €</td>
+          <td>40 recettes disponibles, structurées dans une base (Notion ou Google Sheets)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><strong>Contacter Nice-Matin / magazine local</strong> avec angle "Championne du monde qui cuisine dans vos cuisines"</td>
+          <td>Leslie</td>
+          <td>0 €</td>
+          <td>1 réponse positive d'un journaliste</td>
+          <td>Action 3 (présence Instagram établie)</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><strong>Structurer la séquence WhatsApp post-Découverte</strong> : message J0 photo, message J+48h proposition mensuel, relance J+7</td>
+          <td>Michaël (templates)</td>
+          <td>0 €</td>
+          <td>Séquence testée sur 3 premières sessions Découverte</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Phase 3 — J61 à J90 : Amplification</h3>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Coût</th><th>KPI de validation</th><th>Dépendance</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>12</td>
+          <td><strong>Lancer l'offre gift card naissance</strong> : visuel Instagram + post dédié + mention sur landing page</td>
+          <td>Michaël + Leslie</td>
+          <td>20 € (design)</td>
+          <td>2 premières gift cards vendues</td>
+          <td>Action 2 + landing page opérationnelle</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><strong>Demander les 3 premiers avis clients</strong> sur Google et Instagram. Avec photo et prénom + quartier.</td>
+          <td>Leslie</td>
+          <td>0 €</td>
+          <td>3 avis publiés avec photo</td>
+          <td>Actions 8 + 11 (clients stables)</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><strong>Prospecter la zone E (Est Nice / Cap Ferrat)</strong> : 1 post Instagram ciblé résidents secondaires + test tarif +20%</td>
+          <td>Leslie</td>
+          <td>0 €</td>
+          <td>1 premier client Zone E à M3</td>
+          <td>Planning zones A/B/C en bonne voie</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><strong>Bilan de la stratégie J90</strong> : NSM atteint ? Planning rempli à quel % ? Canaux les plus performants ? Décision pour M4–M12.</td>
+          <td>Michaël + Leslie</td>
+          <td>0 €</td>
+          <td>Rapport 1 page avec décision GO/ADJUST sur chaque canal</td>
+          <td>Toutes les actions précédentes</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- BUDGET & KPIs -->
+<section id="kpis">
+  <div class="section-header">
+    <span class="kicker">Bloc 08</span>
+    <h2>Budget & KPIs</h2>
+    <p class="lead">North Star Metric. Budget alloué par canal. Score de viabilité de la stratégie.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi" style="flex:2;border:2px solid var(--accent);">
+      <span class="kpi-label">North Star Metric</span>
+      <strong class="kpi-value" style="font-size:1.3rem;">Clients mensuels actifs</strong>
+      <p class="kpi-note">La seule métrique qui compte. Tout le reste en dérive. Cible M6 : 6 clients. Cible M9 : 8 clients. Plein régime M12 : 10 clients.</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Budget mois 1–3</span>
+      <strong class="kpi-value">50 €</strong>
+      <p class="kpi-note">Impression plaquettes prescripteurs uniquement</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Budget mois 4–6</span>
+      <strong class="kpi-value">100 €</strong>
+      <p class="kpi-note">+ design gift card + cartes de visite premium</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Budget mois 7–12</span>
+      <strong class="kpi-value">150 €</strong>
+      <p class="kpi-note">+ boost Instagram ponctuel si article PR obtenu</p>
+    </div>
+  </div>
+
+  <!-- Budget donut -->
+  <div class="chart-card">
+    <h4>Allocation budget marketing — 12 mois (total ~1 000 €)</h4>
+    <p class="chart-caption">Budget concentré sur supports physiques prescripteurs et identité visuelle. Aucun paid media avant validation du funnel organique.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;padding:16px 0;">
+      <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Donut chart approximation -->
+        <!-- Total 1000€: Plaquettes/Cartes 350 (35%), Design 200 (20%), Gift card 100 (10%), Boost Instagram 150 (15%), Divers 200 (20%) -->
+        <!-- Segments approximated manually -->
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#0a2540" stroke-width="36" stroke-dasharray="176 327" stroke-dashoffset="82"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#d4a574" stroke-width="36" stroke-dasharray="100 403" stroke-dashoffset="-94"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#0ea5e9" stroke-width="36" stroke-dasharray="63 440" stroke-dashoffset="-194"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#15803d" stroke-width="36" stroke-dasharray="76 427" stroke-dashoffset="-257"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#94a3b8" stroke-width="36" stroke-dasharray="88 415" stroke-dashoffset="-333"/>
+        <text x="100" y="95" font-family="Inter" font-size="14" font-weight="700" fill="#0a2540" text-anchor="middle">1 000 €</text>
+        <text x="100" y="113" font-family="Inter" font-size="10" fill="#64748b" text-anchor="middle">12 mois</text>
+      </svg>
+      <div class="budget-legend">
+        <div class="budget-item"><div class="budget-dot" style="background:#0a2540;"></div><div>Plaquettes & cartes prescripteurs — <strong>350 €</strong></div></div>
+        <div class="budget-item"><div class="budget-dot" style="background:#d4a574;"></div><div>Design (gift card, visuels Instagram) — <strong>200 €</strong></div></div>
+        <div class="budget-item"><div class="budget-dot" style="background:#0ea5e9;"></div><div>Boost Instagram ponctuel (×3/an) — <strong>150 €</strong></div></div>
+        <div class="budget-item"><div class="budget-dot" style="background:#15803d;"></div><div>Matériel photo (smartphone stand, lumière) — <strong>200 €</strong></div></div>
+        <div class="budget-item"><div class="budget-dot" style="background:#94a3b8;"></div><div>Divers (imprévus, packaging, etc.) — <strong>100 €</strong></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPIs secondaires -->
+  <div class="card">
+    <h3>KPIs secondaires — Tableau de suivi hebdomadaire</h3>
+    <table class="data-table">
+      <thead><tr><th>KPI</th><th>M1</th><th>M3</th><th>M6</th><th>M12</th><th>Fréquence revue</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Clients mensuels actifs (NSM)</strong></td><td>1–2</td><td>4</td><td>6–7</td><td>9–10</td><td>Hebdomadaire</td></tr>
+        <tr><td>Taux de rétention mensuelle (clients reconduits)</td><td>—</td><td>≥ 75 %</td><td>≥ 80 %</td><td>≥ 85 %</td><td>Mensuel</td></tr>
+        <tr><td>Abonnés Instagram actifs</td><td>100</td><td>500</td><td>1 200</td><td>2 500</td><td>Hebdomadaire</td></tr>
+        <tr><td>DM entrants qualifiés / mois</td><td>2</td><td>8</td><td>15</td><td>25</td><td>Hebdomadaire</td></tr>
+        <tr><td>Taux conversion Découverte → Mensuel</td><td>—</td><td>≥ 55 %</td><td>≥ 65 %</td><td>≥ 70 %</td><td>Mensuel</td></tr>
+        <tr><td>Prescripteurs actifs</td><td>0</td><td>3</td><td>6</td><td>12</td><td>Mensuel</td></tr>
+        <tr><td>CA mensuel brut</td><td>300–600 €</td><td>2 400 €</td><td>3 600 €</td><td>5 800 €</td><td>Hebdomadaire</td></tr>
+        <tr><td>Ratio prestations matin vs après-midi</td><td>libre</td><td>≥ 65% matin</td><td>≥ 70% matin</td><td>—</td><td>Mensuel (logistique)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Score viabilité stratégie -->
+  <div class="chart-card">
+    <h4>Score de viabilité de la stratégie marketing — 71/100</h4>
+    <p class="chart-caption">Décomposition par sous-bloc. Pondération calibrée sur la capacité d'exécution solo et le budget disponible.</p>
+    <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;">
+      <g fill="#f1f5f9">
+        <rect x="220" y="30" width="380" height="30" rx="4"/>
+        <rect x="220" y="72" width="380" height="30" rx="4"/>
+        <rect x="220" y="114" width="380" height="30" rx="4"/>
+        <rect x="220" y="156" width="380" height="30" rx="4"/>
+        <rect x="220" y="198" width="380" height="30" rx="4"/>
+        <rect x="220" y="240" width="380" height="30" rx="4"/>
+      </g>
+      <!-- Clarté positionnement 17/20 = 85% = 323px -->
+      <rect x="220" y="30" width="323" height="30" rx="4" fill="#0ea5e9"/>
+      <!-- Persona / canaux 16/20 = 80% = 304px -->
+      <rect x="220" y="72" width="304" height="30" rx="4" fill="#0ea5e9"/>
+      <!-- Réalisme moyens 14/20 = 70% = 266px -->
+      <rect x="220" y="114" width="266" height="30" rx="4" fill="#d4a574"/>
+      <!-- Funnel & conversion 11/15 = 73% = 277px -->
+      <rect x="220" y="156" width="277" height="30" rx="4" fill="#d4a574"/>
+      <!-- Différenciation contenu 9/15 = 60% = 228px -->
+      <rect x="220" y="198" width="228" height="30" rx="4" fill="#d4a574"/>
+      <!-- Mesurabilité 4/10 = 40% = 152px -->
+      <rect x="220" y="240" width="152" height="30" rx="4" fill="#b45309"/>
+
+      <g font-family="Inter" font-size="12" fill="#64748b">
+        <text x="210" y="50" text-anchor="end">Clarté du positionnement</text>
+        <text x="210" y="92" text-anchor="end">Adéquation persona / canaux</text>
+        <text x="210" y="134" text-anchor="end">Réalisme des moyens</text>
+        <text x="210" y="176" text-anchor="end">Funnel & conversion</text>
+        <text x="210" y="218" text-anchor="end">Différenciation contenu</text>
+        <text x="210" y="260" text-anchor="end">Mesurabilité (KPIs)</text>
+      </g>
+      <g font-family="Inter" font-size="12" font-weight="700" fill="#0a2540">
+        <text x="556" y="50">17 / 20</text>
+        <text x="556" y="92">16 / 20</text>
+        <text x="556" y="134">14 / 20</text>
+        <text x="556" y="176">11 / 15</text>
+        <text x="556" y="218" fill="#b45309">9 / 15</text>
+        <text x="556" y="260" fill="#b91c1c">4 / 10</text>
+      </g>
+      <line x1="220" y1="286" x2="600" y2="286" stroke="#e2e8f0"/>
+      <text x="556" y="300" font-family="Inter" font-size="13" font-weight="700" fill="#b45309">71 / 100</text>
+    </svg>
+    <div class="callout callout-warning" style="margin-top:16px;">
+      <strong>Sous-score faible à surveiller : Mesurabilité (4/10).</strong> La stratégie est solide sur le positionnement et les canaux, mais elle repose sur des outils informels (WhatsApp, Instagram DM). Sans un minimum de tracking (ne serait-ce qu'un Google Sheet avec date de contact / source / conversion), il sera impossible de savoir quels canaux fonctionnent vraiment. Le skill IA (prochain livrable) doit adresser ce point en priorité.
+    </div>
+  </div>
+</section>
+
+<!-- ANNEXES -->
+<section id="annexes">
+  <div class="section-header">
+    <span class="kicker">Annexes</span>
+    <h2>Hypothèses & Articulation avec les skills suivants</h2>
+  </div>
+  <div class="card">
+    <h3>Hypothèses posées</h3>
+    <table class="data-table">
+      <thead><tr><th>Hypothèse</th><th>Valeur</th><th>Certitude</th></tr></thead>
+      <tbody>
+        <tr><td>Agrément SAP obtenu ou en cours</td><td>Présumé oui</td><td>À vérifier impérativement avant tout lancement</td></tr>
+        <tr><td>Taux de conversion Découverte → Mensuel</td><td>65 %</td><td>Estimée. À mesurer sur les 3 premières sessions réelles.</td></tr>
+        <tr><td>Rétention mensuelle</td><td>≥ 80 %</td><td>Estimée sur analogie services premium à domicile</td></tr>
+        <tr><td>Temps de production contenu Instagram</td><td>75 min/semaine</td><td>Estimée. Peut varier selon format choisi.</td></tr>
+        <tr><td>Nombre de prescripteurs actifs atteignables</td><td>3–5 en M3</td><td>Estimée. Dépend du réseau personnel de Leslie.</td></tr>
+        <tr><td>Capacité Instagram : 500 abonnés à M3</td><td>500</td><td>Estimée. Peut être plus rapide si article PR obtenu.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h3>Articulation avec les prochains livrables</h3>
+    <p style="font-size:.85rem;color:var(--text-body);margin-bottom:16px;">Ce livrable marketing alimente directement le plan IA & automatisation (3e volet) sur les points suivants :</p>
+    <table class="data-table">
+      <thead><tr><th>Output de ce livrable</th><th>Input pour le skill IA & Automatisation</th></tr></thead>
+      <tbody>
+        <tr><td>Customer journey 5 étapes identifié</td><td>Où placer les automations (DM → appel, post-session, relance)</td></tr>
+        <tr><td>Séquences WhatsApp structurées</td><td>À semi-automatiser avec templates + IA générative</td></tr>
+        <tr><td>Bibliothèque recettes (à construire)</td><td>Génération IA des menus personnalisés + listes de courses</td></tr>
+        <tr><td>Calendrier éditorial Instagram 3×/semaine</td><td>Rédaction IA des légendes à partir des photos de Leslie</td></tr>
+        <tr><td>Filtrage géographique des prospects</td><td>Bot DM / script de qualification automatisé</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.82rem;color:var(--text-muted);margin-top:16px;">Rapport produit par <strong>Michaël Lopez — LM Consulting</strong> · Avril 2026.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.toc a[href^="#"]');
+  var sections=[];
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);var el=document.getElementById(id);if(el)sections.push({el:el,link:l});});
+  function onScroll(){var y=window.scrollY+120;var cur=null;sections.forEach(function(s){if(s.el.offsetTop<=y)cur=s;});links.forEach(function(l){l.classList.remove('active');});if(cur)cur.link.classList.add('active');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

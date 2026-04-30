@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit — MMS Monaco Mobilier Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Figtree:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f3ede3;
+    --cream-2:#ebe3d5;
+    --ink:#0f100e;
+    --ink-soft:#2a2a26;
+    --muted:#6a6860;
+    --rule:#d8cfbf;
+    --ochre:#b8862c;
+    --ochre-dark:#8e6617;
+    --blood:#8a1f1f;
+    --green:#3f6b3a;
+    --paper:#fbf7ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Figtree',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{background-image:radial-gradient(1200px 600px at 10% -10%,rgba(184,134,44,.08),transparent 60%),radial-gradient(900px 500px at 90% 110%,rgba(138,31,31,.05),transparent 60%)}
+  .wrap{max-width:1100px;margin:0 auto;padding:48px 32px 120px}
+  @media(max-width:720px){.wrap{padding:24px 18px 80px}}
+
+  /* Typo */
+  .serif{font-family:'Fraunces',serif;font-variation-settings:'opsz' 144}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+  h1{font-size:clamp(44px,6vw,86px);font-weight:800;font-variation-settings:'opsz' 144}
+  h2{font-size:clamp(28px,3.4vw,44px);margin-top:72px;margin-bottom:24px}
+  h3{font-size:clamp(20px,2vw,26px);margin-top:36px;margin-bottom:12px}
+  h4{font-size:18px;margin-top:24px;margin-bottom:8px;font-weight:600}
+  p{margin-bottom:14px;color:var(--ink-soft)}
+  strong{color:var(--ink);font-weight:600}
+  em{font-style:italic;color:var(--ink-soft)}
+  a{color:var(--ochre-dark);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  code,.mono{font-family:'JetBrains Mono',monospace;font-size:.88em;background:var(--cream-2);padding:1px 6px;border-radius:3px}
+
+  /* Rules */
+  .rule{height:1px;background:var(--rule);border:0;margin:48px 0}
+  .rule-thick{height:2px;background:var(--ink);border:0;margin:36px 0}
+  .rule-ochre{height:4px;width:72px;background:var(--ochre);border:0;margin:24px 0}
+
+  /* Cover */
+  .cover{padding:40px 0 20px;border-bottom:1px solid var(--rule);margin-bottom:48px}
+  .cover .meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:40px}
+  .cover .meta span:nth-child(2){text-align:right}
+  .cover h1{margin-bottom:24px}
+  .cover .lede{font-family:'Fraunces',serif;font-size:clamp(18px,2vw,24px);font-style:italic;color:var(--ink-soft);max-width:720px;line-height:1.4;font-weight:300}
+  .cover-url{display:inline-block;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ochre-dark);padding:4px 10px;background:var(--paper);border:1px solid var(--rule);border-radius:3px}
+
+  /* Score dashboard */
+  .score-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:36px 0}
+  @media(max-width:820px){.score-grid{grid-template-columns:1fr 1fr 1fr}}
+  .score-cell{background:var(--paper);padding:22px 18px}
+  .score-cell .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:8px}
+  .score-cell .val{font-family:'Fraunces',serif;font-size:44px;font-weight:600;line-height:1;color:var(--ink)}
+  .score-cell .val .den{font-size:18px;color:var(--muted);font-weight:400}
+  .score-cell.total{background:var(--ink);color:var(--cream)}
+  .score-cell.total .lbl{color:var(--cream-2)}
+  .score-cell.total .val{color:var(--cream)}
+  .score-cell.total .val .den{color:var(--cream-2)}
+  .score-cell .bar{height:3px;background:var(--cream-2);margin-top:12px;overflow:hidden}
+  .score-cell .bar span{display:block;height:100%;background:var(--ochre)}
+  .score-cell.total .bar{background:#333}
+  .score-cell.total .bar span{background:var(--ochre)}
+  .verdict-bad{color:var(--blood);font-weight:700}
+  .verdict-mid{color:var(--ochre-dark);font-weight:700}
+  .verdict-good{color:var(--green);font-weight:700}
+
+  /* Callouts */
+  .callout{background:var(--paper);border-left:3px solid var(--ink);padding:20px 24px;margin:24px 0;border-radius:0 3px 3px 0}
+  .callout.danger{border-left-color:var(--blood);background:#fbf1ec}
+  .callout.warning{border-left-color:var(--ochre);background:#fbf4e1}
+  .callout.note{border-left-color:var(--ink)}
+  .callout .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;margin-bottom:6px;color:var(--muted)}
+  .callout .kicker.d{color:var(--blood)}
+  .callout .kicker.w{color:var(--ochre-dark)}
+
+  /* Extract (quote from site) */
+  .extract{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:16px 0;margin:20px 0;font-family:'Fraunces',serif;font-style:italic;font-size:19px;color:var(--ink);position:relative}
+  .extract::before{content:"EXTRAIT DU SITE";position:absolute;top:-7px;left:0;background:var(--cream);padding:0 10px 0 0;font-family:'JetBrains Mono',monospace;font-size:9px;font-style:normal;letter-spacing:.2em;color:var(--muted)}
+  .extract cite{display:block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-style:normal;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+
+  /* Lists */
+  ul,ol{margin:8px 0 18px 20px;color:var(--ink-soft)}
+  li{margin-bottom:6px}
+  ul li::marker{color:var(--ochre-dark)}
+
+  /* Tables */
+  .tbl-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--rule)}
+  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper)}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{background:var(--cream-2);font-family:'Figtree',sans-serif;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink)}
+  tr:last-child td{border-bottom:0}
+  td code{font-size:12px}
+
+  .sev-red{background:var(--blood);color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;letter-spacing:.08em;white-space:nowrap;display:inline-block}
+  .sev-orange{background:var(--ochre);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;letter-spacing:.08em;white-space:nowrap;display:inline-block}
+  .sev-yellow{background:#e8d58a;color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;letter-spacing:.08em;white-space:nowrap;display:inline-block}
+  .sev-green{background:var(--green);color:var(--cream);font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;letter-spacing:.08em;white-space:nowrap;display:inline-block}
+
+  /* Bloc section */
+  .block-header{display:flex;align-items:baseline;gap:18px;margin-top:80px;padding-top:24px;border-top:2px solid var(--ink)}
+  .block-header .num{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(44px,6vw,78px);color:var(--ochre);line-height:.9}
+  .block-header .content h2{margin:0;font-size:clamp(24px,3vw,36px)}
+  .block-header .content .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:4px}
+  .block-header .score-pill{margin-left:auto;align-self:center;font-family:'Fraunces',serif;font-size:28px;font-weight:600;color:var(--ink);background:var(--paper);padding:8px 16px;border:1px solid var(--ink);white-space:nowrap}
+  .block-header .score-pill .sfx{font-size:14px;color:var(--muted)}
+
+  /* TwoCol */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}
+  @media(max-width:720px){.two{grid-template-columns:1fr}}
+  .two .col{background:var(--paper);padding:20px;border:1px solid var(--rule)}
+  .two .col h4{margin-top:0}
+  .two .col.a{border-top:3px solid var(--green)}
+  .two .col.b{border-top:3px solid var(--blood)}
+
+  /* Final verdict */
+  .verdict{background:var(--ink);color:var(--cream);padding:48px 36px;margin:60px 0;border:0}
+  .verdict .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.25em;color:var(--ochre);margin-bottom:20px}
+  .verdict h2{color:var(--cream);margin-top:0;font-size:clamp(32px,4vw,54px)}
+  .verdict p{color:var(--cream-2);font-size:17px;line-height:1.6;margin-bottom:14px}
+  .verdict strong{color:var(--cream)}
+  .verdict .signature{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ochre);letter-spacing:.2em;margin-top:32px;padding-top:20px;border-top:1px solid #333}
+
+  /* Footer */
+  footer{margin-top:80px;padding-top:32px;border-top:1px solid var(--rule);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* Print */
+  @media print{
+    body{background:#fff}
+    .wrap{max-width:none;padding:0}
+    h2,h3,h4{page-break-after:avoid}
+    .block-header,.verdict,.tbl-wrap,.callout{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- COUVERTURE -->
+  <section class="cover">
+    <div class="meta">
+      <span>Audit stratégique · SEO · GEO/LLM · UX/UI · Conversion</span>
+      <span>21 avril 2026 · Confidentiel</span>
+    </div>
+    <h1>MMS<br>Monaco Mobilier<br>Service.</h1>
+    <hr class="rule-ochre">
+    <p class="lede">Un site vitrine qui sous-exploite un portefeuille clients d'exception. Vingt ans d'expertise réduits à trois pages WordPress génériques. Verdict sans complaisance, et le chemin pour le redresser.</p>
+    <a class="cover-url" href="https://mms-mc.com" target="_blank">https://mms-mc.com/</a>
+  </section>
+
+  <!-- RÉSUMÉ EXÉCUTIF -->
+  <h2>Résumé exécutif</h2>
+  <hr class="rule-ochre">
+
+  <p>MMS est une <strong>entreprise de 20 ans</strong> (fondée en 2005, pas "plus de 10 ans" comme le site l'affirme quatre fois) avec un portefeuille clients <strong>inaccessible à 95 % des concurrents monégasques</strong> : Yacht Club de Monaco par Foster + Partners, Conseil National, CHPG, AS Monaco, Aéroport Nice, Edmond de Rothschild, UBS, KPMG, Musée Bonnard, Hôtel de Paris. Le site web actuel <strong>ne vend rien de cette puissance</strong>.</p>
+
+  <h3>Cinq constats majeurs</h3>
+  <ol>
+    <li><strong>Contenu éditorial famélique.</strong> La home fait ~200 mots, les pages portfolio 30 à 50 mots. Aucune page ne passe 400 mots utiles. Les LLM (ChatGPT, Perplexity, Claude) ne peuvent rien extraire, et Google pondère au ras des pâquerettes.</li>
+    <li><strong>Portfolio prestige gâché.</strong> Le Centre d'entraînement AS Monaco — une référence capable de débloquer des mandats à 500k€ — est traité en 3 lignes + 4 images. Pas de storytelling, pas de chiffres, pas de cabinet d'architecte cité, pas de défi résolu. Le gâchis le plus coûteux du site.</li>
+    <li><strong>Bug critique dans le footer.</strong> L'adresse Google Maps du pied de page redirige vers <span class="mono">"1316 Abbot Kinney Blvd. Copenhagen CA 90291"</span> — une adresse de template oubliée. Pour une boîte monégasque qui vend du prestige, c'est une faute professionnelle visible sur <strong>chaque page</strong>.</li>
+    <li><strong>Invisibilité totale dans les LLM.</strong> Aucune citation sur les requêtes à intention commerciale ("meilleur fournisseur mobilier bureau Monaco", "aménagement espace entreprise Principauté luxe"). Les concurrents cités (Ars Dekor, Ynspir, Bureau & Création, AG Ollivier) ont 2 à 10× plus de contenu structuré.</li>
+    <li><strong>Dissonance positionnement.</strong> Le ton de la page équipe — "pipelette", "panettone", "summer body", "ponctualité relative" — jure frontalement avec la clientèle Foster+Partners / Rothschild / Gouvernement Princier. Soit on assume la proximité et on vend aux TPE, soit on vend au prestige et on efface ce registre.</li>
+  </ol>
+
+  <div class="callout danger">
+    <div class="kicker d">Verdict global</div>
+    <strong>À REFAIRE.</strong> L'optimisation de l'existant coûterait 70 % d'une refonte pour 30 % du résultat. La stack (WordPress 2020 + thème Bridge + Revolution Slider) n'accueille pas proprement les leviers GEO et schema avancés. Le contenu est à réécrire entièrement dans les deux scénarios — autant en profiter pour migrer vers une base moderne alignée au positionnement prestige. <strong>ROI attendu d'une refonte bien menée : 6 à 18 mois pour retrouver le leadership de visibilité locale que les 20 ans de références <em>devraient</em> déjà donner.</strong>
+  </div>
+
+  <!-- DASHBOARD SCORES -->
+  <h2>Score global</h2>
+  <hr class="rule-ochre">
+
+  <div class="score-grid">
+    <div class="score-cell total">
+      <div class="lbl">Total</div>
+      <div class="val">32<span class="den">/100</span></div>
+      <div class="bar"><span style="width:32%"></span></div>
+    </div>
+    <div class="score-cell">
+      <div class="lbl">Technique</div>
+      <div class="val">9<span class="den">/20</span></div>
+      <div class="bar"><span style="width:45%"></span></div>
+    </div>
+    <div class="score-cell">
+      <div class="lbl">SEO Google</div>
+      <div class="val">6<span class="den">/20</span></div>
+      <div class="bar"><span style="width:30%"></span></div>
+    </div>
+    <div class="score-cell">
+      <div class="lbl">GEO / LLM</div>
+      <div class="val">4<span class="den">/20</span></div>
+      <div class="bar"><span style="width:20%"></span></div>
+    </div>
+    <div class="score-cell">
+      <div class="lbl">UX / UI</div>
+      <div class="val">8<span class="den">/20</span></div>
+      <div class="bar"><span style="width:40%"></span></div>
+    </div>
+    <div class="score-cell">
+      <div class="lbl">Conversion</div>
+      <div class="val">5<span class="den">/20</span></div>
+      <div class="bar"><span style="width:25%"></span></div>
+    </div>
+  </div>
+
+  <p><strong class="verdict-bad">32/100.</strong> Un score faible pour une entreprise qui devrait tourner à 65+ au regard de son antériorité et de ses références. Le plafond actuel n'est pas lié au marché mais à la sous-exploitation digitale.</p>
+
+  <!-- BLOC 1 — TECHNIQUE -->
+  <div class="block-header">
+    <div class="num">01</div>
+    <div class="content">
+      <div class="kicker">Bloc 1</div>
+      <h2>Audit technique</h2>
+    </div>
+    <div class="score-pill">9<span class="sfx">/20</span></div>
+  </div>
+
+  <h3>Stack détectée</h3>
+  <p>WordPress (core récent a priori) + thème <strong>Bridge / Qode</strong> (référence <span class="mono">qodeinteractive.com</span> dans le footer) + <strong>Revolution Slider</strong> (lourd, CVE récurrents) + plugins Instagram Feed. Stack typique d'un projet 2020 livré par une agence locale (Banso.mc, crédité dans le pied de page). Fonctionnel, mais un boulet pour tout ce qui touche performance, schema avancé et contenu markdown.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Problème</th><th>Sévérité</th><th>Solution</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Adresse Google Maps bidon</strong> dans le footer (sur toutes les pages) : lien <span class="mono">goo.gl/maps</span> pointant vers "1316 Abbot Kinney Blvd. Copenhagen CA 90291"</td><td><span class="sev-red">BLOQUANT</span></td><td>Remplacer par un lien vers 2 Place Bougainvilliers, 98000 Monaco. À corriger dans l'heure.</td><td>15 min</td></tr>
+      <tr><td>2</td><td><strong>Pages catégories catalogue vides au crawl</strong> (<span class="mono">/bureaux/</span>, <span class="mono">/mobilier/</span>, <span class="mono">/luminaire/</span>, etc.) : le contenu produits est probablement injecté en JavaScript et non lu par les crawlers LLM qui ont des timeouts serrés</td><td><span class="sev-red">BLOQUANT</span></td><td>Rendre le contenu en HTML serveur (SSR) ou générer du texte descriptif crawlable par catégorie</td><td>Refonte</td></tr>
+      <tr><td>3</td><td><strong>Incohérence antériorité</strong> : le site répète "depuis plus de 10 ans" alors que la page équipe indique une fondation en 2005 (20 ans)</td><td><span class="sev-orange">MAJEUR</span></td><td>Harmoniser partout "depuis 2005" (plus fort et vérifiable)</td><td>30 min</td></tr>
+      <tr><td>4</td><td><strong>Images non optimisées</strong> : JPG aux dimensions arbitraires (195×300, 300×225), absence probable de WebP/AVIF, pas de <span class="mono">srcset</span> cohérent</td><td><span class="sev-orange">MAJEUR</span></td><td>Plugin WP (ShortPixel/Imagify) ou migration vers CDN image (Cloudinary, Bunny)</td><td>1-2 j</td></tr>
+      <tr><td>5</td><td><strong>Slider Revolution</strong> en header : vecteur de ralentissement LCP + historiquement vulnérable</td><td><span class="sev-orange">MAJEUR</span></td><td>Remplacer par un hero statique avec image optimisée + CSS</td><td>1 j</td></tr>
+      <tr><td>6</td><td><strong>llms.txt absent</strong> à la racine</td><td><span class="sev-yellow">MINEUR</span></td><td>Créer <span class="mono">/llms.txt</span> + pages Markdown des contenus piliers</td><td>2 h</td></tr>
+      <tr><td>7</td><td><strong>Doublons dans le portfolio</strong> : 3 fiches "Field" portant le même titre, logos clients affichés 2 à 3 fois</td><td><span class="sev-yellow">MINEUR</span></td><td>Nettoyage éditorial (dédoublonner, renommer)</td><td>2 h</td></tr>
+      <tr><td>8</td><td><strong>Fraîcheur éditoriale</strong> : aucun article daté 2025 ou 2026 visible, posts Instagram arrêtés en 2024</td><td><span class="sev-orange">MAJEUR</span></td><td>Cadence de publication mensuelle minimum sur le site + réactiver Instagram</td><td>Récurrent</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout warning">
+    <div class="kicker w">À corriger avant tout</div>
+    L'adresse fausse en footer est le genre de détail qu'un prospect Monégasque exigeant repère en 3 secondes. Sur un site qui vend du prestige, c'est <strong>indéfendable</strong>. À traiter aujourd'hui, refonte ou pas.
+  </div>
+
+  <!-- BLOC 2 — SEO GOOGLE -->
+  <div class="block-header">
+    <div class="num">02</div>
+    <div class="content">
+      <div class="kicker">Bloc 2</div>
+      <h2>SEO Google classique</h2>
+    </div>
+    <div class="score-pill">6<span class="sfx">/20</span></div>
+  </div>
+
+  <p>Le site se positionne sur des requêtes directes de marque ("Monaco Mobilier Service", "MMS Monaco") et en bord de première page sur <em>"mobilier professionnel bureaux Monaco"</em>. Au-delà, il disparaît. Le content gap avec les meilleurs concurrents est massif.</p>
+
+  <h3>Diagnostic page par page</h3>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Page</th><th>Volume de contenu</th><th>KW principal</th><th>Problème dominant</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Home</strong></td><td>~200 mots utiles</td><td>"mobilier professionnel Monaco"</td><td>Value prop molle ("Ensemble, imaginons vos espaces"), pas de KW principal dominant en H1/H2</td><td>5/10</td></tr>
+      <tr><td><strong>Catalogue</strong></td><td>~100 mots</td><td>(aucun)</td><td>Page de redirection visuelle, aucun texte indexable pour positionner sur "catalogue mobilier bureau Monaco"</td><td>3/10</td></tr>
+      <tr><td><strong>Catégories</strong> (bureaux, mobilier, luminaire…)</td><td>~80 mots dupliqués</td><td>(aucun)</td><td>11 pages quasi-identiques avec le même paragraphe de 80 mots = duplicate content pour Google</td><td>2/10</td></tr>
+      <tr><td><strong>Portfolio items</strong> (x40+)</td><td>30-50 mots</td><td>nom du client</td><td>Aucune description narrative, pas de schema Article/Project, pas d'alt images descriptifs</td><td>3/10</td></tr>
+      <tr><td><strong>Notre équipe</strong></td><td>~900 mots (la plus dense)</td><td>(brand)</td><td>Bon contenu E-E-A-T mais ton dissonant, pas de data structurée Person, pas de lien vers LinkedIn des personnes</td><td>6/10</td></tr>
+      <tr><td><strong>Références</strong></td><td>~150 mots + logos</td><td>"réalisations mobilier Monaco"</td><td>Le paragraphe narratif est bon (Foster+Partners, Conseil National…) mais noyé. Duplication massive des logos.</td><td>4/10</td></tr>
+      <tr><td><strong>Contact</strong></td><td>~100 mots</td><td>(local)</td><td>Pas de schema LocalBusiness visible, horaires en texte uniquement, pas de Google Map embed</td><td>4/10</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Schema.org — état estimé</h3>
+  <p>Sur la base du rendu HTML crawlé, les schemas suivants <strong>sont probablement absents ou minimaux</strong> :</p>
+  <ul>
+    <li><code>Organization</code> + <code>sameAs</code> (LinkedIn, Instagram, Facebook, Designbest)</li>
+    <li><code>LocalBusiness</code> avec <code>geo</code>, <code>openingHours</code>, <code>telephone</code>, <code>address</code></li>
+    <li><code>CreativeWork</code> ou <code>Project</code> pour les fiches portfolio</li>
+    <li><code>FAQPage</code> (la page FAQ n'existe simplement pas)</li>
+    <li><code>BreadcrumbList</code></li>
+    <li><code>Person</code> pour chaque membre de l'équipe avec <code>jobTitle</code>, <code>worksFor</code></li>
+  </ul>
+
+  <h3>Content gap vs concurrents</h3>
+  <p>Les concurrents qui captent la visibilité sur le marché prestige Monaco-06 ne sont <strong>pas</strong> ceux qu'on attend. Ce ne sont pas forcément les mieux équipés opérationnellement, mais ceux qui produisent du contenu long et structuré :</p>
+  <ul>
+    <li><strong>arsdekor.mc</strong> — pages de 1500-3000 mots, FAQ, chiffres (25+ experts, Andrea Leorina, 24 ans d'expérience), glossaire implicite du design monégasque</li>
+    <li><strong>ynspir.com</strong> — pages thématiques multiples (Monaco / Nice / Côte d'Azur), architecture d'intérieur déclinée par typologie</li>
+    <li><strong>agollivier.mc</strong> — rédactionnel clair par persona (direction, open-space, collaboratif)</li>
+    <li><strong>bureauetcreation.com</strong> — inventaire produit exhaustif en texte, 40 ans d'antériorité mise en avant</li>
+  </ul>
+  <p>MMS n'a <strong>aucune</strong> page pilier comparable. Pas de "guide de l'aménagement bureau à Monaco". Pas de "comment choisir son fauteuil de direction". Pas de "5 erreurs à éviter pour aménager un open-space". Rien.</p>
+
+  <!-- BLOC 3 — GEO / LLM -->
+  <div class="block-header">
+    <div class="num">03</div>
+    <div class="content">
+      <div class="kicker">Bloc 3 · différenciant</div>
+      <h2>GEO / AEO — visibilité dans les LLM</h2>
+    </div>
+    <div class="score-pill">4<span class="sfx">/20</span></div>
+  </div>
+
+  <p>C'est <strong>la dimension la plus dégradée</strong>. En 2026, l'overlap entre le top Google et les sources citées par les LLM (ChatGPT, Perplexity, Claude, Gemini, AI Overviews) est passé sous 20 %. MMS n'est cité nulle part sur les requêtes commerciales — ni dans le corpus d'entraînement (présence externe très faible), ni en retrieval live (contenu non citable).</p>
+
+  <h3>Problèmes structurels</h3>
+
+  <div class="two">
+    <div class="col b">
+      <h4>Contenu non citable</h4>
+      <ul>
+        <li>Pas de définitions claires ("MMS est… fondé en… spécialisé dans…")</li>
+        <li>Pas d'inverted pyramid — les réponses ne sont jamais en première phrase</li>
+        <li>Aucune FAQ</li>
+        <li>Aucun glossaire, aucune page pilier</li>
+        <li>Aucune donnée chiffrée (nombre de projets livrés, m² aménagés, délai moyen, valeur moyenne d'un mandat…)</li>
+        <li>Pas d'auteur nommé E-E-A-T sur la moindre page (hormis équipe)</li>
+      </ul>
+    </div>
+    <div class="col b">
+      <h4>Distribution off-site faiblarde</h4>
+      <ul>
+        <li>Pas de fiche Wikipedia (éligibilité discutable mais envisageable)</li>
+        <li>Pas de fiche Wikidata (<em>accessible, gratuite, oubliée</em>)</li>
+        <li>Aucune présence Reddit (sub r/monaco, r/france)</li>
+        <li>Aucun post long-form LinkedIn des dirigeants (Jonathan Guez, Muriel Sosso, Dominique Girard)</li>
+        <li>Pas de YouTube avec transcripts</li>
+        <li>Pas d'interview / podcast / média sectoriel (Monaco Matin, Monaco Tribune, JDN, BDM)</li>
+        <li>Fiche Facebook quasi morte : 51 likes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="extract">
+    Ensemble, imaginons vos espaces.
+    <cite>Baseline home — ne dit rien de ce que vous faites, ni pour qui, ni où</cite>
+  </div>
+  <p>Cette baseline est une phrase-slogan interchangeable avec <strong>n'importe quel</strong> concurrent. Un LLM ne peut pas en tirer une information discriminante. À comparer avec la phrase "MMS est le partenaire d'aménagement mobilier de référence à Monaco depuis 2005, référencé par Foster + Partners pour le Yacht Club de Monaco et par les institutions monégasques (CHPG, Conseil National, Aéroport Nice)."</p>
+
+  <h3>Test GEO opérationnel</h3>
+  <p>Simulation sur la base des résultats de recherche Google (proxy fiable pour le comportement retrieval des LLM, enrichie par la connaissance des sources que les moteurs génératifs privilégient). À rejouer proprement sur ChatGPT, Perplexity, Claude et Gemini une fois l'audit validé.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Question cible</th><th>MMS cité ?</th><th>Sources dominantes</th><th>Type de contenu qui gagne</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>"Meilleur fournisseur mobilier de bureau à Monaco"</td><td><span class="sev-red">NON</span></td><td>AG Ollivier, Bureau & Création, Optima Groupe, SRE Monaco</td><td>Pages catégorie textuelles</td></tr>
+      <tr><td>2</td><td>"Aménagement bureau entreprise luxe Monaco"</td><td><span class="sev-red">NON</span></td><td>Ars Dekor, Ynspir, R-House Design, Luxoria</td><td>Pages piliers longues + cas clients</td></tr>
+      <tr><td>3</td><td>"Spécialiste mobilier professionnel Monaco Alpes-Maritimes"</td><td><span class="sev-yellow">PARTIEL</span></td><td>Bureau & Création, MMS (extrait faible), Optima</td><td>Home + fiches annuaires</td></tr>
+      <tr><td>4</td><td>"Qui a aménagé le Yacht Club de Monaco ?"</td><td><span class="sev-red">NON</span></td><td>Foster + Partners (couvrant le design), articles de presse</td><td>Wikipedia, Foster+Partners.com, ArchDaily</td></tr>
+      <tr><td>5</td><td>"Fournisseur USM Haller Monaco"</td><td><span class="sev-yellow">PARTIEL</span></td><td>USM.com (dealer locator), annuaires</td><td>Site officiel marque</td></tr>
+      <tr><td>6</td><td>"Aménagement cabinet médical Monaco CHPG"</td><td><span class="sev-red">NON</span></td><td>Mobilier médical Hervé, Haelvoet, médias sectoriels</td><td>Pages techniques santé</td></tr>
+      <tr><td>7</td><td>"Cloison amovible bureau Monaco"</td><td><span class="sev-red">NON</span></td><td>Clestra, Acova, distributeurs spécialisés</td><td>Comparatifs produits</td></tr>
+      <tr><td>8</td><td>"MMS Monaco avis clients"</td><td><span class="sev-yellow">PARTIEL</span></td><td>Designbest.com, Annuaire Monaco, LinkedIn</td><td>Fiches tierces sans avis</td></tr>
+      <tr><td>9</td><td>"Dépositaire Bulthaup cuisine Monaco"</td><td><span class="sev-yellow">PARTIEL</span></td><td>Bulthaup.com (dealer), MMS (site équipe)</td><td>Site officiel marque</td></tr>
+      <tr><td>10</td><td>"Meilleure agence agencement Côte d'Azur"</td><td><span class="sev-red">NON</span></td><td>Ars Dekor, Ynspir, R-House, Luxoria, Cabinets architecte Nice</td><td>Pages éditoriales longues</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>Bilan.</strong> MMS n'apparaît jamais en première intention sur une requête commerciale. Le site ressort uniquement en requête <em>brand</em> ("MMS Monaco"), ce qui confirme qu'il joue son rôle de carte de visite mais <strong>pas</strong> son rôle d'acquisition.</p>
+
+  <h3>10 actions prioritaires pour devenir citable</h3>
+  <ol>
+    <li><strong>Créer une page "À propos" dense</strong> (1200 mots) avec définition d'entité claire en première phrase, dates, chiffres vérifiables, lien LinkedIn des dirigeants</li>
+    <li><strong>Créer une FAQ de 20 questions réelles</strong> (utiliser AlsoAsked + questions tapées par architectes, DAF, office managers)</li>
+    <li><strong>Créer 5 pages piliers</strong> : (i) Aménagement bureau Monaco, (ii) Mobilier collectivités PACA, (iii) Cuisine Bulthaup Côte d'Azur, (iv) Outdoor Dedon / Tribù Monaco, (v) Cloisons amovibles bureaux</li>
+    <li><strong>Réécrire les 40 fiches portfolio en storytelling</strong> (300-500 mots par projet : contexte, défi, cabinet architecte, produits sélectionnés, résultat chiffré)</li>
+    <li><strong>Publier un llms.txt</strong> à la racine, listant les pages piliers et définitions principales</li>
+    <li><strong>Implémenter Schema.org complet</strong> : Organization + LocalBusiness + Person (équipe) + CreativeWork (portfolio) + FAQPage + BreadcrumbList</li>
+    <li><strong>Créer fiche Wikidata</strong> (éligibilité forte via Foster+Partners, CHPG, Conseil National) et, si possible, une entrée Wikipedia "Mobilier à Monaco" où MMS apparaît comme acteur</li>
+    <li><strong>Plan LinkedIn des dirigeants</strong> : 2 posts/semaine de Jonathan Guez et Muriel Sosso, format long-form (1200-2000 caractères) avec études de cas et vision métier</li>
+    <li><strong>Pitch médias sectoriels</strong> : Monaco Matin, Monaco Tribune, JDN design, Officiel du Design, Intramuros, Ideat — angle "20 ans de mobilier à Monaco"</li>
+    <li><strong>Chaîne YouTube minimale</strong> : 6 vidéos/an de visite guidée de projets livrés, avec transcript publié (indexable par les LLM)</li>
+  </ol>
+
+  <!-- BLOC 4 — UX/UI -->
+  <div class="block-header">
+    <div class="num">04</div>
+    <div class="content">
+      <div class="kicker">Bloc 4</div>
+      <h2>UX / UI Design</h2>
+    </div>
+    <div class="score-pill">8<span class="sfx">/20</span></div>
+  </div>
+
+  <h3>Test des 5 secondes</h3>
+  <p>Un visiteur qui arrive sur la home comprend : "c'est du mobilier, quelque chose à Monaco, il y a des catégories bureaux/mobilier/accessoires/luminaires". Il ne comprend <strong>pas</strong> : à qui s'adresse le site (architecte ? entreprise ? particulier ?), le niveau de gamme, le positionnement prix, la différenciation vs les 8 concurrents locaux, la typologie de projets.</p>
+
+  <h3>Diagnostic design</h3>
+  <ul>
+    <li><strong>Template générique Qode/Bridge</strong> (theme WordPress vendu à 25 000+ exemplaires). Aesthetic banale "design portfolio 2019-2020", sans signature visuelle. Impossible de distinguer MMS d'une agence web lambda.</li>
+    <li><strong>Hiérarchie visuelle plate</strong> : tous les blocs home ont le même poids, l'œil glisse sans se fixer.</li>
+    <li><strong>Typographie sans caractère</strong> : sans-serif standard + italique pour les titres, aucune combinaison distinctive.</li>
+    <li><strong>Photos inégales</strong> : certaines pro (Radisson, AS Monaco, Conseil National), d'autres amateur (Instagram posts dans la home). Mélange des registres.</li>
+    <li><strong>Aucune ambiance Monaco</strong> : le site pourrait aussi bien être celui d'une boutique à Lille ou Mulhouse. Le terroir prestige monégasque est invisible.</li>
+    <li><strong>Mobile probablement responsive</strong> (theme moderne) mais les menus à 4 items ne guident pas le parcours.</li>
+    <li><strong>Accessibilité</strong> : contraste blanc-sur-image en header très faible (à mesurer), pas de focus states testés, boutons "Découvrir" sans contexte.</li>
+  </ul>
+
+  <h3>Dissonance de ton — le plus gros problème UX</h3>
+  <div class="extract">
+    Sa ponctualité légendaire ? Disons qu'elle est… un peu relative. Mais une chose est sûre : il honore toujours ses dires et ses rendez-vous, même s'il faut parfois prévoir un café en attendant !
+    <cite>Page équipe — bio Jonathan Guez, directeur commercial</cite>
+  </div>
+  <div class="extract">
+    Ah, et si vous l'entendez parler un peu trop longtemps près de la machine à café… c'est normal : pipelette assumée.
+    <cite>Page équipe — bio Christelle, commerciale</cite>
+  </div>
+  <p>Ces phrases sont charmantes <strong>dans un contexte de bar de quartier</strong>. Elles sont <strong>toxiques</strong> quand votre prospect est un directeur de patrimoine Rothschild ou un Office Manager du Cabinet Foster+Partners qui engage 600k€ d'aménagement. Le décideur se dit : "si le commercial est en retard et la commerciale trop bavarde, quid de ma livraison ?". Ce ton auto-dérisoire <strong>dévalorise</strong> le prix premium que le positionnement devrait justifier.</p>
+  <p>Deux options cohérentes :</p>
+  <ul>
+    <li><strong>Positionnement prestige pur</strong> (recommandé vu les références) : bios professionnelles, sobres, avec parcours chiffré et réalisations emblématiques attribuées. Ton Monaco / Christie's.</li>
+    <li><strong>Positionnement mid-market proximité</strong> : garder le ton chaleureux mais assumer de viser les TPE/PME locales, pas les signatures d'architecture. Ce n'est pas ce que la clientèle existante suggère.</li>
+  </ul>
+
+  <!-- BLOC 5 — CONVERSION -->
+  <div class="block-header">
+    <div class="num">05</div>
+    <div class="content">
+      <div class="kicker">Bloc 5</div>
+      <h2>Conversion & business</h2>
+    </div>
+    <div class="score-pill">5<span class="sfx">/20</span></div>
+  </div>
+
+  <h3>Tunnel actuel</h3>
+  <p>Home → Catalogue (grille de 11 catégories) → Catégorie vide → <strong>cul-de-sac</strong> → retour home → "Nous contacter". Le visiteur architecte qui cherche une référence USM précise, un fauteuil Vitra ou une solution acoustique ne trouve pas d'information, pas de fiche, pas de pricing, pas de délai indicatif. Il quitte et contacte un concurrent.</p>
+
+  <h3>Points de friction</h3>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Friction</th><th>Impact</th><th>Correctif</th></tr></thead>
+    <tbody>
+      <tr><td>Aucune segmentation par persona (Architecte / DAF-Office Manager / Particulier / Pro santé)</td><td><span class="sev-red">Majeur</span></td><td>4 entrées persona dès la home avec parcours dédiés</td></tr>
+      <tr><td>Aucun CTA intermédiaire : uniquement "Nous contacter" (générique)</td><td><span class="sev-red">Majeur</span></td><td>CTAs contextuels : "Recevoir le catalogue USM", "Demander une visite showroom", "Simuler un aménagement open-space"</td></tr>
+      <tr><td>Aucune indication de gamme de prix / budget moyen / fourchette projet</td><td><span class="sev-orange">Moyen</span></td><td>Filtre par budget type ou "projets à partir de X€"</td></tr>
+      <tr><td>Aucun témoignage client nominatif, daté, photographié</td><td><span class="sev-red">Majeur</span></td><td>5 à 8 témoignages vidéo ou texte avec nom, titre, entreprise, chiffre de projet</td></tr>
+      <tr><td>Aucune preuve sociale chiffrée (nombre de projets, m² livrés, nombre d'années)</td><td><span class="sev-orange">Moyen</span></td><td>Bandeau chiffres clés : "20 ans · 500+ projets · 40 000 m² aménagés · 12 cabinets d'architecture partenaires"</td></tr>
+      <tr><td>Pas de garantie / SAV / engagement visible</td><td><span class="sev-yellow">Mineur</span></td><td>Bloc "Nos engagements" : délais, assurance, SAV, pose certifiée</td></tr>
+      <tr><td>Newsletter orpheline ("inscrivez-vous" sans bénéfice défini)</td><td><span class="sev-yellow">Mineur</span></td><td>Lead magnet : "Guide 2026 — Aménager un bureau à Monaco : 8 cas concrets" (PDF)</td></tr>
+      <tr><td>Formulaire contact : pas de qualification (budget, deadline, typologie de projet)</td><td><span class="sev-orange">Moyen</span></td><td>Formulaire intelligent en 4 étapes (type de projet → surface → délai → coordonnées)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Preuve sociale sous-exploitée</h3>
+  <p>Les 24 logos clients sont là. Mais ils sont <strong>affichés en doublons</strong> (certains 2-3 fois), mélangés sans ordre, sans date, sans type de projet, sans lien vers une étude de cas. C'est comme si Ferrari affichait ses clients mais refusait de dire ce qu'ils ont acheté.</p>
+
+  <p><strong>Sur le papier, MMS a le portfolio que 90 % des concurrents voudraient avoir.</strong> En pratique, le site le traduit en <em>logos-galerie</em> au lieu de <em>storytelling d'expertise</em>. C'est la plus grande perte de valeur du dispositif actuel.</p>
+
+  <!-- BLOC 6 — STRATÉGIE -->
+  <div class="block-header">
+    <div class="num">06</div>
+    <div class="content">
+      <div class="kicker">Bloc 6</div>
+      <h2>Stratégie — Refonte vs Optimisation</h2>
+    </div>
+    <div class="score-pill">—</div>
+  </div>
+
+  <div class="two">
+    <div class="col a">
+      <h4>Scénario A — OPTIMISATION</h4>
+      <p><strong>Principe :</strong> garder la stack WordPress + Bridge, corriger les bugs critiques, réécrire le contenu dans le back existant.</p>
+      <p><strong>Actions majeures :</strong></p>
+      <ul>
+        <li>Correction footer Google Maps + harmonisation antériorité (1 j)</li>
+        <li>Réécriture 40 fiches portfolio + 11 pages catégories (15-20 j)</li>
+        <li>Création FAQ + 5 pages piliers + page À propos + glossaire (10 j)</li>
+        <li>Implémentation schema.org avancé via plugin + ajustements theme (3-5 j)</li>
+        <li>Optimisation images + migration CDN + correction Revslider (3 j)</li>
+        <li>Rafraîchissement direction artistique sans refonte (nouvelle palette, typo, retouches CSS) (5 j)</li>
+        <li>Création <span class="mono">llms.txt</span> + fiche Wikidata + plan LinkedIn (3 j)</li>
+      </ul>
+      <p><strong>Budget estimé :</strong> 12 000 - 18 000 € HT</p>
+      <p><strong>Délai :</strong> 2 à 3 mois</p>
+      <p><strong>Impact attendu 12 mois :</strong> +40 à 60 % de trafic organique, taux de citabilité LLM passant de ~0 % à 15-25 %. Mais <em>plafond structurel</em> : stack datée qui bridera les futures évolutions.</p>
+    </div>
+
+    <div class="col b">
+      <h4>Scénario B — REFONTE</h4>
+      <p><strong>Principe :</strong> nouvelle architecture + nouvelle stack + nouveau design + contenu réécrit en parallèle. Positionnement prestige assumé.</p>
+      <p><strong>Stack recommandée :</strong> Astro ou Next.js 15 en SSG/ISR + Sanity.io (headless CMS) ou Webflow premium si l'équipe ne veut pas gérer un CMS code. Hébergement Vercel ou Netlify. CDN image Cloudinary.</p>
+      <p><strong>Nouvelle architecture :</strong></p>
+      <ul>
+        <li>Home <strong>persona-driven</strong> : 4 entrées (Architectes & prescripteurs / Entreprises & institutions / Collectivités santé / Particuliers premium)</li>
+        <li>Pages piliers par <strong>univers</strong> (bureaux, collectivités, outdoor, cuisine, santé) + pages <strong>marques</strong> (USM, Bulthaup, Dedon, Tribù, Vitra, Edra…)</li>
+        <li>Portfolio en <strong>études de cas immersives</strong> (parcours scroll narratif, chiffres, architecte cité, photos pleine largeur, vidéo optionnelle)</li>
+        <li>Journal éditorial mensuel (3-4 articles/mois)</li>
+        <li>Showroom virtuel ou visite guidée vidéo</li>
+        <li>Espace prescripteur (login architectes : fiches techniques, plans CAD, devis rapides)</li>
+      </ul>
+      <p><strong>Design direction :</strong> éditorial-magazine luxe, inspiré de sites comme Foster+Partners, Molteni Group, Flos, Cassina. Noir / ivoire / une couleur signature + photographie pleine largeur + typo serif de caractère. Voir références visuelles Vitra, Dedon, Cassina, Paola Lenti pour le registre.</p>
+      <p><strong>Plan de migration SEO :</strong> audit des 100+ URLs actuelles → mapping 301 → préservation du jus via sitemap + soumission GSC + monitoring 90 j.</p>
+      <p><strong>Budget estimé :</strong> 28 000 - 45 000 € HT (bas pour stack Webflow premium + design in-house, haut pour stack headless sur-mesure + direction artistique externe)</p>
+      <p><strong>Délai :</strong> 4 à 6 mois (travail en parallèle contenu + dev)</p>
+      <p><strong>Impact attendu 18 mois :</strong> +150 à 250 % trafic organique, taux de citabilité LLM 40-60 %, leads qualifiés +80 à 120 %. Surtout : un site <em>à la hauteur</em> des références clients et utilisable comme outil de prospection active (pitch architectes, Monaco Yacht Show, salons Maison&Objet).</p>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <h2>Roadmap priorisée</h2>
+  <hr class="rule-ochre">
+  <p>Matrice ICE (Impact × Confidence × Ease, noté /10 chacun, total /1000). Trié par priorité.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Action</th><th>Bloc</th><th>I</th><th>C</th><th>E</th><th>ICE</th><th>KPI</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Corriger l'adresse Google Maps du footer</td><td>Tech</td><td>9</td><td>10</td><td>10</td><td><strong>900</strong></td><td>Lien correct sur toutes les pages</td></tr>
+      <tr><td>2</td><td>Harmoniser "depuis 2005" partout (supprimer "plus de 10 ans")</td><td>SEO/UX</td><td>7</td><td>10</td><td>10</td><td><strong>700</strong></td><td>0 occurrence de "10 ans"</td></tr>
+      <tr><td>3</td><td>Réécrire la baseline home + value prop en H1</td><td>UX/SEO</td><td>9</td><td>9</td><td>8</td><td><strong>648</strong></td><td>Taux de bounce -20 %</td></tr>
+      <tr><td>4</td><td>Créer page "À propos" dense (1200 mots, entité claire, chiffres)</td><td>GEO</td><td>10</td><td>9</td><td>7</td><td><strong>630</strong></td><td>Impressions KW brand +100 %</td></tr>
+      <tr><td>5</td><td>Réécrire fiche Yacht Club Monaco en étude de cas narrative (500 mots, Foster+Partners cité, photos, chiffres)</td><td>GEO/Conv</td><td>10</td><td>9</td><td>7</td><td><strong>630</strong></td><td>Page en top 5 Google "aménagement Yacht Club Monaco"</td></tr>
+      <tr><td>6</td><td>Créer FAQ 20 questions réelles</td><td>GEO/SEO</td><td>9</td><td>8</td><td>8</td><td><strong>576</strong></td><td>3 citations minimum dans AI Overviews à 6 mois</td></tr>
+      <tr><td>7</td><td>Schema.org complet (Organization, LocalBusiness, Person, CreativeWork, FAQPage, Breadcrumb)</td><td>Tech/SEO</td><td>8</td><td>9</td><td>7</td><td><strong>504</strong></td><td>Rich results dans GSC +50</td></tr>
+      <tr><td>8</td><td>Créer llms.txt + fiche Wikidata</td><td>GEO</td><td>7</td><td>8</td><td>9</td><td><strong>504</strong></td><td>Fichiers live + Wikidata Q-number obtenu</td></tr>
+      <tr><td>9</td><td>Réécrire les 40 fiches portfolio (storytelling, 300-500 mots)</td><td>SEO/Conv</td><td>10</td><td>8</td><td>5</td><td><strong>400</strong></td><td>Trafic portfolio +150 %</td></tr>
+      <tr><td>10</td><td>Retirer / réécrire les bios "copain-café" de la page équipe pour cohérence prestige</td><td>UX/Conv</td><td>8</td><td>9</td><td>5</td><td><strong>360</strong></td><td>Qualitatif — mesuré via tests utilisateurs</td></tr>
+      <tr><td>11</td><td>Bandeau chiffres clés home (20 ans · 500+ projets · 40 000 m²)</td><td>Conv</td><td>8</td><td>7</td><td>6</td><td><strong>336</strong></td><td>CVR contact +15 %</td></tr>
+      <tr><td>12</td><td>Plan LinkedIn dirigeants : 2 posts/sem, long-form</td><td>GEO/Distr</td><td>9</td><td>7</td><td>5</td><td><strong>315</strong></td><td>Impressions LinkedIn x3 en 6 mois</td></tr>
+      <tr><td>13</td><td>5 témoignages clients nominatifs (vidéo ou texte + photo + chiffres)</td><td>Conv</td><td>9</td><td>7</td><td>4</td><td><strong>252</strong></td><td>CVR formulaire +25 %</td></tr>
+      <tr><td>14</td><td>Créer 5 pages piliers (Aménagement bureau Monaco, Mobilier collectivités, Bulthaup Côte d'Azur, Outdoor Dedon/Tribù, Cloisons amovibles)</td><td>SEO/GEO</td><td>10</td><td>7</td><td>3</td><td><strong>210</strong></td><td>3 pages en top 10 à 12 mois</td></tr>
+      <tr><td>15</td><td>Segmentation home par persona (4 entrées)</td><td>UX/Conv</td><td>8</td><td>6</td><td>4</td><td><strong>192</strong></td><td>Temps page +30 %</td></tr>
+      <tr><td>16</td><td>Optimisation images (WebP/AVIF + CDN)</td><td>Tech</td><td>6</td><td>8</td><td>4</td><td><strong>192</strong></td><td>LCP &lt; 2.5s sur 75 % des pages</td></tr>
+      <tr><td>17</td><td>Remplacer Revolution Slider par hero statique</td><td>Tech</td><td>7</td><td>7</td><td>4</td><td><strong>196</strong></td><td>Web Vitals verts</td></tr>
+      <tr><td>18</td><td>Pitch médias sectoriels (Monaco Matin, Ideat, Intramuros)</td><td>Distr</td><td>8</td><td>5</td><td>4</td><td><strong>160</strong></td><td>2 parutions à 12 mois</td></tr>
+      <tr><td>19</td><td>Chaîne YouTube : 6 visites de projets/an avec transcripts</td><td>Distr/GEO</td><td>7</td><td>5</td><td>3</td><td><strong>105</strong></td><td>1000 vues cumulées an 1</td></tr>
+      <tr><td>20</td><td>Refonte complète (scénario B)</td><td>Stratégie</td><td>10</td><td>7</td><td>2</td><td><strong>140</strong></td><td>Cf. scénario B</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>Conseil d'exécution.</strong> Si le choix se porte sur la refonte (recommandée), commencer par les actions 1 à 3 dans la semaine (coût marginal, impact immédiat) en parallèle du lancement du projet de refonte. Les actions 4 à 8 sont à intégrer dans le cahier des charges de refonte (elles seront livrées avec elle). Les actions 12, 18, 19 sont indépendantes et peuvent démarrer immédiatement.</p>
+
+  <!-- RECOMMANDATION FINALE -->
+  <div class="verdict">
+    <div class="kicker">Recommandation finale</div>
+    <h2>Refaire.<br>Et assumer le positionnement que vingt ans de références imposent déjà.</h2>
+    <p>Le scénario A (optimisation) donnerait un site <em>correct</em> pour ~15 k€. Le scénario B (refonte) donnerait un site <strong>utilisable en outil de prospection active</strong> pour ~35 k€. La différence des 20 k€ est dérisoire face à <strong>un seul mandat de type Yacht Club, CHPG ou siège social bancaire</strong> — qui pèse 150 à 600 k€ de marge brute. Le site actuel ne capte aucun de ces mandats en entrant (ils arrivent par réputation et appels d'offres). Un site refait en capterait mécaniquement <strong>1 à 3 par an</strong> via prescription architectes et référencement qualifié. Le ROI est démontrable dès le premier trimestre post-lancement.</p>
+    <p>Le contenu est de toute façon à réécrire entièrement. La stack actuelle ne permet pas d'embarquer proprement les leviers GEO qui vont dominer la visibilité d'ici 2027. Le design actuel ne reflète pas le positionnement prestige que la clientèle existante <em>valide déjà</em>.</p>
+    <p><strong>Autrement dit : MMS a le plus dur (la réputation, les références, l'équipe). Il lui manque la vitrine digitale qui en découle logiquement. La refonte n'est pas un projet marketing, c'est un rattrapage de dette patrimoniale.</strong></p>
+    <div class="signature">Audit livré le 21 avril 2026 — par Claude · skill audit-site-web</div>
+  </div>
+
+  <footer>
+    <span>MMS — Monaco Mobilier Service</span>
+    <span>Audit Confidentiel · Ne pas diffuser sans accord</span>
+  </footer>
+
+</div>
+</body>
+</html>

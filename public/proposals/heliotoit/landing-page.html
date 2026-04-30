@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelioToit énergie — Le solaire qui dure 25 ans, pas 5 hivers</title>
+<meta name="description" content="Installateur photovoltaïque résidentiel premium sur la Côte d'Azur. Méthode Conciergerie Solaire. Engagement de performance 5 ans. Matériel Dualsun fabriqué en France.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Palette — Côte d'Azur éditoriale */
+  --sand: #FBF7F0;
+  --sand-deep: #F4EDE0;
+  --cream: #FFFFFF;
+  --ink: #0F1B2D;
+  --ink-soft: #2C3848;
+  --ink-muted: #6B7280;
+  --gold: #B8893E;
+  --gold-soft: #D9B069;
+  --terracotta: #C76842;
+  --sea: #1B4A6B;
+  --sea-light: #4A7B96;
+  --line: #E6DCC8;
+  --line-strong: #C9B996;
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Manrope', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--sand);
+  color: var(--ink);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+img { max-width: 100%; display: block; }
+
+/* ─── Typo system ─── */
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); }
+.eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.lead { font-family: var(--serif); font-size: 22px; line-height: 1.45; color: var(--ink-soft); font-weight: 300; font-style: italic; }
+
+/* ─── Container ─── */
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+/* ─── Nav ─── */
+nav.top {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(251, 247, 240, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+nav.top .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 18px; padding-bottom: 18px; }
+.logo { font-family: var(--serif); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+.logo .h-mark { color: var(--gold); font-style: italic; }
+.nav-links { display: flex; gap: 36px; font-size: 14px; }
+.nav-links a { color: var(--ink-soft); transition: color .2s; }
+.nav-links a:hover { color: var(--gold); }
+.btn-primary, .btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 24px; font-size: 14px; font-weight: 600;
+  border-radius: 2px; transition: all .25s ease;
+  letter-spacing: 0.02em;
+}
+.btn-primary { background: var(--ink); color: var(--sand); }
+.btn-primary:hover { background: var(--gold); color: var(--ink); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--sand); }
+.btn-arrow::after { content: "→"; font-size: 16px; transition: transform .25s; }
+.btn-arrow:hover::after { transform: translateX(4px); }
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+/* ─── Hero ─── */
+.hero { position: relative; padding: 120px 0 100px; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; top: -150px; right: -150px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 137, 62, 0.15) 0%, transparent 65%);
+  z-index: 0;
+}
+.hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; position: relative; z-index: 1; }
+.hero-eyebrow-row { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+.hero-eyebrow-row::after { content: ""; flex: 1; height: 1px; background: var(--line-strong); max-width: 80px; }
+.hero h1 {
+  font-size: clamp(42px, 6vw, 84px);
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+.hero h1 .accent { font-style: italic; color: var(--gold); font-weight: 400; }
+.hero h1 .strike { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--ink-muted); font-weight: 300; }
+.hero p.sub { font-size: 19px; color: var(--ink-soft); max-width: 560px; margin-bottom: 44px; line-height: 1.55; }
+.hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 60px; }
+.hero-trust { display: flex; gap: 40px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--line); }
+.trust-item .num { font-family: var(--serif); font-size: 32px; font-weight: 400; color: var(--ink); display: block; line-height: 1; margin-bottom: 6px; letter-spacing: -0.02em; }
+.trust-item .lab { font-size: 12px; color: var(--ink-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+.hero-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, #f4ede0 0%, #e8d8b8 100%);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.hero-visual::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 20px,
+      rgba(15, 27, 45, 0.04) 20px,
+      rgba(15, 27, 45, 0.04) 22px
+    );
+}
+.hero-visual-card {
+  position: absolute; bottom: 32px; left: 32px; right: 32px;
+  background: var(--cream);
+  padding: 24px;
+  border-left: 3px solid var(--gold);
+}
+.hero-visual-card .c-eyebrow { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+.hero-visual-card .c-title { font-family: var(--serif); font-size: 21px; font-weight: 500; line-height: 1.2; margin-bottom: 8px; }
+.hero-visual-card .c-meta { font-size: 13px; color: var(--ink-muted); }
+
+.sun-icon {
+  position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, var(--gold-soft) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.sun-icon::before {
+  content: ""; position: absolute; inset: 30px;
+  background: var(--gold); border-radius: 50%;
+  box-shadow: 0 0 40px rgba(184, 137, 62, 0.4);
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero { padding: 60px 0 60px; }
+}
+
+/* ─── Sections ─── */
+section { padding: 120px 0; position: relative; }
+@media (max-width: 720px) { section { padding: 80px 0; } }
+
+.section-header { max-width: 720px; margin-bottom: 80px; }
+.section-header .eyebrow { display: block; margin-bottom: 20px; }
+.section-header h2 { font-size: clamp(34px, 4.5vw, 58px); font-weight: 300; margin-bottom: 24px; }
+.section-header h2 em { color: var(--gold); font-style: italic; font-weight: 400; }
+.section-header p { font-size: 19px; color: var(--ink-soft); line-height: 1.55; }
+
+/* ─── Constat — anti-arnaque ─── */
+.constat { background: var(--ink); color: var(--sand); }
+.constat .section-header h2 { color: var(--sand); }
+.constat .section-header h2 em { color: var(--gold-soft); }
+.constat .section-header p { color: rgba(251, 247, 240, 0.75); }
+.constat .eyebrow { color: var(--gold-soft); }
+
+.constat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(251, 247, 240, 0.1); border: 1px solid rgba(251, 247, 240, 0.1); }
+.constat-card { background: var(--ink); padding: 48px 36px; }
+.constat-card .num { font-family: var(--serif); font-size: 56px; font-weight: 300; color: var(--gold-soft); line-height: 1; margin-bottom: 20px; font-style: italic; }
+.constat-card h3 { color: var(--sand); font-size: 22px; font-weight: 500; margin-bottom: 16px; }
+.constat-card p { color: rgba(251, 247, 240, 0.7); font-size: 15px; line-height: 1.6; }
+@media (max-width: 720px) { .constat-grid { grid-template-columns: 1fr; } }
+
+/* ─── Méthode Conciergerie ─── */
+.methode { background: var(--sand); }
+.methode-feature {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 80px; align-items: start;
+  padding-bottom: 80px; border-bottom: 1px solid var(--line);
+  margin-bottom: 80px;
+}
+.methode-feature:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.methode-feature.reverse { grid-template-columns: 1.2fr 1fr; }
+.methode-feature.reverse .visual { order: 2; }
+.methode-feature.reverse .text { order: 1; }
+.methode-feature .num-big {
+  font-family: var(--serif); font-size: 140px; font-weight: 300; color: var(--gold);
+  line-height: 1; margin-bottom: 20px; letter-spacing: -0.04em; opacity: 0.85;
+}
+.methode-feature h3 { font-size: 36px; font-weight: 400; margin-bottom: 20px; }
+.methode-feature h3 em { font-style: italic; color: var(--gold); }
+.methode-feature p { color: var(--ink-soft); font-size: 17px; line-height: 1.65; margin-bottom: 16px; }
+.methode-feature .visual {
+  background: linear-gradient(135deg, var(--sand-deep) 0%, var(--line) 100%);
+  aspect-ratio: 5/4; border-radius: 2px;
+  position: relative; overflow: hidden;
+}
+.methode-feature .visual-content {
+  position: absolute; inset: 32px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.methode-feature .visual-stat {
+  font-family: var(--serif); font-size: 64px; font-weight: 300; line-height: 1;
+  letter-spacing: -0.03em;
+}
+.methode-feature .visual-stat-label { font-size: 13px; color: var(--ink-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
+.methode-feature ul { list-style: none; margin-top: 24px; }
+.methode-feature ul li { padding: 10px 0; padding-left: 28px; position: relative; font-size: 15px; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+.methode-feature ul li::before { content: "—"; position: absolute; left: 0; color: var(--gold); font-weight: 600; }
+@media (max-width: 900px) { .methode-feature, .methode-feature.reverse { grid-template-columns: 1fr; gap: 40px; } .methode-feature.reverse .visual { order: 0; } }
+
+/* ─── Offres ─── */
+.offres { background: var(--sand-deep); }
+.offres-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.offre-card {
+  background: var(--cream); padding: 48px 36px;
+  border: 1px solid var(--line);
+  position: relative;
+  transition: all .3s ease;
+}
+.offre-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+.offre-card.featured { border: 2px solid var(--ink); transform: scale(1.02); }
+.offre-card.featured:hover { transform: scale(1.02) translateY(-4px); }
+.offre-card .badge {
+  position: absolute; top: -14px; left: 36px;
+  background: var(--gold); color: var(--ink);
+  padding: 6px 14px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+}
+.offre-card .name { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; margin-bottom: 16px; }
+.offre-card h3 { font-size: 32px; font-weight: 400; margin-bottom: 12px; }
+.offre-card .price { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.02em; }
+.offre-card .price-sub { font-size: 13px; color: var(--ink-muted); margin-bottom: 32px; }
+.offre-card .desc { font-size: 15px; color: var(--ink-soft); margin-bottom: 28px; line-height: 1.55; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.offre-card ul { list-style: none; margin-bottom: 32px; }
+.offre-card ul li { padding: 8px 0 8px 24px; position: relative; font-size: 14px; color: var(--ink-soft); }
+.offre-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+.offre-card .btn-primary, .offre-card .btn-ghost { width: 100%; justify-content: center; }
+@media (max-width: 900px) { .offres-grid { grid-template-columns: 1fr; } .offre-card.featured { transform: none; } }
+
+/* ─── Engagement ─── */
+.engagement { background: var(--sand); position: relative; overflow: hidden; }
+.engagement::before {
+  content: ""; position: absolute; top: 0; left: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(184, 137, 62, 0.08) 0%, transparent 70%);
+  z-index: 0;
+}
+.engagement-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+.engagement h2 { font-size: clamp(40px, 5vw, 64px); font-weight: 300; margin-bottom: 32px; line-height: 1.1; }
+.engagement h2 em { font-style: italic; color: var(--gold); font-weight: 400; }
+.engagement-statement {
+  background: var(--ink); color: var(--sand); padding: 56px 44px;
+  border-left: 6px solid var(--gold);
+}
+.engagement-statement .quote-mark { font-family: var(--serif); font-size: 90px; line-height: 0.8; color: var(--gold); margin-bottom: 16px; }
+.engagement-statement p { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.4; color: var(--sand); }
+.engagement-statement .signature { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(251, 247, 240, 0.2); font-size: 13px; color: var(--gold-soft); letter-spacing: 0.06em; text-transform: uppercase; }
+@media (max-width: 900px) { .engagement-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+/* ─── Matériel ─── */
+.materiel { background: var(--ink); color: var(--sand); }
+.materiel .section-header h2 { color: var(--sand); }
+.materiel .section-header h2 em { color: var(--gold-soft); }
+.materiel .section-header p { color: rgba(251, 247, 240, 0.75); }
+.materiel .eyebrow { color: var(--gold-soft); }
+.materiel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.materiel-card { background: rgba(251, 247, 240, 0.04); border: 1px solid rgba(251, 247, 240, 0.1); padding: 36px; }
+.materiel-card .brand { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--gold-soft); margin-bottom: 8px; }
+.materiel-card .role { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(251, 247, 240, 0.5); margin-bottom: 24px; }
+.materiel-card p { font-size: 14px; color: rgba(251, 247, 240, 0.75); line-height: 1.6; margin-bottom: 20px; }
+.materiel-card .specs { display: flex; gap: 20px; padding-top: 20px; border-top: 1px solid rgba(251, 247, 240, 0.1); }
+.materiel-card .spec .v { font-family: var(--serif); font-size: 22px; color: var(--sand); display: block; line-height: 1; margin-bottom: 4px; }
+.materiel-card .spec .l { font-size: 11px; color: rgba(251, 247, 240, 0.5); letter-spacing: 0.06em; text-transform: uppercase; }
+@media (max-width: 720px) { .materiel-grid { grid-template-columns: 1fr; } }
+
+/* ─── Process ─── */
+.process { background: var(--sand-deep); }
+.process-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+.process-timeline::before {
+  content: ""; position: absolute; top: 32px; left: 5%; right: 5%; height: 1px;
+  background: var(--line-strong);
+}
+.process-step { text-align: center; position: relative; padding: 0 12px; }
+.process-step .dot {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--cream); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--ink);
+  margin: 0 auto 24px; position: relative; z-index: 1;
+}
+.process-step h4 { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+.process-step p { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
+@media (max-width: 900px) { .process-timeline { grid-template-columns: 1fr 1fr; gap: 32px; } .process-timeline::before { display: none; } }
+@media (max-width: 480px) { .process-timeline { grid-template-columns: 1fr; } }
+
+/* ─── Témoignages — placeholders honnêtes ─── */
+.temoins { background: var(--sand); }
+.temoins-note { background: var(--cream); border: 1px dashed var(--line-strong); padding: 32px 36px; margin-top: 40px; }
+.temoins-note .eyebrow { color: var(--terracotta); margin-bottom: 12px; display: block; }
+.temoins-note h4 { font-size: 18px; margin-bottom: 12px; font-weight: 500; }
+.temoins-note p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+.temoins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+.temoin-placeholder {
+  background: var(--cream); padding: 36px;
+  border: 1px solid var(--line);
+  position: relative;
+}
+.temoin-placeholder .ph-mark { font-family: var(--serif); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); font-weight: 700; margin-bottom: 16px; display: block; }
+.temoin-placeholder .ph-name { font-family: var(--serif); font-size: 19px; font-weight: 500; margin-bottom: 4px; }
+.temoin-placeholder .ph-role { font-size: 13px; color: var(--ink-muted); margin-bottom: 20px; }
+.temoin-placeholder .ph-quote { font-style: italic; color: var(--ink-muted); font-size: 14px; line-height: 1.6; padding-top: 20px; border-top: 1px solid var(--line); }
+@media (max-width: 720px) { .temoins-grid { grid-template-columns: 1fr; } }
+
+/* ─── Lead magnet ─── */
+.leadmag { background: linear-gradient(180deg, var(--sand) 0%, var(--sand-deep) 100%); padding: 100px 0; }
+.leadmag-card {
+  background: var(--ink); color: var(--sand);
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  border-radius: 2px; overflow: hidden;
+}
+.leadmag-visual {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--terracotta) 100%);
+  position: relative; min-height: 400px;
+}
+.leadmag-visual::before {
+  content: "";
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-6deg);
+  width: 70%; height: 75%;
+  background: var(--cream); border-radius: 2px;
+  box-shadow: 0 30px 60px rgba(15, 27, 45, 0.3);
+}
+.leadmag-visual::after {
+  content: "GUIDE";
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-6deg);
+  font-family: var(--serif); font-size: 28px; color: var(--ink); font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.leadmag-visual .pages {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 50px)) rotate(-6deg);
+  font-family: var(--serif); font-size: 13px; color: var(--ink-muted); font-style: italic;
+}
+.leadmag-content { padding: 60px 56px; display: flex; flex-direction: column; justify-content: center; }
+.leadmag-content .eyebrow { color: var(--gold-soft); margin-bottom: 20px; }
+.leadmag-content h2 { color: var(--sand); font-size: 38px; font-weight: 300; line-height: 1.1; margin-bottom: 24px; }
+.leadmag-content h2 em { font-style: italic; color: var(--gold-soft); font-weight: 400; }
+.leadmag-content p { font-size: 16px; color: rgba(251, 247, 240, 0.75); margin-bottom: 32px; line-height: 1.6; }
+.leadmag-content ul { list-style: none; margin-bottom: 32px; }
+.leadmag-content ul li { padding: 6px 0 6px 28px; position: relative; font-size: 14px; color: rgba(251, 247, 240, 0.85); }
+.leadmag-content ul li::before { content: "→"; position: absolute; left: 0; color: var(--gold-soft); font-weight: 700; }
+.leadmag-form { display: flex; gap: 12px; margin-bottom: 16px; }
+.leadmag-form input {
+  flex: 1; padding: 14px 18px; font-family: var(--sans); font-size: 14px;
+  background: rgba(251, 247, 240, 0.08); color: var(--sand); border: 1px solid rgba(251, 247, 240, 0.2);
+}
+.leadmag-form input::placeholder { color: rgba(251, 247, 240, 0.5); }
+.leadmag-form input:focus { outline: none; border-color: var(--gold-soft); }
+.leadmag-form button {
+  background: var(--gold); color: var(--ink); padding: 14px 28px; font-weight: 700; font-size: 14px;
+  letter-spacing: 0.04em; transition: all .25s;
+}
+.leadmag-form button:hover { background: var(--sand); }
+.leadmag-disclaimer { font-size: 12px; color: rgba(251, 247, 240, 0.5); }
+@media (max-width: 900px) { .leadmag-card { grid-template-columns: 1fr; } .leadmag-visual { min-height: 240px; } .leadmag-content { padding: 40px 32px; } .leadmag-form { flex-direction: column; } }
+
+/* ─── FAQ ─── */
+.faq { background: var(--sand); }
+.faq-list { max-width: 880px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--line); padding: 28px 0; }
+.faq-item summary {
+  cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--ink);
+  transition: color .2s;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; font-size: 32px; font-weight: 300; color: var(--gold); transition: transform .3s; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:hover { color: var(--gold); }
+.faq-item .a { padding-top: 20px; color: var(--ink-soft); font-size: 16px; line-height: 1.65; max-width: 720px; }
+
+/* ─── CTA Final ─── */
+.cta-final { background: var(--ink); color: var(--sand); text-align: center; padding: 140px 0; position: relative; overflow: hidden; }
+.cta-final::before {
+  content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(184, 137, 62, 0.18) 0%, transparent 60%);
+}
+.cta-final h2 { color: var(--sand); font-size: clamp(40px, 5.5vw, 72px); font-weight: 300; margin-bottom: 28px; position: relative; line-height: 1.1; }
+.cta-final h2 em { font-style: italic; color: var(--gold-soft); font-weight: 400; }
+.cta-final p { font-size: 19px; color: rgba(251, 247, 240, 0.75); max-width: 600px; margin: 0 auto 48px; position: relative; line-height: 1.55; }
+.cta-final .btn-primary { background: var(--gold); color: var(--ink); padding: 18px 40px; font-size: 15px; position: relative; }
+.cta-final .btn-primary:hover { background: var(--sand); }
+.cta-final-meta { margin-top: 60px; display: flex; gap: 60px; justify-content: center; flex-wrap: wrap; padding-top: 48px; border-top: 1px solid rgba(251, 247, 240, 0.15); position: relative; }
+.cta-final-meta .item { font-size: 14px; color: rgba(251, 247, 240, 0.7); }
+.cta-final-meta .item strong { color: var(--gold-soft); display: block; font-family: var(--serif); font-size: 24px; font-weight: 400; margin-bottom: 4px; letter-spacing: -0.01em; }
+
+/* ─── Footer ─── */
+footer { background: var(--ink); color: rgba(251, 247, 240, 0.5); padding: 60px 0 40px; border-top: 1px solid rgba(251, 247, 240, 0.1); }
+footer .wrap { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
+footer .col h5 { font-family: var(--sans); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 16px; font-weight: 700; }
+footer .col a { display: block; padding: 4px 0; font-size: 13px; transition: color .2s; }
+footer .col a:hover { color: var(--gold-soft); }
+footer .brand .logo { color: var(--sand); margin-bottom: 16px; display: block; }
+footer .brand p { font-size: 13px; line-height: 1.6; }
+footer .legal {
+  margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(251, 247, 240, 0.1);
+  font-size: 11px; color: rgba(251, 247, 240, 0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+@media (max-width: 720px) { footer .wrap { grid-template-columns: 1fr; gap: 40px; } }
+</style>
+</head>
+<body>
+
+<!-- ─── Nav ─── -->
+<nav class="top">
+  <div class="wrap">
+    <a href="#" class="logo">Hélio<span class="h-mark">·</span>Toit énergie</a>
+    <div class="nav-links">
+      <a href="#methode">Méthode</a>
+      <a href="#offres">Tarifs</a>
+      <a href="#materiel">Matériel</a>
+      <a href="#process">Process</a>
+      <a href="#faq">Questions</a>
+    </div>
+    <a href="#cta" class="btn-primary btn-arrow">Demander un devis</a>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow-row">
+          <span class="eyebrow">Photovoltaïque résidentiel · Côte d'Azur</span>
+        </div>
+        <h1>Le solaire qui dure <span class="accent">25&nbsp;ans</span>,<br>pas <span class="strike">5&nbsp;hivers</span>.</h1>
+        <p class="sub">Installateur photovoltaïque à Vallauris, dédié aux maisons et villas exigeantes de la Côte d'Azur. Méthode <em style="font-style:italic;color:var(--gold);">Conciergerie Solaire</em> avec engagement de performance contractuel sur 5 ans. Matériel sélectionné pour durer un quart de siècle.</p>
+        <div class="hero-cta">
+          <a href="#cta" class="btn-primary btn-arrow">Étude solaire gratuite</a>
+          <a href="#leadmag" class="btn-ghost">Le guide anti‑arnaque PV PACA</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="num">25 ans</span>
+            <span class="lab">de production garantie</span>
+          </div>
+          <div class="trust-item">
+            <span class="num">5 ans</span>
+            <span class="lab">d'engagement performance</span>
+          </div>
+          <div class="trust-item">
+            <span class="num">72 h</span>
+            <span class="lab">pour votre étude personnalisée</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="sun-icon"></div>
+        <div class="hero-visual-card">
+          <div class="c-eyebrow">Étude — Mougins</div>
+          <div class="c-title">Villa 320 m²<br>9 kWc + batterie 15 kWh</div>
+          <div class="c-meta">Économie projetée : 1 870 €/an · ROI 8,6 ans</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Le constat ─── -->
+<section class="constat">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">Pourquoi nous existons</span>
+      <h2>Le marché du photovoltaïque résidentiel est <em>cassé</em>.</h2>
+      <p>Démarcheurs téléphoniques, sous-traitance dissimulée, devis simplifiés à l'extrême, batteries miracles à 1 999 €. La méfiance des propriétaires de la Côte d'Azur n'est pas paranoïaque — elle est rationnelle.</p>
+    </div>
+
+    <div class="constat-grid">
+      <div class="constat-card">
+        <div class="num">01</div>
+        <h3>Le piège du devis trop court</h3>
+        <p>Un devis sérieux pour une installation 6 kWc avec batterie tient sur 8 à 12 pages. Étude solaire, schéma de raccordement, marques et puissances précisées, simulation 25 ans, clauses de garantie. Si vous recevez 3 lignes sur une page, fuyez.</p>
+      </div>
+      <div class="constat-card">
+        <div class="num">02</div>
+        <h3>La sous-traitance opaque</h3>
+        <p>Beaucoup d'installateurs vous font signer puis font intervenir une équipe de pose qui ne connaît ni le projet, ni le client. Chez HelioToit, vous avez un interlocuteur unique de A à Z. Notre réseau de poseurs partenaires certifiés est connu, sélectionné et coordonné personnellement par Mathis.</p>
+      </div>
+      <div class="constat-card">
+        <div class="num">03</div>
+        <h3>Le SAV qui n'existe pas</h3>
+        <p>Une installation photovoltaïque vit 25 ans. Un onduleur peut tomber en panne au bout de 7 ans, une batterie peut se dégrader. Sans suivi structuré, vous perdez 30 à 50 % de la rentabilité de votre investissement. C'est pour ça que nous avons construit la <em style="color:var(--gold-soft);font-style:italic">Conciergerie Solaire</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Méthode Conciergerie ─── -->
+<section class="methode" id="methode">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">La méthode HelioToit</span>
+      <h2>Conciergerie Solaire — <em>5 ans de tranquillité</em>, pas un contrat oublié dans un tiroir.</h2>
+      <p>L'installation, ce n'est que la moitié du travail. Pour qu'un investissement solaire produise pendant 25 ans à hauteur de la simulation initiale, il a besoin d'attention. Nous l'inscrivons dans le contrat.</p>
+    </div>
+
+    <div class="methode-feature">
+      <div class="text">
+        <div class="num-big">01</div>
+        <h3><em>L'étude solaire</em> avant le devis.</h3>
+        <p>Pas de prix au mètre carré ni de pack standardisé. Avant de chiffrer, nous étudions votre toiture (orientation, ombrages, structure), votre consommation réelle (lecture des 12 derniers mois sur compteur Linky), vos projets à venir (véhicule électrique, piscine chauffée, climatisation supplémentaire).</p>
+        <ul>
+          <li>Visite technique sur site, 60 à 90 minutes</li>
+          <li>Simulation production sur 25 ans avec dégradation panneaux modélisée</li>
+          <li>Étude du dimensionnement batterie selon profil de consommation horaire</li>
+          <li>Devis détaillé livré sous 72 heures</li>
+        </ul>
+      </div>
+      <div class="visual">
+        <div class="visual-content">
+          <div>
+            <div class="eyebrow" style="color:var(--ink-muted)">Production simulée</div>
+          </div>
+          <div>
+            <div class="visual-stat">15 327 <span style="font-size:24px;color:var(--ink-muted)">kWh/an</span></div>
+            <div class="visual-stat-label">Pour 9 kWc à Vallauris · orientation sud</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="methode-feature reverse">
+      <div class="visual">
+        <div class="visual-content">
+          <div>
+            <div class="eyebrow" style="color:var(--ink-muted)">Engagement contractuel</div>
+          </div>
+          <div>
+            <div class="visual-stat">≥ 90 <span style="font-size:32px;">%</span></div>
+            <div class="visual-stat-label">de la simulation, garanti 5 ans · sinon remboursement au prorata</div>
+          </div>
+        </div>
+      </div>
+      <div class="text">
+        <div class="num-big">02</div>
+        <h3>Un <em>engagement de performance</em>, pas une promesse marketing.</h3>
+        <p>Notre contrat inclut une clause spécifique : si votre installation produit moins de 90 % de la simulation pendant les 5 premières années (hors cas de force majeure ou modification d'environnement), nous remboursons la différence au prorata. Cette clause n'existe chez aucun autre installateur de la zone.</p>
+        <ul>
+          <li>Mesure annuelle via votre application monitoring</li>
+          <li>Visite de contrôle technique gratuite si écart constaté</li>
+          <li>Indemnisation calculée sur le tarif électricité réglementé en vigueur</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="methode-feature">
+      <div class="text">
+        <div class="num-big">03</div>
+        <h3><em>Quatre visites par an</em>, pendant 5 ans, incluses dans l'offre Excellence.</h3>
+        <p>Nettoyage saisonnier, vérification serrage et étanchéité, contrôle des connexions onduleur, audit de la production réelle vs simulée, ajustement des paramètres de pilotage. Sans ce suivi, une installation perd 5 à 12 % de production sur 10 ans à cause de l'encrassement seul.</p>
+        <ul>
+          <li>Printemps : nettoyage post-pollens et mistral d'hiver</li>
+          <li>Été : contrôle des températures de fonctionnement onduleur</li>
+          <li>Automne : audit production vs simulation année écoulée</li>
+          <li>Hiver : vérification étanchéité et fixation après tempêtes</li>
+        </ul>
+      </div>
+      <div class="visual">
+        <div class="visual-content">
+          <div>
+            <div class="eyebrow" style="color:var(--ink-muted)">Suivi inclus offre Excellence</div>
+          </div>
+          <div>
+            <div class="visual-stat">20 visites</div>
+            <div class="visual-stat-label">en 5 ans · monitoring continu compris</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── Offres ─── -->
+<section class="offres" id="offres">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">Nos trois offres</span>
+      <h2>Une architecture <em>claire et transparente</em>.</h2>
+      <p>Trois niveaux pensés pour trois profils de foyer. Chaque offre est complète : matériel, pose, démarches Enedis et Consuel, garantie décennale, RGE QualiPV, prime à l'autoconsommation déduite.</p>
+    </div>
+
+    <div class="offres-grid">
+
+      <div class="offre-card">
+        <div class="name">Niveau 01</div>
+        <h3>Essentiel</h3>
+        <div class="price">12 900 €</div>
+        <div class="price-sub">TTC · pose et démarches incluses</div>
+        <p class="desc">3 kWc en autoconsommation pour foyer 4 000 kWh/an. Réduction immédiate de la facture, sans batterie, ROI 9 à 11 ans.</p>
+        <ul>
+          <li>6 panneaux Dualsun 500 Wc</li>
+          <li>Onduleur Solplanet monophasé</li>
+          <li>Fixation surimposition K2 Systems</li>
+          <li>Démarches Enedis + Consuel + urbanisme</li>
+          <li>Garantie décennale et RGE QualiPV</li>
+          <li>Étude solaire personnalisée</li>
+        </ul>
+        <a href="#cta" class="btn-ghost btn-arrow">Demander un devis</a>
+      </div>
+
+      <div class="offre-card featured">
+        <div class="badge">Best-seller</div>
+        <div class="name">Niveau 02</div>
+        <h3>Confort</h3>
+        <div class="price">22 900 €</div>
+        <div class="price-sub">TTC · pose et démarches incluses</div>
+        <p class="desc">6 kWc avec batterie 10 kWh + optimiseur eau chaude. Pour foyer 6 000 à 8 000 kWh/an avec autonomie cible 65-70 %.</p>
+        <ul>
+          <li>12 panneaux Dualsun 500 Wc fabriqués en France</li>
+          <li>Onduleur hybride Solplanet 6 kW + batterie 10 kWh</li>
+          <li>Pilotage eau chaude sanitaire intelligent</li>
+          <li>Monitoring application mobile temps réel</li>
+          <li>Garantie performance 5 ans incluse</li>
+          <li>2 visites annuelles de contrôle pendant 2 ans</li>
+        </ul>
+        <a href="#cta" class="btn-primary btn-arrow">Demander un devis</a>
+      </div>
+
+      <div class="offre-card">
+        <div class="name">Niveau 03</div>
+        <h3>Excellence</h3>
+        <div class="price">35 900 €</div>
+        <div class="price-sub">TTC · pose, démarches et conciergerie 5 ans incluses</div>
+        <p class="desc">9-10 kWc + batterie 15-20 kWh + borne IRVE 22 kW + Conciergerie Solaire 5 ans. Pour villas, propriétaires VE, autonomie cible 80 %+.</p>
+        <ul>
+          <li>20 panneaux Dualsun 500 Wc</li>
+          <li>Onduleur hybride 10 kW + batterie 15 kWh</li>
+          <li>Borne de recharge VE 22 kW intégrée</li>
+          <li>Conciergerie Solaire 5 ans : 4 visites/an</li>
+          <li>Engagement performance contractuel 5 ans</li>
+          <li>Garantie matériel jusqu'à 30 ans (Dualsun)</li>
+        </ul>
+        <a href="#cta" class="btn-ghost btn-arrow">Candidater au devis</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Engagement ─── -->
+<section class="engagement">
+  <div class="wrap">
+    <div class="engagement-grid">
+      <div>
+        <span class="eyebrow">L'engagement HelioToit</span>
+        <h2 style="margin-top:20px">Si nous avons promis 100 %,<br>nous devons <em>tenir 100 %</em>.</h2>
+        <p style="font-size:18px;color:var(--ink-soft);line-height:1.65;margin-bottom:24px">La majorité des installateurs vous remettent une simulation, encaissent l'acompte, et vous laissent face au monitoring. Si la production est en dessous, vous l'apprenez seul — un an plus tard — quand votre facture EDF n'a pas baissé autant que prévu.</p>
+        <p style="font-size:18px;color:var(--ink-soft);line-height:1.65">Nous prenons l'engagement inverse. La simulation produite avant signature devient une obligation contractuelle. Et si nous nous trompons — c'est rare, mais ça peut arriver — c'est nous qui payons la différence.</p>
+      </div>
+
+      <div class="engagement-statement">
+        <div class="quote-mark">"</div>
+        <p>Un installateur photovoltaïque qui n'engage pas sa responsabilité sur la production, c'est comme un constructeur qui ne signe pas la décennale. Personne ne devrait l'accepter en 2026.</p>
+        <div class="signature">Mathis Amazigh — gérant fondateur</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Matériel ─── -->
+<section class="materiel" id="materiel">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">Notre matériel</span>
+      <h2>Trois marques sélectionnées pour <em>durer 25 ans</em>.</h2>
+      <p>Pas de compromis sur le matériel. Nous avons étudié les principaux fabricants disponibles en France et fait nos choix en fonction de la longévité réelle, des garanties constructeurs, et de la réparabilité.</p>
+    </div>
+
+    <div class="materiel-grid">
+      <div class="materiel-card">
+        <div class="brand">Dualsun</div>
+        <div class="role">Panneaux photovoltaïques</div>
+        <p>Fabriqués à Jujurieux (Ain). Marque française pionnière du photovoltaïque hybride. Modules 500 Wc monocristallins, garantis jusqu'à 30 ans avec dégradation maîtrisée 0,4 %/an.</p>
+        <div class="specs">
+          <div class="spec"><span class="v">30 ans</span><span class="l">Garantie</span></div>
+          <div class="spec"><span class="v">500 Wc</span><span class="l">Puissance unitaire</span></div>
+        </div>
+      </div>
+      <div class="materiel-card">
+        <div class="brand">Solplanet</div>
+        <div class="role">Onduleurs hybrides + batteries</div>
+        <p>Onduleur central hybride Tier 1 monophasé, gestion intelligente production / consommation / batterie / réseau. Batteries LFP 6 000 cycles. Fabricant solide avec service après-vente européen structuré.</p>
+        <div class="specs">
+          <div class="spec"><span class="v">12 ans</span><span class="l">Garantie produit</span></div>
+          <div class="spec"><span class="v">6 000</span><span class="l">Cycles batterie</span></div>
+        </div>
+      </div>
+      <div class="materiel-card">
+        <div class="brand">K2 Systems</div>
+        <div class="role">Système de fixation</div>
+        <p>Référence européenne pour les fixations en surimposition. Tests certifiés vent jusqu'à 230 km/h, charge neige conforme normes Eurocode. Compatible avec toutes les couvertures de la Côte d'Azur.</p>
+        <div class="specs">
+          <div class="spec"><span class="v">25 ans</span><span class="l">Garantie</span></div>
+          <div class="spec"><span class="v">230 km/h</span><span class="l">Résistance vent</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Process ─── -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">Le déroulé</span>
+      <h2>De la première visite à la première <em>économie</em>.</h2>
+      <p>Cinq étapes claires, des délais tenus, et un seul interlocuteur du début à la fin.</p>
+    </div>
+
+    <div class="process-timeline">
+      <div class="process-step">
+        <div class="dot">1</div>
+        <h4>Étude consommation</h4>
+        <p>Échange visio 30 min. Lecture facture EDF, projet, contraintes.</p>
+      </div>
+      <div class="process-step">
+        <div class="dot">2</div>
+        <h4>Visite technique</h4>
+        <p>RDV physique sur site, 60-90 min. Étude toiture, ombrage, raccordement.</p>
+      </div>
+      <div class="process-step">
+        <div class="dot">3</div>
+        <h4>Devis détaillé</h4>
+        <p>Document 8-12 pages livré sous 72h. Présentation transparente.</p>
+      </div>
+      <div class="process-step">
+        <div class="dot">4</div>
+        <h4>Démarches & pose</h4>
+        <p>Enedis, urbanisme, Consuel pris en charge. Pose en 1 à 2 jours.</p>
+      </div>
+      <div class="process-step">
+        <div class="dot">5</div>
+        <h4>Mise en service</h4>
+        <p>Activation de l'installation. Application monitoring configurée. Conciergerie démarre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Témoignages — placeholders honnêtes ─── -->
+<section class="temoins">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="eyebrow">Vos voisins équipés</span>
+      <h2>Des cas concrets, <em>chiffrés et vérifiables</em>.</h2>
+      <p>Nous ne publions que des témoignages réels et nominatifs (avec accord explicite des clients), accompagnés des chiffres réels de production. Pas de « Marie 35 ans » avec photo de banque d'images.</p>
+    </div>
+
+    <div class="temoins-grid">
+      <div class="temoin-placeholder">
+        <span class="ph-mark">À venir — Q3 2026</span>
+        <div class="ph-name">Famille [Nom]</div>
+        <div class="ph-role">Villa 320 m² · Mougins</div>
+        <p class="ph-quote">Cas client filmé sur notre première installation Excellence, accompagné des chiffres réels année 1 publiés au-delà du M+12.</p>
+      </div>
+      <div class="temoin-placeholder">
+        <span class="ph-mark">À venir — Q3 2026</span>
+        <div class="ph-name">Famille [Nom]</div>
+        <div class="ph-role">Maison 180 m² · Vallauris</div>
+        <p class="ph-quote">Témoignage vidéo + données monitoring publiables après 12 mois de fonctionnement, avec validation client formelle.</p>
+      </div>
+      <div class="temoin-placeholder">
+        <span class="ph-mark">À venir — Q4 2026</span>
+        <div class="ph-name">Famille [Nom]</div>
+        <div class="ph-role">Villa 420 m² · Cap d'Antibes</div>
+        <p class="ph-quote">Chantier confort + borne IRVE prévu été 2026. Suivi performance et témoignage chiffré disponibles à M+12.</p>
+      </div>
+    </div>
+
+    <div class="temoins-note">
+      <span class="eyebrow">Notre engagement de transparence</span>
+      <h4>Pourquoi cette page n'affiche pas (encore) de témoignages.</h4>
+      <p>HelioToit est une jeune société. Nous préférons publier des témoignages réels après 12 mois de fonctionnement réel d'une installation — avec données monitoring vérifiables — plutôt que des avis fabriqués comme on en voit trop dans le secteur. La DGCCRF sanctionne les faux témoignages jusqu'à 300 000 € d'amende. Vous pouvez vérifier l'identité de chaque client cité, et nous transmettrons leurs coordonnées sur demande, avec leur accord.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Lead magnet ─── -->
+<section class="leadmag" id="leadmag">
+  <div class="wrap">
+    <div class="leadmag-card">
+      <div class="leadmag-visual">
+        <div class="pages">15 pages · PDF gratuit</div>
+      </div>
+      <div class="leadmag-content">
+        <span class="eyebrow">Le guide gratuit</span>
+        <h2>Le guide <em>anti-arnaque</em> du photovoltaïque en PACA.</h2>
+        <p>15 pages pour reconnaître un devis sérieux, comparer deux installateurs sur des critères objectifs, et éviter les pièges classiques du démarchage solaire.</p>
+        <ul>
+          <li>Comment lire un devis PV ligne par ligne</li>
+          <li>Les 7 marques de panneaux à connaître (et celles à éviter)</li>
+          <li>Calculer votre vrai ROI sur 25 ans, sans hypothèses gonflées</li>
+          <li>Les pièges juridiques des contrats long terme</li>
+          <li>Les signaux d'alerte d'un installateur douteux</li>
+        </ul>
+        <form class="leadmag-form" onsubmit="event.preventDefault(); alert('Merci, votre guide est en route.');">
+          <input type="email" placeholder="Votre adresse email" required>
+          <button type="submit">Recevoir le guide</button>
+        </form>
+        <p class="leadmag-disclaimer">Vous recevrez ensuite environ une fois par mois nos analyses sur le secteur PV. Désinscription en un clic. Données stockées chez Brevo (UE).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-header" style="margin: 0 auto 60px; text-align: center;">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2 style="margin-top:20px">Les <em>bonnes questions</em> à se poser.</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Pourquoi vos prix sont-ils plus élevés que les premiers devis que je reçois ?</summary>
+        <div class="a">Parce que nous chiffrons tout : l'étude, le matériel premium (Dualsun et Solplanet ne se trouvent pas en discount), la pose réalisée par notre équipe partenaire certifiée, les démarches administratives complètes, le monitoring, et — dans l'offre Confort et Excellence — le suivi sur plusieurs années. Un devis 30 % moins cher coupe quelque part : matériel reconditionné, sous-dimensionnement câblage, pose bâclée, pas de SAV. Nous vous transmettons sur demande un comparatif technique objectif vs n'importe quel devis concurrent.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>L'engagement de performance, c'est du marketing ou c'est réel ?</summary>
+        <div class="a">C'est une clause juridique du contrat de vente, rédigée par un avocat spécialisé énergie. Si votre production réelle est inférieure à 90 % de la simulation pendant les 5 premières années (hors cas exclus contractuellement comme une modification d'environnement majeure ou un événement climatique exceptionnel), nous vous remboursons la différence calculée sur le tarif réglementé en vigueur. Cette clause ne nous coûte rien si nos simulations sont correctes — et elles le sont, parce que c'est notre métier.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Vous êtes une société récente avec un capital de 1 000 €. Est-ce que je peux vous faire confiance pour 25 ans de garantie ?</summary>
+        <div class="a">Question légitime, et nous l'avons anticipée. La garantie décennale obligatoire est portée par notre assureur professionnel (police active disponible sur demande), pas par notre capital social. Le matériel bénéficie de garanties constructeur directes (Dualsun 30 ans, Solplanet 12 ans, K2 25 ans) qui restent valables même en cas de cessation de notre activité. Nous procédons par ailleurs à une recapitalisation à 15 000 € au cours de l'année 2026 pour renforcer notre solidité bilancielle, en cohérence avec notre montée en gamme.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Je suis dans une copropriété ou un lotissement avec règlement strict. Vous gérez les contraintes urbanistiques ?</summary>
+        <div class="a">Oui. Nous prenons en charge le dépôt en mairie, la consultation de l'ABF (Architecte des Bâtiments de France) si vous êtes en zone protégée, et l'autorisation de copropriété si nécessaire. Sur la Côte d'Azur, plusieurs communes (Cannes, Antibes, Mougins) ont des PLU spécifiques que nous connaissons bien. Le délai d'instruction administrative typique est 2 à 3 mois, à intégrer dans votre calendrier projet.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Quelle est la différence avec un major comme EDF ENR ou Hellio ?</summary>
+        <div class="a">Trois différences majeures. D'abord la taille : nous ne traitons que des projets de villas et maisons individuelles, pas du volume. Vous avez le gérant fondateur comme interlocuteur, pas un téléconseiller. Ensuite la spécialisation : nous ne faisons que du photovoltaïque résidentiel premium — pas d'isolation, pas de PAC, pas de packs prédéfinis. Enfin le suivi : la Conciergerie Solaire 5 ans n'a pas d'équivalent chez les majors. En échange, nous sommes plus chers que leurs offres entrée de gamme et nous ne traitons pas de très petits projets.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Combien de temps entre la signature et la mise en service ?</summary>
+        <div class="a">Calendrier typique sur la Côte d'Azur : déclaration préalable de travaux (1 à 2 mois selon commune), demande de raccordement Enedis (3 à 6 semaines), pose effective (1 à 2 jours), Consuel et mise en service (2 à 3 semaines). Total : 3 à 5 mois, selon la rapidité de la mairie et d'Enedis. Nous vous fournissons un calendrier prévisionnel précis dès la signature, et un point d'avancement hebdomadaire jusqu'à la mise en service.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Quelles aides 2026 puis-je espérer ?</summary>
+        <div class="a">Pour une installation ≤ 9 kWc en autoconsommation : prime à l'autoconsommation 80 €/kWc en 2026 (versée par EDF OA en une fois après la première année), TVA à 5,5 % sur la pose et le matériel sous conditions (logement +2 ans, panneaux bas carbone certifiés), tarif d'achat du surplus à 0,04 €/kWh garanti 20 ans. L'éco-PTZ peut financer le projet à taux zéro sous conditions de bouquet travaux. Nous calculons toutes les aides éligibles dans le devis et nous chargeons des démarches.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA Final ─── -->
+<section class="cta-final" id="cta">
+  <div class="wrap">
+    <h2>Une étude solaire personnalisée,<br><em>gratuite</em> et sans engagement.</h2>
+    <p>Un échange de 30 minutes, suivi d'un devis sous 72 heures si votre projet est éligible. Sans relance commerciale agressive, sans démarchage téléphonique.</p>
+    <a href="mailto:contact@heliotoitenergie.com?subject=Demande%20d'%C3%A9tude%20solaire" class="btn-primary btn-arrow">Demander mon étude</a>
+
+    <div class="cta-final-meta">
+      <div class="item"><strong>72 h</strong>Devis détaillé après visite</div>
+      <div class="item"><strong>30 min</strong>Échange initial visio</div>
+      <div class="item"><strong>0 €</strong>Étude offerte</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="wrap">
+    <div class="col brand">
+      <span class="logo">Hélio<span style="color:var(--gold-soft)">·</span>Toit énergie</span>
+      <p>Installateur photovoltaïque résidentiel premium sur la Côte d'Azur. Spécialiste villas et maisons individuelles. Méthode Conciergerie Solaire avec engagement de performance contractuel.</p>
+    </div>
+    <div class="col">
+      <h5>Offres</h5>
+      <a href="#offres">Niveau 01 — Essentiel</a>
+      <a href="#offres">Niveau 02 — Confort</a>
+      <a href="#offres">Niveau 03 — Excellence</a>
+      <a href="#methode">Conciergerie Solaire</a>
+    </div>
+    <div class="col">
+      <h5>Ressources</h5>
+      <a href="#leadmag">Guide anti-arnaque PV</a>
+      <a href="#faq">Questions fréquentes</a>
+      <a href="#process">Notre process</a>
+      <a href="#materiel">Notre matériel</a>
+    </div>
+    <div class="col">
+      <h5>Contact</h5>
+      <a href="mailto:contact@heliotoitenergie.com">contact@heliotoitenergie.com</a>
+      <a href="#">3030 Route de Cannes<br>06220 Vallauris</a>
+      <a href="#">SIREN 994 152 007</a>
+      <a href="#">RGE QualiPV n° [à compléter]</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="legal">
+      <span>© 2026 HelioToit énergie · SARL au capital de 1 000 € · TVA intracommunautaire FR40994152007</span>
+      <span>Mentions légales · CGV · Politique de confidentialité · Garantie décennale en cours</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

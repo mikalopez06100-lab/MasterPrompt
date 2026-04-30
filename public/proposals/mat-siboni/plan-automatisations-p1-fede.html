@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan d'Automatisations IA — Processus Fédération · Mathieu Siboni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574;
+  --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed; --chart-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.04);
+  --shadow: 0 1px 3px rgba(10, 37, 64, 0.06), 0 1px 2px rgba(10, 37, 64, 0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; border-left: 1px solid var(--border); }
+.toc li { margin-bottom: 4px; }
+.toc a { display: block; padding: 6px 16px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; transition: all 0.15s; }
+.toc a:hover { color: var(--text-primary); border-left-color: var(--accent); }
+.main { max-width: 920px; }
+.cover { padding: 64px 0 48px; border-bottom: 2px solid var(--text-primary); margin-bottom: 64px; }
+.cover-kicker { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 24px; }
+.cover h1 { font-size: 3rem; line-height: 1.1; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.02em; }
+.cover-sub { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; max-width: 700px; }
+.cover-meta { display: flex; gap: 32px; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap; }
+.cover-meta span strong { color: var(--text-primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; font-weight: 600; }
+section { margin-bottom: 96px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; }
+h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin: 32px 0 12px 0; }
+h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 16px 0 8px 0; }
+p { margin-bottom: 16px; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
+.card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 8px; font-weight: 600; }
+.kpi-value { font-size: 2.25rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; display: block; }
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 24px 0; }
+.callout strong { color: var(--text-primary); }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout-info { border-color: var(--info); background: var(--info-soft); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 24px 0; }
+.data-table th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+.data-table td { padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.score-badge { display: inline-flex; align-items: baseline; gap: 4px; padding: 8px 16px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.score-value { font-size: 1.75rem; font-weight: 700; }
+.score-label { font-size: 0.875rem; opacity: 0.7; }
+.score-good { background: var(--success-soft); color: var(--success); }
+.score-medium { background: var(--warning-soft); color: var(--warning); }
+.score-poor { background: var(--danger-soft); color: var(--danger); }
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.chart-caption { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px; }
+.auto-card { background: var(--bg-card); border: 2px solid var(--text-primary); border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
+.auto-header { background: var(--text-primary); color: white; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.auto-header h3 { color: white; margin: 0; font-size: 1.375rem; }
+.auto-header .auto-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
+.auto-body { padding: 32px; }
+.flow-step { display: flex; align-items: flex-start; gap: 16px; padding: 12px 0; }
+.flow-step-num { background: var(--accent); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.875rem; flex-shrink: 0; }
+.flow-step-content { font-size: 0.95rem; }
+.flow-step-content strong { color: var(--text-primary); }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; background: var(--bg-subtle); color: var(--text-muted); margin: 2px; }
+.tag-tech { background: var(--info-soft); color: var(--info); border: 1px solid #bae6fd; }
+.matrix-cell { padding: 8px 12px; font-size: 0.85rem; border-radius: 4px; text-align: center; }
+.matrix-quick-win { background: var(--success-soft); color: var(--success); border: 1px solid #86efac; }
+.matrix-strategic { background: var(--info-soft); color: var(--info); border: 1px solid #bae6fd; }
+.matrix-low { background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border); }
+.matrix-avoid { background: var(--danger-soft); color: var(--danger); border: 1px solid #fecaca; }
+@media print {
+  body { background: white; }
+  .layout { display: block; max-width: 720px; padding: 24px; }
+  .toc { display: none; }
+  .card, .chart-card, .auto-card { break-inside: avoid; box-shadow: none; }
+  section { margin-bottom: 48px; }
+  .cover { padding-top: 0; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#exec">Résumé exécutif</a></li>
+      <li><a href="#cartographie">01 · Cartographie des processus</a></li>
+      <li><a href="#readiness">02 · Audit IA-readiness</a></li>
+      <li><a href="#matrice">03 · Matrice Impact × Faisabilité</a></li>
+      <li><a href="#auto1">Auto #1 · Briefing déplacement</a></li>
+      <li><a href="#auto2">Auto #2 · Dossier défraiement N2F</a></li>
+      <li><a href="#auto3">Auto #3 · Communication multi-publics</a></li>
+      <li><a href="#stack">04 · Stack technique</a></li>
+      <li><a href="#roadmap">05 · Roadmap 90 jours</a></li>
+      <li><a href="#roi">06 · Projection ROI 12 mois</a></li>
+      <li><a href="#gouvernance">07 · Gouvernance & risques</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+    <header class="cover">
+      <div class="cover-kicker">Plan d'implémentation IA & Automatisations — Processus Fédération</div>
+      <h1>P1 — Industrialiser le coaching FFS</h1>
+      <p class="cover-sub">Cartographie des processus opérationnels de Mathieu Siboni au sein du Groupe France Snowboard Freestyle, et plan d'automatisations chiffré pour libérer 50 % de sa charge administrative à 90 jours.</p>
+      <div class="cover-meta">
+        <span><strong>Client</strong>Mathieu Siboni</span>
+        <span><strong>Périmètre</strong>P1 · Fédération FFS</span>
+        <span><strong>Date</strong>Avril 2026</span>
+        <span><strong>Préparé par</strong>Master Prompt</span>
+      </div>
+    </header>
+
+    <!-- EXEC -->
+    <section id="exec">
+      <header class="section-header">
+        <span class="kicker">Résumé exécutif</span>
+        <h2>Le constat en une page</h2>
+        <p class="lead">Le périmètre fédéral de Mathieu n'est pas un business à scaler — c'est une charge à industrialiser.</p>
+      </header>
+
+      <div class="callout callout-warning">
+        <strong>Constat brutal.</strong> Mathieu fait aujourd'hui le travail d'un coach <em>plus</em> celui d'un assistant logistique <em>plus</em> celui d'un comptable <em>plus</em> celui d'un community manager auprès des athlètes et sous-traitants. La fédération paye le coach. Les trois autres rôles sont supportés gratuitement. Cette charge invisible mange 12 à 15 heures par semaine en pleine saison, qui ne sont disponibles ni pour P2 (personal branding), ni pour P3 (camps), ni pour P4 (documentaire).
+      </div>
+
+      <div class="card-row">
+        <div class="kpi">
+          <span class="kpi-label">Heures admin / sem (saison)</span>
+          <span class="kpi-value">~14 h</span>
+          <span class="kpi-sub">Logistique + N2F + comm</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Cible après automatisations</span>
+          <span class="kpi-value">~5 h</span>
+          <span class="kpi-sub">Validation humaine maintenue</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Heures libérées / saison</span>
+          <span class="kpi-value">~210 h</span>
+          <span class="kpi-sub">Soit ~6 sem temps plein</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Investissement total</span>
+          <span class="kpi-value">~1 800 €</span>
+          <span class="kpi-sub">Setup + abonnements an 1</span>
+        </div>
+      </div>
+
+      <p>Trois automatisations sont retenues, par priorité décroissante d'impact : <strong>(1) un agent de briefing logistique de déplacement</strong> qui produit en 2 minutes ce qui prend 4-6h aujourd'hui ; <strong>(2) un pipeline de consolidation des défraiements N2F</strong> vers le format attendu par la fédération ; <strong>(3) un workspace de communication automatisé</strong> avec les athlètes, sous-traitants kiné/préparation mentale, et la fédération elle-même. Ces trois briques se déploient en 60 jours, avec un payback inférieur à 6 mois en se basant sur le coût d'opportunité de 80 €/h appliqué au temps de Mathieu.</p>
+
+      <div class="callout callout-accent">
+        <strong>Garde-fou central.</strong> Aucune automatisation n'est conçue pour <em>remplacer</em> Mathieu sur les décisions métier. Toutes intègrent un point de validation humaine avant le moindre envoi externe (à la fédé, aux athlètes, aux sous-traitants). L'IA produit un brouillon, Mathieu valide en 30 secondes. Ce design est non négociable pour des raisons de responsabilité juridique et institutionnelle (FFS).
+      </div>
+    </section>
+
+    <!-- CARTOGRAPHIE -->
+    <section id="cartographie">
+      <header class="section-header">
+        <span class="kicker">Bloc 01</span>
+        <h2>Cartographie des processus métier</h2>
+        <p class="lead">Inventaire des activités opérationnelles liées au mandat fédéral, en quatre familles.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Famille</th><th>Processus</th><th>Volume</th><th>Temps actuel</th><th>Douleur /5</th><th>Maturité digitale</th></tr></thead>
+        <tbody>
+          <tr style="background: var(--accent-soft);"><td rowspan="3"><strong>Logistique déplacement</strong></td><td>Recherche & réservation hôtels par compétition</td><td>~25/saison</td><td>3-4 h / déplacement</td><td>5</td><td>Manuel</td></tr>
+          <tr style="background: var(--accent-soft);"><td>Plan transport (camion fédé + parking + ferries)</td><td>~25/saison</td><td>1 h / déplacement</td><td>3</td><td>Manuel</td></tr>
+          <tr style="background: var(--accent-soft);"><td>Plan repas + restaurants à proximité hébergement</td><td>~25/saison</td><td>1-2 h / déplacement</td><td>4</td><td>Manuel</td></tr>
+          <tr style="background: var(--accent-soft);"><td rowspan="3"><strong>Comptabilité défraiement</strong></td><td>Email demande budget prévisionnel à la fédé</td><td>~25/saison</td><td>1 h / demande</td><td>3</td><td>Email texte</td></tr>
+          <tr style="background: var(--accent-soft);"><td>Saisie factures dans N2F (capture mobile)</td><td>~150/saison</td><td>~5 min / facture</td><td>2</td><td>Semi-auto (N2F)</td></tr>
+          <tr style="background: var(--accent-soft);"><td>Consolidation dossier défraiement formaté fédé</td><td>~10/saison</td><td>2-4 h / dossier</td><td>5</td><td>Manuel post-N2F</td></tr>
+          <tr><td rowspan="3"><strong>Communication athlètes</strong></td><td>Briefing pré-compétition (planning, départ, équipement)</td><td>~25/saison</td><td>1 h / briefing</td><td>3</td><td>WhatsApp</td></tr>
+          <tr><td>Suivi blessures + coordination kiné</td><td>~variable</td><td>2-4 h / sem</td><td>4</td><td>Manuel</td></tr>
+          <tr><td>Coordination préparation mentale (sous-traitant)</td><td>~variable</td><td>1-2 h / sem</td><td>3</td><td>Manuel</td></tr>
+          <tr><td rowspan="2"><strong>Coordination fédérale</strong></td><td>Reportings ad hoc DTN / Directeur Snowboard</td><td>~10/saison</td><td>2 h / reporting</td><td>3</td><td>Email</td></tr>
+          <tr><td>Mise à jour Google Sheet fédé (dates, athlètes, frais)</td><td>continu</td><td>~30 min/sem</td><td>2</td><td>Outil fédé (lecture/écriture)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-info">
+        <strong>Lecture du tableau.</strong> Trois processus concentrent les douleurs maximales (5/5) : la recherche d'hôtel, la consolidation du défraiement, et le suivi blessures. Ce sont précisément les trois cibles des automatisations proposées. Les autres processus (saisie N2F, mise à jour du Google Sheet fédé) sont déjà semi-outillés et le ROI marginal d'automatisation supplémentaire est faible.
+      </div>
+    </section>
+
+    <!-- READINESS -->
+    <section id="readiness">
+      <header class="section-header">
+        <span class="kicker">Bloc 02</span>
+        <h2>Audit IA-readiness — Score actuel</h2>
+        <p class="lead">Cinq axes évalués pour calibrer l'ambition technique du déploiement.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Axe</th><th>Score /20</th><th>Lecture</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Data readiness</strong></td><td>13/20</td><td>Google Sheet fédé propre et exhaustif (lecture). N2F structuré. Calendrier compétitions structuré. Manque : standardisation des contacts athlètes/sous-traitants.</td></tr>
+          <tr><td><strong>Stack maturity</strong></td><td>9/20</td><td>Stack actuelle légère (Gmail, Drive, WhatsApp, N2F). Absence d'orchestrateur central. Aucun outil no-code en place.</td></tr>
+          <tr><td><strong>Équipe & compétences</strong></td><td>7/20</td><td>Mathieu seul opérateur. Pas de second opérationnel. Adoption d'outils digitaux possible mais courbe d'apprentissage à respecter.</td></tr>
+          <tr><td><strong>Culture & adoption</strong></td><td>14/20</td><td>Fort intérêt manifesté pour la digitalisation, terrain favorable, premier client de Master Prompt en mode accompagnement premium.</td></tr>
+          <tr><td><strong>Budget & ROI</strong></td><td>12/20</td><td>Capacité d'investissement modérée (~1500-3000 € au lancement). Coût d'opportunité du temps gagné élevé compte tenu de P2/P3/P4.</td></tr>
+        </tbody>
+      </table>
+
+      <div style="text-align: center; margin: 32px 0;">
+        <span class="score-badge score-medium"><span class="score-value">55</span><span class="score-label">/ 100</span></span>
+        <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.875rem;">Score cohérent avec un solopreneur. <strong>Seuil acceptable pour démarrer.</strong> L'ambition technique doit rester sobre : pas d'agents autonomes complexes, pas de stack DevOps, pas de RAG sophistiqué.</p>
+      </div>
+
+      <h3>Trois prérequis à lever avant tout déploiement</h3>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Prérequis</th><th>Délai</th><th>Impact si non levé</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Centraliser les contacts athlètes + sous-traitants dans une base unique (Notion ou Airtable)</td><td>J+5</td><td>Aucune communication automatisée possible</td></tr>
+          <tr><td>2</td><td>Confirmer formellement avec la fédé que les outils tiers (orchestrateur, LLM cloud) sont autorisés sur les données fédé</td><td>J+10</td><td>Risque institutionnel et juridique majeur</td></tr>
+          <tr><td>3</td><td>Définir la grille de validation humaine (quelle action requiert quelle validation manuelle)</td><td>J+15</td><td>Risque opérationnel : un envoi auto vers la fédé non contrôlé</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MATRICE -->
+    <section id="matrice">
+      <header class="section-header">
+        <span class="kicker">Bloc 03</span>
+        <h2>Matrice Impact × Faisabilité</h2>
+        <p class="lead">11 cas d'usage analysés. 3 retenus comme « Quick wins », les autres écartés ou différés.</p>
+      </header>
+
+      <div class="chart-card">
+        <div class="chart-title">Quadrant Impact × Faisabilité</div>
+        <p class="chart-caption">Les Quick Wins (top droite) sont prioritaires. La zone basse-droite (faisable mais peu d'impact) est ignorée pour ne pas disperser.</p>
+        <svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg">
+          <!-- Quadrants background -->
+          <rect x="60" y="40" width="280" height="200" fill="var(--info-soft)" opacity="0.4"/>
+          <rect x="340" y="40" width="280" height="200" fill="var(--success-soft)" opacity="0.6"/>
+          <rect x="60" y="240" width="280" height="200" fill="var(--bg-subtle)" opacity="0.4"/>
+          <rect x="340" y="240" width="280" height="200" fill="var(--warning-soft)" opacity="0.4"/>
+          <!-- Axes -->
+          <line x1="60" y1="40" x2="60" y2="440" stroke="var(--text-primary)" stroke-width="1.5"/>
+          <line x1="60" y1="440" x2="620" y2="440" stroke="var(--text-primary)" stroke-width="1.5"/>
+          <line x1="340" y1="40" x2="340" y2="440" stroke="var(--border-strong)" stroke-dasharray="4 4"/>
+          <line x1="60" y1="240" x2="620" y2="240" stroke="var(--border-strong)" stroke-dasharray="4 4"/>
+          <!-- Axis labels -->
+          <text x="340" y="465" text-anchor="middle" font-family="Inter" font-size="12" fill="var(--text-muted)">FAISABILITÉ →</text>
+          <text x="35" y="240" text-anchor="middle" font-family="Inter" font-size="12" fill="var(--text-muted)" transform="rotate(-90 35 240)">← IMPACT</text>
+          <!-- Quadrant labels -->
+          <text x="200" y="60" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="var(--info)" letter-spacing="0.5">STRATÉGIQUE</text>
+          <text x="480" y="60" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="var(--success)" letter-spacing="0.5">QUICK WINS</text>
+          <text x="200" y="430" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="var(--text-muted)" letter-spacing="0.5">À ÉVITER</text>
+          <text x="480" y="430" text-anchor="middle" font-family="Inter" font-size="11" font-weight="600" fill="var(--warning)" letter-spacing="0.5">FAIBLE PRIORITÉ</text>
+          <!-- Points -->
+          <!-- Quick wins (3) -->
+          <circle cx="510" cy="100" r="14" fill="var(--success)"/>
+          <text x="530" y="104" font-family="Inter" font-size="12" font-weight="600" fill="var(--text-primary)">Briefing déplacement (Auto #1)</text>
+          <circle cx="475" cy="155" r="14" fill="var(--success)"/>
+          <text x="495" y="159" font-family="Inter" font-size="12" font-weight="600" fill="var(--text-primary)">Dossier défraiement N2F (Auto #2)</text>
+          <circle cx="450" cy="195" r="14" fill="var(--success)"/>
+          <text x="470" y="199" font-family="Inter" font-size="12" font-weight="600" fill="var(--text-primary)">Communication multi-publics (Auto #3)</text>
+          <!-- Strategic (2) -->
+          <circle cx="200" cy="120" r="10" fill="var(--info)"/>
+          <text x="220" y="124" font-family="Inter" font-size="11" fill="var(--text-body)">Détection anomalies suivi athlètes</text>
+          <circle cx="240" cy="180" r="10" fill="var(--info)"/>
+          <text x="260" y="184" font-family="Inter" font-size="11" fill="var(--text-body)">Plan d'entraînement IA-assisté</text>
+          <!-- Faible priorité (3) -->
+          <circle cx="500" cy="320" r="8" fill="var(--warning)"/>
+          <text x="515" y="324" font-family="Inter" font-size="11" fill="var(--text-muted)">Génération posts réseaux</text>
+          <circle cx="450" cy="370" r="8" fill="var(--warning)"/>
+          <text x="465" y="374" font-family="Inter" font-size="11" fill="var(--text-muted)">Résumé articles presse</text>
+          <circle cx="540" cy="395" r="8" fill="var(--warning)"/>
+          <text x="555" y="399" font-family="Inter" font-size="11" fill="var(--text-muted)">Traduction docs FR/EN</text>
+          <!-- À éviter (3) -->
+          <circle cx="180" cy="380" r="8" fill="var(--chart-muted)"/>
+          <text x="195" y="384" font-family="Inter" font-size="11" fill="var(--text-muted)">Chatbot site public</text>
+          <circle cx="130" cy="350" r="8" fill="var(--chart-muted)"/>
+          <text x="145" y="354" font-family="Inter" font-size="11" fill="var(--text-muted)">Agent autonome multi-tâches</text>
+          <circle cx="220" cy="320" r="8" fill="var(--chart-muted)"/>
+          <text x="235" y="324" font-family="Inter" font-size="11" fill="var(--text-muted)">RAG sur Google Sheet fédé</text>
+        </svg>
+      </div>
+
+      <h3>Légende & arbitrages explicites</h3>
+      <table class="data-table">
+        <thead><tr><th>Cas d'usage</th><th>Décision</th><th>Justification</th></tr></thead>
+        <tbody>
+          <tr><td>Briefing déplacement automatisé</td><td><span class="matrix-cell matrix-quick-win">RETENU — Auto #1</span></td><td>Volume × douleur × faisabilité techniques excellentes. Stack simple. ROI évident.</td></tr>
+          <tr><td>Dossier défraiement N2F → fédé</td><td><span class="matrix-cell matrix-quick-win">RETENU — Auto #2</span></td><td>Process répétitif, format de sortie connu, économie horaire massive sur 10 dossiers/an.</td></tr>
+          <tr><td>Communication multi-publics</td><td><span class="matrix-cell matrix-quick-win">RETENU — Auto #3</span></td><td>Levier de soulagement mental + qualité service athlètes/sous-traitants/fédé.</td></tr>
+          <tr><td>Détection anomalies suivi athlètes</td><td><span class="matrix-cell matrix-strategic">DIFFÉRÉ — Saison 2027</span></td><td>Impact potentiellement élevé mais nécessite données historiques propres. À cadrer après une saison de collecte.</td></tr>
+          <tr><td>Plan d'entraînement IA-assisté</td><td><span class="matrix-cell matrix-strategic">DIFFÉRÉ</span></td><td>Domaine sensible, responsabilité métier. À explorer en R&D, pas en production.</td></tr>
+          <tr><td>Génération posts réseaux</td><td><span class="matrix-cell matrix-low">DIFFÉRÉ — P2</span></td><td>Pertinent mais relève du Pack P2 (personal branding), pas de P1 fédé.</td></tr>
+          <tr><td>Résumé articles presse</td><td><span class="matrix-cell matrix-low">FAIBLE PRIORITÉ</span></td><td>Volume trop faible pour ROI sérieux.</td></tr>
+          <tr><td>Traduction docs FR/EN</td><td><span class="matrix-cell matrix-low">FAIBLE PRIORITÉ</span></td><td>DeepL gratuit fait le job, pas besoin d'automatisation dédiée.</td></tr>
+          <tr><td>Chatbot sur site public</td><td><span class="matrix-cell matrix-avoid">ÉCARTÉ</span></td><td>Volume insuffisant. 80 % des chatbots sont des échecs. Inutile.</td></tr>
+          <tr><td>Agent autonome multi-tâches</td><td><span class="matrix-cell matrix-avoid">ÉCARTÉ</span></td><td>Risque opérationnel trop élevé pour un solopreneur, multiplie les points de défaillance.</td></tr>
+          <tr><td>RAG sur Google Sheet fédé</td><td><span class="matrix-cell matrix-avoid">ÉCARTÉ</span></td><td>Le Sheet est petit, structuré, accessible directement. RAG inutile et risque RGPD/fédé.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- AUTO 1 -->
+    <section id="auto1">
+      <div class="auto-card">
+        <header class="auto-header">
+          <div>
+            <span class="auto-tag">Automatisation #1 · Quick Win</span>
+            <h3>Agent de briefing logistique de déplacement</h3>
+          </div>
+          <span class="score-badge score-good"><span class="score-value">A</span><span class="score-label">priorité</span></span>
+        </header>
+        <div class="auto-body">
+          <p><strong>Objectif business.</strong> Produire en 2 minutes le brief logistique complet d'un déplacement de compétition (hébergement présélectionné, plan transport, restaurants à proximité, budget prévisionnel formaté pour l'email à la fédération).</p>
+
+          <h4>Schéma du workflow</h4>
+          <div class="card" style="background: var(--bg-subtle); padding: 20px;">
+            <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-content"><strong>Trigger</strong> — Mathieu remplit un formulaire Tally simple (lieu compétition, dates, nombre d'athlètes, contraintes spéciales). Possibilité de présélectionner depuis le Google Sheet fédé via dropdown auto-rempli.</div></div>
+            <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-content"><strong>Recherche hébergement</strong> — Make appelle l'API Booking.com (ou Google Places en fallback) avec rayon, gamme de prix et capacité requis. Récupère 5-10 options.</div></div>
+            <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-content"><strong>Recherche restauration</strong> — Google Places API filtre les restaurants à proximité (1-3 km de l'hébergement) compatibles avec l'horaire de retour d'entraînement et les contraintes athlètes (équilibré, capacité groupe).</div></div>
+            <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-content"><strong>Plan transport</strong> — Google Maps API calcule trajet camion fédé entre lieu de départ → hébergement → site de compétition. Identifie parkings poids lourds et péages.</div></div>
+            <div class="flow-step"><div class="flow-step-num">5</div><div class="flow-step-content"><strong>Synthèse Claude API</strong> — Claude reçoit l'ensemble des données + un template d'email fédé et produit : (a) brief logistique structuré, (b) email pré-rédigé pour la fédération avec budget prévisionnel chiffré, (c) Google Sheet récap importable.</div></div>
+            <div class="flow-step"><div class="flow-step-num">6</div><div class="flow-step-content"><strong>Validation humaine</strong> — Mathieu reçoit l'ensemble par email + Notion. Il valide ou édite. <strong>Aucun envoi automatique vers la fédé.</strong> Il copie/édite, puis envoie lui-même.</div></div>
+          </div>
+
+          <h4>Outils & coûts mensuels</h4>
+          <p>
+            <span class="tag tag-tech">Make (orchestration)</span>
+            <span class="tag tag-tech">Tally (formulaire)</span>
+            <span class="tag tag-tech">Booking.com Affiliate API</span>
+            <span class="tag tag-tech">Google Places API</span>
+            <span class="tag tag-tech">Google Maps API</span>
+            <span class="tag tag-tech">Claude API (Sonnet 4)</span>
+            <span class="tag tag-tech">Notion (sortie)</span>
+          </p>
+
+          <table class="data-table">
+            <thead><tr><th>Métrique</th><th>Valeur</th></tr></thead>
+            <tbody>
+              <tr><td>Heures de setup (avec Master Prompt)</td><td class="numeric">~14 h</td></tr>
+              <tr><td>Coût mensuel récurrent (APIs + Make tier core)</td><td class="numeric">~22 €</td></tr>
+              <tr><td>Heures économisées / déplacement</td><td class="numeric">3,5 h</td></tr>
+              <tr><td>Volume / saison</td><td class="numeric">25 déplacements</td></tr>
+              <tr><td>Heures économisées / saison</td><td class="numeric">87,5 h</td></tr>
+              <tr><td>€ économisés / saison (à 80 €/h coût d'opportunité)</td><td class="numeric">7 000 €</td></tr>
+              <tr><td>Coût total an 1 (setup + 6 mois saison)</td><td class="numeric">~1 250 €</td></tr>
+              <tr><td><strong>ROI an 1</strong></td><td class="numeric"><strong>~460 %</strong></td></tr>
+              <tr><td><strong>Payback</strong></td><td class="numeric"><strong>1,8 mois</strong></td></tr>
+            </tbody>
+          </table>
+
+          <h4>Risques & garde-fous</h4>
+          <p>(1) <strong>Validation humaine non négociable</strong> avant tout envoi externe. (2) Confidentialité des informations athlètes : aucune donnée nominative dans les requêtes API tierces (Booking, Maps) — uniquement dates, lieux, nombre. (3) Backup manuel maintenu pour les premiers déplacements le temps de stabiliser le workflow. (4) Coût API contrôlé par cap mensuel sur Make (alerte > 30 € / mois).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTO 2 -->
+    <section id="auto2">
+      <div class="auto-card">
+        <header class="auto-header">
+          <div>
+            <span class="auto-tag">Automatisation #2 · Quick Win</span>
+            <h3>Pipeline N2F → Dossier de défraiement formaté fédé</h3>
+          </div>
+          <span class="score-badge score-good"><span class="score-value">A</span><span class="score-label">priorité</span></span>
+        </header>
+        <div class="auto-body">
+          <p><strong>Objectif business.</strong> Transformer l'export brut N2F (factures saisies à la volée pendant la saison) en un dossier de défraiement consolidé, classé par compétition, formaté selon les attentes de la fédération, prêt à être envoyé sans retraitement manuel.</p>
+
+          <h4>Schéma du workflow</h4>
+          <div class="card" style="background: var(--bg-subtle); padding: 20px;">
+            <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-content"><strong>Trigger manuel</strong> — Une fois par mois ou après un déplacement, Mathieu déclenche le pipeline depuis Notion (bouton).</div></div>
+            <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-content"><strong>Récupération N2F</strong> — Make exporte les notes de frais N2F sur la période (CSV + factures PDF).</div></div>
+            <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-content"><strong>Classification IA</strong> — Claude API lit chaque facture, détecte le contexte (déplacement, compétition associée), catégorise (hébergement, restauration, transport, divers) et rapproche du Google Sheet fédé pour identifier la compétition concernée.</div></div>
+            <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-content"><strong>Génération du dossier</strong> — Claude API produit un document structuré (PDF + Excel) selon le template attendu par la fédé : table récapitulative par compétition, totaux par catégorie, justificatifs en annexe, cohérence avec budget prévisionnel initial.</div></div>
+            <div class="flow-step"><div class="flow-step-num">5</div><div class="flow-step-content"><strong>Anomalies signalées</strong> — Le pipeline détecte les écarts (facture sans contexte clair, dépassement budget initial, doublon, montant aberrant) et les liste dans une section « À vérifier ».</div></div>
+            <div class="flow-step"><div class="flow-step-num">6</div><div class="flow-step-content"><strong>Validation humaine</strong> — Mathieu ouvre le dossier dans Notion, vérifie en 5-10 min, ajuste les anomalies, puis télécharge la version finale qu'il envoie lui-même à la fédération.</div></div>
+          </div>
+
+          <h4>Outils & coûts mensuels</h4>
+          <p>
+            <span class="tag tag-tech">Make (orchestration)</span>
+            <span class="tag tag-tech">N2F (export API ou CSV)</span>
+            <span class="tag tag-tech">Claude API (Sonnet 4 + Vision pour OCR)</span>
+            <span class="tag tag-tech">Notion (interface validation)</span>
+            <span class="tag tag-tech">Google Sheet (lecture)</span>
+          </p>
+
+          <table class="data-table">
+            <thead><tr><th>Métrique</th><th>Valeur</th></tr></thead>
+            <tbody>
+              <tr><td>Heures de setup</td><td class="numeric">~20 h</td></tr>
+              <tr><td>Coût mensuel récurrent (Claude API + Make)</td><td class="numeric">~18 €</td></tr>
+              <tr><td>Heures économisées / dossier</td><td class="numeric">2,5 h</td></tr>
+              <tr><td>Volume / saison</td><td class="numeric">10 dossiers</td></tr>
+              <tr><td>Heures économisées / saison</td><td class="numeric">25 h</td></tr>
+              <tr><td>€ économisés / saison (à 80 €/h)</td><td class="numeric">2 000 €</td></tr>
+              <tr><td>Bénéfice secondaire</td><td>Réduction des allers-retours fédération sur dossiers mal formatés (estimé +0,5h × 10 dossiers)</td></tr>
+              <tr><td>Coût total an 1</td><td class="numeric">~1 000 €</td></tr>
+              <tr><td><strong>ROI an 1</strong></td><td class="numeric"><strong>~100 %</strong></td></tr>
+              <tr><td><strong>Payback</strong></td><td class="numeric"><strong>5 mois</strong></td></tr>
+            </tbody>
+          </table>
+
+          <h4>Risques & garde-fous</h4>
+          <p>(1) <strong>OCR des factures pas fiable à 100 %</strong> — l'IA extrait, l'humain valide systématiquement les montants > 100 €. (2) Aucune facture ne quitte l'environnement de Mathieu (cloisonnement RGPD) hors appel API Claude qui est sous DPA Anthropic. (3) Si la fédération impose une plateforme spécifique d'export (au-delà de N2F), revalider le pipeline. (4) Conservation locale chiffrée des dossiers générés (Notion + backup Drive privé).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTO 3 -->
+    <section id="auto3">
+      <div class="auto-card">
+        <header class="auto-header">
+          <div>
+            <span class="auto-tag">Automatisation #3 · Quick Win</span>
+            <h3>Workspace de communication multi-publics</h3>
+          </div>
+          <span class="score-badge score-good"><span class="score-value">A</span><span class="score-label">priorité</span></span>
+        </header>
+        <div class="auto-body">
+          <p><strong>Objectif business.</strong> Centraliser et automatiser les communications récurrentes vers les athlètes, sous-traitants (kiné, préparation mentale) et la fédération, avec des templates PACO Master Prompt préconfigurés et des séquences de rappels saisonniers.</p>
+
+          <h4>Schéma du workflow</h4>
+          <div class="card" style="background: var(--bg-subtle); padding: 20px;">
+            <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-content"><strong>Source de vérité unique</strong> — Notion database centralisée : Athlètes (contacts, blessures, plan saison), Sous-traitants (coordonnées, périodes d'intervention), Compétitions (calendrier extrait du Sheet fédé en lecture).</div></div>
+            <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-content"><strong>Templates PACO</strong> — Bibliothèque de 12 templates de messages préconfigurés (briefing pré-comp J-7, J-1, debriefing post-comp, point hebdo athlète, demande de RDV kiné, briefing prép mentale, reporting fédé). Chaque template adapté en français/anglais.</div></div>
+            <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-content"><strong>Déclenchement IA</strong> — Make détecte les échéances dans Notion (J-7 d'une compétition, fin de mois, blessure signalée). Claude API personnalise le template avec le contexte spécifique (nom, palmarès récent, dernières observations terrain).</div></div>
+            <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-content"><strong>Brouillon dans Brevo</strong> — Le message rédigé arrive en draft dans Brevo (pour les emails) ou en brouillon WhatsApp Business (pour les athlètes). Pas d'envoi automatique.</div></div>
+            <div class="flow-step"><div class="flow-step-num">5</div><div class="flow-step-content"><strong>Validation 30 secondes</strong> — Mathieu ouvre le draft sur mobile, lit, ajuste si besoin, envoie. Temps moyen 30 sec vs 5-10 min de rédaction « from scratch ».</div></div>
+          </div>
+
+          <h4>Outils & coûts mensuels</h4>
+          <p>
+            <span class="tag tag-tech">Notion (base centrale)</span>
+            <span class="tag tag-tech">Make (orchestration)</span>
+            <span class="tag tag-tech">Claude API (templating PACO)</span>
+            <span class="tag tag-tech">Brevo (emails)</span>
+            <span class="tag tag-tech">WhatsApp Business API (optionnel)</span>
+          </p>
+
+          <table class="data-table">
+            <thead><tr><th>Métrique</th><th>Valeur</th></tr></thead>
+            <tbody>
+              <tr><td>Heures de setup (templates + base Notion + workflows)</td><td class="numeric">~24 h</td></tr>
+              <tr><td>Coût mensuel récurrent</td><td class="numeric">~25 €</td></tr>
+              <tr><td>Heures économisées / sem en saison</td><td class="numeric">~3 h</td></tr>
+              <tr><td>Saison effective</td><td class="numeric">26 semaines</td></tr>
+              <tr><td>Heures économisées / saison</td><td class="numeric">78 h</td></tr>
+              <tr><td>€ économisés / saison (à 80 €/h)</td><td class="numeric">6 240 €</td></tr>
+              <tr><td>Bénéfice qualitatif</td><td>Régularité de communication accrue ; réduction du stress mental de Mathieu ; meilleure perception athlètes/sous-traitants/fédé</td></tr>
+              <tr><td>Coût total an 1</td><td class="numeric">~1 350 €</td></tr>
+              <tr><td><strong>ROI an 1</strong></td><td class="numeric"><strong>~360 %</strong></td></tr>
+              <tr><td><strong>Payback</strong></td><td class="numeric"><strong>2 mois</strong></td></tr>
+            </tbody>
+          </table>
+
+          <h4>Risques & garde-fous</h4>
+          <p>(1) <strong>Confidentialité athlètes</strong> — leurs données médicales (blessures, suivi mental) restent dans Notion privé chiffré. Les appels Claude API n'envoient que le contexte nécessaire pour générer le message (pas le dossier médical complet). (2) <strong>Validation systématique</strong> avant envoi — l'IA propose, l'humain dispose. (3) <strong>Backup en cas de panne</strong> — la base Notion reste consultable manuellement à tout moment, l'envoi reste possible directement depuis Mathieu sans le pipeline. (4) <strong>RGPD</strong> — registre de traitement à formaliser en J+30, consentement documenté des athlètes pour le stockage des données.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <header class="section-header">
+        <span class="kicker">Bloc 04</span>
+        <h2>Stack technique recommandée</h2>
+        <p class="lead">Sobriété technique. La plus simple stack qui résout 80 % du besoin.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Catégorie</th><th>Outil retenu</th><th>Coût mensuel</th><th>Justification</th></tr></thead>
+        <tbody>
+          <tr><td>Orchestration</td><td><strong>Make (Integromat)</strong></td><td>~16 €/mois (tier Core)</td><td>Plus simple que n8n self-hosted. Pas de DevOps. Interface visuelle. Compatible solopreneur.</td></tr>
+          <tr><td>LLM principal</td><td><strong>Claude API (Sonnet 4)</strong></td><td>~25 €/mois (estimation usage)</td><td>Cohérence avec stack Master Prompt. Excellent en rédaction française et raisonnement structuré.</td></tr>
+          <tr><td>Base de données</td><td><strong>Notion</strong></td><td>~10 €/mois (tier Plus)</td><td>Mathieu utilise déjà Notion. Pas de courbe d'apprentissage supplémentaire. Sources de vérité unifiées.</td></tr>
+          <tr><td>Formulaires entrants</td><td><strong>Tally</strong></td><td>0 € (tier gratuit)</td><td>Simple, intégrations natives Make + Notion.</td></tr>
+          <tr><td>Emailing</td><td><strong>Brevo</strong></td><td>0 € (jusqu'à 300 emails/jour)</td><td>Cohérence avec stack Master Prompt. Suffisant pour la volumétrie de Mathieu.</td></tr>
+          <tr><td>APIs métier</td><td>Booking.com Affiliate API · Google Places · Google Maps · WhatsApp Business</td><td>~10 €/mois</td><td>Pay-as-you-go, faible coût.</td></tr>
+          <tr><td><strong>Total mensuel</strong></td><td>—</td><td><strong>~65 €/mois</strong></td><td>Coût récurrent total (un fois les setup amortis)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warning">
+        <strong>Ce qu'on N'utilise PAS et pourquoi.</strong> Pas de n8n self-hosted (DevOps inutile pour ce volume). Pas de RAG/Pinecone (volumétrie trop faible). Pas de fine-tuning (les prompts PACO suffisent). Pas d'agent autonome multi-tâches (risque opérationnel disproportionné). Pas de chatbot client (zéro use case justifié). La discipline technique consiste à savoir <em>ne pas</em> empiler les briques inutiles.
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <header class="section-header">
+        <span class="kicker">Bloc 05</span>
+        <h2>Roadmap 90 jours</h2>
+        <p class="lead">Trois phases : préparer le terrain, déployer les automatisations, stabiliser et mesurer.</p>
+      </header>
+
+      <h3>Phase 1 — Foundations (J1 → J30)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Centralisation contacts athlètes + sous-traitants dans Notion</td><td>Mathieu + Master Prompt</td><td>J5</td><td>Base Notion peuplée et structurée</td></tr>
+          <tr><td>Confirmation FFS sur autorisation outils tiers (data fédé)</td><td>Mathieu (DTN)</td><td>J10</td><td>Accord écrit ou validation orale documentée</td></tr>
+          <tr><td>Setup Make + comptes API (Booking, Google, Anthropic)</td><td>Master Prompt</td><td>J12</td><td>Comptes actifs, clés générées et stockées</td></tr>
+          <tr><td>Cartographie détaillée des templates PACO (12 templates)</td><td>Master Prompt + Mathieu</td><td>J20</td><td>Bibliothèque PACO validée par Mathieu</td></tr>
+          <tr><td>Définition de la grille de validation humaine</td><td>Master Prompt + Mathieu</td><td>J15</td><td>Document interne 1 page</td></tr>
+          <tr><td>Registre de traitement RGPD léger formalisé</td><td>Mathieu</td><td>J25</td><td>Registre signé</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Phase 2 — Déploiement automatisations (J31 → J60)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Build Auto #1 — Briefing déplacement</td><td>Master Prompt</td><td>J40</td><td>Workflow run réussi sur 1 cas test</td></tr>
+          <tr><td>Test Auto #1 sur 2 déplacements réels</td><td>Mathieu</td><td>J50</td><td>2 briefings produits validés</td></tr>
+          <tr><td>Build Auto #2 — Pipeline défraiement N2F</td><td>Master Prompt</td><td>J50</td><td>Workflow run réussi sur 1 dossier test</td></tr>
+          <tr><td>Build Auto #3 — Communication multi-publics</td><td>Master Prompt</td><td>J55</td><td>5 templates PACO opérationnels avec triggers</td></tr>
+          <tr><td>Formation Mathieu (2x 90 min)</td><td>Master Prompt</td><td>J60</td><td>Mathieu autonome sur les 3 workflows</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Phase 3 — Stabilisation & mesure (J61 → J90)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Test Auto #2 sur 1 dossier de défraiement réel</td><td>Mathieu + Master Prompt</td><td>J70</td><td>Dossier accepté par fédé sans retours</td></tr>
+          <tr><td>Itération sur Auto #3 selon retours athlètes</td><td>Master Prompt</td><td>J75</td><td>Templates PACO ajustés v2</td></tr>
+          <tr><td>Reporting hebdo des 3 workflows (logs, erreurs, coûts)</td><td>Master Prompt</td><td>continu</td><td>Tableau de bord Notion mis à jour</td></tr>
+          <tr><td>Bilan ROI après 1 saison partielle</td><td>Master Prompt + Mathieu</td><td>J90</td><td>Rapport quantifié (heures gagnées, € économisés, taux d'erreur)</td></tr>
+          <tr><td>Décision sur cas d'usage différés (P2/P3 backlog)</td><td>Mathieu</td><td>J90</td><td>Backlog priorisé pour saison suivante</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ROI -->
+    <section id="roi">
+      <header class="section-header">
+        <span class="kicker">Bloc 06</span>
+        <h2>Projection ROI à 12 mois</h2>
+        <p class="lead">Coûts cumulés vs gains cumulés. Point d'équilibre atteint à J+90.</p>
+      </header>
+
+      <div class="chart-card">
+        <div class="chart-title">Courbe coût cumulé vs gain cumulé sur 12 mois</div>
+        <p class="chart-caption">Hypothèse : coût d'opportunité 80 €/h, saison effective d'octobre à mars (6 mois actifs), période hors saison à demi-charge.</p>
+        <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- Axes -->
+          <line x1="60" y1="320" x2="690" y2="320" stroke="var(--text-primary)" stroke-width="1.5"/>
+          <line x1="60" y1="40" x2="60" y2="320" stroke="var(--text-primary)" stroke-width="1.5"/>
+          <!-- Y axis ticks -->
+          <g font-family="Inter" font-size="10" fill="var(--text-muted)">
+            <text x="55" y="324" text-anchor="end">0 €</text>
+            <text x="55" y="264" text-anchor="end">5 K€</text>
+            <text x="55" y="204" text-anchor="end">10 K€</text>
+            <text x="55" y="144" text-anchor="end">15 K€</text>
+            <text x="55" y="84" text-anchor="end">20 K€</text>
+          </g>
+          <!-- X axis ticks -->
+          <g font-family="Inter" font-size="10" fill="var(--text-muted)" text-anchor="middle">
+            <text x="60" y="338">M0</text>
+            <text x="180" y="338">M3</text>
+            <text x="300" y="338">M6</text>
+            <text x="420" y="338">M9</text>
+            <text x="540" y="338">M12</text>
+            <text x="690" y="338">→</text>
+          </g>
+          <!-- Grid horizontale -->
+          <g stroke="var(--border)" stroke-dasharray="2 4">
+            <line x1="60" y1="264" x2="690" y2="264"/>
+            <line x1="60" y1="204" x2="690" y2="204"/>
+            <line x1="60" y1="144" x2="690" y2="144"/>
+            <line x1="60" y1="84" x2="690" y2="84"/>
+          </g>
+          <!-- Coût cumulé (rouge clair) -->
+          <path d="M60,320 L90,290 L150,280 L210,275 L270,272 L330,270 L390,267 L450,265 L510,262 L570,260 L630,258" fill="none" stroke="var(--danger)" stroke-width="2.5"/>
+          <!-- Gain cumulé (vert) -->
+          <path d="M60,320 L90,318 L120,310 L150,290 L180,260 L210,225 L240,190 L270,160 L300,130 L330,108 L360,95 L390,82 L450,75 L510,72 L570,72 L630,72" fill="none" stroke="var(--success)" stroke-width="2.5"/>
+          <!-- Point de croisement / breakeven -->
+          <circle cx="180" cy="260" r="5" fill="var(--accent)" stroke="var(--text-primary)" stroke-width="2"/>
+          <text x="190" y="252" font-family="Inter" font-size="11" font-weight="600" fill="var(--text-primary)">Breakeven · ~M3</text>
+          <!-- Labels lignes -->
+          <text x="640" y="262" font-family="Inter" font-size="11" fill="var(--danger)" font-weight="600">Coût cumulé</text>
+          <text x="640" y="76" font-family="Inter" font-size="11" fill="var(--success)" font-weight="600">Gain cumulé</text>
+          <!-- Title -->
+          <text x="375" y="20" font-family="Inter" font-size="13" font-weight="600" fill="var(--text-primary)" text-anchor="middle">Économies vs investissement (€ cumulés)</text>
+        </svg>
+      </div>
+
+      <div class="card-row">
+        <div class="kpi"><span class="kpi-label">Coût total an 1</span><span class="kpi-value">~3 600 €</span><span class="kpi-sub">Setup + abonnements 12 mois</span></div>
+        <div class="kpi"><span class="kpi-label">Gain monétaire an 1</span><span class="kpi-value">~15 200 €</span><span class="kpi-sub">~190h × 80 €/h</span></div>
+        <div class="kpi"><span class="kpi-label">ROI net an 1</span><span class="kpi-value">+322 %</span><span class="kpi-sub">((Gain − Coût) / Coût)</span></div>
+        <div class="kpi"><span class="kpi-label">Payback global</span><span class="kpi-value">~3 mois</span><span class="kpi-sub">Moyenne pondérée</span></div>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>Lecture stratégique du ROI.</strong> Le ROI monétaire (322 %) est secondaire. Le vrai gain est le redéploiement des 190 heures libérées vers P2 (personal branding), P3 (camps) et P4 (documentaire) — qui sont, eux, des projets à effet de levier multiple. Si Mathieu consacre ne serait-ce que 50 heures de plus à P3 par an, il peut faire passer les Rookie Camps de 1 à 2 éditions, ce qui démultiplie le ROI réel d'un ordre de grandeur.
+      </div>
+    </section>
+
+    <!-- GOUVERNANCE -->
+    <section id="gouvernance">
+      <header class="section-header">
+        <span class="kicker">Bloc 07</span>
+        <h2>Gouvernance, sécurité & risques</h2>
+        <p class="lead">Cadrer ce qui doit rester sous contrôle humain et institutionnel.</p>
+      </header>
+
+      <h3>Cartographie des risques</h3>
+      <table class="data-table">
+        <thead><tr><th>Risque</th><th>Probabilité</th><th>Impact</th><th>Mesure de mitigation</th></tr></thead>
+        <tbody>
+          <tr><td>Envoi automatique d'un message non validé à la fédé</td><td>Faible</td><td>Très élevé (rep. institutionnelle)</td><td><strong>Validation humaine systématique</strong> avant tout envoi externe. Aucune action sortante automatique vers la FFS.</td></tr>
+          <tr><td>Fuite de données médicales d'athlètes</td><td>Faible</td><td>Très élevé (RGPD + éthique)</td><td>Cloisonnement strict des données médicales (Notion privé chiffré). Aucune transmission API.</td></tr>
+          <tr><td>Erreur OCR sur facture → écart comptable</td><td>Moyenne</td><td>Moyen</td><td>Validation manuelle obligatoire des factures > 100 €. Détection d'anomalies par IA.</td></tr>
+          <tr><td>Coût API Claude qui dérape</td><td>Faible</td><td>Faible</td><td>Cap mensuel sur Make (alerte > 30 €/mois). Surveillance dans tableau de bord.</td></tr>
+          <tr><td>Panne d'un service tiers (Make, Booking, Google)</td><td>Moyenne</td><td>Faible</td><td>Backup process manuel toujours opérationnel. Mathieu n'est pas dépendant à 100 %.</td></tr>
+          <tr><td>Refus de la fédé sur l'usage d'IA tiers</td><td>Faible-moyenne</td><td>Élevé</td><td>Validation institutionnelle préalable J+10. Si refus partiel, déployer en local pour les données fédé.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>RGPD & confidentialité</h3>
+      <p>Trois principes opérationnels : <strong>(1) minimisation</strong> des données envoyées aux APIs tierces (jamais de données médicales, jamais de noms quand ce n'est pas strictement nécessaire) ; <strong>(2) DPA</strong> en place avec Anthropic (Claude API), Make et Brevo — vérifier la conformité au lancement ; <strong>(3) registre de traitement</strong> léger formalisé en J+25 avec finalités, durées de conservation, droits des personnes.</p>
+
+      <h3>Versioning & maintenance</h3>
+      <p>Chaque workflow Make est versionné. Les templates PACO sont versionnés dans Notion (v1.0, v1.1...). Mathieu n'édite pas les workflows directement — il signale, Master Prompt édite et notifie. Cycle de revue mensuel des 3 workflows (15 min/mois) pour vérifier les coûts API, les erreurs détectées, les ajustements à faire.</p>
+
+      <h3>Score de maturité IA cible à 12 mois</h3>
+      <table class="data-table">
+        <thead><tr><th>Axe</th><th>J0</th><th>J+90</th><th>J+365</th></tr></thead>
+        <tbody>
+          <tr><td>Data readiness</td><td>13/20</td><td>16/20</td><td>17/20</td></tr>
+          <tr><td>Stack maturity</td><td>9/20</td><td>15/20</td><td>17/20</td></tr>
+          <tr><td>Équipe & compétences</td><td>7/20</td><td>13/20</td><td>15/20</td></tr>
+          <tr><td>Culture & adoption</td><td>14/20</td><td>17/20</td><td>18/20</td></tr>
+          <tr><td>Budget & ROI</td><td>12/20</td><td>15/20</td><td>17/20</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>55/100</strong></td><td><strong>76/100</strong></td><td><strong>84/100</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-accent">
+        <strong>Mot de la fin.</strong> Ce plan n'est pas un projet de transformation digitale. C'est un plan d'hygiène opérationnelle qui rend possible la vraie ambition : que Mathieu Siboni soit, dans 4 ans, le coach français le plus visible et sollicité à l'approche des JO 2030 dans les Alpes — sans avoir passé ses années à saisir des factures et chercher des hôtels. L'IA libère du temps. Le temps libéré construit un actif.
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

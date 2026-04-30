@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratégie Marketing & Communication — HelioToit énergie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574; --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; padding: 0; counter-reset: section; }
+.toc li { counter-increment: section; padding: 6px 0; border-left: 2px solid var(--border); padding-left: 12px; }
+.toc li::before { content: counter(section, decimal-leading-zero); color: var(--text-muted); font-weight: 600; margin-right: 8px; font-size: 0.75rem; }
+.toc a { color: var(--text-body); text-decoration: none; }
+.toc a:hover { color: var(--text-primary); }
+.content { max-width: 920px; }
+.cover { padding: 80px 0 64px; border-bottom: 2px solid var(--text-primary); margin-bottom: 64px; }
+.cover-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 16px; }
+.cover h1 { font-size: 2.75rem; color: var(--text-primary); font-weight: 600; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.02em; }
+.cover p.subtitle { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; max-width: 720px; }
+.cover-meta { display: flex; gap: 40px; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-muted); }
+.cover-meta strong { color: var(--text-primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+section { margin-bottom: 80px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; }
+h3 { font-size: 1.25rem; color: var(--text-primary); font-weight: 600; margin: 32px 0 12px; }
+h4 { font-size: 1rem; color: var(--text-primary); font-weight: 600; margin: 20px 0 8px; }
+p { margin-bottom: 12px; }
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 720px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; box-shadow: var(--shadow-sm); }
+.card h4 { margin-top: 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 8px; }
+.kpi-value { font-size: 2rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.875rem; margin-top: 8px; color: var(--text-muted); }
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 1rem; }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout strong { color: var(--text-primary); }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 24px 0; }
+th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: none; }
+ul.bullets { list-style: none; padding-left: 0; }
+ul.bullets li { padding: 6px 0 6px 24px; position: relative; }
+ul.bullets li::before { content: "→"; position: absolute; left: 0; color: var(--accent-dark); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.6875rem; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.tag-strength { background: var(--success-soft); color: var(--success); }
+.tag-weak { background: var(--danger-soft); color: var(--danger); }
+.tag-neutral { background: var(--bg-subtle); color: var(--text-muted); }
+.tag-warm { background: var(--accent-soft); color: var(--accent-dark); }
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+.chart-caption { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px; }
+.chart-card svg { width: 100%; height: auto; }
+.exec-summary { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 40px; }
+.exec-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: start; }
+@media (max-width: 720px) { .exec-grid { grid-template-columns: 1fr; } }
+.exec-score-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; text-align: center; }
+.exec-score-num { font-size: 3.75rem; font-weight: 700; line-height: 1; color: var(--accent-dark); }
+.exec-score-label { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; }
+.persona-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 16px 0; }
+.persona-card .persona-head { display: flex; gap: 16px; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.persona-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-dark); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.25rem; }
+.persona-card h4 { margin: 0; }
+.persona-card .persona-id { font-size: 0.875rem; color: var(--text-muted); }
+.gantt { width: 100%; margin: 24px 0; }
+.gantt-row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--border); align-items: center; }
+.gantt-label { font-size: 0.875rem; color: var(--text-body); }
+.gantt-bar { display: flex; height: 28px; border-radius: 4px; overflow: hidden; }
+.gantt-bar > div { display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white; font-weight: 600; }
+footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--text-muted); }
+@media print {
+  body { background: white; }
+  .layout { grid-template-columns: 1fr; padding: 0; max-width: 100%; }
+  .toc { display: none; }
+  .card, .chart-card, .kpi { break-inside: avoid; box-shadow: none; }
+  section { margin-bottom: 40px; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#exec">Résumé exécutif</a></li>
+    <li><a href="#position">Positionnement & messaging</a></li>
+    <li><a href="#persona">Persona & JTBD</a></li>
+    <li><a href="#journey">Customer journey</a></li>
+    <li><a href="#mix">Mix d'acquisition</a></li>
+    <li><a href="#contenu">Contenu & PESO</a></li>
+    <li><a href="#funnel">Funnel & commercial</a></li>
+    <li><a href="#roadmap">Roadmap 90 jours</a></li>
+  </ol>
+</aside>
+
+<main class="content">
+
+<header class="cover">
+  <div class="cover-eyebrow">Stratégie Marketing & Communication · Pack IA Activité</div>
+  <h1>HelioToit énergie</h1>
+  <p class="subtitle">Positionnement premium niche, mix d'acquisition multicanal Bullseye, funnel & plan 90 jours chiffré. Cible : 25 chantiers/an à panier moyen 22 K€.</p>
+  <div class="cover-meta">
+    <div><strong>Client</strong>Mathis Amazigh, gérant</div>
+    <div><strong>Société</strong>HelioToit énergie · SARL · Vallauris (06)</div>
+    <div><strong>Date</strong>29 avril 2026</div>
+    <div><strong>Consultant</strong>Michaël Lopez · Master Prompt</div>
+  </div>
+</header>
+
+<!-- ─────────── EXEC ─────────── -->
+<section id="exec">
+<div class="exec-summary">
+<div class="exec-grid">
+<div>
+<div class="kicker">Résumé exécutif</div>
+<h2 style="font-size:1.5rem;color:var(--text-primary);margin-bottom:24px">Concentrer les efforts sur 3 canaux, pas 8. Prioriser le local SEO, le référral structuré, et la prescription.</h2>
+
+<p><strong>Déclaration de positionnement.</strong> HelioToit énergie est l'installateur photovoltaïque pensé pour les propriétaires de villas exigeantes de la Côte d'Azur, qui ne veulent ni de la sous-traitance opaque des grands groupes, ni du dépannage approximatif d'un artisan multi-cordes. Notre méthode <em>Conciergerie Solaire</em> garantit 5 ans de suivi de production avec engagement de performance contractuel, sur un parc Dualsun + Solplanet sélectionné pour durer 25 ans.</p>
+
+<p><strong>Top 3 canaux retenus (Bullseye Core) :</strong></p>
+<ul class="bullets">
+<li><strong>Local SEO + Google Business Profile</strong> : 89% des projets PV démarrent par une recherche Google. Construction d'autorité locale sur « installateur photovoltaïque Cannes/Antibes/Mougins/Cap d'Antibes ».</li>
+<li><strong>Programme de parrainage structuré</strong> : 500€/parrain + 500€ remise filleul. Référral converti à 35-50% vs 2-5% pour le froid digital.</li>
+<li><strong>Prescription B2B (architectes, courtiers immo, agences premium, paysagistes)</strong> : 12-15 partenaires actifs = 1-2 leads qualifiés/mois en année 1, 3-4/mois en année 2.</li>
+</ul>
+
+<p><strong>Budget total demandé sur 12 mois : 18-24 K€</strong> (dont 60% sur les 3 canaux Core, 25% sur 2 canaux Promising à tester, 15% en réserve test).</p>
+<p><strong>NSM (North Star Metric) : nombre de devis signés / mois.</strong> Cible 12 mois : 2,5/mois (contre ~1/mois actuel via bouche-à-oreille).</p>
+</div>
+<div>
+<div class="exec-score-box">
+<div class="exec-score-label">Score viabilité stratégie</div>
+<div class="exec-score-num">71</div>
+<div class="exec-score-label">/ 100 — Solide</div>
+</div>
+<div style="margin-top:16px;font-size:0.875rem;color:var(--text-muted);text-align:center">Stratégie réaliste pour budget et capacité solo.<br>Risque principal : discipline d'exécution sur 12 mois.</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ─────────── POSITIONNEMENT ─────────── -->
+<section id="position">
+<header class="section-header">
+<div class="kicker">Bloc 01</div>
+<h2>Positionnement stratégique & messaging</h2>
+<p class="lead">Framework Dunford à 5 axes. Polarisant par construction : la majorité des installateurs concurrents ne pourront pas répliquer.</p>
+</header>
+
+<h3>Déclaration de positionnement structurée</h3>
+
+<table>
+<thead>
+<tr><th>Axe Dunford</th><th>Réponse pour HelioToit</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. Alternatives concurrentielles</strong><br>(Que ferait le client s'il n'achetait pas chez nous ?)</td><td>Soit signer chez un major (EDF ENR, Hellio, Effy) — process froid, sous-traitance non assumée, cycle 4-6 mois. Soit chez un artisan local généraliste (électricien + plomberie + PV) qui fera correctement la pose mais sans SAV structuré. Soit ne rien faire et attendre encore (la majorité du segment cible).</td></tr>
+<tr><td><strong>2. Attributs uniques</strong><br>(Ce que les alternatives n'ont pas)</td><td>• Spécialisation exclusive PV résidentiel haut de gamme<br>• Méthode <em>Conciergerie Solaire</em> propriétaire (suivi 5 ans, 4 visites/an, engagement performance)<br>• Devis détaillé en 72h avec étude solaire personnalisée (vs 7-15 jours majors)<br>• Interlocuteur unique de A à Z (le gérant signe le devis et suit le chantier)<br>• Sélection matériel 25 ans : Dualsun (français) + Solplanet (Tier 1)</td></tr>
+<tr><td><strong>3. Valeur résultante</strong></td><td>Pour le client : un projet PV qui produit comme prévu pendant 25 ans, sans bricolage de SAV, sans dépendance à un call-center. Économie d'énergie projetée garantie contractuellement (engagement performance). Valorisation patrimoniale à la revente (+3 à 5% selon notaires PACA).</td></tr>
+<tr><td><strong>4. Best-fit customers</strong></td><td>Propriétaires de maisons individuelles 200-500 m² (et villas) sur l'arc Mougins / Cap d'Antibes / Vallauris / Mouans-Sartoux / Valbonne / Le Cannet, foyers 8 000-15 000 kWh/an, budget projet 22-50 K€, sensibles à la qualité durable et à la transparence, méfiants envers les majors et les démarcheurs téléphoniques.</td></tr>
+<tr><td><strong>5. Catégorie de marché</strong></td><td>« <em>Installateur photovoltaïque résidentiel premium avec engagement de performance</em> » — pas « installateur PV » tout court. La précision de catégorie autorise un pricing 30-50% supérieur au généraliste.</td></tr>
+</tbody>
+</table>
+
+<h3>Tagline & USP</h3>
+
+<div class="grid grid-2">
+<div class="card">
+<h4>Tagline (12 mots)</h4>
+<p style="font-size:1.5rem;font-family:var(--font-serif);color:var(--text-primary);font-style:italic;line-height:1.3">« Le solaire qui dure 25 ans, pas 5 hivers. »</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:12px">Polarisant : implique que les concurrents low-cost ne durent pas. Crédible parce qu'on vend du Dualsun garanti 30 ans.</p>
+</div>
+<div class="card">
+<h4>USP (Unique Selling Proposition)</h4>
+<p>Le seul installateur photovoltaïque sur la Côte d'Azur qui s'engage contractuellement sur la production réelle de votre installation pendant 5 ans, avec visite technique trimestrielle incluse.</p>
+</div>
+</div>
+
+<h3>Proof points (preuves tangibles à activer)</h3>
+
+<table>
+<thead><tr><th>Proof point</th><th>Format de présentation</th><th>Action requise</th></tr></thead>
+<tbody>
+<tr><td>Engagement performance contractuel <strong>5 ans</strong></td><td>Mentionné en page d'accueil + clause spécifique sur le devis + extrait visible du contrat</td><td>Rédaction clause juridique avec un avocat (300-500€)</td></tr>
+<tr><td><strong>Installateur certifié RGE QualiPV</strong> n° XXX</td><td>Logo officiel + numéro de certificat</td><td>Vérifier la certification, ou la finaliser en priorité absolue</td></tr>
+<tr><td>Matériel <strong>Dualsun (fabriqué en France)</strong> garanti 30 ans</td><td>Logo Dualsun en page produit + lien vers garantie constructeur</td><td>Devenir partenaire référencé Dualsun (gratuit, formulaire sur dualsun.com)</td></tr>
+<tr><td><strong>Capital social recapitalisé</strong> à 15 K€</td><td>Mention en pied de page de tous les supports + SIREN visible</td><td>Recapitalisation préalable (cf. audit business)</td></tr>
+<tr><td>Méthode <strong>Conciergerie Solaire</strong> (marque déposée)</td><td>Page dédiée expliquant les 4 visites/an + monitoring + engagement</td><td>Dépôt INPI 250€ pour la méthode (+ rédaction de la méthode formelle)</td></tr>
+</tbody>
+</table>
+
+<h3>Brand voice — 3 attributs maximum</h3>
+
+<div class="grid grid-3">
+<div class="card">
+<h4>Expert</h4>
+<p><strong>On dit :</strong> chiffres précis, méthode décrite, garanties contractuelles, matériel cité par marque et série.</p>
+<p><strong>On ne dit pas :</strong> « les meilleurs panneaux du marché », « solution adaptée à vos besoins », « équipe d'experts ». Vide.</p>
+</div>
+<div class="card">
+<h4>Direct</h4>
+<p><strong>On dit :</strong> « Notre devis sera détaillé. Si un autre est moins cher, demandez ce qu'il enlève. »</p>
+<p><strong>On ne dit pas :</strong> « N'hésitez pas à nous contacter pour un échange en toute simplicité. »</p>
+</div>
+<div class="card">
+<h4>Local</h4>
+<p><strong>On dit :</strong> noms de communes ciblées, références à la Côte d'Azur (1 700 kWh/kWc/an, mistral), photos de toitures locales identifiables.</p>
+<p><strong>On ne dit pas :</strong> du contenu marketing générique copiable par n'importe quel installateur français.</p>
+</div>
+</div>
+
+</section>
+
+<!-- ─────────── PERSONA ─────────── -->
+<section id="persona">
+<header class="section-header">
+<div class="kicker">Bloc 02</div>
+<h2>Persona stratégique & Jobs-To-Be-Done</h2>
+<p class="lead">1 persona principal, 1 secondaire (prescripteur). Pas plus — la dispersion tue la stratégie.</p>
+</header>
+
+<div class="persona-card">
+<div class="persona-head">
+<div class="persona-avatar">PA</div>
+<div>
+<h4>Pierre-Antoine, 54 ans — propriétaire de villa</h4>
+<div class="persona-id">Persona principal · 75% des efforts marketing</div>
+</div>
+</div>
+
+<table>
+<tbody>
+<tr><td><strong>Démographie</strong></td><td>54 ans, marié, 2 enfants dont 1 encore à la maison · Cadre dirigeant ou chef d'entreprise · Revenu foyer 130-220 K€/an · Propriétaire d'une villa de 280 m² avec piscine sur Mougins</td></tr>
+<tr><td><strong>Contexte d'achat</strong></td><td>Reçoit sa facture EDF de l'été 2025 : 4 200 €/an et en hausse continue. Sa villa consomme 13 000 kWh (climatisation, piscine, VE chez son fils). Il a déjà reçu 2 démarcheurs PV qu'il a éconduits. Sa décision n'est pas urgente mais il commence à comparer activement.</td></tr>
+<tr><td><strong>JTBD functional</strong></td><td>Réduire significativement la facture d'électricité de la villa, sans dégrader le confort. Sécuriser un actif patrimonial (la villa) face à la hausse durable de l'énergie.</td></tr>
+<tr><td><strong>JTBD emotional</strong></td><td>Se sentir <em>maître</em> de son projet — pas pris pour un pigeon, pas dépendant d'un call-center à 800 km. Avoir l'esprit tranquille pour 25 ans.</td></tr>
+<tr><td><strong>JTBD social</strong></td><td>Être perçu par sa famille et son cercle (voisins, amis du club) comme quelqu'un de <em>responsable</em> — qui fait des choix avisés, durables, et qui ne s'est pas fait avoir.</td></tr>
+<tr><td><strong>Pains hiérarchisés</strong></td><td>1. Peur de l'arnaque PV (médiatisée, UFC-Que Choisir, 60M Conso) → frein #1<br>2. Difficulté à comparer les devis (jargon technique, prix qui varient ×3) → frustration<br>3. Délai trop long avec les majors (4-6 mois) → impatience</td></tr>
+<tr><td><strong>Gains hiérarchisés</strong></td><td>1. Économies tangibles + autoconso 70%+ avec batterie<br>2. Tranquillité : un installateur local, joignable, qui revient si problème<br>3. Valorisation du bien (revente)</td></tr>
+<tr><td><strong>Déclencheur d'achat</strong></td><td>Réception facture EDF annuelle (sept-oct), discussion entre amis chez qui le PV marche bien, projet d'achat VE imminent</td></tr>
+<tr><td><strong>Sources d'information</strong></td><td>Google (« panneaux solaires Mougins prix »), recommandation pair (voisin déjà équipé), Hellowatt/Quelle Energie pour les comparatifs, Le Figaro Immobilier ou Capital pour les sujets patrimoniaux</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="persona-card">
+<div class="persona-head">
+<div class="persona-avatar">SC</div>
+<div>
+<h4>Sophie, 41 ans — architecte / courtier immo / paysagiste</h4>
+<div class="persona-id">Persona secondaire · prescripteur · 25% des efforts marketing</div>
+</div>
+</div>
+
+<table>
+<tbody>
+<tr><td><strong>Profil</strong></td><td>Architecte d'intérieur ou courtière en immobilier de prestige, gère 30-80 dossiers/an de villas premium sur la Côte d'Azur. Cherche à enrichir son offre client.</td></tr>
+<tr><td><strong>JTBD</strong></td><td>Recommander un installateur PV fiable à ses clients, sans risquer sa propre réputation. Toucher éventuellement une commission ou un apport d'affaires.</td></tr>
+<tr><td><strong>Pain principal</strong></td><td>Aucun installateur PV crédible dans son carnet d'adresses (les majors sont trop froids, les artisans trop variables). Le sujet PV remonte de plus en plus chez ses clients.</td></tr>
+<tr><td><strong>Gain attendu</strong></td><td>Service de qualité pour ses clients + commission/apport (200-500€ par dossier signé) + différenciation de son propre service.</td></tr>
+<tr><td><strong>Comment l'atteindre</strong></td><td>Approche directe (courrier physique + RDV), événements professionnels locaux (CCI Nice, salons immo Cannes), LinkedIn ciblé.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout callout-warning">
+<strong>Attention au persona « jeune actif urbain ».</strong> Tentation possible : viser aussi les 30-40 ans en appartement avec balcon. Mais le ticket moyen est plus faible, le cycle de décision plus rapide (donc moins de marge pour le narrating premium), et la concurrence directe avec les pure-players digitaux (Otovo, Sunology) y est écrasante. Refuser ce segment au moins en année 1.
+</div>
+
+</section>
+
+<!-- ─────────── JOURNEY ─────────── -->
+<section id="journey">
+<header class="section-header">
+<div class="kicker">Bloc 03</div>
+<h2>Customer journey mapping</h2>
+<p class="lead">Parcours en 5 étapes. Identification des points de friction critiques à neutraliser en priorité.</p>
+</header>
+
+<table>
+<thead>
+<tr><th>Étape</th><th>Question client</th><th>Objectif marketing</th><th>Touchpoint recommandé</th><th>Friction critique</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Awareness</strong></td><td>« J'en ai marre de payer 4 200€/an d'électricité »</td><td>Apparaître au moment où il cherche</td><td>Local SEO Google + bouche-à-oreille structuré + presse locale (Nice-Matin)</td><td>Confusion des messages d'installateurs (« on est tous pareils »)</td></tr>
+<tr><td><strong>Consideration</strong></td><td>« Combien ça coûte vraiment ? Qui choisir ? »</td><td>Apparaître dans la liste des 3-4 devis comparés</td><td>Site web avec simulateur ROI + lead magnet « Guide anti-arnaque PV en PACA »</td><td>Méfiance — 2 prospects sur 3 abandonnent à cette étape sans même demander un devis</td></tr>
+<tr><td><strong>Decision</strong></td><td>« Lequel je signe ? »</td><td>Convertir en client signé</td><td>Étude solaire personnalisée + RDV physique chez le client (≠ démarcheur) + comparatif transparent vs concurrents</td><td>Délai de signature 2-6 semaines, période où le concurrent peut casser le prix</td></tr>
+<tr><td><strong>Onboarding</strong></td><td>« Comment ça va se passer ? »</td><td>Activer la valeur, créer le wow effect</td><td>Process documenté livré au client (PDF) + suivi WhatsApp pendant le chantier + photos avant/après</td><td>Anxiété client (chantier sur sa propre toiture)</td></tr>
+<tr><td><strong>Retention/Referral</strong></td><td>« Est-ce que ça marche bien ? Je recommande ? »</td><td>Transformer en ambassadeur</td><td>Conciergerie Solaire (4 visites/an) + sollicitation avis Google à M+1 et M+6 + programme parrainage structuré</td><td>Sans contact post-installation, le client oublie l'installateur en 6 mois</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-accent">
+<strong>Top 3 frictions à neutraliser en priorité (90 jours).</strong>
+<ol style="margin-top:8px;padding-left:24px">
+<li><strong>Méfiance étape Consideration</strong> → publier un Guide anti-arnaque PV PACA (lead magnet PDF, 12-15 pages) qui crédibilise par la pédagogie. Les prospects qui le téléchargent ont 4× plus de probabilité de signer.</li>
+<li><strong>Délai de signature étape Decision</strong> → introduire une « validité devis 30 jours, prix garanti » avec un bonus signataire J+15 (ex: nettoyage gratuit la 2e année). Réduit le délai moyen de 35-50%.</li>
+<li><strong>Oubli post-installation étape Retention</strong> → séquence email automatique J+7, M+1, M+3, M+6, A+1 (cf. livrable IA & automatisations). Activer la sollicitation d'avis Google à M+1 (taux de retour 35-40% sur clients PV).</li>
+</ol>
+</div>
+
+</section>
+
+<!-- ─────────── MIX ACQUISITION ─────────── -->
+<section id="mix">
+<header class="section-header">
+<div class="kicker">Bloc 04</div>
+<h2>Mix d'acquisition multicanal — Bullseye</h2>
+<p class="lead">Sélection rigoureuse parmi les 19 canaux. Concentration sur 3 canaux Core qui captent 70% du budget.</p>
+</header>
+
+<div class="chart-card">
+<div class="chart-title">Bullseye HelioToit — où concentrer les efforts</div>
+<p class="chart-caption">Centre = canaux Core (70% budget). Anneau intermédiaire = canaux à tester (20%). Anneau externe = canaux à NE PAS lancer maintenant (10%, juste connaître).</p>
+<svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+<!-- 3 cercles -->
+<circle cx="300" cy="240" r="200" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+<circle cx="300" cy="240" r="130" fill="#faf3e8" stroke="#d4a574" stroke-width="1"/>
+<circle cx="300" cy="240" r="70" fill="#0a2540"/>
+<!-- Labels zones -->
+<text x="300" y="60" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b" font-weight="600" letter-spacing="1">LONGTAIL — ne pas lancer maintenant</text>
+<text x="300" y="100" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8">TikTok · Influence · Salons nationaux · Outbound froid</text>
+<!-- Promising -->
+<text x="300" y="135" text-anchor="middle" font-family="Inter" font-size="11" fill="#a67c4f" font-weight="600" letter-spacing="1">PROMISING — à tester (20% budget)</text>
+<text x="180" y="170" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c">LinkedIn ciblé</text>
+<text x="180" y="186" text-anchor="middle" font-family="Inter" font-size="9" fill="#64748b">prescripteurs B2B</text>
+<text x="420" y="170" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c">Presse locale</text>
+<text x="420" y="186" text-anchor="middle" font-family="Inter" font-size="9" fill="#64748b">Nice-Matin · Riviera Mag</text>
+<!-- Core -->
+<text x="300" y="232" text-anchor="middle" font-family="Inter" font-size="11" fill="white" font-weight="700" letter-spacing="1">CORE — 70%</text>
+<text x="300" y="250" text-anchor="middle" font-family="Inter" font-size="9" fill="white">SEO local · Référral · Prescripteurs</text>
+<text x="180" y="320" text-anchor="middle" font-family="Inter" font-size="11" fill="#a67c4f" font-weight="600">YouTube local</text>
+<text x="180" y="336" text-anchor="middle" font-family="Inter" font-size="9" fill="#64748b">vidéos cas client</text>
+<text x="420" y="320" text-anchor="middle" font-family="Inter" font-size="11" fill="#a67c4f" font-weight="600">Email & nurturing</text>
+<text x="420" y="336" text-anchor="middle" font-family="Inter" font-size="9" fill="#64748b">leads téléchargements</text>
+<text x="100" y="400" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8">SEA Google Ads</text>
+<text x="100" y="416" text-anchor="middle" font-family="Inter" font-size="9" fill="#94a3b8">CPC trop cher en année 1</text>
+<text x="500" y="400" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8">Meta Ads</text>
+<text x="500" y="416" text-anchor="middle" font-family="Inter" font-size="9" fill="#94a3b8">brand pas mature</text>
+</svg>
+</div>
+
+<h3>Channel mix matrix — Top 5 canaux retenus</h3>
+
+<table>
+<thead>
+<tr><th>#</th><th>Canal</th><th>Tier</th><th>Budget mensuel</th><th>KPI cible (12 mois)</th><th>ROAS attendu</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>Local SEO + Google Business Profile</strong></td><td><span class="tag tag-strength">Core</span></td><td>700-900€/mois (rédaction + optim technique)</td><td>50 visiteurs uniques/mois sur le site, 5 demandes de devis/mois en M+9</td><td>Très élevé long terme (organique)</td></tr>
+<tr><td>2</td><td><strong>Programme de parrainage structuré</strong></td><td><span class="tag tag-strength">Core</span></td><td>500€/parrain payé après installation (récurrent variable)</td><td>30% des nouveaux clients viennent du référral en M+12</td><td>×8 (CAC payé sur ticket moyen 22 K€)</td></tr>
+<tr><td>3</td><td><strong>Prescription B2B (architectes, courtiers, paysagistes)</strong></td><td><span class="tag tag-strength">Core</span></td><td>300€/mois (déjeuners, événements pro, courrier de prospection)</td><td>12 partenaires actifs en M+9, 1-2 leads qualifiés/mois</td><td>×6-10 (ticket élevé, taux close 40%)</td></tr>
+<tr><td>4</td><td><strong>YouTube vidéos cas client</strong></td><td><span class="tag tag-warm">Promising</span></td><td>200-400€/mois (production + montage)</td><td>4 vidéos publiées en année 1, 3 000 vues cumulées</td><td>Indirect (booste SEO + crédibilité)</td></tr>
+<tr><td>5</td><td><strong>Email & nurturing</strong> (leads guides PDF)</td><td><span class="tag tag-warm">Promising</span></td><td>50€/mois (Brevo gratuit jusqu'à 300 contacts)</td><td>200 leads/an générés, taux de conversion 8% en client</td><td>×4-6 selon mix de séquences</td></tr>
+</tbody>
+</table>
+
+<h3>Canaux explicitement écartés (et pourquoi)</h3>
+
+<table>
+<thead><tr><th>Canal</th><th>Raison de l'écartement</th></tr></thead>
+<tbody>
+<tr><td><strong>SEA Google Ads</strong></td><td>CPC sur « panneaux solaires Cannes » : 4-12€. Budget minimum efficace : 1 500€/mois. Impossible avec budget marketing 1 500-2 000€/mois total. À envisager en année 2 si scénario agressif activé.</td></tr>
+<tr><td><strong>Meta Ads (Facebook / Instagram)</strong></td><td>Brand pas mature, pas de social proof publié. Lancer du paid sans landing page convertissante est jeter de l'argent. Reporter à année 2.</td></tr>
+<tr><td><strong>TikTok</strong></td><td>Persona Pierre-Antoine 54 ans : pas la plateforme. ROI quasi nul. Tentation à ignorer.</td></tr>
+<tr><td><strong>Influence locale (Instagram)</strong></td><td>Trop tôt sans cas clients à mettre en avant. À reconsidérer en année 2.</td></tr>
+<tr><td><strong>Salons grand public (foires de Cannes/Nice)</strong></td><td>Coût stand 3-5 K€ + temps gérant indisponible 3-5 jours. Conversion sur ce type de salons généralistes : 1-3% sur leads froids. Mauvais ratio temps/résultat.</td></tr>
+<tr><td><strong>Outbound froid (cold call, LinkedIn cold messaging B2C)</strong></td><td>Légalement risqué (RGPD), brand-damaging, et associé aux pratiques d'arnaqueurs PV — l'inverse exact du positionnement.</td></tr>
+</tbody>
+</table>
+
+</section>
+
+<!-- ─────────── CONTENU ─────────── -->
+<section id="contenu">
+<header class="section-header">
+<div class="kicker">Bloc 05</div>
+<h2>Stratégie de communication & contenu — modèle PESO</h2>
+<p class="lead">3 piliers de contenu, calendrier réaliste pour une capacité solo + IA-assistée.</p>
+</header>
+
+<h3>Allocation PESO recommandée — stade « lancé »</h3>
+
+<div class="chart-card">
+<div class="chart-title">Répartition Paid / Earned / Shared / Owned (12 mois)</div>
+<p class="chart-caption">Mode lancement : prioriser l'Owned (site, blog, vidéos cas client) pour construire la base. Paid arrive en année 2. Earned via prescription et presse locale.</p>
+<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(40 40)">
+<rect x="0" y="0" width="60" height="220" fill="#0a2540"/>
+<text x="30" y="240" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">OWNED</text>
+<text x="30" y="256" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">Site, blog, vidéos</text>
+<text x="30" y="270" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">55%</text>
+</g>
+<g transform="translate(180 40)">
+<rect x="0" y="80" width="60" height="140" fill="#d4a574"/>
+<text x="30" y="240" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">SHARED</text>
+<text x="30" y="256" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">LinkedIn + GBP</text>
+<text x="30" y="270" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">20%</text>
+</g>
+<g transform="translate(320 40)">
+<rect x="0" y="120" width="60" height="100" fill="#15803d"/>
+<text x="30" y="240" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">EARNED</text>
+<text x="30" y="256" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">Presse, parrain.</text>
+<text x="30" y="270" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">15%</text>
+</g>
+<g transform="translate(460 40)">
+<rect x="0" y="160" width="60" height="60" fill="#7c3aed"/>
+<text x="30" y="240" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">PAID</text>
+<text x="30" y="256" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">Tests fin année 1</text>
+<text x="30" y="270" text-anchor="middle" font-family="Inter" font-size="11" fill="#1a202c" font-weight="600">10%</text>
+</g>
+</svg>
+</div>
+
+<h3>3 piliers de contenu</h3>
+
+<div class="grid grid-3">
+<div class="card">
+<h4>Pilier 1 — Pédagogie & expertise</h4>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:8px">Objectif : autorité et SEO</p>
+<p>Démonter les arnaques PV, expliquer comment lire un devis, comparer Dualsun vs Voltec vs JA Solar, calculer le ROI réel selon orientation toiture, comprendre la prime à l'autoconsommation 2026.</p>
+<p style="margin-top:8px;font-size:0.875rem"><strong>Format :</strong> articles SEO 1 500 mots, infographies, vidéos YouTube 5-8 min</p>
+<p style="font-size:0.875rem"><strong>Cadence :</strong> 1 article + 1 vidéo / mois</p>
+</div>
+<div class="card">
+<h4>Pilier 2 — Cas clients réels</h4>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:8px">Objectif : preuve sociale</p>
+<p>Étude de cas chiffrée et nominative (avec accord client) : « Famille Martin à Mougins, villa 320 m², installation 9 kWc + batt 15 kWh, économie réelle Année 1 : 1 870€ ».</p>
+<p style="margin-top:8px;font-size:0.875rem"><strong>Format :</strong> interview vidéo 3 min + page case study + post LinkedIn</p>
+<p style="font-size:0.875rem"><strong>Cadence :</strong> 1 cas par trimestre</p>
+</div>
+<div class="card">
+<h4>Pilier 3 — Méthode & coulisses</h4>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:8px">Objectif : différenciation, humanisation</p>
+<p>Présentation de la méthode Conciergerie Solaire, vidéos « j'ouvre un onduleur défaillant », « ce que personne ne vous dit sur les batteries », photos chantier avec timelapse.</p>
+<p style="margin-top:8px;font-size:0.875rem"><strong>Format :</strong> reels Instagram, posts LinkedIn, stories Google Business</p>
+<p style="font-size:0.875rem"><strong>Cadence :</strong> 2-3 publications / sem</p>
+</div>
+</div>
+
+<h3>Calendrier éditorial 90 jours (extrait Mois 1)</h3>
+
+<table>
+<thead>
+<tr><th>Sem</th><th>Pilier</th><th>Format</th><th>Sujet</th><th>Canal</th></tr>
+</thead>
+<tbody>
+<tr><td>S1</td><td>1 — Pédagogie</td><td>Article SEO 1 800 mots</td><td>« Combien coûte vraiment 10 kWc en 2026 sur la Côte d'Azur ? »</td><td>Site + Google + LinkedIn</td></tr>
+<tr><td>S1</td><td>3 — Méthode</td><td>Reel + post Instagram</td><td>« Pourquoi je refuse 8 devis sur 10 (et c'est dans votre intérêt) »</td><td>IG + GBP</td></tr>
+<tr><td>S2</td><td>2 — Cas client</td><td>Vidéo YouTube 4 min</td><td>« Famille Dubois à Mougins : 6 mois après l'installation »</td><td>YouTube + site</td></tr>
+<tr><td>S2</td><td>3 — Méthode</td><td>Story Google Business</td><td>Photos chantier en cours</td><td>GBP</td></tr>
+<tr><td>S3</td><td>1 — Pédagogie</td><td>Lead magnet PDF</td><td>« Le Guide anti-arnaque PV en PACA » (12-15 pages)</td><td>Site + Brevo</td></tr>
+<tr><td>S3</td><td>3 — Méthode</td><td>Post LinkedIn</td><td>« Voici le détail de notre Conciergerie Solaire 5 ans »</td><td>LinkedIn</td></tr>
+<tr><td>S4</td><td>1 — Pédagogie</td><td>Article SEO 1 500 mots</td><td>« Dualsun vs JA Solar : pourquoi je choisis le français »</td><td>Site + Google</td></tr>
+<tr><td>S4</td><td>2 — Cas client</td><td>Témoignage texte + photo</td><td>Cas client signé en M-1</td><td>Site + GBP</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-warning">
+<strong>Calibrage capacité.</strong> Pour un gérant solo, la cadence ci-dessus est tenable <em>uniquement</em> si la production est IA-assistée (Claude/ChatGPT pour les drafts d'articles, outil de génération vidéo pour les reels) — voir le livrable IA & automatisations. En production 100% manuelle, diviser par 2.
+</div>
+
+</section>
+
+<!-- ─────────── FUNNEL ─────────── -->
+<section id="funnel">
+<header class="section-header">
+<div class="kicker">Bloc 06</div>
+<h2>Funnel TOFU/MOFU/BOFU & stratégie commerciale</h2>
+<p class="lead">Taux de conversion estimés par étage. Top 3 leviers de conversion à activer immédiatement.</p>
+</header>
+
+<div class="chart-card">
+<div class="chart-title">Funnel HelioToit — projection à M+12</div>
+<p class="chart-caption">Hypothèses : 50 visiteurs uniques/mois en M+9, 1 lead magnet téléchargé pour 6 visiteurs, 1 demande de devis pour 4 leads, 1 signature pour 3 devis. Soit ~25 chantiers signés sur l'année si trafic constant.</p>
+<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+<polygon points="100,40 500,40 460,90 140,90" fill="#0a2540"/>
+<polygon points="140,90 460,90 420,160 180,160" fill="#0ea5e9"/>
+<polygon points="180,160 420,160 380,240 220,240" fill="#d4a574"/>
+<polygon points="220,240 380,240 340,330 260,330" fill="#15803d"/>
+<g font-family="Inter" font-size="13" fill="white" font-weight="600" text-anchor="middle">
+<text x="300" y="70">TOFU — 600 visiteurs / an</text>
+<text x="300" y="130">MOFU — 100 leads téléchargements / an</text>
+<text x="300" y="205">BOFU — 25 demandes devis qualifiées</text>
+<text x="300" y="290">CLOSE — 8-10 signatures</text>
+</g>
+<g font-family="Inter" font-size="11" fill="#64748b" text-anchor="end">
+<text x="540" y="70">SEO local + GBP + référral</text>
+<text x="540" y="130">↓ 17% conversion</text>
+<text x="540" y="205">↓ 25% conversion</text>
+<text x="540" y="290">↓ 35% conversion</text>
+</g>
+</svg>
+</div>
+
+<div class="callout callout-accent">
+<strong>Réalité importante.</strong> 8-10 signatures via canaux digitaux + 12-15 via référral et bouche-à-oreille structuré = 20-25 chantiers/an. C'est la cible réaliste, pas un objectif gonflé. Au-delà = nécessité d'un commercial dédié (cf. recommandations audit business).
+</div>
+
+<h3>Top 3 leviers de conversion à activer</h3>
+
+<div class="grid grid-3">
+<div class="card">
+<h4>1. Lead magnet anti-arnaque</h4>
+<p>« Le Guide anti-arnaque PV en PACA » — PDF 15 pages, gratuit contre email. Outil de qualification : ceux qui le téléchargent ont une intention sérieuse à 3-9 mois.</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:8px"><strong>Impact attendu :</strong> ×3-4 sur le taux d'opt-in vs page contact classique.</p>
+</div>
+<div class="card">
+<h4>2. Page devis transparente avec comparateur</h4>
+<p>Sur la landing : tableau comparatif « ce qu'inclut un devis HelioToit vs un devis discount ». Désamorce la sensibilité prix par la pédagogie.</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:8px"><strong>Impact attendu :</strong> +25-40% sur le taux de signature après devis remis.</p>
+</div>
+<div class="card">
+<h4>3. Engagement de performance contractuel</h4>
+<p>Clause spécifique du contrat : production garantie ≥ 90% de la simulation pendant 5 ans, sinon remboursement au prorata. Différenciant absolu vs concurrence.</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:8px"><strong>Impact attendu :</strong> levée de l'objection #1 (« et si ça produit moins que prévu ? »).</p>
+</div>
+</div>
+
+<h3>Process de vente — sales-led à panier élevé</h3>
+
+<table>
+<thead>
+<tr><th>Étape</th><th>Action</th><th>Délai cible</th><th>Outil</th></tr>
+</thead>
+<tbody>
+<tr><td>1. Lead</td><td>Téléchargement guide ou demande contact</td><td>J0</td><td>Site + Brevo</td></tr>
+<tr><td>2. Premier contact</td><td>Email auto + appel téléphonique sous 24h</td><td>J+1</td><td>Brevo + agenda Calendly</td></tr>
+<tr><td>3. Étude consommation</td><td>Échange visio 30 min : facture EDF, projet, contraintes</td><td>J+3-7</td><td>Calendly + visio</td></tr>
+<tr><td>4. Visite technique</td><td>RDV physique chez le prospect, 60-90 min</td><td>J+10-15</td><td>Smartphone + drone (optionnel)</td></tl>
+<tr><td>5. Devis détaillé personnalisé</td><td>Document 8-12 pages : étude solaire + matériel + ROI 25 ans + clauses + comparatif</td><td>J+18-22</td><td>Pennylane (déjà en place) + template type</td></tr>
+<tr><td>6. Présentation devis</td><td>RDV de remise (physique ou visio) avec pédagogie sur chaque ligne</td><td>J+22-25</td><td>Visio ou physique</td></tr>
+<tr><td>7. Suivi</td><td>Relances structurées J+3, J+10, J+25 du devis</td><td>J+25-50</td><td>Brevo automation</td></tr>
+<tr><td>8. Signature</td><td>Signature électronique + acompte 0% (Eco-PTZ)</td><td>J+30-60 typique</td><td>Yousign ou DocuSign</td></tr>
+</tbody>
+</table>
+
+</section>
+
+<!-- ─────────── ROADMAP ─────────── -->
+<section id="roadmap">
+<header class="section-header">
+<div class="kicker">Bloc 07</div>
+<h2>Roadmap 90 jours, budget & KPIs</h2>
+<p class="lead">3 phases : Quick wins → Setup pérenne → Scale. Owner et coût par action.</p>
+</header>
+
+<h3>Phase 1 — Quick wins (J1-J30)</h3>
+
+<table>
+<thead>
+<tr><th>Action</th><th>Owner</th><th>Coût</th><th>KPI validation</th></tr>
+</thead>
+<tbody>
+<tr><td>Création fiche Google Business Profile complète + photos chantiers + horaires + zone</td><td>Mathis (4h)</td><td>0€</td><td>Fiche publiée + 3 premières photos</td></tr>
+<tr><td>Demande de 5 avis Google aux clients existants satisfaits</td><td>Mathis (par WhatsApp)</td><td>0€</td><td>5 avis 5★ obtenus</td></tr>
+<tr><td>Refonte plaquette commerciale (suppression « pas de sous-traitance », harmonisation adresse, ajout RGE)</td><td>Mathis + designer freelance</td><td>200-400€</td><td>Plaquette V2 imprimée + envoyée aux contacts</td></tr>
+<tr><td>Rédaction du Guide anti-arnaque PV PACA (lead magnet)</td><td>Mathis (drafts) + Claude (assistance)</td><td>0€ (production interne)</td><td>PDF 15 pages livré</td></tr>
+<tr><td>Lancement Brevo (formulaire opt-in + séquence d'accueil 5 emails)</td><td>Mathis</td><td>0€ (gratuit jusqu'à 300 contacts)</td><td>Séquence active + 1er lead capté</td></tr>
+</tbody>
+</table>
+
+<h3>Phase 2 — Setup pérenne (J31-J60)</h3>
+
+<table>
+<thead>
+<tr><th>Action</th><th>Owner</th><th>Coût</th><th>KPI validation</th></tr>
+</thead>
+<tbody>
+<tr><td>Site web professionnel (Webflow ou Framer) avec simulateur ROI + landing « Guide anti-arnaque » + page Conciergerie Solaire</td><td>Freelance Web</td><td>3 500-5 000€</td><td>Site en ligne, indexé Google, 50 visiteurs/mois mois 3</td></tr>
+<tr><td>Tournage de 2 cas clients vidéo (interview + drone toiture)</td><td>Vidéaste freelance + Mathis</td><td>800-1 200€/cas</td><td>2 vidéos publiées YouTube + LinkedIn</td></tr>
+<tr><td>Mise en place programme parrainage (CGV + landing dédiée + suivi tableur)</td><td>Mathis</td><td>200€ (rédaction CGV)</td><td>Programme actif, communiqué aux clients existants</td></tr>
+<tr><td>Cartographie des 30 prescripteurs B2B cibles (architectes, courtiers immo, paysagistes Cap d'Antibes-Cannes-Mougins)</td><td>Mathis</td><td>0€ (recherche manuelle)</td><td>Liste de 30 noms + emails identifiés</td></tr>
+<tr><td>Premier déjeuner / RDV avec 5 prescripteurs prioritaires</td><td>Mathis</td><td>500€ (déjeuners)</td><td>5 RDV tenus, 2-3 partenariats engagés</td></tr>
+</tbody>
+</table>
+
+<h3>Phase 3 — Scale (J61-J90)</h3>
+
+<table>
+<thead>
+<tr><th>Action</th><th>Owner</th><th>Coût</th><th>KPI validation</th></tr>
+</thead>
+<tbody>
+<tr><td>Calendrier éditorial activé : 1 article SEO/mois + 2-3 publications LinkedIn/sem</td><td>Mathis + Claude (drafts IA)</td><td>0-200€/mois (hosting)</td><td>4 articles publiés à M+3, premier mot-clé top 10 Google</td></tr>
+<tr><td>Test promising channels : 1 campagne LinkedIn ciblée prescripteurs (200€)</td><td>Mathis</td><td>200€ (test)</td><td>50 connexions B2B nouvelles, 3 RDV générés</td></tr>
+<tr><td>Première parution presse locale (pitch Nice-Matin angle « jeune entrepreneur PV anti-arnaque »)</td><td>Mathis</td><td>0€ (relations directes)</td><td>1 article publié</td></tr>
+<tr><td>Mesure & ajustement : revue mensuelle des KPIs, ajustement budget canaux</td><td>Mathis</td><td>—</td><td>NSM (devis signés/mois) en hausse vs M0</td></tr>
+</tbody>
+</table>
+
+<h3>Budget total 12 mois</h3>
+
+<div class="chart-card">
+<div class="chart-title">Allocation budget marketing par canal — 12 mois</div>
+<p class="chart-caption">Total demandé : 18 400€ / an, soit ~1 535€/mois moyen. Pour mémoire : 1 chantier supplémentaire à 22 K€ avec 30% marge = 6 600€ générés. Soit 3 chantiers générés couvrent l'intégralité du budget marketing annuel.</p>
+<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(80 60)">
+<rect x="0" y="0" width="100" height="220" fill="#0a2540"/>
+<rect x="120" y="80" width="100" height="140" fill="#d4a574"/>
+<rect x="240" y="120" width="100" height="100" fill="#0ea5e9"/>
+<rect x="360" y="160" width="100" height="60" fill="#15803d"/>
+<g font-family="Inter" font-size="11" font-weight="600" fill="#1a202c" text-anchor="middle">
+<text x="50" y="245">Site & SEO</text>
+<text x="170" y="245">Référral payés</text>
+<text x="290" y="245">Vidéos & contenu</text>
+<text x="410" y="245">Tests paid</text>
+</g>
+<g font-family="Inter" font-size="13" font-weight="700" fill="#0a2540" text-anchor="middle">
+<text x="50" y="-10">7 200€</text>
+<text x="170" y="70">5 000€</text>
+<text x="290" y="110">3 600€</text>
+<text x="410" y="150">2 600€</text>
+</g>
+</g>
+</svg>
+</div>
+
+<h3>North Star Metric & KPIs</h3>
+
+<div class="grid grid-2">
+<div class="card">
+<h4>NSM — North Star Metric</h4>
+<p style="font-size:1.5rem;font-weight:600;color:var(--text-primary);margin:8px 0">Nombre de devis signés / mois</p>
+<p>Cible 12 mois : <strong>2,5 / mois</strong> (vs ~1 actuel)</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:12px">Pourquoi ce KPI : il intègre acquisition + qualité de close + rentabilité — c'est le seul qui résume la santé business globale.</p>
+</div>
+<div class="card">
+<h4>KPIs secondaires hiérarchisés</h4>
+<ul class="bullets">
+<li>Demandes de devis qualifiés / mois (cible 4-5 en M+9)</li>
+<li>Trafic organique mensuel (cible 50 visiteurs/mois en M+6, 200 en M+12)</li>
+<li>Avis Google cumulés (cible 25 avis 5★ en M+12)</li>
+<li>Leads parrainage (cible 6-8 en année 1)</li>
+<li>Partenariats prescripteurs actifs (cible 12 en M+9)</li>
+<li>Taux de close devis → signature (cible 35%+)</li>
+</ul>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:8px">Fréquence de revue : mensuelle, pendant 4-6 mois, puis trimestrielle.</p>
+</div>
+</div>
+
+</section>
+
+<footer>
+<p><strong>Hypothèses & sources</strong></p>
+<p>· Persona principal calibré sur la base démographique INSEE Mougins / Cap d'Antibes / Vallauris (revenu médian foyer haut décile : 95-180 K€) et le modèle de demande PV résidentielle Côte d'Azur (Enedis 2024).</p>
+<p>· Taux de conversion funnel : moyennes secteur PV résidentiel France 2024-2026 (sources : Hellowatt, Effy data).</p>
+<p>· Coût de production contenu : grille tarifaire freelances PACA 2026 (vidéaste 600-900€/jour, designer 350-500€/jour).</p>
+<p>· Budget marketing référence : 4-7% du CA cible 12 mois (380-450 K€), soit 15-31 K€. La fourchette retenue 18-24 K€ est dans la moyenne basse, calibrée sur capacité d'exécution gérant solo.</p>
+<p style="margin-top:24px">Stratégie Marketing & Communication — HelioToit énergie · 29 avril 2026 · Master Prompt — Pack IA Activité · Confidentiel</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

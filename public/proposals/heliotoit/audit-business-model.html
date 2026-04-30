@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic Stratégique — HelioToit énergie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574; --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; padding: 0; counter-reset: section; }
+.toc li { counter-increment: section; padding: 6px 0; border-left: 2px solid var(--border); padding-left: 12px; }
+.toc li::before { content: counter(section, decimal-leading-zero); color: var(--text-muted); font-weight: 600; margin-right: 8px; font-size: 0.75rem; }
+.toc a { color: var(--text-body); text-decoration: none; }
+.toc a:hover { color: var(--text-primary); }
+
+.content { max-width: 920px; }
+
+.cover { padding: 80px 0 64px; border-bottom: 2px solid var(--text-primary); margin-bottom: 64px; }
+.cover-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 16px; }
+.cover h1 { font-size: 2.75rem; color: var(--text-primary); font-weight: 600; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.02em; }
+.cover p.subtitle { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; max-width: 720px; }
+.cover-meta { display: flex; gap: 40px; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-muted); }
+.cover-meta strong { color: var(--text-primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+
+section { margin-bottom: 80px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; }
+
+h3 { font-size: 1.25rem; color: var(--text-primary); font-weight: 600; margin: 32px 0 12px; }
+h4 { font-size: 1rem; color: var(--text-primary); font-weight: 600; margin: 20px 0 8px; }
+p { margin-bottom: 12px; }
+p + p { margin-top: 0; }
+
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 720px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; box-shadow: var(--shadow-sm); }
+.card h4 { margin-top: 0; }
+
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 8px; }
+.kpi-value { font-size: 2rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.875rem; margin-top: 8px; color: var(--text-muted); }
+
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 1rem; }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout strong { color: var(--text-primary); }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 24px 0; }
+th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: none; }
+
+ul.bullets { list-style: none; padding-left: 0; }
+ul.bullets li { padding: 6px 0 6px 24px; position: relative; }
+ul.bullets li::before { content: "→"; position: absolute; left: 0; color: var(--accent-dark); font-weight: 600; }
+
+.score-badge { display: inline-flex; align-items: baseline; gap: 4px; padding: 8px 16px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.score-value { font-size: 1.75rem; font-weight: 700; }
+.score-label { font-size: 0.875rem; opacity: 0.7; }
+.score-good { background: var(--success-soft); color: var(--success); }
+.score-medium { background: var(--warning-soft); color: var(--warning); }
+.score-poor { background: var(--danger-soft); color: var(--danger); }
+
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+.chart-caption { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px; }
+.chart-card svg { width: 100%; height: auto; }
+
+.bmc { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 24px 0; }
+.bmc-cell { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 14px; font-size: 0.8125rem; }
+.bmc-cell h5 { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-dark); margin-bottom: 6px; font-weight: 600; }
+.bmc-cell.span-2 { grid-column: span 2; }
+.bmc-cell.row-2 { grid-row: span 2; }
+@media (max-width: 720px) { .bmc { grid-template-columns: 1fr; } .bmc-cell.span-2, .bmc-cell.row-2 { grid-column: span 1; grid-row: span 1; } }
+
+.tag { display: inline-block; font-size: 0.6875rem; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.tag-strength { background: var(--success-soft); color: var(--success); }
+.tag-weak { background: var(--danger-soft); color: var(--danger); }
+.tag-neutral { background: var(--bg-subtle); color: var(--text-muted); }
+
+.exec-summary { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 40px; }
+.exec-summary h2 { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 24px; }
+.exec-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: start; }
+@media (max-width: 720px) { .exec-grid { grid-template-columns: 1fr; } }
+.exec-score-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; text-align: center; }
+.exec-score-num { font-size: 3.75rem; font-weight: 700; line-height: 1; color: var(--danger); }
+.exec-score-label { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; }
+
+footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--text-muted); }
+footer p { margin: 4px 0; }
+
+@media print {
+  body { background: white; }
+  .layout { grid-template-columns: 1fr; padding: 0; max-width: 100%; }
+  .toc { display: none; }
+  .page-break { page-break-after: always; }
+  .card, .chart-card, .kpi { break-inside: avoid; box-shadow: none; }
+  section { margin-bottom: 40px; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#exec">Résumé exécutif</a></li>
+    <li><a href="#bmc">Business Model Canvas</a></li>
+    <li><a href="#marche">Étude de marché</a></li>
+    <li><a href="#concurrence">Analyse concurrentielle</a></li>
+    <li><a href="#pricing">Stratégie de pricing</a></li>
+    <li><a href="#unit">Unit economics & scale</a></li>
+    <li><a href="#reco">Recommandations</a></li>
+  </ol>
+</aside>
+
+<main class="content">
+
+<header class="cover">
+  <div class="cover-eyebrow">Diagnostic Stratégique · Pack IA Activité</div>
+  <h1>HelioToit énergie</h1>
+  <p class="subtitle">Audit business model, positionnement marché, scalabilité. Cible : structurer une activité photovoltaïque résidentielle viable et différenciée sur la Côte d'Azur.</p>
+  <div class="cover-meta">
+    <div><strong>Client</strong>Mathis Amazigh, gérant</div>
+    <div><strong>Société</strong>HelioToit énergie · SARL · Vallauris (06)</div>
+    <div><strong>Date</strong>29 avril 2026</div>
+    <div><strong>Consultant</strong>Michaël Lopez · Master Prompt</div>
+  </div>
+</header>
+
+<!-- ─────────── EXEC SUMMARY ─────────── -->
+<section id="exec">
+<div class="exec-summary">
+<div class="exec-grid">
+<div>
+<div class="kicker">Résumé exécutif</div>
+<h2>Verdict tranché : NO-GO en l'état, GO conditionné à 5 pivots structurels</h2>
+
+<p>HelioToit pénètre un marché en croissance forte (autoconsommation résidentielle PACA, +76% YoY en 2024) mais saturé : 30+ acteurs identifiés sur la zone Vallauris-Cannes-Nice, dont 4 majors nationaux (EDF ENR, Hellio, Effy, Otovo) et 15+ acteurs régionaux établis depuis 5-15 ans. Le positionnement actuel — installateur low-cost solo avec sous-traitance dissimulée — ne crée aucune défensibilité.</p>
+
+<p><strong>Cinq constats majeurs :</strong></p>
+<ul class="bullets">
+<li><strong>Pricing 50% sous marché</strong> (12 977€ TTC vs 25-30 K€ marché pour 10 kWc + batterie 15 kWh) : soit dumping non soutenable, soit sous-paiement des sous-traitants, soit faille de qualité — aucun de ces scénarios n'est scalable.</li>
+<li><strong>Communication trompeuse exposée</strong> : la mention « PAS DE SOUS-TRAITANCE » sur la plaquette, alors que la pose et l'administratif sont sous-traités, constitue une pratique commerciale trompeuse (L.121-2 Code conso). Risque DGCCRF + perte de confiance client.</li>
+<li><strong>Capital social 1 000 €</strong> : aucune crédibilité B2B (copropriétés, hôteliers, restaurateurs). Une décennale de 10 ans sur des installations à 13-25 K€ avec un capital de 1 000 € = signal d'amateurisme.</li>
+<li><strong>Zéro présence digitale</strong> : pas de site web, pas de fiche Google Business, pas d'avis. Or 89% des projets PV démarrent par une recherche Google. Dépendance totale au bouche-à-oreille local = plafond de croissance bas.</li>
+<li><strong>Aucune différenciation défendable</strong> : ni techno propriétaire, ni niche verticale, ni méthode différenciante. Sur le quadrant prix/valeur perçue, HelioToit est en zone « commodity » avec les 30 autres installateurs locaux.</li>
+</ul>
+
+<p>La fenêtre d'opportunité existe : marché PACA en surchauffe, ensoleillement maximal, ticket moyen client en hausse (avec batteries), tarifs S21 stabilisés. Mais le modèle actuel ne capture rien de cette opportunité. Pivot recommandé : <strong>spécialisation niche villas haut de gamme + service de conciergerie solaire</strong> (cf. recommandations).</p>
+</div>
+
+<div>
+<div class="exec-score-box">
+<div class="exec-score-label">Score de viabilité</div>
+<div class="exec-score-num">38</div>
+<div class="exec-score-label">/ 100 — Faible</div>
+</div>
+<div style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted); text-align: center;">
+NO-GO en configuration actuelle.<br>GO si les 5 pivots structurels sont actés.
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ─────────── BMC ─────────── -->
+<section id="bmc">
+<header class="section-header">
+<div class="kicker">Bloc 01</div>
+<h2>Business Model Canvas — analyse critique</h2>
+<p class="lead">Les 9 blocs d'Osterwalder, remplis à partir des éléments fournis, puis challengés sur les 4 alignements clés.</p>
+</header>
+
+<div class="bmc">
+<div class="bmc-cell row-2"><h5>Partenaires clés</h5>
+<p>• Sous-traitants pose (non identifiés)<br>• Sous-traitant démarches admin<br>• Fournisseurs : Dualsun (panneaux), Solplanet (onduleur + batterie), K2 Systems (fixation)<br>• Enedis, Consuel, mairies (process administratif obligatoire)</p>
+<p style="margin-top:8px"><span class="tag tag-weak">Concentration risquée</span></p>
+</div>
+<div class="bmc-cell"><h5>Activités clés</h5>
+<p>• Étude de consommation<br>• Devis<br>• Coordination chantier<br>• Suivi administratif</p>
+</div>
+<div class="bmc-cell row-2 span-2"><h5>Proposition de valeur</h5>
+<p><em>Affichée :</em> « Votre toit devient votre source d'énergie » — service clé en main, pas de sous-traitance (faux), garantie optimale.</p>
+<p style="margin-top:8px"><em>Réelle :</em> Installateur PV low-cost local, prix d'attaque 30-50% sous marché, sans aucun élément de différenciation tangible.</p>
+<p style="margin-top:8px"><span class="tag tag-weak">Promesse non défendable</span></p>
+</div>
+<div class="bmc-cell row-2"><h5>Relations clients</h5>
+<p>• Vente conseil 1-to-1 (gérant)<br>• Pas de communauté, pas de plateforme client, pas de programme de fidélisation</p>
+</div>
+<div class="bmc-cell row-2"><h5>Segments clients</h5>
+<p><em>Affichés :</em> particuliers Côte d'Azur souhaitant autoconsommer.</p>
+<p style="margin-top:8px"><em>Ciblage réel :</em> indéfini. Aucun persona précis, aucune segmentation revenu/typologie habitat/déclencheur.</p>
+<p style="margin-top:8px"><span class="tag tag-weak">Segment trop large</span></p>
+</div>
+<div class="bmc-cell"><h5>Ressources clés</h5>
+<p>• Le gérant (compétence commerciale + coordination)<br>• Marque embryonnaire<br>• <span class="tag tag-weak">RGE QualiPV à confirmer</span></p>
+</div>
+<div class="bmc-cell"><h5>Canaux</h5>
+<p>• Bouche-à-oreille local<br>• Plaquette papier<br>• Devis par email</p>
+<p style="margin-top:8px"><span class="tag tag-weak">Aucun canal scalable</span></p>
+</div>
+<div class="bmc-cell span-2"><h5>Structure de coûts</h5>
+<p>Variables : matériel (~50% du devis), sous-traitance pose (~25%), sous-traitance admin (~5%). <strong>Marge brute estimée : 15-20%.</strong></p>
+<p>Fixes : très faibles (gérant solo, pas de local commercial, pas d'équipe).</p>
+</div>
+<div class="bmc-cell span-2"><h5>Sources de revenus</h5>
+<p>Modèle one-shot : vente d'installation PV avec batterie (panier moyen estimé : 12-18 K€ TTC).</p>
+<p>Pas de revenus récurrents (maintenance, monitoring, garantie étendue).</p>
+<p style="margin-top:8px"><span class="tag tag-weak">Revenus non récurrents</span></p>
+</div>
+</div>
+
+<h3>Les 4 alignements critiques</h3>
+
+<div class="grid grid-2">
+<div class="card">
+<h4>1. Segment ↔ Valeur</h4>
+<p><span class="tag tag-weak">Faible</span></p>
+<p>Le segment « particuliers Côte d'Azur » est trop large pour qu'une promesse forte puisse y résonner. Sans persona précis, la valeur affichée (« clé en main ») est diluée et indifférenciée des 30 concurrents qui disent la même chose.</p>
+</div>
+<div class="card">
+<h4>2. Valeur ↔ Canaux</h4>
+<p><span class="tag tag-weak">Très faible</span></p>
+<p>Le PV résidentiel est un produit à cycle de décision long (3-12 mois) nécessitant éducation, comparatifs et preuves. Une plaquette papier + bouche-à-oreille ne tiennent pas la route face aux funnels digitaux des concurrents (SEO, simulateurs, devis 24h).</p>
+</div>
+<div class="card">
+<h4>3. Coûts ↔ Revenus</h4>
+<p><span class="tag tag-weak">Critique</span></p>
+<p>À pricing 50% sous marché, la marge brute estimée est de 15-20%. Si on retire 5-8% de coût d'acquisition (qui sera nécessaire dès qu'on cherchera à scaler), il reste 7-15% pour rémunérer le gérant et financer la garantie décennale. Modèle non viable au-delà du premier cercle.</p>
+</div>
+<div class="card">
+<h4>4. Ressources ↔ Activités</h4>
+<p><span class="tag tag-weak">Goulot identifié</span></p>
+<p>Une seule personne sur la chaîne commerciale + coordination chantier + relation client. Plafond mécanique : 2-3 chantiers/mois maximum sans dégrader la qualité, soit ~30-40 chantiers/an, soit 400-600 K€ de CA TTC plafond.</p>
+</div>
+</div>
+
+<h3>3 forces majeures du modèle</h3>
+<ul class="bullets">
+<li><strong>Coûts fixes minimaux</strong> — pas de local, pas de salarié, pas de stock. Permet d'absorber un démarrage lent sans hémorragie.</li>
+<li><strong>Géographie favorable</strong> — Vallauris bénéficie de 1 700+ kWh/kWc/an, l'un des meilleurs gisements de France. Argument ROI client puissant si bien exploité.</li>
+<li><strong>Matériel partenaires de qualité</strong> — Dualsun (français, fabriqué à Jujurieux), Solplanet (Tier 1), K2 Systems (référence allemande). Crédibilité technique disponible si elle est mise en avant.</li>
+</ul>
+
+<h3>3 faiblesses majeures du modèle</h3>
+<ul class="bullets">
+<li><strong>Pas d'actif différenciant</strong> — pas de techno propriétaire, pas de méthode brevetée, pas d'expertise verticale. Tout ce qu'HelioToit propose, 30 autres acteurs locaux le proposent à pricing comparable ou supérieur avec plus de crédibilité.</li>
+<li><strong>Risque légal exposé</strong> — la communication actuelle (« pas de sous-traitance », témoignages génériques) est attaquable en pratique commerciale trompeuse. Première association consommateurs qui signale = procédure DGCCRF.</li>
+<li><strong>Modèle one-shot sans LTV</strong> — un client = une vente, point. Pas de service récurrent, pas de cross-sell (borne IRVE, PAC, isolation), pas de programme de parrainage structuré. CAC ne se rentabilise que sur la première installation, jamais sur la durée.</li>
+</ul>
+
+</section>
+
+<!-- ─────────── MARCHÉ ─────────── -->
+<section id="marche">
+<header class="section-header">
+<div class="kicker">Bloc 02</div>
+<h2>Étude de marché — TAM / SAM / SOM</h2>
+<p class="lead">Estimation chiffrée du marché adressable, tendances de fond, position dans le cycle.</p>
+</header>
+
+<p>Toutes les estimations qui suivent sont produites par méthode <strong>bottom-up</strong>. Hypothèses chiffrées explicites en annexe.</p>
+
+<div class="grid grid-3">
+<div class="kpi">
+<span class="kpi-label">TAM — France particuliers PV</span>
+<span class="kpi-value">3,2 Md€</span>
+<span class="kpi-sub">Marché annuel installations PV résidentielles France 2026.<br><span style="color:var(--success)">+22% YoY</span></span>
+</div>
+<div class="kpi">
+<span class="kpi-label">SAM — Alpes-Maritimes adressable</span>
+<span class="kpi-value">85 M€</span>
+<span class="kpi-sub">Estimation 2026 sur 06 + Var-Est. ~5 500 installations résidentielles potentielles/an.</span>
+</div>
+<div class="kpi">
+<span class="kpi-label">SOM réaliste 12 mois</span>
+<span class="kpi-value">320 K€</span>
+<span class="kpi-sub">~25 chantiers/an, panier moyen 12,8 K€ (hypothèse capacité gérant solo).</span>
+</div>
+</div>
+
+<div class="chart-card">
+<div class="chart-title">TAM / SAM / SOM — installations PV résidentielles</div>
+<p class="chart-caption">Cercles à l'échelle. SOM représente moins de 0,01% du TAM, ce qui est normal pour un installateur local. La question stratégique : comment passer de 320 K€ à 1-2 M€ de SOM en 36 mois ?</p>
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<circle cx="300" cy="200" r="180" fill="#0a2540" opacity="0.10"/>
+<circle cx="300" cy="200" r="100" fill="#0a2540" opacity="0.22"/>
+<circle cx="300" cy="200" r="32" fill="#0a2540" opacity="0.85"/>
+<g font-family="Inter" text-anchor="middle">
+<text x="300" y="35" font-size="12" fill="#64748b" letter-spacing="1">TAM · 3,2 Md€ · France PV résidentiel</text>
+<text x="300" y="115" font-size="12" fill="#64748b" letter-spacing="1">SAM · 85 M€ · 06 + Est-Var</text>
+<text x="300" y="200" font-size="13" font-weight="600" fill="white">SOM</text>
+<text x="300" y="216" font-size="11" font-weight="600" fill="white">320 K€</text>
+</g>
+</svg>
+</div>
+
+<h3>5 tendances de fond — direction & horizon</h3>
+
+<table>
+<thead>
+<tr><th>Tendance</th><th>Direction</th><th>Horizon</th><th>Implication HelioToit</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Hausse continue prix électricité</strong> (+40% projeté d'ici 2030)</td><td><span class="tag tag-strength">Favorable</span></td><td>5 ans</td><td>ROI client s'améliore mécaniquement → argumentaire plus puissant</td></tr>
+<tr><td><strong>Bascule vente totale → autoconso + batterie</strong> (95% des projets en 2026)</td><td><span class="tag tag-strength">Favorable</span></td><td>Acté</td><td>Panier moyen +30% avec batterie (vs PV seul) — opportunité de monter en gamme</td></tr>
+<tr><td><strong>Concentration acteurs majors</strong> (EDF ENR, Hellio, Effy raflent les leads via SEA)</td><td><span class="tag tag-weak">Défavorable</span></td><td>3 ans</td><td>CAC digital qui monte → impossibilité de se battre sur Google Ads sans budget</td></tr>
+<tr><td><strong>Réforme S21 → AOS pour tertiaire</strong> (depuis sept. 2025)</td><td><span class="tag tag-neutral">Neutre</span></td><td>Acté</td><td>Particuliers ≤ 9 kWc préservés — segment cible inchangé</td></tr>
+<tr><td><strong>Méfiance consommateurs</strong> (multiplication arnaques PV, décrié par UFC, 60M Conso)</td><td><span class="tag tag-strength">Opportunité</span></td><td>Permanent</td><td>Acteur local transparent peut capter la prime de confiance — à condition d'ÊTRE transparent (cf. red flags communication)</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-accent">
+<strong>Insight stratégique majeur.</strong> La 3e tendance (concentration majors via SEA) est un piège mortel pour HelioToit s'il essaie de jouer leur jeu. Mais c'est une <em>opportunité</em> si HelioToit se positionne en alternative anti-arnaque, ultra-locale, où le client traite avec un humain identifiable, pas un call-center. C'est ce que les majors NE PEUVENT PAS faire structurellement.
+</div>
+
+<h3>Position dans le cycle de marché</h3>
+
+<p>Le marché PV résidentiel France est en phase <strong>croissance avancée</strong>, début de maturation. Caractéristiques :</p>
+
+<ul class="bullets">
+<li>Prix matériel a baissé de 65% depuis 2009 (Selectra) → produit accessible, prix qui se stabilisent</li>
+<li>Multiplication d'acteurs (~3 000 installateurs RGE QualiPV en France) → pression concurrentielle forte</li>
+<li>Premiers signes de concentration : majors raflent 35-40% du marché, regroupements régionaux apparaissent</li>
+<li>Client final mieux informé, plus exigeant (comparaison de 3+ devis devenue standard)</li>
+</ul>
+
+<div class="callout callout-warning">
+<strong>Conséquence stratégique.</strong> En marché « croissance avancée », la guerre des prix s'intensifie et les marges des généralistes s'écrasent. La seule issue est <em>défragmenter par la spécialisation</em> (verticale, géographique, ou expérientielle). Rester généraliste low-cost = mourir lentement par compression de marges.
+</div>
+
+</section>
+
+<!-- ─────────── CONCURRENCE ─────────── -->
+<section id="concurrence">
+<header class="section-header">
+<div class="kicker">Bloc 03</div>
+<h2>Analyse concurrentielle</h2>
+<p class="lead">Cartographie des 10 acteurs significatifs sur la zone d'influence Vallauris-Cannes-Nice. Identification des espaces blancs.</p>
+</header>
+
+<table>
+<thead>
+<tr><th>Acteur</th><th>Type</th><th>Ancienneté</th><th>Cible</th><th>Force principale</th><th>Faiblesse exploitable</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>EDF ENR</strong></td><td>Major national</td><td>15+ ans</td><td>Tous segments</td><td>Marque, financement</td><td>Process lent, peu personnalisé, prix élevés</td></tr>
+<tr><td><strong>Hellio</strong></td><td>Major national</td><td>Depuis 2008</td><td>Foyers modestes-medium</td><td>Volume, packs prédéfinis (8 990€-20 990€)</td><td>Sous-traitance opaque, peu de relation locale</td></tr>
+<tr><td><strong>Otovo</strong></td><td>Pure-player digital</td><td>Récent en France</td><td>Tech-aware</td><td>Tunnel digital fluide, location 0€</td><td>Pas d'ancrage local, pas de SAV humain</td></tr>
+<tr><td><strong>Effy</strong></td><td>Comparateur + opérateur</td><td>10+ ans</td><td>Bouquets travaux</td><td>Connexion isolation/PAC/PV</td><td>Sous-traitance, signaux mitigés sur qualité</td></tr>
+<tr><td><strong>Sun Watt France</strong></td><td>Régional 06</td><td>Active</td><td>Particuliers locaux</td><td>Présence PagesJaunes, avis clients positifs</td><td>Communication peu différenciée</td></tr>
+<tr><td><strong>Saint Énergie</strong></td><td>Régional 06</td><td>Active</td><td>Vallauris-Antibes</td><td>« Sans sous-traitance » revendiqué (vrai)</td><td>Site SEO faible, pas de stratégie premium</td></tr>
+<tr><td><strong>Sebalyo Solar</strong></td><td>Régional 06</td><td>Depuis 2015</td><td>Particuliers + pros + collectivités</td><td>QualiPV depuis 2015, électriciens internes</td><td>Communication classique, pas de USP forte</td></tr>
+<tr><td><strong>Yes We Sun</strong></td><td>Régional PACA</td><td>Active</td><td>Marseille → Nice</td><td>Pose en 1 jour, batteries virtuelles</td><td>Pas focalisé 06, dilution multi-départements</td></tr>
+<tr><td><strong>Régis Electric</strong></td><td>Local 06</td><td>Depuis 2000</td><td>Particuliers haut de gamme</td><td>QualiPV, électricité+domotique+PV</td><td>Pas une activité focus PV</td></tr>
+<tr><td><strong>Ecotrio Energy</strong></td><td>Local 06</td><td>Récent</td><td>Multi-prestations</td><td>Couverture territoriale</td><td>Pas spécialisé PV (fibre + IRVE + PV)</td></tr>
+</tbody>
+</table>
+
+<h3>Matrice de positionnement — Prix × Crédibilité perçue</h3>
+
+<div class="chart-card">
+<div class="chart-title">Cartographie concurrentielle — zone Cannes-Nice</div>
+<p class="chart-caption">Axe X : positionnement prix (low-cost ↔ premium). Axe Y : crédibilité perçue (jeune marque ↔ référence établie). HelioToit est aujourd'hui en bas-gauche : low-cost et faible crédibilité = quadrant le plus dangereux concurrentiellement.</p>
+<svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg">
+<!-- quadrants -->
+<rect x="60" y="40" width="600" height="380" fill="none" stroke="#cbd5e1"/>
+<line x1="360" y1="40" x2="360" y2="420" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+<line x1="60" y1="230" x2="660" y2="230" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+<!-- quadrant labels -->
+<text x="200" y="60" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">PREMIUM ÉTABLI</text>
+<text x="520" y="60" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">LUXE / NICHE</text>
+<text x="200" y="415" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">COMMODITY DANGEREUX</text>
+<text x="520" y="415" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">CHALLENGER PRIX</text>
+<!-- axes labels -->
+<text x="360" y="455" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b">Prix : low-cost → premium →</text>
+<text x="30" y="230" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b" transform="rotate(-90 30 230)">Crédibilité perçue →</text>
+<!-- competitors -->
+<g font-family="Inter" font-size="11" fill="#1a202c">
+<circle cx="170" cy="120" r="8" fill="#0ea5e9"/><text x="183" y="124">EDF ENR</text>
+<circle cx="220" cy="170" r="8" fill="#0ea5e9"/><text x="233" y="174">Sebalyo Solar</text>
+<circle cx="280" cy="200" r="7" fill="#0ea5e9"/><text x="290" y="204">Saint Énergie</text>
+<circle cx="320" cy="280" r="7" fill="#0ea5e9"/><text x="330" y="284">Sun Watt</text>
+<circle cx="430" cy="100" r="9" fill="#0ea5e9"/><text x="443" y="104">Hellio</text>
+<circle cx="500" cy="170" r="8" fill="#0ea5e9"/><text x="513" y="174">Effy</text>
+<circle cx="380" cy="320" r="7" fill="#0ea5e9"/><text x="390" y="324">Otovo</text>
+<circle cx="260" cy="350" r="7" fill="#0ea5e9"/><text x="270" y="354">Yes We Sun</text>
+<circle cx="170" cy="380" r="6" fill="#0ea5e9"/><text x="180" y="384">Ecotrio</text>
+<circle cx="200" cy="260" r="7" fill="#0ea5e9"/><text x="210" y="264">Régis Electric</text>
+</g>
+<!-- HelioToit position -->
+<circle cx="120" cy="370" r="14" fill="#b91c1c" stroke="#0a2540" stroke-width="3"/>
+<text x="142" y="374" font-family="Inter" font-size="12" font-weight="700" fill="#0a2540">HelioToit (actuel)</text>
+<!-- Espace blanc -->
+<rect x="370" y="50" width="280" height="180" fill="#d4a574" opacity="0.18" stroke="#a67c4f" stroke-dasharray="6 4"/>
+<text x="510" y="140" font-family="Inter" font-size="11" font-weight="600" fill="#a67c4f" text-anchor="middle">ESPACE BLANC IDENTIFIÉ</text>
+<text x="510" y="160" font-family="Inter" font-size="10" fill="#a67c4f" text-anchor="middle">Premium niche — villas haut de gamme,</text>
+<text x="510" y="175" font-family="Inter" font-size="10" fill="#a67c4f" text-anchor="middle">conciergerie solaire, ROI garanti contractuel</text>
+<!-- Trajectoire suggérée -->
+<path d="M 120 370 Q 280 280 510 140" stroke="#15803d" stroke-width="2" fill="none" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><polygon points="0 0, 10 3, 0 6" fill="#15803d"/></marker></defs>
+</svg>
+</div>
+
+<h3>5 forces de Porter — score d'attractivité</h3>
+
+<table>
+<thead>
+<tr><th>Force</th><th>Niveau</th><th>Justification</th></tr>
+</thead>
+<tbody>
+<tr><td>Rivalité concurrents existants</td><td><span class="tag tag-weak">Très forte</span></td><td>30+ acteurs sur la zone, guerre des prix sur les leads aggrégateurs (Hellowatt, Effy)</td></tr>
+<tr><td>Menace nouveaux entrants</td><td><span class="tag tag-neutral">Forte</span></td><td>Barrières faibles (RGE QualiPV obtenable en 6-12 mois, capital faible suffit). Plus de 200 nouvelles entreprises créées en 2024 sur le secteur en France</td></tr>
+<tr><td>Pouvoir fournisseurs</td><td><span class="tag tag-neutral">Modéré</span></td><td>Multi-sourcing possible (Dualsun, JA Solar, Trina, LG, etc.), mais Solplanet/onduleur monopole sur batterie hybride spécifique</td></tr>
+<tr><td>Pouvoir clients</td><td><span class="tag tag-weak">Très fort</span></td><td>Clients comparent 3-5 devis avant signature, switching cost faible avant signature</td></tr>
+<tr><td>Menace substituts</td><td><span class="tag tag-neutral">Modérée</span></td><td>Kits plug & play (300-1 000€) pour locataires, batteries virtuelles, contrats heures creuses optimisés. Pas de vraie substitution sur le PV+batterie résidentiel</td></tr>
+</tbody>
+</table>
+
+<p><strong>Score d'attractivité globale du marché : 4/10.</strong> Marché en croissance mais ultra-concurrentiel avec marges sous pression. Seule issue : trouver une niche défendable.</p>
+
+<h3>Espace blanc identifié</h3>
+
+<div class="callout callout-accent">
+<strong>Quadrant haut-droit non-occupé.</strong> Aucun acteur de la zone ne se positionne explicitement sur « <em>premium installateur exclusif pour villas haut de gamme de la Côte d'Azur, avec service de conciergerie solaire (suivi production garanti, nettoyage, optimisation)</em> ». Les régionaux restent sur le mid-market généraliste. Les majors n'ont pas la souplesse pour personnaliser. C'est une niche défendable 18-24 mois si HelioToit y va vite et nettement.
+</div>
+
+</section>
+
+<!-- ─────────── PRICING ─────────── -->
+<section id="pricing">
+<header class="section-header">
+<div class="kicker">Bloc 04</div>
+<h2>Stratégie de pricing</h2>
+<p class="lead">Triangulation cost-plus / value-based / competitive. Architecture d'offre recommandée.</p>
+</header>
+
+<h3>Diagnostic du pricing actuel</h3>
+
+<table>
+<thead>
+<tr><th>Méthode</th><th>Calcul / référence</th><th>Lecture du devis 10 kWc + 15 kWh à 12 977 € TTC</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Cost-plus</strong></td><td>Matériel 6-7 K€ HT (Dualsun ×20 + Solplanet onduleur + batt 15 kWh + K2 + câbles) + pose 2,5 K€ + admin 0,5 K€ ≈ 9-10 K€ HT</td><td>Marge brute 2-3 K€ HT (~15-20%) sur 12,3 K€ HT. Plancher technique. Au moindre imprévu chantier (toiture amiantée, raccordement complexe), HelioToit perd de l'argent.</td></tr>
+<tr><td><strong>Value-based</strong></td><td>Économie facture client : ~1 200-1 800€/an Côte d'Azur, ROI à 8-10 ans, gain 25 ans = 30-45 K€</td><td>Capter 25-30% de la valeur générée justifierait un prix de 18-22 K€ TTC. <strong>HelioToit laisse 5-9 K€ de valeur sur la table à chaque vente.</strong></td></tr>
+<tr><td><strong>Competitive</strong></td><td>Prix marché 2026 pour 10 kWc + batt 15 kWh : 22-30 K€ TTC selon installateur</td><td>HelioToit est <strong>40-55% sous marché</strong>. Soit dumping non soutenable, soit problème de qualité/sous-traitance.</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-danger">
+<strong>Verdict pricing.</strong> Le pricing actuel est l'erreur stratégique numéro 1. Il signale au client haut de gamme « pas crédible » (« si c'est moitié prix, c'est suspect »), ne génère pas la marge nécessaire pour investir en marketing, et expose à des sinistres non absorbables (capital 1 000€). À corriger avant tout autre pivot.
+</div>
+
+<h3>Architecture d'offre recommandée — 3 niveaux</h3>
+
+<div class="grid grid-3">
+<div class="card">
+<h4>Essentiel</h4>
+<p style="font-size:1.5rem;font-weight:600;color:var(--text-primary);margin:8px 0">12 900 € TTC</p>
+<p><span class="tag tag-neutral">Entry-level</span></p>
+<p style="margin-top:8px">3 kWc autoconso, sans batterie, panneaux Dualsun + onduleur Solplanet, pose + démarches. Cible : foyer 4 000 kWh/an, primo-acheteur prudent.</p>
+<p style="margin-top:8px"><strong>Marge cible : 25%</strong> (3 200 €)</p>
+</div>
+<div class="card" style="border:2px solid var(--accent);background:var(--accent-soft)">
+<h4>Confort <span class="tag tag-neutral" style="background:var(--accent);color:white">Best-seller</span></h4>
+<p style="font-size:1.5rem;font-weight:600;color:var(--text-primary);margin:8px 0">22 900 € TTC</p>
+<p style="margin-top:8px">6 kWc + batterie 10 kWh, optimiseur eau chaude, monitoring, garantie performance 5 ans. Cible : foyer 6 000-8 000 kWh, autonomie 60-70%.</p>
+<p style="margin-top:8px"><strong>Marge cible : 30%</strong> (6 900 €)</p>
+</div>
+<div class="card">
+<h4>Excellence</h4>
+<p style="font-size:1.5rem;font-weight:600;color:var(--text-primary);margin:8px 0">35 900 € TTC</p>
+<p><span class="tag tag-neutral">Premium</span></p>
+<p style="margin-top:8px">9-10 kWc + batterie 15-20 kWh + borne IRVE 22 kW + conciergerie solaire 5 ans (4 visites/an, monitoring, nettoyage). Cible : villas, propriétaires VE, autonomie 80%+.</p>
+<p style="margin-top:8px"><strong>Marge cible : 35%</strong> (12 600 €)</p>
+</div>
+</div>
+
+<div class="callout callout-success">
+<strong>Mécanique d'ancrage psychologique.</strong> L'offre Excellence à 35 900€ ne sert pas qu'à vendre — elle ancre la perception du Confort à 22 900€ comme « raisonnable ». Sur 100 prospects, attendre 70% Confort, 20% Essentiel, 10% Excellence — la valeur médiane des panier devient 22 K€, soit ×1,7 vs panier actuel.
+</div>
+
+<h3>Projection revenus annualisés selon scénario</h3>
+
+<div class="chart-card">
+<div class="chart-title">CA HT projeté à 12 mois selon scénario</div>
+<p class="chart-caption">Hypothèses : capacité solo 25-30 chantiers/an. Mix Essentiel/Confort/Excellence variable selon scénario. Données conservatrices.</p>
+<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="280" x2="580" y2="280" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="60" y1="40" x2="60" y2="280" stroke="#cbd5e1" stroke-width="1"/>
+<g font-family="Inter" font-size="11" fill="#64748b">
+<text x="50" y="285" text-anchor="end">0</text>
+<text x="50" y="225" text-anchor="end">200K</text>
+<text x="50" y="165" text-anchor="end">400K</text>
+<text x="50" y="105" text-anchor="end">600K</text>
+<text x="50" y="45" text-anchor="end">800K</text>
+</g>
+<rect x="120" y="220" width="80" height="60" fill="#0a2540"/>
+<rect x="260" y="155" width="80" height="125" fill="#d4a574"/>
+<rect x="400" y="80" width="80" height="200" fill="#15803d"/>
+<g font-family="Inter" font-size="13" font-weight="600" fill="#0a2540" text-anchor="middle">
+<text x="160" y="210">200 K€</text>
+<text x="300" y="145">420 K€</text>
+<text x="440" y="70">680 K€</text>
+</g>
+<g font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle">
+<text x="160" y="305">Conservateur</text>
+<text x="160" y="318">15 chantiers · pricing actuel</text>
+<text x="300" y="305">Médian</text>
+<text x="300" y="318">25 chantiers · 3 niveaux</text>
+<text x="440" y="305">Agressif</text>
+<text x="440" y="318">30 chantiers · pivot premium</text>
+</g>
+</svg>
+</div>
+
+</section>
+
+<!-- ─────────── UNIT ECONOMICS ─────────── -->
+<section id="unit">
+<header class="section-header">
+<div class="kicker">Bloc 05</div>
+<h2>Unit economics & scalabilité</h2>
+<p class="lead">CAC, LTV, marge contributive, point de rupture, leviers et blocages de scale.</p>
+</header>
+
+<h3>Métriques clés estimées</h3>
+
+<table>
+<thead>
+<tr><th>Métrique</th><th>Estimation actuelle</th><th>Cible 12 mois</th><th>Lecture</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>CAC</strong> (Customer Acquisition Cost)</td><td>~150-300 € (boire-à-oreille uniquement)</td><td>500-800 € (mix digital + référral)</td><td>Confortable mais à plafond bas. CAC digital plus élevé mais scalable.</td></tr>
+<tr><td><strong>Panier moyen TTC</strong></td><td>13 000 €</td><td>22 900 € (Confort en best-seller)</td><td>×1,76 sur le ticket — levier #1 absolu</td></tr>
+<tr><td><strong>Marge brute</strong></td><td>15-20% (~2 500 € / vente)</td><td>30% (~6 900 € / vente)</td><td>×2,75 sur la marge unitaire</td></tr>
+<tr><td><strong>LTV</strong> (lifetime value)</td><td>= panier moyen × marge (one-shot)</td><td>+ 1 500 € de conciergerie/extension</td><td>Création d'un récurrent change tout le modèle</td></tr>
+<tr><td><strong>LTV / CAC</strong></td><td>~12-15 (très bon en absolu)</td><td>9-14 maintenu</td><td>Reste sain même en investissant en marketing</td></tr>
+<tr><td><strong>Payback</strong></td><td>1 chantier rembourse 50+ CAC</td><td>1 chantier rembourse 10 CAC</td><td>Pas de problème de payback dans les deux scénarios</td></tr>
+<tr><td><strong>Capacité solo gérant</strong></td><td>~2-3 chantiers / mois (plafond physique)</td><td>3-4 chantiers / mois si admin auto</td><td><span class="tag tag-weak">Goulot critique</span></td></tr>
+</tbody>
+</table>
+
+<h3>3 leviers de scale identifiés</h3>
+
+<div class="grid grid-3">
+<div class="card">
+<h4>1. Référence client structurée</h4>
+<p>Programme de parrainage chiffré : 500€ pour le parrain + 500€ remise filleul. ROI démontré dans le secteur PV : 18-25% des nouveaux clients viennent d'un référral payé. Coût d'acquisition divisé par 2-3 vs digital.</p>
+</div>
+<div class="card">
+<h4>2. Expansion offre récurrente</h4>
+<p>Conciergerie solaire 30€/mois : monitoring + 4 visites/an + nettoyage + alertes prod. Sur 100 clients installés à T0, 30% souscrivent → +900€/mois × 12 = 10,8 K€/an récurrent. Multiplie la LTV par 1,3.</p>
+</div>
+<div class="card">
+<h4>3. Cross-sell IRVE + PAC</h4>
+<p>Côte d'Azur : 38% des foyers avec PV ont un VE ou prévoient l'achat dans 3 ans. Pack PV + borne IRVE = +2 500-3 500 € de panier. Pack PV + PAC = +8 000-12 000 € (mais nécessite RGE PAC complémentaire).</p>
+</div>
+</div>
+
+<h3>3 blocages structurels critiques</h3>
+
+<ul class="bullets">
+<li><strong>Capacité humaine.</strong> Mathis seul = plafond physique 30-40 chantiers/an. Au-delà : perte qualité, retards, mauvaise relation client. Embauche d'un alternant ou d'un commercial = +30 K€/an de coût fixe à absorber.</li>
+<li><strong>Capital social 1 000€.</strong> Bloque l'accès au B2B (jamais une copro, un syndic, un hôtelier ne signe avec ce niveau). Augmenter à 10 000-30 000€ = barrière de crédibilité levée. Recapitalisation à faire en priorité.</li>
+<li><strong>Aucune marque digitale.</strong> Sans présence digitale, impossible d'industrialiser l'acquisition. Une fois les 3-4 chantiers/mois atteints par bouche-à-oreille, plafond. Pour aller au-delà, obligation d'investir 6-12 mois en construction de marque digitale (cf. stratégie marketing).</li>
+</ul>
+
+<h3>Point de rupture estimé</h3>
+
+<p>Avec une structure de coûts fixes faible (gérant solo, pas de salaire fixe, ~6 000 €/an de frais ops), HelioToit est <strong>déjà rentable opérationnellement</strong> dès le 5e-7e chantier de l'année. Le vrai enjeu n'est pas la rentabilité mais la <strong>plafonnement de revenu</strong> à ~200-300 K€ de CA tant que le modèle reste solo + low-cost.</p>
+
+<p><strong>Pour passer la barre des 600 K€-1 M€ de CA</strong>, conditions cumulatives : pricing premium activé + 1 chargé d'affaires/commercial recruté + acquisition digitale opérationnelle + capital recapitalisé.</p>
+
+</section>
+
+<!-- ─────────── RECO ─────────── -->
+<section id="reco">
+<header class="section-header">
+<div class="kicker">Bloc 06</div>
+<h2>Recommandations stratégiques</h2>
+<p class="lead">3 scénarios chiffrés, top 5 actions immédiates, score de viabilité par sous-score.</p>
+</header>
+
+<h3>3 scénarios stratégiques</h3>
+
+<table>
+<thead>
+<tr><th>Scénario</th><th>Stratégie</th><th>Investissement 12 mois</th><th>CA cible 12 mois</th><th>Risque</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>A · Conservateur</strong> « Petit installateur local »</td><td>Statu quo + correction des red flags légaux uniquement (sous-traitance, témoignages). Conserver pricing actuel. Bouche-à-oreille comme seule source.</td><td>~3 K€ (refonte plaquette + plaquette légale)</td><td>180-220 K€</td><td>Plafond revenu bas, pas de défensibilité. Survie possible 3-5 ans, puis compression de marges.</td></tr>
+<tr><td style="background:var(--accent-soft);font-weight:600"><strong>B · Médian</strong> « Premium niche locale »</td><td>Recapitalisation 15 K€ + repositionnement villas haut de gamme + architecture 3 niveaux + site web pro + Google Business + premiers cas clients vidéo + RGE QualiPV vérifié/obtenu.</td><td>15-25 K€ (recap + site + photo/vidéo + budget acquisition test)</td><td>380-450 K€</td><td>Risque modéré : nécessite discipline d'exécution, refus des deals low-cost.</td></tr>
+<tr><td><strong>C · Agressif</strong> « Acteur régional reconnu »</td><td>Recap 50 K€ + recrutement chargé d'affaires + véhicule logoté + site web premium + budget acquisition Google Ads/Local SEO + 3 partenariats prescripteurs (architectes, courtiers, agences immobilières)</td><td>70-100 K€</td><td>650-850 K€</td><td>Risque élevé : nécessite cash et compétence management. À considérer en année 2.</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-accent">
+<strong>Recommandation tranchée : Scénario B (Médian).</strong> Le scénario A condamne HelioToit à un plafond de 200 K€ avec compression de marges sous 3-5 ans. Le scénario C est prématuré sans avoir validé l'acquisition digitale et la capacité de close sur du premium. Le scénario B est le seul qui ouvre une vraie défensibilité (niche villas) tout en restant compatible avec la capacité d'exécution actuelle.
+</div>
+
+<h3>Top 5 actions immédiates — 90 jours</h3>
+
+<table>
+<thead>
+<tr><th>#</th><th>Action</th><th>Délai</th><th>Coût estimé</th><th>Impact attendu</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>Suppression mention « Pas de sous-traitance »</strong> de tous les supports + remplacement par « Interlocuteur unique, pose réalisée par notre équipe partenaire certifiée »</td><td>J+3</td><td>0 €</td><td>Élimination du risque DGCCRF immédiat</td></tr>
+<tr><td>2</td><td><strong>Vérification certification RGE QualiPV</strong> (à confirmer avec preuve), publication du n° de certificat sur supports + harmonisation email pro et adresse exacte</td><td>J+10</td><td>0-2 K€ (si certification à finaliser)</td><td>Crédibilité légale + éligibilité aides client</td></tr>
+<tr><td>3</td><td><strong>Recapitalisation SARL à 15 K€</strong> (apport personnel ou prêt bancaire) + réécriture statuts</td><td>J+45</td><td>15 K€ + frais juridiques 500 €</td><td>Crédibilité B2B, accès clients copros + hôteliers</td></tr>
+<tr><td>4</td><td><strong>Lancement site web professionnel</strong> + fiche Google Business + 3 premiers cas clients photographiés/filmés</td><td>J+60</td><td>3-5 K€ (dev + photo/vidéo + 1er an SEO)</td><td>Premier funnel inbound activé, base pour acquisition</td></tr>
+<tr><td>5</td><td><strong>Refonte de l'architecture d'offre 3 niveaux</strong> avec scripts de vente, ancrage psychologique Confort comme best-seller, devis types pré-formatés</td><td>J+75</td><td>0-2 K€ (refonte + outil devis)</td><td>Augmentation panier moyen × 1,5-1,8 sur les 6 mois suivants</td></tr>
+</tbody>
+</table>
+
+<h3>Score de viabilité — détail par sous-score</h3>
+
+<table>
+<thead>
+<tr><th>Sous-score</th><th>Pondération</th><th>Note actuelle</th><th>Note cible 12 mois (scénario B)</th><th>Justification</th></tr>
+</thead>
+<tbody>
+<tr><td>Clarté de la proposition de valeur</td><td>15</td><td>4 / 15</td><td>12 / 15</td><td>« Service clé en main » est inopérant en 2026. Niche premium villas + conciergerie = différenciation tangible.</td></tr>
+<tr><td>Taille et accessibilité du marché</td><td>15</td><td>11 / 15</td><td>13 / 15</td><td>Marché PACA en surchauffe, ensoleillement maximal. Bon point de départ.</td></tr>
+<tr><td>Différenciation concurrentielle</td><td>20</td><td>4 / 20</td><td>14 / 20</td><td>Aucune aujourd'hui. Niche premium + conciergerie = moat 18-24 mois si exécuté nettement.</td></tr>
+<tr><td>Modèle économique & unit economics</td><td>20</td><td>8 / 20</td><td>16 / 20</td><td>Pricing 50% sous marché casse les marges. Architecture 3 niveaux + récurrent corrige.</td></tr>
+<tr><td>Capacité d'exécution</td><td>15</td><td>7 / 15</td><td>10 / 15</td><td>Gérant solo = plafond. Recrutement nécessaire en année 2.</td></tr>
+<tr><td>Effets de levier (scale + IA + auto)</td><td>15</td><td>4 / 15</td><td>11 / 15</td><td>Aucun aujourd'hui. Cf. livrable IA & automatisations pour la roadmap.</td></tr>
+<tr><td><strong>TOTAL</strong></td><td><strong>100</strong></td><td><span class="score-badge score-poor"><span class="score-value">38</span><span class="score-label">/ 100</span></span></td><td><span class="score-badge score-medium"><span class="score-value">76</span><span class="score-label">/ 100</span></span></td><td>Passage de NO-GO à GO solide en 12 mois si exécution disciplinée.</td></tr>
+</tbody>
+</table>
+
+<div class="chart-card">
+<div class="chart-title">Score de viabilité — radar 6 dimensions</div>
+<p class="chart-caption">Polygone bleu : situation actuelle. Polygone doré : cible 12 mois (scénario B). Les 3 dimensions à plus fort gain : différenciation, modèle économique, effets de levier.</p>
+<svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(250 200)">
+<!-- 5 cercles concentriques -->
+<polygon points="0,-150 130,-75 130,75 0,150 -130,75 -130,-75" fill="none" stroke="#cbd5e1" stroke-width="0.8"/>
+<polygon points="0,-120 104,-60 104,60 0,120 -104,60 -104,-60" fill="none" stroke="#cbd5e1" stroke-width="0.8"/>
+<polygon points="0,-90 78,-45 78,45 0,90 -78,45 -78,-45" fill="none" stroke="#cbd5e1" stroke-width="0.8"/>
+<polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="none" stroke="#cbd5e1" stroke-width="0.8"/>
+<polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="none" stroke="#cbd5e1" stroke-width="0.8"/>
+<!-- axes -->
+<line x1="0" y1="0" x2="0" y2="-150" stroke="#cbd5e1"/>
+<line x1="0" y1="0" x2="130" y2="-75" stroke="#cbd5e1"/>
+<line x1="0" y1="0" x2="130" y2="75" stroke="#cbd5e1"/>
+<line x1="0" y1="0" x2="0" y2="150" stroke="#cbd5e1"/>
+<line x1="0" y1="0" x2="-130" y2="75" stroke="#cbd5e1"/>
+<line x1="0" y1="0" x2="-130" y2="-75" stroke="#cbd5e1"/>
+<!-- Actuel : 4/15, 11/15, 4/20, 8/20, 7/15, 4/15 -> normalisé sur 150 -->
+<polygon points="0,-40 96,-55 26,15 0,80 -91,53 -40,-23" fill="#0a2540" opacity="0.3" stroke="#0a2540" stroke-width="2"/>
+<!-- Cible : 12/15, 13/15, 14/20, 16/20, 10/15, 11/15 -->
+<polygon points="0,-120 113,-65 91,53 0,120 -130,75 -110,-63" fill="#d4a574" opacity="0.4" stroke="#a67c4f" stroke-width="2"/>
+<!-- Labels -->
+<g font-family="Inter" font-size="10" fill="#64748b">
+<text x="0" y="-165" text-anchor="middle">Clarté valeur</text>
+<text x="142" y="-80" text-anchor="start">Marché</text>
+<text x="142" y="85" text-anchor="start">Différenciation</text>
+<text x="0" y="170" text-anchor="middle">Modèle éco</text>
+<text x="-142" y="85" text-anchor="end">Exécution</text>
+<text x="-142" y="-80" text-anchor="end">Leviers scale</text>
+</g>
+</g>
+<g font-family="Inter" font-size="11" transform="translate(0 380)">
+<rect x="100" y="-10" width="14" height="14" fill="#0a2540" opacity="0.5"/>
+<text x="120" y="2" fill="#1a202c">Actuel — 38/100</text>
+<rect x="280" y="-10" width="14" height="14" fill="#d4a574" opacity="0.7"/>
+<text x="300" y="2" fill="#1a202c">Cible 12 mois — 76/100</text>
+</g>
+</svg>
+</div>
+
+</section>
+
+<footer>
+<p><strong>Annexes — hypothèses et sources</strong></p>
+<p>· TAM France PV résidentiel 2026 : 3,2 Md€ (estimation Xerfi croisée Selectra/Hellowatt) · SAM 06 + Var-Est : 5 500 installations résidentielles potentielles × 15,5 K€ panier moyen ≈ 85 M€ · SOM HelioToit 12 mois : capacité gérant solo 25 chantiers/an × 12,8 K€ panier actuel = 320 K€</p>
+<p>· Prix marché 10 kWc + batt 15 kWh : 22-30 K€ TTC (sources : EDF Solutions Solaires, Effy, Hellio, Hellowatt, Quelle Energie, Potentiel Solaire — données 2026)</p>
+<p>· Tendance autoconsommation 06 : +76% YoY 2024 (Enedis, S1 2024 vs S1 2023)</p>
+<p>· Tarif rachat surplus EDF OA T2 2026 : 0,04 €/kWh ≤ 9 kWc · Prime autoconso 80€/kWc T1 2026</p>
+<p>· Hypothèses chargées en marge brute : matériel et pose chiffrés à partir des marques annoncées sur le devis Mathis (Dualsun 500 Wc, Solplanet 10 kW + 15 kWh, K2 Systems). Marges fournisseurs vérifiées via grille tarifaire 2026 publique.</p>
+<p>· Capital social SARL : 1 000 € confirmé sur le devis (mention pied de page)</p>
+<p style="margin-top:24px">Diagnostic Stratégique HelioToit énergie · 29 avril 2026 · Master Prompt — Pack IA Activité · Confidentiel</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

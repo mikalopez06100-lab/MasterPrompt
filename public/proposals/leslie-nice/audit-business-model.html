@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic Stratégique — Leslie de Nice · Batch Cooking à Domicile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-primary: #0a2540;
+  --text-body: #1a202c;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  --accent: #d4a574;
+  --accent-dark: #a67c4f;
+  --accent-soft: #faf3e8;
+  --success: #15803d;
+  --success-soft: #f0fdf4;
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+  --danger: #b91c1c;
+  --danger-soft: #fef2f2;
+  --info: #0369a1;
+  --info-soft: #f0f9ff;
+  --chart-1: #0a2540;
+  --chart-2: #0ea5e9;
+  --chart-3: #d4a574;
+  --chart-4: #15803d;
+  --chart-5: #b91c1c;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.04);
+  --shadow: 0 1px 3px rgba(10,37,64,0.06), 0 1px 2px rgba(10,37,64,0.04);
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);background:var(--bg-page);color:var(--text-body);font-size:1rem;line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{color:var(--info);text-decoration:none;}
+strong{font-weight:600;}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:220px 1fr;max-width:1240px;margin:0 auto;gap:48px;padding:48px;}
+.main{min-width:0;}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:24px;}.toc{display:none;}}
+
+/* TOC */
+.toc{position:sticky;top:32px;align-self:start;font-size:0.8rem;}
+.toc-title{font-size:0.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;}
+.toc ul{list-style:none;}
+.toc ul li{margin-bottom:6px;}
+.toc ul li a{color:var(--text-muted);transition:color .2s;}
+.toc ul li a:hover,.toc ul li a.active{color:var(--text-primary);font-weight:600;}
+.toc ul li a.active{border-left:2px solid var(--accent);padding-left:8px;}
+.toc-sep{height:1px;background:var(--border);margin:16px 0;}
+
+/* COVER */
+.cover{background:var(--text-primary);color:var(--text-inverse);padding:72px 64px;border-radius:var(--radius-lg);margin-bottom:48px;}
+.cover-kicker{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
+.cover h1{font-size:2.8rem;font-weight:700;line-height:1.1;margin-bottom:16px;}
+.cover h1 em{font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);}
+.cover-meta{margin-top:40px;display:flex;gap:40px;flex-wrap:wrap;}
+.cover-meta-item{}
+.cover-meta-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:4px;}
+.cover-meta-value{font-size:.95rem;font-weight:500;}
+.cover-score-block{margin-top:40px;padding:24px 32px;background:rgba(255,255,255,.08);border-radius:var(--radius);border:1px solid rgba(255,255,255,.12);display:inline-flex;align-items:center;gap:24px;}
+.cover-score-num{font-size:4rem;font-weight:700;line-height:1;color:#f9c74f;}
+.cover-score-label{font-size:.8rem;opacity:.6;margin-top:4px;}
+.cover-score-text{font-size:1.1rem;font-weight:600;}
+.cover-score-sub{font-size:.85rem;color:rgba(255,255,255,.6);margin-top:4px;}
+
+/* SECTION */
+section{margin-bottom:64px;padding-top:32px;}
+.section-header{margin-bottom:40px;padding-bottom:24px;border-bottom:2px solid var(--text-primary);}
+.kicker{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px;}
+.section-header h2{font-size:1.75rem;color:var(--text-primary);margin:0 0 12px;font-weight:700;line-height:1.2;}
+.section-header .lead{font-size:1.05rem;color:var(--text-muted);}
+
+/* CARDS */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;box-shadow:var(--shadow-sm);margin-bottom:20px;}
+.card h3{font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:12px;}
+.card h4{font-size:.9rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;}
+@media(max-width:700px){.card-grid-2,.card-grid-3{grid-template-columns:1fr;}}
+
+/* KPI */
+.kpi-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;flex:1;min-width:160px;box-shadow:var(--shadow-sm);}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);display:block;margin-bottom:6px;}
+.kpi-value{font-size:2.2rem;font-weight:700;color:var(--text-primary);display:block;line-height:1;font-variant-numeric:tabular-nums;}
+.kpi-note{font-size:.78rem;color:var(--text-muted);margin-top:6px;}
+
+/* CALLOUTS */
+.callout{padding:14px 20px;border-left:4px solid var(--text-primary);background:var(--bg-subtle);border-radius:0 var(--radius) var(--radius) 0;margin:20px 0;font-size:.9rem;}
+.callout strong{display:block;margin-bottom:4px;}
+.callout-warning{border-color:var(--warning);background:var(--warning-soft);}
+.callout-success{border-color:var(--success);background:var(--success-soft);}
+.callout-danger{border-color:var(--danger);background:var(--danger-soft);}
+.callout-accent{border-color:var(--accent);background:var(--accent-soft);}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:16px 0;}
+.data-table th{text-align:left;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-size:.72rem;padding:10px 14px;border-bottom:2px solid var(--text-primary);}
+.data-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text-body);vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td.center{text-align:center;}
+.data-table td.right{text-align:right;font-variant-numeric:tabular-nums;}
+.data-table tr.highlight td{background:var(--accent-soft);font-weight:600;}
+
+/* SCORE BADGE */
+.score-badge{display:inline-flex;align-items:baseline;gap:4px;padding:6px 14px;border-radius:var(--radius);font-variant-numeric:tabular-nums;}
+.score-value{font-size:1.6rem;font-weight:700;}
+.score-label{font-size:.82rem;opacity:.7;}
+.score-good{background:var(--success-soft);color:var(--success);}
+.score-medium{background:var(--warning-soft);color:var(--warning);}
+.score-poor{background:var(--danger-soft);color:var(--danger);}
+
+/* BMC GRID */
+.bmc-grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto auto auto;gap:12px;margin-bottom:20px;}
+.bmc-cell{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-size:.82rem;}
+.bmc-cell.span2{grid-column:span 2;}
+.bmc-cell.span1{grid-column:span 1;}
+.bmc-cell .bmc-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px;}
+.bmc-cell ul{list-style:none;padding:0;}
+.bmc-cell ul li{padding:3px 0;color:var(--text-body);border-bottom:1px solid var(--border);}
+.bmc-cell ul li:last-child{border-bottom:none;}
+.bmc-cell.accent-bg{background:var(--accent-soft);border-color:var(--accent);}
+.bmc-cell.dark-bg{background:var(--text-primary);color:var(--text-inverse);}
+.bmc-cell.dark-bg .bmc-label{color:var(--accent);}
+.bmc-cell.dark-bg ul li{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.1);}
+
+/* CHART CARD */
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow-sm);}
+.chart-card h4{font-size:.95rem;font-weight:700;color:var(--text-primary);margin-bottom:4px;}
+.chart-caption{font-size:.8rem;color:var(--text-muted);margin-bottom:16px;}
+
+/* ICE TABLE */
+.ice-score{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:.82rem;font-variant-numeric:tabular-nums;}
+.ice-high{background:#f0fdf4;color:#15803d;}
+.ice-med{background:#fffbeb;color:#b45309;}
+.ice-low{background:#fef2f2;color:#b91c1c;}
+
+/* ROADMAP */
+.roadmap{display:flex;gap:0;margin:24px 0;overflow:auto;}
+.roadmap-col{flex:1;min-width:200px;padding:20px;border-left:3px solid var(--border);}
+.roadmap-col:first-child{border-left-color:var(--chart-5);}
+.roadmap-col:nth-child(2){border-left-color:var(--chart-3);}
+.roadmap-col:nth-child(3){border-left-color:var(--chart-2);}
+.roadmap-col h5{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;}
+.roadmap-col ul{list-style:none;padding:0;}
+.roadmap-col ul li{font-size:.84rem;padding:6px 0;border-bottom:1px solid var(--border);color:var(--text-body);}
+.roadmap-col ul li:last-child{border-bottom:none;}
+.roadmap-col ul li::before{content:"→ ";color:var(--accent-dark);font-weight:700;}
+
+/* EXECUTIVE PILLS */
+.exec-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+.pill{padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:600;border:1.5px solid;}
+.pill-danger{color:var(--danger);border-color:var(--danger);background:var(--danger-soft);}
+.pill-warning{color:var(--warning);border-color:var(--warning);background:var(--warning-soft);}
+.pill-success{color:var(--success);border-color:var(--success);background:var(--success-soft);}
+
+/* SCENARIO CARDS */
+.scenario-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:700px){.scenario-grid{grid-template-columns:1fr;}}
+.scenario{border:1px solid var(--border);border-radius:var(--radius);padding:24px;background:var(--bg-card);}
+.scenario.recommended{border-color:var(--accent);background:var(--accent-soft);}
+.scenario h4{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+.scenario .s-amount{font-size:2rem;font-weight:700;color:var(--text-primary);line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums;}
+.scenario .s-label{font-size:.78rem;color:var(--text-muted);margin-bottom:16px;}
+.scenario ul{list-style:none;font-size:.82rem;}
+.scenario ul li{padding:4px 0;border-bottom:1px solid var(--border);}
+.scenario ul li:last-child{border-bottom:none;}
+
+/* PRINT */
+@media print{
+  body{background:white;}
+  .toc{display:none;}
+  .layout{grid-template-columns:1fr;padding:0;max-width:720px;}
+  .cover{border-radius:0;}
+  .no-print{display:none!important;}
+  .card,.chart-card,.scenario{break-inside:avoid;box-shadow:none;}
+  .page-break{page-break-after:always;}
+}
+@page{size:A4;margin:16mm 14mm;}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- TOC -->
+<nav class="toc" aria-label="Sommaire">
+  <div class="toc-title">Sommaire</div>
+  <ul>
+    <li><a href="#exec">Résumé exécutif</a></li>
+    <li><a href="#bmc">Business Model Canvas</a></li>
+    <li><a href="#marche">Étude de marché</a></li>
+    <li><a href="#concurrence">Analyse concurrentielle</a></li>
+    <li><a href="#pricing">Stratégie de pricing</a></li>
+    <li><a href="#economics">Scalabilité & Unit Economics</a></li>
+    <li><a href="#recommandations">Recommandations 90 jours</a></li>
+    <li><a href="#annexes">Annexes</a></li>
+  </ul>
+  <div class="toc-sep"></div>
+  <div style="font-size:.75rem;color:var(--text-muted);">Score global<br>
+    <strong style="font-size:1.2rem;color:var(--warning);">61 / 100</strong>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<!-- COVER -->
+<div class="cover" id="top">
+  <div class="cover-kicker">Diagnostic Stratégique · Avril 2026</div>
+  <h1>Leslie <em>de Nice</em><br>Batch Cooking à Domicile</h1>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Secteur</div>
+      <div class="cover-meta-value">Services à la Personne · Gastronomie à domicile</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Géographie</div>
+      <div class="cover-meta-value">Nice & NCA · Rayon 45 min</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Stade</div>
+      <div class="cover-meta-value">Pré-lancement / Idée structurée</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">Consultant</div>
+      <div class="cover-meta-value">Michaël Lopez · LM Consulting</div>
+    </div>
+  </div>
+  <div class="cover-score-block">
+    <div>
+      <div style="font-size:3.8rem;font-weight:700;color:#f9c74f;line-height:1;">61</div>
+      <div style="font-size:.8rem;opacity:.6;margin-top:2px;">/ 100</div>
+    </div>
+    <div>
+      <div style="font-size:1.05rem;font-weight:600;">Viabilité mitigée</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,.6);margin-top:4px;">GO conditionné à 3 pivots structurels</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1 : RÉSUMÉ EXÉCUTIF -->
+<section id="exec">
+  <div class="section-header">
+    <span class="kicker">Résumé exécutif</span>
+    <h2>5 constats. 1 verdict tranché.</h2>
+    <p class="lead">Ce que ce diagnostic révèle sur le potentiel réel du business, sans biais favorable.</p>
+  </div>
+
+  <div class="exec-pills">
+    <span class="pill pill-success">Différenciation forte (titre champion)</span>
+    <span class="pill pill-success">Marché porteur Côte d'Azur</span>
+    <span class="pill pill-success">Avantage fiscal SAP sous-exploité</span>
+    <span class="pill pill-danger">Plafond de revenu structurel (solo)</span>
+    <span class="pill pill-danger">Erreur de modèle sur les courses</span>
+    <span class="pill pill-warning">Pricing incohérent et non défendable</span>
+    <span class="pill pill-warning">Zéro mécanisme de rétention</span>
+  </div>
+
+  <div class="card">
+    <h3>Constat 1 — Le titre "Championne du monde de farcis niçois 2025" est un actif sous-exploité</h3>
+    <p>C'est l'élément différenciateur le plus puissant du business, et il ne figure pas comme argument central de conversion. Dans le secteur des services à domicile premium, un titre mondial est un signal de crédibilité immédiate que 99 % des concurrentes ne peuvent pas répliquer. Il doit être en tête de chaque support, pas en bas de page dans le footer.</p>
+  </div>
+
+  <div class="card">
+    <h3>Constat 2 — Le modèle "courses incluses" sur la landing page est une faute opérationnelle critique</h3>
+    <p>La formule Hebdo affiche "Courses au marché incluses (en option)". C'est incompatible avec le modèle réel où le client fournit les courses. Ce point crée une dissonance commerciale et un risque de litige dès le premier rendez-vous client. À corriger en priorité absolue avant tout lancement ou trafic envoyé vers la page.</p>
+  </div>
+  <div class="callout callout-danger">
+    <strong>Erreur commerciale immédiate.</strong> Le pricing Découverte (180 €) est plus élevé que le Hebdo (150 €). Dans un modèle de service premium, le tarif récurrent doit être au moins équivalent au one-shot, sinon supérieur par volume. Ici, le prospect le plus précieux — le client fidèle — est facturé moins que le prospect d'essai. C'est une inversion complète de la logique de valeur client.
+  </div>
+
+  <div class="card">
+    <h3>Constat 3 — Le plafond de revenu solo est atteint rapidement</h3>
+    <p>Avec 5 prestations hebdomadaires × 150 € × 48 semaines = <strong>36 000 € brut/an</strong> maximum. Déduction faite des charges, déplacements et temps non facturé (menus, courses, communication), le revenu net réel tourne autour de <strong>1 800 à 2 200 €/mois</strong>. Ce n'est pas une machine à cash : c'est un métier artisanal avec un plafond très bas. Sans levier de scale, ce business ne croise jamais 50 K€/an net.</p>
+  </div>
+
+  <div class="card">
+    <h3>Constat 4 — L'avantage fiscal SAP est l'argument commercial n°1, pas mentionné correctement</h3>
+    <p>Si Leslie opère sous l'agrément Services à la Personne, le client bénéficie d'un crédit d'impôt de 50 % sur la prestation. 150 € facturés = 75 € nets pour le client. C'est une réduction de prix de 50 % financée par l'État, sans impact sur la marge. Aucun acteur concurrentiel (livraison de repas, traiteur) ne peut proposer ça. C'est l'argument de closing le plus puissant du dossier et il est quasi invisible sur la landing page actuelle.</p>
+  </div>
+
+  <div class="card">
+    <h3>Constat 5 — Aucun mécanisme de rétention ou de récurrence formalisée</h3>
+    <p>La formule Hebdo est présentée comme "engagement souple, sans abonnement". C'est une erreur de positionnement : ça rassure le prospect mais ça détruit la visibilité de revenu. Sans engagement minimum (4 séances/mois par exemple), chaque semaine est une renégociation implicite. Les clients les plus rentables — ceux qui s'abonnent — ont besoin d'un cadre contractuel pour se sentir prioritaires. L'"engagement souple" c'est le discours pour fermer une vente, pas pour structurer un business.</p>
+  </div>
+
+  <!-- Score Viabilité -->
+  <div class="chart-card">
+    <h4>Score de viabilité global — Décomposition par sous-bloc</h4>
+    <p class="chart-caption">Pondération McKinsey /100. Sous-scores calculés sur données réelles et hypothèses explicites (cf. Annexes).</p>
+
+    <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;">
+      <!-- background bars -->
+      <g fill="#f1f5f9">
+        <rect x="200" y="30" width="400" height="30" rx="4"/>
+        <rect x="200" y="72" width="400" height="30" rx="4"/>
+        <rect x="200" y="114" width="400" height="30" rx="4"/>
+        <rect x="200" y="156" width="400" height="30" rx="4"/>
+        <rect x="200" y="198" width="400" height="30" rx="4"/>
+        <rect x="200" y="240" width="400" height="30" rx="4"/>
+      </g>
+      <!-- value bars -->
+      <!-- Proposition de valeur 12/15 = 80% -->
+      <rect x="200" y="30" width="320" height="30" rx="4" fill="#0ea5e9"/>
+      <!-- Taille marché 9/15 = 60% -->
+      <rect x="200" y="72" width="240" height="30" rx="4" fill="#d4a574"/>
+      <!-- Différenciation 14/20 = 70% -->
+      <rect x="200" y="114" width="280" height="30" rx="4" fill="#0ea5e9"/>
+      <!-- Unit economics 10/20 = 50% -->
+      <rect x="200" y="156" width="200" height="30" rx="4" fill="#b45309"/>
+      <!-- Capacité exec 10/15 = 66% -->
+      <rect x="200" y="198" width="265" height="30" rx="4" fill="#d4a574"/>
+      <!-- Leviers scale 6/15 = 40% -->
+      <rect x="200" y="240" width="160" height="30" rx="4" fill="#b91c1c"/>
+
+      <!-- Labels gauche -->
+      <g font-family="Inter" font-size="12" fill="#64748b">
+        <text x="190" y="50" text-anchor="end">Proposition de valeur</text>
+        <text x="190" y="92" text-anchor="end">Taille du marché</text>
+        <text x="190" y="134" text-anchor="end">Différenciation</text>
+        <text x="190" y="176" text-anchor="end">Unit economics</text>
+        <text x="190" y="218" text-anchor="end">Capacité d'exécution</text>
+        <text x="190" y="260" text-anchor="end">Leviers de scale</text>
+      </g>
+
+      <!-- Scores droite -->
+      <g font-family="Inter" font-size="12" font-weight="700" fill="#0a2540">
+        <text x="530" y="50">12 / 15</text>
+        <text x="530" y="92">9 / 15</text>
+        <text x="530" y="134">14 / 20</text>
+        <text x="530" y="176" fill="#b45309">10 / 20</text>
+        <text x="530" y="218">10 / 15</text>
+        <text x="530" y="260" fill="#b91c1c">6 / 15</text>
+      </g>
+
+      <!-- Total -->
+      <line x1="200" y1="286" x2="600" y2="286" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="530" y="300" font-family="Inter" font-size="13" font-weight="700" fill="#b45309">61 / 100</text>
+    </svg>
+
+    <div style="margin-top:16px;display:flex;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-muted);"><span style="width:12px;height:12px;background:#0ea5e9;border-radius:2px;display:inline-block;"></span>Solide</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-muted);"><span style="width:12px;height:12px;background:#d4a574;border-radius:2px;display:inline-block;"></span>Mitigé</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-muted);"><span style="width:12px;height:12px;background:#b91c1c;border-radius:2px;display:inline-block;"></span>Faible — pivot requis</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 : BMC -->
+<section id="bmc" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 01</span>
+    <h2>Business Model Canvas — Analyse critique</h2>
+    <p class="lead">Les 9 blocs remplis, puis les 3 forces et les 3 faiblesses majeures du modèle.</p>
+  </div>
+
+  <!-- BMC GRID SIMPLIFIED -->
+  <div style="overflow-x:auto;">
+  <div class="bmc-grid">
+    <!-- Row 1 : Partenaires / Activités / VP / Relations / Segments -->
+    <div class="bmc-cell">
+      <div class="bmc-label">Partenaires clés</div>
+      <ul>
+        <li>Épiceries & marchés locaux (qualité produits)</li>
+        <li>Prescripteurs : nutritionnistes, pédiatres, sages-femmes</li>
+        <li>Plateformes SAP si agrément</li>
+        <li>Potentiels cuisiniers partenaires (scale)</li>
+      </ul>
+    </div>
+    <div class="bmc-cell span2 accent-bg">
+      <div class="bmc-label">Activités clés</div>
+      <ul>
+        <li>Conception des menus hebdomadaires personnalisés</li>
+        <li>Production listes de courses (client fournit)</li>
+        <li>Prestation cuisine à domicile (~3h sur place)</li>
+        <li>Étiquetage, rangement, conservation</li>
+        <li>Communication & acquisition clients (Instagram)</li>
+      </ul>
+    </div>
+    <div class="bmc-cell dark-bg span2" style="grid-row:span 2;">
+      <div class="bmc-label">Proposition de Valeur</div>
+      <ul>
+        <li>Récupérer 3h/semaine de cuisine</li>
+        <li>Repas faits maison, sains, variés</li>
+        <li>Championne du monde farcis niçois 2025 → crédibilité absolue</li>
+        <li>Personnalisation complète (allergies, régimes)</li>
+        <li>Avantage fiscal SAP : 150€ → 75€ net</li>
+        <li>Ancrage local, terroir niçois</li>
+      </ul>
+    </div>
+    <div class="bmc-cell">
+      <div class="bmc-label">Relations clients</div>
+      <ul>
+        <li>Relation personnelle directe</li>
+        <li>Consultation menu en amont</li>
+        <li>Retours continus sur les plats</li>
+        <li>Aucun abonnement formalisé (⚠ lacune)</li>
+      </ul>
+    </div>
+    <div class="bmc-cell">
+      <div class="bmc-label">Segments clients</div>
+      <ul>
+        <li>Couples actifs avec enfants (35–55 ans, CSP+)</li>
+        <li>Familles manquant de temps</li>
+        <li>Nouveaux parents (post-naissance)</li>
+        <li>Seniors autonomes soigneux</li>
+        <li>Second home owners (Côte d'Azur)</li>
+      </ul>
+    </div>
+
+    <!-- Row 2 : (Partenaires cont.) / Ressources / (VP cont.) / Canaux / (Segments cont.) -->
+    <div class="bmc-cell">
+      <div class="bmc-label">Ressources clés</div>
+      <ul>
+        <li>Savoir-faire culinaire certifié (titre mondial)</li>
+        <li>Réseau de recommandations initial</li>
+        <li>Bibliothèque recettes (à construire)</li>
+        <li>Temps disponible Leslie (contrainte principale)</li>
+      </ul>
+    </div>
+    <div class="bmc-cell">
+      <div class="bmc-label">Canaux</div>
+      <ul>
+        <li>Instagram @leslie.de.nice</li>
+        <li>Bouche à oreille (principal)</li>
+        <li>Landing page leslie-de-nice.fr</li>
+        <li>Prescripteurs (à activer)</li>
+        <li>Plateformes SAP (à explorer)</li>
+      </ul>
+    </div>
+
+    <!-- Row 3 : Coûts / Sources revenus -->
+    <div class="bmc-cell span2">
+      <div class="bmc-label">Structure de coûts</div>
+      <ul style="display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;">
+        <li>Transport domicile-client (~15 €/prestation)</li>
+        <li>Matériel cuisine (contenants, étiquettes ~5 €)</li>
+        <li>Temps préparation menus non facturé (~1h/prestation)</li>
+        <li>Communication & marketing (Instagram)</li>
+        <li>Charges auto-entrepreneur (~23 % du CA)</li>
+        <li>Déplacement course si nécessaire (rare)</li>
+      </ul>
+    </div>
+    <div class="bmc-cell span3" style="background:var(--info-soft);border-color:#bae6fd;">
+      <div class="bmc-label" style="color:var(--info);">Sources de revenus</div>
+      <ul style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 16px;">
+        <li>Forfait Hebdo 150 €/semaine (cœur du modèle)</li>
+        <li>Forfait Découverte 180 € (one-shot)</li>
+        <li>Réception sur devis (upside ponctuel)</li>
+        <li style="color:var(--text-muted);font-style:italic;">À créer : abonnement mensuel 4× 150€</li>
+        <li style="color:var(--text-muted);font-style:italic;">À créer : gift card naissance/cadeau</li>
+        <li style="color:var(--text-muted);font-style:italic;">À créer : offre B2B dirigeants</li>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+  <div class="callout callout-warning" style="margin-top:28px;">
+    <strong>Alignement coûts ↔ revenus : défaut structurel identifié.</strong>
+    Avec 5 prestations max/semaine à 150 € = 750 €/semaine. Après charges AE (23 %), transport, matériel et temps non facturé (~4h/semaine de prep), le coût réel par prestation est ~40 €. Marge brute : ~73 %. Ce chiffre paraît sain mais masque que le plafond absolu de CA est ~36 K€/an. Aucun investissement ne peut faire croître ce CA sans changer le modèle.
+  </div>
+
+  <div class="card-grid-3">
+    <div class="card" style="border-top:3px solid var(--success);">
+      <h4 style="color:var(--success);">3 Forces majeures</h4>
+      <ul style="list-style:none;font-size:.85rem;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);">Titre mondial = barrière à l'entrée symbolique très forte</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);">Avantage fiscal SAP (50 % CI) = proposition imbattable en termes de prix perçu</li>
+        <li style="padding:8px 0;">Ancrage local niçois sur un marché touristique et haut de gamme</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--danger);">
+      <h4 style="color:var(--danger);">3 Faiblesses majeures</h4>
+      <ul style="list-style:none;font-size:.85rem;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);">Monoressource : tout repose sur 1 personne, 0 résilience</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);">Aucune rétention formelle → churn non maîtrisé</li>
+        <li style="padding:8px 0;">Pas de bibliothèque de recettes = prep time élevé, différenciation non capitalisée</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--warning);">
+      <h4 style="color:var(--warning);">3 Angles morts</h4>
+      <ul style="list-style:none;font-size:.85rem;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);">Absence totale de canal de prescription structuré</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border);">Aucune offre "cadeau" (segment porteur : naissance, épuisement parental)</li>
+        <li style="padding:8px 0;">Statut SAP non confirmé → si absent, l'argument fiscal s'effondre</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 : MARCHÉ -->
+<section id="marche" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 02</span>
+    <h2>Étude de marché — TAM · SAM · SOM</h2>
+    <p class="lead">Marché des services à la personne + culinaire à domicile, France & Côte d'Azur.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">TAM France</span>
+      <strong class="kpi-value">9,2 Md€</strong>
+      <p class="kpi-note">Marché SAP culinaire & entretien France 2024 (hypothèse FEPEM)</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">SAM — Côte d'Azur</span>
+      <strong class="kpi-value">38 M€</strong>
+      <p class="kpi-note">~80 000 ménages CSP+ rayon 45 min × 475€/mois × 12 %</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">SOM réaliste 3 ans</span>
+      <strong class="kpi-value">72 K€</strong>
+      <p class="kpi-note">Plafond solo optimisé. 2 opérateurs = 144 K€</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Cycle de marché</span>
+      <strong class="kpi-value" style="font-size:1.3rem;">Croissance</strong>
+      <p class="kpi-note">Services à domicile premium : +8 %/an. Pénétration faible.</p>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <h4>TAM → SAM → SOM — Batch cooking premium à domicile</h4>
+    <p class="chart-caption">Méthode bottom-up. Source : hypothèses posées sur données INSEE Alpes-Maritimes + FEPEM 2024.</p>
+    <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block;margin:0 auto;">
+      <circle cx="280" cy="170" r="155" fill="#0a2540" opacity="0.08"/>
+      <circle cx="280" cy="170" r="105" fill="#0a2540" opacity="0.16"/>
+      <circle cx="280" cy="170" r="55" fill="#0a2540" opacity="0.55"/>
+      <!-- Labels TAM -->
+      <text x="280" y="26" font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle" letter-spacing="1">TAM · 9,2 Md€</text>
+      <text x="280" y="40" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">Marché SAP France (culinaire & ménage)</text>
+      <!-- Labels SAM -->
+      <text x="280" y="78" font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle" letter-spacing="1">SAM · 38 M€</text>
+      <text x="280" y="91" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">Ménages CSP+ NCA · rayon 45 min</text>
+      <!-- Labels SOM -->
+      <text x="280" y="163" font-family="Inter" font-size="12" font-weight="700" fill="white" text-anchor="middle">SOM</text>
+      <text x="280" y="182" font-family="Inter" font-size="16" font-weight="700" fill="white" text-anchor="middle">72 K€</text>
+      <text x="280" y="198" font-family="Inter" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">Solo optimisé / an</text>
+      <!-- Annotation flèche scale -->
+      <line x1="350" y1="220" x2="395" y2="250" stroke="#d4a574" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="400" y="255" font-family="Inter" font-size="11" fill="#a67c4f">+2 opérateurs</text>
+      <text x="400" y="270" font-family="Inter" font-size="12" font-weight="700" fill="#a67c4f">→ 144 K€</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h3>5 tendances de fond — horizon 3 ans</h3>
+    <table class="data-table">
+      <thead><tr><th>Tendance</th><th>Direction</th><th>Impact pour Leslie</th><th>Horizon</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Fatigue culinaire post-Covid</strong> — le "cuisiné maison" reste aspirationnel mais le temps manque</td>
+          <td style="color:var(--success)">Favorable</td>
+          <td>Demande croissante pour externalisation cuisinée sans compromis qualité</td>
+          <td>Maintenant</td>
+        </tr>
+        <tr>
+          <td><strong>Montée des services premium à domicile</strong> — coach, personal shopper, ménage haut de gamme</td>
+          <td style="color:var(--success)">Favorable</td>
+          <td>Normalise la dépense, élève le consentement à payer</td>
+          <td>Maintenant → 3 ans</td>
+        </tr>
+        <tr>
+          <td><strong>Avantage fiscal SAP en hausse</strong> — crédit d'impôt 50 % pérennisé, communication renforcée</td>
+          <td style="color:var(--success)">Très favorable</td>
+          <td>Prix perçu divisé par 2. Aucune solution concurrente ne peut égaler ça</td>
+          <td>Maintenant</td>
+        </tr>
+        <tr>
+          <td><strong>Côte d'Azur : marché résidents secondaires & retraités aisés</strong></td>
+          <td style="color:var(--success)">Favorable</td>
+          <td>Segment supplémentaire (semi-résidents aisés, présents 3–6 mois/an)</td>
+          <td>1–2 ans</td>
+        </tr>
+        <tr>
+          <td><strong>Risque de commoditisation</strong> : arrivée de plateformes type "Uber du batch cooking"</td>
+          <td style="color:var(--danger)">Risque moyen</td>
+          <td>Pression sur les prix, nécessité de verrouiller la clientèle avant</td>
+          <td>2–4 ans</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-accent">
+    <strong>Signal fort à exploiter immédiatement.</strong> Nice concentre un nombre anormal de ménages à fort pouvoir d'achat pour sa taille (5e ville de France). Les résidents secondaires (secteur Est : Saint-Jean-Cap-Ferrat, Beaulieu, Villefranche) représentent un segment sous-adressé, prêt à payer 200–250€ par session sans négociation, et potentiellement demandeurs sur des séjours de 3–4 jours avec cuisine de réception en sus.
+  </div>
+</section>
+
+<!-- SECTION 4 : CONCURRENCE -->
+<section id="concurrence">
+  <div class="section-header">
+    <span class="kicker">Bloc 03</span>
+    <h2>Analyse concurrentielle</h2>
+    <p class="lead">Concurrents directs et indirects. Matrice de positionnement. Identification de l'espace blanc.</p>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Acteur</th>
+        <th>Type</th>
+        <th>Prix moyen</th>
+        <th>Force principale</th>
+        <th>Faiblesse vs Leslie</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HelloFresh / Marmiton Box</strong></td>
+        <td>Kit repas livré (DIY)</td>
+        <td>~7–10 €/repas</td>
+        <td>Prix bas, praticité, notoriété</td>
+        <td>Le client cuisine encore. Aucune personnalisation réelle. Pas de SAP.</td>
+      </tr>
+      <tr>
+        <td><strong>Traiteurs niçois (Chez Pipo, etc.)</strong></td>
+        <td>Traiteur classique</td>
+        <td>15–25 €/plat</td>
+        <td>Notoriété locale, ancrage terroir</td>
+        <td>Pas à domicile, pas de cuisine sur mesure, pas de SAP</td>
+      </tr>
+      <tr>
+        <td><strong>Popotte / Les Batch Cookers</strong></td>
+        <td>Franchise batch cooking</td>
+        <td>120–180 €/session</td>
+        <td>Cadre structuré, réseau national</td>
+        <td>Pas de différenciation culinaire. Leslie les écrase sur le titre et l'ancrage local.</td>
+      </tr>
+      <tr>
+        <td><strong>Assistantes ménagères qualifiées</strong></td>
+        <td>Service à la personne généraliste</td>
+        <td>15–20 €/h</td>
+        <td>Prix, disponibilité, multitâche</td>
+        <td>Pas de compétence culinaire certifiée. Aucune capacité de menus gastronomiques.</td>
+      </tr>
+      <tr>
+        <td><strong>Cheffe privée sur événements</strong></td>
+        <td>Événementiel premium</td>
+        <td>300–800 €/soir</td>
+        <td>Glamour, haut de gamme</td>
+        <td>Positionné événementiel, pas quotidien. Leslie peut adresser les deux.</td>
+      </tr>
+      <tr>
+        <td><strong>DIY — Le client cuisine lui-même</strong></td>
+        <td>Concurrent indirect majeur</td>
+        <td>Coût temps uniquement</td>
+        <td>Zéro coût monétaire, contrôle total</td>
+        <td>Temps, compétence, fatigue. L'argument 75 € net SAP élimine l'objection prix.</td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>Leslie de Nice</strong></td>
+        <td>Batch cooking premium à domicile</td>
+        <td>150 € (→ 75 € SAP)</td>
+        <td>Titre mondial, ancrage terroir, personnalisation totale, SAP</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-card" style="margin-top:24px;">
+    <h4>Matrice de positionnement — Personnalisation vs Prix perçu client</h4>
+    <p class="chart-caption">Axes choisis pour révéler le gap premium personnalisé. Prix perçu = après avantage fiscal SAP si applicable.</p>
+    <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;">
+      <!-- Zone grisée = espace vide -->
+      <rect x="310" y="40" width="250" height="180" rx="6" fill="#faf3e8" opacity=".7"/>
+      <text x="430" y="80" font-family="Inter" font-size="11" fill="#a67c4f" text-anchor="middle" font-weight="600">ESPACE BLANC</text>
+      <text x="430" y="95" font-family="Inter" font-size="10" fill="#a67c4f" text-anchor="middle">Premium personnalisé</text>
+
+      <!-- Axes -->
+      <line x1="60" y1="420" x2="580" y2="420" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="60" y1="40" x2="60" y2="420" stroke="#cbd5e1" stroke-width="1.5"/>
+      <!-- Axis midlines -->
+      <line x1="320" y1="40" x2="320" y2="420" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1"/>
+      <line x1="60" y1="230" x2="580" y2="230" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1"/>
+
+      <!-- Axis labels -->
+      <text x="320" y="445" font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">Prix perçu client →</text>
+      <text x="25" y="230" font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle" transform="rotate(-90 25 230)">Personnalisation →</text>
+      <!-- Min/max labels -->
+      <text x="65" y="438" font-family="Inter" font-size="10" fill="#94a3b8">Bas</text>
+      <text x="560" y="438" font-family="Inter" font-size="10" fill="#94a3b8">Élevé</text>
+      <text x="62" y="52" font-family="Inter" font-size="10" fill="#94a3b8">Max</text>
+      <text x="62" y="418" font-family="Inter" font-size="10" fill="#94a3b8">Min</text>
+
+      <!-- Concurrents -->
+      <!-- HelloFresh : prix bas, perso faible -->
+      <circle cx="120" cy="370" r="9" fill="#94a3b8"/>
+      <text x="135" y="375" font-family="Inter" font-size="11" fill="#1a202c">HelloFresh</text>
+
+      <!-- Traiteur : prix moyen, perso faible -->
+      <circle cx="230" cy="340" r="9" fill="#94a3b8"/>
+      <text x="245" y="345" font-family="Inter" font-size="11" fill="#1a202c">Traiteur local</text>
+
+      <!-- Franchise Popotte : prix moyen, perso moyenne -->
+      <circle cx="260" cy="260" r="9" fill="#94a3b8"/>
+      <text x="275" y="265" font-family="Inter" font-size="11" fill="#1a202c">Franchise batch</text>
+
+      <!-- Assistante ménagère : prix très bas, perso nulle -->
+      <circle cx="100" cy="400" r="9" fill="#94a3b8"/>
+      <text x="115" y="405" font-family="Inter" font-size="11" fill="#1a202c">Assistante ménagère</text>
+
+      <!-- Cheffe événementiel : prix élevé, perso haute mais pas quotidien -->
+      <circle cx="490" cy="150" r="9" fill="#94a3b8"/>
+      <text x="505" y="155" font-family="Inter" font-size="11" fill="#1a202c">Cheffe événementiel</text>
+
+      <!-- LESLIE : prix perçu moyen (75€ SAP) mais perso max -->
+      <circle cx="390" cy="68" r="14" fill="#d4a574" stroke="#0a2540" stroke-width="2.5"/>
+      <text x="410" y="64" font-family="Inter" font-size="13" font-weight="700" fill="#0a2540">LESLIE</text>
+      <text x="410" y="80" font-family="Inter" font-size="10" fill="#a67c4f">75€ net · Champion</text>
+    </svg>
+    <div class="callout callout-success" style="margin-top:16px;">
+      <strong>Gap identifié.</strong> Le quadrant "Personnalisation maximale + Prix perçu moyen" est quasi vide. Leslie peut s'y installer durablement grâce à la combinaison titre mondial + avantage fiscal SAP. Aucun concurrent ne peut répliquer les deux simultanément.
+    </div>
+  </div>
+
+  <!-- Porter 5 forces -->
+  <div class="card">
+    <h3>Porter 5 forces — Attractivité du marché</h3>
+    <table class="data-table">
+      <thead><tr><th>Force</th><th>Intensité</th><th>Analyse</th></tr></thead>
+      <tbody>
+        <tr><td>Rivalité entre concurrents</td><td style="color:var(--warning)"><strong>Moyenne</strong></td><td>Marché fragmenté, pas de leader local établi sur le batch cooking premium</td></tr>
+        <tr><td>Nouveaux entrants</td><td style="color:var(--success)"><strong>Faible</strong></td><td>Titre mondial crée une barrière symbolique forte. Formation de cuisinière qualifiée = 2–3 ans</td></tr>
+        <tr><td>Pouvoir fournisseurs</td><td style="color:var(--success)"><strong>Faible</strong></td><td>Marché, épiceries locaux = nombreux, pas de dépendance</td></tr>
+        <tr><td>Pouvoir clients</td><td style="color:var(--warning)"><strong>Moyen</strong></td><td>Clientèle aisée sensible à la qualité, moins au prix. Risque de churn si déception qualitative</td></tr>
+        <tr><td>Substituts</td><td style="color:var(--warning)"><strong>Moyen</strong></td><td>DIY reste le substitut principal. L'argument SAP (75€ net) rend le DIY moins rationnel financièrement</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.85rem;color:var(--text-muted);margin-top:12px;font-style:italic;">Verdict Porter : marché attractif. La force la plus contraignante est le pouvoir client dans un segment premium où la tolérance zéro à la déception est élevée.</p>
+  </div>
+</section>
+
+<!-- SECTION 5 : PRICING -->
+<section id="pricing" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 04</span>
+    <h2>Stratégie de pricing — Triangulation</h2>
+    <p class="lead">3 méthodes croisées. Architecture d'offre recommandée. Leviers psychologiques.</p>
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>Problème identifié sur la landing page actuelle.</strong> Le tarif "Découverte" (180 €) est supérieur au tarif récurrent "Hebdo" (150 €). C'est l'inverse de la logique économique et psychologique d'un service premium : le client régulier doit percevoir un avantage (volume, fidélité), pas payer moins parce qu'il revient. En l'état, cette architecture dit implicitement "les nouveaux clients coûtent plus cher à convaincre et on leur fait payer". Ce n'est pas un positionnement haut de gamme.
+  </div>
+
+  <div class="card-grid-3">
+    <div class="card">
+      <h4>Méthode 1 — Cost-plus</h4>
+      <p style="font-size:.85rem;margin-bottom:12px;">Coût réel estimé par prestation :</p>
+      <table class="data-table" style="font-size:.8rem;">
+        <tr><td>Transport (aller-retour)</td><td class="right">12 €</td></tr>
+        <tr><td>Matériel (contenants, étiquettes)</td><td class="right">6 €</td></tr>
+        <tr><td>Préparation menu (1h30 à 15€/h)</td><td class="right">22 €</td></tr>
+        <tr><td>Charges AE (23 % de 150€)</td><td class="right">34 €</td></tr>
+        <tr><td><strong>Coût total / prestation</strong></td><td class="right"><strong>74 €</strong></td></tr>
+        <tr><td>Marge à 150 €</td><td class="right" style="color:var(--success)">76 €</td></tr>
+      </table>
+      <p style="font-size:.78rem;color:var(--text-muted);margin-top:8px;">Plancher pricing : 90 € (×1,2 sur coûts). Pas de raison de descendre sous ce seuil.</p>
+    </div>
+    <div class="card" style="border:1px solid var(--accent);">
+      <h4 style="color:var(--accent-dark);">Méthode 2 — Value-based (prioritaire)</h4>
+      <p style="font-size:.85rem;margin-bottom:12px;">Valeur économique créée pour le client :</p>
+      <table class="data-table" style="font-size:.8rem;">
+        <tr><td>3h cuisine économisées/semaine</td><td class="right">~60 €</td></tr>
+        <tr><td>Réduction gaspillage alimentaire</td><td class="right">~25 €</td></tr>
+        <tr><td>Qualité repas vs livraison (Deliveroo)</td><td class="right">~40 €</td></tr>
+        <tr><td>Bénéfice stress/temps famille</td><td class="right">non chiffré</td></tr>
+        <tr><td><strong>Valeur totale estimée/semaine</strong></td><td class="right"><strong>~125 €</strong></td></tr>
+        <tr><td>Capture à 120 % = pricing target</td><td class="right" style="color:var(--accent-dark)"><strong>150–175 €</strong></td></tr>
+      </table>
+      <p style="font-size:.78rem;color:var(--text-muted);margin-top:8px;">Avec SAP : 75–87 € net client. Excellent ratio valeur/prix.</p>
+    </div>
+    <div class="card">
+      <h4>Méthode 3 — Compétitive</h4>
+      <p style="font-size:.85rem;margin-bottom:12px;">Benchmark marché :</p>
+      <table class="data-table" style="font-size:.8rem;">
+        <tr><td>Popotte / franchises</td><td class="right">120–180 €</td></tr>
+        <tr><td>Prestation indépendante Nice</td><td class="right">100–160 €</td></tr>
+        <tr><td>Cuisinier à domicile événementiel</td><td class="right">250–600 €</td></tr>
+        <tr><td>SAP généraliste</td><td class="right">15–20 €/h</td></tr>
+      </table>
+      <p style="font-size:.78rem;color:var(--text-muted);margin-top:8px;">Position cible : premium sur le batch cooking (150–175 €), sans atteindre le tarif événementiel (250 €+).</p>
+    </div>
+  </div>
+
+  <!-- Architecture d'offre recommandée -->
+  <div class="card" style="margin-top:8px;">
+    <h3>Architecture d'offre recommandée — 3 niveaux</h3>
+    <div class="scenario-grid">
+      <div class="scenario">
+        <h4 style="color:var(--text-muted);">Découverte</h4>
+        <div class="s-amount">195 €</div>
+        <div class="s-label">1 session · 5 plats · liste courses fournie</div>
+        <ul>
+          <li>Tarif one-shot volontairement plus élevé</li>
+          <li>Ancre le Mensuel comme "intéressant"</li>
+          <li>Menu personnalisé + debriefing</li>
+          <li>→ 97,50 € net avec SAP</li>
+        </ul>
+      </div>
+      <div class="scenario recommended">
+        <h4 style="color:var(--accent-dark);">Mensuel — Le bestseller</h4>
+        <div class="s-amount" style="color:var(--accent-dark);">150 €</div>
+        <div class="s-label">Par session · 4 sessions/mois · 600 €/mois</div>
+        <ul>
+          <li>Engagement mensuel → revenu prévisible</li>
+          <li>Plats variés, jamais répétés sur 4 semaines</li>
+          <li>Priorité planning + créneaux réservés</li>
+          <li>→ 75 € net/session avec SAP</li>
+        </ul>
+      </div>
+      <div class="scenario">
+        <h4 style="color:var(--text-primary);">Premium / Réception</h4>
+        <div class="s-amount">Sur devis</div>
+        <div class="s-label">À partir de 350 € · Dîner / Événement</div>
+        <ul>
+          <li>4 à 20 personnes</li>
+          <li>Menu gastronomique + service</li>
+          <li>Ancre le Mensuel comme "accessible"</li>
+          <li>Marge supérieure (+40 %)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout callout-accent">
+      <strong>Recommandation tranchée sur le pricing.</strong> Passer le tarif Découverte à 195 €, maintenir le Mensuel à 150 €/session. L'écart crée l'ancrage psychologique correct : le client s'abonne parce que c'est rationnel, pas parce qu'on lui force la main. À 600 €/mois avec 5 clients mensuels = 3 000 €/mois de revenu récurrent prévisible — c'est la base d'un business.
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <h4>Projection revenus selon l'architecture d'offre — 12 mois</h4>
+    <p class="chart-caption">Hypothèse : montée en puissance progressive sur 6 mois. 5 clients mensuels au régime + 1 événement/mois moyen 400€.</p>
+    <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;">
+      <!-- axes -->
+      <line x1="60" y1="260" x2="620" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="30" x2="60" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <!-- Y ticks -->
+      <g font-family="Inter" font-size="10" fill="#94a3b8">
+        <text x="52" y="264" text-anchor="end">0</text>
+        <text x="52" y="204" text-anchor="end">1K</text>
+        <text x="52" y="144" text-anchor="end">2K</text>
+        <text x="52" y="84" text-anchor="end">3K</text>
+        <text x="52" y="40" text-anchor="end">3,6K</text>
+      </g>
+      <!-- Monthly bars: mois 1 à 12 -->
+      <!-- Scale: 3600€ = 230px height. So 1€ = 0.0639px -->
+      <!-- M1: 300€ = 19px; M2: 600; M3: 900; M4: 1200; M5: 1800; M6: 2400; M7: 3000; M8-12: 3400 -->
+      <g fill="#0ea5e9" opacity=".75">
+        <rect x="72"  y="241" width="36" height="19"  rx="3"/> <!-- 300 -->
+        <rect x="118" y="222" width="36" height="38"  rx="3"/> <!-- 600 -->
+        <rect x="164" y="202" width="36" height="58"  rx="3"/> <!-- 910 -->
+        <rect x="210" y="184" width="36" height="76"  rx="3"/> <!-- 1190 -->
+        <rect x="256" y="145" width="36" height="115" rx="3"/> <!-- 1800 -->
+        <rect x="302" y="107" width="36" height="153" rx="3"/> <!-- 2400 -->
+        <rect x="348" y="68"  width="36" height="192" rx="3"/> <!-- 3000 -->
+        <rect x="394" y="47"  width="36" height="213" rx="3"/> <!-- 3340 -->
+        <rect x="440" y="47"  width="36" height="213" rx="3"/>
+        <rect x="486" y="47"  width="36" height="213" rx="3"/>
+        <rect x="532" y="47"  width="36" height="213" rx="3"/>
+        <rect x="578" y="47"  width="36" height="213" rx="3"/>
+      </g>
+      <!-- Monthly labels -->
+      <g font-family="Inter" font-size="9" fill="#94a3b8" text-anchor="middle">
+        <text x="90" y="278">M1</text><text x="136" y="278">M2</text><text x="182" y="278">M3</text>
+        <text x="228" y="278">M4</text><text x="274" y="278">M5</text><text x="320" y="278">M6</text>
+        <text x="366" y="278">M7</text><text x="412" y="278">M8</text><text x="458" y="278">M9</text>
+        <text x="504" y="278">M10</text><text x="550" y="278">M11</text><text x="596" y="278">M12</text>
+      </g>
+      <!-- Target line -->
+      <line x1="60" y1="47" x2="620" y2="47" stroke="#d4a574" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="625" y="44" font-family="Inter" font-size="10" fill="#a67c4f" text-anchor="start">3 400 € cible</text>
+      <!-- Total annotation -->
+      <text x="596" y="38" font-family="Inter" font-size="11" font-weight="700" fill="#0a2540" text-anchor="middle">3 400 €/m</text>
+    </svg>
+  </div>
+</section>
+
+<!-- SECTION 6 : UNIT ECONOMICS -->
+<section id="economics">
+  <div class="section-header">
+    <span class="kicker">Bloc 05</span>
+    <h2>Scalabilité & Unit Economics</h2>
+    <p class="lead">Métriques clés, plafond de revenu, leviers de scale, blocages structurels.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">CAC estimé</span>
+      <strong class="kpi-value">0–25 €</strong>
+      <p class="kpi-note">Bouche à oreille dominant. Faible si Instagram bien tenu. Hausse si paid ads.</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">LTV client mensuel</span>
+      <strong class="kpi-value">3 600 €</strong>
+      <p class="kpi-note">600 €/mois × 6 mois rétention estimée (hypothèse conservatrice)</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Ratio LTV / CAC</span>
+      <strong class="kpi-value" style="color:var(--success);">&gt; 100×</strong>
+      <p class="kpi-note">Ratio exceptionnel. CAC quasi nul au démarrage. Se dégrade si acquisition payante.</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Marge contributive</span>
+      <strong class="kpi-value">~51 %</strong>
+      <p class="kpi-note">76 € marge / 150 € prix. Correct pour service artisanal. Faible vs SaaS.</p>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">Plafond CA solo</span>
+      <strong class="kpi-value" style="color:var(--danger);">36 K€/an</strong>
+      <p class="kpi-note">5 prestations × 150 € × 48 semaines. Plafond absolu sans levier.</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">CA solo optimisé</span>
+      <strong class="kpi-value" style="color:var(--warning);">52–60 K€</strong>
+      <p class="kpi-note">Mix Mensuel 150€ + 2 événements/mois à 350€ + quelques Découverte 195€</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">CA cible 3 ans (scale)</span>
+      <strong class="kpi-value" style="color:var(--success);">130–150 K€</strong>
+      <p class="kpi-note">Leslie + 2 partenaires formés, même modèle, même standard qualité</p>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Seuil rentabilité</span>
+      <strong class="kpi-value">3 clients</strong>
+      <p class="kpi-note">3 clients mensuels = 1 800 €/mois. Couvre charges AE + transport. Atteint en M1-M2.</p>
+    </div>
+  </div>
+
+  <div class="card-grid-2" style="margin-top:8px;">
+    <div class="card" style="border-top:3px solid var(--success);">
+      <h3>3 Leviers de scale activables</h3>
+      <ul style="list-style:none;font-size:.85rem;">
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);">
+          <strong>1. Formation de partenaires cuisiniers</strong><br>
+          <span style="color:var(--text-muted);">Former 1–2 profils qualifiés à la méthode Leslie (menus, standards, SAP). Chaque partenaire = +36 K€/an de CA potentiel. Modèle franchise légère ou portage.</span>
+        </li>
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);">
+          <strong>2. Monétisation de la bibliothèque de recettes</strong><br>
+          <span style="color:var(--text-muted);">Construire un catalogue de 150+ recettes → vente de menus digitaux, e-book, workshop en ligne. Revenu passif à terme. Faible mais sans plafond.</span>
+        </li>
+        <li style="padding:10px 0;">
+          <strong>3. Prescription institutionnelle</strong><br>
+          <span style="color:var(--text-muted);">Conventions avec maternités, CHU Nice, nutritionnistes, pédiatres. Flux entrant de clients qualifiés à CAC quasi nul. 1 prescription = 6 mois de client récurrent.</span>
+        </li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--danger);">
+      <h3>3 Blocages structurels</h3>
+      <ul style="list-style:none;font-size:.85rem;">
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);">
+          <strong>1. Coût marginal constant = pas d'économies d'échelle</strong><br>
+          <span style="color:var(--text-muted);">Chaque prestation supplémentaire coûte le même temps. Il n'y a pas de "1 000e client moins cher que le 10e". Le modèle ne s'améliore pas avec le volume.</span>
+        </li>
+        <li style="padding:10px 0;border-bottom:1px solid var(--border);">
+          <strong>2. Dépendance totale à la santé de Leslie</strong><br>
+          <span style="color:var(--text-muted);">1 arrêt maladie = 0 revenu. 0 remplacement possible. Risque maximal pour un business en solo. Aucun tampon financier si incident.</span>
+        </li>
+        <li style="padding:10px 0;">
+          <strong>3. Saisonnalité Côte d'Azur</strong><br>
+          <span style="color:var(--text-muted);">L'été, les clients aisés voyagent. Les résidents principaux sont en vacances. Risque de creux juillet–août qui déstabilise la récurrence.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-warning">
+    <strong>Point de rupture.</strong> Le business solo ne devient réellement profitable (>2 500 €/mois net) qu'à partir de 6 clients mensuels actifs. Ce palier est atteignable en M4–M6 si l'acquisition démarre sérieusement à J0. Sans ce palier, le business reste un "beau métier mal rémunéré" — ce qui n'est pas l'objectif.
+  </div>
+</section>
+
+<!-- SECTION 7 : RECOMMANDATIONS -->
+<section id="recommandations" class="page-break">
+  <div class="section-header">
+    <span class="kicker">Bloc 06</span>
+    <h2>Recommandations stratégiques & Plan 90 jours</h2>
+    <p class="lead">3 scénarios chiffrés. Matrice ICE. Top 5 actions immédiates. Verdict final tranché.</p>
+  </div>
+
+  <!-- Scénarios -->
+  <div class="scenario-grid">
+    <div class="scenario">
+      <h4>Conservateur</h4>
+      <div class="s-amount">28 K€</div>
+      <div class="s-label">CA brut / an · 4–5 clients · no change</div>
+      <ul>
+        <li>Pas d'investissement marketing</li>
+        <li>Pricing actuel non corrigé</li>
+        <li>Bouche à oreille uniquement</li>
+        <li>Risque : plafonnement rapide</li>
+        <li>Net estimé : ~1 100 €/mois</li>
+      </ul>
+    </div>
+    <div class="scenario recommended">
+      <h4 style="color:var(--accent-dark);">Médian — Recommandé</h4>
+      <div class="s-amount" style="color:var(--accent-dark);">58 K€</div>
+      <div class="s-label">CA brut / an · 6–7 clients + 2 récep/mois</div>
+      <ul>
+        <li>Pricing corrigé (195/150/devis)</li>
+        <li>Abonnement mensuel formalisé</li>
+        <li>2 canaux prescripteurs activés</li>
+        <li>Instagram 3×/semaine</li>
+        <li>Net estimé : ~2 500 €/mois</li>
+      </ul>
+    </div>
+    <div class="scenario">
+      <h4>Agressif</h4>
+      <div class="s-amount">130 K€</div>
+      <div class="s-label">CA brut / an · Leslie + 2 partenaires</div>
+      <ul>
+        <li>Formation 1–2 cuisiniers partenaires</li>
+        <li>Bibliothèque recettes digitalisée</li>
+        <li>Convention maternité/nutritionniste</li>
+        <li>Modèle micro-franchise légère</li>
+        <li>Net estimé : ~4 500 €/mois</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-accent">
+    <strong>Verdict tranché.</strong> Le scénario médian est le seul défendable à 12 mois. L'agressif est prématuré sans avoir d'abord validé la rétention client et construit la bibliothèque de recettes. Le conservateur est une impasse économique. La séquence logique : Médian (M1–M12) → Agressif (M13–M36) avec un critère de déclenchement clair : 6 clients mensuels actifs stables pendant 3 mois consécutifs.
+  </div>
+
+  <!-- Matrice ICE -->
+  <div class="chart-card">
+    <h4>Matrice de priorisation ICE — 10 actions candidates</h4>
+    <p class="chart-caption">Impact (1–10) × Confidence (1–10) × Ease (1–10). Top 5 = actions à lancer dans les 90 jours.</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th class="center">Impact</th>
+          <th class="center">Conf.</th>
+          <th class="center">Ease</th>
+          <th class="right">Score ICE</th>
+          <th>Priorité</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Corriger la landing page</strong> (supprimer courses incluses, pricing corrigé)</td>
+          <td class="center">6</td><td class="center">10</td><td class="center">10</td>
+          <td class="right"><span class="ice-score ice-high">600</span></td>
+          <td>J+0 → J+3</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Confirmer statut SAP / agrément</strong> et l'afficher comme argument #1</td>
+          <td class="center">9</td><td class="center">9</td><td class="center">8</td>
+          <td class="right"><span class="ice-score ice-high">648</span></td>
+          <td>J+0 → J+7</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Construire bibliothèque recettes structurée</strong> (60+ recettes catégorisées par saison/régime)</td>
+          <td class="center">8</td><td class="center">9</td><td class="center">7</td>
+          <td class="right"><span class="ice-score ice-high">504</span></td>
+          <td>J+7 → J+30</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Formaliser l'abonnement mensuel</strong> 4 séances (contrat simple, prélèvement auto)</td>
+          <td class="center">8</td><td class="center">8</td><td class="center">7</td>
+          <td class="right"><span class="ice-score ice-high">448</span></td>
+          <td>J+7 → J+21</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>Activer 3 prescripteurs</strong> (1 pédiatre + 1 nutritionniste + 1 sage-femme)</td>
+          <td class="center">8</td><td class="center">6</td><td class="center">7</td>
+          <td class="right"><span class="ice-score ice-med">336</span></td>
+          <td>J+14 → J+45</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Créer une offre gift card "naissance / épuisement parental" à 195 €</td>
+          <td class="center">7</td><td class="center">7</td><td class="center">7</td>
+          <td class="right"><span class="ice-score ice-med">343</span></td>
+          <td>J+30 → J+60</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Instagram : 3 posts/semaine avec thème fixe (lundi recette, mercredi coulisses, vendredi titre champion)</td>
+          <td class="center">6</td><td class="center">7</td><td class="center">8</td>
+          <td class="right"><span class="ice-score ice-med">336</span></td>
+          <td>J+0 → continu</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Offre résidents secondaires / Cap Ferrat : forfait 2 jours 3 plats gastronomiques (450–600 €)</td>
+          <td class="center">7</td><td class="center">5</td><td class="center">6</td>
+          <td class="right"><span class="ice-score ice-med">210</span></td>
+          <td>J+45 → J+90</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Former un partenaire cuisinier certifié "méthode Leslie"</td>
+          <td class="center">9</td><td class="center">5</td><td class="center">4</td>
+          <td class="right"><span class="ice-score ice-low">180</span></td>
+          <td>M7–M12</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Créer une chaîne YouTube / Reels batch cooking pédagogique</td>
+          <td class="center">4</td><td class="center">4</td><td class="center">4</td>
+          <td class="right"><span class="ice-score ice-low">64</span></td>
+          <td>Déprioritiser</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Roadmap 90 jours -->
+  <div class="card">
+    <h3>Plan d'action 90 jours — Top 5 priorités</h3>
+    <div class="roadmap">
+      <div class="roadmap-col">
+        <h5>Semaines 1–2 · Urgences</h5>
+        <ul>
+          <li>Corriger la landing page (courses, pricing)</li>
+          <li>Confirmer/obtenir agrément SAP</li>
+          <li>Rédiger contrat abonnement mensuel simple</li>
+          <li>Mettre le titre champion en H1 de la page</li>
+        </ul>
+      </div>
+      <div class="roadmap-col">
+        <h5>Semaines 3–6 · Fondations</h5>
+        <ul>
+          <li>Construire bibliothèque 60 recettes structurée</li>
+          <li>Créer liste de courses standardisée par menu</li>
+          <li>Lancer Instagram 3×/semaine (contenu terrain)</li>
+          <li>Premiers rendez-vous prescripteurs (cibler 3)</li>
+        </ul>
+      </div>
+      <div class="roadmap-col">
+        <h5>Semaines 7–12 · Acquisition</h5>
+        <ul>
+          <li>Activer 2 prescripteurs confirmés</li>
+          <li>Lancer gift card naissance (Noël / fêtes des mères)</li>
+          <li>Identifier les 3 premiers clients abonnés mensuels</li>
+          <li>Préparer l'offre résidents secondaires Est Nice</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableau de bord KPIs -->
+  <div class="card">
+    <h3>Tableau de bord — KPIs à suivre hebdomadairement</h3>
+    <table class="data-table">
+      <thead><tr><th>KPI</th><th>Cible M3</th><th>Cible M6</th><th>Cible M12</th><th>Fréquence</th></tr></thead>
+      <tbody>
+        <tr><td>Nombre de clients actifs mensuels</td><td>3</td><td>5</td><td>7</td><td>Hebdo</td></tr>
+        <tr><td>CA mensuel brut</td><td>1 800 €</td><td>2 800 €</td><td>4 200 €</td><td>Hebdo</td></tr>
+        <tr><td>Taux de reconduction mensuel</td><td>—</td><td>≥ 80 %</td><td>≥ 85 %</td><td>Mensuel</td></tr>
+        <tr><td>Nouveaux leads entrants</td><td>2/mois</td><td>4/mois</td><td>6/mois</td><td>Mensuel</td></tr>
+        <tr><td>Nombre prescripteurs actifs</td><td>1</td><td>3</td><td>5</td><td>Mensuel</td></tr>
+        <tr><td>Recettes bibliothèque</td><td>40</td><td>100</td><td>180</td><td>Mensuel</td></tr>
+        <tr><td>Événements réception facturés</td><td>0–1</td><td>2/mois</td><td>3/mois</td><td>Mensuel</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 8 : ANNEXES -->
+<section id="annexes">
+  <div class="section-header">
+    <span class="kicker">Annexes</span>
+    <h2>Hypothèses & Sources</h2>
+    <p class="lead">Toutes les hypothèses posées dans ce diagnostic, avec leur niveau de certitude.</p>
+  </div>
+  <div class="card">
+    <table class="data-table">
+      <thead><tr><th>Hypothèse</th><th>Valeur utilisée</th><th>Certitude</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Ménages CSP+ rayon 45 min Nice</td><td>~80 000</td><td>Estimée</td><td>INSEE Alpes-Maritimes, extrapolation décile revenu</td></tr>
+        <tr><td>Taux de pénétration services culinaires premium</td><td>0,1–0,5 %</td><td>Hypothèse conservatrice</td><td>Analogie marché coach sportif à domicile</td></tr>
+        <tr><td>Crédit d'impôt SAP</td><td>50 %</td><td>Certaine</td><td>CGI Art. 199 sexdecies — valable si agrément SAP obtenu</td></tr>
+        <tr><td>Charges auto-entrepreneur</td><td>23 %</td><td>Certaine</td><td>URSSAF 2024 — prestation de service</td></tr>
+        <tr><td>Durée de rétention client mensuel</td><td>6 mois</td><td>Estimée basse</td><td>Analogie services premium à domicile (hypothèse non validée)</td></tr>
+        <tr><td>CAC moyen</td><td>0–25 €</td><td>Estimée</td><td>Phase bouche à oreille — se dégrade si paid ads lancés</td></tr>
+        <tr><td>Temps prep non facturé / prestation</td><td>1h30</td><td>Estimée</td><td>À confirmer avec Leslie en conditions réelles</td></tr>
+        <tr><td>Tarif concurrent franchises batch cooking</td><td>120–180 €</td><td>Vérifiable</td><td>Sites Popotte, Les Batch Cookers, pages Instagram concurrentes</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px;font-size:.82rem;color:var(--text-muted);">Ce rapport constitue un diagnostic stratégique sur la base des informations transmises et d'hypothèses explicites. Il n'engage pas la responsabilité du consultant sur les projections financières. Tout scénario financier doit être validé par Leslie sur la base de ses coûts réels et de sa capacité opérationnelle.</p>
+    <p style="margin-top:8px;font-size:.82rem;color:var(--text-muted);">Diagnostic produit par <strong>Michaël Lopez — LM Consulting</strong> · Avril 2026</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+  var sections = [];
+  tocLinks.forEach(function(link){
+    var id = link.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if(el) sections.push({id:id,el:el,link:link});
+  });
+  function onScroll(){
+    var scrollY = window.scrollY + 120;
+    var current = null;
+    sections.forEach(function(s){
+      if(s.el.offsetTop <= scrollY) current = s;
+    });
+    tocLinks.forEach(function(l){ l.classList.remove('active'); });
+    if(current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA & Automatisations — HelioToit énergie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574; --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; padding: 0; counter-reset: section; }
+.toc li { counter-increment: section; padding: 6px 0; border-left: 2px solid var(--border); padding-left: 12px; }
+.toc li::before { content: counter(section, decimal-leading-zero); color: var(--text-muted); font-weight: 600; margin-right: 8px; font-size: 0.75rem; }
+.toc a { color: var(--text-body); text-decoration: none; }
+.toc a:hover { color: var(--text-primary); }
+.content { max-width: 920px; }
+.cover { padding: 80px 0 64px; border-bottom: 2px solid var(--text-primary); margin-bottom: 64px; }
+.cover-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 16px; }
+.cover h1 { font-size: 2.75rem; color: var(--text-primary); font-weight: 600; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.02em; }
+.cover p.subtitle { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; max-width: 720px; }
+.cover-meta { display: flex; gap: 40px; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-muted); }
+.cover-meta strong { color: var(--text-primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+section { margin-bottom: 80px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; }
+h3 { font-size: 1.25rem; color: var(--text-primary); font-weight: 600; margin: 32px 0 12px; }
+h4 { font-size: 1rem; color: var(--text-primary); font-weight: 600; margin: 20px 0 8px; }
+p { margin-bottom: 12px; }
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 720px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; box-shadow: var(--shadow-sm); }
+.card h4 { margin-top: 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 8px; }
+.kpi-value { font-size: 2rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.875rem; margin-top: 8px; color: var(--text-muted); }
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 1rem; }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout strong { color: var(--text-primary); }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 24px 0; }
+th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: none; }
+ul.bullets { list-style: none; padding-left: 0; }
+ul.bullets li { padding: 6px 0 6px 24px; position: relative; }
+ul.bullets li::before { content: "→"; position: absolute; left: 0; color: var(--accent-dark); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.6875rem; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.tag-quick { background: var(--success-soft); color: var(--success); }
+.tag-medium { background: var(--accent-soft); color: var(--accent-dark); }
+.tag-complex { background: var(--warning-soft); color: var(--warning); }
+.tag-skip { background: var(--danger-soft); color: var(--danger); }
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+.chart-caption { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px; }
+.chart-card svg { width: 100%; height: auto; }
+.exec-summary { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-bottom: 40px; }
+.exec-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: start; }
+@media (max-width: 720px) { .exec-grid { grid-template-columns: 1fr; } }
+.exec-score-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; text-align: center; }
+.exec-score-num { font-size: 3.75rem; font-weight: 700; line-height: 1; color: var(--accent-dark); }
+.exec-score-label { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; }
+.workflow {
+  background: var(--bg-subtle); border-radius: 8px; padding: 24px; margin: 16px 0;
+  display: flex; gap: 12px; align-items: stretch; overflow-x: auto;
+}
+.workflow .step {
+  flex: 1; min-width: 140px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 14px; font-size: 0.8125rem; position: relative;
+}
+.workflow .step::after {
+  content: "→"; position: absolute; right: -16px; top: 50%; transform: translateY(-50%);
+  color: var(--accent-dark); font-weight: 700; font-size: 16px;
+}
+.workflow .step:last-child::after { display: none; }
+.workflow .step .step-num { font-size: 0.6875rem; color: var(--accent-dark); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+.workflow .step .step-title { font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.workflow .step .step-desc { color: var(--text-muted); font-size: 0.75rem; line-height: 1.4; }
+.roi-box { background: var(--bg-card); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 16px 0; }
+.roi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 12px; }
+.roi-item .v { font-family: var(--font-sans); font-size: 1.5rem; font-weight: 600; color: var(--text-primary); display: block; }
+.roi-item .l { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+@media (max-width: 720px) { .roi-grid { grid-template-columns: repeat(2, 1fr); } }
+footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--text-muted); }
+@media print {
+  body { background: white; }
+  .layout { grid-template-columns: 1fr; padding: 0; max-width: 100%; }
+  .toc { display: none; }
+  .card, .chart-card, .kpi { break-inside: avoid; box-shadow: none; }
+  section { margin-bottom: 40px; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#exec">Résumé exécutif</a></li>
+    <li><a href="#carto">Cartographie processus</a></li>
+    <li><a href="#readiness">Audit IA-readiness</a></li>
+    <li><a href="#cas">Cas d'usage IA</a></li>
+    <li><a href="#stack">Stack technique</a></li>
+    <li><a href="#top3">Top 3 automatisations</a></li>
+    <li><a href="#roadmap">Roadmap & ROI</a></li>
+    <li><a href="#gouvernance">Gouvernance</a></li>
+  </ol>
+</aside>
+
+<main class="content">
+
+<header class="cover">
+  <div class="cover-eyebrow">IA & Automatisations · Pack IA Activité</div>
+  <h1>HelioToit énergie</h1>
+  <p class="subtitle">Cartographie des processus, audit IA-readiness, stack technique recommandée, top 3 automatisations chiffrées avec ROI. Cible : libérer 8 à 12 heures/semaine du gérant pour les recentrer sur la prospection et le close.</p>
+  <div class="cover-meta">
+    <div><strong>Client</strong>Mathis Amazigh, gérant</div>
+    <div><strong>Société</strong>HelioToit énergie · SARL · Vallauris (06)</div>
+    <div><strong>Date</strong>29 avril 2026</div>
+    <div><strong>Consultant</strong>Michaël Lopez · Master Prompt</div>
+  </div>
+</header>
+
+<!-- ─────────── EXEC ─────────── -->
+<section id="exec">
+<div class="exec-summary">
+<div class="exec-grid">
+<div>
+<div class="kicker">Résumé exécutif</div>
+<h2 style="font-size:1.5rem;color:var(--text-primary);margin-bottom:24px">Pas d'agent IA autonome, pas de chatbot. Trois automatisations simples qui rendent 35-45 heures/mois au gérant.</h2>
+
+<p>Le réflexe naturel pour un gérant solo qui découvre l'IA : déployer un agent autonome qui « gère tout ». C'est précisément le piège à éviter. Sur HelioToit, le ROI réel se trouve dans <strong>l'automatisation classique de tâches répétitives</strong>, augmentée d'IA générative ciblée à 3 endroits précis : génération de devis, rédaction de contenu SEO, et tri/qualification des leads.</p>
+
+<p><strong>Score IA-readiness actuel : 32 / 100.</strong> Faible mais classique pour une société de 6 mois. Trois prérequis à lever avant tout déploiement avancé : (1) digitaliser la donnée client, (2) structurer un CRM léger, (3) industrialiser l'étude solaire.</p>
+
+<p><strong>Top 3 automatisations recommandées (par ROI décroissant) :</strong></p>
+<ul class="bullets">
+<li><strong>Automatisation #1 — Pipeline devis</strong> : génération automatique du devis détaillé à partir d'un formulaire client + données Enedis. Gain : 4-6h/devis × 12 devis/mois = 48-72h/mois.</li>
+<li><strong>Automatisation #2 — Suivi commercial & nurturing</strong> : séquences email automatiques + relances de devis non signés. Gain : 6-8h/mois + +20-30% taux de signature.</li>
+<li><strong>Automatisation #3 — Production de contenu SEO</strong> : workflow de rédaction d'articles de blog 100% IA-assistée puis validation humaine. Gain : 12-16h/article économisées.</li>
+</ul>
+
+<p><strong>Investissement total 12 mois : 4 800-6 200 € (setup + abonnements).</strong> ROI estimé à 8-12 mois selon volume de chantiers généré par la libération de temps.</p>
+</div>
+<div>
+<div class="exec-score-box">
+<div class="exec-score-label">IA-readiness actuel</div>
+<div class="exec-score-num" style="color:var(--danger)">32</div>
+<div class="exec-score-label">/ 100 — À structurer</div>
+</div>
+<div style="margin-top:16px;font-size:0.875rem;color:var(--text-muted);text-align:center">Cible 12 mois : 68/100<br>après les 3 automatisations + CRM</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ─────────── CARTOGRAPHIE ─────────── -->
+<section id="carto">
+<header class="section-header">
+<div class="kicker">Bloc 01</div>
+<h2>Cartographie des processus métier</h2>
+<p class="lead">Identification des 12 processus candidats, regroupés en 4 familles. Volume, temps actuel, niveau de digitalisation.</p>
+</header>
+
+<table>
+<thead>
+<tr><th>Famille</th><th>Processus</th><th>Volume / mois</th><th>Temps actuel</th><th>Digitalisation</th><th>Douleur (1-5)</th></tr>
+</thead>
+<tbody>
+<tr><td rowspan="3"><strong>Acquisition & Marketing</strong></td><td>Production article de blog SEO</td><td>1-2</td><td>16-20h / article</td><td>Manuel</td><td>5</td></tr>
+<tr><td>Animation Google Business Profile (posts, photos)</td><td>4-6 posts</td><td>3-4h / mois</td><td>Manuel</td><td>3</td></tr>
+<tr><td>Sollicitation avis Google clients</td><td>2-4 demandes</td><td>1-2h / mois</td><td>Manuel oublié</td><td>4</td></tr>
+<tr><td rowspan="4"><strong>Vente & Conversion</strong></td><td>Étude solaire personnalisée + simulation</td><td>10-15</td><td>2-3h / étude</td><td>Manuel (Excel)</td><td>5</td></tr>
+<tr><td>Génération du devis détaillé (8-12 pages)</td><td>10-15</td><td>3-5h / devis</td><td>Pennylane partiel</td><td>5</td></tr>
+<tr><td>Relances devis en attente</td><td>20-30 relances</td><td>4-6h / mois</td><td>Manuel WhatsApp/Mail</td><td>4</td></tr>
+<tr><td>Réponse aux questions techniques pré-vente</td><td>15-25</td><td>3-5h / mois</td><td>Manuel email/WhatsApp</td><td>3</td></tr>
+<tr><td rowspan="3"><strong>Delivery & Opérations</strong></td><td>Démarches administratives (Enedis, urbanisme, Consuel)</td><td>2-4 dossiers</td><td>4-6h / dossier</td><td>Sous-traité</td><td>2</td></tr>
+<tr><td>Coordination chantier (sous-traitants pose)</td><td>2-3 chantiers</td><td>3-5h / chantier</td><td>WhatsApp manuel</td><td>3</td></tr>
+<tr><td>Suivi monitoring production clients livrés</td><td>10-30 clients</td><td>0h (non fait actuellement)</td><td>Inexistant</td><td>5</td></tr>
+<tr><td rowspan="2"><strong>Support & Admin</strong></td><td>Facturation & comptabilité</td><td>5-10 factures</td><td>2-3h / mois</td><td>Pennylane (en place)</td><td>2</td></tr>
+<tr><td>Gestion calendrier RDV (visites techniques)</td><td>10-15 RDV</td><td>2-3h / mois</td><td>Manuel</td><td>4</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-accent">
+<strong>Lecture rapide.</strong> Les 5 processus à plus forte douleur (notés 5/5) sont : production article SEO, étude solaire, génération devis, suivi monitoring, et — implicitement — l'absence de structure d'avis Google. Trois d'entre eux (article SEO, étude solaire, devis) consomment ensemble <em>50 à 80 heures par mois</em> du gérant. C'est précisément là que l'IA crée le plus de valeur.
+</div>
+
+</section>
+
+<!-- ─────────── READINESS ─────────── -->
+<section id="readiness">
+<header class="section-header">
+<div class="kicker">Bloc 02</div>
+<h2>Audit IA-readiness — score sur 5 axes</h2>
+<p class="lead">Avant de déployer, il faut mesurer la maturité actuelle. Chaque axe est noté sur 20.</p>
+</header>
+
+<table>
+<thead>
+<tr><th>Axe</th><th>Note actuelle</th><th>Note cible 12 mois</th><th>Justification & prérequis</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Data readiness</strong> (qualité et accessibilité des données)</td><td>4 / 20</td><td>14 / 20</td><td>Données clients dispersées (WhatsApp, email, Pennylane). Pas de CRM. Premier prérequis : centraliser les données dans un CRM léger (Notion, Airtable ou HubSpot Free).</td></tr>
+<tr><td><strong>Stack maturity</strong> (outils en place)</td><td>6 / 20</td><td>16 / 20</td><td>Pennylane utilisé pour facturation. Reste à déployer : email automation (Brevo), CRM, outil de signature, monitoring clients.</td></tr>
+<tr><td><strong>Équipe & compétences</strong></td><td>10 / 20</td><td>14 / 20</td><td>Mathis seul, mais profil ouvert au digital (utilise WhatsApp Business, applis pro). Formation IA générative nécessaire (8-12h sur 3 mois) — pris en charge par le Pack IA Master Prompt.</td></tr>
+<tr><td><strong>Culture & adoption</strong></td><td>8 / 20</td><td>14 / 20</td><td>Pas de résistance à l'outil mais habitude « tout dans la tête ». Risque : retomber dans le manuel après quelques semaines. Ritualisation hebdomadaire nécessaire.</td></tr>
+<tr><td><strong>Budget & ROI</strong></td><td>4 / 20</td><td>10 / 20</td><td>Trésorerie limitée année 1. Recommandation : capper le budget IA à 200-300€/mois récurrent, optimiser sur outils gratuits/freemium.</td></tr>
+<tr><td><strong>TOTAL</strong></td><td><strong>32 / 100</strong></td><td><strong>68 / 100</strong></td><td>Passage de « non-prêt » à « solide » en 12 mois</td></tr>
+</tbody>
+</table>
+
+<h3>Les 3 prérequis à lever AVANT tout déploiement IA</h3>
+
+<div class="grid grid-3">
+<div class="card">
+<h4>1. CRM léger en place</h4>
+<p>Notion ou Airtable gratuit. Une base unique avec : contacts, statut deal, devis, calendrier. Sans CRM, aucune automatisation ne tient — vous ne pourrez pas relancer correctement.</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:8px"><strong>Délai :</strong> 1-2 semaines · <strong>Coût :</strong> 0-15€/mois</p>
+</div>
+<div class="card">
+<h4>2. Étude solaire industrialisée</h4>
+<p>Template Excel ou Google Sheets standardisé avec calculs de simulation, prime à l'autoconsommation, ROI 25 ans, intégration tarif réglementé. Aujourd'hui : tout reconstruit à la main à chaque devis.</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:8px"><strong>Délai :</strong> 1 semaine · <strong>Coût :</strong> 0€ (production interne)</p>
+</div>
+<div class="card">
+<h4>3. Modèles de devis pré-formatés</h4>
+<p>3 templates de devis Pennylane (un par niveau d'offre), avec textes-types, clauses contractuelles, schémas matériel. Permet de générer un devis en 30 min vs 3-5h aujourd'hui.</p>
+<p style="font-size:0.875rem;color:var(--text-muted);margin-top:8px"><strong>Délai :</strong> 1-2 semaines · <strong>Coût :</strong> 200-400€ rédaction clauses</p>
+</div>
+</div>
+
+</section>
+
+<!-- ─────────── CAS USAGE ─────────── -->
+<section id="cas">
+<header class="section-header">
+<div class="kicker">Bloc 03</div>
+<h2>Identification des cas d'usage IA — matrice Impact × Faisabilité</h2>
+<p class="lead">12 cas d'usage évalués. 3 quadrants : quick wins, à planifier, à éviter.</p>
+</header>
+
+<div class="chart-card">
+<div class="chart-title">Matrice Impact × Faisabilité — 12 cas d'usage</div>
+<p class="chart-caption">Axe horizontal : faisabilité technique et budget. Axe vertical : impact business attendu (gain de temps + €/an générés). Quick wins en haut-droite. À éviter en bas-gauche (effort élevé, faible impact).</p>
+<svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+<!-- background grid -->
+<rect x="60" y="40" width="580" height="380" fill="none" stroke="#cbd5e1"/>
+<line x1="350" y1="40" x2="350" y2="420" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+<line x1="60" y1="230" x2="640" y2="230" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+<!-- quadrant labels -->
+<text x="200" y="60" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">À PLANIFIER (Impact ↑ · Effort ↑)</text>
+<text x="490" y="60" font-family="Inter" font-size="10" fill="#15803d" text-anchor="middle" font-weight="600">QUICK WINS</text>
+<text x="200" y="415" font-family="Inter" font-size="10" fill="#b91c1c" text-anchor="middle">À ÉVITER</text>
+<text x="490" y="415" font-family="Inter" font-size="10" fill="#94a3b8" text-anchor="middle">NICE-TO-HAVE</text>
+<!-- axes -->
+<text x="350" y="460" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b">Faisabilité →</text>
+<text x="30" y="230" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b" transform="rotate(-90 30 230)">Impact business →</text>
+<!-- cases -->
+<g font-family="Inter" font-size="10" fill="#1a202c">
+<!-- Quick wins (haut droite) -->
+<circle cx="510" cy="100" r="9" fill="#15803d"/><text x="525" y="104">A1 · Génération devis IA</text>
+<circle cx="540" cy="140" r="9" fill="#15803d"/><text x="555" y="144">A2 · Séquences email auto</text>
+<circle cx="490" cy="180" r="9" fill="#15803d"/><text x="505" y="184">A3 · Articles SEO IA-assistés</text>
+<circle cx="450" cy="210" r="7" fill="#15803d"/><text x="465" y="214">B1 · Templates Notion CRM</text>
+<!-- À planifier (haut gauche) -->
+<circle cx="180" cy="120" r="8" fill="#0a2540"/><text x="195" y="124">C1 · Étude solaire automatique avec drone</text>
+<circle cx="200" cy="170" r="7" fill="#0a2540"/><text x="215" y="174">C2 · Suivi monitoring multi-clients</text>
+<!-- Nice-to-have (bas droite) -->
+<circle cx="500" cy="290" r="6" fill="#94a3b8"/><text x="514" y="294">D1 · Auto-réponse messages WhatsApp</text>
+<circle cx="540" cy="330" r="6" fill="#94a3b8"/><text x="555" y="334">D2 · Génération de posts LinkedIn</text>
+<circle cx="470" cy="370" r="5" fill="#94a3b8"/><text x="484" y="374">D3 · Calendrier auto Calendly</text>
+<!-- À éviter (bas gauche) -->
+<circle cx="170" cy="280" r="7" fill="#b91c1c"/><text x="185" y="284">E1 · Chatbot site (faible volume)</text>
+<circle cx="200" cy="330" r="6" fill="#b91c1c"/><text x="215" y="334">E2 · Agent autonome de prospection</text>
+<circle cx="180" cy="380" r="6" fill="#b91c1c"/><text x="195" y="384">E3 · RAG sur 5 docs techniques (overkill)</text>
+</g>
+</svg>
+</div>
+
+<h3>Lecture des cas d'usage par catégorie</h3>
+
+<div class="grid grid-2">
+<div class="card" style="border-left:4px solid var(--success)">
+<h4><span class="tag tag-quick">Quick wins</span> à lancer en priorité</h4>
+<p><strong>A1 — Génération devis IA-assistée :</strong> formulaire client + Claude/GPT pour produire un draft de devis 8-12 pages avec étude solaire, ROI, clauses. Gain de 3-4h par devis.</p>
+<p><strong>A2 — Séquences email automatiques :</strong> Brevo + scénarios de relance devis, onboarding chantier, sollicitation avis post-installation. Aucune IA requise — automation classique.</p>
+<p><strong>A3 — Articles SEO IA-assistés :</strong> draft d'article de 1 500 mots produit en 30 min via Claude, puis édition humaine 1h. Gain : 12-16h par article.</p>
+<p><strong>B1 — CRM Notion ou Airtable :</strong> base de données structurée. Pas de l'IA mais prérequis indispensable.</p>
+</div>
+
+<div class="card" style="border-left:4px solid var(--text-primary)">
+<h4><span class="tag tag-medium">À planifier</span> en année 2</h4>
+<p><strong>C1 — Étude solaire avec analyse drone IA :</strong> photo aérienne du toit + IA de détection (orientation, ombrage, surface). Gain potentiel important mais setup ≥ 5 K€.</p>
+<p><strong>C2 — Suivi monitoring multi-clients :</strong> dashboard agrégé production de tous les clients avec alertes IA si écart > 10%. À déployer après 30+ installations.</p>
+</div>
+
+<div class="card" style="border-left:4px solid var(--text-muted);opacity:0.85">
+<h4><span class="tag tag-medium">Nice-to-have</span> — quand le temps le permet</h4>
+<p><strong>D1 — Auto-réponses WhatsApp Business :</strong> 5-10 messages-types automatiques pour FAQ. Gain modéré.</p>
+<p><strong>D2 — Génération de posts LinkedIn :</strong> drafts IA puis validation. Outil simple type Buffer + Claude.</p>
+<p><strong>D3 — Calendrier auto Calendly :</strong> RDV visio en self-service. Économie de 1-2h/mois.</p>
+</div>
+
+<div class="card" style="border-left:4px solid var(--danger)">
+<h4><span class="tag tag-skip">À éviter</span> — pièges classiques</h4>
+<p><strong>E1 — Chatbot sur le site :</strong> volume actuel insuffisant (≤ 50 visiteurs/mois). 80% des chatbots sont des échecs produit. Reporter à année 2 si trafic > 1 000 visiteurs/mois.</p>
+<p><strong>E2 — Agent autonome de prospection :</strong> trop de risque de spam, de message hors-charte, de blocage de la délivrabilité. Aucun acteur sérieux du secteur PV ne le fait.</p>
+<p><strong>E3 — RAG sur 5 documents techniques :</strong> absurde. Un RAG est pertinent à partir de 100+ documents. Pour 5 fiches techniques, un simple Notion suffit.</p>
+</div>
+</div>
+
+</section>
+
+<!-- ─────────── STACK ─────────── -->
+<section id="stack">
+<header class="section-header">
+<div class="kicker">Bloc 04</div>
+<h2>Stack technique recommandée</h2>
+<p class="lead">Principe : la plus simple solution qui résout 80% du besoin. Pas de self-hosted, pas de complexité gratuite.</p>
+</header>
+
+<table>
+<thead>
+<tr><th>Catégorie</th><th>Outil recommandé</th><th>Alternative</th><th>Coût mensuel</th><th>Justification</th></tr>
+</thead>
+<tbody>
+<tr><td>Orchestration workflows</td><td><strong>Make</strong> (ex Integromat)</td><td>Zapier · n8n cloud</td><td>9-29€/mois</td><td>Plus accessible que Zapier en France, interface visuelle, 1 000 opérations/mois suffisent pour démarrer</td></tr>
+<tr><td>LLM & IA générative</td><td><strong>Claude (Anthropic)</strong> via Master Prompt + API</td><td>ChatGPT Plus 20€/mois</td><td>20-50€/mois</td><td>Claude excellent en français, longueur de contexte adaptée aux études + devis. Master Prompt déjà à disposition.</td></tr>
+<tr><td>CRM léger</td><td><strong>Notion</strong> (template CRM)</td><td>Airtable · HubSpot Free</td><td>0-12€/mois</td><td>Notion gratuit suffit pour 30-50 deals actifs. Migration HubSpot quand volume > 100 deals actifs/an.</td></tr>
+<tr><td>Email automation</td><td><strong>Brevo</strong></td><td>Mailchimp</td><td>0-25€/mois</td><td>Gratuit jusqu'à 300 contacts. Français, compatible RGPD, séquences automatiques natives.</td></tr>
+<tr><td>Signature électronique</td><td><strong>Yousign</strong></td><td>DocuSign · Pandadoc</td><td>9-25€/mois</td><td>Solution française, eIDAS qualifié. Indispensable pour signer les devis à distance.</td></tr>
+<tr><td>Calendrier RDV</td><td><strong>Calendly Free</strong></td><td>SimplyMeet</td><td>0€</td><td>Gratuit suffisant pour 1 utilisateur. Élimine les allers-retours mail pour caler une visio.</td></tr>
+<tr><td>Comptabilité & devis</td><td><strong>Pennylane</strong> (déjà en place)</td><td>—</td><td>~30€/mois (déjà payé)</td><td>Conserver. Templates de devis à structurer.</td></tr>
+<tr><td>Stockage & doc</td><td><strong>Google Workspace Standard</strong></td><td>Microsoft 365</td><td>9,36€/mois</td><td>Drive + Gmail Pro + Docs + Sheets. Indispensable pour partage doc et templates étude solaire.</td></tr>
+</tbody>
+</table>
+
+<div class="callout callout-accent">
+<strong>Total stack mensuel cible : 80-130 € / mois</strong> (hors Pennylane déjà en place et hors Master Prompt qui couvre l'usage IA). Sur 12 mois : 1 000-1 600€. Largement absorbé par 1 chantier supplémentaire généré (= 22 K€ TTC, ~6 600€ marge brute).
+</div>
+
+<h3>Ce qu'on n'utilisera PAS (et pourquoi)</h3>
+
+<table>
+<thead><tr><th>Outil</th><th>Pourquoi on ne le déploie pas</th></tr></thead>
+<tbody>
+<tr><td><strong>n8n self-hosted</strong></td><td>Nécessite un serveur, des compétences DevOps, du monitoring. Make cloud à 9€/mois fait 95% du job sans risque.</td></tr>
+<tr><td><strong>Salesforce ou Pipedrive</strong></td><td>Sur-dimensionné pour 1 utilisateur et 25-30 deals/an. Notion suffit. Migration possible quand volume > 100 deals actifs.</td></tr>
+<tr><td><strong>Pinecone / Weaviate (vectorisation)</strong></td><td>Aucun cas d'usage RAG sérieux à ce stade. Volume documentaire trop faible.</td></tr>
+<tr><td><strong>Bubble / Softr (apps no-code custom)</strong></td><td>Aucun besoin d'app custom. Notion + Make + Brevo couvre tout.</td></tr>
+<tr><td><strong>Zapier (vs Make)</strong></td><td>Zapier 2-3× plus cher pour le même usage. Make est devenu le standard européen.</td></tr>
+</tbody>
+</table>
+
+</section>
+
+<!-- ─────────── TOP 3 AUTOMATISATIONS ─────────── -->
+<section id="top3">
+<header class="section-header">
+<div class="kicker">Bloc 05</div>
+<h2>Top 3 automatisations prioritaires</h2>
+<p class="lead">Pour chacune : workflow détaillé, outils, coûts, gain mensuel chiffré, ROI, garde-fous.</p>
+</header>
+
+<!-- AUTO 1 -->
+<h3>Automatisation #1 — Pipeline devis IA-assisté</h3>
+
+<p><strong>Objectif business.</strong> Réduire le temps de production d'un devis détaillé de 3-5h à 30-45 min, sans dégrader la qualité.</p>
+
+<div class="workflow">
+<div class="step"><div class="step-num">Étape 1</div><div class="step-title">Formulaire prospect</div><div class="step-desc">Tally ou Notion form intégré au site. Capture conso annuelle, surface toiture, orientation, projet VE, budget.</div></div>
+<div class="step"><div class="step-num">Étape 2</div><div class="step-title">Make trigger</div><div class="step-desc">À soumission, Make crée un nouveau record dans Notion CRM avec statut « Étude à faire ».</div></div>
+<div class="step"><div class="step-num">Étape 3</div><div class="step-title">Génération étude IA</div><div class="step-desc">Claude API reçoit les données + prompt structuré « génère étude solaire 25 ans ». Retour : production estimée, ROI, scénario d'autoconso.</div></div>
+<div class="step"><div class="step-num">Étape 4</div><div class="step-title">Pré-remplissage devis</div><div class="step-desc">Make injecte les valeurs dans le template Pennylane via API. Devis pré-rempli en 90 sec.</div></div>
+<div class="step"><div class="step-num">Étape 5</div><div class="step-title">Validation Mathis</div><div class="step-desc">Mathis revoit, ajuste, valide. Étape humaine non négociable. Gain net : ~3,5h par devis vs aujourd'hui.</div></div>
+</div>
+
+<div class="roi-box">
+<strong>ROI Automatisation #1</strong>
+<div class="roi-grid">
+<div class="roi-item"><span class="v">12 devis</span><span class="l">Volume mensuel cible</span></div>
+<div class="roi-item"><span class="v">42 h/mois</span><span class="l">Heures économisées</span></div>
+<div class="roi-item"><span class="v">2 100 €/mois</span><span class="l">€ économisés (taux 50€/h)</span></div>
+<div class="roi-item"><span class="v">2,5 mois</span><span class="l">Payback (setup 5 200€)</span></div>
+</div>
+</div>
+
+<h4>Détail coûts & garde-fous</h4>
+<ul class="bullets">
+<li><strong>Coût setup :</strong> 4-6 jours de développement Make/Notion/template Pennylane = 3 000-5 000€ (freelance ou via Pack IA Master Prompt). Construction prompt Claude : 8-12h (à faire avec Master Prompt).</li>
+<li><strong>Coût récurrent :</strong> Make 9€/mois + Claude API ~15-30€/mois (12 devis × 4-6 prompts) = 25-40€/mois.</li>
+<li><strong>Garde-fou critique :</strong> Mathis valide systématiquement avant envoi. Une erreur de simulation IA = perte de crédibilité voire engagement de performance non tenable. Ne JAMAIS automatiser l'envoi du devis sans relecture humaine.</li>
+<li><strong>Risque RGPD :</strong> les données client (consommation, adresse, revenus pressentis) sont traitées par Claude. Vérifier que l'API Claude est en mode « no-train », ne stocke pas les données. Anthropic conforme RGPD via clauses contractuelles standards.</li>
+</ul>
+
+<!-- AUTO 2 -->
+<h3>Automatisation #2 — Suivi commercial & nurturing</h3>
+
+<p><strong>Objectif business.</strong> Ne plus jamais perdre un lead par défaut de relance. Augmenter le taux de signature de 25% à 40% sur les devis remis.</p>
+
+<div class="workflow">
+<div class="step"><div class="step-num">Étape 1</div><div class="step-title">Capture lead</div><div class="step-desc">Téléchargement guide anti-arnaque ou demande de devis. Brevo capture l'email automatiquement.</div></div>
+<div class="step"><div class="step-num">Étape 2</div><div class="step-title">Séquence nurturing TOFU</div><div class="step-desc">5 emails sur 14 jours : pédagogie matériel, comparatif PV, témoignage type, FAQ, invitation visio.</div></div>
+<div class="step"><div class="step-num">Étape 3</div><div class="step-title">Relances devis (BOFU)</div><div class="step-desc">Si devis remis et non signé : relance J+3 (questions ?), J+10 (cas client similaire), J+25 (validité expire).</div></div>
+<div class="step"><div class="step-num">Étape 4</div><div class="step-title">Onboarding post-signature</div><div class="step-desc">3 emails : confirmation + planning, 1 semaine avant pose (ce qui se passe), J+1 post-mise en service (utilisation app).</div></div>
+<div class="step"><div class="step-num">Étape 5</div><div class="step-title">Sollicitation avis Google</div><div class="step-desc">À M+1 et M+6 : email automatique avec lien direct vers fiche Google Business.</div></div>
+</div>
+
+<div class="roi-box">
+<strong>ROI Automatisation #2</strong>
+<div class="roi-grid">
+<div class="roi-item"><span class="v">+5 signatures/an</span><span class="l">Effet relances structurées</span></div>
+<div class="roi-item"><span class="v">~33 K€</span><span class="l">€ marge supplémentaire/an</span></div>
+<div class="roi-item"><span class="v">8 h/mois</span><span class="l">Temps économisé relances</span></div>
+<div class="roi-item"><span class="v">1,5 mois</span><span class="l">Payback (setup 1 800€)</span></div>
+</div>
+</div>
+
+<h4>Détail coûts & garde-fous</h4>
+<ul class="bullets">
+<li><strong>Coût setup :</strong> rédaction des 12-15 emails (séquence nurturing + relances + onboarding) avec Claude assist + paramétrage Brevo : 3 jours = 1 200-2 000€.</li>
+<li><strong>Coût récurrent :</strong> Brevo gratuit jusqu'à 300 contacts. Bascule plan Starter 25€/mois autour de 500-600 contacts (mois 8-10).</li>
+<li><strong>Garde-fou critique :</strong> les relances doivent être personnalisées (prénom, ville, projet spécifique) — pas du copier-coller industriel. Sinon le lead se grille.</li>
+<li><strong>Pas d'IA dans cette automatisation</strong> — c'est de l'automation classique. Inutile d'ajouter de la complexité IA là où Brevo + Make font déjà le travail.</li>
+</ul>
+
+<!-- AUTO 3 -->
+<h3>Automatisation #3 — Production de contenu SEO IA-assistée</h3>
+
+<p><strong>Objectif business.</strong> Tenir une cadence d'1 article SEO/mois (pilier de la stratégie marketing) sans y consacrer 16-20h. Réduire à 3-4h par article.</p>
+
+<div class="workflow">
+<div class="step"><div class="step-num">Étape 1</div><div class="step-title">Choix sujet & mot-clé</div><div class="step-desc">Mathis choisit dans backlog SEO préparé : « prix panneaux solaires Mougins », « batterie 10 kWh autonomie », etc.</div></div>
+<div class="step"><div class="step-num">Étape 2</div><div class="step-title">Brief Claude</div><div class="step-desc">Prompt structuré dans Master Prompt : sujet + mot-clé + ton de marque + structure cible 1 500 mots.</div></div>
+<div class="step"><div class="step-num">Étape 3</div><div class="step-title">Draft IA 30 min</div><div class="step-desc">Claude produit un draft complet : intro, sections H2, conclusion, CTA. Sources et chiffres factuels marqués comme à vérifier.</div></div>
+<div class="step"><div class="step-num">Étape 4</div><div class="step-title">Édition humaine 1h30</div><div class="step-desc">Mathis vérifie chiffres, ajoute exemples locaux Côte d'Azur, retire formulations IA-typiques, ajuste ton.</div></div>
+<div class="step"><div class="step-num">Étape 5</div><div class="step-title">Publication & repurposing</div><div class="step-desc">Publication site + extraction de 3 posts LinkedIn dérivés via Claude + 1 post GBP. Time-on-task total : 3-4h pour 4 contenus.</div></div>
+</div>
+
+<div class="roi-box">
+<strong>ROI Automatisation #3</strong>
+<div class="roi-grid">
+<div class="roi-item"><span class="v">12 articles/an</span><span class="l">Cadence cible</span></div>
+<div class="roi-item"><span class="v">156 h/an</span><span class="l">Économisées vs full-manuel</span></div>
+<div class="roi-item"><span class="v">~7 800 €/an</span><span class="l">Valeur du temps libéré</span></div>
+<div class="roi-item"><span class="v">200 €</span><span class="l">Setup (prompts à construire)</span></div>
+</div>
+</div>
+
+<h4>Détail coûts & garde-fous</h4>
+<ul class="bullets">
+<li><strong>Coût setup :</strong> construction du prompt-système structuré + 5-7 itérations sur Claude : 8-12h. Coût direct : 0€ si Mathis le fait via Pack IA Master Prompt.</li>
+<li><strong>Coût récurrent :</strong> ~3-5€ d'API Claude par article. Inclus dans abonnement Master Prompt ou Claude Pro.</li>
+<li><strong>Garde-fou critique #1 :</strong> JAMAIS publier le draft brut. L'IA hallucine sur les chiffres marché ou les références juridiques. Vérification humaine obligatoire sur tout chiffre, prime, tarif S21, marque, URL.</li>
+<li><strong>Garde-fou critique #2 :</strong> humaniser le ton. Les détecteurs d'IA (et les lecteurs) repèrent en 10 sec un article 100% Claude. Apport humain nécessaire : exemples concrets locaux, anecdote chantier, opinion tranchée.</li>
+<li><strong>Risque SEO :</strong> Google n'a pas pénalisé le contenu IA en 2024-2026, mais sanctionne le contenu sans valeur ajoutée. Tant que l'article apporte une vraie utilité au lecteur, no problem.</li>
+</ul>
+
+</section>
+
+<!-- ─────────── ROADMAP & ROI ─────────── -->
+<section id="roadmap">
+<header class="section-header">
+<div class="kicker">Bloc 06</div>
+<h2>Feuille de route 90 jours & projection ROI 12 mois</h2>
+<p class="lead">3 phases : Foundations → First automations → Scale. Et la courbe coût vs gain cumulé.</p>
+</header>
+
+<h3>Phase 1 — Foundations (J1-J30)</h3>
+
+<table>
+<thead>
+<tr><th>Action</th><th>Owner</th><th>Coût</th><th>KPI validation</th></tr>
+</thead>
+<tbody>
+<tr><td>Mise en place CRM Notion (template imposé : Contacts, Deals, Devis, Calendrier)</td><td>Mathis (8h)</td><td>0€</td><td>Tous les leads et deals existants migrés</td></tr>
+<tr><td>Industrialisation de l'étude solaire (Excel/Sheets standardisé)</td><td>Mathis + freelance Excel</td><td>0-300€</td><td>Étude type production, ROI, primes, tarifs</td></tr>
+<tr><td>3 templates de devis Pennylane (Essentiel, Confort, Excellence) + clauses juridiques validées</td><td>Mathis + avocat 2h</td><td>400-600€</td><td>3 templates utilisables, clauses contractuelles incluses</td></tr>
+<tr><td>Ouverture comptes Brevo, Make, Calendly</td><td>Mathis</td><td>0€ (gratuits)</td><td>Comptes actifs, intégrations testées</td></tr>
+</tbody>
+</table>
+
+<h3>Phase 2 — First automations (J31-J60)</h3>
+
+<table>
+<thead>
+<tr><th>Action</th><th>Owner</th><th>Coût</th><th>KPI validation</th></tr>
+</thead>
+<tbody>
+<tr><td>Déploiement Auto #2 — Suivi commercial & nurturing (Brevo + scénarios relances)</td><td>Mathis + Master Prompt</td><td>1 200-2 000€</td><td>5 séquences actives, 10 leads passés en séquence</td></tr>
+<tr><td>Déploiement Auto #3 — Production contenu SEO (prompt + workflow)</td><td>Mathis (via Master Prompt)</td><td>200€ (frais variables)</td><td>2 articles publiés en 8h cumulées vs 32h manuel</td></tr>
+<tr><td>Mise en place sollicitation avis Google automatique (J+30 et J+180 post-pose)</td><td>Mathis (Brevo + Make)</td><td>0€</td><td>Séquence active, 5 premiers avis Google obtenus</td></tr>
+</tbody>
+</table>
+
+<h3>Phase 3 — Scale & IA (J61-J90)</h3>
+
+<table>
+<thead>
+<tr><th>Action</th><th>Owner</th><th>Coût</th><th>KPI validation</th></tr>
+</thead>
+<tbody>
+<tr><td>Déploiement Auto #1 — Pipeline devis IA-assisté (le plus complexe, à faire en dernier)</td><td>Freelance Make + Mathis</td><td>3 000-5 000€</td><td>Premier devis généré en 30 min vs 4h actuellement</td></tr>
+<tr><td>Mise en place dashboard de suivi des KPIs IA (heures économisées, devis générés, taux de conversion)</td><td>Mathis (Notion)</td><td>0€</td><td>Dashboard mensuel actif</td></tr>
+<tr><td>Formation continue IA générative (Pack IA Master Prompt + ressources)</td><td>Mathis (4h/mois)</td><td>Compris dans Master Prompt</td><td>Maîtrise prompts complexes, autonomie IA</td></tr>
+</tbody>
+</table>
+
+<h3>Projection ROI cumulé sur 12 mois</h3>
+
+<div class="chart-card">
+<div class="chart-title">Coût cumulé vs gain cumulé (heures économisées valorisées à 50€/h + signatures supplémentaires)</div>
+<p class="chart-caption">Le point d'équilibre est atteint au mois 4-5. À 12 mois, le ROI net est de l'ordre de 35-50 K€ (heures gain + signatures additionnelles attribuables au nurturing structuré).</p>
+<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="320" x2="580" y2="320" stroke="#cbd5e1"/>
+<line x1="60" y1="40" x2="60" y2="320" stroke="#cbd5e1"/>
+<g font-family="Inter" font-size="11" fill="#64748b">
+<text x="50" y="325" text-anchor="end">0€</text>
+<text x="50" y="265" text-anchor="end">10K</text>
+<text x="50" y="205" text-anchor="end">20K</text>
+<text x="50" y="145" text-anchor="end">30K</text>
+<text x="50" y="85" text-anchor="end">50K</text>
+</g>
+<g font-family="Inter" font-size="10" fill="#64748b">
+<text x="100" y="340" text-anchor="middle">M1</text>
+<text x="180" y="340" text-anchor="middle">M3</text>
+<text x="260" y="340" text-anchor="middle">M5</text>
+<text x="340" y="340" text-anchor="middle">M7</text>
+<text x="420" y="340" text-anchor="middle">M9</text>
+<text x="500" y="340" text-anchor="middle">M12</text>
+</g>
+<!-- Coût cumulé -->
+<path d="M 60 320 L 100 305 L 180 290 L 260 280 L 340 273 L 420 268 L 500 264" stroke="#b91c1c" stroke-width="2" fill="none"/>
+<text x="510" y="262" font-family="Inter" font-size="11" fill="#b91c1c" font-weight="600">Coût cumulé · 6 200€</text>
+<!-- Gain cumulé -->
+<path d="M 60 320 L 100 310 L 180 270 L 260 220 L 340 165 L 420 110 L 500 75" stroke="#15803d" stroke-width="3" fill="none"/>
+<text x="510" y="78" font-family="Inter" font-size="11" fill="#15803d" font-weight="600">Gain cumulé · 41 K€</text>
+<!-- Point d'équilibre -->
+<circle cx="225" cy="280" r="6" fill="#d4a574" stroke="#0a2540" stroke-width="2"/>
+<text x="235" y="284" font-family="Inter" font-size="10" fill="#0a2540" font-weight="600">Équilibre M4-M5</text>
+</svg>
+</div>
+
+<div class="grid grid-3">
+<div class="kpi">
+<span class="kpi-label">Investissement total 12 mois</span>
+<span class="kpi-value">6 200 €</span>
+<span class="kpi-sub">setup + récurrent · stack + freelance</span>
+</div>
+<div class="kpi">
+<span class="kpi-label">Gain estimé 12 mois</span>
+<span class="kpi-value">41 K€</span>
+<span class="kpi-sub">temps libéré + signatures additionnelles</span>
+</div>
+<div class="kpi">
+<span class="kpi-label">ROI net</span>
+<span class="kpi-value">×6,6</span>
+<span class="kpi-sub">retour sur investissement</span>
+</div>
+</div>
+
+</section>
+
+<!-- ─────────── GOUVERNANCE ─────────── -->
+<section id="gouvernance">
+<header class="section-header">
+<div class="kicker">Bloc 07</div>
+<h2>Gouvernance, sécurité, RGPD</h2>
+<p class="lead">Les automatisations traitent des données personnelles. Cadre minimal à mettre en place.</p>
+</header>
+
+<h3>RGPD — données traitées par les outils</h3>
+
+<table>
+<thead>
+<tr><th>Outil</th><th>Données traitées</th><th>Localisation</th><th>Action requise</th></tr>
+</thead>
+<tbody>
+<tr><td>Notion CRM</td><td>Identité, email, téléphone, adresse, projet</td><td>USA (avec clauses contractuelles standards)</td><td>Mention RGPD à inclure dans politique de confidentialité du site</td></tr>
+<tr><td>Brevo</td><td>Email, prénom, statut deal, ouvertures email</td><td>UE (France)</td><td>Conforme par défaut. Opt-in clair sur tous les formulaires.</td></tr>
+<tr><td>Claude API</td><td>Données prospect (transmises pour génération devis)</td><td>USA (no-train activé)</td><td>Mention dans politique de confidentialité. Cap sur les données strictement nécessaires.</td></tr>
+<tr><td>Make</td><td>Données en transit entre outils</td><td>UE (Prague, République Tchèque)</td><td>Conforme par défaut</td></tr>
+<tr><td>Pennylane</td><td>Toutes données comptables</td><td>UE (France)</td><td>Conforme par défaut</td></tr>
+</tbody>
+</table>
+
+<h3>Confidentialité — ce qui doit rester off-IA</h3>
+<ul class="bullets">
+<li>Données financières précises du client (revenus, patrimoine) : ne jamais transmettre à un LLM cloud sauf nécessité explicite</li>
+<li>Documents juridiques signés (contrats, devis signés, attestations) : stockage Pennylane + Drive uniquement</li>
+<li>Photos de chantier identifiables (façade visible, plaque immatriculation, etc.) : floutage avant publication site / réseaux sociaux</li>
+<li>Données de monitoring de production (par client) : ne pas exposer dans un dashboard public</li>
+</ul>
+
+<h3>Monitoring & versioning</h3>
+
+<div class="grid grid-3">
+<div class="card">
+<h4>Logs d'exécution</h4>
+<p>Make conserve un log des 30 derniers jours. À consulter hebdomadairement pour repérer les erreurs (échec API, doublon, format invalide).</p>
+</div>
+<div class="card">
+<h4>Alertes d'erreur</h4>
+<p>Configurer dans Make : email à Mathis si une exécution échoue 2 fois consécutives. Évite que des leads passent à la trappe pendant 2 semaines.</p>
+</div>
+<div class="card">
+<h4>Versioning des prompts</h4>
+<p>Chaque prompt-système (génération devis, étude solaire, articles) versionné dans Notion avec date de modification + raison du changement. Permet de rollback en cas de dégradation.</p>
+</div>
+</div>
+
+<h3>Score IA-readiness — projection 12 mois</h3>
+
+<div class="chart-card">
+<div class="chart-title">Évolution score IA-readiness · 5 axes</div>
+<p class="chart-caption">Trajectoire du score sur 5 dimensions, de l'audit initial à la cible 12 mois après déploiement Pack IA.</p>
+<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="280" x2="580" y2="280" stroke="#cbd5e1"/>
+<line x1="60" y1="40" x2="60" y2="280" stroke="#cbd5e1"/>
+<g font-family="Inter" font-size="11" fill="#64748b">
+<text x="50" y="285" text-anchor="end">0</text>
+<text x="50" y="220" text-anchor="end">5</text>
+<text x="50" y="155" text-anchor="end">10</text>
+<text x="50" y="90" text-anchor="end">15</text>
+<text x="50" y="45" text-anchor="end">20</text>
+</g>
+<!-- Bars actuel -->
+<g>
+<rect x="100" y="228" width="32" height="52" fill="#0a2540" opacity="0.4"/>
+<rect x="220" y="202" width="32" height="78" fill="#0a2540" opacity="0.4"/>
+<rect x="340" y="150" width="32" height="130" fill="#0a2540" opacity="0.4"/>
+<rect x="460" y="176" width="32" height="104" fill="#0a2540" opacity="0.4"/>
+<rect x="540" y="228" width="32" height="52" fill="#0a2540" opacity="0.4"/>
+</g>
+<!-- Bars cible -->
+<g>
+<rect x="135" y="98" width="32" height="182" fill="#15803d"/>
+<rect x="255" y="74" width="32" height="206" fill="#15803d"/>
+<rect x="375" y="98" width="32" height="182" fill="#15803d"/>
+<rect x="495" y="98" width="32" height="182" fill="#15803d"/>
+<rect x="575" y="150" width="32" height="130" fill="#15803d"/>
+</g>
+<g font-family="Inter" font-size="10" fill="#64748b" text-anchor="middle">
+<text x="135" y="305">Data</text>
+<text x="255" y="305">Stack</text>
+<text x="375" y="305">Équipe</text>
+<text x="495" y="305">Culture</text>
+<text x="595" y="305">Budget</text>
+</g>
+<g font-family="Inter" font-size="10">
+<rect x="100" y="330" width="14" height="14" fill="#0a2540" opacity="0.4"/>
+<text x="120" y="342" fill="#1a202c">Actuel · 32/100</text>
+<rect x="240" y="330" width="14" height="14" fill="#15803d"/>
+<text x="260" y="342" fill="#1a202c">Cible 12 mois · 68/100</text>
+</g>
+</svg>
+</div>
+
+</section>
+
+<footer>
+<p><strong>Hypothèses & sources</strong></p>
+<p>· Taux horaire Mathis valorisé à 50€/h (= taux indépendant marché PACA pour métier technique-commercial). Si valorisé à 75€/h, gains × 1,5.</p>
+<p>· Volume de devis cible 12 mois : 12-15/mois en moyenne (cible scénario médian audit business model).</p>
+<p>· Coûts outils : tarifs publics Make, Brevo, Anthropic, Notion, Calendly, Yousign au 29 avril 2026.</p>
+<p>· Hypothèse impact nurturing automatisé : taux de signature passe de 25% à 35-40% sur les devis remis (ordre de grandeur secteur services B2C complex sale).</p>
+<p>· Score IA-readiness : méthodologie propriétaire Pack IA, calibré sur 5 axes pondérés à 20 points chacun.</p>
+<p style="margin-top:24px">IA & Automatisations — HelioToit énergie · 29 avril 2026 · Master Prompt — Pack IA Activité · Confidentiel</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>
