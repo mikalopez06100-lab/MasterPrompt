@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { AvatarStack } from "@/components/AvatarStack";
 import { TestimonialsVideo } from "@/components/TestimonialsVideo";
 import { EmailSignupBlock } from "@/components/landing/EmailSignupBlock";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -175,7 +176,14 @@ export default function LandingPage() {
             href="/formation"
             className="block rounded-2xl border border-border bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(15,23,42,0.08)]"
           >
-            <p className={`${headingClass} text-xs uppercase tracking-[0.2em] text-muted`}>Niveau 1</p>
+            <div className="flex items-start justify-between gap-3">
+              <p className={`${headingClass} text-xs uppercase tracking-[0.2em] text-muted`}>Niveau 1</p>
+              {launchPriceActive && (
+                <span className="inline-block rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
+                  Précommande · 1er juin
+                </span>
+              )}
+            </div>
             <h3 className={`${headingClass} mt-2 text-2xl font-bold`}>Formation</h3>
             {launchPriceActive ? (
               <>
@@ -309,8 +317,15 @@ export default function LandingPage() {
       <section className="bg-[#0A1620] px-4 py-12 text-center text-white sm:px-6 sm:py-16">
         <h2 className={`${headingClass} text-3xl font-bold sm:text-4xl`}>Choisissez votre point d&apos;entrée</h2>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/formation" className="rounded-md border border-white/20 px-5 py-3 text-sm">
-            Formation — 49€ <span className="line-through text-white/60">97€</span>
+          <Link href="/formation" className="inline-flex items-center gap-2 rounded-md border border-white/20 px-5 py-3 text-sm">
+            <span>
+              Formation — 49€ <span className="line-through text-white/60">97€</span>
+            </span>
+            {launchPriceActive && (
+              <span className="rounded-full border border-amber-300/60 bg-amber-100/90 px-2 py-0.5 text-[10px] font-semibold text-amber-900">
+                Précommande
+              </span>
+            )}
           </Link>
           <Link href="/pack-ia" className="rounded-md bg-amber-500 px-5 py-3 text-sm font-bold text-navy">
             Pack IA — 397€
@@ -321,33 +336,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="bg-navy px-4 py-10 text-slate-400 sm:px-6">
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
-          <div>
-            <p className={`${headingClass} text-sm font-semibold text-white`}>MASTER PROMPT</p>
-            <p className="mt-2 text-sm">Formation, accompagnement et outils IA pour entrepreneurs.</p>
-          </div>
-          <div className="space-y-2 text-sm">
-            <Link href="/formation" className="block">
-              Formation — 49€ (97€)
-            </Link>
-            <Link href="/pack-ia" className="block">
-              Pack IA — 397€
-            </Link>
-            <Link href="/abonnements" className="block">
-              Abonnements
-            </Link>
-            <Link href="/accompagnement" className="block">
-              Accompagnement
-            </Link>
-          </div>
-          <div className="text-sm">
-            <Link href="mailto:hello@masterprompt.fr" className="underline underline-offset-4 hover:text-white">
-              hello@masterprompt.fr
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter launchPriceActive={launchPriceActive} />
     </main>
   );
 }

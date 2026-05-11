@@ -10,6 +10,7 @@ import { PreorderBadge } from "@/components/PreorderBadge";
 import { CountdownBanner } from "@/components/CountdownBanner";
 import { PresentationVideo } from "@/components/landing/PresentationVideo";
 import { UnlockPreviewGate } from "@/components/landing/UnlockPreviewGate";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -310,6 +311,7 @@ export default function FormationPage() {
         </div>
       </section>
       <StickyBuyBar href={stripeLink} label="Formation Master Prompt" priceLabel={launchPriceActive ? "49€ lancement" : "97€"} />
+      <SiteFooter launchPriceActive={launchPriceActive} />
     </main>
   );
 }

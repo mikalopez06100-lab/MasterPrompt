@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Syne, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Reveal } from "@/components/landing/Reveal";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -359,6 +360,7 @@ export default function AbonnementsPage() {
           </p>
         </Reveal>
       </section>
+      <SiteFooter />
     </main>
   );
 }

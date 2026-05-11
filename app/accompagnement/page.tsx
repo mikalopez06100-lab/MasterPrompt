@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { DeliverableCard } from "@/components/DeliverableCard";
 import { AccompagnementApplicationForm } from "@/components/AccompagnementApplicationForm";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -153,6 +154,7 @@ export default function AccompagnementPage() {
           </Link>
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }

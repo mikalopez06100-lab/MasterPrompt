@@ -1,0 +1,31 @@
+# MasterPrompt
+
+> MasterPrompt est une formation et un service d'accompagnement IA pour solopreneurs et micro-entrepreneurs francophones. Le site propose la méthode PACO (Persona, Action, Contexte, Output) pour rendre l'IA utile et concrète dans un contexte professionnel non-technique.
+
+## Fondateur
+
+- Michaël Lopez — entrepreneur avec 25 ans d'expérience dans plusieurs secteurs (conception d'espaces, immobilier, aménagement sur-mesure). Fondateur de MasterPrompt en 2024.
+
+## Offres
+
+- [Formation Master Prompt](https://www.masterprompt.fr/formation) : formation en ligne 7 modules, méthode PACO, 97€, accès à vie (tarif de lancement 49€ jusqu'au 31 mai 2026).
+- [Pack IA Activité](https://www.masterprompt.fr/pack-ia) : prestation de conseil IA livrée en 5 jours, 397€ forfait tout inclus (audit, landing page, 20 prompts métier, 3 automatisations, visio 60 min, plan d'action 30 jours).
+- [Accompagnement 90 jours](https://www.masterprompt.fr/accompagnement) : programme individualisé sur 90 jours, sur candidature.
+- [Abonnements](https://www.masterprompt.fr/abonnements) : hébergement, maintenance, SEO et tokens IA inclus pour les clients Pack IA, à partir de 49€/mois.
+
+## Méthode PACO
+
+La méthode PACO structure les prompts en 4 composantes : Persona (rôle donné à l'IA), Action (tâche précise), Contexte (informations nécessaires), Output (format et contraintes du résultat attendu).
+
+## Pages principales
+
+- [Accueil](https://www.masterprompt.fr/) : présentation des offres et de la méthode PACO.
+- [FAQ](https://www.masterprompt.fr/#faq) : questions fréquentes sur les offres.
+- [Mentions légales](https://www.masterprompt.fr/mentions-legales)
+- [CGV](https://www.masterprompt.fr/cgv)
+- [Politique de confidentialité](https://www.masterprompt.fr/politique-confidentialite)
+
+## Contact
+
+- Email : hello@masterprompt.fr
+- Site : https://www.masterprompt.fr

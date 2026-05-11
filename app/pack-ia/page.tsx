@@ -8,6 +8,7 @@ import { TestimonialBlock } from "@/components/TestimonialBlock";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { PriceBadge } from "@/components/PriceBadge";
 import { UnlockPreviewGate } from "@/components/landing/UnlockPreviewGate";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -239,6 +240,7 @@ export default function PackIAPage() {
         </div>
       </section>
       <StickyBuyBar href={stripeLink} label="Pack IA Activité" priceLabel="397€ forfait" />
+      <SiteFooter />
     </main>
   );
 }
