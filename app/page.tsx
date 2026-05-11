@@ -6,7 +6,6 @@ import { Navbar } from "@/components/Navbar";
 import { AvatarStack } from "@/components/AvatarStack";
 import { TestimonialsVideo } from "@/components/TestimonialsVideo";
 import { EmailSignupBlock } from "@/components/landing/EmailSignupBlock";
-import { PresentationVideo } from "@/components/landing/PresentationVideo";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -70,7 +69,6 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   const launchPriceActive = process.env.NEXT_PUBLIC_LAUNCH_PRICE_ACTIVE !== "false";
-  const presentationVideoUrl = process.env.NEXT_PUBLIC_PRESENTATION_VIDEO_URL || "";
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -111,30 +109,22 @@ export default function LandingPage() {
       </div>
 
       <section className="bg-[#0A1620] px-4 py-14 text-white sm:px-6 sm:py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.2fr_auto] lg:items-center">
-          <div>
-            <p className={`${headingClass} mb-4 text-xs uppercase tracking-[0.2em] text-amber-500`}>Méthode PACO</p>
-            <h1 className={`${headingClass} mb-4 text-3xl font-bold leading-[1.1] sm:text-4xl md:text-6xl`}>
-              L&apos;IA qui travaille <span className="text-amber-500">vraiment</span> pour votre activité.
-            </h1>
-            <p className="mb-7 max-w-xl text-slate-300">
-              Formation, Pack IA et accompagnement : choisissez le niveau adapté à votre situation.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="#offres" className={`${headingClass} rounded-md bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-navy`}>
-                Découvrir les offres
-              </Link>
-              <Link href="#guide" className={`${headingClass} rounded-md border border-white/20 px-6 py-3 text-center text-sm`}>
-                Guide gratuit
-              </Link>
-            </div>
+        <div className="mx-auto max-w-6xl">
+          <p className={`${headingClass} mb-4 text-xs uppercase tracking-[0.2em] text-amber-500`}>Méthode PACO</p>
+          <h1 className={`${headingClass} mb-4 text-3xl font-bold leading-[1.1] sm:text-4xl md:text-6xl`}>
+            L&apos;IA qui travaille <span className="text-amber-500">vraiment</span> pour votre activité.
+          </h1>
+          <p className="mb-7 max-w-xl text-slate-300">
+            Formation, Pack IA et accompagnement : choisissez le niveau adapté à votre situation.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link href="#offres" className={`${headingClass} rounded-md bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-navy`}>
+              Découvrir les offres
+            </Link>
+            <Link href="#guide" className={`${headingClass} rounded-md border border-white/20 px-6 py-3 text-center text-sm`}>
+              Guide gratuit
+            </Link>
           </div>
-
-          {presentationVideoUrl && (
-            <div className="lg:w-[340px]">
-              <PresentationVideo src={presentationVideoUrl} variant="light" />
-            </div>
-          )}
         </div>
       </section>
 
