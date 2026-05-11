@@ -6,13 +6,23 @@ type Props = {
   src: string;
   poster?: string;
   className?: string;
+  /** Caption affichée sous la vidéo. Mettre `null` pour la masquer. */
+  caption?: string | null;
+  /** Adapte la couleur de la caption au fond ("light" pour fond sombre). */
+  variant?: "dark" | "light";
 };
 
 /**
  * Player vidéo portrait (9:16) responsive, pensé mobile-first.
  * Autoplay muted au scroll-in, contrôles natifs, captions activés.
  */
-export function PresentationVideo({ src, poster, className = "" }: Props) {
+export function PresentationVideo({
+  src,
+  poster,
+  className = "",
+  caption = "2 min — Présentation Master Prompt par Michaël Lopez",
+  variant = "dark",
+}: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [hasInteracted, setHasInteracted] = useState(false);
 
@@ -82,9 +92,11 @@ export function PresentationVideo({ src, poster, className = "" }: Props) {
           </button>
         )}
       </div>
-      <p className="mt-3 text-center text-xs text-muted">
-        2 min — Présentation Master Prompt par Michaël Lopez
-      </p>
+      {caption && (
+        <p className={`mt-3 text-center text-xs ${variant === "light" ? "text-slate-300" : "text-muted"}`}>
+          {caption}
+        </p>
+      )}
     </div>
   );
 }

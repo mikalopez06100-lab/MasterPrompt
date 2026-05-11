@@ -195,15 +195,28 @@ export default async function EspaceFormationPreviewPage({
 }
 
 function ModulesTab({ accessLevel }: { accessLevel: AccessLevel }) {
+  const presentationVideoUrl = process.env.NEXT_PUBLIC_PRESENTATION_VIDEO_URL || undefined;
   return (
     <>
       <header>
-        <h2 className={`${syne.className} text-2xl font-bold`}>7 modules vidéo</h2>
+        <h2 className={`${syne.className} text-2xl font-bold`}>Présentation + 7 modules vidéo</h2>
         <p className="mt-1 text-sm text-muted">
           50 leçons · 4h30 de contenu · Captions FR · Téléchargement hors-ligne
         </p>
       </header>
       <div className="grid gap-4 sm:grid-cols-2">
+        {presentationVideoUrl && (
+          <ModuleVideoCard
+            moduleNumber={0}
+            badgeLabel="Présentation"
+            title="Bienvenue dans Master Prompt"
+            duration="2 min"
+            lessons={0}
+            videoUrl={presentationVideoUrl}
+            accessLevel={accessLevel}
+            alwaysUnlocked
+          />
+        )}
         {MODULES.map((mod) => (
           <ModuleVideoCard
             key={mod.num}

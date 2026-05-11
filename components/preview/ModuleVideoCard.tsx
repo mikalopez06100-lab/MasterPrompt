@@ -9,6 +9,10 @@ type Props = {
   videoUrl?: string;
   /** Niveau d'accès du visiteur. "full" lit la vidéo, sinon = LockedContent flouté. */
   accessLevel: "none" | "preview" | "full";
+  /** Label personnalisé pour le bloc "MODULE XX" (ex. "INTRO" pour la présentation). */
+  badgeLabel?: string;
+  /** Si vrai, la vidéo se lit même en mode preview (utile pour les teasers publics). */
+  alwaysUnlocked?: boolean;
 };
 
 export function ModuleVideoCard({
@@ -18,18 +22,22 @@ export function ModuleVideoCard({
   lessons,
   videoUrl,
   accessLevel,
+  badgeLabel,
+  alwaysUnlocked = false,
 }: Props) {
   const hasVideo = Boolean(videoUrl);
-  const isUnlocked = accessLevel === "full" && hasVideo;
+  const isUnlocked = hasVideo && (alwaysUnlocked || accessLevel === "full");
+  const moduleLabel = badgeLabel ?? `Module ${moduleNumber}`;
+  const badge = badgeLabel ?? `MODULE ${String(moduleNumber).padStart(2, "0")}`;
 
   return (
     <article className="rounded-2xl border border-border bg-white p-4">
       <p className="text-xs font-semibold uppercase tracking-wider text-blue-600">
-        Module {moduleNumber}
+        {moduleLabel}
       </p>
       <h3 className="mt-1 text-base font-semibold text-navy">{title}</h3>
       <p className="mt-1 text-xs text-muted">
-        {lessons} leçons · {duration}
+        {lessons > 0 ? `${lessons} leçons · ${duration}` : duration}
       </p>
 
       <div className="mt-3">
@@ -40,7 +48,7 @@ export function ModuleVideoCard({
               controls
               playsInline
               preload="metadata"
-              className="aspect-video w-full"
+              className="aspect-video w-full object-contain"
               crossOrigin="anonymous"
             >
               Votre navigateur ne supporte pas la lecture vidéo HTML5.
@@ -54,7 +62,7 @@ export function ModuleVideoCard({
           >
             <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-navy via-slate-700 to-slate-900">
               <span className="absolute left-3 top-3 rounded-full bg-amber-500 px-2.5 py-1 text-[10px] font-bold text-navy">
-                MODULE {String(moduleNumber).padStart(2, "0")}
+                {badge}
               </span>
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 shadow-xl">
                 <svg
