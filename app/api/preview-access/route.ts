@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { prisma } from "@/lib/db";
+import {
+  sendPreviewWelcomeEmail,
+  sendPreviewAdminNotification,
+} from "@/lib/email";
 
 const COOKIE_NAME = "mp_preview_access";
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 30; // 30 jours
@@ -16,6 +21,26 @@ function sanitizeRedirect(value: unknown): string {
   if (typeof value !== "string") return DEFAULT_REDIRECT;
   if (!ALLOWED_REDIRECTS.has(value)) return DEFAULT_REDIRECT;
   return value;
+}
+
+async function persistLead(email: string, source: string) {
+  try {
+    const existing = await prisma.lead.findUnique({ where: { email } });
+    if (!existing) {
+      await prisma.lead.create({ data: { email, source } });
+      return { created: true, alreadyKnown: false };
+    }
+    if (source && existing.source !== source) {
+      await prisma.lead.update({
+        where: { id: existing.id },
+        data: { source },
+      });
+    }
+    return { created: false, alreadyKnown: true };
+  } catch (dbError) {
+    console.error("[preview-access] DB persist failed", dbError);
+    return { created: false, alreadyKnown: false, error: true };
+  }
 }
 
 async function pushToBrevo(email: string, source: string) {
@@ -55,7 +80,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Email invalide." }, { status: 400 });
   }
 
-  await pushToBrevo(email, source);
+  const persist = await persistLead(email, source);
+
+  const isNewLead = persist.created === true;
+
+  await Promise.allSettled([
+    pushToBrevo(email, source),
+    sendPreviewWelcomeEmail({ email, source, redirectTo }),
+    isNewLead
+      ? sendPreviewAdminNotification({ email, source, redirectTo })
+      : Promise.resolve({ ok: true }),
+  ]);
 
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, "1", {
