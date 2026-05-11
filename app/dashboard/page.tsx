@@ -9,7 +9,7 @@ export default async function DashboardPage() {
   const userId = user?.id;
   const firstName = user?.name?.split(" ")[0] ?? "Vous";
 
-  const [recentPrompts, progressCount] = await Promise.all([
+  const [recentPrompts, progressCount, publishedModuleCount] = await Promise.all([
     userId
       ? prisma.prompt.findMany({
           where: { userId },
@@ -20,13 +20,47 @@ export default async function DashboardPage() {
     userId
       ? prisma.userProgress.count({ where: { userId, completed: true } })
       : 0,
+    prisma.module.count({ where: { isPublished: true } }),
   ]);
+
+  const formationPending = publishedModuleCount === 0;
 
   return (
     <div className="space-y-8 animate-fade-in">
       <h1 className="font-heading text-3xl font-bold tracking-tight text-slate-900">
         Bonjour, <span className="text-primary">{firstName}</span>.
       </h1>
+
+      {formationPending && (
+        <section className="rounded-card border border-amber-200 bg-amber-50 p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
+            Précommande active
+          </p>
+          <h2 className="mt-2 font-heading text-xl font-bold text-amber-950">
+            Votre accès complet ouvre le 1<sup>er</sup> juin 2026
+          </h2>
+          <p className="mt-2 text-sm text-amber-900">
+            Les 7 modules de formation, la bibliothèque de 300 prompts et les exercices
+            seront ajoutés dans cet espace à la livraison. En attendant, vous pouvez
+            visualiser un aperçu de l&apos;espace formation et regarder la vidéo de
+            présentation ainsi que les 2 premiers modules déjà disponibles.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link
+              href="/espace-formation"
+              className="rounded-md bg-amber-500 px-5 py-2.5 text-sm font-semibold text-amber-950 hover:bg-amber-400"
+            >
+              Voir l&apos;aperçu de mon espace formation →
+            </Link>
+            <Link
+              href="/editor"
+              className="rounded-md border border-amber-300 bg-white px-5 py-2.5 text-sm font-semibold text-amber-900 hover:bg-amber-50"
+            >
+              Essayer l&apos;éditeur de prompts
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section className="card grid gap-6 md:grid-cols-2">
         <div>

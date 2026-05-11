@@ -17,10 +17,37 @@ export default async function CoursesPage() {
       </h1>
 
       {modules.length === 0 ? (
-        <div className="card p-12 text-center">
-          <p className="text-muted">
-            Aucun module pour le moment. Revenez bientôt.
+        <div className="card space-y-4 border border-amber-200 bg-amber-50 p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
+            Précommande active
           </p>
+          <h2 className="font-heading text-2xl font-bold text-amber-950">
+            Votre accès complet ouvre le 1<sup>er</sup> juin 2026
+          </h2>
+          <p className="text-sm text-amber-900">
+            Les 7 modules vidéo, la bibliothèque de 300 prompts, les exercices et
+            l&apos;éditeur intelligent seront débloqués automatiquement à cette date dans
+            cet espace. Vous recevrez un email de notification.
+          </p>
+          <p className="text-sm text-amber-900">
+            En attendant, vous pouvez parcourir un aperçu détaillé de l&apos;espace
+            formation et visionner la vidéo de présentation ainsi que les 2 premiers
+            modules déjà disponibles.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <Link
+              href="/espace-formation"
+              className="rounded-md bg-amber-500 px-5 py-2.5 text-sm font-semibold text-amber-950 hover:bg-amber-400"
+            >
+              Voir l&apos;aperçu de mon espace formation →
+            </Link>
+            <Link
+              href="/editor"
+              className="rounded-md border border-amber-300 bg-white px-5 py-2.5 text-sm font-semibold text-amber-900 hover:bg-amber-50"
+            >
+              Essayer l&apos;éditeur de prompts
+            </Link>
+          </div>
         </div>
       ) : (
         <ul className="space-y-4">
