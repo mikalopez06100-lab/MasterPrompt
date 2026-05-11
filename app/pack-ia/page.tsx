@@ -7,6 +7,7 @@ import { StickyBuyBar } from "@/components/StickyBuyBar";
 import { TestimonialBlock } from "@/components/TestimonialBlock";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { PriceBadge } from "@/components/PriceBadge";
+import { UnlockPreviewGate } from "@/components/landing/UnlockPreviewGate";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -73,12 +74,17 @@ export default function PackIAPage() {
         <div className="mx-auto max-w-6xl">
           <p className={`${headingClass} text-xs uppercase tracking-[0.2em] text-amber-500`}>Pack IA Activite</p>
           <h1 className={`${headingClass} mt-3 text-3xl font-bold sm:text-4xl md:text-5xl`}>
-            Pack Lancement IA — On structure votre activité avec l'IA en 5 jours
+            Pack Lancement IA — On structure votre activité avec l&apos;IA en 5 jours
           </h1>
           <div className="mt-5"><PriceBadge currentPrice="397€" note="Forfait tout inclus" /></div>
-          <Link href={stripeLink} target="_blank" rel="noreferrer noopener" className="mt-6 inline-block rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy">
-            Réserver mon Pack
-          </Link>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href={stripeLink} target="_blank" rel="noreferrer noopener" className="inline-block rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy">
+              Réserver mon Pack
+            </Link>
+            <Link href="#exemple" className="inline-block rounded-md border border-white/20 px-6 py-3 text-sm font-semibold text-white hover:bg-white/5">
+              Voir un exemple de Pack livré
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -116,13 +122,51 @@ export default function PackIAPage() {
       <section className="px-4 py-10 sm:px-6">
         <div className="mx-auto grid max-w-6xl gap-4 md:grid-cols-2">
           <article className="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
-            <h2 className={`${headingClass} text-xl font-bold text-emerald-900`}>Pour qui c'est</h2>
+            <h2 className={`${headingClass} text-xl font-bold text-emerald-900`}>Pour qui c&apos;est</h2>
             <p className="mt-2 text-sm text-emerald-800">Indépendants et petites équipes qui veulent des livrables concrets, rapidement.</p>
           </article>
           <article className="rounded-xl border border-red-200 bg-red-50 p-5">
             <h3 className={`${headingClass} text-xl font-bold text-red-900`}>Pour qui ce n&apos;est pas</h3>
             <p className="mt-2 text-sm text-red-800">Si vous cherchez uniquement de la théorie ou un support quotidien 1:1.</p>
           </article>
+        </div>
+      </section>
+
+      <section id="exemple" className="px-4 py-10 sm:px-6">
+        <div className="mx-auto max-w-6xl rounded-2xl bg-navy p-6 text-white sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+            <div>
+              <p className={`${headingClass} text-xs font-semibold uppercase tracking-[0.2em] text-amber-400`}>
+                Aperçu gratuit · confidentialité préservée
+              </p>
+              <h2 className={`${headingClass} mt-2 text-2xl font-bold sm:text-3xl`}>
+                Voir un exemple de Pack IA livré à un vrai client
+              </h2>
+              <p className="mt-3 text-sm text-slate-300 sm:text-base">
+                Audit business model, stratégie marketing, automatisations IA et landing page : la structure
+                complète d&apos;un Pack livré, avec les données client floutées pour respecter notre engagement
+                de confidentialité.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                <li>✓ Les 4 livrables visibles dans leur format final</li>
+                <li>✓ Données business et marques masquées</li>
+                <li>✓ Aucun engagement · Désabonnement en 1 clic</li>
+              </ul>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+              <UnlockPreviewGate
+                variant="dark"
+                redirectTo="/pack-ia/exemple"
+                source="preview-pack-ia"
+                buttonLabel="Voir l'exemple"
+                inputId="pack-preview-gate-email"
+              />
+              <p className="mt-3 text-xs text-slate-400">
+                En soumettant votre email, vous acceptez de recevoir occasionnellement des informations sur
+                le Pack IA Master Prompt.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

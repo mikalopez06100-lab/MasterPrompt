@@ -5,9 +5,23 @@ import { useState } from "react";
 
 type Props = {
   variant?: "dark" | "light";
+  /** Destination après validation. Défaut : valeur renvoyée par l'API (/espace-formation). */
+  redirectTo?: string;
+  /** Source à transmettre à l'API (utile pour segmenter dans Brevo). */
+  source?: string;
+  /** Libellé du bouton de soumission. */
+  buttonLabel?: string;
+  /** Identifiant unique pour l'input (utile si plusieurs gates sur la même page). */
+  inputId?: string;
 };
 
-export function UnlockPreviewGate({ variant = "dark" }: Props) {
+export function UnlockPreviewGate({
+  variant = "dark",
+  redirectTo,
+  source,
+  buttonLabel = "Voir l'espace formation",
+  inputId = "preview-gate-email",
+}: Props) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,14 +42,14 @@ export function UnlockPreviewGate({ variant = "dark" }: Props) {
       const res = await fetch("/api/preview-access", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, source, redirectTo }),
       });
       const data = await res.json().catch(() => null);
       if (!res.ok) {
         setError(data?.error || "Impossible de débloquer l'aperçu. Réessayez.");
         return;
       }
-      router.push(data?.redirectTo || "/espace-formation");
+      router.push(redirectTo || data?.redirectTo || "/espace-formation");
       router.refresh();
     } catch {
       setError("Erreur de connexion. Réessayez dans un instant.");
@@ -51,11 +65,11 @@ export function UnlockPreviewGate({ variant = "dark" }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
-      <label htmlFor="preview-gate-email" className="sr-only">
+      <label htmlFor={inputId} className="sr-only">
         Votre email
       </label>
       <input
-        id="preview-gate-email"
+        id={inputId}
         type="email"
         autoComplete="email"
         placeholder="votre@email.com"
@@ -69,7 +83,7 @@ export function UnlockPreviewGate({ variant = "dark" }: Props) {
         disabled={loading}
         className="rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {loading ? "Chargement…" : "Voir l'espace formation"}
+        {loading ? "Chargement…" : buttonLabel}
       </button>
       {error && (
         <p className={`mt-1 w-full text-xs ${isDark ? "text-red-200" : "text-red-600"}`}>{error}</p>
