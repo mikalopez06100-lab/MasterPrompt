@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratégie Marketing 2027 — Spring Rookie Camp · Les Deux Alpes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574;
+  --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed; --chart-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.04);
+  --shadow: 0 1px 3px rgba(10, 37, 64, 0.06), 0 1px 2px rgba(10, 37, 64, 0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; border-left: 1px solid var(--border); }
+.toc li { margin-bottom: 4px; }
+.toc a { display: block; padding: 6px 16px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; transition: all 0.15s; }
+.toc a:hover { color: var(--text-primary); border-left-color: var(--accent); }
+.main { max-width: 920px; }
+.cover { padding: 64px 0 48px; border-bottom: 2px solid var(--text-primary); margin-bottom: 64px; }
+.cover-kicker { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 24px; }
+.cover h1 { font-size: 3rem; line-height: 1.1; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.02em; }
+.cover-sub { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; max-width: 720px; }
+.cover-meta { display: flex; gap: 32px; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap; }
+.cover-meta span strong { color: var(--text-primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; font-weight: 600; }
+section { margin-bottom: 96px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; }
+h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin: 32px 0 12px 0; }
+h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 16px 0 8px 0; }
+p { margin-bottom: 16px; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
+.card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 8px; font-weight: 600; }
+.kpi-value { font-size: 2.25rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; display: block; }
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 24px 0; }
+.callout strong { color: var(--text-primary); }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout-info { border-color: var(--info); background: var(--info-soft); }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 24px 0; }
+.data-table th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+.data-table td { padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td.numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.score-badge { display: inline-flex; align-items: baseline; gap: 4px; padding: 8px 16px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.score-value { font-size: 1.75rem; font-weight: 700; }
+.score-label { font-size: 0.875rem; opacity: 0.7; }
+.score-good { background: var(--success-soft); color: var(--success); }
+.score-medium { background: var(--warning-soft); color: var(--warning); }
+.score-poor { background: var(--danger-soft); color: var(--danger); }
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 24px 0; }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.chart-caption { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 16px; }
+.persona-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.persona-header { background: var(--text-primary); color: white; padding: 16px 24px; }
+.persona-header h4 { color: white; margin: 0; font-size: 1.125rem; }
+.persona-header span { font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; }
+.persona-body { padding: 20px 24px; font-size: 0.875rem; }
+.persona-body dt { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 12px; }
+.persona-body dd { margin-bottom: 8px; color: var(--text-body); }
+.persona-body dd:first-of-type { margin-top: 0; }
+.pos-quote { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--text-primary); padding: 24px 32px; border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; margin: 24px 0; line-height: 1.5; }
+.tagline { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-primary); font-weight: 400; text-align: center; padding: 32px; border: 2px solid var(--text-primary); border-radius: 8px; margin: 24px 0; letter-spacing: -0.01em; }
+.proof-list { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0; list-style: none; }
+.proof-list li { padding: 12px 16px; background: var(--bg-subtle); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; font-size: 0.95rem; }
+.proof-list li strong { color: var(--text-primary); }
+.dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+@media (max-width: 700px) { .dos-donts { grid-template-columns: 1fr; } }
+.do-card, .dont-card { padding: 20px; border-radius: 8px; }
+.do-card { background: var(--success-soft); border: 1px solid #bbf7d0; }
+.dont-card { background: var(--danger-soft); border: 1px solid #fecaca; }
+.do-card h4 { color: var(--success); }
+.dont-card h4 { color: var(--danger); }
+.do-card ul, .dont-card ul { list-style: none; font-size: 0.875rem; }
+.do-card li, .dont-card li { padding: 6px 0; }
+.do-card li::before { content: '✓ '; font-weight: 700; color: var(--success); }
+.dont-card li::before { content: '✕ '; font-weight: 700; color: var(--danger); }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; background: var(--bg-subtle); color: var(--text-muted); margin: 2px; }
+.tag-tofu { background: var(--info-soft); color: var(--info); border: 1px solid #bae6fd; }
+.tag-mofu { background: var(--accent-soft); color: var(--accent-dark); border: 1px solid #f5d8b8; }
+.tag-bofu { background: var(--success-soft); color: var(--success); border: 1px solid #86efac; }
+@media print {
+  body { background: white; }
+  .layout { display: block; max-width: 720px; padding: 24px; }
+  .toc { display: none; }
+  .card, .chart-card { break-inside: avoid; box-shadow: none; }
+  section { margin-bottom: 48px; }
+  .cover { padding-top: 0; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#exec">Résumé exécutif</a></li>
+      <li><a href="#bilan">01 · Bilan 2026</a></li>
+      <li><a href="#positioning">02 · Positionnement</a></li>
+      <li><a href="#personas">03 · Personas & JTBD</a></li>
+      <li><a href="#journey">04 · Parcours d'inscription</a></li>
+      <li><a href="#bullseye">05 · Mix d'acquisition</a></li>
+      <li><a href="#contenu">06 · Contenu & PESO</a></li>
+      <li><a href="#funnel">07 · Funnel & conversion</a></li>
+      <li><a href="#roadmap">08 · Roadmap 12 mois</a></li>
+      <li><a href="#budget">09 · Budget & KPIs</a></li>
+      <li><a href="#score">10 · Score de viabilité</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+    <!-- COVER -->
+    <header class="cover">
+      <div class="cover-kicker">Stratégie Marketing & Communication — Édition 2027</div>
+      <h1>Spring Rookie Camp 2027</h1>
+      <p class="cover-sub">De 45 à 100 riders : doubler le volume sans dégrader la marge ni l'expérience. Plan d'acquisition 12 mois pour la 5e édition du Spring Rookie Camp à Les Deux Alpes.</p>
+      <div class="cover-meta">
+        <span><strong>Client</strong>Mathieu Siboni & Laurent Pordié</span>
+        <span><strong>Mission</strong>Stratégie marketing 2027</span>
+        <span><strong>Spot</strong>Les 2 Alpes · mai 2027</span>
+        <span><strong>Préparé par</strong>Master Prompt</span>
+      </div>
+    </header>
+
+    <!-- EXEC SUMMARY -->
+    <section id="exec">
+      <header class="section-header">
+        <span class="kicker">Résumé exécutif</span>
+        <h2>Le constat en une page</h2>
+        <p class="lead">Pourquoi l'ambition de doubler à 100 riders est tenable, à condition de cadrer la stratégie maintenant — pas en mars 2027.</p>
+      </header>
+
+      <div class="card-row">
+        <div class="kpi">
+          <span class="kpi-label">Riders 2026 réels</span>
+          <span class="kpi-value">45</span>
+          <span class="kpi-sub">100% en pack premium</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Cible 2027</span>
+          <span class="kpi-value">100</span>
+          <span class="kpi-sub">+122% de croissance</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Budget marketing</span>
+          <span class="kpi-value">&lt; 5 K€</span>
+          <span class="kpi-sub">À débloquer via sponsors</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Score viabilité</span>
+          <span class="kpi-value">71<small style="font-size: 1rem; color: var(--text-muted);">/100</small></span>
+          <span class="kpi-sub">Tenable mais tendu</span>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <strong>Verdict honnête.</strong> Doubler le volume rider en gardant le même staff, le même spot, le même pricing et un budget marketing &lt; 5 K€ est un objectif tendu. Les 45 riders 2026 ont été acquis presque exclusivement par bouche-à-oreille (70 % clubs / 30 % WRT), sans aucun système d'acquisition structuré. Pour passer à 100, il faut maintenant <strong>industrialiser le canal clubs</strong> (qui marche déjà), <strong>activer le canal réseaux sociaux organique</strong> (sous-exploité) et <strong>monter une mécanique de retour 2026 → 2027</strong> qui sécurise une base. Sans ces trois actions enclenchées dès septembre 2026, le camp 2027 finira à 60-70 riders, pas 100.
+      </div>
+
+      <p>L'analyse révèle un <strong>quick win majeur</strong> : sur 45 riders 2026, si 60 % reviennent en 2027 (taux de fidélisation réaliste pour un camp réussi en pack premium), c'est déjà 27 riders sécurisés au 1er janvier 2027 — soit 27 % de l'objectif <em>avant même</em> l'ouverture des inscriptions publiques. Cette base de retour est l'asset le plus précieux et le moins exploité aujourd'hui — il n'existe aucune mécanique formalisée pour l'activer.</p>
+
+      <p>Le mix d'acquisition recommandé concentre 70 % des efforts sur trois canaux à effet de levier sur les clubs (le canal historique qui a déjà prouvé sa rentabilité), et 30 % sur l'activation du compte Instagram <code style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 2px 6px; border-radius: 3px;">@spring.rookie.camp</code> qui doit passer de support de communication à canal d'acquisition. Pas de paid ads, pas de salons, pas de site SEO. La concentration est non négociable au vu du budget.</p>
+
+      <div class="callout callout-accent">
+        <strong>North Star Metric retenue : nombre de riders inscrits & payés à 30 jours de l'événement</strong> (cible J-30 = 80 riders, soit 80 % de la cible). Atteindre 80 à J-30 sécurise l'objectif final à 100, car les 20 derniers jours apportent toujours 15-25 % d'inscriptions tardives. Si J-30 ne montre que 50 riders, la stratégie aura échoué et il faudra réduire l'objectif ou activer un plan B (paid ads d'urgence).
+      </div>
+    </section>
+
+    <!-- BILAN -->
+    <section id="bilan">
+      <header class="section-header">
+        <span class="kicker">Bloc 01</span>
+        <h2>Bilan honnête de l'édition 2026</h2>
+        <p class="lead">Ce qui a marché, ce qui n'a pas marché, et ce que les chiffres racontent vraiment.</p>
+      </header>
+
+      <h3>Lecture quantitative des inscriptions 2026</h3>
+      <table class="data-table">
+        <thead><tr><th>Indicateur</th><th>Réalisé 2026</th><th>Lecture stratégique</th></tr></thead>
+        <tbody>
+          <tr><td>Nombre de riders inscrits</td><td class="numeric"><strong>45</strong></td><td>~55 % en dessous de la cible affichée (100). Soit l'objectif était irréaliste en 2026, soit l'acquisition n'a pas été pilotée.</td></tr>
+          <tr><td>Mix de packages choisis</td><td class="numeric"><strong>100 % Snowcamp + Coach</strong></td><td>Excellent pour la rentabilité unitaire. Mais signal fort : les packages Skatecamp (490 €) et Snow Fests-only (350 €) <em>n'ont pas trouvé leur audience</em>. Soit ils n'étaient pas assez visibles, soit ils ne répondent à aucun JTBD.</td></tr>
+          <tr><td>Mix canaux d'acquisition</td><td class="numeric"><strong>70 % clubs · 30 % WRT</strong></td><td>Acquisition 100 % organique, zéro paid, zéro système de tracking. Le canal clubs domine — c'est l'actif central à industrialiser.</td></tr>
+          <tr><td>Modèle économique</td><td class="numeric"><strong>Rentable</strong></td><td>45 riders × pack premium + sponsors + arrangement station = équation viable. Pas de pression à augmenter le prix.</td></tr>
+          <tr><td>Staff opérationnel</td><td>Mathieu + Laurent + équipe pro</td><td>Capacité à 100 riders sans recrutement = à valider techniquement (ratio coach/rider, capacité hôtel, capacité parc).</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Trois enseignements stratégiques pour 2027</h3>
+
+      <div class="callout callout-success">
+        <strong>Enseignement 1 — Le pack premium est le bon produit.</strong> 100 % des inscrits 2026 ont pris le pack le plus cher (860 € + 120 € coach). C'est validé. L'idée d'élargir avec des packs d'entrée plus accessibles a dilué la communication sans générer d'inscriptions. Recommandation 2027 : <strong>simplifier l'offre</strong> autour de 2 packages clairs (Snowcamp + Skatecamp), supprimer ou repositionner le « Snow Fests only ».
+      </div>
+
+      <div class="callout callout-warning">
+        <strong>Enseignement 2 — Le canal clubs marche, mais sans système.</strong> 70 % des riders sont venus par les clubs, ce qui prouve la légitimité métier. Mais cette acquisition s'appuie sur le réseau personnel de Mathieu et Laurent, sans contrat de partenariat formalisé, sans kit de communication clés-en-main, sans incentive structuré pour les coachs de clubs. C'est fragile à scale : passer de 5 clubs actifs à 15 demandera un système, pas plus de bouche-à-oreille.
+      </div>
+
+      <div class="callout callout-danger">
+        <strong>Enseignement 3 — Aucune mécanique de fidélisation 2026 → 2027.</strong> Aujourd'hui, après leur séjour, les 45 riders 2026 et leurs parents reçoivent... rien. Pas d'email de remerciement, pas de récap de leur progression, pas de pré-inscription anticipée 2027 avec early bird. C'est l'occasion ratée la plus coûteuse de l'édition. Mécanique de retour à mettre en place <strong>dans les 30 jours suivant le camp 2026</strong>, pas en septembre.
+      </div>
+    </section>
+
+    <!-- POSITIONING -->
+    <section id="positioning">
+      <header class="section-header">
+        <span class="kicker">Bloc 02</span>
+        <h2>Positionnement stratégique 2027 — Framework Dunford</h2>
+        <p class="lead">Une déclaration de positionnement qui assume ce que le camp est, et ce qu'il n'est pas.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Axe Dunford</th><th>Réponse stratégique</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Compétitive alternatives</strong></td>
+            <td>(1) <strong>Camps d'autres opens du World Rookie Tour</strong> — l'alternative directe (autres dates, autres pays, mêmes athlètes ciblés) · (2) <strong>Stages clubs habituels</strong> aux 2 Alpes ou ailleurs · (3) <strong>Camps de clubs-grandes nations</strong> (USA, CAN, JPN) que les athlètes binationaux peuvent rejoindre · (4) <strong>Le statu quo</strong> : continuer à s'entraîner en club sans mode camp</td>
+          </tr>
+          <tr>
+            <td><strong>Unique attributes</strong></td>
+            <td>(1) <strong>Premier événement du World Rookie Tour 2027-28</strong> (qualifying officiel pour les Finals 2028) · (2) <strong>Co-organisé par 2 coachs Équipe de France actifs</strong> (Mathieu + Laurent) — légitimité métier · (3) <strong>Spot Les 2 Alpes glacier 3400m</strong> (assurance neige en mai) · (4) <strong>Mix snowboard + freeski + skate</strong> dans un même événement · (5) <strong>Format camp+comp combiné</strong> rare dans le circuit · (6) <strong>3 Fests (skate, snowboard, freeski) en une semaine</strong> · (7) <strong>Brand village dense</strong> (Red Bull, Vans, DC, Lib Tech, Union, Nixon)</td>
+          </tr>
+          <tr>
+            <td><strong>Value</strong></td>
+            <td>Pour un rookie ambitieux : <strong>une semaine condensée pour ouvrir la porte du circuit international</strong> — entraînement de qualité + premier dossard officiel WRT + visibilité auprès de marques sponsors. Pour un coach de club : <strong>un événement clé en main pour valoriser ses athlètes et son club</strong>, sans avoir à monter sa propre logistique. Pour un parent : <strong>un cadre encadré et international sans avoir à s'expatrier</strong> en Autriche ou Italie.</td>
+          </tr>
+          <tr>
+            <td><strong>Best-fit customers</strong></td>
+            <td>(1) <strong>Rookies 14-17 ans</strong> en club fédéral, ambitieux, premier ou deuxième cycle WRT · (2) <strong>Coachs de clubs francophones</strong> (France, Suisse romande, Belgique) cherchant à monter leurs athlètes en cycle international · (3) <strong>Parents CSP+</strong> qui financent le projet sportif de leur enfant et veulent un cadre rassurant. <strong>NE SONT PAS la cible</strong> : skieurs alpin, riders adultes/loisir, riders très jeunes (&lt;12 ans), parents qui cherchent une « colo de neige ».</td>
+          </tr>
+          <tr>
+            <td><strong>Market category</strong></td>
+            <td><strong>« Camp & première compétition du World Rookie Tour 2027-28 »</strong>. Pas un « stage de freestyle aux 2 Alpes ». La revendication WRT change l'aimant : on attire ceux qui veulent un dossard officiel, pas ceux qui veulent juste rider en groupe.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Déclaration de positionnement (forme longue)</h3>
+      <div class="pos-quote">
+        Pour les rookies 14-17 ans qui veulent ouvrir la porte du circuit international en snowboard, freeski ou skateboard, le <strong>Spring Rookie Camp Les 2 Alpes</strong> est <strong>le premier événement du World Rookie Tour 2027-28</strong>. Co-organisé par deux coachs Équipe de France actifs sur un glacier 3400m garantissant la neige de printemps, le camp combine en une semaine entraînement encadré, premier dossard officiel WRT, exposition aux marques sponsors et opportunité de qualifier pour les World Rookie Finals 2028. Pour les coachs de clubs et les parents, c'est l'événement clé en main qui transforme un athlète prometteur en compétiteur du circuit.
+      </div>
+
+      <h3>Tagline 2027 — 3 options à arbitrer</h3>
+      <div class="card-row">
+        <div class="card" style="text-align: center;">
+          <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px;">Option A — Action</p>
+          <p style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-primary); margin: 0;">Where rookies turn pro.</p>
+        </div>
+        <div class="card" style="text-align: center; border: 2px solid var(--accent);">
+          <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-dark); margin-bottom: 8px;">Option B — Recommandée</p>
+          <p style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-primary); margin: 0;">Your first WRT dossard.<br>Your first comp story.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px;">Option C — Heritage</p>
+          <p style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-primary); margin: 0;">5 ans. Une porte d'entrée.<br>Le World Rookie Tour.</p>
+        </div>
+      </div>
+
+      <h3>USP & proof points 2027</h3>
+      <div class="tagline">
+        Le seul camp français qui ouvre officiellement le World Rookie Tour 2027-28, encadré par deux coachs Équipe de France actifs sur le glacier 3400m des 2 Alpes.
+      </div>
+
+      <ul class="proof-list">
+        <li><strong>5 éditions consécutives</strong> (2023 → 2027), preuve de continuité et de stabilité opérationnelle.</li>
+        <li><strong>Premier événement officiel du World Rookie Tour 2027-28</strong> avec dossard officiel et qualification Finals 2028.</li>
+        <li><strong>Glacier 3400m</strong> — seule station française à garantir la neige fin mai.</li>
+        <li><strong>Brand village 12+ marques internationales</strong> : Red Bull, Vans, DC Shoes, Lib Tech, Union, Nixon, TSG, Von Zipper, Blue Tomato, CMP.</li>
+        <li><strong>Coachs Équipe de France snowboard freestyle actifs</strong> (Mathieu Siboni, Laurent Pordié) — formateurs de médaillés olympiques et YOG Gangwon 2024.</li>
+      </ul>
+
+      <h3>Brand voice & dos/don'ts</h3>
+      <p><strong>Direct · Authentique · International.</strong> Voix de la culture snowboard / skate / freeski : registre street, anglais en cohabitation avec le français, pas de marketing corporate, pas d'infantilisation, pas de jargon coaching néo-américain.</p>
+
+      <div class="dos-donts">
+        <div class="do-card">
+          <h4>À FAIRE</h4>
+          <ul>
+            <li>Mixer FR et EN de manière naturelle (« lock your spot », « real level. real vibe. »)</li>
+            <li>Mettre en avant les noms des athlètes (Pereira, Ramoin, Allemand, Soleymieux, Collomb Paton)</li>
+            <li>Citer le glacier, l'altitude, le park, les sponsors par leur nom</li>
+            <li>Montrer les coulisses : park, BBQ, brand village, briefings start</li>
+            <li>Adresser les coachs et clubs comme des partenaires, pas des prospects</li>
+          </ul>
+        </div>
+        <div class="dont-card">
+          <h4>À NE PAS FAIRE</h4>
+          <ul>
+            <li>Vendre comme une « colo » ou un « séjour vacances » (positionnement incompatible)</li>
+            <li>Survendre les podiums (« devenez le prochain champion ») — décrédibilise</li>
+            <li>Diluer la cible avec « tous niveaux acceptés » — perd le rookie sérieux</li>
+            <li>Cliquetis émojis et hashtags trop nombreux dans la com officielle</li>
+            <li>Promettre des sélections qu'on ne peut pas garantir</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAS -->
+    <section id="personas">
+      <header class="section-header">
+        <span class="kicker">Bloc 03</span>
+        <h2>Personas stratégiques & Jobs-To-Be-Done</h2>
+        <p class="lead">Trois personas hiérarchisés. La stratégie 2027 se concentre sur le persona prescripteur (le coach de club), pas sur le rider final.</p>
+      </header>
+
+      <div class="callout callout-info">
+        <strong>Décision méthodologique clé.</strong> Sur les 45 riders 2026, 70 % sont venus via leur coach de club. Le coach est donc le <strong>vrai persona décideur</strong>, pas le rider lui-même. Une stratégie qui parle directement aux 14-16 ans sur TikTok serait belle, mais le ratio effort/résultat est défavorable. La stratégie 2027 cible d'abord les coachs et les parents, qui amènent les riders.
+      </div>
+
+      <div class="card-row">
+        <div class="persona-card">
+          <div class="persona-header">
+            <span>Persona principal · 50 % du focus</span>
+            <h4>Stéphane · Coach de club fédéral</h4>
+          </div>
+          <div class="persona-body">
+            <dt>Identité</dt><dd>35-50 ans · entraîneur snowboard ou freeski · club fédéral en France, Suisse romande ou Belgique · 5 à 20 athlètes en groupe compétition jeunes</dd>
+            <dt>Contexte</dt><dd>Construit son calendrier de saison entre août et novembre. Cherche un événement qui fasse monter ses athlètes à l'international, sans avoir à organiser lui-même la logistique.</dd>
+            <dt>JTBD functional</dt><dd>Trouver un événement à coût raisonnable où inscrire ses athlètes pour leur premier dossard WRT.</dd>
+            <dt>JTBD emotional</dt><dd>Être rassuré que ses athlètes seront bien encadrés, et que les conditions de neige tiendront en mai.</dd>
+            <dt>JTBD social</dt><dd>Pouvoir dire au club et aux parents : « j'ai trouvé un événement sérieux qui ouvre le circuit international ».</dd>
+            <dt>Pains hiérarchisés</dt><dd>(1) Crainte que la neige ne tienne pas en fin de saison · (2) Logistique transport+hôtel chronophage · (3) Coût pour les familles trop élevé</dd>
+            <dt>Déclencheur</dt><dd>Octobre-novembre : préparation calendrier saison + budgets clubs</dd>
+            <dt>Sources</dt><dd>Réseau pair / WhatsApp coachs · WRT website · Instagram · recommandation Mathieu/Laurent · fédération</dd>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-header">
+            <span>Persona principal · 30 % du focus</span>
+            <h4>Catherine · Mère d'athlète U16-U17</h4>
+          </div>
+          <div class="persona-body">
+            <dt>Identité</dt><dd>40-50 ans · CSP+ · finance le projet sportif d'un enfant 14-17 ans en club · co-décide les inscriptions avec l'enfant et le coach</dd>
+            <dt>Contexte</dt><dd>L'enfant pousse pour s'inscrire à un événement international. Catherine veut savoir si c'est sérieux, quel encadrement, quel coût total.</dd>
+            <dt>JTBD functional</dt><dd>Valider qu'investir 1 000 € + transport est rationnel (encadrement, palmarès, sécurité).</dd>
+            <dt>JTBD emotional</dt><dd>Être rassurée que son enfant sera bien encadré, dans un cadre safe, avec adultes responsables.</dd>
+            <dt>JTBD social</dt><dd>Pouvoir présenter le projet aux autres parents et au cercle familial sans avoir à se justifier.</dd>
+            <dt>Pains</dt><dd>(1) Coût total mal estimé (transport + extras non communiqués) · (2) Doute sur la sécurité encadrement (alcool, soirées, dérives) · (3) Difficulté à valider la légitimité du camp depuis l'extérieur du milieu snow</dd>
+            <dt>Déclencheur</dt><dd>Conversation avec l'enfant + recommandation coach club</dd>
+            <dt>Sources</dt><dd>Coach club (canal principal) · site web officiel · témoignages d'autres parents · Instagram du camp</dd>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <div class="persona-header">
+            <span>Persona secondaire · 20 % du focus</span>
+            <h4>Aono · Rider rookie 14-17 ans</h4>
+          </div>
+          <div class="persona-body">
+            <dt>Identité</dt><dd>14-17 ans · membre d'un club fédéral · niveau régional/national en début de progression internationale · suit déjà les pros sur Insta</dd>
+            <dt>Contexte</dt><dd>Veut son premier dossard officiel WRT, faire des edits qui le mettent en valeur, signer un premier deal de matos, rider avec ses idoles.</dd>
+            <dt>JTBD functional</dt><dd>Décrocher son premier dossard WRT et son premier classement officiel.</dd>
+            <dt>JTBD emotional</dt><dd>Vivre une vraie semaine de pro : start gates, plateaux, brand village, edits.</dd>
+            <dt>JTBD social</dt><dd>Poster du contenu Instagram qui le pose comme rider sérieux dans son cercle d'amis snowboard.</dd>
+            <dt>Pains</dt><dd>(1) Peur de ne pas être au niveau · (2) Peur de la blessure pré-comp · (3) FOMO si ses potes y vont sans lui</dd>
+            <dt>Déclencheur</dt><dd>Posts Instagram du camp · pote du club qui s'inscrit · clip du camp précédent</dd>
+            <dt>Sources</dt><dd>Instagram (canal exclusif) · TikTok marginal · YouTube edits · WhatsApp groupe club</dd>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-accent">
+        <strong>Conséquence stratégique majeure.</strong> Aono (le rider) est l'<em>utilisateur</em>, mais c'est Stéphane (le coach) et Catherine (la mère) qui décident et paient. Le contenu Instagram doit donc être à <strong>double lecture</strong> : assez stylé pour qu'Aono le partage à ses parents, mais assez rassurant pour que Catherine valide l'inscription. Cette double lecture conditionne la stratégie de contenu (Bloc 06).
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="journey">
+      <header class="section-header">
+        <span class="kicker">Bloc 04</span>
+        <h2>Parcours d'inscription — où ça coince réellement</h2>
+        <p class="lead">5 étapes du premier contact à l'inscription payée, avec les frictions à neutraliser pour 2027.</p>
+      </header>
+
+      <div class="chart-card">
+        <div class="chart-title">Parcours d'inscription en 5 étapes</div>
+        <p class="chart-caption">Frictions actuelles (rouge) et leviers à activer pour 2027 (vert).</p>
+        <svg viewBox="0 0 920 320" xmlns="http://www.w3.org/2000/svg" role="img">
+          <g font-family="Inter" font-size="11" fill="var(--text-muted)" text-anchor="middle">
+            <text x="92" y="20" font-weight="600" fill="var(--text-primary)">1 · DÉCOUVERTE</text>
+            <text x="276" y="20" font-weight="600" fill="var(--text-primary)">2 · CONSIDÉRATION</text>
+            <text x="460" y="20" font-weight="600" fill="var(--text-primary)">3 · DÉCISION</text>
+            <text x="644" y="20" font-weight="600" fill="var(--text-primary)">4 · INSCRIPTION</text>
+            <text x="828" y="20" font-weight="600" fill="var(--text-primary)">5 · PRÉ-CAMP</text>
+          </g>
+          <g>
+            <rect x="20" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="204" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="388" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="572" y="40" width="144" height="100" fill="var(--bg-subtle)" stroke="var(--border-strong)" rx="6"/>
+            <rect x="756" y="40" width="144" height="100" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2" rx="6"/>
+          </g>
+          <g font-family="Inter" font-size="10.5" fill="var(--text-body)">
+            <text x="32" y="60">• Coach club</text>
+            <text x="32" y="76">• Insta WRT</text>
+            <text x="32" y="92">• Pote inscrit</text>
+            <text x="32" y="108">• Insta du camp</text>
+            <text x="32" y="124">• Bouche-à-oreille</text>
+
+            <text x="216" y="60">• Site web camp</text>
+            <text x="216" y="76">• DM Instagram</text>
+            <text x="216" y="92">• Conversation</text>
+            <text x="216" y="108">  coach &gt; parent</text>
+            <text x="216" y="124">• Édition précédente</text>
+
+            <text x="400" y="60">• Confrontation</text>
+            <text x="400" y="76">  prix vs valeur</text>
+            <text x="400" y="92">• Vérif neige + park</text>
+            <text x="400" y="108">• Vérif sponsors</text>
+            <text x="400" y="124">• Décision famille</text>
+
+            <text x="584" y="60">• Form simple</text>
+            <text x="584" y="76">• Acompte ou full</text>
+            <text x="584" y="92">• Email confirmation</text>
+            <text x="584" y="108">• Caution dossard</text>
+            <text x="584" y="124">• Logistique transport</text>
+
+            <text x="768" y="60">• Communication J-30</text>
+            <text x="768" y="76">• Liste à emporter</text>
+            <text x="768" y="92">• Programme détaillé</text>
+            <text x="768" y="108">• Préparation physique</text>
+            <text x="768" y="124">• Hype groupe</text>
+          </g>
+          <g font-family="Inter" font-size="10" fill="var(--danger)">
+            <text x="92" y="170" text-anchor="middle">Friction : invisible si</text>
+            <text x="92" y="184" text-anchor="middle" font-style="italic">le coach n'en parle pas</text>
+            <text x="276" y="170" text-anchor="middle">Friction : pas de site web</text>
+            <text x="276" y="184" text-anchor="middle" font-style="italic">page éphémère Insta</text>
+            <text x="460" y="170" text-anchor="middle">Friction : prix mal communiqué</text>
+            <text x="460" y="184" text-anchor="middle" font-style="italic">extras flous (transport, etc.)</text>
+            <text x="644" y="170" text-anchor="middle">Friction : process DM Insta</text>
+            <text x="644" y="184" text-anchor="middle" font-style="italic">manuel, lent, pas scalable</text>
+          </g>
+          <g font-family="Inter" font-size="10" fill="var(--success)">
+            <text x="92" y="220" text-anchor="middle">Levier : kit clubs</text>
+            <text x="92" y="234" text-anchor="middle" font-style="italic">+ ambassadeurs alumni</text>
+            <text x="276" y="220" text-anchor="middle">Levier : landing dédiée</text>
+            <text x="276" y="234" text-anchor="middle" font-style="italic">+ FAQ + témoignages</text>
+            <text x="460" y="220" text-anchor="middle">Levier : prix tout compris</text>
+            <text x="460" y="234" text-anchor="middle" font-style="italic">+ early bird novembre</text>
+            <text x="644" y="220" text-anchor="middle">Levier : form Stripe direct</text>
+            <text x="644" y="234" text-anchor="middle" font-style="italic">+ acompte 30 %</text>
+            <text x="828" y="220" text-anchor="middle" font-weight="600" fill="var(--text-primary)">Cible : 100 riders</text>
+            <text x="828" y="234" text-anchor="middle" font-style="italic">vs 45 en 2026</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3>Top 3 frictions à neutraliser absolument pour 2027</h3>
+
+      <div class="card">
+        <h4>Friction #1 — Pas de landing page dédiée</h4>
+        <p>Aujourd'hui, le compte Instagram <code style="font-family: var(--font-mono); background: var(--bg-subtle); padding: 2px 6px; border-radius: 3px;">@spring.rookie.camp</code> est le seul point d'entrée numérique. Aucune URL stable à transmettre par email à un coach ou un parent. Aucun référencement Google possible. <strong>Action 2027 :</strong> mise en ligne d'une landing page dédiée (sous-domaine ou domaine propre) avec FAQ, programme, sponsors, témoignages. Prêt en septembre 2026, pas en avril 2027.</p>
+      </div>
+
+      <div class="card">
+        <h4>Friction #2 — Prix mal communiqué (extras flous)</h4>
+        <p>Le pack 860 € est annoncé comme « all-in » mais en pratique, transport + caution dossard + assurance + extras = +200 à +400 €. Pour Catherine (parent), ce flou est rédhibitoire au moment de la décision. <strong>Action 2027 :</strong> grille de prix transparente avec un pack de base + options chiffrées (transport navette Lyon/Genève en option, package famille pour parents accompagnants, etc.). Communiqué sur la landing dès septembre.</p>
+      </div>
+
+      <div class="card">
+        <h4>Friction #3 — Process d'inscription manuel via DM Instagram</h4>
+        <p>L'inscription par DM Insta marche tant qu'il y a 45 riders. À 100 riders, c'est 100 conversations Insta à gérer en parallèle, en deux langues, avec relances, paiements, confirmations. Source d'erreurs et goulot d'étranglement. <strong>Action 2027 :</strong> formulaire d'inscription avec paiement Stripe (acompte 30 % à l'inscription, solde 30 jours avant), confirmation auto par email, gestion via base centralisée. Investissement ~300 € (site simple type Webflow/Framer + Stripe).</p>
+      </div>
+    </section>
+
+    <!-- BULLSEYE -->
+    <section id="bullseye">
+      <header class="section-header">
+        <span class="kicker">Bloc 05</span>
+        <h2>Mix d'acquisition — Bullseye 2027</h2>
+        <p class="lead">Trois canaux core, deux canaux promising, le reste écarté avec raison. Concentration imposée par le budget &lt; 5 K€.</p>
+      </header>
+
+      <div class="chart-card">
+        <div class="chart-title">Bullseye 2027 — répartition des canaux</div>
+        <p class="chart-caption">70 % de l'effort sur 3 canaux core. 25 % sur deux canaux promising. 5 % d'expérimentation. Le reste écarté volontairement.</p>
+        <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="300" cy="230" r="200" fill="var(--chart-1)" opacity="0.06" stroke="var(--border)"/>
+          <circle cx="300" cy="230" r="135" fill="var(--chart-1)" opacity="0.12" stroke="var(--border)"/>
+          <circle cx="300" cy="230" r="70" fill="var(--accent)" opacity="0.7" stroke="var(--accent-dark)"/>
+          <g font-family="Inter" font-size="10" font-weight="600" fill="var(--text-muted)" text-anchor="middle" letter-spacing="0.5">
+            <text x="300" y="55">LONGTAIL — écartés volontairement</text>
+            <text x="300" y="115">PROMISING — à tester</text>
+            <text x="300" y="170" fill="var(--text-primary)">CORE</text>
+          </g>
+          <g font-family="Inter" font-size="11" font-weight="600" fill="var(--text-primary)" text-anchor="middle">
+            <text x="300" y="220">Partenariat Clubs</text>
+            <text x="300" y="238">+ Insta Camp</text>
+            <text x="300" y="256">+ Retour 2026</text>
+          </g>
+          <g font-family="Inter" font-size="11" fill="var(--text-body)">
+            <circle cx="180" cy="170" r="6" fill="var(--chart-2)"/><text x="195" y="174">Canal Earned WRT</text>
+            <circle cx="180" cy="290" r="6" fill="var(--chart-2)"/><text x="195" y="294">Influence athlètes alumni</text>
+          </g>
+          <g font-family="Inter" font-size="10" fill="var(--text-muted)">
+            <circle cx="120" cy="80" r="4" fill="var(--chart-muted)"/><text x="132" y="84">Paid Meta Ads</text>
+            <circle cx="480" cy="80" r="4" fill="var(--chart-muted)"/><text x="492" y="84">SEO blog</text>
+            <circle cx="120" cy="380" r="4" fill="var(--chart-muted)"/><text x="132" y="384">TikTok organique</text>
+            <circle cx="480" cy="380" r="4" fill="var(--chart-muted)"/><text x="492" y="384">SEA Google</text>
+            <circle cx="300" cy="425" r="4" fill="var(--chart-muted)"/><text x="312" y="429">Salons grand public</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3>Détail des 3 canaux CORE</h3>
+
+      <div class="card">
+        <h4>Canal core #1 — Programme partenariat clubs structuré</h4>
+        <p><strong>Pourquoi.</strong> 70 % des riders 2026 sont venus par les clubs. C'est le canal le plus rentable et le moins exploité de manière systématique. <strong>Quoi faire 2027 :</strong> identifier 20 à 25 clubs francophones (FR/CH/BE) cibles, contractualiser un partenariat avec chacun (kit communication clés-en-main + commission/incentive coach 50-100 € par rider amené à partir du 3e rider). <strong>Lancement :</strong> septembre 2026. <strong>KPI :</strong> 15 clubs partenaires actifs envoyant chacun 3-5 riders = 45-75 riders sécurisés.</p>
+      </div>
+
+      <div class="card">
+        <h4>Canal core #2 — Compte Instagram @spring.rookie.camp en mode acquisition</h4>
+        <p><strong>Pourquoi.</strong> Aujourd'hui le compte sert de support de comm pendant le camp. Il doit basculer en canal d'acquisition toute l'année. <strong>Quoi faire 2027 :</strong> calendrier éditorial 12 mois (cf. Bloc 06), 3 publications/semaine en saison creuse, 5/semaine en saison hot (oct-nov ouverture inscriptions, mars-avril J-60 à J-30). Reels avec edits riders alumni, témoignages parents, behind-the-scenes Mathieu/Laurent, countdown en direct. <strong>KPI :</strong> passer de ~3 000 abonnés actuels à 8 000 d'ici mai 2027, et générer 25 % des inscriptions via DM Insta.</p>
+      </div>
+
+      <div class="card">
+        <h4>Canal core #3 — Mécanique de retour 2026 → 2027</h4>
+        <p><strong>Pourquoi.</strong> Aucun coût d'acquisition. Si 60 % des 45 riders 2026 reviennent en 2027 = 27 riders sécurisés sans dépenser un euro. <strong>Quoi faire 2027 :</strong> séquence email post-camp 2026 (J+7 thank-you + recap photos vidéos / J+30 invitation pré-inscription 2027 avec early bird -10 % / J+90 ouverture officielle inscriptions). Le tout déclenché dans les 7 jours suivant la fin du camp 2026. <strong>KPI :</strong> 25-30 riders 2026 pré-inscrits 2027 avant Noël 2026.</p>
+      </div>
+
+      <h3>Détail des 2 canaux PROMISING (à tester)</h3>
+
+      <table class="data-table">
+        <thead><tr><th>Canal</th><th>Action 2027</th><th>Budget</th><th>KPI test</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Earned WRT (World Rookie Tour)</strong></td><td>Coordination renforcée avec WRT pour publication conjointe sur le site et les réseaux WRT, mise en avant prioritaire dans la newsletter mondiale du tour</td><td>0 €</td><td>Mention dans 3 communications WRT majeures</td></tr>
+          <tr><td><strong>Influence athlètes alumni</strong></td><td>10 athlètes alumni du camp (Allemand, Pordié, Soleymieux, Collomb Paton…) postent un reel/story chacun avant l'événement (gratuit, en échange de tags + matos)</td><td>~500 € en swag</td><td>10 publications cumulant 50K+ views</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Canaux explicitement écartés (avec raisons)</h3>
+
+      <div class="card">
+        <p><strong>Paid Meta Ads / Instagram Ads</strong> — Le persona Stéphane (coach club) ne convertit pas en paid ads classique : il décide en réseau pair, pas via une pub sponsorisée. Persona Catherine (parent) pourrait être ciblée mais le coût d'apprentissage des audiences et créatifs avec un budget &lt; 5 K€ est défavorable. À reconsidérer en 2028 si le système organique 2027 a saturé.</p>
+        <p><strong>SEO blog / contenu long format</strong> — Pas de capacité de production interne. Volume de recherche faible (« stage snowboard 2 alpes 2027 » = quelques dizaines/mois). ROI nul pour un événement annuel.</p>
+        <p><strong>TikTok organique</strong> — Audience trop jeune (12-15 ans, hors cible Aono qui est plutôt Insta) et formats à fort coût de production. À reconsidérer si le camp veut s'ouvrir à un public plus large à terme.</p>
+        <p><strong>SEA Google Ads</strong> — Volume de recherche insuffisant pour qu'une enchère ait du sens.</p>
+        <p><strong>Salons grand public (Snow Avant, etc.)</strong> — Le coach et le parent ne s'y rendent pas pour ce type de décision. Coût/temps disproportionné.</p>
+      </div>
+    </section>
+
+    <!-- CONTENU -->
+    <section id="contenu">
+      <header class="section-header">
+        <span class="kicker">Bloc 06</span>
+        <h2>Stratégie de contenu — Modèle PESO</h2>
+        <p class="lead">Trois piliers de contenu, un calendrier 12 mois calibré sur la capacité réelle de production.</p>
+      </header>
+
+      <h3>Trois piliers de contenu (à 33 % chacun)</h3>
+      <table class="data-table">
+        <thead><tr><th>Pilier</th><th>Angle narratif</th><th>Formats prioritaires</th><th>Pour qui ?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Coulisses & coaching</strong></td><td>Ce qui se passe entre les sessions : briefings start, ateliers technique, bank of pro videos, ambiance hôtel, brand village. La matière du camp.</td><td>Reels Insta, photos action, behind-the-scenes coachs</td><td>Aono (FOMO) · Stéphane (légitimité) · Catherine (rassurance encadrement)</td></tr>
+          <tr><td><strong>2. Riders alumni & success stories</strong></td><td>Le parcours d'un rookie 2024-2025-2026 jusqu'à son podium WRT actuel ou son entrée en sélection nationale. Preuve de la trajectoire.</td><td>Carrousel Insta, reel témoignage, post LinkedIn (parents)</td><td>Stéphane (validation choix) · Catherine (preuve ROI)</td></tr>
+          <tr><td><strong>3. Le format & le spot</strong></td><td>Les 2 Alpes glacier 3400m, les sponsors, le programme, l'esprit Black Yeti / WRT. La promesse opérationnelle.</td><td>Posts Insta posters, reels paysage, photos park, posts WRT</td><td>Aono (vibes) · Stéphane (qualité spot) · Catherine (cadre)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Calendrier éditorial 12 mois — calibré sur la capacité réelle</h3>
+      <table class="data-table">
+        <thead><tr><th>Période</th><th>Phase</th><th>Cadence Insta</th><th>Objectif principal</th></tr></thead>
+        <tbody>
+          <tr><td>Juin 2026 (post-camp)</td><td>Capitalisation</td><td>3-4 publis/sem pendant 4 sem</td><td>Recap édition 2026, remerciements, hype retour 2027</td></tr>
+          <tr><td>Juil-Août 2026</td><td>Saison creuse</td><td>1-2 publis/sem</td><td>Maintenir présence : alumni updates, off-season vibes</td></tr>
+          <tr><td>Sept 2026</td><td>Pré-launch</td><td>2-3 publis/sem</td><td>Teasers édition 2027, partenariats clubs annoncés</td></tr>
+          <tr><td>Oct-Nov 2026</td><td>Ouverture inscriptions</td><td>3-4 publis/sem</td><td>Annonce officielle, early bird, premiers locked-in</td></tr>
+          <tr><td>Déc 2026 - Janv 2027</td><td>Hold</td><td>1-2 publis/sem</td><td>Holidays content, alumni edits saison hivernale</td></tr>
+          <tr><td>Févr-Mars 2027</td><td>Mid-funnel push</td><td>3 publis/sem</td><td>Témoignages, sponsors confirmés, programme détaillé</td></tr>
+          <tr><td>Avril 2027 (J-30 à J-7)</td><td>Sprint final</td><td>5 publis/sem</td><td>Countdown, dernières places, urgence, FOMO</td></tr>
+          <tr><td>Mai 2027 (camp)</td><td>Live coverage</td><td>Stories quotidiennes + reels</td><td>Couverture live + inscription 2028 anticipée</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warning">
+        <strong>Réalisme.</strong> Cette cadence demande ~3-5 heures/semaine de production de contenu en saison creuse, et ~8-10 heures/semaine en saison hot (oct-nov, mars-mai). Soit Mathieu et Laurent dédient ce temps, soit ils contractualisent un community manager freelance à 400-600 €/mois pendant les 4 mois critiques (oct-nov + mars-mai). À budgétiser dans les 5 K€ disponibles.
+      </div>
+
+      <h3>Matrice PESO 2027</h3>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>% effort</th><th>Actions concrètes</th><th>Budget annuel</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Paid</strong></td><td>0 %</td><td>Aucune dépense paid en 2027. Plan B en cas de retard d'inscriptions à J-45 : ~500 € de paid Meta ads d'urgence.</td><td>0 € (réserve 500 €)</td></tr>
+          <tr><td><strong>Earned</strong></td><td>30 %</td><td>Coordination WRT, athlètes alumni publient gratuitement, un pitch presse trimestriel (ACT Mag, Snowsurf, Le Dauphiné Libéré, France 3 Alpes)</td><td>~500 € swag athlètes</td></tr>
+          <tr><td><strong>Shared</strong></td><td>50 %</td><td>Instagram organique (canal #1), reposts athlètes, communautés clubs en bouche-à-oreille</td><td>~2 400 € (community manager 4 mois × 600 €)</td></tr>
+          <tr><td><strong>Owned</strong></td><td>20 %</td><td>Landing page dédiée (Bloc 04), formulaire inscription Stripe, dossier presse PDF, kit clubs</td><td>~600 € (landing + Stripe + outils)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FUNNEL -->
+    <section id="funnel">
+      <header class="section-header">
+        <span class="kicker">Bloc 07</span>
+        <h2>Funnel d'inscription — TOFU / MOFU / BOFU</h2>
+        <p class="lead">Projection des taux de conversion par étage pour atteindre 100 riders inscrits.</p>
+      </header>
+
+      <div class="chart-card">
+        <div class="chart-title">Funnel projeté 2027 — de la portée à l'inscription payée</div>
+        <p class="chart-caption">Volumes cibles à fin avril 2027 (J-7) pour atteindre 100 riders inscrits. Hypothèses de conversion réalistes pour un événement de niche.</p>
+        <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,40 650,40 580,110 120,110" fill="var(--chart-1)" opacity="0.85"/>
+          <polygon points="120,120 580,120 510,200 190,200" fill="var(--chart-2)" opacity="0.85"/>
+          <polygon points="190,210 510,210 440,290 260,290" fill="var(--chart-3)" opacity="0.95"/>
+          <polygon points="260,300 440,300 380,370 320,370" fill="var(--accent-dark)" opacity="0.95"/>
+          <g font-family="Inter" font-size="13" fill="white" font-weight="600" text-anchor="middle">
+            <text x="350" y="78">TOFU · Reach total cumulé saison</text>
+            <text x="350" y="95">~ 250 000 personnes touchées (Insta + WRT + clubs)</text>
+            <text x="350" y="155">MOFU · Visiteurs landing + DM Insta</text>
+            <text x="350" y="172">~ 4 000 (taux 1,6 %)</text>
+            <text x="350" y="245">BOFU · Demandes d'info qualifiées</text>
+            <text x="350" y="262">~ 350 (taux 8,75 %)</text>
+            <text x="350" y="338">Riders inscrits & payés</text>
+            <text x="350" y="355">100 (taux 28,5 %)</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3>Décomposition par canal d'acquisition (cible 100 riders)</h3>
+      <table class="data-table">
+        <thead><tr><th>Source</th><th>Riders cible</th><th>% du total</th><th>Mécanique principale</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Retour 2026 (alumni)</strong></td><td class="numeric">25-30</td><td class="numeric">27 %</td><td>Séquence email post-camp + early bird novembre</td></tr>
+          <tr><td><strong>Partenariats clubs structurés</strong></td><td class="numeric">35-45</td><td class="numeric">40 %</td><td>Kit clubs + commission coach 50-100 €/rider à partir du 3e</td></tr>
+          <tr><td><strong>Instagram organique direct</strong></td><td class="numeric">20-25</td><td class="numeric">22 %</td><td>Inscription via DM Insta puis form Stripe</td></tr>
+          <tr><td><strong>Earned WRT + presse + alumni influence</strong></td><td class="numeric">10-15</td><td class="numeric">11 %</td><td>Reach gratuit, conversion site web</td></tr>
+          <tr><td><strong>Total cible</strong></td><td class="numeric"><strong>100</strong></td><td class="numeric">100 %</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Top 3 leviers de conversion à activer en priorité</h3>
+
+      <div class="card">
+        <h4>1. Early bird novembre (-10 %) réservé aux alumni 2026</h4>
+        <p>Lancé fin octobre 2026. Communiqué uniquement aux 45 riders 2026 par email personnalisé. Crée de la rareté et incite à se décider tôt. <strong>Cible :</strong> 20-25 inscriptions sécurisées avant Noël 2026.</p>
+      </div>
+      <div class="card">
+        <h4>2. Kit clubs clés-en-main + incentive coach</h4>
+        <p>Document PDF de 4 pages : programme, prix, FAQ, visuels prêts à reposter. Envoyé en septembre 2026 à 25 clubs cibles avec proposition formelle de partenariat (commission 50-100 € par rider amené à partir du 3e). <strong>Cible :</strong> 15 clubs partenaires actifs.</p>
+      </div>
+      <div class="card">
+        <h4>3. Form Stripe avec acompte 30 %</h4>
+        <p>Acompte engageant, mais accessible (~250 € sur 860 €). Confirme l'engagement et fluidifie la trésorerie. Solde 30 jours avant le camp. <strong>Cible :</strong> diviser par 3 le temps de gestion administrative par rapport au DM Insta.</p>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <header class="section-header">
+        <span class="kicker">Bloc 08</span>
+        <h2>Roadmap 12 mois — M-12 → camp 2027</h2>
+        <p class="lead">Un camp annuel se prépare sur 12 mois, pas en 90 jours. Trois phases : capitalisation, mobilisation, sprint final.</p>
+      </header>
+
+      <h3>Phase 1 — Capitalisation post-camp 2026 (juin → septembre 2026)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>Coût</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Email J+7 thank-you + recap photos/vidéos aux 45 riders 2026</td><td>Mathieu / community manager</td><td>Juin 2026</td><td>0 €</td><td>Taux d'ouverture &gt; 60 %</td></tr>
+          <tr><td>Construction de la liste cible 25 clubs partenaires (FR/CH/BE)</td><td>Mathieu + Laurent</td><td>Juin-Juillet 2026</td><td>0 €</td><td>Liste de 25 clubs avec contacts coachs</td></tr>
+          <tr><td>Production du kit clubs clés-en-main (PDF + visuels)</td><td>Master Prompt + Mathieu</td><td>Août 2026</td><td>~300 € freelance</td><td>Kit livré + validé</td></tr>
+          <tr><td>Mise en ligne landing dédiée (sous-domaine ou domaine)</td><td>Master Prompt + dev</td><td>Septembre 2026</td><td>~600 € (dev + hébergement an 1)</td><td>Landing live avec FAQ + form</td></tr>
+          <tr><td>Email J+90 invitation pré-inscription 2027 avec early bird</td><td>Mathieu</td><td>Sept 2026</td><td>0 €</td><td>Email envoyé aux 45 alumni</td></tr>
+          <tr><td>Setup Stripe + form inscription</td><td>Master Prompt</td><td>Sept 2026</td><td>0 € (setup) + 1.4 % par paiement</td><td>Workflow inscription testé</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Phase 2 — Mobilisation (octobre 2026 → février 2027)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>Coût</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Lancement officiel inscriptions + early bird alumni</td><td>Mathieu</td><td>1er nov 2026</td><td>0 €</td><td>20-25 riders pré-inscrits avant Noël</td></tr>
+          <tr><td>Envoi kit clubs aux 25 clubs cibles + RDV téléphoniques</td><td>Mathieu + Laurent</td><td>Oct-Déc 2026</td><td>~200 € appels/déplacements</td><td>15 clubs partenaires confirmés</td></tr>
+          <tr><td>Démarrage cadence Insta 3 publis/sem + community manager freelance</td><td>Community manager</td><td>Oct 2026</td><td>~600 €/mois × 4 mois</td><td>Engagement +50 %, abonnés +2 000</td></tr>
+          <tr><td>Pitch presse trimestriel #1 (Snowsurf, ACT Mag)</td><td>Mathieu</td><td>Nov 2026</td><td>0 €</td><td>1 article publié</td></tr>
+          <tr><td>Confirmation sponsors 2027 (Red Bull, Vans, etc.)</td><td>Mathieu + Laurent</td><td>Janv 2027</td><td>0 €</td><td>10+ sponsors confirmés</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Phase 3 — Sprint final (mars → mai 2027)</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Owner</th><th>Délai</th><th>Coût</th><th>KPI validation</th></tr></thead>
+        <tbody>
+          <tr><td>Cadence Insta 5 publis/sem + countdown</td><td>Community manager</td><td>Mars-Avr 2027</td><td>1 200 € (2 mois)</td><td>Audience +30 % sur 2 mois</td></tr>
+          <tr><td>Activation campagne « locked in » athlètes alumni</td><td>Mathieu + 10 athlètes</td><td>Avr 2027</td><td>~500 € swag</td><td>10 publications athlètes cumulant 50K+ vues</td></tr>
+          <tr><td>Bilan inscriptions à J-30 — décision plan B paid</td><td>Mathieu + Master Prompt</td><td>15 avr 2027</td><td>0 € (audit)</td><td>Décision : si &lt; 80 inscrits → activer 500 € paid Insta</td></tr>
+          <tr><td>Envoi communications J-30 / J-15 / J-7 aux inscrits</td><td>Mathieu</td><td>Avr-Mai 2027</td><td>0 €</td><td>Communication reçue par 100 % des inscrits</td></tr>
+          <tr><td>Couverture live pendant le camp + recrutement 2028</td><td>Community manager + photographe</td><td>10-17 mai 2027</td><td>~800 € photographe (déjà budget événement)</td><td>50+ stories/reels live + 30 pré-inscriptions 2028</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- BUDGET -->
+    <section id="budget">
+      <header class="section-header">
+        <span class="kicker">Bloc 09</span>
+        <h2>Budget marketing & KPIs</h2>
+        <p class="lead">Allocation des ~5 K€ et tableau de bord opérationnel.</p>
+      </header>
+
+      <h3>Budget marketing 2027 — allocation détaillée</h3>
+      <table class="data-table">
+        <thead><tr><th>Poste</th><th>Période</th><th>Montant</th><th>Justification</th></tr></thead>
+        <tbody>
+          <tr><td>Landing page dédiée (dev + hébergement an 1)</td><td>Sept 2026</td><td class="numeric">600 €</td><td>One-shot + 80 €/an récurrent. Webflow / Framer / Next.js simple.</td></tr>
+          <tr><td>Kit clubs (design PDF + visuels)</td><td>Août 2026</td><td class="numeric">300 €</td><td>Designer freelance, prestation ponctuelle.</td></tr>
+          <tr><td>Community manager freelance (4 mois × 600 €)</td><td>Oct-Nov 2026 + Mars-Avr 2027</td><td class="numeric">2 400 €</td><td>~10h/sem en saison hot pour tenir cadence Insta.</td></tr>
+          <tr><td>Swag athlètes alumni (10 packs)</td><td>Avr 2027</td><td class="numeric">500 €</td><td>50 €/athlète en moyenne pour reach influence gratuit.</td></tr>
+          <tr><td>Outils inscription (Stripe + Tally / Typeform)</td><td>Sept 2026 → Mai 2027</td><td class="numeric">200 €</td><td>~20 €/mois × 9 mois + frais Stripe.</td></tr>
+          <tr><td>Réserve plan B paid Insta J-30</td><td>Avr 2027</td><td class="numeric">500 €</td><td>Activé seulement si &lt; 80 riders inscrits à J-30.</td></tr>
+          <tr><td>Petits frais (timbres pitchs presse, déplacements RDV clubs)</td><td>Toute saison</td><td class="numeric">300 €</td><td>Frais opérationnels divers.</td></tr>
+          <tr><td><strong>TOTAL</strong></td><td>—</td><td class="numeric"><strong>4 800 €</strong></td><td>Sous le plafond 5 K€ avec marge sécurité.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>North Star Metric & KPIs secondaires</h3>
+      <div class="callout callout-accent">
+        <strong>NSM : Riders inscrits & payés à J-30 du camp 2027.</strong> Cible : 80 riders. Si NSM &lt; 80 à J-30 → activer plan B paid 500 €. Si NSM &gt; 90 → relâcher l'effort marketing et préparer édition 2028.
+      </div>
+
+      <table class="data-table">
+        <thead><tr><th>KPI</th><th>Mesure</th><th>Cible novembre 2026</th><th>Cible avril 2027 (J-30)</th></tr></thead>
+        <tbody>
+          <tr><td>Riders inscrits & payés (NSM)</td><td>Form Stripe</td><td class="numeric">25 (alumni early bird)</td><td class="numeric"><strong>80</strong></td></tr>
+          <tr><td>Clubs partenaires actifs</td><td>Liste interne</td><td class="numeric">10</td><td class="numeric">15</td></tr>
+          <tr><td>Abonnés Instagram @spring.rookie.camp</td><td>Insta natif</td><td class="numeric">5 000</td><td class="numeric">8 000</td></tr>
+          <tr><td>Visiteurs uniques landing</td><td>Plausible</td><td class="numeric">800</td><td class="numeric">4 000 cumulés</td></tr>
+          <tr><td>Taux conversion visiteur → inscription</td><td>Plausible + Stripe</td><td class="numeric">3 %</td><td class="numeric">2,5 %</td></tr>
+          <tr><td>Articles presse publiés</td><td>Veille manuelle</td><td class="numeric">1</td><td class="numeric">3</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Visualisation budget par canal PESO</h3>
+      <div class="chart-card">
+        <div class="chart-title">Allocation budget 2027 — 4 800 € total</div>
+        <svg viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="300" height="40" fill="var(--chart-3)" opacity="0.85"/>
+          <rect x="320" y="20" width="75" height="40" fill="var(--chart-2)" opacity="0.85"/>
+          <rect x="395" y="20" width="113" height="40" fill="var(--chart-1)" opacity="0.85"/>
+          <rect x="508" y="20" width="62" height="40" fill="var(--chart-5)" opacity="0.85"/>
+          <text x="170" y="46" font-family="Inter" font-size="12" fill="white" font-weight="600" text-anchor="middle">Shared (CM + outils) · 50 %</text>
+          <text x="357" y="46" font-family="Inter" font-size="11" fill="white" font-weight="600" text-anchor="middle">Owned · 19 %</text>
+          <text x="451" y="46" font-family="Inter" font-size="11" fill="white" font-weight="600" text-anchor="middle">Earned · 21 %</text>
+          <text x="539" y="46" font-family="Inter" font-size="10" fill="white" font-weight="600" text-anchor="middle">Paid · 10 %</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- SCORE -->
+    <section id="score">
+      <header class="section-header">
+        <span class="kicker">Bloc 10</span>
+        <h2>Score de viabilité de la stratégie</h2>
+        <p class="lead">71/100. Stratégie tenable mais tendue, dépendante de l'exécution sur trois leviers critiques.</p>
+      </header>
+
+      <div class="card">
+        <table class="data-table">
+          <thead><tr><th>Sous-score</th><th>Pondération</th><th>Note</th><th>Justification</th></tr></thead>
+          <tbody>
+            <tr><td>Clarté du positionnement</td><td>20</td><td><strong>17/20</strong></td><td>Catégorie WRT 2027-28 polarisante et défendable. Coachs ÉdF actifs = preuve solide.</td></tr>
+            <tr><td>Adéquation persona / canaux</td><td>20</td><td><strong>15/20</strong></td><td>Centrer sur Stéphane (coach) et Catherine (parent) est juste, mais le canal clubs structuré reste à prouver à scale.</td></tr>
+            <tr><td>Réalisme des moyens</td><td>20</td><td><strong>11/20</strong></td><td>Doubler le volume avec budget &lt; 5 K€ et staff inchangé est tendu. Risque exécution élevé sur la phase 1 (juin-sept 2026).</td></tr>
+            <tr><td>Mécanique de funnel & conversion</td><td>15</td><td><strong>11/15</strong></td><td>Form Stripe + acompte + early bird = mécanique solide. Faiblesse : pas de séquence email automatisée définie en détail.</td></tr>
+            <tr><td>Différenciation du contenu</td><td>15</td><td><strong>10/15</strong></td><td>Trois piliers cohérents, mais la cadence à 5 publis/sem en sprint demande un community manager qualifié sur la culture snow — recrutement à valider.</td></tr>
+            <tr><td>Mesurabilité</td><td>10</td><td><strong>7/10</strong></td><td>NSM clair, KPIs traçables. Faiblesse : pas de système actuel pour mesurer l'attribution clubs vs Insta vs WRT — à mettre en place dès septembre.</td></tr>
+          </tbody>
+        </table>
+        <div style="text-align: center; margin-top: 32px;">
+          <span class="score-badge score-medium"><span class="score-value">71</span><span class="score-label">/ 100</span></span>
+          <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.875rem;">Stratégie viable mais qui dépend de l'exécution disciplinée sur trois actions critiques.</p>
+        </div>
+      </div>
+
+      <h3>Trois actions critiques qui font basculer le score à 85+</h3>
+      <ol style="padding-left: 24px; margin-top: 16px;">
+        <li style="margin-bottom: 12px;"><strong>Lancer la séquence email post-camp 2026 dans les 7 jours suivant la fin du camp 2026.</strong> Sans cette mécanique de retour, la base de 25-30 alumni pré-inscrits 2027 disparaît, et l'objectif 100 devient inatteignable.</li>
+        <li style="margin-bottom: 12px;"><strong>Avoir 10 clubs partenaires confirmés et signés avant le 1er novembre 2026.</strong> Si à l'ouverture officielle des inscriptions seulement 5 clubs sont engagés, le canal core #1 ne tiendra pas son rôle de 35-45 riders.</li>
+        <li style="margin-bottom: 12px;"><strong>Recruter un community manager qualifié snow/skate en septembre 2026.</strong> Sans cette ressource dédiée pendant les 4 mois critiques, la cadence Insta s'effondrera et avec elle 20-25 riders d'inscriptions directes.</li>
+      </ol>
+
+      <div class="callout callout-accent">
+        <strong>Conclusion stratégique.</strong> Le Spring Rookie Camp 2027 a tous les ingrédients pour atteindre 100 riders : produit éprouvé, pricing rentable, sponsors solides, légitimité métier. Le facteur limitant est <strong>la discipline d'exécution dans les 12 mois qui viennent</strong>, particulièrement sur la phase 1 (juin-septembre 2026) où le terrain se prépare. Si Mathieu et Laurent enclenchent les 3 actions critiques dès la fin du camp 2026, l'objectif 100 est tenable. S'ils attendent septembre pour s'y mettre, le camp 2027 finira à 65-75 riders.
+      </div>
+
+      <p style="margin-top: 32px; font-size: 0.85rem; color: var(--text-muted); font-style: italic;">Hypothèses majeures du plan : (1) L'objectif 100 riders annoncé est ferme et non négociable. (2) Le pricing 860 € + coach reste inchangé. (3) Le staff Mathieu + Laurent + équipe pro reste inchangé. (4) Les sponsors actuels reconduisent leur engagement 2027. (5) La station Les 2 Alpes maintient son arrangement infrastructure. Si l'une de ces hypothèses change, le plan est à revoir.</p>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

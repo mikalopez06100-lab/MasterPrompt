@@ -11,6 +11,7 @@ type Props = {
   afterNote?: React.ReactNode;
   /** Mettre input et bouton côte à côte (footer CTA) */
   inline?: boolean;
+  endpoint?: string;
 };
 
 export function EmailSignupBlock({
@@ -21,6 +22,7 @@ export function EmailSignupBlock({
   successMessage = "✓ Votre PDF est en route ! Vérifiez votre boîte mail.",
   afterNote,
   inline = false,
+  endpoint = "/api/leads",
 }: Props) {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +42,7 @@ export function EmailSignupBlock({
     }
     try {
       setLoading(true);
-      const res = await fetch("/api/leads", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: value, source: inputId }),

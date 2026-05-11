@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Syne, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { getProposalBySlug } from "@/lib/proposals";
+import type { DeliverableCard } from "@/lib/proposals";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -19,19 +20,11 @@ type PageProps = {
   searchParams: { token?: string };
 };
 
-type DeliverableCard = {
-  title: string;
-  description: string;
-  url: string;
-  ctaLabel: string;
-  ctaVariant?: "navy" | "amber";
-};
-
 export default function ProposalPrivatePage({ params, searchParams }: PageProps) {
   const proposal = getProposalBySlug(params.slug);
   if (!proposal) return notFound();
 
-  const expectedToken = process.env.PROPOSAL_ACCESS_TOKEN;
+  const expectedToken = process.env.PROPOSAL_ACCESS_TOKEN?.trim();
   const providedToken = searchParams.token?.trim();
   const isAuthorized = Boolean(expectedToken) && providedToken === expectedToken;
   const analysisPdfUrl = proposal.analysisPdfUrl;
@@ -62,12 +55,17 @@ export default function ProposalPrivatePage({ params, searchParams }: PageProps)
       : null,
   ] as Array<DeliverableCard | null>).filter((item): item is DeliverableCard => Boolean(item));
 
-  const deliverables = proposal.deliverables?.length
-    ? proposal.deliverables
-    : legacyDeliverables;
-  const hasDeliverables = deliverables.length > 0;
-  const deliverablesGridClass =
-    deliverables.length > 1 ? "grid gap-6 lg:grid-cols-2" : "grid gap-6";
+  const groupedDeliverables = proposal.deliverableGroups?.length
+    ? proposal.deliverableGroups
+    : proposal.deliverables?.length || legacyDeliverables.length
+      ? [
+          {
+            title: "Livrables",
+            deliverables: proposal.deliverables?.length ? proposal.deliverables : legacyDeliverables,
+          },
+        ]
+      : [];
+  const hasDeliverables = groupedDeliverables.length > 0;
 
   return (
     <main className={`${dmSans.className} min-h-screen bg-ivory text-navy`}>
@@ -107,30 +105,46 @@ export default function ProposalPrivatePage({ params, searchParams }: PageProps)
             </header>
 
             {hasDeliverables ? (
-              <div className={deliverablesGridClass}>
-                {deliverables.map((item) => (
-                  <article key={item.url} className="rounded-2xl border border-border bg-white p-6">
-                    <h2 className={`${syne.className} text-2xl font-bold`}>{item.title}</h2>
-                    <p className="mt-2 text-sm text-muted">{item.description}</p>
-                    <Link
-                      href={item.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className={`mt-4 inline-block rounded-md px-4 py-2 text-sm font-semibold ${
-                        item.ctaVariant === "amber"
-                          ? "bg-amber-500 text-navy"
-                          : "bg-navy text-white"
-                      }`}
-                    >
-                      {item.ctaLabel}
-                    </Link>
-                    <iframe
-                      src={item.url}
-                      className="mt-4 h-[420px] w-full rounded-lg border border-border"
-                      title={item.title}
-                    />
-                  </article>
-                ))}
+              <div className="space-y-6">
+                {groupedDeliverables.map((group, index) => {
+                  const deliverablesGridClass =
+                    group.deliverables.length > 1 ? "grid gap-6 lg:grid-cols-2" : "grid gap-6";
+                  return (
+                    <section key={`${group.title}-${index}`} className="rounded-2xl border border-border bg-white p-6">
+                      <header className="mb-6 border-b border-border pb-4">
+                        <h2 className={`${syne.className} text-2xl font-bold`}>{group.title}</h2>
+                        {group.description ? (
+                          <p className="mt-2 text-sm text-muted">{group.description}</p>
+                        ) : null}
+                      </header>
+                      <div className={deliverablesGridClass}>
+                        {group.deliverables.map((item) => (
+                          <article key={item.url} className="rounded-2xl border border-border bg-white p-6">
+                            <h3 className={`${syne.className} text-xl font-bold`}>{item.title}</h3>
+                            <p className="mt-2 text-sm text-muted">{item.description}</p>
+                            <Link
+                              href={item.url}
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              className={`mt-4 inline-block rounded-md px-4 py-2 text-sm font-semibold ${
+                                item.ctaVariant === "amber"
+                                  ? "bg-amber-500 text-navy"
+                                  : "bg-navy text-white"
+                              }`}
+                            >
+                              {item.ctaLabel}
+                            </Link>
+                            <iframe
+                              src={item.url}
+                              className="mt-4 h-[420px] w-full rounded-lg border border-border"
+                              title={item.title}
+                            />
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
               </div>
             ) : null}
 

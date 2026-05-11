@@ -5,8 +5,14 @@
 :root {
   --ivory: #F7F4EF;
   --navy: #0D1B2A;
+  --navy2: #152234;
+  --navy3: #0A1620;
   --blue: #2563EB;
   --blue-light: #DBEAFE;
+  --amber: #F59E0B;
+  --white: #FFFFFF;
+  --green: #059669;
+  --bdr: #E2DDD6;
   --border: #E2DDD6;
   --muted: #6B7280;
 }

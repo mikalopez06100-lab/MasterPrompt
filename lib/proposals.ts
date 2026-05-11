@@ -1,25 +1,66 @@
+export type DeliverableCard = {
+  title: string;
+  description: string;
+  url: string;
+  ctaLabel: string;
+  ctaVariant?: "navy" | "amber";
+};
+
 export type ProposalConfig = {
   slug: string;
   clientName: string;
   title: string;
   subtitle: string;
-  deliverables?: Array<{
+  deliverables?: DeliverableCard[];
+  deliverableGroups?: Array<{
     title: string;
-    description: string;
-    url: string;
-    ctaLabel: string;
-    ctaVariant?: "navy" | "amber";
+    description?: string;
+    deliverables: DeliverableCard[];
   }>;
-  /** Absent si le livrable ne comprend pas encore d’analyse PDF. */
+  /** Absent si le livrable ne comprend pas encore d'analyse PDF. */
   analysisPdfUrl?: string;
-  /** Audit ou analyse livrée en HTML statique (aperçu iframe). */
+  /** Audit ou analyse livree en HTML statique (apercu iframe). */
   analysisHtmlUrl?: string;
-  /** Absent si le dossier ne contient que l’audit (pas encore de maquette). */
+  /** Absent si le dossier ne contient que l'audit (pas encore de maquette). */
   mockupUrl?: string;
   notes?: string[];
 };
 
 export const proposals: ProposalConfig[] = [
+  {
+    slug: "sopolendance",
+    clientName: "So Pole & Dance",
+    title: "Audit + 2 versions de landing page (espace prive)",
+    subtitle:
+      "3 livrables HTML heberges sur votre domaine : audit du site actuel et deux versions de landing page.",
+    deliverables: [
+      {
+        title: "Audit du site actuel",
+        description: "Document d'audit strategique (HTML autonome).",
+        url: "/proposals/sopolendance/audit-sopolendance.html",
+        ctaLabel: "Ouvrir l'audit",
+        ctaVariant: "navy",
+      },
+      {
+        title: "Landing page - Version 1",
+        description: "Premiere proposition de landing page (HTML statique).",
+        url: "/proposals/sopolendance/landing-sopolendance.html",
+        ctaLabel: "Ouvrir la V1",
+        ctaVariant: "amber",
+      },
+      {
+        title: "Landing page - Version 2",
+        description: "Seconde proposition de landing page (HTML statique).",
+        url: "/proposals/sopolendance/landing-sopolendance-v2.html",
+        ctaLabel: "Ouvrir la V2",
+        ctaVariant: "navy",
+      },
+    ],
+    notes: [
+      "Cet espace prive centralise l'audit et les deux variantes de landing page pour validation client.",
+      "Chaque livrable peut etre consulte directement dans la page puis ouvert en plein ecran.",
+    ],
+  },
   {
     slug: "heliotoit",
     clientName: "Heliotoit",
@@ -157,40 +198,66 @@ export const proposals: ProposalConfig[] = [
     clientName: "Mathieu Siboni",
     title: "Accompagnement premium (espace prive)",
     subtitle:
-      "Presentation des livrables : strategie de positionnement, plan d'automatisations, skills Claude et landing page.",
-    deliverables: [
+      "Presentation des livrables de deux projets : accompagnement principal et Spring Rookie Camp.",
+    deliverableGroups: [
       {
-        title: "Strategie de positioning",
-        description: "Document de strategie et positionnement (HTML autonome).",
-        url: "/proposals/mat-siboni/strategie-positioning-mathieu-siboni.html",
-        ctaLabel: "Ouvrir la strategie",
-        ctaVariant: "navy",
+        title: "Projet 1 — Accompagnement premium",
+        description: "Livrables strategiques et operationnels de l'accompagnement principal.",
+        deliverables: [
+          {
+            title: "Strategie de positioning",
+            description: "Document de strategie et positionnement (HTML autonome).",
+            url: "/proposals/mat-siboni/strategie-positioning-mathieu-siboni.html",
+            ctaLabel: "Ouvrir la strategie",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Plan automatisations",
+            description: "Plan d'automatisations P1 (HTML autonome).",
+            url: "/proposals/mat-siboni/plan-automatisations-p1-fede.html",
+            ctaLabel: "Ouvrir le plan",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Skills Claude",
+            description: "Bibliotheque de skills et organisation operationnelle (HTML autonome).",
+            url: "/proposals/mat-siboni/skills-claude-mathieu-siboni.html",
+            ctaLabel: "Ouvrir les skills",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Landing page",
+            description: "Livrable de landing page (HTML statique).",
+            url: "/proposals/mat-siboni/landing-page.html",
+            ctaLabel: "Ouvrir la landing",
+            ctaVariant: "amber",
+          },
+        ],
       },
       {
-        title: "Plan automatisations",
-        description: "Plan d'automatisations P1 (HTML autonome).",
-        url: "/proposals/mat-siboni/plan-automatisations-p1-fede.html",
-        ctaLabel: "Ouvrir le plan",
-        ctaVariant: "amber",
-      },
-      {
-        title: "Skills Claude",
-        description: "Bibliotheque de skills et organisation operationnelle (HTML autonome).",
-        url: "/proposals/mat-siboni/skills-claude-mathieu-siboni.html",
-        ctaLabel: "Ouvrir les skills",
-        ctaVariant: "navy",
-      },
-      {
-        title: "Landing page",
-        description: "Emplacement reserve : rendu HTML a venir.",
-        url: "/proposals/mat-siboni/landing-page.html",
-        ctaLabel: "Voir l'emplacement",
-        ctaVariant: "amber",
+        title: "Projet 2 — Spring Rookie Camp",
+        description: "Nouveaux livrables dedies au second projet du meme client.",
+        deliverables: [
+          {
+            title: "Landing Spring Rookie Camp 2026",
+            description: "Landing page evenementielle (HTML autonome).",
+            url: "/proposals/mat-siboni/landing-spring-rookie-camp-2026.html",
+            ctaLabel: "Ouvrir la landing 2026",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Strategie marketing Spring Rookie Camp 2027",
+            description: "Strategie marketing complete (HTML autonome).",
+            url: "/proposals/mat-siboni/strategie-marketing-spring-rookie-camp-2027.html",
+            ctaLabel: "Ouvrir la strategie 2027",
+            ctaVariant: "navy",
+          },
+        ],
       },
     ],
     notes: [
-      "Cet espace prive centralise les livrables de l'accompagnement premium.",
-      "La landing page sera remplacee automatiquement des reception du rendu final.",
+      "Cet espace prive centralise les livrables de deux projets distincts pour le meme client.",
+      "Chaque projet est presente dans une section separee pour simplifier la lecture et la validation.",
     ],
   },
   {

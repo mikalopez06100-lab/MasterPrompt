@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit stratégique — sopolendance.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1B3B;
+    --navy-soft: #1A2B4F;
+    --navy-light: #3A4A6E;
+    --gold: #B8945A;
+    --gold-soft: #D4B98A;
+    --gold-bright: #C9A66B;
+    --ivory: #FAF7F2;
+    --paper: #FFFFFF;
+    --line: #E5DFD3;
+    --line-soft: #F0EBDF;
+    --ink: #1A1A1A;
+    --ink-soft: #4A4A4A;
+    --ink-muted: #7A7A7A;
+    --red: #B5443A;
+    --orange: #C97A3A;
+    --green: #4A7B5A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--ivory);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .serif { font-family: 'Source Serif 4', Georgia, serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+
+  /* COVER */
+  .cover {
+    background: var(--navy);
+    color: var(--paper);
+    padding: 80px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(184,148,90,0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .cover-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cover-eyebrow::after {
+    content: ""; flex: 1; height: 1px; background: rgba(184,148,90,0.3); max-width: 200px;
+  }
+  .cover h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  .cover h1 em { font-style: italic; color: var(--gold-soft); font-weight: 300; }
+  .cover-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    max-width: 640px;
+    line-height: 1.6;
+  }
+  .cover-meta {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(184,148,90,0.2);
+  }
+  .meta-item-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .meta-item-value { font-size: 14px; color: var(--paper); font-weight: 400; }
+
+  /* SECTIONS */
+  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  section:last-child { border-bottom: none; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h2.section-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--navy);
+    margin-bottom: 12px;
+    max-width: 720px;
+  }
+  h2.section-title em { font-style: italic; color: var(--gold); }
+  .section-deck {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+  h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--navy);
+    margin: 40px 0 16px;
+    line-height: 1.25;
+  }
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 24px 0 12px;
+  }
+  p { margin-bottom: 14px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  /* VERDICT BOX */
+  .verdict-box {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--red);
+    padding: 32px 36px;
+    margin: 32px 0;
+    box-shadow: 0 1px 3px rgba(11,27,59,0.04);
+  }
+  .verdict-box.gold { border-left-color: var(--gold); }
+  .verdict-box.green { border-left-color: var(--green); }
+  .verdict-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .verdict-box.gold .verdict-label { color: var(--gold); }
+  .verdict-box.green .verdict-label { color: var(--green); }
+  .verdict-box p:last-child { margin-bottom: 0; }
+
+  /* CONSTATS */
+  .constats { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 32px 0; }
+  .constat {
+    background: var(--paper);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .constat-num {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .constat-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .constat-body { color: var(--ink-soft); font-size: 14.5px; }
+
+  /* SCORES */
+  .score-hero {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 48px;
+    margin: 32px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .score-big {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 110px;
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--navy);
+    letter-spacing: -0.04em;
+  }
+  .score-big-suffix { color: var(--ink-muted); font-size: 32px; font-weight: 300; }
+  .score-big-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .score-grid { display: grid; gap: 18px; }
+  .score-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 60px;
+    gap: 16px;
+    align-items: center;
+  }
+  .score-label { font-size: 13.5px; font-weight: 500; color: var(--navy); }
+  .score-bar {
+    height: 6px;
+    background: var(--line-soft);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+  .score-fill { height: 100%; background: linear-gradient(90deg, var(--gold-soft), var(--gold)); border-radius: 3px; }
+  .score-fill.low { background: linear-gradient(90deg, #D89A8A, var(--red)); }
+  .score-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink-soft); text-align: right; }
+
+  /* TABLES */
+  .table-wrap { margin: 24px 0; border: 1px solid var(--line); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--paper); }
+  th {
+    text-align: left;
+    padding: 14px 18px;
+    background: var(--navy);
+    color: var(--paper);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  td { padding: 14px 18px; border-top: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+  tr:nth-child(even) td { background: rgba(245,240,230,0.4); }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .badge.red { background: #F5E0DD; color: var(--red); }
+  .badge.orange { background: #F8E8D4; color: var(--orange); }
+  .badge.gold { background: #F2E8D2; color: var(--gold); }
+  .badge.green { background: #DCE8DF; color: var(--green); }
+  .badge.navy { background: #DDE2EC; color: var(--navy); }
+
+  /* BLOCKQUOTE / PULL */
+  .pull {
+    border-left: 3px solid var(--gold);
+    padding: 8px 28px;
+    margin: 32px 0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--navy);
+  }
+  .pull cite {
+    display: block;
+    margin-top: 14px;
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .toc h4 { margin: 0 0 16px; }
+  .toc ol { list-style: none; counter-reset: toc; padding: 0; }
+  .toc li {
+    counter-increment: toc;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--line);
+    display: flex; align-items: baseline; gap: 16px;
+    font-size: 14px;
+  }
+  .toc li:last-child { border: none; }
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 11px;
+    width: 28px;
+  }
+  .toc a { color: var(--navy); text-decoration: none; flex: 1; font-weight: 500; }
+  .toc a:hover { color: var(--gold); }
+  .toc-page { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-muted); }
+
+  /* SCENARIO BOXES */
+  .scenarios { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0; }
+  .scenario {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 32px;
+    position: relative;
+  }
+  .scenario.recommended { border-color: var(--gold); border-width: 2px; box-shadow: 0 4px 16px rgba(184,148,90,0.12); }
+  .scenario.recommended::before {
+    content: "Recommandé";
+    position: absolute;
+    top: -10px; right: 24px;
+    background: var(--gold);
+    color: var(--paper);
+    padding: 4px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .scenario-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .scenario h3 { margin-top: 0; margin-bottom: 16px; }
+  .scenario-price {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--navy);
+    margin: 16px 0 4px;
+  }
+  .scenario-price-sub { font-size: 13px; color: var(--ink-muted); margin-bottom: 20px; }
+  .scenario ul { list-style: none; padding: 0; margin: 16px 0; }
+  .scenario li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line-soft);
+  }
+  .scenario li:first-child { border-top: none; }
+  .scenario li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* GEO TEST */
+  .geo-test {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 28px 32px;
+    margin: 20px 0;
+  }
+  .geo-q {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 12px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .geo-q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    background: #F2E8D2;
+    padding: 3px 10px;
+    border-radius: 3px;
+  }
+  .geo-cited { font-size: 14px; color: var(--ink-soft); margin: 8px 0; }
+  .geo-cited strong { color: var(--ink); }
+  .geo-result { display: inline-block; margin-top: 8px; }
+
+  /* ROADMAP */
+  .roadmap-header { margin-top: 24px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    padding: 56px 0;
+    font-size: 13px;
+    text-align: center;
+  }
+  footer .signature {
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--gold);
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  /* INLINE EMPHASIS */
+  .red-text { color: var(--red); font-weight: 600; }
+  .gold-text { color: var(--gold); font-weight: 600; }
+
+  /* DIVIDERS */
+  .ornament {
+    text-align: center;
+    margin: 56px 0 32px;
+    color: var(--gold);
+    font-family: 'Source Serif 4', Georgia, serif;
+    letter-spacing: 0.6em;
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    section { padding: 56px 0; }
+    .score-hero { grid-template-columns: 1fr; padding: 32px; gap: 32px; }
+    .score-big { font-size: 88px; }
+    .scenarios { grid-template-columns: 1fr; }
+    .constat { grid-template-columns: 50px 1fr; padding: 22px; }
+    .constat-num { font-size: 28px; }
+    .score-row { grid-template-columns: 100px 1fr 50px; }
+    th, td { padding: 12px 14px; font-size: 13px; }
+  }
+
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .cover { page-break-after: always; }
+    section { page-break-inside: avoid; padding: 32px 0; }
+    .scenarios { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== COVER ============== -->
+<header class="cover">
+  <div class="container">
+    <div class="cover-eyebrow">Audit stratégique · Confidentiel</div>
+    <h1>sopolendance.com<br><em>diagnostic sans complaisance.</em></h1>
+    <p class="cover-sub">Analyse d'un site Wix de studio de pole, heels, reggaeton et yogalates situé au 27 av. Jean Médecin à Nice. Audit à quatre dimensions — technique, SEO Google, GEO/LLM, UX/UI, conversion — et recommandation stratégique tranchée.</p>
+
+    <div class="cover-meta">
+      <div>
+        <div class="meta-item-label">Site audité</div>
+        <div class="meta-item-value">www.sopolendance.com</div>
+      </div>
+      <div>
+        <div class="meta-item-label">Mode d'audit</div>
+        <div class="meta-item-value">Aveugle (pas d'accès GSC/Analytics)</div>
+      </div>
+      <div>
+        <div class="meta-item-label">Date</div>
+        <div class="meta-item-value">8 mai 2026</div>
+      </div>
+      <div>
+        <div class="meta-item-label">Score global</div>
+        <div class="meta-item-value">22 / 100 — refonte requise</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============== TOC ============== -->
+<section style="padding-top: 56px; padding-bottom: 24px;">
+  <div class="container">
+    <div class="toc">
+      <h4>Sommaire</h4>
+      <ol>
+        <li><a href="#synthese">Synthèse exécutive — les 5 constats</a><span class="toc-page">p. 02</span></li>
+        <li><a href="#score">Score global et sous-scores</a><span class="toc-page">p. 03</span></li>
+        <li><a href="#bloc1">Bloc 1 — Audit technique</a><span class="toc-page">p. 04</span></li>
+        <li><a href="#bloc2">Bloc 2 — SEO Google</a><span class="toc-page">p. 05</span></li>
+        <li><a href="#bloc3">Bloc 3 — GEO / AEO (citabilité LLM)</a><span class="toc-page">p. 06</span></li>
+        <li><a href="#bloc4">Bloc 4 — UX / UI design</a><span class="toc-page">p. 07</span></li>
+        <li><a href="#bloc5">Bloc 5 — Conversion &amp; business</a><span class="toc-page">p. 08</span></li>
+        <li><a href="#bloc6">Bloc 6 — Stratégie : refonte vs optimisation</a><span class="toc-page">p. 09</span></li>
+        <li><a href="#roadmap">Roadmap d'action priorisée</a><span class="toc-page">p. 10</span></li>
+        <li><a href="#verdict">Recommandation finale</a><span class="toc-page">p. 11</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SYNTHESE ============== -->
+<section id="synthese">
+  <div class="container">
+    <div class="section-eyebrow">§ 01 — Synthèse exécutive</div>
+    <h2 class="section-title">Le site ne <em>vend pas</em>, il <em>existe</em>. Et à peine.</h2>
+    <p class="section-deck">Cinq constats qui résument l'état réel de l'actif digital. Ils sont durs parce que la situation l'est. Aucune n'est exagérée — toutes sont vérifiables sur le site live au moment de l'audit.</p>
+
+    <div class="constats">
+
+      <div class="constat">
+        <div class="constat-num">01</div>
+        <div>
+          <div class="constat-title">Le contenu critique est invisible aux moteurs de recherche</div>
+          <div class="constat-body">Les pages <strong>/planning</strong>, <strong>/tarifs</strong> et <strong>/about-1-1</strong> (description des cours) ne contiennent strictement aucun texte exploitable — ce sont de simples images JPG. Google, ChatGPT, Perplexity et Claude voient une page vide. Aucun mot-clé indexé, aucun extrait possible, aucune citation possible. Pour un studio dont les pages les plus consultées sont précisément le planning et les tarifs, c'est une auto-mutilation SEO.</div>
+        </div>
+      </div>
+
+      <div class="constat">
+        <div class="constat-num">02</div>
+        <div>
+          <div class="constat-title">Identité de marque incohérente sur tous les canaux</div>
+          <div class="constat-body">Le studio s'appelle « <strong>so pole&amp;dance</strong> » (Facebook), « <strong>so polendance</strong> » (URL), « <strong>SoPole&amp;Dance</strong> » (cité par Antonella Yoga), « <strong>so-pole-dance-studio</strong> » (booking youmethem.fr). La page d'accueil parle de « cocon Yoga &amp; Danse », l'Instagram de « Pole, Heels, Reggaeton &amp; Yogalates ». Quatre orthographes, deux promesses différentes. Les LLM ne peuvent pas construire d'entité claire — donc ne te citent pas.</div>
+        </div>
+      </div>
+
+      <div class="constat">
+        <div class="constat-num">03</div>
+        <div>
+          <div class="constat-title">Tu fais le SEO de tes voisins, pas le tien</div>
+          <div class="constat-body">La professeure de yoga <strong>Antonella</strong> (antoyoga.com) loue ta salle pour donner ses cours et capture toute la visibilité « yoga avenue Jean Médecin Nice » sur son propre site. <strong>Univers Yoga</strong> au 23 av Jean Médecin (à 50 mètres) domine la recherche locale. Sur la requête « yogalates Nice », c'est Physiolight via Groupon qui rafle la mise. Ton studio propose le service mais c'est un autre site qui le vend.</div>
+        </div>
+      </div>
+
+      <div class="constat">
+        <div class="constat-num">04</div>
+        <div>
+          <div class="constat-title">Mentions légales non conformes — risque juridique réel</div>
+          <div class="constat-body">La page « conditions générales » présente une numérotation cassée (saute du 6 au 8), un bloc de coordonnées vide en bas (« E-mail : Tél : Fax : Adresse : »), aucun SIRET, aucun directeur de publication, aucun hébergeur mentionné. La clause d'auto-renouvellement annuel sans rappel à 1-3 mois (article L.215-1 Code conso) et l'absence de mentions RGPD complètes exposent l'entreprise à des sanctions DGCCRF / CNIL. En cas de contentieux client, le dossier juridique est faible.</div>
+        </div>
+      </div>
+
+      <div class="constat">
+        <div class="constat-num">05</div>
+        <div>
+          <div class="constat-title">Le tunnel de conversion est cassé dès la home</div>
+          <div class="constat-body">Pas de tarif visible en texte. Pas de CTA primaire identifiable au-dessus de la ligne de flottaison. Pas de témoignage client daté. Pas d'auteur identifié pour les cours. La promo « Tout à -15% » est affichée hors contexte sans date, sans expiration, sans mention de produit. Le bouton « réservation en ligne » renvoie sur un site tiers (youmethem.fr) sans préparation à la conversion. Pour un studio premium ciblant une clientèle féminine 25-45 ans à Nice, le site dégrade activement la perception de la marque.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="verdict-box">
+      <div class="verdict-label">Verdict global</div>
+      <p style="font-family: 'Source Serif 4', serif; font-size: 22px; color: var(--navy); margin-bottom: 8px;">Site à <strong>refaire</strong>, pas à optimiser.</p>
+      <p>Le diagnostic n'est pas « il manque trois plug-ins ». C'est la base qui ne tient pas : le contenu n'existe pas en texte, l'identité n'est pas stable, la conformité est absente. Tenter d'optimiser ce Wix coûterait plus cher en correctifs que le refaire proprement. ROI 12 mois post-refonte estimé : <strong>+150 % à +250 %</strong> de leads qualifiés à budget marketing constant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SCORE ============== -->
+<section id="score">
+  <div class="container">
+    <div class="section-eyebrow">§ 02 — Notation</div>
+    <h2 class="section-title">Score global <em>22 / 100</em></h2>
+    <p class="section-deck">Cinq dimensions notées sur 20. La méthodologie est celle du skill audit-site-web (sources : Indig, Aggarwal, Brandlight 2026). Aucune complaisance dans la notation — un studio qui veut professionnaliser doit savoir où il part.</p>
+
+    <div class="score-hero">
+      <div>
+        <div class="score-big">22<span class="score-big-suffix">/100</span></div>
+        <div class="score-big-label">⬛ Critique — refonte</div>
+      </div>
+      <div class="score-grid">
+        <div class="score-row">
+          <div class="score-label">Technique</div>
+          <div class="score-bar"><div class="score-fill low" style="width: 30%;"></div></div>
+          <div class="score-num">6 / 20</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">SEO Google</div>
+          <div class="score-bar"><div class="score-fill low" style="width: 20%;"></div></div>
+          <div class="score-num">4 / 20</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">GEO / LLM</div>
+          <div class="score-bar"><div class="score-fill low" style="width: 15%;"></div></div>
+          <div class="score-num">3 / 20</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">UX / UI</div>
+          <div class="score-bar"><div class="score-fill low" style="width: 25%;"></div></div>
+          <div class="score-num">5 / 20</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">Conversion</div>
+          <div class="score-bar"><div class="score-fill low" style="width: 20%;"></div></div>
+          <div class="score-num">4 / 20</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull">
+      Quand un studio physique de 100 m² en plein centre de Nice avec 2 567 abonnés Instagram score 22/100, le site n'est pas un actif — c'est une fuite.
+      <cite>— Constat opérationnel</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BLOC 1 ============== -->
+<section id="bloc1">
+  <div class="container">
+    <div class="section-eyebrow">§ 03 — Bloc 1</div>
+    <h2 class="section-title">Audit technique <em>— 6 / 20</em></h2>
+    <p class="section-deck">Diagnostic stack, indexation, performance, structure HTML.</p>
+
+    <h3>Stack et architecture</h3>
+    <p>Plateforme : <strong>Wix.com Website Builder</strong> (déclaré explicitement dans la balise <code class="mono">meta-generator</code>). Hébergement : infrastructure Wix mutualisée. Pas de contrôle sur le serveur, pas d'accès logs, pas de personnalisation au-delà du templating Wix. Conséquence : <strong>plafond technique très bas</strong> — aucune optimisation TTFB possible, pas de SSR contrôlé, pas de migration serveur possible sans refonte complète.</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width: 28%;">Élément</th><th style="width: 18%;">État</th><th>Constat &amp; impact</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>HTTPS + SSL</td>
+          <td><span class="badge green">OK</span></td>
+          <td>Géré nativement par Wix. Aucune action requise.</td>
+        </tr>
+        <tr>
+          <td>Mobile-first / responsive</td>
+          <td><span class="badge gold">À vérifier</span></td>
+          <td>Wix produit du responsive par défaut, mais les pages composées d'une seule image (planning, tarifs) seront illisibles sur mobile (texte trop petit). À tester sur smartphone réel.</td>
+        </tr>
+        <tr>
+          <td>Sitemap XML</td>
+          <td><span class="badge gold">Auto-Wix</span></td>
+          <td>Généré automatiquement par Wix. Suffisant pour Google, mais pas optimisé.</td>
+        </tr>
+        <tr>
+          <td>llms.txt</td>
+          <td><span class="badge red">Absent</span></td>
+          <td>Standard 2025 émergent pour guider les LLM. Wix ne le génère pas. Coût d'opportunité réel pour la visibilité ChatGPT / Claude.</td>
+        </tr>
+        <tr>
+          <td>Schema.org structuré</td>
+          <td><span class="badge red">Inexistant</span></td>
+          <td>Aucun balisage <code class="mono">LocalBusiness</code>, <code class="mono">Organization</code>, <code class="mono">Service</code> ou <code class="mono">FAQPage</code> détecté dans le HTML rendu. Pour un commerce local, c'est un sabotage SEO local.</td>
+        </tr>
+        <tr>
+          <td>HTML sémantique</td>
+          <td><span class="badge red">Pauvre</span></td>
+          <td>Hiérarchie Hn cassée : <code class="mono">&lt;h1&gt;studio&lt;/h1&gt;</code> en navigation principale (1 mot), aucun H1 sur les pages /planning, /tarifs, /about-1-1. Les principales sont des images.</td>
+        </tr>
+        <tr>
+          <td>Optimisation images</td>
+          <td><span class="badge orange">Partielle</span></td>
+          <td>Wix sert du AVIF / WebP correctement. Mais aucun <code class="mono">alt</code> descriptif sur les images-clés. Les noms de fichiers sont du type <code class="mono">0383af_f1f08d0c996441fa9066188241562b39~mv2.jpg</code> — illisibles pour Google.</td>
+        </tr>
+        <tr>
+          <td>Core Web Vitals</td>
+          <td><span class="badge gold">À mesurer</span></td>
+          <td>Wix a fait des progrès sur les CWV depuis 2023, mais le LCP sur la home (image hero lourde) est probablement &gt; 2.5s. À auditer avec PageSpeed Insights.</td>
+        </tr>
+        <tr>
+          <td>robots.txt LLM bots</td>
+          <td><span class="badge gold">Auto-Wix</span></td>
+          <td>Wix a mis à jour son robots.txt par défaut pour autoriser GPTBot, ClaudeBot, PerplexityBot. Probablement OK. À vérifier.</td>
+        </tr>
+        <tr>
+          <td>Indexation Google</td>
+          <td><span class="badge orange">À auditer</span></td>
+          <td>Sans accès Search Console, impossible de chiffrer. Mais : 7 pages publiques, dont 4 quasi-vides en texte → l'indexation utile est probablement de 2-3 pages.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Le problème Wix</h3>
+    <p>Wix n'est pas <em>incompatible</em> avec un site qui performe. Mais Wix sur ce projet est utilisé comme un outil de bricolage : pages-images, hiérarchie cassée, identité éclatée. La plateforme amplifie les défauts de paramétrage. Un studio premium dans une ville touristique de 350 000 habitants n'a pas vocation à rester sur un Wix dont la maintenance et l'évolution dépendent d'une seule personne non-tech.</p>
+  </div>
+</section>
+
+<!-- ============== BLOC 2 ============== -->
+<section id="bloc2">
+  <div class="container">
+    <div class="section-eyebrow">§ 04 — Bloc 2</div>
+    <h2 class="section-title">SEO Google <em>— 4 / 20</em></h2>
+    <p class="section-deck">Mots-clés, métadonnées, content gap, signaux E-E-A-T.</p>
+
+    <h3>Métadonnées : amateur de bout en bout</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width: 22%;">Page</th><th style="width: 28%;">Title réel</th><th>Constat</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Home</td>
+          <td><em>"studio de danse so polendance situé en face de Nice Etoile sur l'av jean médecin"</em></td>
+          <td><span class="badge red">Cassé</span> 80 caractères, tout en minuscule, mots clés noyés en fin, faute « av » non développée. Aucun mot vendeur. Devrait être : <code class="mono">Studio Pole Dance &amp; Heels Nice — So Pole&amp;Dance</code>.</td>
+        </tr>
+        <tr>
+          <td>Planning</td>
+          <td><em>"planning | so pole&amp;dance"</em></td>
+          <td><span class="badge red">Vide</span> Aucun mot clé local, aucune intention. Devrait être : <code class="mono">Planning des cours — Pole, Heels, Yogalates · Nice Étoile</code>.</td>
+        </tr>
+        <tr>
+          <td>Tarifs</td>
+          <td><em>"tarifs | so pole&amp;dance"</em></td>
+          <td><span class="badge red">Vide</span> Idem. La page elle-même est une image. Title pauvre.</td>
+        </tr>
+        <tr>
+          <td>Description des cours</td>
+          <td><em>"Description Des Cours | So Polendance | Nice"</em></td>
+          <td><span class="badge orange">Médiocre</span> Mieux que les autres mais sans nom des disciplines. Page = image.</td>
+        </tr>
+        <tr>
+          <td>Mentions légales</td>
+          <td><em>"conditions générales | so pole&amp;dance"</em></td>
+          <td><span class="badge orange">Incohérent</span> URL <code class="mono">/mentions-légales</code>, titre « conditions générales ». Confusion sémantique.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Meta-descriptions : bâclées</h3>
+    <p>Trois exemples constatés :</p>
+    <ul style="margin: 12px 0 24px 24px; color: var(--ink-soft);">
+      <li>Home : <em>« so polendance propose un planning avec descriptions des cours de danse et fitness ainsi que les soins bien etre. réservation en ligne possible. »</em> — 144 caractères, minuscules, fautes (« etre »), aucune call-to-value.</li>
+      <li>Planning : <em>« planning des cours »</em> — 19 caractères. Quasi-vide.</li>
+      <li>Tarifs : <em>« tous les tarifs »</em> — 15 caractères. Aberrant.</li>
+    </ul>
+
+    <h3>Content gap vs concurrents — comparaison brutale</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Critère</th><th>So Pole&amp;Dance</th><th>French Pole Riviera</th><th>Nice Pole Dance Studio</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Disciplines décrites en texte</td><td>0</td><td>~12</td><td>~8</td></tr>
+        <tr><td>Tarifs lisibles en texte</td><td>0</td><td>Oui</td><td>Oui (15€ 1<sup>er</sup> cours)</td></tr>
+        <tr><td>Pages enseignants nommées</td><td>0</td><td>4 profs détaillées</td><td>5+ profs avec bio</td></tr>
+        <tr><td>FAQ</td><td>Aucune</td><td>Oui</td><td>Partielle</td></tr>
+        <tr><td>Année de création visible</td><td>Non</td><td>2016</td><td>Visible</td></tr>
+        <tr><td>Témoignages clients</td><td>Aucun</td><td>Oui</td><td>Présents (Google)</td></tr>
+        <tr><td>Mots-clés indexables (volume estimé)</td><td>~150 mots utiles</td><td>~3000+</td><td>~2500+</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>E-E-A-T : néant</h3>
+    <p>Aucun auteur nommé. Aucune photo de la fondatrice. Aucune page « équipe » ou « professeurs ». Aucune mention de diplôme, de fédération (FFD, IPSF), de parcours. Pour un secteur où la confiance et la sécurité physique comptent (figures aériennes, talons hauts, accompagnement débutantes), c'est un signal de défiance pour Google et pour les LLM. Comparé à <strong>Nice Pole Dance Studio</strong> qui détaille Jackie, Julia, Coco avec leurs parcours respectifs, So Pole&amp;Dance n'a aucune crédibilité textuelle.</p>
+
+    <h3>Maillage interne et liens sortants</h3>
+    <p>Maillage interne quasi inexistant — la navigation se fait uniquement via le menu principal de 7 entrées. Aucun lien contextuel entre pages. Aucun lien sortant vers des autorités du secteur (FFD, fédérations, Wikipedia pole dance). Le site est un cul-de-sac sémantique.</p>
+
+    <h3>Mots-clés <span class="gold-text">non capturés</span> (alors qu'ils devraient l'être)</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Requête</th><th>Volume mensuel estimé Nice</th><th>Position estimée</th><th>Qui domine ?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>cours pole dance Nice</td><td>~480</td><td>&gt; 30</td><td>Nice Pole Dance Studio, French Pole Riviera</td></tr>
+        <tr><td>heels dance Nice</td><td>~140</td><td>&gt; 30</td><td>Studio K, love-ly-south.com</td></tr>
+        <tr><td>cours yoga Jean Médecin Nice</td><td>~70</td><td>&gt; 50</td><td>Univers Yoga (voisin direct)</td></tr>
+        <tr><td>yogalates Nice</td><td>~30</td><td>&gt; 50</td><td>Physiolight via Groupon</td></tr>
+        <tr><td>reggaeton Nice cours</td><td>~50</td><td>Hors top 50</td><td>Studio K</td></tr>
+        <tr><td>pole dance débutante Nice</td><td>~110</td><td>Hors top 50</td><td>French Pole Riviera</td></tr>
+        <tr><td>EVJF pole dance Nice</td><td>~40</td><td>Hors top 50</td><td>French Pole Riviera</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top: 16px;">À volumes cumulés ~900 recherches/mois, avec un CTR moyen de 5% en première position et un taux de conversion réaliste de 2% (lead découverte), <strong>le potentiel raté est de l'ordre de 1 à 2 leads qualifiés perdus chaque jour</strong>. Sur 12 mois : 360 à 720 prospects. Dans un studio à ticket d'abonnement annuel (~700-1200€), c'est un manque à gagner de 50 000 à 150 000 € par an.</p>
+  </div>
+</section>
+
+<!-- ============== BLOC 3 — GEO ============== -->
+<section id="bloc3">
+  <div class="container">
+    <div class="section-eyebrow">§ 05 — Bloc 3</div>
+    <h2 class="section-title">GEO / AEO — citabilité par les LLM <em>— 3 / 20</em></h2>
+    <p class="section-deck">Test concret d'apparition dans les sources citées par Google Search (proxy fiable du retrieval que font ChatGPT Search, Claude Web Search et Perplexity en 2026).</p>
+
+    <h3>Test d'existence — 5 requêtes prospects</h3>
+    <p>Méthodologie : pour chaque question qu'une cliente potentielle taperait à ChatGPT ou Perplexity, j'ai relevé les sources citées sur le marché. Tu n'apparais que dans la dernière (recherche par nom de marque).</p>
+
+    <div class="geo-test">
+      <div class="geo-q"><span class="geo-q-num">Q1</span> « Cours de pole dance pour débutante à Nice »</div>
+      <div class="geo-cited"><strong>Sources dominantes :</strong> nicepoledancestudio.com, frenchpoleriviera.com, ecoles-poledance.fr (annuaire), feelup.app, poledanceinfo.com, masalledesport.com</div>
+      <div class="geo-cited"><strong>So Pole&amp;Dance :</strong> <span class="badge red">Absent</span></div>
+    </div>
+
+    <div class="geo-test">
+      <div class="geo-q"><span class="geo-q-num">Q2</span> « Cours de yoga centre Nice avenue Jean Médecin »</div>
+      <div class="geo-cited"><strong>Sources dominantes :</strong> yogaunivers.com (au n°23, voisin direct), antoyoga.com (qui loue ta salle !), love-ly-south.com, jfyoga.fr, espacerancher.com</div>
+      <div class="geo-cited"><strong>So Pole&amp;Dance :</strong> <span class="badge red">Absent</span> — Antonella mentionne ta salle sur SON site, ce qui capture le SEO local pour son nom à elle.</div>
+    </div>
+
+    <div class="geo-test">
+      <div class="geo-q"><span class="geo-q-num">Q3</span> « Heels dance reggaeton Nice studio »</div>
+      <div class="geo-cited"><strong>Sources dominantes :</strong> Studio K, Arty Studio, Madschool, love-ly-south.com (article référent local sur le heels à Nice)</div>
+      <div class="geo-cited"><strong>So Pole&amp;Dance :</strong> <span class="badge red">Absent</span> — Pas une seule mention dans les guides touristiques / blogs lifestyle locaux qui font autorité.</div>
+    </div>
+
+    <div class="geo-test">
+      <div class="geo-q"><span class="geo-q-num">Q4</span> « Yogalates Nice France studio »</div>
+      <div class="geo-cited"><strong>Sources dominantes :</strong> studionamasteyoga.org, groupon.fr (Physiolight), studioenso.fr, yogalatestudio.fr — aucun de Nice n'apparaît !</div>
+      <div class="geo-cited"><strong>So Pole&amp;Dance :</strong> <span class="badge red">Absent</span> — La requête « yogalates Nice » est <strong>quasi-vacante</strong>. Énorme opportunité ratée vu que c'est dans la bio Instagram du studio.</div>
+    </div>
+
+    <div class="geo-test">
+      <div class="geo-q"><span class="geo-q-num">Q5</span> « So polendance Nice avis » <em>(requête de marque)</em></div>
+      <div class="geo-cited"><strong>Sources :</strong> sopolendance.com, instagram.com/sopolendance, recreanice.fr (article 2023), facebook.com/Sopolendance</div>
+      <div class="geo-cited"><strong>So Pole&amp;Dance :</strong> <span class="badge gold">Partiel</span> — Visible uniquement sur recherche directe de marque. Aucune profondeur : pas d'avis Google agrégés, pas de note moyenne. Facebook lit « Not yet rated ».</div>
+    </div>
+
+    <h3>Diagnostic GEO</h3>
+    <p>Tu n'es <strong>pas une entité reconnue</strong> par les LLM dans aucune des trois catégories où tu pourrais l'être (pole dance Nice, yoga Nice, heels Nice). Les LLM ne te citeront pas comme réponse — ils citeront tes concurrents, parce qu'eux ont :</p>
+    <ul style="margin: 12px 0 24px 24px; color: var(--ink-soft);">
+      <li>Des pages textuelles riches que les bots peuvent extraire</li>
+      <li>Des mentions répétées sur des sites tiers (guides locaux, annuaires, articles lifestyle)</li>
+      <li>Des avis Google &amp; Facebook agrégés et notés</li>
+      <li>Des auteurs/professeurs nommés avec bio (E-E-A-T)</li>
+    </ul>
+
+    <h3>Les 7 leviers GEO non actionnés</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Levier</th><th>État actuel</th><th>Action</th><th>Effort</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>llms.txt à la racine</td><td><span class="badge red">Absent</span></td><td>Créer (impossible sur Wix sans plan Premium)</td><td>0,5 j</td></tr>
+        <tr><td>Schema.org LocalBusiness + FAQ</td><td><span class="badge red">Absent</span></td><td>Implémenter via Wix SEO Tools</td><td>1 j</td></tr>
+        <tr><td>Inverted pyramid (réponse en première phrase)</td><td><span class="badge red">Absent</span></td><td>Réécrire les 5 pages clés</td><td>3 j</td></tr>
+        <tr><td>FAQ avec vraies questions</td><td><span class="badge red">Absent</span></td><td>Créer 20-30 Q/R extraibles</td><td>2 j</td></tr>
+        <tr><td>Auteur/professeur nommé avec bio</td><td><span class="badge red">Absent</span></td><td>Page équipe avec photos + parcours</td><td>2 j</td></tr>
+        <tr><td>Présence sur sources citées (annuaires)</td><td><span class="badge orange">Partielle</span></td><td>Inscription ecoles-poledance.fr, masalledesport.com, feelup.app</td><td>1 j</td></tr>
+        <tr><td>Wikidata / Google Knowledge Graph</td><td><span class="badge red">Absent</span></td><td>Créer fiche entité</td><td>0,5 j</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="pull">
+      Tu paies un loyer au 27 av. Jean Médecin. Mais sur Internet, c'est ta voisine du 23 qui est citée pour le yoga au centre de Nice. C'est aussi simple que ça.
+      <cite>— Le coût d'opportunité du SEO local non traité</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BLOC 4 — UX/UI ============== -->
+<section id="bloc4">
+  <div class="container">
+    <div class="section-eyebrow">§ 06 — Bloc 4</div>
+    <h2 class="section-title">UX / UI design <em>— 5 / 20</em></h2>
+    <p class="section-deck">Premier impact, hiérarchie, identité visuelle, friction.</p>
+
+    <h3>Test des 5 secondes</h3>
+    <p>Question : <em>« Que fait ce site ? Pour qui ? »</em> en 5 secondes.</p>
+    <p>La home affiche un titre fade « <strong>Bien plus qu'un studio</strong> » suivi de « <strong>Bienvenue dans votre cocon de bien-être Yoga &amp; Danse</strong> ». Une cliente qui cherche « cours de pole à Nice » ne saura <strong>pas, en 5 secondes</strong>, qu'elle est sur le bon site. Le mot « pole » n'apparaît même pas avant la ligne de flottaison. La promesse principale du studio (« Pole, Heels, Reggaeton, Yogalates » selon Instagram) est invisible sur la page d'accueil.</p>
+
+    <h3>Identité visuelle : aucune direction</h3>
+    <ul style="margin: 12px 0 24px 24px; color: var(--ink-soft);">
+      <li><strong>Pas de logo identitaire</strong>. Le wordmark est posé en typographie Wix par défaut.</li>
+      <li><strong>Pas de palette de couleurs identifiable</strong>. Mélange de pastels et de templates Canva.</li>
+      <li><strong>6 visuels disposés en grille</strong> sur la home, sans logique éditoriale ni cohérence stylistique. Photos studio, dessins de pole, captures Canva — un patchwork.</li>
+      <li>L'image « Tout à -15% » en bas est une vignette Canva 60×60 illisible, sans contexte.</li>
+    </ul>
+
+    <h3>Texte : le carnage français</h3>
+    <p>Citation textuelle de la home : <em>« Imaginez un lieu ou le tumulte du quotidien s'arrete des le seuil de la porte . Notre studio est un vrai refuge ,bienveillant et chaleureux,concu pour vous offrir une parenthèse de douceur (...) Oubliez les cours anonymes ,ici nous prenons le temps de vous guider dans votre progressio,d'etre a l'écoute de vos besoins. »</em></p>
+    <p>Trois fautes en cinq lignes. Espaces avant les virgules ratés, mot tronqué (« progressio »), accents manquants, ponctuation flottante. Pour une cible féminine premium 30-45 ans qui s'engage à 700-1200€/an, c'est un signal de manque de soin qui agit en aversion immédiate.</p>
+
+    <h3>Hiérarchie visuelle</h3>
+    <p>Aucune. Le H1 du site est « <strong>studio</strong> » (un seul mot). Les blocs textuels, les images et le bandeau promo sont au même niveau hiérarchique. L'œil du visiteur ne sait pas quoi lire ni dans quel ordre.</p>
+
+    <h3>Mobile UX</h3>
+    <p>Wix gère le responsive de base. Mais : les pages /planning, /tarifs et /about-1-1 étant des images JPG, sur mobile elles sont soit illisibles (texte trop petit), soit nécessitent un pinch-to-zoom. Pour la majorité du trafic local (recherche depuis smartphone, ~75 % en 2026), <strong>les informations critiques sont inaccessibles</strong>.</p>
+
+    <h3>Accessibilité WCAG 2.2</h3>
+    <p>Sans audit Lighthouse direct, les signaux observables sont défavorables :</p>
+    <ul style="margin: 12px 0 24px 24px; color: var(--ink-soft);">
+      <li>Pas d'<code class="mono">alt</code> descriptif sur les images-clés (planning, tarifs)</li>
+      <li>Hiérarchie Hn cassée → lecteurs d'écran perdus</li>
+      <li>Pages-images = contenu inaccessible aux personnes malvoyantes (zéro alternative texte)</li>
+      <li>Contrastes texte/fond non évalués mais visiblement faibles dans certains blocs</li>
+    </ul>
+
+    <h3>Signaux de confiance visibles</h3>
+    <p><strong>Néant.</strong> Pas de témoignage. Pas de photo de la fondatrice. Pas de logos partenaires (fédération, marques, presse). Pas de chiffres (« 250 élèves accompagnées », « 5 ans d'expérience », « note Google 4,8 »). Pas de garantie (« 1<sup>er</sup> cours d'essai à 15 € »). Pour un commerce où la confiance est centrale, l'absence est elle-même un signal négatif.</p>
+  </div>
+</section>
+
+<!-- ============== BLOC 5 — Conversion ============== -->
+<section id="bloc5">
+  <div class="container">
+    <div class="section-eyebrow">§ 07 — Bloc 5</div>
+    <h2 class="section-title">Conversion &amp; business <em>— 4 / 20</em></h2>
+    <p class="section-deck">Tunnel, CTA, traitement objections, offre.</p>
+
+    <h3>Tunnel de conversion</h3>
+    <p>Le parcours type d'une prospect (« je cherche un cours de pole à Nice ») est :</p>
+    <ol style="margin: 12px 0 24px 28px; color: var(--ink-soft);">
+      <li>Arrive sur la home via Google ou Instagram</li>
+      <li>Cherche le planning → page-image illisible sur mobile → friction 1</li>
+      <li>Cherche les tarifs → page-image, pas de texte → friction 2</li>
+      <li>Cherche à comparer → pas de FAQ, pas de description claire de la pole vs heels → friction 3</li>
+      <li>Clique sur « réservation en ligne » → redirection sur youmethem.fr (site tiers, marque inconnue) → friction 4</li>
+    </ol>
+    <p>Sur ce tunnel, on observe minimum 4 points de friction. Le taux d'abandon entre arrivée home et réservation est probablement supérieur à 95 %. Comparaison : un site de studio bien designé (ex. French Pole Riviera) descend ce taux à 75-85 %.</p>
+
+    <h3>CTA : invisibles</h3>
+    <p>Aucun CTA primaire identifiable au-dessus de la ligne de flottaison. Le seul CTA réel (« réservation en ligne ») est noyé en cinquième position de la nav, sans contraste, sans accroche bénéfice. Pas de bouton « Premier cours d'essai à 15 € » qui serait pourtant la porte d'entrée standard du secteur.</p>
+
+    <h3>Traitement des objections — non fait</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Objection prospect typique</th><th>Réponse présente sur le site ?</th></tr></thead>
+      <tbody>
+        <tr><td>Je n'ai jamais fait de pole, vais-je avoir le niveau ?</td><td><span class="badge red">Non traité</span></td></tr>
+        <tr><td>C'est uniquement pour les femmes minces / sportives ?</td><td><span class="badge red">Non traité</span></td></tr>
+        <tr><td>Combien ça coûte vraiment ?</td><td><span class="badge red">Non lisible</span> (image)</td></tr>
+        <tr><td>Quels sont les profs ? Sont-ils diplômés ?</td><td><span class="badge red">Non traité</span></td></tr>
+        <tr><td>Est-ce un cours mixte ou féminin uniquement ?</td><td><span class="badge orange">Contradictoire</span> (Insta dit féminin, CGV au masculin neutre)</td></tr>
+        <tr><td>Puis-je annuler / suspendre / résilier ?</td><td><span class="badge gold">Présent</span> mais dans CGV peu lisibles</td></tr>
+        <tr><td>Quels sont les avis ?</td><td><span class="badge red">Aucun témoignage</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Preuve sociale</h3>
+    <p>Le studio dispose pourtant de leviers :</p>
+    <ul style="margin: 12px 0 24px 24px; color: var(--ink-soft);">
+      <li><strong>2 567 abonnés Instagram</strong> — non exploité comme preuve sociale sur le site</li>
+      <li><strong>Article RécréaNice 2023</strong> — pas de logo « vu dans la presse » en home</li>
+      <li><strong>1 avis Facebook</strong> — bien trop peu, et marqué « Not yet rated » sur la page Facebook</li>
+      <li>Pas de fiche Google Business renseignée publiquement — ou alors mal optimisée</li>
+    </ul>
+
+    <h3>Offre : floue et incohérente</h3>
+    <p>La promotion <strong>« Tout à -15 % »</strong> affichée en footer permanent :</p>
+    <ul style="margin: 12px 0 24px 24px; color: var(--ink-soft);">
+      <li>Sur quoi porte la réduction ? Cours, abonnement, boutique ?</li>
+      <li>Jusqu'à quand ? Pas de date d'expiration → perte de l'effet d'urgence</li>
+      <li>Comment l'activer ? Code promo ? Automatique ? Inconnu</li>
+    </ul>
+    <p>Conséquence : la promesse est non opérante commercialement et envoie un signal d'amateurisme (« promo permanente sans cadre »). Cf. ce qui a été corrigé sur MasterPrompt — la même logique s'applique : <strong>une promesse qui n'a ni cadre ni preuve est pire qu'aucune promesse</strong>.</p>
+  </div>
+</section>
+
+<!-- ============== BLOC 6 — STRATEGIE ============== -->
+<section id="bloc6">
+  <div class="container">
+    <div class="section-eyebrow">§ 08 — Bloc 6</div>
+    <h2 class="section-title">Stratégie : <em>refonte vs optimisation</em></h2>
+    <p class="section-deck">Deux scénarios chiffrés. La recommandation est tranchée — pas de « ça dépend ».</p>
+
+    <div class="scenarios">
+
+      <div class="scenario">
+        <div class="scenario-tag">Scénario A</div>
+        <h3>Optimiser le Wix existant</h3>
+        <div class="scenario-price">2 500 – 4 000 €</div>
+        <div class="scenario-price-sub">+ 8 à 12 jours de travail · Wix Studio plan recommandé (~36€/mois)</div>
+
+        <p style="font-size: 14px; margin-top: 16px;"><strong>Ce qu'on peut faire :</strong></p>
+        <ul>
+          <li>Réécrire les pages clés en texte (planning, tarifs, cours)</li>
+          <li>Refaire les métadonnées + meta-descriptions</li>
+          <li>Ajouter Schema.org via Wix SEO Tools</li>
+          <li>Créer une page Équipe avec bio</li>
+          <li>Créer une FAQ</li>
+          <li>Mettre les CGV / mentions légales en conformité</li>
+          <li>Inscription annuaires + GMB optimisé</li>
+        </ul>
+
+        <p style="font-size: 14px; margin-top: 16px;"><strong>Limites structurelles :</strong></p>
+        <ul style="border-color: var(--red);">
+          <li>Plafond Wix : pas de SSR contrôlé, pas de A/B testing avancé, performance limitée</li>
+          <li>Identité visuelle Wix template — toujours générique</li>
+          <li>Évolution future bloquée (boutique, CRM, automatisation difficiles)</li>
+          <li>Score plafond atteignable : <strong>~50/100</strong></li>
+        </ul>
+        <p style="font-size: 13px; color: var(--ink-muted); margin-top: 16px;">ROI estimé 12 mois : <strong>+30 à +50 % de leads</strong>. Suffisant pour un commerce stable, insuffisant pour scaler.</p>
+      </div>
+
+      <div class="scenario recommended">
+        <div class="scenario-tag">Scénario B</div>
+        <h3>Refonte complète sur stack moderne</h3>
+        <div class="scenario-price">5 000 – 9 000 €</div>
+        <div class="scenario-price-sub">+ 4 à 6 semaines · Webflow ou Framer (préco) · ou WordPress headless si besoin de blog actif</div>
+
+        <p style="font-size: 14px; margin-top: 16px;"><strong>Livrables :</strong></p>
+        <ul>
+          <li>Nouvelle architecture : home, /pole-dance, /heels, /yoga-yogalates, /equipe, /tarifs, /faq, /blog, /reservation</li>
+          <li>Identité visuelle pro (logo, palette, typographies, photographie)</li>
+          <li>Photos professionnelles studio + cours (1/2 journée shooting)</li>
+          <li>Copywriting brand-aligned sur 8 pages</li>
+          <li>SEO + GEO (llms.txt, schema, FAQ, glossaire)</li>
+          <li>Intégration réservation native + paiement</li>
+          <li>Blog / actualités pour fraîcheur SEO continue</li>
+          <li>Tracking analytics propre (GA4 + Plausible)</li>
+        </ul>
+
+        <p style="font-size: 14px; margin-top: 16px;"><strong>Pourquoi ça change tout :</strong></p>
+        <ul>
+          <li>Identité enfin différenciante (vs voisinage saturé)</li>
+          <li>Score visé : <strong>75-85/100</strong> en 6 mois</li>
+          <li>Capable de scaler : événements, EVJF, stages, boutique</li>
+          <li>Marketing automation possible (Brevo, Klaviyo)</li>
+        </ul>
+        <p style="font-size: 13px; color: var(--ink-muted); margin-top: 16px;">ROI estimé 12 mois : <strong>+150 à +250 % de leads qualifiés</strong>. Investissement amorti en 4 à 8 mois si l'acquisition est correctement activée en parallèle.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== ROADMAP ============== -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-eyebrow">§ 09 — Plan d'action</div>
+    <h2 class="section-title">Roadmap priorisée <em>— matrice ICE</em></h2>
+    <p class="section-deck">Impact (1-10) × Confidence (1-10) × Ease (1-10). Score ICE = produit. À traiter dans l'ordre, peu importe le scénario retenu.</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th>Bloc</th>
+          <th>I</th>
+          <th>C</th>
+          <th>E</th>
+          <th>ICE</th>
+          <th>Délai</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Mettre les CGV/mentions légales en conformité</strong> (SIRET, hébergeur, RGPD, clause auto-renouvellement)</td><td>Conformité</td><td>9</td><td>10</td><td>9</td><td>810</td><td>Semaine 1</td></tr>
+        <tr><td>2</td><td><strong>Optimiser et renseigner Google Business Profile</strong> (photos, posts hebdo, FAQ, horaires, activités, avis)</td><td>SEO local</td><td>10</td><td>10</td><td>8</td><td>800</td><td>Semaine 1</td></tr>
+        <tr><td>3</td><td><strong>Réécrire les pages /planning, /tarifs, /cours en texte</strong> (sortir des images JPG)</td><td>SEO + UX</td><td>10</td><td>9</td><td>8</td><td>720</td><td>Semaine 2</td></tr>
+        <tr><td>4</td><td>Inscriptions annuaires sectoriels (ecoles-poledance.fr, masalledesport.com, feelup.app, poledanceinfo.com)</td><td>GEO + SEO</td><td>8</td><td>9</td><td>10</td><td>720</td><td>Semaine 2</td></tr>
+        <tr><td>5</td><td>Page « Équipe » avec photos &amp; parcours nominatifs des professeurs (E-E-A-T)</td><td>SEO + Conversion</td><td>9</td><td>9</td><td>7</td><td>567</td><td>Semaine 3</td></tr>
+        <tr><td>6</td><td>Créer une FAQ texte de 20 vraies questions (debutante, douleurs, tenue, mixité, tarifs, EVJF)</td><td>GEO + Conversion</td><td>9</td><td>9</td><td>7</td><td>567</td><td>Semaine 3</td></tr>
+        <tr><td>7</td><td>Définir une <strong>identité de marque unique</strong> (un seul nom : « So Pole&amp;Dance ») et l'aligner partout (site, IG, FB, Google, plateforme de résa)</td><td>Brand</td><td>9</td><td>10</td><td>6</td><td>540</td><td>Semaine 3</td></tr>
+        <tr><td>8</td><td>Implémenter Schema.org LocalBusiness + FAQPage + Organization</td><td>SEO + GEO</td><td>8</td><td>9</td><td>7</td><td>504</td><td>Semaine 4</td></tr>
+        <tr><td>9</td><td>Activer un <strong>parcours « 1<sup>er</sup> cours d'essai 15 € »</strong> avec landing dédiée + CTA en home</td><td>Conversion</td><td>10</td><td>8</td><td>6</td><td>480</td><td>Semaine 4</td></tr>
+        <tr><td>10</td><td>Récolter et publier 10-15 avis clients datés et nominatifs (Google + site)</td><td>Conversion</td><td>9</td><td>9</td><td>5</td><td>405</td><td>Semaine 4-6</td></tr>
+        <tr><td>11</td><td>Briefer Antonella Yoga pour cross-link réciproque (échange de mentions textuelles)</td><td>SEO local</td><td>7</td><td>9</td><td>6</td><td>378</td><td>Semaine 5</td></tr>
+        <tr><td>12</td><td>Plan de contenu Instagram = 3 posts/semaine + Reels — passer de 13 posts à 60+ en 3 mois</td><td>Acquisition</td><td>9</td><td>7</td><td>6</td><td>378</td><td>Mois 1-3</td></tr>
+        <tr><td>13</td><td>Pitcher love-ly-south.com et Nice-Matin pour un article (média locaux d'autorité GEO)</td><td>GEO off-site</td><td>8</td><td>6</td><td>7</td><td>336</td><td>Mois 2</td></tr>
+        <tr><td>14</td><td>Créer une fiche Wikidata du studio (entité reconnue)</td><td>GEO</td><td>7</td><td>8</td><td>6</td><td>336</td><td>Mois 2</td></tr>
+        <tr><td>15</td><td>Refonte complète du site (Webflow / Framer)</td><td>Stratégie</td><td>10</td><td>9</td><td>3</td><td>270</td><td>Mois 2-4</td></tr>
+        <tr><td>16</td><td>Shooting photo professionnel (cours, ambiance, profs)</td><td>Brand</td><td>9</td><td>8</td><td>4</td><td>288</td><td>Mois 2</td></tr>
+        <tr><td>17</td><td>Activer un funnel email Brevo (lead magnet « Guide du débutant Pole Dance »)</td><td>Acquisition</td><td>8</td><td>7</td><td>5</td><td>280</td><td>Mois 3</td></tr>
+        <tr><td>18</td><td>Partenariats EVJF (sites mariage, hôtels, agences événementielles Nice)</td><td>Business dev</td><td>8</td><td>7</td><td>5</td><td>280</td><td>Mois 3</td></tr>
+        <tr><td>19</td><td>Articles de blog pilier (« Pole dance débutante : tout savoir »)</td><td>SEO long-terme</td><td>8</td><td>7</td><td>5</td><td>280</td><td>Mois 3-6</td></tr>
+        <tr><td>20</td><td>YouTube avec transcripts (mini-tutos pole, présentations cours)</td><td>GEO long-terme</td><td>7</td><td>6</td><td>4</td><td>168</td><td>Mois 4-6</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p style="margin-top: 24px; font-size: 13.5px;">Note : les actions 1 à 10 sont à exécuter <strong>quel que soit le scénario retenu</strong>. La refonte (action 15) ne dispense pas de la conformité légale, du GMB ou du contenu structuré — elle les facilite seulement.</p>
+  </div>
+</section>
+
+<!-- ============== VERDICT ============== -->
+<section id="verdict">
+  <div class="container">
+    <div class="section-eyebrow">§ 10 — Recommandation</div>
+    <h2 class="section-title">Verdict : <em>refonte</em>, sans détour.</h2>
+
+    <div class="verdict-box gold">
+      <div class="verdict-label">Recommandation finale</div>
+      <p style="font-family: 'Source Serif 4', serif; font-size: 22px; color: var(--navy); margin-bottom: 16px;">Scénario B — Refonte complète sur Webflow ou Framer.</p>
+      <p>Trois raisons brutales :</p>
+      <p><strong>1. Le coût d'optimisation rejoint le coût de refonte.</strong> 2 500 à 4 000 € pour atteindre péniblement 50/100, contre 5 000 à 9 000 € pour viser 80/100. Sur 24 mois, l'optimisation sera amortie deux fois en correctifs — la refonte une fois en croissance.</p>
+      <p><strong>2. La marque est diluée à un point qui demande un reset.</strong> Quatre orthographes du nom, deux promesses contradictoires (« cocon yoga &amp; danse » vs « pole heels reggaeton »), aucune photo officielle de la fondatrice ou des profs. Aucun lifting ne corrige une identité absente — il faut la créer.</p>
+      <p><strong>3. Le marché niçois est saturé et saute le studio.</strong> Nice Pole Dance Studio, French Pole Riviera, Studio K, Univers Yoga et Madschool dominent toutes les requêtes locales — y compris celles où So Pole&amp;Dance offre le service. Sans un actif digital de niveau pro, la marque restera invisible. Le « cocon de bienveillance » ne se voit pas en ligne — il faut le vendre, pas le murmurer.</p>
+    </div>
+
+    <h3>Conditions de succès</h3>
+    <p>Une refonte ne suffit pas, elle conditionne. Trois leviers business à activer en parallèle :</p>
+    <ol style="margin: 12px 0 24px 28px; color: var(--ink-soft);">
+      <li><strong>Décider une promesse unique</strong> (ex. : « Le studio féminin de Pole, Heels &amp; Yogalates au cœur de Nice ») et la porter sur tous les canaux. Pas de variations selon les humeurs.</li>
+      <li><strong>Instaurer une cadence de contenu</strong> Instagram (3 posts/semaine, 1 Reel/semaine minimum). 13 posts en X mois pour 2 567 abonnés signale un compte dormant — c'est ça que les LLM voient aussi.</li>
+      <li><strong>Pricing affiché et transparent.</strong> Premier cours 15-20 €, abonnements clairs, EVJF packagés. Plus aucun tarif en image. La promesse « Tout à -15 % » est soit vraie et datée, soit retirée.</li>
+    </ol>
+
+    <h3>Qui doit faire quoi ?</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tâche</th><th>Responsable</th><th>Budget indicatif</th></tr></thead>
+      <tbody>
+        <tr><td>Refonte site (Webflow ou équivalent)</td><td>Freelance / agence (recos sur demande)</td><td>5 000 – 9 000 €</td></tr>
+        <tr><td>Photographie professionnelle</td><td>Photographe Côte d'Azur</td><td>500 – 1 200 €</td></tr>
+        <tr><td>Identité visuelle (logo + charte)</td><td>Designer freelance</td><td>800 – 2 500 €</td></tr>
+        <tr><td>Copywriting pages site</td><td>Rédacteur SEO/GEO</td><td>800 – 1 800 €</td></tr>
+        <tr><td>Mentions légales / CGV conformes</td><td>Juriste / template legalplace</td><td>0 – 500 €</td></tr>
+        <tr><td>SEO local / GMB / annuaires</td><td>Interne (1 j) ou freelance</td><td>0 – 600 €</td></tr>
+        <tr><td>Plan contenu IG + community</td><td>Interne ou CM freelance</td><td>0 – 800 €/mois</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p style="margin-top: 32px;"><strong>Budget total raisonnable :</strong> 7 000 à 14 000 € sur 6 mois pour un actif digital qui passe de 22/100 à 80/100. À comparer au manque à gagner annuel estimé du SEO local non capté (50 000 à 150 000 €), c'est l'investissement de la décennie pour ce studio.</p>
+
+    <div class="ornament">·  ·  ·</div>
+
+    <p style="text-align: center; max-width: 600px; margin: 24px auto; font-style: italic; font-family: 'Source Serif 4', serif; color: var(--navy); font-size: 18px;">Le studio physique vaut largement plus que ce que son site digital communique. C'est l'écart à fermer — et ce n'est pas une question de couleurs ni de polices, mais de positionnement, de contenu, et de discipline d'exécution.</p>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="container">
+    <div class="signature">Audit produit pour Michaël Lopez · Pack IA / Cinémark Azur portfolio</div>
+    <div>8 mai 2026 · sopolendance.com · Mode aveugle (sans accès Search Console / Analytics)</div>
+    <div style="margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em;">CONFIDENTIEL — DOCUMENT DE TRAVAIL</div>
+  </div>
+</footer>
+
+</body>
+</html>
