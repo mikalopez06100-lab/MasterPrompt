@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
+import { proposals } from "@/lib/proposals";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +50,13 @@ export default async function AdminDashboardPage() {
           <p className="text-2xl font-bold text-primary">{leadCount}</p>
           <p className="text-sm text-muted">leads</p>
         </div>
+        <Link
+          href="/admin/propositions"
+          className="rounded-card bg-white p-4 shadow-sm transition hover:shadow-md"
+        >
+          <p className="text-2xl font-bold text-primary">{proposals.length}</p>
+          <p className="text-sm text-muted">propositions clients →</p>
+        </Link>
       </div>
 
       <div className="flex flex-wrap gap-4">
@@ -81,6 +89,12 @@ export default async function AdminDashboardPage() {
           className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
         >
           Voir les abonnements
+        </Link>
+        <Link
+          href="/admin/propositions"
+          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+        >
+          Propositions clients
         </Link>
       </div>
     </div>

@@ -67,6 +67,12 @@ export default async function AdminLayout({
           >
             Leads
           </Link>
+          <Link
+            href="/admin/propositions"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+          >
+            Propositions
+          </Link>
         </nav>
         <Link
           href="/dashboard"
