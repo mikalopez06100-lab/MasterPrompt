@@ -7,6 +7,7 @@ import { StickyBuyBar } from "@/components/StickyBuyBar";
 import { TestimonialBlock } from "@/components/TestimonialBlock";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { PriceBadge } from "@/components/PriceBadge";
+import { PriceFigure } from "@/components/PriceFigure";
 import { UnlockPreviewGate } from "@/components/landing/UnlockPreviewGate";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 
@@ -195,7 +196,8 @@ export default function PackIAPage() {
         <div className="mx-auto max-w-6xl rounded-xl border border-border bg-white p-6">
           <h2 className={`${headingClass} text-2xl font-bold`}>Le tarif</h2>
           <p className="mt-2 text-sm text-slate-700">
-            397€ forfait, tout inclus, paiement sécurisé Stripe, facture TVA fournie.
+            <PriceFigure as="span" className="font-semibold text-slate-900">397€</PriceFigure> forfait, tout inclus,
+            paiement sécurisé Stripe, facture TVA fournie.
           </p>
         </div>
       </section>
@@ -209,7 +211,12 @@ export default function PackIAPage() {
 
       <section className="px-4 pb-10 sm:px-6">
         <div className="mx-auto max-w-6xl rounded-2xl bg-navy p-8 text-white">
-          <h2 className={`${headingClass} text-3xl font-bold`}>Réserver mon Pack — 397€</h2>
+          <h2 className={`${headingClass} text-3xl font-bold`}>
+            Réserver mon Pack —{" "}
+            <PriceFigure as="span" className="text-3xl font-bold text-white">
+              397€
+            </PriceFigure>
+          </h2>
           <Link href={stripeLink} target="_blank" rel="noreferrer noopener" className="mt-5 inline-block rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy">
             Réserver mon Pack
           </Link>

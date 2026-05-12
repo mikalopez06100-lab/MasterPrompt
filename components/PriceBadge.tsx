@@ -1,6 +1,4 @@
-import { Syne } from "next/font/google";
-
-const syne = Syne({ subsets: ["latin"], weight: ["600", "700", "800"] });
+import { PriceFigure } from "@/components/PriceFigure";
 
 type PriceBadgeProps = {
   currentPrice: string;
@@ -13,9 +11,12 @@ export function PriceBadge({ currentPrice, originalPrice, note, accent = "amber"
   return (
     <div>
       {originalPrice ? <p className="text-sm text-muted line-through">{originalPrice}</p> : null}
-      <p className={`${syne.className} text-5xl font-extrabold ${accent === "amber" ? "text-amber-500" : "text-navy"}`}>
+      <PriceFigure
+        as="p"
+        className={`text-4xl font-bold sm:text-5xl ${accent === "amber" ? "text-amber-500" : "text-navy"}`}
+      >
         {currentPrice}
-      </p>
+      </PriceFigure>
       {note ? <p className="mt-1 text-sm text-muted">{note}</p> : null}
     </div>
   );

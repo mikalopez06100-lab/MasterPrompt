@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { Syne, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { LockedProposalDeliverable } from "@/components/preview/LockedProposalDeliverable";
+import { PriceFigure } from "@/components/PriceFigure";
 import { getAccessLevel } from "@/lib/access-level";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
@@ -61,7 +62,7 @@ export default async function PackIAExempleAperçuPage() {
               rel="noreferrer noopener"
               className="rounded-md bg-amber-500 px-5 py-3 text-sm font-semibold text-navy shadow-sm transition hover:bg-amber-400"
             >
-              Réserver mon Pack — 397€
+              Réserver mon Pack — <PriceFigure as="span" className="text-sm font-semibold text-navy">397€</PriceFigure>
             </Link>
           </div>
         </div>
@@ -151,8 +152,9 @@ export default async function PackIAExempleAperçuPage() {
             <div>
               <h2 className={`${syne.className} text-2xl font-bold sm:text-3xl`}>Prêt à lancer votre Pack ?</h2>
               <p className="mt-2 max-w-xl text-sm text-slate-300">
-                397€ forfait · livré en 5 jours ouvrés · paiement sécurisé Stripe · facture TVA fournie ·
-                appel de cadrage gratuit avant tout engagement.
+                <PriceFigure as="span" className="font-semibold text-white">397€</PriceFigure> forfait · livré en 5
+                jours ouvrés · paiement sécurisé Stripe · facture TVA fournie · appel de cadrage gratuit avant tout
+                engagement.
               </p>
             </div>
             <Link

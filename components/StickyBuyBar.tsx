@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { PriceFigure } from "@/components/PriceFigure";
 
 type StickyBuyBarProps = {
   href: string;
@@ -26,7 +27,7 @@ export function StickyBuyBar({ href, label, priceLabel }: StickyBuyBarProps) {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
         <div>
           <p className="text-xs text-white/70">{label}</p>
-          <p className="text-sm font-semibold text-amber-300">{priceLabel}</p>
+          <PriceFigure className="text-base font-semibold text-amber-300">{priceLabel}</PriceFigure>
         </div>
         <Link href={href} target="_blank" rel="noreferrer noopener" className="rounded-md bg-amber-500 px-4 py-2 text-sm font-semibold text-navy">
           Acheter

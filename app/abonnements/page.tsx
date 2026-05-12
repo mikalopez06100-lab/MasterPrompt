@@ -4,6 +4,7 @@ import { Syne, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Reveal } from "@/components/landing/Reveal";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PriceFigure } from "@/components/PriceFigure";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -221,7 +222,9 @@ export default function AbonnementsPage() {
                 </span>
               )}
               <h3 className={`${headingClass} mt-3 text-2xl font-bold`}>{plan.name}</h3>
-              <p className={`${headingClass} mt-2 text-3xl font-bold text-white`}>{plan.price}</p>
+              <PriceFigure as="p" className="mt-2 text-3xl font-bold text-white">
+                {plan.price}
+              </PriceFigure>
               <p className="mt-1 text-xs text-slate-400">{plan.minPeriod}</p>
               <p className="mt-3 text-sm text-slate-300">{plan.subtitle}</p>
               <ul className="mt-5 space-y-2 text-sm text-slate-200">
@@ -269,7 +272,9 @@ export default function AbonnementsPage() {
                 </span>
               )}
               <h3 className={`${headingClass} mt-3 text-2xl font-bold`}>{plan.name}</h3>
-              <p className={`${headingClass} mt-2 text-3xl font-bold text-white`}>{plan.price}</p>
+              <PriceFigure as="p" className="mt-2 text-3xl font-bold text-white">
+                {plan.price}
+              </PriceFigure>
               <p className="mt-1 text-xs text-slate-400">{plan.minPeriod}</p>
               <p className="mt-3 text-sm text-slate-300">{plan.subtitle}</p>
               <ul className="mt-5 space-y-2 text-sm text-slate-200">

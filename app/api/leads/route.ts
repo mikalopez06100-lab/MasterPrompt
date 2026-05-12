@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { sendLeadPdfEmail } from "@/lib/email";
+import { hasOutboundFromConfigured } from "@/lib/resend-addresses";
 
 function isValidEmail(value: string): boolean {
   const trimmed = value?.trim?.() ?? "";
@@ -11,7 +12,7 @@ function isValidEmail(value: string): boolean {
 export async function GET() {
   const resendSet = Boolean(process.env.RESEND_API_KEY);
   const pdfUrlSet = Boolean(process.env.LEAD_MAGNET_PDF_URL);
-  const fromEmailSet = Boolean(process.env.FROM_EMAIL);
+  const fromEmailSet = hasOutboundFromConfigured();
   let dbOk = false;
   try {
     await prisma.$queryRaw`SELECT 1`;

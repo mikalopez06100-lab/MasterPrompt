@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getInboundNotificationEmail, getResendFromHeader } from "@/lib/resend-addresses";
 
 type Payload = {
   nom: string;
@@ -29,8 +30,8 @@ export async function POST(request: Request) {
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
-        from: process.env.EMAIL_FROM ?? "hello@masterprompt.fr",
-        to: [process.env.EMAIL_TO ?? "hello@masterprompt.fr"],
+        from: getResendFromHeader(),
+        to: [getInboundNotificationEmail()],
         replyTo: email,
         subject: `Candidature Accompagnement — ${nom}`,
         html: `

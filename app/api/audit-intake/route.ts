@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getInboundNotificationEmail, getResendFromHeader } from "@/lib/resend-addresses";
 
 type AuditIntakePayload = {
   contactNom: string;
@@ -75,8 +76,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "RESEND_API_KEY manquant." }, { status: 500 });
   }
 
-  const from = process.env.EMAIL_FROM ?? process.env.FROM_EMAIL ?? "hello@masterprompt.fr";
-  const to = process.env.EMAIL_TO ?? "hello@masterprompt.fr";
+  const from = getResendFromHeader();
+  const to = getInboundNotificationEmail();
 
   const html = `
     <h2>Nouveau formulaire audit client</h2>

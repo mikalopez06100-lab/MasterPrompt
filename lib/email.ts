@@ -2,10 +2,11 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { Resend } from "resend";
 import { LEAD_PDF_EMAIL_HTML } from "./email-lead-pdf-html";
+import { getInboundNotificationEmail, getResendFromHeader } from "./resend-addresses";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-const FROM_EMAIL = process.env.FROM_EMAIL ?? "Master Prompt <info@masterprompt.fr>";
+const FROM_EMAIL = getResendFromHeader();
 const PDF_URL = process.env.LEAD_MAGNET_PDF_URL ?? "";
 const UNSUBSCRIBE_URL = process.env.UNSUBSCRIBE_URL ?? "https://masterprompt.fr";
 
@@ -78,7 +79,7 @@ export async function sendLeadPdfEmail(to: string, source?: string): Promise<{ o
 }
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") || "https://www.masterprompt.fr";
-const ADMIN_NOTIF_TO = process.env.EMAIL_TO ?? "hello@masterprompt.fr";
+const ADMIN_NOTIF_TO = getInboundNotificationEmail();
 
 type PreviewContext = {
   email: string;

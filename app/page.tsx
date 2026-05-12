@@ -5,8 +5,9 @@ import { Syne, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { AvatarStack } from "@/components/AvatarStack";
 import { TestimonialsVideo } from "@/components/TestimonialsVideo";
-import { EmailSignupBlock } from "@/components/landing/EmailSignupBlock";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ClientCaseCards } from "@/components/landing/ClientCaseCards";
+import { PriceFigure } from "@/components/PriceFigure";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -122,8 +123,8 @@ export default function LandingPage() {
             <Link href="#offres" className={`${headingClass} rounded-md bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-navy`}>
               Découvrir les offres
             </Link>
-            <Link href="#guide" className={`${headingClass} rounded-md border border-white/20 px-6 py-3 text-center text-sm`}>
-              Guide gratuit
+            <Link href="/diagnostic" className={`${headingClass} rounded-md border border-white/20 px-6 py-3 text-center text-sm`}>
+              Diagnostic gratuit
             </Link>
           </div>
         </div>
@@ -188,10 +189,14 @@ export default function LandingPage() {
             {launchPriceActive ? (
               <>
                 <p className="mt-4 text-sm text-muted line-through">97€</p>
-                <p className={`${headingClass} text-4xl font-bold text-amber-600`}>49€</p>
+                <PriceFigure as="p" className="mt-1 text-4xl font-bold text-amber-600">
+                  49€
+                </PriceFigure>
               </>
             ) : (
-              <p className={`${headingClass} mt-4 text-4xl font-bold`}>97€</p>
+              <PriceFigure as="p" className="mt-4 text-4xl font-bold text-navy">
+                97€
+              </PriceFigure>
             )}
           </Link>
           <Link
@@ -200,7 +205,9 @@ export default function LandingPage() {
           >
             <p className={`${headingClass} text-xs uppercase tracking-[0.2em] text-slate-500`}>Niveau 2</p>
             <h3 className={`${headingClass} mt-2 text-2xl font-bold`}>Pack IA Activité</h3>
-            <p className={`${headingClass} mt-4 text-4xl font-bold text-amber-500`}>397€</p>
+            <PriceFigure as="p" className="mt-4 text-4xl font-bold text-amber-500">
+              397€
+            </PriceFigure>
           </Link>
           <Link
             href="/accompagnement"
@@ -215,49 +222,20 @@ export default function LandingPage() {
 
       <section id="guide" className="px-4 pb-12 sm:px-6 sm:pb-16">
         <div className="mx-auto max-w-6xl rounded-2xl border border-blue-500/20 bg-[#0D2A4A] p-5 text-white sm:p-8">
-          <h2 className={`${headingClass} text-2xl font-bold sm:text-3xl`}>10 prompts essentiels pour votre activité</h2>
-          <p className="mb-5 mt-2 text-slate-300">Recevez le PDF gratuitement.</p>
-          <div className="max-w-md">
-            <EmailSignupBlock
-              inputId="lead-magnet-v5"
-              placeholder="votre@email.com"
-              buttonText="Je reçois le guide"
-              buttonGreen
-              endpoint="/api/lead-magnet"
-            />
-          </div>
+          <h2 className={`${headingClass} text-2xl font-bold sm:text-3xl`}>Diagnostic IA-readiness gratuit</h2>
+          <p className="mb-5 mt-2 text-slate-300">
+            7 questions, 3 minutes : score personnalisé, profil et 3 actions prioritaires pour votre activité.
+          </p>
+          <Link
+            href="/diagnostic"
+            className={`${headingClass} inline-flex rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy transition hover:brightness-105`}
+          >
+            Lancer le diagnostic →
+          </Link>
         </div>
       </section>
 
-      <section className="bg-white px-4 py-12 sm:px-6 sm:py-16">
-        <div className="mx-auto max-w-6xl">
-          <h2 className={`${headingClass} mb-2 text-3xl font-bold`}>Cas clients</h2>
-          <p className="mb-6 max-w-2xl text-sm text-muted sm:text-base">
-            Projets réels, exécution concrète. Accédez directement aux sites clients.
-          </p>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              { name: "The Nice Picnic", href: "https://thenicepicnic.com", domain: "thenicepicnic.com", tag: "Expérience premium" },
-              { name: "Cinémark Azur", href: "https://cinemark-azur.com", domain: "cinemark-azur.com", tag: "Placement produit" },
-              { name: "Douzième Homme", href: "https://douziemehomme-lejeu.com", domain: "douziemehomme-lejeu.com", tag: "Jeu & communauté" },
-            ].map((item) => (
-              <article
-                key={item.name}
-                className="group rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-[0_8px_30px_rgba(15,23,42,0.06)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(15,23,42,0.12)]"
-              >
-                <span className="inline-flex rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-500">{item.tag}</span>
-                <Link href={item.href} target="_blank" rel="noreferrer noopener" className="mt-3 block rounded-xl border border-slate-200 bg-white p-4 transition-colors group-hover:border-blue-200">
-                  <h3 className={`${headingClass} flex items-center justify-between text-lg font-semibold text-slate-900`}>
-                    {item.name}
-                    <span className="text-sm text-blue-600 transition-transform duration-200 group-hover:translate-x-1">↗</span>
-                  </h3>
-                  <p className="mt-1 text-sm text-slate-500">{item.domain}</p>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ClientCaseCards headingClass={headingClass} />
 
       <section className="px-4 py-12 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-6xl">
@@ -317,9 +295,18 @@ export default function LandingPage() {
       <section className="bg-[#0A1620] px-4 py-12 text-center text-white sm:px-6 sm:py-16">
         <h2 className={`${headingClass} text-3xl font-bold sm:text-4xl`}>Choisissez votre point d&apos;entrée</h2>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link href="/formation" className="inline-flex items-center gap-2 rounded-md border border-white/20 px-5 py-3 text-sm">
-            <span>
-              Formation — 49€ <span className="line-through text-white/60">97€</span>
+          <Link
+            href="/formation"
+            className="inline-flex items-center gap-2 rounded-md border border-white/20 px-5 py-3 text-sm font-sans"
+          >
+            <span className="text-white">
+              Formation —{" "}
+              <PriceFigure as="span" className="text-sm font-bold text-white">
+                49€
+              </PriceFigure>{" "}
+              <PriceFigure as="span" className="text-sm font-medium line-through text-white/60">
+                97€
+              </PriceFigure>
             </span>
             {launchPriceActive && (
               <span className="rounded-full border border-amber-300/60 bg-amber-100/90 px-2 py-0.5 text-[10px] font-semibold text-amber-900">
@@ -327,8 +314,11 @@ export default function LandingPage() {
               </span>
             )}
           </Link>
-          <Link href="/pack-ia" className="rounded-md bg-amber-500 px-5 py-3 text-sm font-bold text-navy">
-            Pack IA — 397€
+          <Link href="/pack-ia" className="inline-flex items-center gap-1 rounded-md bg-amber-500 px-5 py-3 text-sm font-sans font-bold text-navy">
+            <span>Pack IA —</span>
+            <PriceFigure as="span" className="text-sm font-bold text-navy">
+              397€
+            </PriceFigure>
           </Link>
           <Link href="/accompagnement" className="rounded-md border border-white/20 px-5 py-3 text-sm">
             Accompagnement

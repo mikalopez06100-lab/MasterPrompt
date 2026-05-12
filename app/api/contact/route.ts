@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getInboundNotificationEmail, getResendFromHeader } from "@/lib/resend-addresses";
 
 type ContactPayload = {
   prenom: string;
@@ -26,8 +27,8 @@ export async function POST(request: Request) {
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM ?? "hello@masterprompt.fr";
-  const to = process.env.EMAIL_TO ?? "hello@masterprompt.fr";
+  const from = getResendFromHeader();
+  const to = getInboundNotificationEmail();
 
   if (!resendApiKey) {
     return NextResponse.json({ error: "RESEND_API_KEY manquant." }, { status: 500 });

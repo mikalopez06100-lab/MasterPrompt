@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
+import { PriceFigure } from "@/components/PriceFigure";
 
 function BillingPageContent() {
   const searchParams = useSearchParams();
@@ -58,10 +59,8 @@ function BillingPageContent() {
             Offre de lancement — Précommande
           </p>
           <div className="flex items-baseline gap-2">
-            <span className="text-4xl font-heading font-bold text-slate-900">
-              49€
-            </span>
-            <span className="text-sm text-slate-400 line-through">97€</span>
+            <PriceFigure className="text-4xl font-bold text-slate-900">49€</PriceFigure>
+            <PriceFigure className="text-sm font-medium text-slate-400 line-through">97€</PriceFigure>
           </div>
           <p className="mt-2 text-sm text-slate-500">
             Vous réservez dès maintenant votre accès à la formation Master

@@ -11,6 +11,7 @@ import { CountdownBanner } from "@/components/CountdownBanner";
 import { PresentationVideo } from "@/components/landing/PresentationVideo";
 import { UnlockPreviewGate } from "@/components/landing/UnlockPreviewGate";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PriceFigure } from "@/components/PriceFigure";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -230,7 +231,7 @@ export default function FormationPage() {
       <section className="px-4 py-10 sm:px-6">
         <div className="mx-auto grid max-w-6xl gap-4 md:grid-cols-2">
           <article className="rounded-xl border border-red-200 bg-red-50 p-5">
-            <h2 className={`${syne.className} text-xl font-bold text-red-900`}>Méthode PACO</h2>
+            <h2 className={`${syne.className} text-xl font-bold text-red-900`}>SANS méthode PACO</h2>
             <p className="mt-2 text-sm text-red-800">Prompt vague : &quot;Écris-moi un email pour mon client.&quot;</p>
           </article>
           <article className="rounded-xl border border-emerald-200 bg-emerald-50 p-5">
@@ -293,7 +294,12 @@ export default function FormationPage() {
 
       <section className="px-4 py-10 sm:px-6">
         <div className="mx-auto max-w-6xl rounded-2xl bg-navy p-8 text-white">
-          <h2 className={`${syne.className} text-3xl font-bold`}>Précommander à {launchPriceActive ? "49€" : "97€"}</h2>
+          <h2 className={`${syne.className} text-3xl font-bold`}>
+            Précommander à{" "}
+            <PriceFigure as="span" className="text-3xl font-bold text-amber-400 sm:text-4xl">
+              {launchPriceActive ? "49€" : "97€"}
+            </PriceFigure>
+          </h2>
           <Link href={stripeLink} target="_blank" rel="noreferrer noopener" className="mt-5 inline-block rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy">
             Précommander maintenant
           </Link>

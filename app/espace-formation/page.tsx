@@ -5,6 +5,7 @@ import { Syne, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { LockedContent } from "@/components/preview/LockedContent";
 import { ModuleVideoCard } from "@/components/preview/ModuleVideoCard";
+import { PriceFigure } from "@/components/PriceFigure";
 import { getAccessLevel, type AccessLevel } from "@/lib/access-level";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
@@ -113,7 +114,10 @@ export default async function EspaceFormationPreviewPage({
               rel="noreferrer noopener"
               className="rounded-md bg-amber-500 px-5 py-3 text-sm font-semibold text-navy shadow-sm transition hover:bg-amber-400"
             >
-              Précommander à {launchPriceActive ? "49€" : "97€"}
+              Précommander à{" "}
+              <PriceFigure as="span" className="font-semibold text-navy">
+                {launchPriceActive ? "49€" : "97€"}
+              </PriceFigure>
             </Link>
           </div>
         </div>
@@ -175,7 +179,11 @@ export default async function EspaceFormationPreviewPage({
                 Débloquez l&apos;accès complet
               </h2>
               <p className="mt-2 max-w-xl text-sm text-slate-300">
-                Précommande à {launchPriceActive ? "49€" : "97€"} · Accès le 1er juin 2026 ·
+                Précommande à{" "}
+                <PriceFigure as="span" className="font-semibold text-slate-200">
+                  {launchPriceActive ? "49€" : "97€"}
+                </PriceFigure>{" "}
+                · Accès le 1er juin 2026 ·
                 Remboursement intégral si non-livré · Garantie 14 jours après accès.
               </p>
             </div>
