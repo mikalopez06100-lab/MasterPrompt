@@ -142,30 +142,92 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="px-4 py-12 sm:px-6 sm:py-16">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2">
-          <div>
-            <p className={`${headingClass} text-xs uppercase tracking-[0.2em] text-blue-600`}>La méthode</p>
-            <h2 className={`${headingClass} mt-2 text-3xl font-bold`}>PACO — la structure qui fait la différence</h2>
-            <p className="mt-4 text-sm text-muted">
-              Avant PACO, les prompts restent vagues. Avec PACO, vous donnez un cadre exploitable et l&apos;IA répond avec un résultat directement utilisable.
+      <section className="border-b border-border bg-gradient-to-b from-[#FAF8F5] to-white px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 max-w-2xl">
+            <p className={`${headingClass} text-xs uppercase tracking-[0.22em] text-blue-600`}>La méthode</p>
+            <h2 className={`${headingClass} mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl`}>
+              PACO — la structure qui fait la différence
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted sm:text-[17px]">
+              Avant PACO, les prompts restent vagues. Avec PACO, vous donnez un cadre exploitable et l&apos;IA répond avec un
+              résultat directement utilisable.
             </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-red-200 bg-red-50 p-4">
-              <h3 className={`${headingClass} text-sm font-semibold text-red-900`}>Avant : prompt vague</h3>
-              <p className="mt-2 text-sm text-red-800">&quot;Écris-moi un email pour mon client.&quot;</p>
-              <p className="mt-2 text-xs text-red-700">Résultat : générique, trop long, difficile à utiliser.</p>
+
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+            {/* Sans PACO */}
+            <article className="relative overflow-hidden rounded-3xl border border-rose-200/70 bg-white p-6 shadow-[0_2px_20px_rgba(225,29,72,0.06)] ring-1 ring-rose-100/80 sm:p-7">
+              <div
+                className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-rose-200/25 blur-3xl"
+                aria-hidden
+              />
+              <div className="relative">
+                <span className="inline-flex rounded-full bg-rose-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-rose-800">
+                  Sans cadre
+                </span>
+                <h3 className={`${headingClass} mt-4 text-lg font-bold text-rose-950 sm:text-xl`}>SANS méthode PACO</h3>
+                <p className="mt-4 rounded-2xl border border-rose-100 bg-rose-50/80 px-4 py-3 font-mono text-[13px] italic leading-relaxed text-rose-900 sm:text-sm">
+                  &quot;Écris-moi un email pour mon client.&quot;
+                </p>
+                <p className="mt-4 flex items-start gap-2 text-sm text-rose-800/90">
+                  <span className="mt-0.5 text-rose-500" aria-hidden>
+                    ✕
+                  </span>
+                  <span>Résultat trop souvent générique, trop long, difficile à utiliser.</span>
+                </p>
+              </div>
             </article>
-            <article className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-              <h3 className={`${headingClass} text-sm font-semibold text-emerald-900`}>Après : prompt PACO</h3>
-              <p className="mt-2 text-sm text-emerald-800">
-                Persona : conseiller commercial.<br />
-                Action : rédiger un email de suivi.<br />
-                Contexte : devis mariage, 80 personnes.<br />
-                Output : 8 lignes, ton chaleureux, CTA appel.
-              </p>
-              <p className="mt-2 text-xs text-emerald-700">Résultat : clair, exploitable, prêt à envoyer.</p>
+
+            {/* Avec PACO — lettres verticales */}
+            <article className="relative overflow-hidden rounded-3xl border border-emerald-200/70 bg-white p-6 shadow-[0_2px_24px_rgba(5,150,105,0.08)] ring-1 ring-emerald-100/90 sm:p-7">
+              <div
+                className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-emerald-200/20 blur-3xl"
+                aria-hidden
+              />
+              <div className="relative">
+                <span className="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-900">
+                  Avec PACO
+                </span>
+                <h3 className={`${headingClass} mt-4 text-lg font-bold text-emerald-950 sm:text-xl`}>
+                  Même demande, structure claire
+                </h3>
+
+                <ol className="mt-6 space-y-0" aria-label="Détail PACO : Persona, Action, Contexte, Output">
+                  {(
+                    [
+                      { L: "P", label: "Persona", line: "Conseiller commercial." },
+                      { L: "A", label: "Action", line: "Rédiger un email de suivi." },
+                      { L: "C", label: "Contexte", line: "Devis mariage, 80 personnes." },
+                      { L: "O", label: "Output", line: "8 lignes, ton chaleureux, CTA appel." },
+                    ] as const
+                  ).map((row, i) => (
+                    <li
+                      key={row.L}
+                      className={`flex gap-4 ${i > 0 ? "border-t border-emerald-100/90 pt-5" : ""} ${i < 3 ? "pb-1" : ""}`}
+                    >
+                      <div className="flex shrink-0 flex-col items-center">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-700 text-lg font-bold leading-none text-white shadow-md shadow-emerald-900/15">
+                          {row.L}
+                        </span>
+                      </div>
+                      <div className="min-w-0 flex-1 pt-0.5">
+                        <p className={`${headingClass} text-[13px] font-bold uppercase tracking-[0.12em] text-emerald-800`}>
+                          {row.label}
+                        </p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-emerald-950/95">{row.line}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+
+                <p className="mt-6 flex items-start gap-2 rounded-2xl border border-emerald-100 bg-emerald-50/60 px-4 py-3 text-sm text-emerald-900">
+                  <span className="text-lg leading-none text-emerald-600" aria-hidden>
+                    ✓
+                  </span>
+                  <span className="font-medium">Résultat clair, exploitable, prêt à envoyer.</span>
+                </p>
+              </div>
             </article>
           </div>
         </div>
