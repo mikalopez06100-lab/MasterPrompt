@@ -17,7 +17,7 @@ Si tu étais dans `C:\Users\ppmpc` (sans être dans `MasterPrompt`), npm ne trou
 
 ## 2. Logo intégré
 
-- Le fichier **logo.png** (icône + « Master Prompt » + « Apprenez à parler à l’IA ») est dans `public/logo.png`.
+- Le fichier **logo** (identité MasterPrompt) est dans `public/logo.jpg` (favicon + Open Graph via `app/icon.jpg` et métadonnées).
 - Le composant **Logo** (`components/layout/Logo.tsx`) est utilisé sur :
   - **Landing** : barre de navigation + footer
   - **Login** et **Signup**

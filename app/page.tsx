@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.masterprompt.fr/logo.png",
+        url: "/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Master Prompt",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: "Master Prompt | L'IA utile pour votre activité",
     description:
       "Méthode PACO, Formation 97€, Pack IA 397€, Accompagnement 90 jours. Des résultats concrets pour votre activité dès la première semaine.",
-    images: ["https://www.masterprompt.fr/logo.png"],
+    images: ["/logo.jpg"],
   },
 };
 
@@ -88,7 +88,7 @@ export default function LandingPage() {
     "@type": "Organization",
     name: "Master Prompt",
     url: "https://www.masterprompt.fr",
-    logo: "https://www.masterprompt.fr/logo.png",
+    logo: "https://www.masterprompt.fr/logo.jpg",
     founder: {
       "@type": "Person",
       name: "Michaël Lopez",

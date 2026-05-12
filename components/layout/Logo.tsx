@@ -7,13 +7,13 @@ type LogoProps = {
   size?: "sm" | "md" | "lg";
 };
 
-// Logo principal
-const logoUrl = "/logo-masterprompt-v2.png";
+// Logo horizontal MasterPrompt (JPEG) — même fichier que /logo.jpg et favicon
+const logoUrl = "/logo.jpg";
 
 const sizes = {
-  sm: { width: 140, height: 48 },
-  md: { width: 180, height: 62 },
-  lg: { width: 220, height: 76 },
+  sm: { width: 200, height: 48 },
+  md: { width: 240, height: 56 },
+  lg: { width: 280, height: 64 },
 };
 
 export function Logo({ href = "/", className = "", size = "md" }: LogoProps) {

@@ -24,6 +24,13 @@ export const metadata: Metadata = {
     description: "Quiz gratuit — score personnalisé et recommandations pour votre activité.",
     url: "https://www.masterprompt.fr/diagnostic",
     type: "website",
+    images: ["/logo.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Diagnostic IA-readiness | Master Prompt",
+    description: "Quiz gratuit — score personnalisé et recommandations pour votre activité.",
+    images: ["/logo.jpg"],
   },
 };
 

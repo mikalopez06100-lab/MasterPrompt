@@ -21,14 +21,14 @@ export const metadata: Metadata = {
       "Programme 90 jours, sessions hebdo, WhatsApp direct, livrables sur-mesure.",
     type: "website",
     url: "https://www.masterprompt.fr/accompagnement",
-    images: ["https://www.masterprompt.fr/logo.png"],
+    images: ["https://www.masterprompt.fr/logo.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Accompagnement IA 90 jours",
     description:
       "Transformation business sur-mesure avec l'IA. Sur candidature.",
-    images: ["https://www.masterprompt.fr/logo.png"],
+    images: ["https://www.masterprompt.fr/logo.jpg"],
   },
 };
 

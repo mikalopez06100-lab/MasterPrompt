@@ -1,5 +1,5 @@
 /**
- * Upload logo to Supabase Storage (bucket "assets", path "logo.png").
+ * Upload logo to Supabase Storage (bucket "assets", path "logo.jpg").
  * Run from project root with: node scripts/upload-logo-to-supabase.mjs
  * Loads .env.local for NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.
  */
@@ -38,14 +38,15 @@ if (!url || !serviceKey) {
   process.exit(1);
 }
 
-const logoPath = join(root, "public", "logo.png");
+const logoPath = join(root, "public", "logo.jpg");
 if (!existsSync(logoPath)) {
-  console.error("public/logo.png not found. Add the logo file first.");
+  console.error("public/logo.jpg not found. Add the logo file first.");
   process.exit(1);
 }
 
 const supabase = createClient(url, serviceKey);
 const bucketName = "assets";
+const objectPath = "logo.jpg";
 
 async function main() {
   const logoBuffer = readFileSync(logoPath);
@@ -63,17 +64,17 @@ async function main() {
 
   const { error: uploadErr } = await supabase.storage
     .from(bucketName)
-    .upload("logo.png", logoBuffer, { contentType: "image/png", upsert: true });
+    .upload(objectPath, logoBuffer, { contentType: "image/jpeg", upsert: true });
 
   if (uploadErr) {
     console.error("Upload failed:", uploadErr.message);
     process.exit(1);
   }
 
-  const { data: urlData } = supabase.storage.from(bucketName).getPublicUrl("logo.png");
+  const { data: urlData } = supabase.storage.from(bucketName).getPublicUrl(objectPath);
   console.log("Logo uploaded successfully.");
   console.log("Public URL:", urlData.publicUrl);
-  console.log("\nAdd to .env.local:");
+  console.log("\nAdd to .env.local (optional, sinon le site utilise /logo.jpg) :");
   console.log("NEXT_PUBLIC_LOGO_URL=" + urlData.publicUrl);
 }
 

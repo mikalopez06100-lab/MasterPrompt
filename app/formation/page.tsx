@@ -27,14 +27,14 @@ export const metadata: Metadata = {
       "7 modules, méthode PACO, 300 prompts métier. Accès à vie, garantie 14 jours.",
     type: "website",
     url: "https://www.masterprompt.fr/formation",
-    images: ["https://www.masterprompt.fr/logo.png"],
+    images: ["https://www.masterprompt.fr/logo.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Formation Master Prompt — 49€ lancement",
     description:
       "7 modules, méthode PACO, 300 prompts métier. Accès à vie, garantie 14 jours.",
-    images: ["https://www.masterprompt.fr/logo.png"],
+    images: ["https://www.masterprompt.fr/logo.jpg"],
   },
 };
 
