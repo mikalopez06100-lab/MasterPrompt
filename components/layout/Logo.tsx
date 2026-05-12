@@ -17,9 +17,9 @@ type LogoProps = {
   onDark?: boolean;
 };
 
-/** Hauteur généreuse : le wordmark est souvent horizontal ; la hauteur pilote la taille réelle. */
+/** `sm` : navbar mobile — laisser ~9.5rem pour CTA + marges (évite le bouton coupé). */
 const boxClass = {
-  sm: "h-[4.25rem] w-[min(92vw,340px)] sm:h-20 sm:w-[min(92vw,420px)] md:h-[5.25rem] md:w-[min(92vw,480px)]",
+  sm: "h-[4.25rem] w-[min(calc(100vw-10.5rem),320px)] sm:h-20 sm:w-[min(calc(100vw-10rem),400px)] md:h-[5.25rem] md:w-[min(92vw,480px)]",
   md: "h-20 w-[min(92vw,380px)] sm:h-[5.25rem] sm:w-[min(92vw,460px)] md:h-24 md:w-[min(92vw,520px)]",
   lg: "h-24 w-[min(94vw,440px)] sm:h-[5.75rem] sm:w-[min(94vw,540px)] md:h-28 md:w-[min(94vw,600px)]",
 } as const;
