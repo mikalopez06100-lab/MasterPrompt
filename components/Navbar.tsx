@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Logo } from "@/components/layout/Logo";
 
@@ -17,7 +15,7 @@ export function Navbar() {
     <nav className="sticky top-0 z-[100] border-b border-white/10 bg-navy px-5 py-3 md:px-10">
       <div className="mx-auto w-full max-w-6xl">
         <div className="flex items-center justify-between gap-4">
-          <Logo href="/" size="sm" onDark />
+          <Logo href="/" size="sm" />
           <Link
             href={navCTA.href}
             className="rounded-md bg-amber-500 px-3 py-2 text-xs font-bold text-navy transition hover:opacity-90 md:hidden"

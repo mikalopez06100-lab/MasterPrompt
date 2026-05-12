@@ -2,17 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-const DEFAULT_LOGO = "/logo.png";
+/** Toujours le fichier versionné : une URL CDN erronée dans `NEXT_PUBLIC_LOGO_URL` ne doit pas casser le bandeau. */
+const LOGO_SRC = "/logo.png";
 
 type LogoProps = {
   href?: string;
   className?: string;
   size?: "sm" | "md" | "lg";
-  /** Navbar / fond sombre : adoucit un fond uni sombre dans le fichier image. */
-  onDark?: boolean;
 };
 
 const boxClass = {
@@ -21,31 +19,16 @@ const boxClass = {
   lg: "h-14 w-[min(92vw,360px)] sm:h-16 sm:w-[min(92vw,440px)]",
 } as const;
 
-function initialLogoSrc(): string {
-  const env = process.env.NEXT_PUBLIC_LOGO_URL?.trim();
-  if (env && /^https?:\/\//i.test(env)) return env;
-  if (env && env.startsWith("/")) return env;
-  return DEFAULT_LOGO;
-}
-
-export function Logo({ href = "/", className = "", size = "md", onDark = false }: LogoProps) {
-  const [src, setSrc] = useState(() => initialLogoSrc());
-
+export function Logo({ href = "/", className = "", size = "md" }: LogoProps) {
   const img = (
     <span className={cn("relative block overflow-visible", boxClass[size], className)}>
       <Image
-        src={src}
+        src={LOGO_SRC}
         alt="Master Prompt"
         fill
         sizes="(max-width: 640px) 90vw, 400px"
-        className={cn(
-          "object-contain object-left",
-          onDark && "mix-blend-lighten [filter:brightness(1.03)]"
-        )}
+        className="object-contain object-left"
         priority
-        onError={() => {
-          if (src !== DEFAULT_LOGO) setSrc(DEFAULT_LOGO);
-        }}
       />
     </span>
   );

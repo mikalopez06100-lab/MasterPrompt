@@ -74,8 +74,8 @@ async function main() {
   const { data: urlData } = supabase.storage.from(bucketName).getPublicUrl(objectPath);
   console.log("Logo uploaded successfully.");
   console.log("Public URL:", urlData.publicUrl);
-  console.log("\nAdd to .env.local (optional, sinon le site utilise /logo.png) :");
-  console.log("NEXT_PUBLIC_LOGO_URL=" + urlData.publicUrl);
+  console.log("\nURL publique Supabase (partage / emails ; le site utilise toujours /logo.png) :");
+  console.log(urlData.publicUrl);
 }
 
 main();

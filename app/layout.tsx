@@ -18,9 +18,8 @@ const instrumentSans = Instrument_Sans({
 const siteUrl =
   process.env.NEXT_PUBLIC_APP_URL?.trim().replace(/\/$/, "") || "https://www.masterprompt.fr";
 
-/** Image Open Graph / Twitter : URL absolue ou chemin relatif au metadataBase. */
-const rawOgLogo = process.env.NEXT_PUBLIC_LOGO_URL?.trim();
-const ogImage = rawOgLogo && /^https?:\/\//i.test(rawOgLogo) ? rawOgLogo : "/logo.png";
+/** Image Open Graph / Twitter : fichier versionné (évite une `NEXT_PUBLIC_LOGO_URL` erronée sur Vercel). */
+const ogImage = "/logo.png";
 
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
