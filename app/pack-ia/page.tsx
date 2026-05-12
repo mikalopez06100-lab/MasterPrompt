@@ -26,14 +26,14 @@ export const metadata: Metadata = {
       "Audit, landing page, 20 prompts métier, 3 automatisations, session stratégique. Forfait 397€.",
     type: "website",
     url: "https://www.masterprompt.fr/pack-ia",
-    images: ["https://www.masterprompt.fr/logo.jpg"],
+    images: ["https://www.masterprompt.fr/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pack IA Activité 397€",
     description:
       "Audit, landing page, 20 prompts métier, 3 automatisations, session stratégique.",
-    images: ["https://www.masterprompt.fr/logo.jpg"],
+    images: ["https://www.masterprompt.fr/logo.png"],
   },
 };
 

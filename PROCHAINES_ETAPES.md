@@ -17,7 +17,7 @@ Si tu étais dans `C:\Users\ppmpc` (sans être dans `MasterPrompt`), npm ne trou
 
 ## 2. Logo intégré
 
-- Le fichier **logo** (identité MasterPrompt) est dans `public/logo.jpg` (favicon + Open Graph via `app/icon.jpg` et métadonnées).
+- Le fichier **logo** (identité MasterPrompt) est dans `public/logo.png` (favicon via `app/icon.svg` / `app/apple-icon.svg` et métadonnées Open Graph).
 - Le composant **Logo** (`components/layout/Logo.tsx`) est utilisé sur :
   - **Landing** : barre de navigation + footer
   - **Login** et **Signup**

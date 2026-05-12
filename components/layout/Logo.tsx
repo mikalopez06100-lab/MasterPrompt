@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+const DEFAULT_LOGO = "/logo.png";
+
 type LogoProps = {
   href?: string;
   className?: string;
   size?: "sm" | "md" | "lg";
-  /** Fond sombre (navbar) : atténue un fond noir du fichier source */
+  /** Navbar / fond sombre : adoucit un fond uni sombre dans le fichier image. */
   onDark?: boolean;
 };
 
@@ -23,7 +25,7 @@ function initialLogoSrc(): string {
   const env = process.env.NEXT_PUBLIC_LOGO_URL?.trim();
   if (env && /^https?:\/\//i.test(env)) return env;
   if (env && env.startsWith("/")) return env;
-  return "/logo-masterprompt-v2.png";
+  return DEFAULT_LOGO;
 }
 
 export function Logo({ href = "/", className = "", size = "md", onDark = false }: LogoProps) {
@@ -38,11 +40,11 @@ export function Logo({ href = "/", className = "", size = "md", onDark = false }
         sizes="(max-width: 640px) 90vw, 400px"
         className={cn(
           "object-contain object-left",
-          onDark && "mix-blend-lighten [filter:contrast(1.05)_brightness(1.02)]"
+          onDark && "mix-blend-lighten [filter:brightness(1.03)]"
         )}
         priority
         onError={() => {
-          if (src !== "/logo.jpg") setSrc("/logo.jpg");
+          if (src !== DEFAULT_LOGO) setSrc(DEFAULT_LOGO);
         }}
       />
     </span>

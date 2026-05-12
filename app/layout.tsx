@@ -20,7 +20,7 @@ const siteUrl =
 
 /** Image Open Graph / Twitter : URL absolue ou chemin relatif au metadataBase. */
 const rawOgLogo = process.env.NEXT_PUBLIC_LOGO_URL?.trim();
-const ogImage = rawOgLogo && /^https?:\/\//i.test(rawOgLogo) ? rawOgLogo : "/logo.jpg";
+const ogImage = rawOgLogo && /^https?:\/\//i.test(rawOgLogo) ? rawOgLogo : "/logo.png";
 
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 

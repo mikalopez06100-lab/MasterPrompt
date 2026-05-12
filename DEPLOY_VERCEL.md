@@ -50,7 +50,7 @@ Copie **toutes** les variables ci-dessous dans **Settings → Environment Variab
 | `NEXTAUTH_URL` | En prod : `https://masterprompt.fr` (ou ton URL Vercel) — sans slash final | Non | Si NextAuth utilisé |
 | `NEXTAUTH_SECRET` | Secret fort (ex. `openssl rand -base64 32`) | Oui | Si NextAuth utilisé |
 | `NEXT_PUBLIC_APP_URL` | URL du site : `https://masterprompt.fr` ou `https://ton-projet.vercel.app` | Non | Recommandé (auth, liens) |
-| `NEXT_PUBLIC_LOGO_URL` | URL absolue du logo JPEG (ex. CDN Supabase `…/logo.jpg`) | Non | Sinon `metadataBase` + `/logo.jpg` |
+| `NEXT_PUBLIC_LOGO_URL` | URL absolue du logo PNG (ex. CDN Supabase `…/logo.png`) | Non | Sinon `metadataBase` + `/logo.png` |
 | `NEXT_PUBLIC_HERO_VIDEO_URL` | URL de la vidéo hero (ex. `…/assets/videos/bienvenue.mp4`) | Non | Optionnel |
 | `RESEND_API_KEY` | Clé API Resend (envoi email + PDF) | Oui | Oui (pour le formulaire PDF) |
 | `FROM_EMAIL` | `Master Prompt <info@masterprompt.fr>` | Non | Oui (pour le formulaire PDF) |
@@ -102,7 +102,7 @@ La table **Lead** doit exister. En local : `npx prisma db push`. Ton **`.env`** 
 `DATABASE_URL` · `DIRECT_URL` · `NEXT_PUBLIC_SUPABASE_URL` · `NEXT_PUBLIC_SUPABASE_ANON_KEY` · `SUPABASE_SERVICE_ROLE_KEY` · `NEXTAUTH_URL` · `NEXTAUTH_SECRET` · `NEXT_PUBLIC_APP_URL` · `NEXT_PUBLIC_LOGO_URL` · `NEXT_PUBLIC_HERO_VIDEO_URL` · `RESEND_API_KEY` · `FROM_EMAIL` · `LEAD_MAGNET_PDF_URL`
 
 **Médias (Supabase Storage, bucket `assets`) :**
-- **Logo :** placer le fichier dans `public/logo.jpg`, puis `node scripts/upload-logo-to-supabase.mjs`. Définir `NEXT_PUBLIC_LOGO_URL` sur Vercel si tu utilises l’URL Supabase (optionnel).
+- **Logo :** placer le fichier dans `public/logo.png`, puis `node scripts/upload-logo-to-supabase.mjs`. Définir `NEXT_PUBLIC_LOGO_URL` sur Vercel si tu utilises l’URL Supabase (optionnel).
 - **Vidéo hero :** placer la vidéo dans `public/videos/bienvenue.mp4`, puis `node scripts/upload-hero-video-to-supabase.mjs`. Définir `NEXT_PUBLIC_HERO_VIDEO_URL` sur Vercel (ou laisser vide pour la vidéo locale).
 - **PDF lead magnet :** le PDF est déjà uploadé sur Supabase ; l’URL est dans `LEAD_MAGNET_PDF_URL` (voir `.env.local`). Pour mettre à jour le PDF plus tard : placer le fichier dans `public/pdfs/master-prompt-10-prompts-essentiels.pdf`, puis `node scripts/upload-lead-pdf-to-supabase.mjs`. Pour la config email (Resend, domaine, Vercel), voir **GUIDE-DEBUTANT-EMAIL-PDF.md**.
 
