@@ -12,8 +12,7 @@ type LogoProps = {
   className?: string;
   size?: "sm" | "md" | "lg";
   /**
-   * Fond sombre (navbar) : agrandit la zone + atténue un fond noir dans le PNG
-   * (`mix-blend-lighten` sur le bleu nuit).
+   * Fond sombre (navbar) : léger relief pour le PNG transparent sur bleu nuit.
    */
   onDark?: boolean;
 };
@@ -31,7 +30,6 @@ export function Logo({ href = "/", className = "", size = "md", onDark = false }
       className={cn(
         "relative isolate block overflow-visible",
         boxClass[size],
-        onDark && "rounded-md px-1 py-0.5",
         className
       )}
     >
@@ -42,7 +40,7 @@ export function Logo({ href = "/", className = "", size = "md", onDark = false }
         sizes="(max-width: 768px) 92vw, 480px"
         className={cn(
           "object-contain object-left",
-          onDark && "mix-blend-lighten [filter:brightness(1.08)_contrast(1.04)]"
+          onDark && "[filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.55))]"
         )}
         priority
       />
