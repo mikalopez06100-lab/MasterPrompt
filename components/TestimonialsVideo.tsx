@@ -70,30 +70,6 @@ export function TestimonialsVideo({ items = testimonials }: Props) {
               : "border-border bg-white"
           }`}
         >
-          <div className="relative aspect-video bg-[#0A1826]">
-            {testimonial.videoUrl ? (
-              <video
-                src={testimonial.videoUrl}
-                poster={testimonial.posterUrl}
-                controls
-                data-video-id={testimonial.id}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div
-                className="flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-[#0A1826] to-[#0D2440]"
-                data-video-id={testimonial.id}
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-lg text-navy">
-                  ▶
-                </div>
-                <span className="text-xs font-bold tracking-wide text-slate-300">
-                  Témoignage · {testimonial.name.split(" ")[0]}
-                </span>
-              </div>
-            )}
-          </div>
-
           <div className="space-y-3 p-5">
             <p className="text-sm tracking-wide text-amber-500">★★★★★</p>
             <blockquote
@@ -101,16 +77,16 @@ export function TestimonialsVideo({ items = testimonials }: Props) {
                 testimonial.featured ? "text-slate-300" : "text-slate-700"
               }`}
             >
-              "{testimonial.quote}"
+              &ldquo;{testimonial.quote}&rdquo;
             </blockquote>
             <div className="flex items-center gap-3">
               <div
-                className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-white"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
                 style={{ backgroundColor: testimonial.avatarColor }}
               >
                 {testimonial.avatar}
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className={`text-sm font-semibold ${testimonial.featured ? "text-white" : "text-navy"}`}>
                   {testimonial.name}
                 </p>
@@ -129,6 +105,21 @@ export function TestimonialsVideo({ items = testimonials }: Props) {
               {testimonial.offer}
             </span>
           </div>
+
+          {testimonial.videoUrl && (
+            <div className="px-5 pb-5">
+              <video
+                src={testimonial.videoUrl}
+                poster={testimonial.posterUrl}
+                controls
+                playsInline
+                preload="metadata"
+                data-video-id={testimonial.id}
+                className="w-full rounded-lg border border-white/10 bg-black"
+                style={{ maxHeight: "160px" }}
+              />
+            </div>
+          )}
         </article>
       ))}
     </div>
