@@ -40,7 +40,7 @@ type ModuleConfig = {
 const MODULES: ModuleConfig[] = [
   { num: 1, title: "Comprendre l'IA et le Prompt Engineering", duration: "32 min", lessons: 6, videoEnvVar: "NEXT_PUBLIC_MODULE_1_VIDEO_URL" },
   { num: 2, title: "La méthode PACO", duration: "45 min", lessons: 8, videoEnvVar: "NEXT_PUBLIC_MODULE_2_VIDEO_URL" },
-  { num: 3, title: "Communication & Marketing", duration: "38 min", lessons: 7 },
+  { num: 3, title: "Communication & Marketing", duration: "38 min", lessons: 7, videoEnvVar: "NEXT_PUBLIC_MODULE_3_VIDEO_URL" },
   { num: 4, title: "Gestion & Productivité", duration: "41 min", lessons: 7 },
   { num: 5, title: "Ateliers pratiques", duration: "55 min", lessons: 9 },
   { num: 6, title: "Enchaînements IA, vers l'automatisation", duration: "47 min", lessons: 8 },
