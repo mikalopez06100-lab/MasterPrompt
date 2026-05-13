@@ -20,7 +20,7 @@ export function Navbar() {
           </div>
           <Link
             href={navCTA.href}
-            className="shrink-0 whitespace-nowrap rounded-md bg-amber-500 px-2.5 py-2 text-[11px] font-bold leading-tight text-navy transition hover:opacity-90 sm:px-3 sm:text-xs md:hidden"
+            className="cta-pulse shrink-0 whitespace-nowrap rounded-md bg-amber-500 px-2.5 py-2 text-[11px] font-bold leading-tight text-navy transition hover:opacity-90 sm:px-3 sm:text-xs md:hidden"
           >
             Diagnostic
           </Link>
@@ -37,7 +37,7 @@ export function Navbar() {
             ))}
             <Link
               href={navCTA.href}
-              className="ml-2 rounded-md bg-amber-500 px-4 py-2 text-xs font-bold text-navy transition hover:opacity-90"
+              className="cta-pulse ml-2 rounded-md bg-amber-500 px-4 py-2 text-xs font-bold text-navy transition hover:opacity-90"
             >
               {navCTA.label}
             </Link>

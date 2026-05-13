@@ -290,7 +290,7 @@ export default function LandingPage() {
           </p>
           <Link
             href="/diagnostic"
-            className={`${headingClass} inline-flex rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy transition hover:brightness-105`}
+            className={`${headingClass} cta-pulse inline-flex rounded-md bg-amber-500 px-6 py-3 text-sm font-semibold text-navy transition hover:brightness-105`}
           >
             Lancer le diagnostic →
           </Link>
