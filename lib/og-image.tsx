@@ -119,5 +119,5 @@ export async function ogImageResponse(slide: OgBrandSlide) {
 /** URL absolue de l'image OG dynamique pour une proposition. */
 export function proposalOgImageUrl(siteUrl: string, slug: string): string {
   const base = siteUrl.replace(/\/$/, "");
-  return `${base}/propositions/${slug}/opengraph-image`;
+  return `${base}/api/og/proposition?slug=${encodeURIComponent(slug)}`;
 }
