@@ -76,7 +76,15 @@ export function renderOgBrandSlide({ eyebrow, headline, subline }: OgBrandSlide)
           MP
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 44, fontWeight: 700, lineHeight: 1.1 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              fontSize: 44,
+              fontWeight: 700,
+              lineHeight: 1.1,
+            }}
+          >
             <span style={{ color: "#FFFFFF" }}>Master</span>
             <span style={{ color: "#A78BFA" }}>Prompt</span>
           </div>
@@ -97,6 +105,8 @@ export function renderOgBrandSlide({ eyebrow, headline, subline }: OgBrandSlide)
 
       <div
         style={{
+          display: "flex",
+          flexDirection: "column",
           marginTop: "auto",
           paddingTop: 36,
           borderTop: "1px solid rgba(167, 139, 250, 0.35)",

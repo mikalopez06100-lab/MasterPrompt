@@ -1,7 +1,7 @@
 import { getProposalBySlug } from "@/lib/proposals";
 import { ogImageResponse } from "@/lib/og-image";
 
-export const runtime = "nodejs";
+export const runtime = "edge";
 
 export async function GET(request: Request) {
   const slug = new URL(request.url).searchParams.get("slug")?.trim();
