@@ -175,7 +175,7 @@ export default function PackIAPage() {
       <section className="bg-white px-4 py-10 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <h2 className={`${headingClass} mb-6 text-3xl font-bold`}>Témoignages clients</h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <TestimonialBlock
               quote="Michaël a structuré ce que j'avais en tête et l'a rendu actionnable. Landing page, automatisations, prompts : tout est opérationnel."
               name="Julien M."
@@ -187,6 +187,14 @@ export default function PackIAPage() {
               name="Dominic G."
               role="Fondateur · Cinémark Azur"
               offer="Accompagnement IA Transformation"
+            />
+            <TestimonialBlock
+              quote="Nous avons structuré 13 ans de bricolage et je vais le transformer en véritable actif monétisable."
+              name="Davide C."
+              role="Plombier · Var"
+              offer="Pack IA Activité"
+              websiteUrl="https://cacouledesource.fr"
+              websiteLabel="cacouledesource.fr"
             />
           </div>
         </div>

@@ -12,6 +12,8 @@ export type TestimonialVideoItem = {
   featured?: boolean;
   videoUrl?: string;
   posterUrl?: string;
+  websiteUrl?: string;
+  websiteLabel?: string;
 };
 
 export const testimonials: TestimonialVideoItem[] = [
@@ -52,6 +54,19 @@ export const testimonials: TestimonialVideoItem[] = [
     offerType: "pack",
     videoUrl: process.env.NEXT_PUBLIC_VIDEO_MATHIEU,
   },
+  {
+    id: "davide",
+    name: "Davide C.",
+    role: "Plombier · Var",
+    avatar: "DC",
+    avatarColor: "#0369A1",
+    quote:
+      "Nous avons structuré 13 ans de bricolage et je vais le transformer en véritable actif monétisable.",
+    offer: "Pack IA Activité",
+    offerType: "pack",
+    websiteUrl: "https://cacouledesource.fr",
+    websiteLabel: "cacouledesource.fr",
+  },
 ];
 
 type Props = {
@@ -60,7 +75,7 @@ type Props = {
 
 export function TestimonialsVideo({ items = testimonials }: Props) {
   return (
-    <div className="grid gap-5 md:grid-cols-3">
+    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
       {items.map((testimonial) => (
         <article
           key={testimonial.id}
@@ -93,6 +108,18 @@ export function TestimonialsVideo({ items = testimonials }: Props) {
                 <p className={`text-xs ${testimonial.featured ? "text-slate-400" : "text-muted"}`}>
                   {testimonial.role}
                 </p>
+                {testimonial.websiteUrl ? (
+                  <a
+                    href={testimonial.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-1 inline-block text-xs font-medium underline-offset-2 hover:underline ${
+                      testimonial.featured ? "text-amber-400" : "text-blue-700"
+                    }`}
+                  >
+                    {testimonial.websiteLabel ?? testimonial.websiteUrl}
+                  </a>
+                ) : null}
               </div>
             </div>
             <span
