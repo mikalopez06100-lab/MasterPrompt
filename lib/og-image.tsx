@@ -8,6 +8,41 @@ export type OgBrandSlide = {
   subline?: string;
 };
 
+type OgFont = {
+  name: string;
+  data: ArrayBuffer;
+  weight: 400 | 700;
+  style: "normal";
+};
+
+let fontsPromise: Promise<OgFont[]> | null = null;
+
+async function loadGoogleFont(family: string, weight: number): Promise<ArrayBuffer> {
+  const css = await fetch(
+    `https://fonts.googleapis.com/css2?family=${family}:wght@${weight}&display=swap`,
+    { headers: { "User-Agent": "Mozilla/5.0 (compatible; OG/1.0)" } },
+  ).then((res) => res.text());
+
+  const match = css.match(/src: url\(([^)]+)\) format\('(?:opentype|truetype)'\)/);
+  if (!match?.[1]) {
+    throw new Error(`Impossible de charger la police ${family} (${weight})`);
+  }
+  return fetch(match[1]).then((res) => res.arrayBuffer());
+}
+
+async function getOgFonts(): Promise<OgFont[]> {
+  if (!fontsPromise) {
+    fontsPromise = Promise.all([
+      loadGoogleFont("Inter", 400),
+      loadGoogleFont("Inter", 700),
+    ]).then(([regular, bold]) => [
+      { name: "Inter", data: regular, weight: 400, style: "normal" },
+      { name: "Inter", data: bold, weight: 700, style: "normal" },
+    ]);
+  }
+  return fontsPromise;
+}
+
 /** Carte Open Graph 1200×630 (WhatsApp, LinkedIn, iMessage…). */
 export function renderOgBrandSlide({ eyebrow, headline, subline }: OgBrandSlide) {
   return (
@@ -19,8 +54,7 @@ export function renderOgBrandSlide({ eyebrow, headline, subline }: OgBrandSlide)
         height: "100%",
         background: "linear-gradient(145deg, #0B1421 0%, #141d31 45%, #1c2840 100%)",
         padding: "52px 60px",
-        fontFamily:
-          'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+        fontFamily: "Inter",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
@@ -34,7 +68,7 @@ export function renderOgBrandSlide({ eyebrow, headline, subline }: OgBrandSlide)
             alignItems: "center",
             justifyContent: "center",
             fontSize: 34,
-            fontWeight: 800,
+            fontWeight: 700,
             color: "#FFFFFF",
             letterSpacing: "-0.04em",
           }}
@@ -56,7 +90,7 @@ export function renderOgBrandSlide({ eyebrow, headline, subline }: OgBrandSlide)
               color: "#94A3B8",
             }}
           >
-            Maîtrisez l&apos;IA, créez l&apos;exception
+            Maitrisez l&apos;IA, creez l&apos;exception
           </div>
         </div>
       </div>
@@ -111,8 +145,10 @@ export function renderOgBrandSlide({ eyebrow, headline, subline }: OgBrandSlide)
 }
 
 export async function ogImageResponse(slide: OgBrandSlide) {
+  const fonts = await getOgFonts();
   return new ImageResponse(renderOgBrandSlide(slide), {
     ...OG_SIZE,
+    fonts,
   });
 }
 
