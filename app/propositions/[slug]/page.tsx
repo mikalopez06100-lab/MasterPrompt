@@ -5,20 +5,64 @@ import { Syne, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { getProposalBySlug } from "@/lib/proposals";
 import type { DeliverableCard } from "@/lib/proposals";
+import { proposalOgImageUrl } from "@/lib/og-image";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
-export const metadata: Metadata = {
-  title: "Espace proposition client privé | Master Prompt",
-  description: "Espace sécurisé de présentation d'offre client.",
-  robots: { index: false, follow: false },
-};
+const siteUrl =
+  process.env.NEXT_PUBLIC_APP_URL?.trim().replace(/\/$/, "") || "https://www.masterprompt.fr";
 
 type PageProps = {
   params: { slug: string };
   searchParams: { token?: string };
 };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const proposal = getProposalBySlug(params.slug);
+  if (!proposal) {
+    return {
+      title: "Proposition | Master Prompt",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${proposal.clientName} — Proposition confidentielle`;
+  const description =
+    proposal.ogShareSubline?.trim() ||
+    proposal.subtitle.replace(/\s+/g, " ").slice(0, 160);
+  const ogImage = proposalOgImageUrl(siteUrl, proposal.slug);
+  const ogImageAlt = `${proposal.clientName} — proposition Master Prompt`;
+
+  return {
+    title,
+    description,
+    robots: { index: false, follow: false },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: "Master Prompt",
+      url: `${siteUrl}/propositions/${proposal.slug}`,
+      images: [
+        {
+          url: ogImage,
+          secureUrl: ogImage,
+          width: 1200,
+          height: 630,
+          alt: ogImageAlt,
+          type: "image/png",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: ogImageAlt }],
+    },
+  };
+}
 
 export default function ProposalPrivatePage({ params, searchParams }: PageProps) {
   const proposal = getProposalBySlug(params.slug);
