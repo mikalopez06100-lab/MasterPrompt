@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratégie Marketing & Acquisition — InterFace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page:#fafafa; --bg-card:#ffffff; --bg-subtle:#f1f5f9; --border:#e2e8f0; --border-strong:#cbd5e1;
+  --text-primary:#0a2540; --text-body:#1a202c; --text-muted:#64748b; --text-inverse:#fff;
+  --accent:#d4a574; --accent-dark:#a67c4f; --accent-soft:#faf3e8;
+  --success:#15803d; --success-soft:#f0fdf4; --warning:#b45309; --warning-soft:#fffbeb;
+  --danger:#b91c1c; --danger-soft:#fef2f2; --info:#0369a1; --info-soft:#f0f9ff;
+  --chart-1:#0a2540; --chart-2:#0ea5e9; --chart-3:#d4a574; --chart-4:#15803d; --chart-5:#b91c1c; --chart-6:#7c3aed; --chart-muted:#94a3b8;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-serif:'Source Serif 4',Georgia,serif; --font-mono:'JetBrains Mono',Menlo,monospace;
+  --shadow-sm:0 1px 2px rgba(10,37,64,.04); --shadow:0 1px 3px rgba(10,37,64,.06),0 1px 2px rgba(10,37,64,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;} html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);background:var(--bg-page);color:var(--text-body);font-size:1rem;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.layout{display:grid;grid-template-columns:220px 1fr;max-width:1240px;margin:0 auto;gap:48px;padding:48px;}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:24px;gap:24px;}.toc{position:static!important;}}
+.toc{position:sticky;top:32px;align-self:start;font-size:.875rem;}
+.toc-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:16px;}
+.toc ol{list-style:none;border-left:1px solid var(--border);}
+.toc li{margin-bottom:4px;}
+.toc a{display:block;padding:6px 16px;color:var(--text-muted);text-decoration:none;border-left:2px solid transparent;margin-left:-1px;transition:all .15s;}
+.toc a:hover{color:var(--text-primary);border-left-color:var(--accent);}
+.toc a.active{color:var(--text-primary);border-left-color:var(--text-primary);font-weight:600;}
+.main{max-width:920px;}
+.cover{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:64px 48px;margin-bottom:64px;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;background:var(--text-primary);}
+.cover-kicker{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-dark);margin-bottom:16px;}
+.cover h1{font-size:3rem;font-weight:700;color:var(--text-primary);line-height:1.1;margin-bottom:16px;letter-spacing:-.02em;}
+.cover-tagline{font-family:var(--font-serif);font-style:italic;font-size:1.25rem;color:var(--text-muted);margin-bottom:48px;max-width:640px;}
+.cover-meta{display:flex;gap:48px;border-top:1px solid var(--border);padding-top:24px;font-size:.875rem;flex-wrap:wrap;}
+.cover-meta-item .label{color:var(--text-muted);text-transform:uppercase;font-size:.7rem;letter-spacing:.05em;margin-bottom:4px;}
+.cover-meta-item .value{color:var(--text-primary);font-weight:600;}
+.section{margin-bottom:80px;scroll-margin-top:32px;}
+.section-header{margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--text-primary);}
+.kicker{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px;}
+.section-header h2{font-size:1.75rem;color:var(--text-primary);margin:0 0 12px 0;font-weight:600;line-height:1.2;letter-spacing:-.01em;}
+.section-header .lead{font-size:1.125rem;color:var(--text-muted);margin:0;max-width:720px;}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:32px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+.card h3{font-size:1.125rem;color:var(--text-primary);margin-bottom:12px;font-weight:600;}
+.card p{margin-bottom:12px;}.card p:last-child{margin-bottom:0;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+@media(max-width:700px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:24px;}
+.kpi-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);display:block;margin-bottom:8px;font-weight:500;}
+.kpi-value{font-size:2.1rem;font-weight:700;color:var(--text-primary);display:block;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
+.kpi-delta{font-size:.8rem;margin-top:8px;display:inline-block;font-weight:500;color:var(--text-muted);}
+.delta-up{color:var(--success);}.delta-down{color:var(--danger);}
+.score-display{display:flex;align-items:center;gap:24px;padding:32px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;}
+.score-circle{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--success-soft);border:4px solid var(--success);flex-shrink:0;}
+.score-circle .score-number{font-size:2.5rem;font-weight:700;color:var(--text-primary);line-height:1;}
+.score-circle .score-max{font-size:.875rem;color:var(--text-muted);margin-top:4px;}
+.score-verdict h3{font-size:1.5rem;margin-bottom:8px;color:var(--text-primary);}
+.score-verdict p{color:var(--text-muted);margin:0;}
+.callout{padding:16px 24px;border-left:4px solid var(--text-primary);background:var(--bg-subtle);border-radius:0 8px 8px 0;margin:24px 0;font-size:1rem;}
+.callout strong{color:var(--text-primary);display:block;margin-bottom:4px;font-weight:600;}
+.callout-warning{border-color:var(--warning);background:var(--warning-soft);}.callout-warning strong{color:var(--warning);}
+.callout-success{border-color:var(--success);background:var(--success-soft);}.callout-success strong{color:var(--success);}
+.callout-danger{border-color:var(--danger);background:var(--danger-soft);}.callout-danger strong{color:var(--danger);}
+.callout-accent{border-color:var(--accent);background:var(--accent-soft);}.callout-accent strong{color:var(--accent-dark);}
+.data-table{width:100%;border-collapse:collapse;font-size:.875rem;margin:24px 0;}
+.data-table th{text-align:left;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-size:.7rem;padding:12px 16px;border-bottom:2px solid var(--text-primary);}
+.data-table td{padding:16px;border-bottom:1px solid var(--border);color:var(--text-body);vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td.numeric{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--font-mono);font-weight:500;}
+.data-table tbody tr:hover{background:var(--bg-subtle);}
+.tag{display:inline-block;padding:4px 10px;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;border-radius:4px;background:var(--bg-subtle);color:var(--text-muted);}
+.tag-success{background:var(--success-soft);color:var(--success);}.tag-warning{background:var(--warning-soft);color:var(--warning);}
+.tag-danger{background:var(--danger-soft);color:var(--danger);}.tag-accent{background:var(--accent-soft);color:var(--accent-dark);}
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:32px;margin-bottom:24px;box-shadow:var(--shadow-sm);}
+.chart-title{font-size:1rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;}
+.chart-caption{font-size:.875rem;color:var(--text-muted);margin-bottom:20px;font-style:italic;}
+.chart-card svg{width:100%;height:auto;max-height:480px;}
+.main p{margin-bottom:16px;max-width:760px;}.main p:last-child{margin-bottom:0;}
+.main ul,.main ol{margin:0 0 16px 24px;max-width:760px;}.main li{margin-bottom:8px;}
+.main strong{color:var(--text-primary);font-weight:600;}
+.lead-paragraph{font-family:var(--font-serif);font-size:1.25rem;line-height:1.6;color:var(--text-body);margin-bottom:32px;max-width:760px;}
+.persona-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:28px;box-shadow:var(--shadow-sm);}
+.persona-head{display:flex;align-items:center;gap:16px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.persona-avatar{width:52px;height:52px;border-radius:50%;background:var(--text-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex-shrink:0;}
+.persona-card h4{font-size:1.05rem;color:var(--text-primary);margin:0;}
+.persona-card .role{font-size:.8rem;color:var(--text-muted);}
+.jtbd-row{font-size:.85rem;margin-bottom:6px;}
+.jtbd-row b{color:var(--text-primary);}
+.barwrap{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:8px 0 4px;}
+.barwrap span{display:block;height:100%;}
+@media print{
+  body{background:#fff;}
+  .layout{grid-template-columns:1fr;padding:0;max-width:100%;gap:0;}
+  .toc{display:none;}.no-print{display:none!important;}
+  .section{page-break-inside:avoid;margin-bottom:40px;}
+  .cover{page-break-after:always;box-shadow:none;}
+  .card,.chart-card,.kpi,.score-display,.persona-card{box-shadow:none;break-inside:avoid;}
+  a{color:var(--text-body);text-decoration:none;}
+}
+@page{size:A4;margin:18mm 16mm;}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc no-print">
+    <p class="toc-title">Sommaire</p>
+    <ol>
+      <li><a href="#executive-summary">Résumé exécutif</a></li>
+      <li><a href="#positionnement">01 · Positionnement</a></li>
+      <li><a href="#persona">02 · Personas & JTBD</a></li>
+      <li><a href="#journey">03 · Customer journey</a></li>
+      <li><a href="#acquisition">04 · Mix d'acquisition</a></li>
+      <li><a href="#contenu">05 · Contenu & PESO</a></li>
+      <li><a href="#funnel">06 · Funnel & commercial</a></li>
+      <li><a href="#roadmap">Roadmap, budget, KPIs</a></li>
+      <li><a href="#annexes">Annexes</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+    <!-- COVER -->
+    <section class="cover">
+      <p class="cover-kicker">Stratégie Marketing & Communication · Pack IA</p>
+      <h1>InterFace</h1>
+      <p class="cover-tagline">Positionnement, personas, parcours client, mix d'acquisition, contenu et plan commercial — pour transformer un flux de bouche-à-oreille aléatoire en pipeline de chantiers prévisible.</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item"><div class="label">Préparé pour</div><div class="value">Olivier Colombani · InterFace SARL</div></div>
+        <div class="cover-meta-item"><div class="label">Date</div><div class="value">28 mai 2026</div></div>
+        <div class="cover-meta-item"><div class="label">Préparé par</div><div class="value">Michaël Lopez · MasterPrompt</div></div>
+        <div class="cover-meta-item"><div class="label">Volet</div><div class="value">2/3 — fait suite au diagnostic stratégique</div></div>
+      </div>
+    </section>
+
+    <!-- RÉSUMÉ EXÉCUTIF -->
+    <section class="section" id="executive-summary">
+      <header class="section-header">
+        <span class="kicker">Synthèse</span>
+        <h2>Résumé exécutif</h2>
+        <p class="lead">Le positionnement choisi, les 3 canaux retenus, le budget et le score de viabilité de la stratégie.</p>
+      </header>
+
+      <p class="lead-paragraph">La stratégie tient en une phrase : ne pas chercher du volume, mais devenir <em>le</em> nom qui vient à l'esprit quand un propriétaire de la Côte d'Azur doit confier la rénovation lourde d'un bien de valeur. Cela ne se gagne pas avec de la publicité de masse, mais avec trois leviers concentrés — la prescription systématisée, la visibilité Google locale, et la preuve. Le budget est modeste parce que le métier l'exige : 8-10 chantiers se vendent par la confiance, pas par le matraquage.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag tag-accent">Positionnement retenu</span>
+          <p style="margin-top:12px; font-family:var(--font-serif); font-size:1.15rem; color:var(--text-primary);">« Le maître d'œuvre qui pilote votre rénovation d'exception comme un investisseur protège un actif. »</p>
+          <p style="font-size:.9rem; color:var(--text-muted);">Double ADN immobilier + BTP. Polarisant : s'adresse au propriétaire patrimonial, pas au chasseur du devis le moins cher.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Les 3 canaux core</span>
+          <ol style="margin:12px 0 0 18px; font-size:.92rem;">
+            <li><strong>Réseau prescripteurs systématisé</strong> (agents, notaires, promoteurs)</li>
+            <li><strong>Google local</strong> (fiche Business + avis + SEO « maître d'œuvre rénovation [ville] »)</li>
+            <li><strong>Site d'autorité avec preuve</strong> (réalisations, méthode, garanties)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="kpi"><span class="kpi-label">Budget marketing an 1</span><strong class="kpi-value">~15 k€</strong><span class="kpi-delta">Scénario médian</span></div>
+        <div class="kpi"><span class="kpi-label">North Star Metric</span><strong class="kpi-value" style="font-size:1.3rem;">Pipeline qualifié</strong><span class="kpi-delta">€ d'honoraires en discussion</span></div>
+        <div class="kpi"><span class="kpi-label">Objectif signatures an 1</span><strong class="kpi-value">8-10</strong><span class="kpi-delta delta-up">chantiers</span></div>
+      </div>
+
+      <div class="score-display">
+        <div class="score-circle"><span class="score-number">75</span><span class="score-max">/ 100</span></div>
+        <div class="score-verdict">
+          <h3>Stratégie solide, prête à démarrer</h3>
+          <p>Positionnement polarisant et défendable, canaux parfaitement alignés sur un persona patrimonial. Le seul vrai risque : la capacité d'exécution en solo sur le contenu et le suivi prescripteurs. À sécuriser par l'IA et la discipline.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <strong>Le piège à éviter absolument</strong>
+        Disperser le maigre budget sur Instagram, TikTok et Meta Ads « parce qu'il faut être présent partout ». Le persona patrimonial ne s'y trouve pas en intention d'achat. Chaque euro non investi dans la prescription, Google et la preuve est un euro perdu.
+      </div>
+    </section>
+
+    <!-- BLOC 01 POSITIONNEMENT -->
+    <section class="section" id="positionnement">
+      <header class="section-header">
+        <span class="kicker">Bloc 01</span>
+        <h2>Positionnement stratégique & messaging</h2>
+        <p class="lead">Déclaration de positionnement (framework Dunford), tagline, USP, preuves et voix de marque.</p>
+      </header>
+
+      <div class="card">
+        <h3>Déclaration de positionnement</h3>
+        <p>Pour les <strong>propriétaires d'un bien de valeur à rénover lourdement sur la Côte d'Azur</strong> (best-fit), qui hésitent aujourd'hui entre se débrouiller seuls, confier le chantier à une entreprise générale opaque ou à un architecte focalisé sur l'esthétique (alternatives), <strong>InterFace est le maître d'œuvre patrimonial</strong> (catégorie) qui combine <strong>vingt ans d'œil d'investisseur immobilier et la rigueur d'un pilote de chantier formé sur le terrain</strong> (attributs uniques). Résultat : un budget tenu, des délais maîtrisés, une qualité garantie jusqu'à la levée des réserves, et un bien dont la valeur est protégée — sans charge mentale pour le propriétaire (valeur).</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Tagline (3 pistes à arbitrer)</h3>
+          <ul style="margin:0;">
+            <li>« Votre rénovation d'exception, pilotée comme un actif. »</li>
+            <li>« Le maître d'œuvre des biens qu'on ne rénove qu'une fois. »</li>
+            <li>« De l'achat à la réception, un seul interlocuteur de confiance. »</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>USP — une phrase</h3>
+          <p>Le seul maître d'œuvre de la Côte d'Azur qui pense votre chantier en investisseur immobilier autant qu'en homme de terrain : chaque décision protège la valeur de votre bien.</p>
+        </div>
+      </div>
+
+      <h3 style="margin:16px 0; color:var(--text-primary); font-size:1.125rem;">5 proof points à construire / mettre en avant</h3>
+      <table class="data-table">
+        <thead><tr><th>Preuve</th><th>Statut</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Double parcours immobilier (transaction, valeur vénale, VEFA) + BTP (parents promoteurs, terrain)</td><td><span class="tag tag-success">Acquis</span></td><td>À raconter sur le site « À propos »</td></tr>
+          <tr><td>Le gros chantier livré (avant/après, budget tenu, témoignage maître d'ouvrage)</td><td><span class="tag tag-warning">À documenter</span></td><td>Photos pro + verbatim client</td></tr>
+          <tr><td>Carnet d'artisans sélectionnés et fidélisés</td><td><span class="tag tag-success">Acquis</span></td><td>Argument de fiabilité à formuler</td></tr>
+          <tr><td>Assurances & garanties (décennale MOE, RC)</td><td><span class="tag tag-danger">À sécuriser</span></td><td>Prérequis du volet juridique (cf. diagnostic)</td></tr>
+          <tr><td>Méthode de suivi transparente (du chiffrage à la levée des réserves)</td><td><span class="tag tag-warning">À formaliser</span></td><td>Issue du volet IA & process (volet 3)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Canvas de perception — où se placer dans la tête du client</h4>
+        <p class="chart-caption">Axe X : pure exécution travaux → conseil patrimonial global. Axe Y : relation transactionnelle (devis) → accompagnement de confiance.</p>
+        <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" role="img">
+          <rect x="310" y="55" width="250" height="185" fill="#d4a574" opacity="0.10"/>
+          <line x1="60" y1="420" x2="560" y2="420" stroke="#cbd5e1"/>
+          <line x1="60" y1="55" x2="60" y2="420" stroke="#cbd5e1"/>
+          <line x1="310" y1="55" x2="310" y2="420" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+          <line x1="60" y1="237" x2="560" y2="237" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+          <text x="310" y="448" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b">Exécution travaux  →  Conseil patrimonial global</text>
+          <text x="32" y="237" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b" transform="rotate(-90 32 237)">Transactionnel (devis)  →  Accompagnement de confiance</text>
+          <circle cx="160" cy="350" r="9" fill="#0ea5e9"/><text x="172" y="354" font-family="Inter" font-size="11.5" fill="#1a202c">Entreprises générales</text>
+          <circle cx="200" cy="300" r="9" fill="#0ea5e9"/><text x="212" y="304" font-family="Inter" font-size="11.5" fill="#1a202c">Annuaires / mise en concurrence</text>
+          <circle cx="370" cy="170" r="9" fill="#7c3aed"/><text x="240" y="155" font-family="Inter" font-size="11.5" fill="#1a202c">Architectes d'intérieur HDG</text>
+          <text x="438" y="92" text-anchor="middle" font-family="Inter" font-size="11" fill="#a67c4f" font-weight="600" letter-spacing=".05em">POSITION VISÉE</text>
+          <circle cx="460" cy="150" r="13" fill="#d4a574" stroke="#0a2540" stroke-width="2"/>
+          <text x="460" y="184" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#0a2540">InterFace</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <h3>Voix de marque — 3 attributs</h3>
+        <p><strong>Expert · Direct · Rassurant.</strong></p>
+        <div class="grid-2" style="margin-top:8px;">
+          <div><span class="tag tag-success">À faire</span><ul style="margin-top:8px;"><li>Parler chiffres, délais, garanties concrètes</li><li>Vulgariser sans infantiliser (le client est intelligent mais non-expert)</li><li>Assumer un avis tranché (« voici ce que je déconseille »)</li></ul></div>
+          <div><span class="tag tag-danger">À éviter</span><ul style="margin-top:8px;"><li>Le jargon BTP qui exclut</li><li>Le ton commercial « pas cher / promo »</li><li>Les promesses vagues (« qualité et savoir-faire »)</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOC 02 PERSONA -->
+    <section class="section" id="persona">
+      <header class="section-header">
+        <span class="kicker">Bloc 02</span>
+        <h2>Personas & Jobs-To-Be-Done</h2>
+        <p class="lead">Un persona principal (le payeur), deux secondaires tactiques (prescripteur et investisseur).</p>
+      </header>
+
+      <div class="persona-card" style="margin-bottom:24px; border-color:var(--accent); border-width:2px;">
+        <div class="persona-head">
+          <div class="persona-avatar">H&M</div>
+          <div><h4>Hélène & Marc, 50-60 ans — le couple propriétaire patrimonial <span class="tag tag-accent">Principal · payeur</span></h4><div class="role">Cadres dirigeants ou jeunes retraités aisés · 06 / Monaco · viennent d'acquérir ou possèdent un bien de caractère à rénover entièrement (300-800 k€ de travaux)</div></div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <p class="jtbd-row"><b>Contexte d'achat :</b> achat d'un bien à rénover, projet « maison de la retraite », valorisation avant revente, ou héritage. Décision en couple, parfois avec l'agent qui a vendu le bien.</p>
+            <p class="jtbd-row"><b>JTBD fonctionnel :</b> faire rénover sans devoir piloter eux-mêmes une dizaine d'artisans ni y passer leurs soirées.</p>
+            <p class="jtbd-row"><b>JTBD émotionnel :</b> être rassurés que le budget ne dérapera pas et que rien ne sera bâclé.</p>
+            <p class="jtbd-row"><b>JTBD social :</b> recevoir dans un bien dont ils sont fiers ; passer pour des gens qui ont « bien fait les choses ».</p>
+          </div>
+          <div>
+            <p class="jtbd-row"><b>Pains :</b> 1) la peur de se faire arnaquer / déborder ; 2) le temps qu'ils n'ont pas ; 3) l'incapacité à juger la qualité technique.</p>
+            <p class="jtbd-row"><b>Gains recherchés :</b> 1) un interlocuteur unique de confiance ; 2) un budget et un calendrier tenus ; 3) un résultat qui valorise le bien.</p>
+            <p class="jtbd-row"><b>Déclencheur :</b> la signature de l'acte d'achat d'un bien à rénover, ou le premier devis d'artisan qui les effraie.</p>
+            <p class="jtbd-row"><b>S'informe via :</b> Google (« maître d'œuvre rénovation [ville] »), recommandation de leur agent / notaire, bouche-à-oreille de pairs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="persona-card">
+          <div class="persona-head">
+            <div class="persona-avatar" style="background:var(--chart-3);">P</div>
+            <div><h4>Le prescripteur <span class="tag">Secondaire · clé</span></h4><div class="role">Agent immobilier prestige, notaire, courtier, promoteur (dont le réseau familial d'Olivier)</div></div>
+          </div>
+          <p class="jtbd-row"><b>JTBD :</b> recommander un MOE fiable sans risquer sa propre réputation auprès de son client.</p>
+          <p class="jtbd-row"><b>Déclencheur :</b> un client qui vient d'acheter un bien à rénover et demande « vous connaissez quelqu'un de sérieux ? ».</p>
+          <p class="jtbd-row"><b>Ce qu'il attend :</b> un partenaire qui le fait bien paraître, qui revient vers lui, qui ne lui fait pas honte. Levier : réciprocité + suivi régulier.</p>
+        </div>
+        <div class="persona-card">
+          <div class="persona-head">
+            <div class="persona-avatar" style="background:var(--chart-2);">I</div>
+            <div><h4>L'investisseur / marchand de biens <span class="tag">Secondaire</span></h4><div class="role">Achète pour rénover et revendre / louer · raisonne ROI</div></div>
+          </div>
+          <p class="jtbd-row"><b>JTBD :</b> maximiser la plus-value, tenir le budget au centime, livrer vite.</p>
+          <p class="jtbd-row"><b>Déclencheur :</b> nouvelle acquisition dans son portefeuille.</p>
+          <p class="jtbd-row"><b>Ce qu'il attend :</b> chiffrage carré, délais courts, récurrence possible. Client à fort potentiel de répétition — mais plus dur en négociation. À cultiver en second rideau.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOC 03 JOURNEY -->
+    <section class="section" id="journey">
+      <header class="section-header">
+        <span class="kicker">Bloc 03</span>
+        <h2>Parcours client & points de friction</h2>
+        <p class="lead">Cinq étapes, les objections à chaque seuil, et les frictions critiques à neutraliser.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Étape</th><th>Ce que pense le client</th><th>Objection / friction</th><th>Levier à activer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Awareness</strong></td><td>« Je viens d'acheter, ça va être un chantier énorme… »</td><td>Ne sait pas qu'un MOE existe ; pense « entreprise générale » ou « je gère moi-même »</td><td>Visibilité Google + prescription de l'agent/notaire au moment de l'achat</td></tr>
+          <tr><td><strong>Consideration</strong></td><td>« Qui pourrait piloter ça pour moi ? »</td><td>Ne sait pas distinguer un bon MOE d'un mauvais ; aucun repère</td><td>Site avec réalisations + méthode + avis Google vérifiés</td></tr>
+          <tr><td><strong>Decision</strong></td><td>« Je peux lui faire confiance avec autant d'argent ? »</td><td>Peur de l'engagement, du dérapage budgétaire, de l'arnaque</td><td><strong>Étude de faisabilité payante</strong> (petit engagement) + garanties + RDV sur le bien</td></tr>
+          <tr><td><strong>Réalisation</strong></td><td>« Est-ce que tout se passe comme prévu ? »</td><td>Anxiété pendant le chantier, manque de visibilité</td><td>Comptes-rendus réguliers structurés (volet IA/process) → réassurance continue</td></tr>
+          <tr><td><strong>Referral</strong></td><td>« J'en suis ravi, je le recommande »</td><td>On oublie de demander l'avis / la reco</td><td>Demande d'avis Google systématisée + sollicitation des prescripteurs</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-danger">
+        <strong>Friction critique n°1 : le seuil « Decision ».</strong>
+        C'est là que tout se joue et que les prospects s'évaporent. Confier 300 k€+ à un inconnu est un acte de foi. La parade n'est pas un meilleur argumentaire commercial — c'est de <strong>réduire la taille du premier engagement</strong> : l'étude de faisabilité payante permet au client de tester la relation pour quelques milliers d'euros avant de signer la mission complète. C'est le pivot de toute la stratégie de conversion.
+      </div>
+    </section>
+
+    <!-- BLOC 04 ACQUISITION -->
+    <section class="section" id="acquisition">
+      <header class="section-header">
+        <span class="kicker">Bloc 04</span>
+        <h2>Mix d'acquisition — méthode Bullseye</h2>
+        <p class="lead">Concentration sur 3 canaux core, 2 à tester, le reste écarté avec raisons.</p>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Bullseye d'acquisition</h4>
+        <p class="chart-caption">Centre = 70 % de l'effort. Anneau = à tester. Externe = à connaître mais NE PAS lancer maintenant.</p>
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" role="img">
+          <circle cx="300" cy="210" r="195" fill="#0a2540" opacity="0.05" stroke="#cbd5e1"/>
+          <circle cx="300" cy="210" r="130" fill="#0a2540" opacity="0.09" stroke="#cbd5e1"/>
+          <circle cx="300" cy="210" r="68" fill="#d4a574" opacity="0.30" stroke="#a67c4f"/>
+          <g font-family="Inter" text-anchor="middle">
+            <text x="300" y="205" font-size="11" font-weight="700" fill="#0a2540">CORE 70 %</text>
+            <text x="300" y="222" font-size="10" fill="#0a2540">Prescription · Google</text>
+            <text x="300" y="236" font-size="10" fill="#0a2540">· Site preuve</text>
+            <text x="300" y="120" font-size="10.5" font-weight="600" fill="#64748b">Promising 20 %</text>
+            <text x="300" y="62" font-size="10.5" font-weight="600" fill="#94a3b8">Longtail · à écarter</text>
+            <!-- promising labels -->
+            <text x="160" y="170" font-size="10.5" fill="#1a202c">SEA local (test)</text>
+            <text x="445" y="170" font-size="10.5" fill="#1a202c">Partenariats</text>
+            <text x="445" y="260" font-size="10.5" fill="#1a202c">LinkedIn perso</text>
+            <!-- longtail labels -->
+            <text x="150" y="100" font-size="10" fill="#94a3b8">Meta / Insta Ads</text>
+            <text x="455" y="100" font-size="10" fill="#94a3b8">TikTok</text>
+            <text x="150" y="330" font-size="10" fill="#94a3b8">Salons</text>
+            <text x="455" y="330" font-size="10" fill="#94a3b8">Affiliation large</text>
+          </g>
+        </svg>
+      </div>
+
+      <table class="data-table">
+        <thead><tr><th>Canal core</th><th>Comment l'attaquer</th><th>Budget an 1</th><th>KPI cible</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Réseau prescripteurs</strong><br><span style="color:var(--text-muted);font-size:.8rem;">Apporteurs d'affaires</span></td><td>Lister 30-50 prescripteurs (agents prestige, notaires, promoteurs, réseau familial). Cadence de contact mensuelle. Carte + plaquette. Éventuel apport d'affaires rémunéré.</td><td class="numeric">~2 400 €</td><td>15-25 leads/an</td></tr>
+          <tr><td><strong>Google local</strong><br><span style="color:var(--text-muted);font-size:.8rem;">GMB + SEO + avis</span></td><td>Fiche Google Business optimisée, photos du chantier livré, collecte d'avis. SEO local sur « maître d'œuvre rénovation Nice / Cannes / Antibes ».</td><td class="numeric">inclus site</td><td>Top 3 local · 10+ avis</td></tr>
+          <tr><td><strong>Site d'autorité</strong><br><span style="color:var(--text-muted);font-size:.8rem;">Owned · preuve</span></td><td>Réalisations avant/après, méthode, garanties, « À propos » fort, étude de faisabilité payante en CTA.</td><td class="numeric">~6 000 €</td><td>2 % visiteurs → contact</td></tr>
+          <tr><td><strong>SEA local</strong> <span class="tag tag-warning">Test</span><br><span style="color:var(--text-muted);font-size:.8rem;">Paid · intentionnel</span></td><td>Google Ads sur requêtes à forte intention, zone 06. Test 6 mois, ROAS mesuré au lead qualifié.</td><td class="numeric">~3 600 €</td><td>CAC &lt; 2 k€/chantier</td></tr>
+          <tr><td><strong>Partenariats</strong> <span class="tag tag-warning">Test</span><br><span style="color:var(--text-muted);font-size:.8rem;">Earned</span></td><td>Architectes d'intérieur (complémentaires, pas concurrents), agences immo de prestige, courtiers en travaux haut de gamme.</td><td class="numeric">temps</td><td>2-3 partenariats actifs</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warning">
+        <strong>Canaux écartés — et pourquoi.</strong>
+        <strong>Meta / Instagram / TikTok Ads :</strong> le persona patrimonial 50-60 ans n'y est pas en intention de rénovation lourde ; ciblage par budget travaux impossible → gaspillage. <strong>Salons :</strong> coût et temps élevés, à reconsidérer en an 2 seulement. <strong>LinkedIn organique :</strong> utile pour la crédibilité d'Olivier et le lien prescripteurs, mais en soutien (Shared), pas comme moteur d'acquisition.
+      </div>
+    </section>
+
+    <!-- BLOC 05 CONTENU -->
+    <section class="section" id="contenu">
+      <header class="section-header">
+        <span class="kicker">Bloc 05</span>
+        <h2>Communication & contenu — modèle PESO</h2>
+        <p class="lead">Trois piliers, une cadence réaliste pour un solo, production IA-assistée.</p>
+      </header>
+
+      <div class="grid-2">
+        <div class="chart-card">
+          <h4 class="chart-title">Répartition PESO recommandée</h4>
+          <p class="chart-caption">Stade lancé sans base : priorité à construire l'actif propre (Owned) et la preuve (Earned).</p>
+          <div style="font-size:.85rem;">
+            <div class="barwrap"><span style="width:50%;background:var(--chart-1);"></span><span style="width:25%;background:var(--chart-4);"></span><span style="width:15%;background:var(--chart-3);"></span><span style="width:10%;background:var(--chart-2);"></span></div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;color:var(--text-muted);">
+              <span><b style="color:var(--chart-1);">■</b> Owned 50 % — site, GMB, réalisations</span>
+              <span><b style="color:var(--chart-4);">■</b> Earned 25 % — avis, prescription, PR locale</span>
+              <span><b style="color:var(--chart-3);">■</b> Shared 15 % — LinkedIn d'Olivier</span>
+              <span><b style="color:var(--chart-2);">■</b> Paid 10 % — SEA test</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Modèle de production : IA-assistée</h3>
+          <p style="font-size:.92rem;">Olivier est seul et sur le terrain. Une cadence ambitieuse s'effondrera en 3 semaines. Le bon modèle : <strong>dicter à la voix</strong> (sur chantier, en voiture) → l'IA structure en post / article / fiche réalisation. Multiplie la production ×2-4 sans perdre sa voix. Détaillé dans le volet 3 (IA & automatisations).</p>
+        </div>
+      </div>
+
+      <h3 style="margin:16px 0; color:var(--text-primary); font-size:1.125rem;">3 piliers de contenu</h3>
+      <div class="grid-3">
+        <div class="card"><h3>1 · Autorité</h3><p style="font-size:.9rem;color:var(--text-muted);">« Les coulisses d'une rénovation maîtrisée. » Comment lire un devis, les 5 pièges qui font exploser un budget, faut-il un MOE ou pas. Démontre l'expertise.</p></div>
+        <div class="card"><h3>2 · Réalisations</h3><p style="font-size:.9rem;color:var(--text-muted);">Avant/après commentés, le récit d'un chantier, le problème résolu. La preuve qui rassure au seuil « Decision ».</p></div>
+        <div class="card"><h3>3 · Parcours</h3><p style="font-size:.9rem;color:var(--text-muted);">Le double ADN immo + BTP d'Olivier, sa méthode, sa vision du métier. Humanise et différencie — personne d'autre n'a ce profil.</p></div>
+      </div>
+
+      <h3 style="margin:16px 0; color:var(--text-primary); font-size:1.125rem;">Cadence réaliste (tenable 12 mois)</h3>
+      <table class="data-table">
+        <thead><tr><th>Format</th><th>Fréquence</th><th>Pilier</th><th>Canal</th></tr></thead>
+        <tbody>
+          <tr><td>Post LinkedIn (dicté → structuré IA)</td><td>1 / semaine</td><td>Rotation des 3</td><td>LinkedIn d'Olivier</td></tr>
+          <tr><td>Fiche réalisation documentée</td><td>1 / mois</td><td>Réalisations</td><td>Site + GMB</td></tr>
+          <tr><td>Post / photo sur la fiche Google</td><td>2 / mois</td><td>Réalisations / Autorité</td><td>Google Business</td></tr>
+          <tr><td>Article de fond SEO local</td><td>1 / 2 mois</td><td>Autorité</td><td>Site (blog)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- BLOC 06 FUNNEL -->
+    <section class="section" id="funnel">
+      <header class="section-header">
+        <span class="kicker">Bloc 06</span>
+        <h2>Funnel & stratégie commerciale</h2>
+        <p class="lead">TOFU / MOFU / BOFU chiffré, séquences de nurturing et processus de vente.</p>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Funnel annuel estimé — objectif 8-10 chantiers</h4>
+        <p class="chart-caption">Cycle long, high-ticket. Les taux sont des hypothèses de référence à calibrer après le 1er trimestre.</p>
+        <svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" role="img">
+          <polygon points="80,40 520,40 470,110 130,110" fill="#0a2540" opacity="0.85"/>
+          <polygon points="130,120 470,120 420,190 180,190" fill="#0ea5e9" opacity="0.85"/>
+          <polygon points="180,200 420,200 370,270 230,270" fill="#d4a574" opacity="0.9"/>
+          <polygon points="230,280 370,280 330,340 270,340" fill="#15803d" opacity="0.9"/>
+          <g font-family="Inter" text-anchor="middle" fill="#fff">
+            <text x="300" y="70" font-size="12" font-weight="600">TOFU · Visibilité</text>
+            <text x="300" y="90" font-size="11">~3 000 visiteurs site + portée prescripteurs / an</text>
+            <text x="300" y="150" font-size="12" font-weight="600">MOFU · Contacts</text>
+            <text x="300" y="170" font-size="11">~60 demandes de contact (≈2 %)</text>
+            <text x="300" y="228" font-size="12" font-weight="600">BOFU · Études faisabilité</text>
+            <text x="300" y="248" font-size="11">~32 RDV / études payantes qualifiés</text>
+            <text x="300" y="312" font-size="12" font-weight="600">Signatures</text>
+            <text x="300" y="330" font-size="11">8-10 missions (~28 % close)</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Séquences de nurturing (email · Brevo)</h3>
+          <ul style="margin:0;">
+            <li><strong>Après 1er contact</strong> (3-4 emails) : confirmer, envoyer une fiche réalisation, expliquer la méthode, proposer l'étude de faisabilité.</li>
+            <li><strong>Après étude de faisabilité</strong> (2-3 emails) : restitution, preuves sociales, proposition d'honoraires, garanties.</li>
+            <li><strong>Réseau dormant / post-chantier</strong> : demande d'avis + sollicitation de recommandation.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Processus de vente (sales-led)</h3>
+          <ol style="margin:0;">
+            <li>Lead (Google / prescription)</li>
+            <li>Appel de qualification (projet réel ? budget ? timing ?)</li>
+            <li>RDV sur le bien — moment de vérité</li>
+            <li>Étude de faisabilité payante (close intermédiaire)</li>
+            <li>Proposition d'honoraires → mission complète</li>
+          </ol>
+          <p style="font-size:.85rem;color:var(--text-muted);margin-top:8px;">CRM léger : Notion. Cycle estimé : 1 à 4 mois.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>Top 3 leviers de conversion à activer.</strong>
+        1) L'<strong>étude de faisabilité payante</strong> comme palier de confiance (réduit la friction du gros engagement). 2) La <strong>preuve sociale contextualisée</strong> : avis Google + le chantier livré en avant/après. 3) La <strong>clarté des garanties</strong> : afficher assurances, méthode de suivi et transparence budgétaire — c'est ce qui distingue d'une entreprise générale opaque.
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section" id="roadmap">
+      <header class="section-header">
+        <span class="kicker">Exécution</span>
+        <h2>Roadmap 90 jours, budget & KPIs</h2>
+        <p class="lead">Trois phases, allocation budgétaire et North Star Metric.</p>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Roadmap 90 jours</h4>
+        <p class="chart-caption">Quick wins → systèmes durables → amplification. Calé sur la séquence du diagnostic (sécuriser → visible → systématiser).</p>
+        <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="58" x2="560" y2="58" stroke="#cbd5e1" stroke-width="2"/>
+          <g font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle">
+            <text x="120" y="38">J1-J30 · Quick wins</text><text x="300" y="38">J31-J60 · Setup pérenne</text><text x="480" y="38">J61-J90 · Scale</text>
+          </g>
+          <circle cx="120" cy="58" r="7" fill="#b91c1c"/><circle cx="300" cy="58" r="7" fill="#d4a574"/><circle cx="480" cy="58" r="7" fill="#15803d"/>
+          <g font-family="Inter" font-size="11" fill="#1a202c" text-anchor="middle">
+            <text x="120" y="98" font-weight="600">Rendre visible</text>
+            <text x="120" y="117" fill="#64748b">Fiche Google + 1ers avis</text>
+            <text x="120" y="133" fill="#64748b">Liste 30-50 prescripteurs</text>
+            <text x="120" y="149" fill="#64748b">Photos pro du chantier livré</text>
+
+            <text x="300" y="98" font-weight="600">Systématiser</text>
+            <text x="300" y="117" fill="#64748b">Site d'autorité en ligne</text>
+            <text x="300" y="133" fill="#64748b">Cadence prescripteurs (CRM)</text>
+            <text x="300" y="149" fill="#64748b">Séquences email + LinkedIn</text>
+
+            <text x="480" y="98" font-weight="600">Amplifier</text>
+            <text x="480" y="117" fill="#64748b">Test Google Ads local</text>
+            <text x="480" y="133" fill="#64748b">2-3 partenariats actifs</text>
+            <text x="480" y="149" fill="#64748b">1ères études faisabilité signées</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-card">
+          <h4 class="chart-title">Budget marketing an 1 — ~15 000 €</h4>
+          <p class="chart-caption">Dominé par l'actif durable (site + preuve), pas par la pub.</p>
+          <div style="font-size:.85rem;">
+            <div class="barwrap" style="height:18px;"><span style="width:40%;background:var(--chart-1);"></span><span style="width:24%;background:var(--chart-2);"></span><span style="width:16%;background:var(--chart-3);"></span><span style="width:20%;background:var(--chart-4);"></span></div>
+            <div style="margin-top:10px;color:var(--text-muted);">
+              <div><b style="color:var(--chart-1);">■</b> Site & preuve (site + photos pro) — 6 000 € · 40 %</div>
+              <div><b style="color:var(--chart-2);">■</b> SEA local (test 6 mois) — 3 600 € · 24 %</div>
+              <div><b style="color:var(--chart-3);">■</b> Activation réseau (supports, RDV) — 2 400 € · 16 %</div>
+              <div><b style="color:var(--chart-4);">■</b> Outils & contenu (Notion, Brevo, IA) — 3 000 € · 20 %</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>North Star Metric & KPIs</h3>
+          <p style="font-size:.92rem;"><strong>NSM : valeur du pipeline qualifié</strong> (€ d'honoraires en discussion active). En cycle long, c'est le meilleur indicateur avancé du revenu.</p>
+          <p style="font-size:.85rem;color:var(--text-muted);margin:0;"><strong>KPIs secondaires :</strong> leads qualifiés/mois · études de faisabilité signées · taux de close · avis Google · position SEO local · CAC réel par chantier.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-accent">
+        <strong>ROI de référence.</strong>
+        Un seul chantier incrémental signé = ~50 k€ d'honoraires, soit plus de 3× le budget marketing annuel total. Si le dispositif génère ne serait-ce que 2 chantiers attribuables sur l'année, le retour dépasse <strong>×6</strong>. Le risque financier est faible ; le vrai enjeu est la régularité d'exécution.
+      </div>
+    </section>
+
+    <!-- ANNEXES -->
+    <section class="section" id="annexes">
+      <header class="section-header">
+        <span class="kicker">Annexes</span>
+        <h2>Score, hypothèses & méthodologie</h2>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Score de viabilité de la stratégie — 75 / 100</h4>
+        <p class="chart-caption">Six sous-scores pondérés. La note est tirée vers le bas par le réalisme des moyens (exécution solo), vers le haut par l'alignement persona/canaux.</p>
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="300,60 421.2,130 421.2,270 300,340 178.8,270 178.8,130" fill="none" stroke="#e2e8f0"/>
+          <polygon points="300,130 360.6,165 360.6,235 300,270 239.4,235 239.4,165" fill="none" stroke="#e2e8f0"/>
+          <g stroke="#e2e8f0">
+            <line x1="300" y1="200" x2="300" y2="60"/><line x1="300" y1="200" x2="421.2" y2="130"/>
+            <line x1="300" y1="200" x2="421.2" y2="270"/><line x1="300" y1="200" x2="300" y2="340"/>
+            <line x1="300" y1="200" x2="178.8" y2="270"/><line x1="300" y1="200" x2="178.8" y2="130"/>
+          </g>
+          <polygon points="300,88 403,140.5 388.8,251.3 300,302.6 211.2,251.3 215.2,151" fill="#0a2540" opacity="0.18" stroke="#0a2540" stroke-width="2"/>
+          <g font-family="Inter" font-size="11" fill="#1a202c" text-anchor="middle">
+            <text x="300" y="46">Positionnement · 16/20</text>
+            <text x="448" y="125">Persona ↔ canaux · 17/20</text>
+            <text x="450" y="282">Réalisme moyens · 13/20</text>
+            <text x="300" y="358">Funnel & conversion · 11/15</text>
+            <text x="150" y="282">Différenciation · 11/15</text>
+            <text x="152" y="125">Mesurabilité · 7/10</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3 style="margin-bottom:12px; color:var(--text-primary);">Hypothèses posées (à valider après le 1er trimestre)</h3>
+      <ul style="margin-bottom:32px;">
+        <li><strong>Funnel :</strong> ~3 000 visiteurs/an, 2 % → contact, ~28 % de close BOFU. Références sectorielles B2C high-ticket / service ; à recalibrer sur données réelles.</li>
+        <li><strong>Budget 15 k€ :</strong> scénario médian issu du diagnostic ; ajustable selon trésorerie.</li>
+        <li><strong>Cadence contenu :</strong> calibrée sur une production solo IA-assistée ; non tenable sans outillage (volet 3).</li>
+        <li><strong>SAM / persona :</strong> hérités du diagnostic stratégique (propriétaires patrimoniaux 06 + Monaco, travaux 300 k€-1,5 M€).</li>
+      </ul>
+
+      <h3 style="margin-bottom:12px; color:var(--text-primary);">Méthodologie</h3>
+      <p style="font-size:.92rem;">Frameworks mobilisés : positionnement Dunford (« Obviously Awesome »), Jobs-To-Be-Done (Christensen), customer journey mapping, Bullseye (Weinberg, « Traction »), modèle PESO, funnel TOFU/MOFU/BOFU, AARRR, priorisation ICE, score de viabilité décomposé en 6 sous-scores pondérés. Inputs hérités du diagnostic stratégique InterFace (volet 1).</p>
+
+      <p style="margin-top:48px; padding-top:24px; border-top:1px solid var(--border); color:var(--text-muted); font-size:.85rem;">
+        Stratégie préparée par Michaël Lopez — MasterPrompt · Conseil Stratégique & IA. Document de travail confidentiel, 28 mai 2026. Volet 2/3 du Pack IA. Le volet 3 (IA & automatisations) opérationnalisera la production de contenu, le CRM prescripteurs, le suivi de chantier et les séquences email décrits ici.
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section, #executive-summary');
+const tocLinks = document.querySelectorAll('.toc a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) {
+    tocLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+  }});
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

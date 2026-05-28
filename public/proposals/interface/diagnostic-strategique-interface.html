@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic Stratégique — InterFace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa; --bg-card: #ffffff; --bg-subtle: #f1f5f9;
+  --border: #e2e8f0; --border-strong: #cbd5e1;
+  --text-primary: #0a2540; --text-body: #1a202c; --text-muted: #64748b; --text-inverse: #ffffff;
+  --accent: #d4a574; --accent-dark: #a67c4f; --accent-soft: #faf3e8;
+  --success: #15803d; --success-soft: #f0fdf4;
+  --warning: #b45309; --warning-soft: #fffbeb;
+  --danger: #b91c1c; --danger-soft: #fef2f2;
+  --info: #0369a1; --info-soft: #f0f9ff;
+  --chart-1: #0a2540; --chart-2: #0ea5e9; --chart-3: #d4a574; --chart-4: #15803d; --chart-5: #b91c1c; --chart-6: #7c3aed; --chart-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+  --shadow-sm: 0 1px 2px rgba(10,37,64,.04);
+  --shadow: 0 1px 3px rgba(10,37,64,.06), 0 1px 2px rgba(10,37,64,.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .toc { position: static !important; } }
+.toc { position: sticky; top: 32px; align-self: start; font-size: .875rem; }
+.toc-title { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; border-left: 1px solid var(--border); }
+.toc li { margin-bottom: 4px; }
+.toc a { display: block; padding: 6px 16px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; transition: all .15s; }
+.toc a:hover { color: var(--text-primary); border-left-color: var(--accent); }
+.toc a.active { color: var(--text-primary); border-left-color: var(--text-primary); font-weight: 600; }
+.main { max-width: 920px; }
+.cover { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 64px 48px; margin-bottom: 64px; position: relative; overflow: hidden; }
+.cover::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--text-primary); }
+.cover-kicker { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--accent-dark); margin-bottom: 16px; }
+.cover h1 { font-size: 3rem; font-weight: 700; color: var(--text-primary); line-height: 1.1; margin-bottom: 16px; letter-spacing: -.02em; }
+.cover-tagline { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--text-muted); margin-bottom: 48px; max-width: 640px; }
+.cover-meta { display: flex; gap: 48px; border-top: 1px solid var(--border); padding-top: 24px; font-size: .875rem; flex-wrap: wrap; }
+.cover-meta-item .label { color: var(--text-muted); text-transform: uppercase; font-size: .7rem; letter-spacing: .05em; margin-bottom: 4px; }
+.cover-meta-item .value { color: var(--text-primary); font-weight: 600; }
+.section { margin-bottom: 80px; scroll-margin-top: 32px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 12px 0; font-weight: 600; line-height: 1.2; letter-spacing: -.01em; }
+.section-header .lead { font-size: 1.125rem; color: var(--text-muted); margin: 0; max-width: 720px; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
+.card h3 { font-size: 1.125rem; color: var(--text-primary); margin-bottom: 12px; font-weight: 600; }
+.card p { margin-bottom: 12px; } .card p:last-child { margin-bottom: 0; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+@media (max-width: 700px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.kpi-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); display: block; margin-bottom: 8px; font-weight: 500; }
+.kpi-value { font-size: 2.2rem; font-weight: 700; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.kpi-delta { font-size: .8rem; margin-top: 8px; display: inline-block; font-weight: 500; color: var(--text-muted); }
+.delta-up { color: var(--success); } .delta-down { color: var(--danger); }
+.score-display { display: flex; align-items: center; gap: 24px; padding: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; }
+.score-circle { width: 120px; height: 120px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-subtle); border: 4px solid var(--text-primary); flex-shrink: 0; }
+.score-circle.medium { border-color: var(--warning); background: var(--warning-soft); }
+.score-circle .score-number { font-size: 2.5rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
+.score-circle .score-max { font-size: .875rem; color: var(--text-muted); margin-top: 4px; }
+.score-verdict h3 { font-size: 1.5rem; margin-bottom: 8px; color: var(--text-primary); }
+.score-verdict p { color: var(--text-muted); margin: 0; }
+.callout { padding: 16px 24px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 24px 0; font-size: 1rem; }
+.callout strong { color: var(--text-primary); display: block; margin-bottom: 4px; font-weight: 600; }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); } .callout-warning strong { color: var(--warning); }
+.callout-success { border-color: var(--success); background: var(--success-soft); } .callout-success strong { color: var(--success); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); } .callout-danger strong { color: var(--danger); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); } .callout-accent strong { color: var(--accent-dark); }
+.data-table { width: 100%; border-collapse: collapse; font-size: .875rem; margin: 24px 0; }
+.data-table th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; font-size: .7rem; padding: 12px 16px; border-bottom: 2px solid var(--text-primary); }
+.data-table td { padding: 16px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td.numeric { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-weight: 500; }
+.data-table tbody tr:hover { background: var(--bg-subtle); }
+.tag { display: inline-block; padding: 4px 10px; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; border-radius: 4px; background: var(--bg-subtle); color: var(--text-muted); }
+.tag-success { background: var(--success-soft); color: var(--success); }
+.tag-warning { background: var(--warning-soft); color: var(--warning); }
+.tag-danger { background: var(--danger-soft); color: var(--danger); }
+.tag-accent { background: var(--accent-soft); color: var(--accent-dark); }
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 32px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.chart-caption { font-size: .875rem; color: var(--text-muted); margin-bottom: 20px; font-style: italic; }
+.chart-card svg { width: 100%; height: auto; max-height: 460px; }
+.main p { margin-bottom: 16px; max-width: 760px; } .main p:last-child { margin-bottom: 0; }
+.main ul, .main ol { margin: 0 0 16px 24px; max-width: 760px; } .main li { margin-bottom: 8px; }
+.main strong { color: var(--text-primary); font-weight: 600; }
+.lead-paragraph { font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.6; color: var(--text-body); margin-bottom: 32px; max-width: 760px; }
+@media print {
+  body { background: white; }
+  .layout { grid-template-columns: 1fr; padding: 0; max-width: 100%; gap: 0; }
+  .toc { display: none; } .no-print { display: none !important; }
+  .section { page-break-inside: avoid; margin-bottom: 40px; }
+  .cover { page-break-after: always; box-shadow: none; }
+  .card, .chart-card, .kpi, .score-display { box-shadow: none; break-inside: avoid; }
+  a { color: var(--text-body); text-decoration: none; }
+}
+@page { size: A4; margin: 18mm 16mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc no-print">
+    <p class="toc-title">Sommaire</p>
+    <ol>
+      <li><a href="#executive-summary">Résumé exécutif</a></li>
+      <li><a href="#bmc">01 · Business Model Canvas</a></li>
+      <li><a href="#marche">02 · Étude de marché</a></li>
+      <li><a href="#concurrence">03 · Concurrence</a></li>
+      <li><a href="#pricing">04 · Pricing & offre</a></li>
+      <li><a href="#scalabilite">05 · Scalabilité</a></li>
+      <li><a href="#recommandations">06 · Recommandations</a></li>
+      <li><a href="#annexes">Annexes</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+    <!-- COVER -->
+    <section class="cover">
+      <p class="cover-kicker">Diagnostic Stratégique · Pack IA</p>
+      <h1>InterFace</h1>
+      <p class="cover-tagline">Maîtrise d'œuvre d'exécution & rénovation lourde — Côte d'Azur. Analyse de business model, marché, positionnement, scalabilité et feuille de route 90 jours.</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item"><div class="label">Préparé pour</div><div class="value">Olivier Colombani · InterFace SARL</div></div>
+        <div class="cover-meta-item"><div class="label">Date</div><div class="value">28 mai 2026</div></div>
+        <div class="cover-meta-item"><div class="label">Préparé par</div><div class="value">Michaël Lopez · MasterPrompt</div></div>
+        <div class="cover-meta-item"><div class="label">Statut</div><div class="value">Document de travail confidentiel</div></div>
+      </div>
+    </section>
+
+    <!-- RÉSUMÉ EXÉCUTIF -->
+    <section class="section" id="executive-summary">
+      <header class="section-header">
+        <span class="kicker">Synthèse</span>
+        <h2>Résumé exécutif</h2>
+        <p class="lead">Les 5 constats majeurs, le verdict tranché et le score de viabilité décomposé.</p>
+      </header>
+
+      <p class="lead-paragraph">InterFace n'a pas un problème de marché : la rénovation lourde haut de gamme sur la Côte d'Azur est l'un des terrains les plus porteurs de France. InterFace a un problème d'<em>actif d'acquisition</em>. À ce jour, le carnet de commandes dépend d'un réseau « aléatoire et faible », il n'existe aucune présence digitale, et le pipeline est vide. Le modèle est extrêmement rentable à l'unité, mais structurellement plafonné par une seule personne. Le verdict est un GO franc — à condition de traiter trois angles morts avant de pousser l'acquisition.</p>
+
+      <div class="score-display">
+        <div class="score-circle medium">
+          <span class="score-number">68</span>
+          <span class="score-max">/ 100</span>
+        </div>
+        <div class="score-verdict">
+          <h3>Verdict : GO solide, conditionné</h3>
+          <p>Fondamentaux excellents (marge, panier, expertise, marché). Trois conditions : sécuriser le cadre juridique, construire un actif d'acquisition prévisible, trancher tôt la question du plafond solo.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:32px; margin-bottom:16px; color:var(--text-primary); font-size:1.125rem;">Les 5 constats majeurs</h3>
+
+      <div class="card">
+        <h3 style="display:flex; align-items:baseline; gap:12px;"><span style="color:var(--accent); font-family:var(--font-serif); font-size:1.5rem;">01</span> Le vrai sujet n'est pas « générer du lead » — c'est créer un canal d'acquisition prévisible.</h3>
+        <p>Avec 6-7 chantiers/an et un panier moyen de 50 k€ d'honoraires, InterFace n'est pas un business de volume mais un business de <strong>confiance et de haut de panier</strong>. Mathématiquement, il faut ~40-50 leads qualifiés/an, soit 3-4 par mois — pas un tunnel à mille emails. Un lead magnet « grand public » ramènera des curieux et des petits budgets, les pires clients pour de la rénovation lourde. L'enjeu est la <strong>qualité et la régularité</strong> du flux, pas le volume brut.</p>
+      </div>
+
+      <div class="card">
+        <h3 style="display:flex; align-items:baseline; gap:12px;"><span style="color:var(--accent); font-family:var(--font-serif); font-size:1.5rem;">02</span> L'actif le plus puissant est sous-exploité : le réseau prescripteurs.</h3>
+        <p>Parents promoteurs, 20 ans dans la transaction immobilière, écosystème d'agents et de notaires : ces gens orientent des chantiers de rénovation lourde en permanence. Ce réseau est qualifié « faible » non parce qu'il faut le remplacer, mais parce qu'il n'est <strong>pas travaillé ni systématisé</strong>. C'est le canal n°1, à coût d'acquisition quasi nul — et c'est précisément celui qui n'est ni outillé ni cadencé aujourd'hui.</p>
+      </div>
+
+      <div class="card">
+        <h3 style="display:flex; align-items:baseline; gap:12px;"><span style="color:var(--accent); font-family:var(--font-serif); font-size:1.5rem;">03</span> Unit economics exceptionnelles, mais plafond de verre structurel.</h3>
+        <p>Marge contributive estimée à ~80 %, point mort opérationnel atteint dès le premier chantier de l'année. Mais la production repose à 100 % sur une personne qui travaille « tout à la main ». Le plafond réaliste est de ~6-8 chantiers/an. <strong>300-350 k€ de CA solo est un excellent revenu, mais ce n'est pas « scalable » au sens propre</strong> tant qu'InterFace n'industrialise pas son pilotage (process + délégation). Il faut le décider consciemment, pas le subir.</p>
+      </div>
+
+      <div class="card">
+        <h3 style="display:flex; align-items:baseline; gap:12px;"><span style="color:var(--accent); font-family:var(--font-serif); font-size:1.5rem;">04</span> Risque juridique latent à neutraliser avant toute communication commerciale.</h3>
+        <p>La maîtrise d'œuvre d'exécution engage une responsabilité lourde. La RC est en cours de validité, mais l'assurance décennale MOE et la collecte des attestations décennales des sous-traitants doivent être confirmées. Piloter des prestataires jusqu'à la réception et la levée des réserves sans cadre contractuel et assurantiel verrouillé, c'est exposer la société à un sinistre qui peut l'effacer. Sur ce métier, un seul litige mal couvert coûte plus cher que dix ans d'honoraires.</p>
+      </div>
+
+      <div class="card">
+        <h3 style="display:flex; align-items:baseline; gap:12px;"><span style="color:var(--accent); font-family:var(--font-serif); font-size:1.5rem;">05</span> Zéro preuve en ligne sur un métier d'achat de confiance = handicap immédiat.</h3>
+        <p>Un propriétaire qui confie 300 k€ à 1,5 M€ de travaux veut voir des réalisations, une méthode, des garanties, un visage. Aujourd'hui : aucune fiche Google, aucun site, aucune trace. Le marché local est dense mais fragmenté, dominé par des annuaires et des acteurs sans présence digitale soignée. L'espace est ouvert pour celui qui apporte de la <strong>crédibilité visible</strong>. La marque « InterFace » est par ailleurs un terme générique difficile à posséder en référencement — un point à arbitrer.</p>
+      </div>
+
+      <div class="callout callout-warning">
+        <strong>Risque principal à neutraliser</strong>
+        Le trou d'air. Pipeline vide + acquisition non systématisée = revenu en dents de scie. Le premier livrable n'est pas un site « joli », c'est un <strong>mécanisme qui remplit le calendrier de façon prévisible</strong> : réseau cadencé + visibilité locale Google + preuve. Tout le reste en découle.
+      </div>
+    </section>
+
+    <!-- BLOC 01 BMC -->
+    <section class="section" id="bmc">
+      <header class="section-header">
+        <span class="kicker">Bloc 01</span>
+        <h2>Business Model Canvas</h2>
+        <p class="lead">Les 9 blocs du modèle, puis l'analyse des alignements critiques.</p>
+      </header>
+
+      <div class="card">
+        <div style="display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:1fr 1fr; gap:8px; min-height:380px; font-size:.8rem;">
+          <div style="grid-column:1; grid-row:1/span 2; background:var(--bg-subtle); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px;">Partenaires clés</div>
+            <p style="margin:0; font-size:.82rem;">Sous-traitants tous corps d'état · réseau immo (parents promoteurs, agents, notaires) · bureaux d'études · assureurs · fournisseurs matériaux</p>
+          </div>
+          <div style="grid-column:2; grid-row:1; background:var(--bg-subtle); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px;">Activités clés</div>
+            <p style="margin:0; font-size:.82rem;">Étude de faisabilité · chiffrage · sélection & pilotage prestataires · suivi de chantier · réception & levée de réserves</p>
+          </div>
+          <div style="grid-column:3; grid-row:1/span 2; background:var(--accent-soft); padding:14px; border-radius:4px; border:2px solid var(--accent);">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-dark); margin-bottom:8px;">Proposition de valeur</div>
+            <p style="margin:0; font-size:.82rem; font-weight:500;">Un interlocuteur unique qui transforme une rénovation lourde à risque en chantier maîtrisé : budget tenu, délais tenus, qualité garantie, zéro charge mentale pour le propriétaire.</p>
+          </div>
+          <div style="grid-column:4; grid-row:1; background:var(--bg-subtle); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px;">Relations clients</div>
+            <p style="margin:0; font-size:.82rem;">Accompagnement personnalisé haut de gamme, 1:1, sur la durée du chantier · relation de confiance long terme</p>
+          </div>
+          <div style="grid-column:5; grid-row:1/span 2; background:var(--bg-subtle); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px;">Segments clients</div>
+            <p style="margin:0; font-size:.82rem;">Propriétaires de biens à rénover lourdement (300 k€-1,5 M€ de travaux) · résidences principales et secondaires haut de gamme 06 / Monaco · investisseurs · marchands de biens</p>
+          </div>
+          <div style="grid-column:2; grid-row:2; background:var(--bg-subtle); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px;">Ressources clés</div>
+            <p style="margin:0; font-size:.82rem;">Expertise BTP + immobilier d'Olivier · réseau de prescripteurs · carnet de sous-traitants de confiance · réputation</p>
+          </div>
+          <div style="grid-column:4; grid-row:2; background:var(--bg-subtle); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:8px;">Canaux</div>
+            <p style="margin:0; font-size:.82rem;">Aujourd'hui : bouche-à-oreille réseau (seul). À construire : Google local, site d'autorité, prescription cadencée</p>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+          <div style="background:var(--danger-soft); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--danger); margin-bottom:8px;">Structure de coûts</div>
+            <p style="margin:0; font-size:.82rem;">Fixes faibles : assurances (décennale + RC), véhicule, outils, compta, hébergement (~15-25 k€/an). Variables : déplacements, BE ponctuels. Sous-traitance refacturée au maître d'ouvrage.</p>
+          </div>
+          <div style="background:var(--success-soft); padding:14px; border-radius:4px;">
+            <div style="font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; color:var(--success); margin-bottom:8px;">Sources de revenus</div>
+            <p style="margin:0; font-size:.82rem;">Honoraires de maîtrise d'œuvre au % du montant des travaux (~7-10 % en mission complète). One-shot par chantier. ~50 k€ en moyenne.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:32px; margin-bottom:16px; color:var(--text-primary); font-size:1.125rem;">Analyse des 4 alignements</h3>
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="color:var(--success);">✓ Forces du modèle</h3>
+          <ul style="margin:0;">
+            <li><strong>Segment ↔ valeur : très aligné.</strong> La douleur n°1 du propriétaire (peur de se faire déborder par un chantier lourd) est exactement ce que pilote un MOE. Le profil hybride immobilier + BTP rassure une clientèle patrimoniale.</li>
+            <li><strong>Coûts ↔ revenus : exceptionnel.</strong> 50 k€ d'honoraires pour des charges fixes annuelles de l'ordre de 15-25 k€. Un seul chantier couvre l'année.</li>
+            <li><strong>Ressources rares :</strong> le réseau immo + l'expérience terrain sont difficiles à répliquer par un nouvel entrant.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);">✗ Faiblesses critiques</h3>
+          <ul style="margin:0;">
+            <li><strong>Valeur ↔ canaux : cassé.</strong> Une valeur complexe et de confiance se vend par la preuve et l'éducation. Or le seul canal actif est le bouche-à-oreille passif. Aucun canal n'« explique » la valeur à un prospect froid.</li>
+            <li><strong>Ressources ↔ activités : goulot.</strong> Toutes les activités clés reposent sur une seule personne. Pas de système, « tout à la main » → plafond de capacité et risque de rupture en cas d'indisponibilité.</li>
+            <li><strong>Revenu mono-jambe :</strong> 100 % one-shot, aucun revenu récurrent, aucune diversification.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOC 02 MARCHÉ -->
+    <section class="section" id="marche">
+      <header class="section-header">
+        <span class="kicker">Bloc 02</span>
+        <h2>Étude de marché</h2>
+        <p class="lead">TAM / SAM / SOM, tendances de fond, cycle de marché.</p>
+      </header>
+
+      <div class="grid-3">
+        <div class="kpi"><span class="kpi-label">TAM — honoraires MOE rénovation résidentielle France</span><strong class="kpi-value">~3,7 Md€</strong><span class="kpi-delta">Théorique · hypothèse</span></div>
+        <div class="kpi"><span class="kpi-label">SAM — rénovation lourde haut de gamme 06 + Monaco</span><strong class="kpi-value">~50 M€</strong><span class="kpi-delta">Bottom-up · ±40 %</span></div>
+        <div class="kpi"><span class="kpi-label">SOM — captable à 3-5 ans</span><strong class="kpi-value">0,5-0,75 M€</strong><span class="kpi-delta delta-up">10-15 chantiers/an</span></div>
+      </div>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Du marché total au marché réellement atteignable</h4>
+        <p class="chart-caption">Le SOM 12 mois (objectif client : 6-7 chantiers ≈ 325 k€) ne représente que ~0,65 % du SAM. Le marché n'est pas la contrainte.</p>
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" role="img">
+          <circle cx="300" cy="215" r="185" fill="#0a2540" opacity="0.10"/>
+          <circle cx="300" cy="240" r="125" fill="#0a2540" opacity="0.22"/>
+          <circle cx="300" cy="285" r="62" fill="#0a2540" opacity="0.70"/>
+          <g font-family="Inter" text-anchor="middle">
+            <text x="300" y="48" font-size="12" fill="#64748b" letter-spacing="1">TAM · honoraires MOE réno résidentielle FR</text>
+            <text x="300" y="68" font-size="16" font-weight="700" fill="#0a2540">~3,7 Md€</text>
+            <text x="300" y="140" font-size="12" fill="#64748b" letter-spacing="1">SAM · réno lourde HDG 06 + Monaco</text>
+            <text x="300" y="160" font-size="16" font-weight="700" fill="#0a2540">~50 M€</text>
+            <text x="300" y="280" font-size="12" font-weight="600" fill="white">SOM (3-5 ans)</text>
+            <text x="300" y="302" font-size="19" font-weight="700" fill="white">0,5-0,75 M€</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Méthode TAM (top-down)</h3>
+          <p style="font-size:.92rem;">Marché des travaux de rénovation du logement en France ≈ 46 Md€. Application d'un taux d'honoraires MOE moyen de 8 % sur l'hypothèse théorique où chaque chantier serait piloté → <strong>~3,7 Md€</strong>. Dans la réalité, seule une fraction des rénovations passe par un MOE : ce chiffre est un plafond conceptuel, pas un marché réellement servi.</p>
+        </div>
+        <div class="card">
+          <h3>Méthode SAM (bottom-up)</h3>
+          <p style="font-size:.92rem;">Hypothèse : ~1 000 chantiers/an de rénovation lourde (&gt;300 k€ de travaux) dans le 06 et sa frange (Monaco, Est-Var), × 50 k€ d'honoraires moyens = <strong>~50 M€</strong>. Marge d'erreur ±40 % : ce chiffre doit être affiné en discovery (données notaires / permis de construire / DPE). Même divisé par deux, il reste 30× supérieur à l'objectif annuel d'Olivier.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:16px; margin-bottom:16px; color:var(--text-primary); font-size:1.125rem;">Tendances de fond</h3>
+      <table class="data-table">
+        <thead><tr><th>Tendance</th><th>Direction</th><th>Horizon</th><th>Implication pour InterFace</th></tr></thead>
+        <tbody>
+          <tr><td><strong>La rénovation dépasse le neuf</strong><br><span style="color:var(--text-muted); font-size:.8rem;">~118 Md€, &gt;50 % du marché construction en 2026</span></td><td><span class="tag tag-success">Favorable</span></td><td>Durable</td><td>Le cœur d'activité est sur le segment qui gagne. Le neuf s'effondre, la réno devient la norme.</td></tr>
+          <tr><td><strong>Rareté du foncier sur la Côte d'Azur</strong></td><td><span class="tag tag-success">Favorable</span></td><td>5+ ans</td><td>On rénove l'existant faute de pouvoir construire. Demande structurelle sur biens d'exception.</td></tr>
+          <tr><td><strong>Croissance réno +2,2 %/an (énergétique +6,1 %)</strong></td><td><span class="tag tag-success">Favorable</span></td><td>2025-2030</td><td>Vent porteur, mais la réno lourde HDG dépend moins des aides que de la richesse patrimoniale locale.</td></tr>
+          <tr><td><strong>Fraude & défiance dans la rénovation</strong></td><td><span class="tag tag-accent">Ambivalent</span></td><td>Continu</td><td>La défiance générale rend la <strong>preuve de sérieux</strong> (avis, réalisations, garanties) ultra-différenciante. Opportunité pour qui inspire confiance.</td></tr>
+          <tr><td><strong>Pression sur les coûts matériaux & main-d'œuvre</strong></td><td><span class="tag tag-warning">Défavorable</span></td><td>12-24 mois</td><td>Risque de dérapage budgétaire en cours de chantier → renforce la valeur d'un pilote rigoureux, mais exige un chiffrage carré.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-accent">
+        <strong>Cycle de marché : croissance mature, fortement local.</strong>
+        Le marché de la MOE rénovation est mature au national mais <strong>hyper-fragmenté localement</strong>. La concurrence ne se joue pas sur le marché global, elle se joue sur quelques kilomètres carrés et sur la réputation. C'est une excellente nouvelle : un acteur local crédible peut capter une part disproportionnée sans budget national.
+      </div>
+    </section>
+
+    <!-- BLOC 03 CONCURRENCE -->
+    <section class="section" id="concurrence">
+      <header class="section-header">
+        <span class="kicker">Bloc 03</span>
+        <h2>Analyse concurrentielle</h2>
+        <p class="lead">5 forces de Porter, acteurs locaux et identification de l'espace blanc.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Force de Porter</th><th>Intensité</th><th>Lecture</th></tr></thead>
+        <tbody>
+          <tr><td>Rivalité concurrentielle</td><td><span class="tag tag-warning">Moyenne-forte</span></td><td>Beaucoup d'acteurs (annuaires saturés), mais peu de marques fortes et différenciées sur le HDG. Concurrence diffuse, pas frontale.</td></tr>
+          <tr><td>Menace de nouveaux entrants</td><td><span class="tag tag-success">Faible</span></td><td>Barrière réelle : réseau, références, assurances, expérience. On ne s'improvise pas MOE rénovation lourde.</td></tr>
+          <tr><td>Pouvoir des fournisseurs (sous-traitants)</td><td><span class="tag tag-warning">Moyenne</span></td><td>Bons artisans rares et courtisés sur la Côte d'Azur. Dépendance au carnet d'adresses → à sécuriser et formaliser.</td></tr>
+          <tr><td>Pouvoir des clients</td><td><span class="tag tag-success">Faible-moyenne</span></td><td>Clientèle patrimoniale moins sensible au prix qu'au risque et à la confiance. Faible pression tarifaire si la valeur est démontrée.</td></tr>
+          <tr><td>Produits de substitution</td><td><span class="tag tag-warning">Moyenne</span></td><td>Entreprise générale « clé en main », architecte, ou le client qui pilote lui-même. La substitution principale = « je gère moi-même » → à combattre par la pédagogie du risque.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Attractivité globale du marché : forte pour un acteur de niche bien positionné.</strong>
+        Les deux forces qui dominent sont favorables : barrières à l'entrée réelles + clientèle peu sensible au prix. Le point de vigilance est l'accès aux meilleurs sous-traitants.
+      </div>
+
+      <h3 style="margin-top:24px; margin-bottom:8px; color:var(--text-primary); font-size:1.125rem;">Paysage concurrentiel local (06)</h3>
+      <table class="data-table">
+        <thead><tr><th>Type d'acteur</th><th>Exemples observés</th><th>Force</th><th>Faille exploitable</th></tr></thead>
+        <tbody>
+          <tr><td>Annuaires / plateformes</td><td>PagesJaunes, Obat, Travaux.com, rdvartisans</td><td>Volume de trafic, SEO</td><td>Aucune relation, mise en concurrence brutale, déshumanisé</td></tr>
+          <tr><td>MOE / entreprises générales locales</td><td>SOCOREBAT, Quintesens, RDR Pro Bâtiment, M4…</td><td>Présence terrain</td><td>Présence digitale faible : « aucun avis », « aucune photo », sites pauvres</td></tr>
+          <tr><td>Architectes d'intérieur HDG</td><td>Donati Architecture…</td><td>Image premium, villa d'exception</td><td>Positionnés « déco/conception », moins sur le pilotage d'exécution & budget</td></tr>
+          <tr><td>Le client lui-même (DIY)</td><td>—</td><td>Coût zéro perçu</td><td>Sous-estime le risque ; cible parfaite pour la pédagogie</td></tr>
+        </tbody>
+      </table>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Matrice de positionnement — l'espace blanc</h4>
+        <p class="chart-caption">Axe X : généraliste → spécialiste réno lourde haut de gamme. Axe Y : invisible en ligne → crédibilité digitale forte. Le quadrant haut-droit est vide.</p>
+        <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img">
+          <rect x="310" y="55" width="250" height="190" fill="#d4a574" opacity="0.10"/>
+          <line x1="60" y1="430" x2="560" y2="430" stroke="#cbd5e1"/>
+          <line x1="60" y1="55" x2="60" y2="430" stroke="#cbd5e1"/>
+          <line x1="310" y1="55" x2="310" y2="430" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+          <line x1="60" y1="242" x2="560" y2="242" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+          <text x="310" y="458" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b">Généraliste  →  Spécialiste réno lourde haut de gamme</text>
+          <text x="32" y="242" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b" transform="rotate(-90 32 242)">Invisible  →  Crédibilité digitale forte</text>
+          <!-- competitors -->
+          <circle cx="150" cy="360" r="9" fill="#0ea5e9"/><text x="163" y="364" font-family="Inter" font-size="11.5" fill="#1a202c">Annuaires (trafic, 0 relation)</text>
+          <circle cx="230" cy="320" r="9" fill="#0ea5e9"/><text x="243" y="324" font-family="Inter" font-size="11.5" fill="#1a202c">MOE / EG locales</text>
+          <circle cx="430" cy="150" r="9" fill="#7c3aed"/><text x="300" y="135" font-family="Inter" font-size="11.5" fill="#1a202c">Architectes d'intérieur HDG</text>
+          <circle cx="200" cy="200" r="9" fill="#94a3b8"/><text x="213" y="204" font-family="Inter" font-size="11.5" fill="#1a202c">Client DIY</text>
+          <!-- target zone -->
+          <text x="435" y="90" text-anchor="middle" font-family="Inter" font-size="11" fill="#a67c4f" font-weight="600" letter-spacing="0.05em">ESPACE BLANC</text>
+          <!-- own future position -->
+          <circle cx="455" cy="160" r="13" fill="#d4a574" stroke="#0a2540" stroke-width="2"/>
+          <text x="455" y="195" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#0a2540">InterFace (cible)</text>
+        </svg>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>L'espace blanc existe et il est défendable.</strong>
+        « Le maître d'œuvre de référence pour la rénovation lourde de biens d'exception sur la Côte d'Azur, avec un niveau de preuve et de transparence inédit. » Personne ne tient ce créneau en digital localement. La barrière (réseau + références + assurances) protège la position une fois installée.
+      </div>
+    </section>
+
+    <!-- BLOC 04 PRICING -->
+    <section class="section" id="pricing">
+      <header class="section-header">
+        <span class="kicker">Bloc 04</span>
+        <h2>Stratégie de pricing & architecture d'offre</h2>
+        <p class="lead">Triangulation des honoraires et structuration d'une offre à trois portes d'entrée.</p>
+      </header>
+
+      <p>Le pricing actuel (honoraires au % des travaux) est <strong>sain et conforme au marché</strong> — il n'y a rien à « casser ». Le levier n'est pas le taux, c'est la <strong>structuration de l'offre</strong> pour créer une porte d'entrée à faible engagement qui qualifie les projets sérieux et nourrit la mission complète.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag">Cost-plus</span>
+          <strong class="kpi-value" style="font-size:1.6rem; margin-top:12px; display:block;">Plancher</strong>
+          <p style="font-size:.85rem; color:var(--text-muted); margin-top:8px;">Temps de pilotage facturé : ne jamais descendre sous ~5-6 % sur un gros chantier, sous peine de travailler à perte sur le suivi.</p>
+        </div>
+        <div class="card">
+          <span class="tag tag-accent">Value-based ★</span>
+          <strong class="kpi-value" style="font-size:1.6rem; margin-top:12px; display:block;">8-12 %</strong>
+          <p style="font-size:.85rem; color:var(--text-muted); margin-top:8px;">Un MOE fait économiser jusqu'à ~15 % du budget travaux et sécurise un actif patrimonial. Capter 8-12 % est justifié par la valeur réelle créée.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Competitive</span>
+          <strong class="kpi-value" style="font-size:1.6rem; margin-top:12px; display:block;">6-12 %</strong>
+          <p style="font-size:.85rem; color:var(--text-muted); margin-top:8px;">Fourchette marché en rénovation : 6-12 % en mission complète, jusqu'à 15 % sur bâti ancien complexe. Dégressif sur les gros montants.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-accent">
+        <strong>Recommandation : taux dégressif assumé et affiché.</strong>
+        10-12 % jusqu'à 400 k€ de travaux, 8-10 % de 400 k€ à 800 k€, 5-7 % au-delà. Cohérent avec un honoraire moyen de 50 k€ et lisible pour le client. Sur le très haut de gamme, basculer vers un <strong>forfait par phase</strong> (conception / consultation / suivi) plutôt que le pur % — plus rassurant et protège vos honoraires si le chantier dérape à la hausse.
+      </div>
+
+      <h3 style="margin-top:32px; margin-bottom:16px; color:var(--text-primary);">Architecture d'offre recommandée — 3 portes d'entrée</h3>
+      <div class="grid-3">
+        <div class="card" style="border-color:var(--border-strong);">
+          <span class="tag">Porte d'entrée</span>
+          <h3 style="margin-top:12px; font-size:1.4rem;">1 500-3 500 €</h3>
+          <p style="color:var(--text-muted); font-size:.875rem;"><strong>Étude de faisabilité & estimation d'enveloppe.</strong> Mission courte, payante, déductible des honoraires si le chantier se fait. Qualifie les vrais projets, élimine les curieux, et installe la relation de confiance.</p>
+        </div>
+        <div class="card" style="border-color:var(--accent); border-width:2px;">
+          <span class="tag tag-accent">★ Cœur d'activité</span>
+          <h3 style="margin-top:12px; font-size:1.6rem;">~50 k€</h3>
+          <p style="color:var(--text-muted); font-size:.875rem;"><strong>Mission de maîtrise d'œuvre complète.</strong> Conception → consultation → pilotage → réception → levée de réserves. Le bestseller. 6-7 par an = l'objectif.</p>
+        </div>
+        <div class="card" style="border-color:var(--border-strong);">
+          <span class="tag">Premium</span>
+          <h3 style="margin-top:12px; font-size:1.4rem;">Honoraires majorés</h3>
+          <p style="color:var(--text-muted); font-size:.875rem;"><strong>MOE + AMO « clé en main » biens d'exception.</strong> Pilotage global incluant coordination décoration / ameublement / artisans d'art. Pour villas et appartements de prestige. Effet d'ancrage et marge.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Pourquoi la porte d'entrée payante change tout.</strong>
+        Elle résout le problème n°1 d'un business de confiance : transformer un inconnu en client sans devoir « vendre ». Le prospect paie une petite somme, vit une première expérience de votre rigueur, et la mission complète devient la suite logique. C'est aussi le meilleur usage possible d'un lead magnet — non pas un PDF gratuit, mais une <strong>première prestation à faible friction</strong>.
+      </div>
+    </section>
+
+    <!-- BLOC 05 SCALABILITÉ -->
+    <section class="section" id="scalabilite">
+      <header class="section-header">
+        <span class="kicker">Bloc 05</span>
+        <h2>Scalabilité & unit economics</h2>
+        <p class="lead">Marges, leviers de scale, blocages structurels et point de rupture.</p>
+      </header>
+
+      <div class="grid-4">
+        <div class="kpi"><span class="kpi-label">Honoraires moyens / chantier</span><strong class="kpi-value">50 k€</strong></div>
+        <div class="kpi"><span class="kpi-label">Marge contributive</span><strong class="kpi-value">~80 %</strong><span class="kpi-delta delta-up">Excellente</span></div>
+        <div class="kpi"><span class="kpi-label">CAC estimé / chantier</span><strong class="kpi-value">~1,5 k€</strong><span class="kpi-delta">An 1 · hypothèse</span></div>
+        <div class="kpi"><span class="kpi-label">Ratio valeur / coût acq.</span><strong class="kpi-value">&gt;30×</strong><span class="kpi-delta delta-up">Hors-norme</span></div>
+      </div>
+
+      <div class="callout callout-warning">
+        <strong>Le CAC n'est pas votre KPI. Le taux de remplissage du calendrier l'est.</strong>
+        Avec une marge à 80 % et un panier à 50 k€, même un coût d'acquisition de 3 000-5 000 € par chantier signé reste dérisoire. Le vrai goulot n'est jamais l'argent dépensé pour acquérir — c'est la <strong>capacité de production d'une seule personne</strong>. Piloter l'analyse sur le CAC serait une erreur de cadrage : ce qui compte, c'est « combien de chantiers de qualité je peux mener de front sans casser ».</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="color:var(--success);">↗ 3 leviers de scale</h3>
+          <ol style="margin:0;">
+            <li><strong>Systématisation du réseau prescripteurs</strong> — un CRM léger + une cadence de contact transforme un flux « aléatoire » en pipeline prévisible, à coût d'acquisition quasi nul. Levier le plus puissant et le plus rapide.</li>
+            <li><strong>Process + IA pour démultiplier la capacité</strong> — comptes-rendus de visite, suivi des réserves, relances prestataires automatisés : permet de gérer plus de chantiers en parallèle <em>sans</em> dégrader la qualité. C'est ce qui repousse le plafond.</li>
+            <li><strong>Marque / autorité locale</strong> — au-delà de 12-18 mois de preuve accumulée (avis, réalisations), le coût d'acquisition organique baisse fortement et le pricing soutenable monte.</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);">↘ 3 blocages structurels</h3>
+          <ol style="margin:0;">
+            <li><strong>Dépendance à une seule personne</strong> — plafond réaliste ~6-8 chantiers/an. Au-delà, il faut déléguer (conducteur de travaux) ou refuser des affaires. Blocage n°1.</li>
+            <li><strong>Cycle long & saisonnalité</strong> — du premier contact à la signature : plusieurs mois. Un trou dans le pipeline aujourd'hui = un trou de CA dans 6-9 mois. D'où l'urgence d'amorcer l'acquisition maintenant.</li>
+            <li><strong>Risque réputation / juridique</strong> — un sinistre mal couvert ou un chantier qui dérape, et la réputation locale (= l'actif principal) s'effondre. Le digital amplifie autant le bon que le mauvais.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="callout callout-accent">
+        <strong>Point de rupture : déjà franchi structurellement.</strong>
+        Avec des charges fixes de ~15-25 k€/an et un honoraire moyen de 50 k€, InterFace est rentable dès le <strong>premier chantier de l'année</strong>. L'enjeu n'est donc pas d'atteindre la rentabilité — c'est de garantir la <strong>régularité du flux</strong> et de décider si l'on accepte le plafond solo (~300-350 k€) ou si l'on casse ce plafond par la délégation (cap potentiel 600 k€-1 M€ avec une petite équipe).
+      </div>
+    </section>
+
+    <!-- BLOC 06 RECOMMANDATIONS -->
+    <section class="section" id="recommandations">
+      <header class="section-header">
+        <span class="kicker">Bloc 06</span>
+        <h2>Recommandations stratégiques</h2>
+        <p class="lead">3 scénarios chiffrés, top 5 actions priorisées (ICE) et feuille de route 90 jours.</p>
+      </header>
+
+      <h3 style="margin-bottom:16px; color:var(--text-primary);">Trois scénarios de déploiement</h3>
+      <table class="data-table">
+        <thead><tr><th>Scénario</th><th>Investissement an 1</th><th>Objectif</th><th>Risques</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Conservateur</strong><br><span style="color:var(--text-muted); font-size:.8rem;">Google Business + site vitrine + réseau ré-activé manuellement</span></td><td class="numeric">~5 k€</td><td class="numeric">6-7 chantiers<br>stabilisés</td><td>Reste dépendant d'un flux peu prévisible ; pas d'effet de marque</td><td><span class="tag">Plancher</span></td></tr>
+          <tr><td><strong>Médian</strong><br><span style="color:var(--text-muted); font-size:.8rem;">Site d'autorité + GMB + CRM prescripteurs cadencé + process chantier digitalisé (IA) + porte d'entrée payante</span></td><td class="numeric">~12-18 k€</td><td class="numeric">8-10 chantiers<br>+ prévisibilité</td><td>Exige de la discipline d'exécution sur le contenu et le suivi réseau</td><td><span class="tag tag-accent">★ Recommandé</span></td></tr>
+          <tr><td><strong>Agressif</strong><br><span style="color:var(--text-muted); font-size:.8rem;">+ recrutement d'un conducteur de travaux pour casser le plafond solo + marque régionale</span></td><td class="numeric">~50-70 k€</td><td class="numeric">12-15 chantiers</td><td>Trésorerie, qualité, prématuré tant que le flux n'est pas prouvé</td><td><span class="tag tag-warning">An 2-3</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Honoraires projetés à 12 mois — par scénario</h4>
+        <p class="chart-caption">Hypothèse honoraires moyens 50 k€/chantier. Le scénario médian est le seul à conjuguer croissance et prévisibilité.</p>
+        <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="280" x2="580" y2="280" stroke="#cbd5e1"/>
+          <line x1="60" y1="40" x2="60" y2="280" stroke="#cbd5e1"/>
+          <g font-family="Inter" font-size="11" fill="#64748b">
+            <text x="50" y="285" text-anchor="end">0</text>
+            <text x="50" y="220" text-anchor="end">200K</text>
+            <text x="50" y="150" text-anchor="end">400K</text>
+            <text x="50" y="80" text-anchor="end">600K</text>
+          </g>
+          <rect x="120" y="167" width="80" height="113" fill="#0a2540"/>
+          <rect x="260" y="123" width="80" height="157" fill="#d4a574"/>
+          <rect x="400" y="42" width="80" height="238" fill="#0ea5e9"/>
+          <g font-family="Inter" font-size="13" font-weight="600" fill="#0a2540" text-anchor="middle">
+            <text x="160" y="157">~325 K€</text>
+            <text x="300" y="113">~450 K€</text>
+            <text x="440" y="32">~675 K€</text>
+          </g>
+          <g font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">
+            <text x="160" y="300">Conservateur</text>
+            <text x="300" y="300">Médian ★</text>
+            <text x="440" y="300">Agressif</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3 style="margin-top:32px; margin-bottom:16px; color:var(--text-primary);">Top 5 actions priorisées (matrice ICE)</h3>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Action</th><th class="numeric">I</th><th class="numeric">C</th><th class="numeric">E</th><th class="numeric">ICE</th></tr></thead>
+        <tbody>
+          <tr><td><strong>01</strong></td><td><strong>Sécuriser le cadre juridique & assurantiel</strong><br><span style="color:var(--text-muted); font-size:.8rem;">Décennale MOE + collecte attestations sous-traitants + contrats-types · Olivier · S1</span></td><td class="numeric">9</td><td class="numeric">10</td><td class="numeric">8</td><td class="numeric"><strong>720</strong></td></tr>
+          <tr><td><strong>02</strong></td><td><strong>Google Business Profile + premiers avis vérifiés</strong><br><span style="color:var(--text-muted); font-size:.8rem;">Fiche optimisée « maître d'œuvre rénovation [villes] » + avis du chantier livré · S1-S2</span></td><td class="numeric">9</td><td class="numeric">9</td><td class="numeric">9</td><td class="numeric"><strong>729</strong></td></tr>
+          <tr><td><strong>03</strong></td><td><strong>Systématiser le réseau prescripteurs</strong><br><span style="color:var(--text-muted); font-size:.8rem;">CRM léger (Notion) + liste + cadence de contact mensuelle · S2-S4</span></td><td class="numeric">9</td><td class="numeric">8</td><td class="numeric">8</td><td class="numeric"><strong>576</strong></td></tr>
+          <tr><td><strong>04</strong></td><td><strong>Site d'autorité avec preuve</strong><br><span style="color:var(--text-muted); font-size:.8rem;">Réalisations (avant/après du chantier livré), méthode, garanties, porte d'entrée payante · S3-S8</span></td><td class="numeric">8</td><td class="numeric">7</td><td class="numeric">6</td><td class="numeric"><strong>336</strong></td></tr>
+          <tr><td><strong>05</strong></td><td><strong>Digitaliser le process chantier (Notion + IA)</strong><br><span style="color:var(--text-muted); font-size:.8rem;">CR de visite dictés → structurés, suivi des réserves, relances prestataires · S4-S10</span></td><td class="numeric">8</td><td class="numeric">8</td><td class="numeric">5</td><td class="numeric"><strong>320</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Feuille de route 90 jours</h4>
+        <p class="chart-caption">Séquence : sécuriser → rendre visible → systématiser → outiller. L'ops se construit pendant que le pipeline est calme.</p>
+        <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="60" x2="560" y2="60" stroke="#cbd5e1" stroke-width="2"/>
+          <g font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle">
+            <text x="120" y="40">Jours 0-30</text><text x="300" y="40">Jours 30-60</text><text x="480" y="40">Jours 60-90</text>
+          </g>
+          <circle cx="120" cy="60" r="7" fill="#b91c1c"/><circle cx="300" cy="60" r="7" fill="#d4a574"/><circle cx="480" cy="60" r="7" fill="#15803d"/>
+          <g font-family="Inter" font-size="11.5" fill="#1a202c">
+            <text x="120" y="100" text-anchor="middle" font-weight="600">Sécuriser & rendre visible</text>
+            <text x="120" y="120" text-anchor="middle" fill="#64748b">Juridique + assurances</text>
+            <text x="120" y="136" text-anchor="middle" fill="#64748b">Google Business + avis</text>
+            <text x="120" y="152" text-anchor="middle" fill="#64748b">Arbitrage nom de marque</text>
+
+            <text x="300" y="100" text-anchor="middle" font-weight="600">Systématiser l'acquisition</text>
+            <text x="300" y="120" text-anchor="middle" fill="#64748b">CRM prescripteurs + cadence</text>
+            <text x="300" y="136" text-anchor="middle" fill="#64748b">Site d'autorité (réalisations)</text>
+            <text x="300" y="152" text-anchor="middle" fill="#64748b">Porte d'entrée payante</text>
+
+            <text x="480" y="100" text-anchor="middle" font-weight="600">Outiller la production</text>
+            <text x="480" y="120" text-anchor="middle" fill="#64748b">Process chantier Notion</text>
+            <text x="480" y="136" text-anchor="middle" fill="#64748b">IA : CR, réserves, relances</text>
+            <text x="480" y="152" text-anchor="middle" fill="#64748b">Premiers pré-diagnostics signés</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>Recommandation finale tranchée — scénario médian.</strong>
+        On ne touche pas au pricing (il est bon). On attaque dans l'ordre : <strong>(1) sécuriser le juridique cette semaine, (2) ouvrir la fiche Google et récupérer les avis du chantier livré, (3) systématiser le réseau prescripteurs.</strong> Le site et l'outillage IA viennent ensuite, pas avant. Le plafond solo se gère en arbitrage conscient : viser d'abord 8-10 chantiers prévisibles avant d'envisager une délégation. Ne pas recruter tant que le flux n'est pas prouvé sur deux trimestres.
+      </div>
+    </section>
+
+    <!-- ANNEXES -->
+    <section class="section" id="annexes">
+      <header class="section-header">
+        <span class="kicker">Annexes</span>
+        <h2>Hypothèses, sources, méthodologie & score</h2>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Décomposition du score de viabilité — 68 / 100</h4>
+        <p class="chart-caption">Six sous-scores pondérés. Le plafond solo et l'absence de récurrence pèsent sur le total ; le marché et la marge le tirent vers le haut.</p>
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- grid hexagons -->
+          <polygon points="300,60 421.2,130 421.2,270 300,340 178.8,270 178.8,130" fill="none" stroke="#e2e8f0"/>
+          <polygon points="300,130 360.6,165 360.6,235 300,270 239.4,235 239.4,165" fill="none" stroke="#e2e8f0"/>
+          <!-- axes -->
+          <g stroke="#e2e8f0">
+            <line x1="300" y1="200" x2="300" y2="60"/><line x1="300" y1="200" x2="421.2" y2="130"/>
+            <line x1="300" y1="200" x2="421.2" y2="270"/><line x1="300" y1="200" x2="300" y2="340"/>
+            <line x1="300" y1="200" x2="178.8" y2="270"/><line x1="300" y1="200" x2="178.8" y2="130"/>
+          </g>
+          <!-- data polygon -->
+          <polygon points="300,106.2 405.4,139.1 372.7,242 300,305 211.5,251.1 243,167.1" fill="#0a2540" opacity="0.18" stroke="#0a2540" stroke-width="2"/>
+          <!-- labels -->
+          <g font-family="Inter" font-size="11" fill="#1a202c" text-anchor="middle">
+            <text x="300" y="46">Clarté proposition · 10/15</text>
+            <text x="445" y="125">Marché · 13/15</text>
+            <text x="448" y="282">Différenciation · 12/20</text>
+            <text x="300" y="358">Modèle éco · 15/20</text>
+            <text x="150" y="282">Exécution · 11/15</text>
+            <text x="150" y="125">Leviers · 7/15</text>
+          </g>
+        </svg>
+      </div>
+
+      <h3 style="margin-bottom:12px; color:var(--text-primary);">Hypothèses posées (à valider en discovery)</h3>
+      <ul style="margin-bottom:32px;">
+        <li><strong>SAM ~50 M€</strong> : ~1 000 chantiers/an &gt;300 k€ de travaux dans le 06 + frange, × 50 k€ d'honoraires. Marge ±40 %. À affiner via données permis de construire / notaires / transactions immo.</li>
+        <li><strong>TAM ~3,7 Md€</strong> : 46 Md€ de travaux rénovation logement FR × 8 % d'honoraires théoriques. Plafond conceptuel, non servi en totalité.</li>
+        <li><strong>Honoraire moyen 50 k€ → travaux ~500-700 k€</strong> à 7-10 %, cohérent avec la cible 300 k€-1,5 M€ et la dégressivité usuelle.</li>
+        <li><strong>Charges fixes 15-25 k€/an</strong> : estimation assurances + véhicule + outils + compta + hébergement, à confirmer sur pièces.</li>
+        <li><strong>CAC ~1,5 k€/chantier (an 1)</strong> : budget acquisition médian ~12 k€ ÷ ~8 chantiers. Indicatif.</li>
+        <li><strong>Plafond solo ~6-8 chantiers/an</strong> : estimation de capacité de pilotage d'une personne sans système ni délégation.</li>
+      </ul>
+
+      <h3 style="margin-bottom:12px; color:var(--text-primary);">Sources</h3>
+      <ul style="margin-bottom:32px;">
+        <li>Marché construction & rénovation France 2025-2026 (rénovation &gt;50 % du marché, ~118 Md€) — synthèses sectorielles 2025/2026.</li>
+        <li>Honoraires maîtrise d'œuvre rénovation (6-12 %, jusqu'à 15-18 % bâti ancien) — guides tarifaires professionnels 2025/2026.</li>
+        <li>Croissance entretien-rénovation +2,2 %/an, énergétique +6,1 %/an — Observatoire des métiers du BTP.</li>
+        <li>Paysage concurrentiel local 06 — annuaires PagesJaunes, Obat, Travaux.com (mai 2026).</li>
+        <li>Données société : extrait Kbis InterFace (RCS Nice 944 635 366, immat. 27/05/2025) ; profil professionnel d'Olivier Colombani ; entretien de cadrage.</li>
+      </ul>
+
+      <h3 style="margin-bottom:12px; color:var(--text-primary);">Méthodologie</h3>
+      <p style="font-size:.92rem;">Frameworks mobilisés : Business Model Canvas (Osterwalder), 5 forces de Porter, TAM/SAM/SOM (top-down croisé bottom-up), triangulation de pricing à 3 méthodes (cost-plus / value-based / competitive), unit economics service, matrice de priorisation ICE, score de viabilité décomposé en 6 sous-scores pondérés.</p>
+
+      <p style="margin-top:48px; padding-top:24px; border-top:1px solid var(--border); color:var(--text-muted); font-size:.85rem;">
+        Diagnostic préparé par Michaël Lopez — MasterPrompt · Conseil Stratégique & IA. Document de travail confidentiel, instantané basé sur les informations disponibles au 28 mai 2026. Les hypothèses chiffrées sont à valider en phase discovery. Un score de 68/100 traduit des fondamentaux solides : le potentiel de passage à 75+/100 tient à l'exécution de 3 décisions structurantes (sécurisation juridique, actif d'acquisition prévisible, arbitrage du plafond solo).
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section, #executive-summary');
+const tocLinks = document.querySelectorAll('.toc a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

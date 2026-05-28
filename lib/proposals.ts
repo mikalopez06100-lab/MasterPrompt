@@ -23,6 +23,8 @@ export type ProposalConfig = {
   analysisHtmlUrl?: string;
   /** Absent si le dossier ne contient que l'audit (pas encore de maquette). */
   mockupUrl?: string;
+  /** Sous-titre court pour l’aperçu WhatsApp / LinkedIn (sinon : subtitle tronqué). */
+  ogShareSubline?: string;
   notes?: string[];
 };
 
@@ -141,6 +143,137 @@ export const proposals: ProposalConfig[] = [
     notes: [
       "Cet espace privé centralise les 4 livrables transmis pour validation client.",
       "Chaque document peut être ouvert en plein écran via le bouton d'ouverture.",
+    ],
+  },
+  {
+    slug: "shoptamere",
+    clientName: "Shop Ta Mère Socks",
+    title: "Pack IA complet (espace privé)",
+    subtitle:
+      "3 livrables HTML hébergés sur votre domaine : audit stratégique, automatisations IA et stratégie marketing.",
+    ogShareSubline: "shoptamere.com — audit, IA & stratégie marketing",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description: "Les trois documents sont accessibles sur cette même page ; le bouton ouvre le plein écran.",
+        deliverables: [
+          {
+            title: "Audit stratégique",
+            description: "Audit web shoptamere.com (HTML autonome).",
+            url: "/proposals/shoptamere/audit-shoptamere.html",
+            ctaLabel: "Ouvrir l'audit",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Automatisations IA",
+            description: "Scénarios et architecture d'automatisation (HTML autonome).",
+            url: "/proposals/shoptamere/ia-automation-shoptamere.html",
+            ctaLabel: "Ouvrir l'automatisation",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Stratégie marketing",
+            description: "Plan marketing & communication (HTML autonome).",
+            url: "/proposals/shoptamere/strategie-marketing-shoptamere.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Un seul lien client : les trois livrables s'affichent ci-dessous.",
+      "Ce lien est réservé aux personnes autorisées.",
+    ],
+  },
+  {
+    slug: "la-casa-de-anna",
+    clientName: "La Casa de Anna",
+    title: "Proposition dédiée — La Casa de Anna",
+    subtitle:
+      "Décoratrice et architecte d'intérieur à Annecy — audit du site et stratégie marketing (aperçu ci-dessous).",
+    ogShareSubline: "Décoratrice & architecte d'intérieur · Annecy — dossier confidentiel",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description: "Les deux documents sont accessibles sur cette même page ; le bouton ouvre le plein écran.",
+        deliverables: [
+          {
+            title: "Audit du site",
+            description: "Audit web complet (version à jour).",
+            url: "/proposals/la-casa-de-anna/audit-lacasadeanna.html",
+            ctaLabel: "Ouvrir l'audit du site",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Stratégie marketing",
+            description: "Plan marketing & communication.",
+            url: "/proposals/la-casa-de-anna/strategie-marketing-lacasadeanna.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "amber",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Un seul lien client : les deux livrables s'affichent ci-dessous.",
+      "Ce lien est réservé aux personnes autorisées.",
+    ],
+  },
+  {
+    slug: "interface",
+    clientName: "Olivier Colombani — SARL INTERFACE",
+    title: "Pack IA complet (espace privé)",
+    subtitle:
+      "5 livrables HTML hébergés sur votre domaine : diagnostic, stratégie marketing, plan IA, simulateur et landing page.",
+    ogShareSubline: "InterFace — diagnostic, stratégie, IA, simulateur & landing (dossier confidentiel)",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Les cinq documents sont accessibles sur cette page ; chaque bouton ouvre le livrable en plein écran.",
+        deliverables: [
+          {
+            title: "Diagnostic stratégique",
+            description: "Audit stratégique et positionnement (HTML autonome).",
+            url: "/proposals/interface/diagnostic-strategique-interface.html",
+            ctaLabel: "Ouvrir le diagnostic",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Stratégie marketing",
+            description: "Plan marketing & acquisition (HTML autonome).",
+            url: "/proposals/interface/strategie-marketing-interface.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Plan IA & automatisations",
+            description: "Scénarios et architecture d'automatisation (HTML autonome).",
+            url: "/proposals/interface/plan-ia-automatisations-interface.html",
+            ctaLabel: "Ouvrir le plan IA",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Simulateur",
+            description: "Outil interactif de simulation (HTML autonome).",
+            url: "/proposals/interface/simulateur-interface.html",
+            ctaLabel: "Ouvrir le simulateur",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Landing page",
+            description: "Maquette de landing page (HTML statique).",
+            url: "/proposals/interface/landing-interface.html",
+            ctaLabel: "Ouvrir la landing",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Un seul lien client : les cinq livrables s'affichent ci-dessous en aperçu intégré.",
+      "Ce lien est réservé aux personnes autorisées (Olivier Colombani / SARL INTERFACE).",
     ],
   },
   {

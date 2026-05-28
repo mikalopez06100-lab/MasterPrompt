@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan IA & Automatisations — InterFace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-page:#fafafa;--bg-card:#fff;--bg-subtle:#f1f5f9;--border:#e2e8f0;--border-strong:#cbd5e1;
+  --text-primary:#0a2540;--text-body:#1a202c;--text-muted:#64748b;--text-inverse:#fff;
+  --accent:#d4a574;--accent-dark:#a67c4f;--accent-soft:#faf3e8;
+  --success:#15803d;--success-soft:#f0fdf4;--warning:#b45309;--warning-soft:#fffbeb;
+  --danger:#b91c1c;--danger-soft:#fef2f2;--info:#0369a1;--info-soft:#f0f9ff;
+  --chart-1:#0a2540;--chart-2:#0ea5e9;--chart-3:#d4a574;--chart-4:#15803d;--chart-5:#b91c1c;--chart-6:#7c3aed;--chart-muted:#94a3b8;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-serif:'Source Serif 4',Georgia,serif;--font-mono:'JetBrains Mono',Menlo,monospace;
+  --shadow-sm:0 1px 2px rgba(10,37,64,.04);--shadow:0 1px 3px rgba(10,37,64,.06),0 1px 2px rgba(10,37,64,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);background:var(--bg-page);color:var(--text-body);font-size:1rem;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.layout{display:grid;grid-template-columns:220px 1fr;max-width:1240px;margin:0 auto;gap:48px;padding:48px;}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:24px;gap:24px;}.toc{position:static!important;}}
+.toc{position:sticky;top:32px;align-self:start;font-size:.875rem;}
+.toc-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:16px;}
+.toc ol{list-style:none;border-left:1px solid var(--border);}
+.toc li{margin-bottom:4px;}
+.toc a{display:block;padding:6px 16px;color:var(--text-muted);text-decoration:none;border-left:2px solid transparent;margin-left:-1px;transition:all .15s;}
+.toc a:hover{color:var(--text-primary);border-left-color:var(--accent);}
+.toc a.active{color:var(--text-primary);border-left-color:var(--text-primary);font-weight:600;}
+.main{max-width:920px;}
+.cover{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:64px 48px;margin-bottom:64px;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;background:var(--text-primary);}
+.cover-kicker{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-dark);margin-bottom:16px;}
+.cover h1{font-size:3rem;font-weight:700;color:var(--text-primary);line-height:1.1;margin-bottom:16px;letter-spacing:-.02em;}
+.cover-tagline{font-family:var(--font-serif);font-style:italic;font-size:1.25rem;color:var(--text-muted);margin-bottom:48px;max-width:640px;}
+.cover-meta{display:flex;gap:48px;border-top:1px solid var(--border);padding-top:24px;font-size:.875rem;flex-wrap:wrap;}
+.cover-meta-item .label{color:var(--text-muted);text-transform:uppercase;font-size:.7rem;letter-spacing:.05em;margin-bottom:4px;}
+.cover-meta-item .value{color:var(--text-primary);font-weight:600;}
+.section{margin-bottom:80px;scroll-margin-top:32px;}
+.section-header{margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--text-primary);}
+.kicker{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px;}
+.section-header h2{font-size:1.75rem;color:var(--text-primary);margin:0 0 12px 0;font-weight:600;line-height:1.2;letter-spacing:-.01em;}
+.section-header .lead{font-size:1.125rem;color:var(--text-muted);margin:0;max-width:720px;}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:32px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+.card h3{font-size:1.125rem;color:var(--text-primary);margin-bottom:12px;font-weight:600;}
+.card p{margin-bottom:12px;}.card p:last-child{margin-bottom:0;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+@media(max-width:700px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:24px;}
+.kpi-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);display:block;margin-bottom:8px;font-weight:500;}
+.kpi-value{font-size:2.1rem;font-weight:700;color:var(--text-primary);display:block;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
+.kpi-delta{font-size:.8rem;margin-top:8px;display:inline-block;font-weight:500;color:var(--text-muted);}
+.delta-up{color:var(--success);}.delta-down{color:var(--danger);}
+.score-display{display:flex;align-items:center;gap:24px;padding:32px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;}
+.score-circle{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--warning-soft);border:4px solid var(--warning);flex-shrink:0;}
+.score-circle .score-number{font-size:2.5rem;font-weight:700;color:var(--text-primary);line-height:1;}
+.score-circle .score-max{font-size:.875rem;color:var(--text-muted);margin-top:4px;}
+.score-verdict h3{font-size:1.5rem;margin-bottom:8px;color:var(--text-primary);}
+.score-verdict p{color:var(--text-muted);margin:0;}
+.callout{padding:16px 24px;border-left:4px solid var(--text-primary);background:var(--bg-subtle);border-radius:0 8px 8px 0;margin:24px 0;font-size:1rem;}
+.callout strong{color:var(--text-primary);display:block;margin-bottom:4px;font-weight:600;}
+.callout-warning{border-color:var(--warning);background:var(--warning-soft);}.callout-warning strong{color:var(--warning);}
+.callout-success{border-color:var(--success);background:var(--success-soft);}.callout-success strong{color:var(--success);}
+.callout-danger{border-color:var(--danger);background:var(--danger-soft);}.callout-danger strong{color:var(--danger);}
+.callout-accent{border-color:var(--accent);background:var(--accent-soft);}.callout-accent strong{color:var(--accent-dark);}
+.data-table{width:100%;border-collapse:collapse;font-size:.875rem;margin:24px 0;}
+.data-table th{text-align:left;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-size:.7rem;padding:12px 16px;border-bottom:2px solid var(--text-primary);}
+.data-table td{padding:14px 16px;border-bottom:1px solid var(--border);color:var(--text-body);vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td.numeric{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--font-mono);font-weight:500;}
+.data-table tbody tr:hover{background:var(--bg-subtle);}
+.tag{display:inline-block;padding:4px 10px;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;border-radius:4px;background:var(--bg-subtle);color:var(--text-muted);}
+.tag-success{background:var(--success-soft);color:var(--success);}.tag-warning{background:var(--warning-soft);color:var(--warning);}
+.tag-danger{background:var(--danger-soft);color:var(--danger);}.tag-accent{background:var(--accent-soft);color:var(--accent-dark);}
+.tag-info{background:var(--info-soft);color:var(--info);}
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:32px;margin-bottom:24px;box-shadow:var(--shadow-sm);}
+.chart-title{font-size:1rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;}
+.chart-caption{font-size:.875rem;color:var(--text-muted);margin-bottom:20px;font-style:italic;}
+.chart-card svg{width:100%;height:auto;max-height:480px;}
+.main p{margin-bottom:16px;max-width:760px;}.main p:last-child{margin-bottom:0;}
+.main ul,.main ol{margin:0 0 16px 24px;max-width:760px;}.main li{margin-bottom:8px;}
+.main strong{color:var(--text-primary);font-weight:600;}
+.lead-paragraph{font-family:var(--font-serif);font-size:1.25rem;line-height:1.6;color:var(--text-body);margin-bottom:32px;max-width:760px;}
+.auto-card{background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:28px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0;font-size:.82rem;}
+.flow-step{background:var(--bg-subtle);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text-primary);}
+.flow-arrow{color:var(--accent-dark);font-weight:700;}
+@media print{
+  body{background:#fff;}
+  .layout{grid-template-columns:1fr;padding:0;max-width:100%;gap:0;}
+  .toc{display:none;}.no-print{display:none!important;}
+  .section{page-break-inside:avoid;margin-bottom:40px;}
+  .cover{page-break-after:always;box-shadow:none;}
+  .card,.chart-card,.kpi,.score-display,.auto-card{box-shadow:none;break-inside:avoid;}
+  a{color:var(--text-body);text-decoration:none;}
+}
+@page{size:A4;margin:18mm 16mm;}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc no-print">
+    <p class="toc-title">Sommaire</p>
+    <ol>
+      <li><a href="#executive-summary">Résumé exécutif</a></li>
+      <li><a href="#cartographie">01 · Cartographie process</a></li>
+      <li><a href="#readiness">02 · Audit IA-readiness</a></li>
+      <li><a href="#cas-usage">03 · Cas d'usage & matrice</a></li>
+      <li><a href="#stack">04 · Stack technique</a></li>
+      <li><a href="#top3">05 · Top 3 automatisations</a></li>
+      <li><a href="#roadmap">06 · Roadmap & ROI</a></li>
+      <li><a href="#gouvernance">07 · Gouvernance</a></li>
+      <li><a href="#annexes">Annexes</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+
+    <!-- COVER -->
+    <section class="cover">
+      <p class="cover-kicker">Plan IA & Automatisations · Pack IA</p>
+      <h1>InterFace</h1>
+      <p class="cover-tagline">Cartographie des processus, audit IA-readiness, top 3 automatisations chiffrées et feuille de route — pour repousser le plafond du solo sans sacrifier la qualité ni la traçabilité.</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item"><div class="label">Préparé pour</div><div class="value">Olivier Colombani · InterFace SARL</div></div>
+        <div class="cover-meta-item"><div class="label">Date</div><div class="value">28 mai 2026</div></div>
+        <div class="cover-meta-item"><div class="label">Préparé par</div><div class="value">Michaël Lopez · MasterPrompt</div></div>
+        <div class="cover-meta-item"><div class="label">Volet</div><div class="value">3/3 — clôture du Pack IA</div></div>
+      </div>
+    </section>
+
+    <!-- RÉSUMÉ EXÉCUTIF -->
+    <section class="section" id="executive-summary">
+      <header class="section-header">
+        <span class="kicker">Synthèse</span>
+        <h2>Résumé exécutif</h2>
+        <p class="lead">Où l'IA crée une valeur réelle pour InterFace — et où elle n'en crée pas.</p>
+      </header>
+
+      <p class="lead-paragraph">Soyons clairs d'emblée : InterFace est une activité solo à faible volume. L'IA n'y fera pas gagner « 40 heures par semaine » — ce serait un mensonge. Le vrai retour est ailleurs, et il est décisif : <em>sécuriser juridiquement</em> (tracer chaque réserve, chaque échange), <em>rassurer le client</em> (des comptes-rendus impeccables qui font signer et recommander), et <em>repousser le plafond du solo</em> (gérer plus de chantiers en parallèle sans perdre le fil). C'est exactement le risque d'exécution identifié dans les volets 1 et 2 que ce plan vient lever.</p>
+
+      <div class="grid-3">
+        <div class="kpi"><span class="kpi-label">Score IA-readiness actuel</span><strong class="kpi-value">48<span style="font-size:1rem;color:var(--text-muted);">/100</span></strong><span class="kpi-delta">Foundations d'abord</span></div>
+        <div class="kpi"><span class="kpi-label">Gain temps net (régime établi)</span><strong class="kpi-value">~14 h</strong><span class="kpi-delta delta-up">/ mois, après décote</span></div>
+        <div class="kpi"><span class="kpi-label">Coût récurrent stack</span><strong class="kpi-value">~90 €</strong><span class="kpi-delta">/ mois</span></div>
+      </div>
+
+      <div class="score-display">
+        <div class="score-circle"><span class="score-number">48</span><span class="score-max">/ 100</span></div>
+        <div class="score-verdict">
+          <h3>Verdict : Foundations d'abord</h3>
+          <p>InterFace part de zéro côté systèmes (tout à la main). Avant tout agent IA sophistiqué, il faut structurer : un CRM, une base chantiers, des process écrits. Ensuite seulement, 3 automatisations simples à fort impact. Pas d'usine à gaz.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <strong>Ce qu'on NE fait PAS (et pourquoi).</strong>
+        Pas de chatbot sur le site (volume de questions trop faible → échec garanti). Pas d'agent IA autonome qui pilote les chantiers (technologie immature, risque d'erreur en cascade sur un métier à responsabilité). Pas de RAG ni de fine-tuning (aucun besoin à ce stade). L'argent et le temps vont aux 3 automatisations qui comptent.
+      </div>
+    </section>
+
+    <!-- BLOC 01 CARTOGRAPHIE -->
+    <section class="section" id="cartographie">
+      <header class="section-header">
+        <span class="kicker">Bloc 01</span>
+        <h2>Cartographie des processus</h2>
+        <p class="lead">15 processus sur 4 familles, notés en volume, temps, douleur et maturité.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Processus</th><th>Famille</th><th class="numeric">Vol./mois</th><th class="numeric">Douleur</th><th>Maturité</th></tr></thead>
+        <tbody>
+          <tr><td>Production contenu (LinkedIn, site)</td><td>Acquisition</td><td class="numeric">~6</td><td class="numeric">3/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td>Alimentation fiche Google + réalisations</td><td>Acquisition</td><td class="numeric">~4</td><td class="numeric">2/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td><strong>Relances réseau prescripteurs</strong></td><td>Acquisition</td><td class="numeric">~40</td><td class="numeric">5/5</td><td><span class="tag tag-danger">Inexistant</span></td></tr>
+          <tr><td>Traitement lead entrant</td><td>Vente</td><td class="numeric">~5</td><td class="numeric">3/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td>Suivi pipeline / relances prospects</td><td>Vente</td><td class="numeric">~15</td><td class="numeric">4/5</td><td><span class="tag tag-danger">Inexistant</span></td></tr>
+          <tr><td>Rédaction études faisabilité / chiffrage</td><td>Vente</td><td class="numeric">~3</td><td class="numeric">3/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td>Devis / propositions d'honoraires</td><td>Vente</td><td class="numeric">~4</td><td class="numeric">3/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td><strong>Comptes-rendus de visite de chantier</strong></td><td>Delivery</td><td class="numeric">~12</td><td class="numeric">5/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td><strong>Suivi prestataires / relances sous-traitants</strong></td><td>Delivery</td><td class="numeric">~25</td><td class="numeric">5/5</td><td><span class="tag tag-danger">Manuel</span></td></tr>
+          <tr><td><strong>Suivi des réserves jusqu'à levée</strong></td><td>Delivery</td><td class="numeric">~20</td><td class="numeric">5/5</td><td><span class="tag tag-danger">Manuel</span></td></tr>
+          <tr><td>Collecte attestations (décennale s/traitants)</td><td>Delivery</td><td class="numeric">~8</td><td class="numeric">4/5</td><td><span class="tag tag-danger">Inexistant</span></td></tr>
+          <tr><td>Facturation / situations de travaux</td><td>Delivery</td><td class="numeric">~6</td><td class="numeric">3/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td>Gestion / tri des emails</td><td>Admin</td><td class="numeric">~150</td><td class="numeric">3/5</td><td><span class="tag">Manuel</span></td></tr>
+          <tr><td>Classement documents chantier</td><td>Admin</td><td class="numeric">~40</td><td class="numeric">4/5</td><td><span class="tag tag-danger">Manuel</span></td></tr>
+          <tr><td>Reporting / tableau de bord activité</td><td>Admin</td><td class="numeric">~2</td><td class="numeric">2/5</td><td><span class="tag tag-danger">Inexistant</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-accent">
+        <strong>Le centre de gravité est clair : le Delivery.</strong>
+        Les processus les plus douloureux et les plus risqués sont tous côté chantier — comptes-rendus, suivi prestataires, levée des réserves. C'est là, pas dans le marketing, que l'IA et l'automation rapportent le plus à InterFace. C'est aussi là que le « tout à la main » expose juridiquement.
+      </div>
+    </section>
+
+    <!-- BLOC 02 READINESS -->
+    <section class="section" id="readiness">
+      <header class="section-header">
+        <span class="kicker">Bloc 02</span>
+        <h2>Audit IA-readiness — 48/100</h2>
+        <p class="lead">Maturité actuelle sur 5 axes et les 3 prérequis à lever avant de déployer.</p>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Maturité IA actuelle — 5 axes</h4>
+        <p class="chart-caption">Le point fort est l'appétence (culture). Les points faibles : aucune donnée structurée, aucun outil en place.</p>
+        <svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="300,60 433.1,156.7 382.3,313.3 217.7,313.3 166.9,156.7" fill="none" stroke="#e2e8f0"/>
+          <polygon points="300,130 366.6,178.4 341.2,256.6 258.8,256.6 233.4,178.4" fill="none" stroke="#e2e8f0"/>
+          <g stroke="#e2e8f0">
+            <line x1="300" y1="200" x2="300" y2="60"/><line x1="300" y1="200" x2="433.1" y2="156.7"/>
+            <line x1="300" y1="200" x2="382.3" y2="313.3"/><line x1="300" y1="200" x2="217.7" y2="313.3"/>
+            <line x1="300" y1="200" x2="166.9" y2="156.7"/>
+          </g>
+          <polygon points="300,155.2 333.3,189.2 337,251 238.3,284.9 202.4,168.3" fill="#0a2540" opacity="0.18" stroke="#0a2540" stroke-width="2"/>
+          <g font-family="Inter" font-size="11" fill="#1a202c" text-anchor="middle">
+            <text x="300" y="48">Data readiness · 8/25</text>
+            <text x="463" y="152">Stack · 5/20</text>
+            <text x="400" y="332">Équipe · 9/20</text>
+            <text x="200" y="332">Culture · 15/20</text>
+            <text x="140" y="152">Budget · 11/15</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="grid-3">
+        <div class="card"><h3 style="color:var(--danger);">1 · Centraliser la data</h3><p style="font-size:.9rem;color:var(--text-muted);">Tout est dans la tête d'Olivier ou sur papier. Prérequis n°1 : une base unique (Notion) pour clients, prescripteurs, chantiers, réserves.</p></div>
+        <div class="card"><h3 style="color:var(--warning);">2 · Écrire les process</h3><p style="font-size:.9rem;color:var(--text-muted);">On ne peut pas automatiser ce qui n'est pas formalisé. Documenter le cycle de chantier type (du chiffrage à la levée des réserves) est un préalable.</p></div>
+        <div class="card"><h3 style="color:var(--info);">3 · Monter en compétence</h3><p style="font-size:.9rem;color:var(--text-muted);">Formation prompting (formation MasterPrompt) + prise en main de Make. Objectif : autonomie sur les ajustements simples.</p></div>
+      </div>
+    </section>
+
+    <!-- BLOC 03 CAS D'USAGE -->
+    <section class="section" id="cas-usage">
+      <header class="section-header">
+        <span class="kicker">Bloc 03</span>
+        <h2>Cas d'usage — matrice Impact × Faisabilité</h2>
+        <p class="lead">Les quick wins à attaquer, et les fausses bonnes idées à écarter.</p>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Priorisation des cas d'usage</h4>
+        <p class="chart-caption">Quadrant haut-droit = quick wins. Les 3 retenus sont entourés. Les cas écartés sont en gris.</p>
+        <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" role="img">
+          <rect x="310" y="55" width="250" height="185" fill="#15803d" opacity="0.07"/>
+          <line x1="60" y1="420" x2="560" y2="420" stroke="#cbd5e1"/>
+          <line x1="60" y1="55" x2="60" y2="420" stroke="#cbd5e1"/>
+          <line x1="310" y1="55" x2="310" y2="420" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+          <line x1="60" y1="237" x2="560" y2="237" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+          <text x="310" y="448" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b">Faisabilité →</text>
+          <text x="32" y="237" text-anchor="middle" font-family="Inter" font-size="12" fill="#64748b" transform="rotate(-90 32 237)">Impact →</text>
+          <text x="435" y="74" text-anchor="middle" font-family="Inter" font-size="10.5" fill="#15803d" font-weight="600" letter-spacing=".05em">QUICK WINS</text>
+          <!-- quick wins (retenus, entourés) -->
+          <circle cx="445" cy="110" r="11" fill="#d4a574" stroke="#0a2540" stroke-width="2"/><text x="430" y="113" text-anchor="end" font-family="Inter" font-size="11" fill="#1a202c">CR chantier vocal</text>
+          <circle cx="480" cy="160" r="11" fill="#d4a574" stroke="#0a2540" stroke-width="2"/><text x="465" y="163" text-anchor="end" font-family="Inter" font-size="11" fill="#1a202c">CRM prescripteurs</text>
+          <circle cx="400" cy="135" r="11" fill="#d4a574" stroke="#0a2540" stroke-width="2"/><text x="385" y="138" text-anchor="end" font-family="Inter" font-size="11" fill="#1a202c">Suivi réserves</text>
+          <!-- other -->
+          <circle cx="470" cy="210" r="8" fill="#0ea5e9"/><text x="455" y="213" text-anchor="end" font-family="Inter" font-size="10.5" fill="#1a202c">Traitement lead</text>
+          <circle cx="500" cy="290" r="8" fill="#94a3b8"/><text x="490" y="293" text-anchor="end" font-family="Inter" font-size="10.5" fill="#64748b">Tri emails (fill-in)</text>
+          <circle cx="350" cy="175" r="8" fill="#0ea5e9"/><text x="338" y="178" text-anchor="end" font-family="Inter" font-size="10.5" fill="#1a202c">Brouillon étude faisa.</text>
+          <!-- big bets -->
+          <circle cx="160" cy="130" r="8" fill="#94a3b8"/><text x="173" y="133" font-family="Inter" font-size="10.5" fill="#64748b">Agent pilotage auto. (écarté)</text>
+          <circle cx="140" cy="180" r="8" fill="#94a3b8"/><text x="153" y="183" font-family="Inter" font-size="10.5" fill="#64748b">IA prédictive budget (écarté)</text>
+          <!-- abandon -->
+          <circle cx="180" cy="340" r="8" fill="#94a3b8"/><text x="193" y="343" font-family="Inter" font-size="10.5" fill="#64748b">Chatbot site (écarté)</text>
+        </svg>
+      </div>
+
+      <div class="callout callout-warning">
+        <strong>Cas d'usage écartés — assumés.</strong>
+        <strong>Agent IA de pilotage autonome :</strong> impact élevé mais faisabilité faible et risque d'erreur cascade sur un métier engageant la responsabilité → non, pas maintenant. <strong>IA prédictive de dérapage budgétaire :</strong> exige un historique de données propres qui n'existe pas → impossible aujourd'hui. <strong>Chatbot site :</strong> trop peu de questions répétitives → échec produit garanti.
+      </div>
+    </section>
+
+    <!-- BLOC 04 STACK -->
+    <section class="section" id="stack">
+      <header class="section-header">
+        <span class="kicker">Bloc 04</span>
+        <h2>Stack technique recommandée</h2>
+        <p class="lead">La plus simple qui fait 80 % du job, calibrée pour un non-technicien.</p>
+      </header>
+
+      <table class="data-table">
+        <thead><tr><th>Couche</th><th>Outil retenu</th><th>Pourquoi</th><th class="numeric">Coût/mois</th></tr></thead>
+        <tbody>
+          <tr><td>Base de données / CRM</td><td><strong>Notion</strong></td><td>Centralise clients, prescripteurs, chantiers, réserves. Prise en main facile, MCP disponible.</td><td class="numeric">~10 €</td></tr>
+          <tr><td>Orchestration / workflows</td><td><strong>Make</strong> (cloud)</td><td>Visuel, abordable, pas de serveur à administrer. <span style="color:var(--text-muted);">n8n self-hosted écarté : pas de compétence DevOps en interne.</span></td><td class="numeric">~20 €</td></tr>
+          <tr><td>IA générative</td><td><strong>Claude API</strong></td><td>Excellent en rédaction et raisonnement en français (CR, messages, PV). Hébergement EU + DPA pour le RGPD.</td><td class="numeric">~25 €</td></tr>
+          <tr><td>Transcription vocale</td><td>Whisper (via API)</td><td>Transforme les notes vocales de chantier en texte. Cœur de l'automatisation n°1.</td><td class="numeric">~10 €</td></tr>
+          <tr><td>Formulaires</td><td>Tally</td><td>Formulaire lead + demande d'étude de faisabilité. Gratuit / faible coût.</td><td class="numeric">~0-15 €</td></tr>
+          <tr><td>Email & séquences</td><td>Gmail (MCP) + Brevo</td><td>Communication + séquences de nurturing. Gmail déjà utilisé.</td><td class="numeric">~10 €</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-accent">
+        <strong>Option d'infrastructure managée.</strong>
+        Plutôt qu'Olivier administre et maintienne lui-même ces connexions, l'infrastructure d'orchestration (workflows, monitoring, API) peut être hébergée et maintenue par MasterPrompt en marque blanche — c'est l'objet d'un abonnement automations dédié. Olivier reste propriétaire de ses données (Notion, Gmail) ; il délègue uniquement la tuyauterie technique. Recommandé vu son profil non-technique.
+      </div>
+    </section>
+
+    <!-- BLOC 05 TOP 3 -->
+    <section class="section" id="top3">
+      <header class="section-header">
+        <span class="kicker">Bloc 05</span>
+        <h2>Top 3 automatisations prioritaires</h2>
+        <p class="lead">Chiffrage transparent. Taux de valorisation retenu : 80 €/h (coût d'opportunité prudent ; la valeur réelle est supérieure car le temps libéré sert à piloter plus de chantiers).</p>
+      </header>
+
+      <!-- AUTO 1 -->
+      <div class="auto-card">
+        <span class="tag tag-accent">★ Core · Delivery</span>
+        <h3 style="margin:12px 0 4px; font-size:1.25rem; color:var(--text-primary);">N°1 — Compte-rendu de visite vocal → CR structuré</h3>
+        <p style="color:var(--text-muted); font-size:.92rem;">Transformer une visite de chantier dictée à la voix en compte-rendu professionnel, archivé et envoyé au client — en 10 minutes au lieu de 45.</p>
+        <div class="flow">
+          <span class="flow-step">Note vocale (mobile)</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Transcription Whisper</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Claude structure le CR</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Validation Olivier</span><span class="flow-arrow">→</span>
+          <span class="flow-step">PDF + archive Notion + envoi client</span>
+        </div>
+        <table class="data-table" style="margin-top:12px;">
+          <tbody>
+            <tr><td>Volume / mois</td><td class="numeric">~12 CR</td><td>Setup</td><td class="numeric">~10 h</td></tr>
+            <tr><td>Temps économisé / CR</td><td class="numeric">~35 min</td><td>Coût récurrent</td><td class="numeric">~35 €/mois</td></tr>
+            <tr><td>Gain horaire / mois</td><td class="numeric">~5,5 h</td><td>Gain € / mois</td><td class="numeric">~440 €</td></tr>
+            <tr><td>Payback</td><td class="numeric">~2 mois</td><td>ROI annuel</td><td class="numeric">~520 %</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.85rem; color:var(--text-muted); margin-top:8px;"><strong>Au-delà des heures :</strong> traçabilité juridique (preuve écrite de chaque visite) et réassurance client = levier de conversion et de recommandation. C'est le vrai ROI.</p>
+        <p style="font-size:.85rem; color:var(--text-muted);"><strong>Garde-fou :</strong> Olivier valide chaque CR avant envoi (l'IA propose, l'humain signe). Aucune donnée sensible au-delà du nécessaire.</p>
+      </div>
+
+      <!-- AUTO 2 -->
+      <div class="auto-card">
+        <span class="tag tag-accent">★ Core · Acquisition</span>
+        <h3 style="margin:12px 0 4px; font-size:1.25rem; color:var(--text-primary);">N°2 — CRM prescripteurs + relances cadencées</h3>
+        <p style="color:var(--text-muted); font-size:.92rem;">Ne plus jamais laisser un prescripteur sans nouvelles. Transformer le réseau « aléatoire » (volet 1) en pipeline régulier — le levier d'acquisition n°1.</p>
+        <div class="flow">
+          <span class="flow-step">Base prescripteurs (Notion)</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Make détecte les contacts « dormants »</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Claude propose un message perso</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Tâche du jour pour Olivier</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Log du contact</span>
+        </div>
+        <table class="data-table" style="margin-top:12px;">
+          <tbody>
+            <tr><td>Volume / mois</td><td class="numeric">~40 contacts</td><td>Setup</td><td class="numeric">~8 h</td></tr>
+            <tr><td>Temps économisé</td><td class="numeric">~4 min/contact</td><td>Coût récurrent</td><td class="numeric">~25 €/mois</td></tr>
+            <tr><td>Gain horaire / mois</td><td class="numeric">~2,5 h</td><td>Gain € / mois</td><td class="numeric">~200 €</td></tr>
+            <tr><td>Payback</td><td class="numeric">~3,5 mois</td><td>ROI annuel</td><td class="numeric">~220 %</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.85rem; color:var(--text-muted); margin-top:8px;"><strong>Le vrai ROI n'est pas le temps :</strong> un seul chantier supplémentaire/an issu d'un réseau cadencé = ~50 k€ d'honoraires. C'est l'automatisation au plus fort effet de levier business, de loin.</p>
+        <p style="font-size:.85rem; color:var(--text-muted);"><strong>Garde-fou :</strong> l'IA rédige un brouillon, Olivier personnalise et envoie. Jamais d'envoi automatique à un prescripteur — la relation humaine reste le cœur.</p>
+      </div>
+
+      <!-- AUTO 3 -->
+      <div class="auto-card">
+        <span class="tag tag-accent">★ Core · Delivery</span>
+        <h3 style="margin:12px 0 4px; font-size:1.25rem; color:var(--text-primary);">N°3 — Suivi des réserves & traçabilité chantier</h3>
+        <p style="color:var(--text-muted); font-size:.92rem;">Tracer chaque réserve de la réception à sa levée, relancer les prestataires automatiquement, générer les PV. Zéro réserve oubliée = protection juridique.</p>
+        <div class="flow">
+          <span class="flow-step">Base réserves (Notion)</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Make relance le prestataire à J-X</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Suivi statut + photo</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Claude génère le PV</span><span class="flow-arrow">→</span>
+          <span class="flow-step">Archive + envoi</span>
+        </div>
+        <table class="data-table" style="margin-top:12px;">
+          <tbody>
+            <tr><td>Volume / mois</td><td class="numeric">~20 réserves</td><td>Setup</td><td class="numeric">~10 h</td></tr>
+            <tr><td>Temps économisé</td><td class="numeric">~5 h/chantier</td><td>Coût récurrent</td><td class="numeric">~20 €/mois</td></tr>
+            <tr><td>Gain horaire / mois</td><td class="numeric">~6 h</td><td>Gain € / mois</td><td class="numeric">~480 €</td></tr>
+            <tr><td>Payback</td><td class="numeric">~1,7 mois</td><td>ROI annuel</td><td class="numeric">~580 %</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.85rem; color:var(--text-muted); margin-top:8px;"><strong>Le ROI majeur est le risque évité :</strong> une réserve non levée oubliée = litige, responsabilité engagée, réputation entamée. Sur un métier où un sinistre peut effacer la société (volet 1), la traçabilité automatisée vaut bien plus que les heures gagnées.</p>
+        <p style="font-size:.85rem; color:var(--text-muted);"><strong>Garde-fou :</strong> les relances prestataires sont semi-automatiques (Olivier garde la main sur le ton). Le PV est toujours relu et signé manuellement.</p>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>Total des 3 automatisations.</strong>
+        ~14 h/mois récupérées (après décote de réalisme), ~80 €/mois de coût récurrent, payback global inférieur à 3 mois. Mais retenez surtout les deux ROI invisibles : la <strong>traçabilité juridique</strong> et la <strong>capacité à piloter plus de chantiers en parallèle sans casser la qualité</strong> — soit le déplafonnement du solo identifié dès le diagnostic.
+      </div>
+    </section>
+
+    <!-- BLOC 06 ROADMAP -->
+    <section class="section" id="roadmap">
+      <header class="section-header">
+        <span class="kicker">Bloc 06</span>
+        <h2>Roadmap 90 jours & projection ROI</h2>
+        <p class="lead">Foundations → automatisations → scale, et la courbe coût/gain sur 12 mois.</p>
+      </header>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Roadmap 90 jours</h4>
+        <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="56" x2="560" y2="56" stroke="#cbd5e1" stroke-width="2"/>
+          <g font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle">
+            <text x="120" y="36">J1-J30 · Foundations</text><text x="300" y="36">J31-J60 · Automatisations</text><text x="480" y="36">J61-J90 · Scale & IA</text>
+          </g>
+          <circle cx="120" cy="56" r="7" fill="#b91c1c"/><circle cx="300" cy="56" r="7" fill="#d4a574"/><circle cx="480" cy="56" r="7" fill="#15803d"/>
+          <g font-family="Inter" font-size="11" fill="#1a202c" text-anchor="middle">
+            <text x="120" y="96" font-weight="600">Structurer</text>
+            <text x="120" y="115" fill="#64748b">Notion : CRM + chantiers</text>
+            <text x="120" y="131" fill="#64748b">Écrire le process chantier</text>
+            <text x="120" y="147" fill="#64748b">Formation prompting</text>
+
+            <text x="300" y="96" font-weight="600">Déployer les 3</text>
+            <text x="300" y="115" fill="#64748b">#1 CR vocal</text>
+            <text x="300" y="131" fill="#64748b">#2 CRM prescripteurs</text>
+            <text x="300" y="147" fill="#64748b">#3 Suivi réserves</text>
+
+            <text x="480" y="96" font-weight="600">Étendre</text>
+            <text x="480" y="115" fill="#64748b">IA contenu (volet 2)</text>
+            <text x="480" y="131" fill="#64748b">Traitement lead auto</text>
+            <text x="480" y="147" fill="#64748b">Monitoring + ajustements</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Projection ROI à 12 mois — coût cumulé vs gain cumulé</h4>
+        <p class="chart-caption">Gains en temps valorisé uniquement (hors valeur juridique et pipeline, non chiffrées ici). Point d'équilibre ~mois 2.</p>
+        <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="270" x2="570" y2="270" stroke="#cbd5e1"/>
+          <line x1="60" y1="30" x2="60" y2="270" stroke="#cbd5e1"/>
+          <g font-family="Inter" font-size="10.5" fill="#64748b">
+            <text x="54" y="274" text-anchor="end">0</text>
+            <text x="54" y="190" text-anchor="end">5 K€</text>
+            <text x="54" y="110" text-anchor="end">10 K€</text>
+            <text x="54" y="40" text-anchor="end">15 K€</text>
+            <text x="60" y="288" text-anchor="middle">M0</text>
+            <text x="315" y="288" text-anchor="middle">M6</text>
+            <text x="570" y="288" text-anchor="middle">M12</text>
+          </g>
+          <!-- gain cumulé (montée rapide) : ramp puis ~1100€/mois -->
+          <polyline points="60,270 102,262 145,240 187,212 230,190 272,168 315,146 357,124 400,102 442,80 485,58 527,42 570,30" fill="none" stroke="#15803d" stroke-width="2.5"/>
+          <!-- coût cumulé (setup ~2200 + ~90/mois) -->
+          <polyline points="60,236 102,234 145,233 187,231 230,229 272,228 315,226 357,224 400,223 442,221 485,219 527,218 570,216" fill="none" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="5 4"/>
+          <!-- breakeven marker -->
+          <circle cx="130" cy="236" r="4" fill="#0a2540"/>
+          <text x="138" y="232" font-family="Inter" font-size="10.5" fill="#0a2540">Équilibre ≈ M2</text>
+          <g font-family="Inter" font-size="11" font-weight="600">
+            <text x="500" y="48" fill="#15803d">Gain cumulé</text>
+            <text x="500" y="208" fill="#b91c1c">Coût cumulé</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="chart-card">
+        <h4 class="chart-title">Progression du score de maturité IA</h4>
+        <p class="chart-caption">Trajectoire réaliste : +10 à +12 points par trimestre si le plan est exécuté.</p>
+        <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+          <line x1="60" y1="220" x2="570" y2="220" stroke="#cbd5e1"/>
+          <g font-family="Inter" font-size="11" fill="#64748b">
+            <text x="50" y="225" text-anchor="end">0</text><text x="50" y="150" text-anchor="end">50</text><text x="50" y="75" text-anchor="end">100</text>
+          </g>
+          <rect x="100" y="148" width="70" height="72" fill="#b91c1c" opacity="0.85"/>
+          <rect x="240" y="130" width="70" height="90" fill="#d4a574" opacity="0.85"/>
+          <rect x="380" y="115" width="70" height="105" fill="#0ea5e9" opacity="0.85"/>
+          <rect x="500" y="103" width="70" height="117" fill="#15803d" opacity="0.9"/>
+          <g font-family="Inter" font-size="13" font-weight="600" fill="#0a2540" text-anchor="middle">
+            <text x="135" y="140">48</text><text x="275" y="122">60</text><text x="415" y="107">70</text><text x="535" y="95">78</text>
+          </g>
+          <g font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle">
+            <text x="135" y="240">Aujourd'hui</text><text x="275" y="240">M+3</text><text x="415" y="240">M+6</text><text x="535" y="240">M+12</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- BLOC 07 GOUVERNANCE -->
+    <section class="section" id="gouvernance">
+      <header class="section-header">
+        <span class="kicker">Bloc 07</span>
+        <h2>Gouvernance & sécurité</h2>
+        <p class="lead">RGPD, confidentialité, monitoring — l'essentiel pour un solo, sans sur-administrer.</p>
+      </header>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>RGPD & données</h3>
+          <ul style="margin:0;">
+            <li>Données personnelles en transit : noms, coordonnées, adresses de biens (clients & prescripteurs).</li>
+            <li>Signer un DPA avec chaque sous-traitant (Make, Anthropic, Notion, Brevo).</li>
+            <li>Minimiser : n'envoyer au LLM que les champs nécessaires, jamais la base entière.</li>
+            <li>Tenir un registre simple des traitements automatisés.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Confidentialité & monitoring</h3>
+          <ul style="margin:0;">
+            <li>Classer les données : un bien et son budget = Confidentiel. Hébergement EU privilégié (Claude via EU + DPA).</li>
+            <li>Alerte email/Slack en cas d'échec de workflow ; plafond de dépense sur l'API (éviter la facture x10 sur bug).</li>
+            <li>Export régulier des configurations (sauvegarde Make + Notion).</li>
+            <li>Une seule personne modifie les workflows en production (Olivier ou le prestataire mandaté).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout callout-danger">
+        <strong>Rappel transversal (issu du volet 1).</strong>
+        Aucune automatisation ne remplace la sécurisation juridique préalable : assurance décennale MOE confirmée et collecte des attestations décennales des sous-traitants. L'automatisation n°3 (suivi des réserves) <em>outille</em> cette rigueur, elle ne la crée pas. Le cadre assurantiel reste le prérequis n°1 avant tout déploiement commercial.
+      </div>
+    </section>
+
+    <!-- ANNEXES -->
+    <section class="section" id="annexes">
+      <header class="section-header">
+        <span class="kicker">Annexes</span>
+        <h2>Hypothèses & méthodologie</h2>
+      </header>
+
+      <h3 style="margin-bottom:12px; color:var(--text-primary);">Hypothèses posées</h3>
+      <ul style="margin-bottom:32px;">
+        <li><strong>Taux horaire de valorisation : 80 €/h</strong> — coût d'opportunité prudent. La valeur réelle est supérieure (le temps libéré sert à prendre des chantiers à 50 k€).</li>
+        <li><strong>Décote de réalisme de 25 %</strong> appliquée à tous les gains de temps projetés.</li>
+        <li><strong>Volumes (CR, réserves, contacts)</strong> estimés en régime de croisière (6-7 chantiers/an, 2-3 actifs en parallèle). En phase de lancement, ils seront plus faibles — le ROI monte avec l'activité.</li>
+        <li><strong>Coûts setup</strong> exprimés en heures ; mobilisés dans le cadre de l'accompagnement. Coûts récurrents = abonnements outils + API.</li>
+        <li><strong>Score IA-readiness 48/100</strong> reflète une activité solo partant de zéro côté systèmes, avec une forte appétence (culture) qui compense.</li>
+      </ul>
+
+      <h3 style="margin-bottom:12px; color:var(--text-primary);">Méthodologie</h3>
+      <p style="font-size:.92rem;">Frameworks mobilisés : cartographie SIPOC, audit IA-readiness sur 5 axes, taxonomie IA (générative / prédictive / agentique / automation classique), matrice Impact × Faisabilité, ROI framework chiffré avec décote, scoring de maturité. Inputs hérités des volets 1 (modèle économique, plafond solo, risque juridique) et 2 (customer journey, canaux, volume de contenu, séquences).</p>
+
+      <p style="margin-top:48px; padding-top:24px; border-top:1px solid var(--border); color:var(--text-muted); font-size:.85rem;">
+        Plan préparé par Michaël Lopez — MasterPrompt · Conseil Stratégique & IA. Document de travail confidentiel, 28 mai 2026. Volet 3/3 — clôture du Pack IA. La trilogie (diagnostic stratégique · stratégie marketing · plan IA & automatisations) forme l'accompagnement complet d'InterFace.
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section, #executive-summary');
+const tocLinks = document.querySelectorAll('.toc a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) {
+    tocLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+  }});
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
