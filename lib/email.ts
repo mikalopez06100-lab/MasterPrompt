@@ -107,7 +107,7 @@ function describePreview(source: string, redirectTo: string): {
     ctaUrl: `${APP_URL}/espace-formation`,
     ctaLabel: "Accéder à l'espace formation",
     intro:
-      "Vous avez débloqué l'aperçu de l'espace formation Master Prompt : 7 modules, bibliothèque de prompts, exercices, éditeur intelligent. Les modules complets seront accessibles le 1er juin 2026 après précommande.",
+      "Vous avez débloqué l'aperçu de l'espace formation Master Prompt : 7 modules, bibliothèque de prompts, exercices, éditeur intelligent. Les modules complets seront accessibles le 1er juillet 2026 après précommande.",
   };
 }
 
@@ -169,6 +169,116 @@ export async function sendPreviewWelcomeEmail({
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erreur inconnue";
     console.error("[sendPreviewWelcomeEmail]", err);
+    return { ok: false, error: message };
+  }
+}
+
+type DiagnosticLeadContext = {
+  email: string;
+  score: number;
+  profile: string;
+  sector: string | null;
+};
+
+export async function sendDiagnosticAdminNotification({
+  email,
+  score,
+  profile,
+  sector,
+}: DiagnosticLeadContext): Promise<{ ok: boolean; error?: string }> {
+  if (!resend) return { ok: false, error: "RESEND_API_KEY non configuré" };
+
+  const profileLabels: Record<string, string> = {
+    starter: "Débutant IA",
+    frustrated: "Frustré IA",
+    advanced: "Avancé IA",
+  };
+
+  const subject = `[Nouveau lead diag] ${email} — ${profileLabels[profile] ?? profile}`;
+  const html = `
+    <h2>Nouveau lead diagnostic</h2>
+    <p><strong>Email :</strong> <a href="mailto:${email}">${email}</a></p>
+    <p><strong>Score :</strong> ${score}/100</p>
+    <p><strong>Profil :</strong> ${profileLabels[profile] ?? profile}</p>
+    <p><strong>Secteur :</strong> ${sector ?? "Non renseigné"}</p>
+    <p><strong>Reçu le :</strong> ${new Date().toISOString()}</p>
+    <hr>
+    <p style="color:#64748B; font-size:12px;">Notification automatique de masterprompt.fr — table <code>diagnostic_leads</code> mise à jour.</p>
+  `;
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: [ADMIN_NOTIF_TO],
+      replyTo: email,
+      subject,
+      html,
+    });
+    if (error) {
+      console.error("[sendDiagnosticAdminNotification]", error);
+      const msg =
+        typeof error === "object" && error !== null && "message" in error && typeof (error as { message: unknown }).message === "string"
+          ? (error as { message: string }).message
+          : String(error);
+      return { ok: false, error: msg };
+    }
+    return { ok: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Erreur inconnue";
+    console.error("[sendDiagnosticAdminNotification]", err);
+    return { ok: false, error: message };
+  }
+}
+
+export type StripePurchaseContext = {
+  customerEmail: string;
+  amountEur: string;
+  productLabel: string;
+  sessionId: string;
+  paymentLink?: boolean;
+};
+
+export async function sendStripePurchaseAdminNotification(
+  ctx: StripePurchaseContext,
+): Promise<{ ok: boolean; error?: string }> {
+  if (!resend) return { ok: false, error: "RESEND_API_KEY non configuré" };
+
+  const subject = `[Vente Stripe] ${ctx.amountEur} — ${ctx.productLabel} — ${ctx.customerEmail}`;
+  const html = `
+    <h2>Nouvelle vente Stripe</h2>
+    <p><strong>Client :</strong> <a href="mailto:${ctx.customerEmail}">${ctx.customerEmail}</a></p>
+    <p><strong>Montant :</strong> ${ctx.amountEur}</p>
+    <p><strong>Produit / offre :</strong> ${ctx.productLabel}</p>
+    <p><strong>Session :</strong> <code>${ctx.sessionId}</code></p>
+    <p><strong>Type :</strong> ${ctx.paymentLink ? "Payment Link ou Checkout" : "Checkout"}</p>
+    <p><strong>Reçu le :</strong> ${new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}</p>
+    <hr>
+    <p style="color:#64748B;font-size:12px;">
+      <a href="https://dashboard.stripe.com/payments">Ouvrir le tableau de bord Stripe</a>
+      · Notification automatique masterprompt.fr
+    </p>
+  `;
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: [ADMIN_NOTIF_TO],
+      replyTo: ctx.customerEmail,
+      subject,
+      html,
+    });
+    if (error) {
+      console.error("[sendStripePurchaseAdminNotification]", error);
+      const msg =
+        typeof error === "object" && error !== null && "message" in error && typeof (error as { message: unknown }).message === "string"
+          ? (error as { message: string }).message
+          : String(error);
+      return { ok: false, error: msg };
+    }
+    return { ok: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Erreur inconnue";
+    console.error("[sendStripePurchaseAdminNotification]", err);
     return { ok: false, error: message };
   }
 }

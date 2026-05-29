@@ -57,7 +57,7 @@ export function ModuleVideoCard({
         ) : (
           <LockedContent
             title="Vidéo réservée aux membres"
-            subtitle={hasVideo ? `${lessons} leçons · ${duration} · Disponible 1er juin 2026` : `${lessons} leçons · ${duration}`}
+            subtitle={hasVideo ? `${lessons} leçons · ${duration} · Disponible 1er juillet 2026` : `${lessons} leçons · ${duration}`}
             aspect="video"
           >
             <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-navy via-slate-700 to-slate-900">

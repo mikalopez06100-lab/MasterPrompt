@@ -104,7 +104,7 @@ export default async function EspaceFormationPreviewPage({
               </h1>
               <p className="mt-2 max-w-2xl text-sm text-amber-900">
                 Tous les contenus ci-dessous (vidéos, prompts, exercices, éditeur) sont floutés. Ils
-                seront débloqués automatiquement le <strong>1er juin 2026</strong> après votre
+                seront débloqués automatiquement le <strong>1er juillet 2026</strong> après votre
                 précommande.
               </p>
             </div>
@@ -157,7 +157,7 @@ export default async function EspaceFormationPreviewPage({
                 <div className="h-full w-0 bg-emerald-500" />
               </div>
               <p className="mt-2">0 / 50 leçons complétées</p>
-              <p className="mt-1 italic">Disponible le 1er juin 2026</p>
+              <p className="mt-1 italic">Disponible le 1er juillet 2026</p>
             </div>
           </aside>
 
@@ -183,7 +183,7 @@ export default async function EspaceFormationPreviewPage({
                 <PriceFigure as="span" className="font-semibold text-slate-200">
                   {launchPriceActive ? "49€" : "97€"}
                 </PriceFigure>{" "}
-                · Accès le 1er juin 2026 ·
+                · Accès le 1er juillet 2026 ·
                 Remboursement intégral si non-livré · Garantie 14 jours après accès.
               </p>
             </div>

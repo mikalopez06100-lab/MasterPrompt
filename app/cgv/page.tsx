@@ -34,7 +34,7 @@ export default function CGVPage() {
               Conditions Générales de Vente
             </h1>
             <p className="mt-2 text-sm text-muted">
-              En vigueur au 1<sup>er</sup> juin 2026 — applicables à tout achat effectué sur
+              En vigueur au 1<sup>er</sup> juillet 2026 — applicables à tout achat effectué sur
               masterprompt.fr.
             </p>
           </header>
@@ -67,7 +67,7 @@ export default function CGVPage() {
               <li>
                 <strong>Niveau 1 — Formation Master Prompt :</strong> formation en ligne composée de 7
                 modules vidéo, bibliothèque de prompts, exercices et accès à la plateforme de formation.
-                Accès à vie. Prix : 97 € TTC (tarif de lancement : 49 € TTC jusqu&apos;au 31/05/2026).
+                Accès à vie. Prix : 97 € TTC (tarif de lancement : 49 € TTC jusqu&apos;au 30/06/2026).
               </li>
               <li>
                 <strong>Niveau 2 — Pack IA Activité :</strong> prestation de conseil et de développement
@@ -110,7 +110,7 @@ export default function CGVPage() {
             <ul className="space-y-2 text-sm text-slate-700">
               <li>
                 <strong>Formation :</strong> accès immédiat à la plateforme après paiement (ou au 1<sup>er</sup>{" "}
-                juin 2026 pour les précommandes effectuées avant cette date).
+                juillet 2026 pour les précommandes effectuées avant cette date).
               </li>
               <li>
                 <strong>Pack IA :</strong> livraison des livrables dans un délai de 5 jours ouvrés à compter
@@ -141,7 +141,7 @@ export default function CGVPage() {
               </li>
               <li>
                 <strong>Formation (précommande) :</strong> si la formation n&apos;est pas livrée à la date
-                prévue du 1<sup>er</sup> juin 2026, remboursement intégral automatique, sans démarche du
+                prévue du 1<sup>er</sup> juillet 2026, remboursement intégral automatique, sans démarche du
                 Client.
               </li>
               <li>
@@ -167,13 +167,13 @@ export default function CGVPage() {
           <section className="space-y-3">
             <h2 className={`${syne.className} text-xl font-bold`}>Article 6 — Précommande</h2>
             <p className="text-sm leading-relaxed text-slate-700">
-              La Formation Master Prompt est commercialisée en précommande jusqu&apos;au 31 mai 2026 inclus
+              La Formation Master Prompt est commercialisée en précommande jusqu&apos;au 30 juin 2026 inclus
               au tarif de 49 € TTC. En achetant en précommande, le Client :
             </p>
             <ul className="list-inside list-disc space-y-1 text-sm text-slate-700">
               <li>
                 reconnaît que la formation n&apos;est pas encore disponible et sera livrée le 1<sup>er</sup>{" "}
-                juin 2026 ;
+                juillet 2026 ;
               </li>
               <li>bénéficie d&apos;un tarif préférentiel réservé aux précommandants ;</li>
               <li>
@@ -236,7 +236,7 @@ export default function CGVPage() {
           </section>
 
           <p className="border-t border-border pt-6 text-xs text-muted">
-            Version en vigueur au 1<sup>er</sup> juin 2026
+            Version en vigueur au 1<sup>er</sup> juillet 2026
           </p>
         </article>
       </section>

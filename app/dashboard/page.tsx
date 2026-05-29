@@ -37,7 +37,7 @@ export default async function DashboardPage() {
             Précommande active
           </p>
           <h2 className="mt-2 font-heading text-xl font-bold text-amber-950">
-            Votre accès complet ouvre le 1<sup>er</sup> juin 2026
+            Votre accès complet ouvre le 1<sup>er</sup> juillet 2026
           </h2>
           <p className="mt-2 text-sm text-amber-900">
             Les 7 modules de formation, la bibliothèque de 300 prompts et les exercices

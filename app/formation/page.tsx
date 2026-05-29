@@ -17,9 +17,9 @@ const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
 export const metadata: Metadata = {
-  title: "Formation Master Prompt — Précommande 49€ · Accès 1er juin 2026",
+  title: "Formation Master Prompt — Précommande 49€ · Accès 1er juillet 2026",
   description:
-    "Précommande à 49€ au lieu de 97€. 7 modules, méthode PACO, livraison garantie le 1er juin 2026 avec remboursement intégral si non-livrée.",
+    "Précommande à 49€ au lieu de 97€. 7 modules, méthode PACO, livraison garantie le 1er juillet 2026 avec remboursement intégral si non-livrée.",
   alternates: { canonical: "https://www.masterprompt.fr/formation" },
   openGraph: {
     title: "Formation Master Prompt — Maîtriser l'IA en 7 modules",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function FormationPage() {
   const stripeLink = process.env.NEXT_PUBLIC_STRIPE_LINK_FORMATION || "/billing";
-  const promoEndDate = process.env.NEXT_PUBLIC_PROMO_END_DATE || "31/05/2026";
+  const promoEndDate = process.env.NEXT_PUBLIC_PROMO_END_DATE || "30/06/2026";
   const launchPriceActive = process.env.NEXT_PUBLIC_LAUNCH_PRICE_ACTIVE !== "false";
   const presentationVideoUrl = process.env.NEXT_PUBLIC_PRESENTATION_VIDEO_URL || "";
   const courseSchema = {
@@ -60,7 +60,7 @@ export default function FormationPage() {
     {
       question: "Qu'est-ce qu'une précommande ?",
       answer:
-        "Vous payez maintenant au tarif préférentiel 49€ (au lieu de 97€ au lancement officiel) et recevez un accès complet à la formation le 1er juin 2026 par email.",
+        "Vous payez maintenant au tarif préférentiel 49€ (au lieu de 97€ au lancement officiel) et recevez un accès complet à la formation le 1er juillet 2026 par email.",
     },
     {
       question: "Pourquoi cette logique de précommande ?",
@@ -68,7 +68,7 @@ export default function FormationPage() {
         "Les 7 modules vidéo sont en cours de finalisation. Précommander permet de bloquer le tarif -49% et de faire partie des premiers apprenants, avec des teasers exclusifs chaque semaine jusqu'à l'accès.",
     },
     {
-      question: "Et si la formation n'est pas livrée le 1er juin ?",
+      question: "Et si la formation n'est pas livrée le 1er juillet ?",
       answer:
         "Remboursement intégral automatique, sans justification à fournir. Votre paiement est sécurisé par Stripe.",
     },
@@ -129,7 +129,7 @@ export default function FormationPage() {
                 Voir l&apos;espace formation
               </Link>
             </div>
-            <p className="mt-3 text-xs text-muted">Paiement sécurisé Stripe · Accès 1er juin 2026 · Remboursement garanti</p>
+            <p className="mt-3 text-xs text-muted">Paiement sécurisé Stripe · Accès 1er juillet 2026 · Remboursement garanti</p>
           </div>
 
           {presentationVideoUrl && (
@@ -153,7 +153,7 @@ export default function FormationPage() {
               <p className="mt-3 text-sm text-slate-300 sm:text-base">
                 7 modules vidéo, 300 prompts métier, exercices, éditeur intelligent. Entrez votre
                 email et visitez l&apos;espace membre en mode aperçu — vous verrez exactement ce que
-                vous obtiendrez le 1er juin 2026.
+                vous obtiendrez le 1er juillet 2026.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-slate-300">
                 <li>✓ Navigation libre dans tous les onglets</li>
@@ -182,7 +182,7 @@ export default function FormationPage() {
             </article>
             <article className="rounded-lg bg-white p-4 text-sm text-slate-700">
               <strong>Quand vais-je recevoir la formation ?</strong>
-              <p className="mt-1">Le 1er juin 2026 par email, avec identifiants et accès complet.</p>
+              <p className="mt-1">Le 1er juillet 2026 par email, avec identifiants et accès complet.</p>
             </article>
             <article className="rounded-lg bg-white p-4 text-sm text-slate-700">
               <strong>Et si la formation n&apos;est pas livrée ?</strong>
@@ -246,7 +246,7 @@ export default function FormationPage() {
           <article className="rounded-xl border border-border bg-white p-5">
             <h2 className={`${syne.className} text-xl font-bold`}>Ce qui est inclus</h2>
             <ul className="mt-3 space-y-2 text-sm text-slate-700">
-              {["7 modules vidéo", "300 prompts métier", "Quiz", "Exercices", "Accès à vie", "Mises à jour"].map((item) => (
+              {["7 modules vidéo", "300 prompts métier", "Quiz", "Exercices", "Accès à vie aux vidéos et à l'espace", "Correcteur PACO — 3 mois inclus, puis 4,90 €/mois"].map((item) => (
                 <li key={item}>✓ {item}</li>
               ))}
             </ul>
@@ -287,7 +287,7 @@ export default function FormationPage() {
         <div className="mx-auto max-w-6xl rounded-xl border border-emerald-300 bg-emerald-50 p-6">
           <h2 className={`${syne.className} text-2xl font-bold text-emerald-900`}>Garantie livraison + remboursement 14 jours</h2>
           <p className="mt-2 text-sm text-emerald-800">
-            Livraison garantie le 1er juin 2026. En cas de retard, remboursement intégral automatique. Après accès, vous conservez la garantie 14 jours satisfait ou remboursé.
+            Livraison garantie le 1er juillet 2026. En cas de retard, remboursement intégral automatique. Après accès, vous conservez la garantie 14 jours satisfait ou remboursé.
           </p>
         </div>
       </section>

@@ -243,7 +243,7 @@ export default function LandingPage() {
               <p className={`${headingClass} text-xs uppercase tracking-[0.2em] text-muted`}>Niveau 1</p>
               {launchPriceActive && (
                 <span className="inline-block rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-                  Précommande · 1er juin
+                  Précommande · 1er juillet
                 </span>
               )}
             </div>

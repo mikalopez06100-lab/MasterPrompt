@@ -22,7 +22,7 @@ export default async function CoursesPage() {
             Précommande active
           </p>
           <h2 className="font-heading text-2xl font-bold text-amber-950">
-            Votre accès complet ouvre le 1<sup>er</sup> juin 2026
+            Votre accès complet ouvre le 1<sup>er</sup> juillet 2026
           </h2>
           <p className="text-sm text-amber-900">
             Les 7 modules vidéo, la bibliothèque de 300 prompts, les exercices et

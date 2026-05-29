@@ -19,7 +19,7 @@ export default function FormationMerciPage() {
         <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-white p-8">
           <h1 className={`${syne.className} text-3xl font-bold`}>Merci pour votre précommande</h1>
           <p className="mt-3 text-slate-700">
-            Votre place est réservée. Rendez-vous le 1er juin 2026 pour l'accès complet à la Formation Master Prompt.
+            Votre place est réservée. Rendez-vous le 1er juillet 2026 pour l'accès complet à la Formation Master Prompt.
           </p>
           <p className="mt-2 text-sm text-muted">
             Vous recevrez un email de confirmation dans les prochaines minutes, puis un teaser exclusif des modules chaque semaine jusqu&apos;à l&apos;accès.
