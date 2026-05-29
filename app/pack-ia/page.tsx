@@ -196,6 +196,14 @@ export default function PackIAPage() {
               websiteUrl="https://cacouledesource.fr"
               websiteLabel="cacouledesource.fr"
             />
+            <TestimonialBlock
+              quote="Nous avons créé un tunnel de vente et une structure complète pour gérer les intervenants de façon hyper pro."
+              name="Audrey"
+              role="Fondatrice · Samsara Yoga Camp"
+              offer="Pack IA Activité"
+              websiteUrl="https://samsarayogacamp.com"
+              websiteLabel="samsarayogacamp.com"
+            />
           </div>
         </div>
       </section>

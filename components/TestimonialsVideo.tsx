@@ -67,6 +67,19 @@ export const testimonials: TestimonialVideoItem[] = [
     websiteUrl: "https://cacouledesource.fr",
     websiteLabel: "cacouledesource.fr",
   },
+  {
+    id: "audrey",
+    name: "Audrey",
+    role: "Fondatrice · Samsara Yoga Camp",
+    avatar: "A",
+    avatarColor: "#BE185D",
+    quote:
+      "Nous avons créé un tunnel de vente et une structure complète pour gérer les intervenants de façon hyper pro.",
+    offer: "Pack IA Activité",
+    offerType: "pack",
+    websiteUrl: "https://samsarayogacamp.com",
+    websiteLabel: "samsarayogacamp.com",
+  },
 ];
 
 type Props = {
@@ -75,7 +88,7 @@ type Props = {
 
 export function TestimonialsVideo({ items = testimonials }: Props) {
   return (
-    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {items.map((testimonial) => (
         <article
           key={testimonial.id}
