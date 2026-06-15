@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 type Props = {
   src: string;
@@ -16,7 +16,7 @@ type Props = {
 
 /**
  * Player vidéo responsive, pensé mobile-first.
- * Autoplay muted au scroll-in, bouton pour activer le son, contrôles natifs.
+ * Lecture manuelle via bouton play — le son est activé dès le lancement.
  */
 export function PresentationVideo({
   src,
@@ -27,39 +27,16 @@ export function PresentationVideo({
   aspect = "portrait",
 }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [started, setStarted] = useState(false);
 
-  useEffect(() => {
+  function handleStart() {
     const el = videoRef.current;
     if (!el) return;
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              el.play().catch(() => {
-                // Autoplay peut être bloqué — pas grave, l'utilisateur cliquera
-              });
-            } else {
-              el.pause();
-            }
-          }
-        },
-        { threshold: 0.4 },
-      );
-      observer.observe(el);
-      return () => observer.disconnect();
-    }
-  }, []);
-
-  const handleUnmute = () => {
-    const el = videoRef.current;
-    if (!el) return;
+    el.currentTime = 0;
     el.muted = false;
     el.play().catch(() => null);
-    setHasInteracted(true);
-  };
+    setStarted(true);
+  }
 
   const isLandscape = aspect === "landscape";
   const wrapperMax = isLandscape ? "max-w-3xl" : "max-w-[360px] sm:max-w-[420px]";
@@ -75,40 +52,27 @@ export function PresentationVideo({
           ref={videoRef}
           src={src}
           poster={poster}
-          controls
+          controls={started}
           playsInline
-          muted
-          loop={false}
           preload="metadata"
           className={`absolute inset-0 h-full w-full ${objectClass}`}
           crossOrigin="anonymous"
+          onPlay={() => setStarted(true)}
         >
           Votre navigateur ne supporte pas la lecture vidéo HTML5.
         </video>
 
-        {!hasInteracted && (
+        {!started && (
           <button
             type="button"
-            onClick={handleUnmute}
-            aria-label="Activer le son"
-            className="absolute right-3 top-3 z-10 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur transition hover:bg-black/85"
+            onClick={handleStart}
+            aria-label="Lancer la vidéo"
+            className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/30 transition hover:bg-black/40"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <line x1="23" y1="9" x2="17" y2="15" />
-              <line x1="17" y1="9" x2="23" y2="15" />
-            </svg>
-            Activer le son
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500 text-xl text-navy shadow-lg">
+              ▶
+            </span>
+            <span className="text-xs font-semibold text-white">Lire la vidéo</span>
           </button>
         )}
       </div>
