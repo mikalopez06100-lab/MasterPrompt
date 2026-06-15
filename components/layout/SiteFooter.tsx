@@ -1,7 +1,22 @@
 import Link from "next/link";
 import { Syne } from "next/font/google";
+import { Instagram, Linkedin } from "lucide-react";
+import { WhatsAppFooterLink } from "@/components/WhatsAppContact";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
+
+const SOCIAL_LINKS = [
+  {
+    href: "https://www.instagram.com/michael.lopez.pro/",
+    label: "Instagram — @michael.lopez.pro",
+    Icon: Instagram,
+  },
+  {
+    href: "https://www.linkedin.com/in/micha%C3%ABl-lopez-450342198/",
+    label: "LinkedIn — Michaël Lopez",
+    Icon: Linkedin,
+  },
+] as const;
 
 type Props = {
   launchPriceActive?: boolean;
@@ -22,8 +37,8 @@ export function SiteFooter({ launchPriceActive = true }: Props) {
           <nav aria-label="Offres" className="space-y-2 text-sm">
             <Link href="/formation" className="block hover:text-white">{formationLabel}</Link>
             <Link href="/pack-ia" className="block hover:text-white">Pack IA — 397€</Link>
-            <Link href="/abonnements" className="block hover:text-white">Abonnements</Link>
             <Link href="/accompagnement" className="block hover:text-white">Accompagnement</Link>
+            <Link href="/abonnements" className="block hover:text-white">Abonnements</Link>
           </nav>
 
           <div className="text-sm">
@@ -33,6 +48,21 @@ export function SiteFooter({ launchPriceActive = true }: Props) {
             >
               hello@masterprompt.fr
             </Link>
+            <WhatsAppFooterLink />
+            <div className="mt-3 flex items-center gap-3">
+              {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-slate-300 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
+                >
+                  <Icon className="h-4 w-4" aria-hidden />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
