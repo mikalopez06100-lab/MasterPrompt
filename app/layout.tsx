@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/next";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -58,6 +59,7 @@ export default function RootLayout({
     <html lang="fr" className={`${fraunces.variable} ${instrumentSans.variable}`}>
       <body className="font-sans font-light text-navy antialiased">
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
