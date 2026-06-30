@@ -324,13 +324,13 @@ export const proposals: ProposalConfig[] = [
     clientName: "Élodie Fleury",
     title: "Pack IA complet (espace privé)",
     subtitle:
-      "5 livrables HTML : audit 360, stratégie marketing, automatisations IA, guide acquéreur hispanophone et landing page.",
+      "6 livrables HTML : audit 360, stratégie marketing, automatisations IA, guide acquéreur hispanophone, charte graphique et landing page.",
     ogShareSubline: "immo_elo / YourBnB06 — Côte d'Azur (dossier confidentiel)",
     deliverableGroups: [
       {
         title: "Dossier client",
         description:
-          "Les cinq documents sont accessibles sur cette page ; le bouton ouvre le livrable en plein écran.",
+          "Les six documents sont accessibles sur cette page ; le bouton ouvre le livrable en plein écran.",
         deliverables: [
           {
             title: "Audit 360",
@@ -362,17 +362,24 @@ export const proposals: ProposalConfig[] = [
             ctaVariant: "amber",
           },
           {
+            title: "Charte graphique",
+            description: "Identité visuelle — palette, typographies, logo et usages (HTML autonome).",
+            url: "/proposals/elodie-fleury/charte-graphique.html",
+            ctaLabel: "Ouvrir la charte",
+            ctaVariant: "navy",
+          },
+          {
             title: "Landing page",
             description: "Maquette landing agent immobilier & conciergerie — Côte d'Azur (HTML statique).",
             url: "/proposals/elodie-fleury/landing-elodie-fleury-v3.html",
             ctaLabel: "Ouvrir la landing",
-            ctaVariant: "navy",
+            ctaVariant: "amber",
           },
         ],
       },
     ],
     notes: [
-      "Un seul lien client : les cinq livrables s'affichent ci-dessous en aperçu intégré.",
+      "Un seul lien client : les six livrables s'affichent ci-dessous en aperçu intégré.",
       "Ce lien est réservé aux personnes autorisées.",
     ],
   },
