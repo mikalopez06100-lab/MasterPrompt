@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit 360 — Élodie Fleury · immo_elo / YourBnB06</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page: #fafafa;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-primary: #0a2540;
+  --text-body: #1a202c;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  --accent: #d4a574;
+  --accent-dark: #a67c4f;
+  --accent-soft: #faf3e8;
+  --success: #15803d;
+  --success-soft: #f0fdf4;
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+  --danger: #b91c1c;
+  --danger-soft: #fef2f2;
+  --info: #0369a1;
+  --info-soft: #f0f9ff;
+  --chart-1: #0a2540;
+  --chart-2: #0ea5e9;
+  --chart-3: #d4a574;
+  --chart-4: #15803d;
+  --chart-5: #b91c1c;
+  --chart-6: #7c3aed;
+  --chart-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.04);
+  --shadow: 0 1px 3px rgba(10,37,64,0.06), 0 1px 2px rgba(10,37,64,0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg-page); color: var(--text-body); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1240px; margin: 0 auto; gap: 48px; padding: 48px; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; padding: 24px; } .toc { display: none; } }
+
+.toc { position: sticky; top: 32px; align-self: start; font-size: 0.875rem; }
+.toc-title { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 16px; }
+.toc ol { list-style: none; border-left: 1px solid var(--border); }
+.toc li { margin-bottom: 4px; }
+.toc a { display: block; padding: 6px 16px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; }
+.toc a:hover { color: var(--text-primary); border-left-color: var(--accent); }
+
+.main { max-width: 920px; }
+.cover { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 64px 48px; margin-bottom: 64px; position: relative; overflow: hidden; }
+.cover::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--text-primary); }
+.cover-kicker { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-dark); margin-bottom: 16px; }
+.cover h1 { font-size: 2.75rem; font-weight: 700; color: var(--text-primary); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.02em; }
+.cover-tagline { font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; }
+.cover-meta { display: flex; gap: 40px; border-top: 1px solid var(--border); padding-top: 24px; font-size: 0.875rem; flex-wrap: wrap; }
+.cover-meta-item .label { color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; margin-bottom: 4px; }
+.cover-meta-item .value { color: var(--text-primary); font-weight: 600; }
+
+.section { margin-bottom: 80px; scroll-margin-top: 32px; }
+.section-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 8px; }
+.section-header h2 { font-size: 1.75rem; color: var(--text-primary); margin: 0 0 10px 0; font-weight: 600; line-height: 1.2; }
+.section-header .lead { font-size: 1.1rem; color: var(--text-muted); margin: 0; }
+
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+.card h3 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 10px; font-weight: 600; }
+
+.callout { padding: 16px 20px; border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 0.95rem; }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout strong { display: block; margin-bottom: 4px; }
+
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 24px 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; }
+.kpi-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 6px; }
+.kpi-value { font-size: 2rem; font-weight: 700; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; display: block; }
+.kpi-delta { font-size: 0.8rem; margin-top: 6px; display: inline-block; }
+.delta-up { color: var(--success); }
+.delta-down { color: var(--danger); }
+.delta-warn { color: var(--warning); }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 20px 0; }
+.data-table th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; padding: 10px 14px; border-bottom: 2px solid var(--text-primary); }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+@media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+@media (max-width: 700px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.score-badge { display: inline-flex; align-items: baseline; gap: 4px; padding: 8px 16px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.score-value { font-size: 2.2rem; font-weight: 700; }
+.score-label { font-size: 0.9rem; opacity: 0.7; }
+.score-good { background: var(--success-soft); color: var(--success); }
+.score-medium { background: var(--warning-soft); color: var(--warning); }
+.score-poor { background: var(--danger-soft); color: var(--danger); }
+
+.tag { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 6px; margin-bottom: 4px; }
+.tag-success { background: var(--success-soft); color: var(--success); }
+.tag-warning { background: var(--warning-soft); color: var(--warning); }
+.tag-danger { background: var(--danger-soft); color: var(--danger); }
+.tag-info { background: var(--info-soft); color: var(--info); }
+.tag-neutral { background: var(--bg-subtle); color: var(--text-muted); }
+
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+.chart-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+.chart-caption { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
+
+.verdict-block { background: var(--text-primary); color: var(--text-inverse); border-radius: 12px; padding: 40px 48px; margin: 32px 0; }
+.verdict-block .verdict-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 8px; }
+.verdict-block h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
+.verdict-block p { opacity: 0.85; line-height: 1.7; }
+
+ul.checklist { list-style: none; margin: 12px 0; }
+ul.checklist li { padding: 6px 0 6px 28px; position: relative; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+ul.checklist li:last-child { border-bottom: none; }
+ul.checklist li::before { content: '→'; position: absolute; left: 0; color: var(--accent-dark); font-weight: 700; }
+ul.checklist.danger li::before { content: '✗'; color: var(--danger); }
+ul.checklist.success li::before { content: '✓'; color: var(--success); }
+
+.page-break { page-break-after: always; }
+
+@media print {
+  body { background: white; }
+  .toc { display: none; }
+  .layout { display: block; padding: 24px; }
+  .main { max-width: 100%; }
+  .cover { padding: 40px 32px; margin-bottom: 40px; }
+  .card, .chart-card { break-inside: avoid; box-shadow: none; }
+  .section { margin-bottom: 48px; }
+}
+@page { size: A4; margin: 16mm 14mm; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- TOC -->
+<nav class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#exec">Résumé exécutif</a></li>
+    <li><a href="#situation">Situation actuelle</a></li>
+    <li><a href="#marche">Analyse de marché</a></li>
+    <li><a href="#concurrence">Paysage concurrentiel</a></li>
+    <li><a href="#brand">Personal branding</a></li>
+    <li><a href="#digital">Présence digitale</a></li>
+    <li><a href="#conciergerie">YourBnB06</a></li>
+    <li><a href="#risques">Risques critiques</a></li>
+    <li><a href="#opportunites">Opportunités</a></li>
+    <li><a href="#plan">Plan d'action 90j</a></li>
+  </ol>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-kicker">Audit Stratégique 360°</div>
+  <h1>Élodie Fleury</h1>
+  <p class="cover-tagline">Agent immobilier IAD · Conciergerie YourBnB06 · Personal brand immo_elo — Côte d'Azur</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><div class="label">Préparé par</div><div class="value">Michaël Lopez · MasterPrompt</div></div>
+    <div class="cover-meta-item"><div class="label">Date</div><div class="value">Juin 2026</div></div>
+    <div class="cover-meta-item"><div class="label">Stade</div><div class="value">Pack IA — Phase 1/4</div></div>
+    <div class="cover-meta-item"><div class="label">Score global</div><div class="value">58 / 100</div></div>
+  </div>
+</div>
+
+<!-- RÉSUMÉ EXÉCUTIF -->
+<section class="section" id="exec">
+  <div class="section-header">
+    <span class="kicker">Résumé exécutif</span>
+    <h2>Le diagnostic en 5 points</h2>
+    <p class="lead">Un potentiel réel, une exécution dispersée, un repositionnement urgent à opérer avant toute action marketing.</p>
+  </div>
+
+  <div class="verdict-block">
+    <div class="verdict-label">Verdict global</div>
+    <h3>Actifs sous-exploités · Positionnement dilué · Niche espagnole non monétisée</h3>
+    <p>Élodie dispose d'une combinaison rare : double activité immobilier + conciergerie, réseau hispanophone, présence Instagram active (immo_elo), 4,9/5 sur 18 avis. Ces atouts valent structurellement plus que ce qu'ils génèrent. Le problème n'est pas le produit — c'est l'absence d'une architecture business qui les fait converger. Résultat : 3 mandats en cours, 8-10 biens en conciergerie, zéro levier de scale visible. Avec une stratégie cohérente, le CA double en 12 mois sans un seul euro de pub.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">Mandats actifs</span>
+      <strong class="kpi-value">3</strong>
+      <span class="kpi-sub delta-warn">Critique — plancher de viabilité</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Biens conciergerie</span>
+      <strong class="kpi-value">8-10</strong>
+      <span class="kpi-sub delta-up">Base correcte, sous-valorisée</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Score avis IAD</span>
+      <strong class="kpi-value">4,9</strong>
+      <span class="kpi-sub delta-up">Actif de confiance fort</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Fiches GMB</span>
+      <strong class="kpi-value">2</strong>
+      <span class="kpi-sub delta-warn">Fragmenté — signal confus</span>
+    </div>
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>Problème structurel #1 — Dispersion identitaire.</strong>
+    Trois marques distinctes coexistent sans pont entre elles : immo_elo (Instagram), YourBnB06 (conciergerie), Élodie Fleury IAD (réseau mandataire). Chacune parle à un segment différent, aucune ne capitalise sur les deux autres. C'est du gâchis d'actifs.
+  </div>
+
+  <div class="callout callout-warning">
+    <strong>Problème structurel #2 — La niche espagnole est un trésor non extrait.</strong>
+    Le différenciateur le plus puissant du dossier — la maîtrise de l'espagnol et un réseau latino — n'est visible nulle part : ni sur le site IAD, ni sur YourBnB06, ni dans le bio Instagram. C'est comme avoir un passe VIP et rester en queue.
+  </div>
+
+  <div class="callout callout-warning">
+    <strong>Problème structurel #3 — Changement de réseau imminent sans plan.</strong>
+    Le départ d'IAD est envisagé. Sans anticipation (personal brand construit en amont, mandats portables, landing indépendante), le changement de crèmerie peut anéantir 6-12 mois de traction. C'est le risque le plus urgent à gérer.
+  </div>
+</section>
+
+<!-- SITUATION ACTUELLE -->
+<section class="section" id="situation">
+  <div class="section-header">
+    <span class="kicker">Bloc 01</span>
+    <h2>Situation actuelle — État des lieux brut</h2>
+    <p class="lead">Ce qui existe, ce qui manque, ce qui est en tension.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Activité immobilière — IAD France</h3>
+      <p>Agent mandataire rattachée au réseau IAD, secteur Nice (06200) et environs. RSAC Nice n° 925 155 855.</p>
+      <p><strong>3 mandats actifs</strong> au 26/06/2026 : appartement Cagnes-sur-Mer 194 500 €, terrain Aspremont 275 000 €, maison Antibes (exclusivité) 599 000 €.</p>
+      <p><strong>2 dernières transactions</strong> : deux appartements Antibes vendus en collaboration avec Alexandre Wandel — signal positif de réseau, mais dépendance co-vente à surveiller.</p>
+      <span class="tag tag-warning">3 mandats = plancher critique</span>
+      <span class="tag tag-success">4,9/5 · 18 avis vérifiés</span>
+    </div>
+    <div class="card">
+      <h3>Conciergerie — YourBnB06</h3>
+      <p>Conciergerie premium Nice. 8-10 biens en gestion saisonnière. Commission : 20% TTC sur réservations. Ménage facturé aux voyageurs.</p>
+      <p>Site Wix basique. Un seul témoignage client affiché (Marine, villa Fabron). Positionnement "premium" non justifié visuellement.</p>
+      <span class="tag tag-success">Portefeuille existant</span>
+      <span class="tag tag-danger">Site sous-performant</span>
+      <span class="tag tag-warning">20% — dans la médiane marché</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Atouts distinctifs identifiés</h3>
+    <table class="data-table">
+      <thead><tr><th>Atout</th><th>Niveau actuel d'exploitation</th><th>Potentiel réel</th></tr></thead>
+      <tbody>
+        <tr><td>Maîtrise espagnol + réseau latinophone</td><td><span class="tag tag-danger">0% exploité</span></td><td>Différenciateur n°1 sur le marché</td></tr>
+        <tr><td>Double casquette immo + conciergerie</td><td><span class="tag tag-warning">Cloisonné</span></td><td>Funnel propriétaire unique</td></tr>
+        <tr><td>Présence Instagram active (immo_elo)</td><td><span class="tag tag-warning">Audience non qualifiée</span></td><td>Lead gen organique si pivotée</td></tr>
+        <tr><td>Note 4,9/5 · 18 avis</td><td><span class="tag tag-warning">Peu mis en avant</span></td><td>Social proof de conversion</td></tr>
+        <tr><td>31 ans · énergie · passion</td><td><span class="tag tag-success">Visible Instagram</span></td><td>Personal brand authentique</td></tr>
+        <tr><td>2 fiches GMB</td><td><span class="tag tag-danger">Fragmentées</span></td><td>SEO local si consolidées</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-accent">
+    <strong>Signal fort à ne pas rater.</strong>
+    Le profil Immodvisor confirme la récence des avis (avril 2026) et la qualité des verbatims — "Elle n'a rien lâché", "portefeuille clients qui a fait la différence". Ce sont des preuves de hunter commercial, pas d'agent passif. Ce profil-là peut justifier un repositionnement haut de gamme.
+  </div>
+</section>
+
+<!-- MARCHÉ -->
+<section class="section" id="marche">
+  <div class="section-header">
+    <span class="kicker">Bloc 02</span>
+    <h2>Analyse de marché</h2>
+    <p class="lead">Nice 06 en 2026 : un marché premium qui joue en faveur d'une spécialiste internationale.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">Prix moyen appt. Nice</span>
+      <strong class="kpi-value">5 800</strong>
+      <span class="kpi-sub">€/m² (2026)</span>
+      <span class="kpi-delta delta-up">+18,7% vs 2021</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Acheteurs étrangers</span>
+      <strong class="kpi-value">50%</strong>
+      <span class="kpi-sub">des transactions >2M€</span>
+      <span class="kpi-delta delta-up">En hausse structurelle</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Achat cash (>2M€)</span>
+      <strong class="kpi-value">60%</strong>
+      <span class="kpi-sub">sans condition suspensive</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Conciergeries Nice</span>
+      <strong class="kpi-value">15+</strong>
+      <span class="kpi-sub">acteurs identifiés</span>
+      <span class="kpi-delta delta-warn">Marché fragmenté</span>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Prix immobilier par quartier — Nice 2026 (€/m²)</div>
+    <div class="chart-caption">Opportunité : la zone de mandats actifs d'Élodie couvre des segments de 194k€ à 599k€, cohérent avec le haut du marché standard.</div>
+    <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" role="img">
+      <line x1="60" y1="260" x2="600" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="40" x2="60" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <!-- grid lines -->
+      <line x1="60" y1="200" x2="600" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="60" y1="140" x2="600" y2="140" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="60" y1="80" x2="600" y2="80" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+      <!-- y labels -->
+      <g font-family="Inter" font-size="10" fill="#64748b">
+        <text x="52" y="264" text-anchor="end">0</text>
+        <text x="52" y="204" text-anchor="end">4K</text>
+        <text x="52" y="144" text-anchor="end">8K</text>
+        <text x="52" y="84" text-anchor="end">12K</text>
+      </g>
+      <!-- bars: Ariane 3800, St-Roch 4200, Cimiez 5500, Port 7000, Promenade 9000, Mont Boron 12000 -->
+      <rect x="80" y="184" width="55" height="76" fill="#0ea5e9" opacity="0.7"/>
+      <rect x="155" y="176" width="55" height="84" fill="#0ea5e9" opacity="0.8"/>
+      <rect x="230" y="150" width="55" height="110" fill="#0a2540" opacity="0.7"/>
+      <rect x="305" y="120" width="55" height="140" fill="#0a2540" opacity="0.85"/>
+      <rect x="380" y="80" width="55" height="180" fill="#d4a574"/>
+      <rect x="455" y="20" width="55" height="240" fill="#d4a574" opacity="0.9"/>
+      <!-- value labels -->
+      <g font-family="Inter" font-size="11" font-weight="600" fill="#0a2540" text-anchor="middle">
+        <text x="107" y="178">3.8K</text>
+        <text x="182" y="170">4.2K</text>
+        <text x="257" y="144">5.5K</text>
+        <text x="332" y="114">7K</text>
+        <text x="407" y="74">9K</text>
+        <text x="482" y="14">12K</text>
+      </g>
+      <!-- x labels -->
+      <g font-family="Inter" font-size="10" fill="#64748b" text-anchor="middle">
+        <text x="107" y="278">Ariane</text>
+        <text x="182" y="278">St-Roch</text>
+        <text x="257" y="278">Cimiez</text>
+        <text x="332" y="278">Port</text>
+        <text x="407" y="278">Promenade</text>
+        <text x="482" y="278">Mt Boron</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Clientèle internationale Côte d'Azur 2026</h3>
+      <p>Les acheteurs étrangers représentent <strong>60% des transactions sur les biens de plus de 2M€</strong>. Répartition : Américains/Canadiens 9% (en hausse de +5pts vs 2022), Scandinaves 10%, Moyen-Orient 6% (18% des volumes en valeur), Asiatiques 7%.</p>
+      <p>Les acheteurs hispanophones (Espagne, Amérique latine) constituent un segment croissant — investisseurs en recherche de diversification patrimoniale européenne, budget moyen 800K-2M€.</p>
+      <div class="callout callout-accent" style="margin-top:12px;">
+        <strong>Fenêtre unique pour Élodie.</strong> Aucun acteur identifiable ne s'est positionné explicitement sur la clientèle hispanophone à Nice. C'est un espace blanc réel.
+      </div>
+    </div>
+    <div class="card">
+      <h3>Conciergerie Nice — Données marché</h3>
+      <p>Commission marché : <strong>19-23,2% du loyer brut</strong> (note moyenne des concurrents : 4,5/5 sur 636 avis cumulés). YourBnB06 est à 20% — dans la médiane, ni premium ni discount.</p>
+      <p>Nice a <strong>durci la réglementation location saisonnière en 2025</strong> : enregistrement obligatoire, quotas dans certains quartiers. Impact sur les nouveaux entrants, avantage aux opérateurs établis.</p>
+      <p>Concurrents identifiés avec ancrage fort : BnB Groom Services, Nestor & Jeeves, Ze Perfect Place (10 ans), My Concierge in Nice, GuestReady (international).</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONCURRENCE -->
+<section class="section" id="concurrence">
+  <div class="section-header">
+    <span class="kicker">Bloc 03</span>
+    <h2>Paysage concurrentiel</h2>
+    <p class="lead">Élodie joue sur deux marchés simultanément. Analyse séparée pour chacun.</p>
+  </div>
+
+  <div class="card">
+    <h3>Matrice concurrentielle — Immobilier (mandataires Nice)</h3>
+    <table class="data-table">
+      <thead><tr><th>Acteur</th><th>Réseau</th><th>Différenciateur</th><th>Menace pour Élodie</th></tr></thead>
+      <tbody>
+        <tr><td>Alexandre Wandel</td><td>IAD</td><td>Partenaire co-vente actuel</td><td><span class="tag tag-warning">Dépendance</span></td></tr>
+        <tr><td>Agents IAD generic</td><td>IAD (240+ Nice)</td><td>Volume, prix compétitif</td><td><span class="tag tag-warning">Commoditisation</span></td></tr>
+        <tr><td>Sotheby's Int. Nice</td><td>Franchise luxe</td><td>International, brand premium</td><td><span class="tag tag-danger">Sur segment haut</span></td></tr>
+        <tr><td>Engel & Völkers</td><td>Franchise luxe</td><td>Clientèle 50% étrangère</td><td><span class="tag tag-danger">Cible les mêmes acheteurs</span></td></tr>
+        <tr><td>Agents indépendants</td><td>Aucun</td><td>Flexibilité</td><td><span class="tag tag-neutral">Faible si brand forte</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Positionnement concurrentiel — Immobilier Nice (axes : spécialisation internationale × taille réseau)</div>
+    <div class="chart-caption">Espace blanc identifié : spécialiste internationale mid-market, accessible mais experte. Aucun acteur ne l'occupe explicitement.</div>
+    <svg viewBox="0 0 580 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- quadrants -->
+      <rect x="60" y="40" width="240" height="180" fill="#f8fafc" stroke="#e2e8f0"/>
+      <rect x="300" y="40" width="240" height="180" fill="#f0f9ff" stroke="#e2e8f0"/>
+      <rect x="60" y="220" width="240" height="160" fill="#fafafa" stroke="#e2e8f0"/>
+      <rect x="300" y="220" width="240" height="160" fill="#f0fdf4" stroke="#e2e8f0"/>
+      <!-- axes labels -->
+      <text x="300" y="395" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b">Réseau / Ressources →</text>
+      <text x="30" y="220" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b" transform="rotate(-90 30 220)">Spécialisation internationale →</text>
+      <!-- quadrant labels -->
+      <text x="180" y="58" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8">NICHE LOCALE</text>
+      <text x="420" y="58" text-anchor="middle" font-family="Inter" font-size="10" fill="#0369a1">PREMIUM INTERNATIONAL</text>
+      <text x="180" y="238" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8">GÉNÉRALISTE LOCAL</text>
+      <text x="420" y="238" text-anchor="middle" font-family="Inter" font-size="10" fill="#15803d">VOLUME INTERNATIONAL</text>
+      <!-- competitors -->
+      <circle cx="350" cy="80" r="10" fill="#0a2540" opacity="0.7"/>
+      <text x="365" y="84" font-family="Inter" font-size="11" fill="#0a2540">Sotheby's</text>
+      <circle cx="380" cy="100" r="10" fill="#0a2540" opacity="0.5"/>
+      <text x="395" y="104" font-family="Inter" font-size="11" fill="#0a2540">Engel & Völkers</text>
+      <circle cx="180" cy="300" r="10" fill="#94a3b8"/>
+      <text x="195" y="304" font-family="Inter" font-size="11" fill="#64748b">IAD generic</text>
+      <circle cx="160" cy="260" r="8" fill="#94a3b8" opacity="0.7"/>
+      <text x="173" y="264" font-family="Inter" font-size="11" fill="#64748b">Indépendants</text>
+      <!-- Élodie target position -->
+      <circle cx="360" cy="175" r="14" fill="#d4a574" stroke="#0a2540" stroke-width="2"/>
+      <text x="380" y="172" font-family="Inter" font-size="12" font-weight="700" fill="#0a2540">ÉLODIE</text>
+      <text x="380" y="186" font-family="Inter" font-size="10" fill="#a67c4f">(cible)</text>
+      <!-- current Élodie position -->
+      <circle cx="220" cy="280" r="9" fill="#b91c1c" stroke="#fff" stroke-width="2" opacity="0.8"/>
+      <text x="234" y="284" font-family="Inter" font-size="10" fill="#b91c1c">Actuel</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h3>Conciergerie — Analyse concurrentielle</h3>
+    <p style="margin-bottom:16px;">Sur le segment conciergerie Nice, YourBnB06 est invisible dans les classements sectoriels (non mentionnée dans les top-lists 2026 de toploc.com, liwango.com, livretaccueil.com — consultées lors de cet audit). L'absence de SEO structuré et de social proof massif explique ce vide.</p>
+    <table class="data-table">
+      <thead><tr><th>Critère</th><th>YourBnB06</th><th>Leaders marché</th></tr></thead>
+      <tbody>
+        <tr><td>Présence top-lists Google</td><td><span class="tag tag-danger">Absente</span></td><td>1-3 fiches optimisées</td></tr>
+        <tr><td>Commission</td><td>20% — médiane</td><td>19-23% selon prestataire</td></tr>
+        <tr><td>Social proof</td><td>1 témoignage site</td><td>50-200+ avis Google</td></tr>
+        <tr><td>Tarification dynamique</td><td>Non mentionnée</td><td>Différenciateur standard</td></tr>
+        <tr><td>Différenciateur visible</td><td>Aucun</td><td>Hôtellerie / 10 ans exp.</td></tr>
+        <tr><td>Synergie immo-conciergerie</td><td>Non activée</td><td>Inexistante chez les autres</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-accent" style="margin-top:16px;">
+      <strong>Avantage unique non activé.</strong> Aucun concurrent conciergerie ne possède également une carte pro immobilière. La synergie "je gère ton bien en saisonnier ET je peux le vendre quand tu veux" est une proposition de valeur sans équivalent sur le marché niçois.
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL BRANDING -->
+<section class="section" id="brand">
+  <div class="section-header">
+    <span class="kicker">Bloc 04</span>
+    <h2>Personal branding — Diagnostic</h2>
+    <p class="lead">immo_elo : bonne présence, mauvais positionnement. Le contenu existe, le message manque.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Ce qui fonctionne</h3>
+      <ul class="checklist success">
+        <li>Esthétique Instagram cohérente (bleu, House Tour, villes)</li>
+        <li>Format Reels House Tour — format porteur, bon engagement</li>
+        <li>Présentation personnelle visible (post "j'ai 31 ans")</li>
+        <li>Volume de contenu régulier, villes identifiées (Nice, Antibes, Cagnes, Biot)</li>
+        <li>Mix contenu : biens + coulisses métier ("Être agent immo c'est...")</li>
+        <li>Podcast/interview visible — signal d'autorité</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ce qui ne fonctionne pas</h3>
+      <ul class="checklist danger">
+        <li>Zéro mention espagnol / hispanophone dans tout le contenu visible</li>
+        <li>Pas de lien entre immo_elo et YourBnB06 — deux univers étanches</li>
+        <li>Bio Instagram non auditée (probablement générique)</li>
+        <li>Aucun contenu en espagnol visible</li>
+        <li>Pas de CTA qualifié vers landing page propre</li>
+        <li>Audience Instagram : quantité inconnue, qualification inconnue</li>
+        <li>Absence de newsletter / base contacts propriétaire</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Proposition de positionnement — Draft</h3>
+    <p style="margin-bottom:16px;">À valider et affiner avec Élodie, mais voici la direction qui capitalise sur ses vrais atouts :</p>
+    <div style="background:var(--text-primary); color:white; padding:24px 28px; border-radius:8px; font-size:1.05rem; line-height:1.8;">
+      <em style="font-family: 'Source Serif 4', Georgia, serif; font-size:1.15rem;">"L'agente immobilière niçoise qui parle espagnol — et qui connaît vos locataires aussi bien que vos acheteurs."</em>
+      <div style="margin-top:16px; font-size:0.85rem; opacity:0.7;">Pour les propriétaires hispanophones qui veulent acheter, vendre ou rentabiliser un bien sur la Côte d'Azur — avec quelqu'un qui comprend leur langue, leur culture et le marché local.</div>
+    </div>
+    <p style="margin-top:16px; color:var(--text-muted); font-size:0.9rem;">Ce positionnement est polarisant (c'est voulu), défendable (différenciateur réel), et couvre les deux activités (vente + conciergerie).</p>
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>Risque immédiat — Dépendance à IAD.</strong>
+    Le profil IAD est le seul point de contact pro structuré en ligne (hormis Wix). En cas de départ du réseau, Élodie perd sa page SEO, ses avis Immodvisor (liés au profil IAD), et sa visibilité en recherche "conseiller immobilier Nice". La landing page personnelle n'est pas un nice-to-have, c'est une urgence opérationnelle.
+  </div>
+</section>
+
+<!-- PRÉSENCE DIGITALE -->
+<section class="section" id="digital">
+  <div class="section-header">
+    <span class="kicker">Bloc 05</span>
+    <h2>Présence digitale — Audit complet</h2>
+    <p class="lead">Six points de contact, zéro cohérence entre eux. Fragmentation = perte de signal.</p>
+  </div>
+
+  <table class="data-table">
+    <thead><tr><th>Canal</th><th>État actuel</th><th>Problème identifié</th><th>Priorité</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Instagram immo_elo</strong></td>
+        <td>Actif, contenu régulier</td>
+        <td>Positionnement générique, pas de niche espagnole, pas de lien conciergerie</td>
+        <td><span class="tag tag-danger">Critique</span></td>
+      </tr>
+      <tr>
+        <td><strong>IAD France (profil)</strong></td>
+        <td>4,9/5 · 18 avis · 3 mandats</td>
+        <td>Dépendant du réseau, disparaît en cas de changement</td>
+        <td><span class="tag tag-danger">Critique</span></td>
+      </tr>
+      <tr>
+        <td><strong>YourBnB06.fr (Wix)</strong></td>
+        <td>Basique, 1 avis, 0 SEO</td>
+        <td>Pas premium, invisible sur Google, pas de lien avec immo</td>
+        <td><span class="tag tag-danger">Critique</span></td>
+      </tr>
+      <tr>
+        <td><strong>Google My Business x2</strong></td>
+        <td>2 fiches distinctes</td>
+        <td>Signal SEO local fragmenté, confusion potentielle pour le prospect</td>
+        <td><span class="tag tag-warning">Haute</span></td>
+      </tr>
+      <tr>
+        <td><strong>LinkedIn</strong></td>
+        <td>Inconnu (non vérifié)</td>
+        <td>Absent ou inactif probable</td>
+        <td><span class="tag tag-warning">Moyenne</span></td>
+      </tr>
+      <tr>
+        <td><strong>Landing page perso</strong></td>
+        <td>Inexistante</td>
+        <td>Aucun hub personnel portable entre réseaux</td>
+        <td><span class="tag tag-danger">Critique</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-card">
+    <div class="chart-title">Architecture digitale cible — Hub personal brand centralisateur</div>
+    <div class="chart-caption">Aujourd'hui : 5 points de contact étanches. Cible : un hub central qui capture tout et distribue vers les activités.</div>
+    <svg viewBox="0 0 580 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Central hub -->
+      <rect x="210" y="120" width="160" height="60" rx="8" fill="#0a2540"/>
+      <text x="290" y="146" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="white">elodiecoteazur.fr</text>
+      <text x="290" y="163" text-anchor="middle" font-family="Inter" font-size="10" fill="#d4a574">Hub personal brand</text>
+      <!-- IAD left -->
+      <rect x="40" y="50" width="120" height="44" rx="6" fill="#e2e8f0"/>
+      <text x="100" y="69" text-anchor="middle" font-family="Inter" font-size="11" fill="#0a2540" font-weight="600">IAD / réseau</text>
+      <text x="100" y="84" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">Transactions</text>
+      <line x1="160" y1="72" x2="210" y2="145" stroke="#d4a574" stroke-width="2" stroke-dasharray="4 2"/>
+      <!-- Instagram -->
+      <rect x="40" y="130" width="120" height="44" rx="6" fill="#e2e8f0"/>
+      <text x="100" y="149" text-anchor="middle" font-family="Inter" font-size="11" fill="#0a2540" font-weight="600">immo_elo</text>
+      <text x="100" y="164" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">Instagram</text>
+      <line x1="160" y1="152" x2="210" y2="152" stroke="#d4a574" stroke-width="2" stroke-dasharray="4 2"/>
+      <!-- YourBnB -->
+      <rect x="40" y="210" width="120" height="44" rx="6" fill="#e2e8f0"/>
+      <text x="100" y="229" text-anchor="middle" font-family="Inter" font-size="11" fill="#0a2540" font-weight="600">YourBnB06</text>
+      <text x="100" y="244" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">Conciergerie</text>
+      <line x1="160" y1="232" x2="210" y2="165" stroke="#d4a574" stroke-width="2" stroke-dasharray="4 2"/>
+      <!-- GMB right -->
+      <rect x="420" y="50" width="120" height="44" rx="6" fill="#e2e8f0"/>
+      <text x="480" y="69" text-anchor="middle" font-family="Inter" font-size="11" fill="#0a2540" font-weight="600">Google Maps</text>
+      <text x="480" y="84" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">SEO local</text>
+      <line x1="420" y1="72" x2="370" y2="145" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="4 2"/>
+      <!-- Leads -->
+      <rect x="420" y="130" width="120" height="44" rx="6" fill="#f0fdf4" stroke="#15803d"/>
+      <text x="480" y="149" text-anchor="middle" font-family="Inter" font-size="11" fill="#15803d" font-weight="600">Leads qualifiés</text>
+      <text x="480" y="164" text-anchor="middle" font-family="Inter" font-size="10" fill="#15803d">ES/US/FR</text>
+      <line x1="420" y1="152" x2="370" y2="152" stroke="#15803d" stroke-width="2"/>
+      <!-- WhatsApp -->
+      <rect x="420" y="210" width="120" height="44" rx="6" fill="#e2e8f0"/>
+      <text x="480" y="229" text-anchor="middle" font-family="Inter" font-size="11" fill="#0a2540" font-weight="600">WhatsApp ES</text>
+      <text x="480" y="244" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b">Conversion</text>
+      <line x1="420" y1="232" x2="370" y2="165" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="4 2"/>
+    </svg>
+  </div>
+</section>
+
+<!-- YOURBNB06 -->
+<section class="section" id="conciergerie">
+  <div class="section-header">
+    <span class="kicker">Bloc 06</span>
+    <h2>YourBnB06 — Diagnostic conciergerie</h2>
+    <p class="lead">L'activité tourne mais stagne. Le vrai levier n'est pas la commission — c'est la différenciation.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Modèle économique actuel</h3>
+      <p><strong>20% TTC</strong> sur réservations. Sur un bien à Nice avec taux d'occupation 70% (130 nuits/an) et tarif moyen 120€/nuit :</p>
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:6px; margin:12px 0;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span>CA brut par bien</span><strong>15 600 €</strong></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span>Commission 20%</span><strong>3 120 €</strong></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span>× 10 biens</span><strong>31 200 €/an</strong></div>
+        <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:8px;"><span>Marge estimée (après coûts opex)</span><strong>~18-20K€/an</strong></div>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.85rem;">Correcte mais plafonnée sans scale. À 20 biens : ~36K€ commission brut. À 30 biens : ~54K€. Le modèle ne scale pas linéairement — les coûts opex (ménage, logistique) suivent.</p>
+    </div>
+    <div class="card">
+      <h3>Voie de scale — Services additionnels</h3>
+      <p>Les conciergeries qui gagnent vraiment ne vivent pas du %. Elles vendent des services additionnels facturés aux voyageurs ET aux propriétaires :</p>
+      <ul class="checklist success" style="margin-top:12px;">
+        <li>Home staging / décoration avant mise en ligne (+500-1500€ one-shot)</li>
+        <li>Shooting photo professionnel (sous-traitance avec marge)</li>
+        <li>Accueil premium personnalisé (60-120€/accueil)</li>
+        <li>Petits travaux / maintenance (partenariat artisans, marge 15%)</li>
+        <li>Gestion multi-plateformes (Airbnb + Booking + Vrbo) avec tarification dynamique</li>
+        <li>Package "revente" — si le propriétaire veut vendre, Élodie a le mandat</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-success">
+    <strong>Levier de différenciation n°1 — Le funnel propriétaire unique.</strong>
+    Un propriétaire espagnol à Nice confie son bien à YourBnB06 pour la conciergerie. Quand il veut vendre, Élodie prend le mandat. Quand il veut en acheter un deuxième, elle le conseille. Ce cycle fermé est un modèle LTV propriétaire qui n'existe chez aucun concurrent identifié.
+  </div>
+
+  <div class="card">
+    <h3>Réglementation Nice 2025-2026 — Impact YourBnB06</h3>
+    <p>Nice a durci la réglementation location saisonnière en 2025. Les nouveaux entrants font face à des exigences d'enregistrement et potentiellement des quotas par quartier. <strong>Les opérateurs établis avec portefeuille existant (YourBnB06) bénéficient d'un avantage de premier arrivant</strong> — à faire valoir explicitement dans la communication commerciale.</p>
+    <p style="margin-top:8px;">Point de vigilance : les DPE des biens gérés vont devenir un argument de vente/location croissant. Un service de conseil DPE en partenariat avec un diagnostiqueur peut générer une commission et renforcer le positionnement premium.</p>
+  </div>
+</section>
+
+<!-- RISQUES CRITIQUES -->
+<section class="section" id="risques">
+  <div class="section-header">
+    <span class="kicker">Bloc 07</span>
+    <h2>Risques critiques</h2>
+    <p class="lead">Quatre risques à neutraliser avant toute action de croissance. Dans cet ordre.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--danger);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div style="background:var(--danger-soft); color:var(--danger); font-weight:700; font-size:1.2rem; padding:8px 14px; border-radius:6px;">R1</div>
+      <h3 style="margin:0;">Changement réseau sans préparation</h3>
+    </div>
+    <p>Le départ d'IAD (envisagé) peut anéantir la visibilité SEO, les avis Immodvisor, et l'accès aux outils réseau. Sans landing page personnelle opérationnelle AVANT le départ, Élodie repart de zéro numériquement.</p>
+    <p style="margin-top:8px;"><strong>Mitigation :</strong> Lancer elodiecoteazur.fr (ou similaire) maintenant, transférer les avis sur Google My Business personnel, sécuriser les contacts clients dans un CRM propre.</p>
+    <span class="tag tag-danger">Probabilité : Haute</span> <span class="tag tag-danger">Impact : Critique</span>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--danger);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div style="background:var(--danger-soft); color:var(--danger); font-weight:700; font-size:1.2rem; padding:8px 14px; border-radius:6px;">R2</div>
+      <h3 style="margin:0;">3 mandats = viabilité économique précaire</h3>
+    </div>
+    <p>3 mandats actifs représente environ 15-25K€ de commissions potentielles (selon les prix), non certaines. Sans pipeline de nouveaux mandats, le mois prochain peut être vide. La conciergerie tamponne mais ne compense pas une activité immo nulle.</p>
+    <p style="margin-top:8px;"><strong>Mitigation :</strong> Activer immédiatement la niche espagnole comme canal d'apport d'affaires, formaliser une offre de prospection via le réseau latinophone.</p>
+    <span class="tag tag-danger">Probabilité : Certaine</span> <span class="tag tag-danger">Impact : Fort</span>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--warning);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div style="background:var(--warning-soft); color:var(--warning); font-weight:700; font-size:1.2rem; padding:8px 14px; border-radius:6px;">R3</div>
+      <h3 style="margin:0;">Réglementation saisonnière Nice — rigidification</h3>
+    </div>
+    <p>Si Nice impose des quotas plus stricts sur la LCD (location courte durée) en 2026-2027, une partie du portefeuille YourBnB06 pourrait être impactée. Risque de perte de 2-3 biens en gestion si les propriétaires arrêtent la LCD.</p>
+    <p style="margin-top:8px;"><strong>Mitigation :</strong> Diversifier vers la gestion moyenne durée (1-6 mois) et vers la vente des biens gérés.</p>
+    <span class="tag tag-warning">Probabilité : Moyenne</span> <span class="tag tag-warning">Impact : Modéré</span>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--warning);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+      <div style="background:var(--warning-soft); color:var(--warning); font-weight:700; font-size:1.2rem; padding:8px 14px; border-radius:6px;">R4</div>
+      <h3 style="margin:0;">Dépendance à un seul partenaire co-vente</h3>
+    </div>
+    <p>Les 2 dernières transactions ont été réalisées en collaboration avec Alexandre Wandel. Si cette collaboration s'arrête (départ IAD, différend), Élodie perd un canal de transaction significatif.</p>
+    <p style="margin-top:8px;"><strong>Mitigation :</strong> Développer un réseau de co-vente diversifié, activer les apporteurs d'affaires hispanophones.</p>
+    <span class="tag tag-warning">Probabilité : Moyenne</span> <span class="tag tag-warning">Impact : Modéré</span>
+  </div>
+</section>
+
+<!-- OPPORTUNITÉS -->
+<section class="section" id="opportunites">
+  <div class="section-header">
+    <span class="kicker">Bloc 08</span>
+    <h2>Opportunités à activer</h2>
+    <p class="lead">Cinq leviers concrets, priorisés par impact/effort. Aucun ne nécessite de budget publicitaire.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Matrice ICE — Priorisation des opportunités (Impact × Confiance × Effort)</div>
+    <div class="chart-caption">Score ICE sur 30. Priorité aux actions score ≥ 20.</div>
+    <svg viewBox="0 0 580 260" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="220" x2="560" y2="220" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="30" x2="60" y2="220" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="103" x2="560" y2="103" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+      <!-- y labels -->
+      <g font-family="Inter" font-size="10" fill="#64748b">
+        <text x="52" y="224" text-anchor="end">0</text>
+        <text x="52" y="107" text-anchor="end">15</text>
+        <text x="52" y="34" text-anchor="end">30</text>
+      </g>
+      <!-- bars -->
+      <!-- Niche ES: 27 -->
+      <rect x="80" y="36" width="60" height="184" fill="#d4a574"/>
+      <!-- Landing: 25 -->
+      <rect x="170" y="56" width="60" height="164" fill="#0a2540"/>
+      <!-- Funnel prop: 24 -->
+      <rect x="260" y="63" width="60" height="157" fill="#0a2540" opacity="0.7"/>
+      <!-- GMB fusio: 21 -->
+      <rect x="350" y="90" width="60" height="130" fill="#0ea5e9"/>
+      <!-- Avis Google: 19 -->
+      <rect x="440" y="103" width="60" height="117" fill="#94a3b8"/>
+      <!-- labels valeur -->
+      <g font-family="Inter" font-size="12" font-weight="700" fill="white" text-anchor="middle">
+        <text x="110" y="55">27</text>
+        <text x="200" y="74">25</text>
+        <text x="290" y="81">24</text>
+        <text x="380" y="108">21</text>
+        <text x="470" y="121">19</text>
+      </g>
+      <!-- x labels -->
+      <g font-family="Inter" font-size="10" fill="#64748b" text-anchor="middle">
+        <text x="110" y="237">Niche ES</text>
+        <text x="200" y="237">Landing</text>
+        <text x="290" y="237">Funnel prop.</text>
+        <text x="380" y="237">GMB fusion</text>
+        <text x="470" y="237">Avis Google</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h3>O1 — Activer la niche espagnole · ICE 27/30</h3>
+    <p>Créer un contenu billingue (FR/ES) sur Instagram, identifier et contacter les communautés hispaniques de la Côte d'Azur (associations, groupes Facebook, réseaux d'expatriés espagnols et latinos à Nice). Proposer une première consultation immobilière gratuite en espagnol. Coût : 0€.</p>
+    <p style="margin-top:8px; color:var(--text-muted); font-size:0.9rem;"><strong>Résultat attendu à 90j :</strong> 2-3 mandats qualifiés issus du réseau hispanophone. Un seul mandat sur un bien à 400K€ = ~8 000€ de commission.</p>
+  </div>
+
+  <div class="card">
+    <h3>O2 — Landing page personnelle indépendante · ICE 25/30</h3>
+    <p>Hub central Élodie Fleury · Côte d'Azur, bilingue FR/ES : qui je suis, vente immo, conciergerie, avis Google embeddés, formulaire de contact direct (WhatsApp + calendrier). URL portée hors IAD, hors réseau. Sécurise l'identité numérique avant tout changement de crèmerie.</p>
+    <p style="margin-top:8px; color:var(--text-muted); font-size:0.9rem;"><strong>Délai :</strong> Livrable Pack IA. Coût infra : ~15€/mois.</p>
+  </div>
+
+  <div class="card">
+    <h3>O3 — Funnel propriétaire (conciergerie → mandat) · ICE 24/30</h3>
+    <p>Formaliser une offre structurée : "Je gère votre bien en saisonnier — et quand vous voulez vendre, vous avez une alliée qui connaît votre bien mieux que personne." Email séquence automatisée aux propriétaires YourBnB06 avec CTA mandat de vente. 10 propriétaires actuels = 10 prospects mandats qualifiés.</p>
+  </div>
+
+  <div class="card">
+    <h3>O4 — Fusionner/optimiser les 2 GMB · ICE 21/30</h3>
+    <p>Une fiche Google My Business pro unique "Élodie Fleury — Agent immobilier & Conciergerie Nice", avec catégories mixtes, 50+ photos, Q&A, posts hebdo. Activer la fiche YourBnB06 séparément si marque distincte souhaitée, mais les relier via le site landing. SEO local = canal d'acquisition gratuit et durable.</p>
+  </div>
+
+  <div class="card">
+    <h3>O5 — Campagne avis Google · ICE 19/30</h3>
+    <p>Contacter les 8-10 propriétaires de YourBnB06 + les clients immo récents pour demander un avis Google sur la fiche personnelle. Objectif : 30+ avis dans les 60 jours. C'est le déclencheur de confiance n°1 pour un prospect hispanophone qui cherche "agent immo Nice espagnol" sur Google.</p>
+  </div>
+</section>
+
+<!-- PLAN D'ACTION -->
+<section class="section" id="plan">
+  <div class="section-header">
+    <span class="kicker">Bloc 09</span>
+    <h2>Plan d'action 90 jours</h2>
+    <p class="lead">Séquençage réaliste pour une solopreneuse qui gère deux activités en parallèle.</p>
+  </div>
+
+  <div class="card">
+    <h3>J1–J30 — Fondations</h3>
+    <table class="data-table">
+      <thead><tr><th>Action</th><th>Owner</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Décision réseau (IAD ou nouveau) + timeline officielle</td><td>Élodie</td><td>Décision actée</td></tr>
+        <tr><td>Réservation domaine + brief landing page personnelle</td><td>MasterPrompt</td><td>Domaine acheté</td></tr>
+        <tr><td>Livraison landing page bilingue FR/ES</td><td>MasterPrompt</td><td>Page live</td></tr>
+        <tr><td>Fusionner ou optimiser les 2 GMB (1 fiche principale)</td><td>Élodie + MasterPrompt</td><td>1 fiche optimisée</td></tr>
+        <tr><td>Campagne avis Google — propriétaires YourBnB06</td><td>Élodie</td><td>+15 avis</td></tr>
+        <tr><td>Bio Instagram réécrite + mention ES dans profile</td><td>MasterPrompt</td><td>Bio live</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>J31–J60 — Activation niche ES + funnel</h3>
+    <table class="data-table">
+      <thead><tr><th>Action</th><th>Owner</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>3 premiers Reels en espagnol / bilinge</td><td>Élodie</td><td>3 publications</td></tr>
+        <tr><td>Identifier 5 groupes/associations hispanophones PACA et s'y connecter</td><td>Élodie</td><td>5 contacts qualifiés</td></tr>
+        <tr><td>Séquence email n8n — propriétaires YourBnB06 → CTA mandat</td><td>MasterPrompt</td><td>Workflow actif</td></tr>
+        <tr><td>Offre "Pack Propriétaire" (conciergerie + mandat) formalisée</td><td>MasterPrompt</td><td>Doc + page site</td></tr>
+        <tr><td>Premier post LinkedIn (si départ IAD confirmé)</td><td>Élodie</td><td>1 post</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>J61–J90 — Scale et mesure</h3>
+    <table class="data-table">
+      <thead><tr><th>Action</th><th>Owner</th><th>KPI cible</th></tr></thead>
+      <tbody>
+        <tr><td>Bilan mandats issus niche ES</td><td>Élodie</td><td>≥ 2 mandats nouveaux</td></tr>
+        <tr><td>Bilan avis Google total</td><td>Élodie</td><td>≥ 30 avis</td></tr>
+        <tr><td>Analyse trafic landing page (GA4)</td><td>MasterPrompt</td><td>Données 60j</td></tr>
+        <tr><td>Décision : ajouter 2 biens conciergerie via réseau ES</td><td>Élodie</td><td>+2 biens = +6 240€/an</td></tr>
+        <tr><td>Brief automations (scraping prospects, relances WhatsApp)</td><td>MasterPrompt</td><td>Specs livrées</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-success">
+    <strong>Scénario 90 jours — Projection conservative.</strong>
+    2 mandats supplémentaires via niche ES (moyenne 350K€ × 5% commission réseau mandataire ≈ 8 750€ × 2 = 17 500€) + 2 biens conciergerie supplémentaires (+6 240€/an) + 1 mandat propriétaire YourBnB06 converti (5 000€). Total incrémental Q1 : environ 25-30K€ sans budget publicitaire.
+  </div>
+
+  <!-- SCORE FINAL -->
+  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:40px; margin-top:40px;">
+    <div class="kicker" style="margin-bottom:16px;">Score diagnostic global</div>
+    <div style="display:flex; align-items:center; gap:24px; margin-bottom:32px; flex-wrap:wrap;">
+      <div class="score-badge score-medium"><span class="score-value">58</span><span class="score-label">/ 100</span></div>
+      <div>
+        <div style="font-size:1.15rem; font-weight:600; color:var(--text-primary);">GO — Conditionné à l'exécution des fondations</div>
+        <div style="color:var(--text-muted); font-size:0.9rem; margin-top:4px;">Le potentiel est réel. L'exécution actuelle ne le reflète pas.</div>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:8px;">
+        <div class="kpi-label">Personal brand</div>
+        <div style="font-size:1.5rem; font-weight:700; color:var(--warning);">52/100</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">Présent, non positionné</div>
+      </div>
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:8px;">
+        <div class="kpi-label">Présence digitale</div>
+        <div style="font-size:1.5rem; font-weight:700; color:var(--danger);">40/100</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">Fragmentée, risquée</div>
+      </div>
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:8px;">
+        <div class="kpi-label">Différenciation</div>
+        <div style="font-size:1.5rem; font-weight:700; color:var(--danger);">35/100</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">Niche ES non activée</div>
+      </div>
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:8px;">
+        <div class="kpi-label">Modèle économique</div>
+        <div style="font-size:1.5rem; font-weight:700; color:var(--warning);">60/100</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">Fonctionnel, non scalé</div>
+      </div>
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:8px;">
+        <div class="kpi-label">Social proof</div>
+        <div style="font-size:1.5rem; font-weight:700; color:var(--warning);">65/100</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">4,9/5 sous-exploité</div>
+      </div>
+      <div style="background:var(--bg-subtle); padding:16px; border-radius:8px;">
+        <div class="kpi-label">Viabilité 12 mois</div>
+        <div style="font-size:1.5rem; font-weight:700; color:var(--warning);">55/100</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">Fragile si pas d'action</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCHAINES ÉTAPES -->
+  <div class="card" style="margin-top:24px; border-left:4px solid var(--accent);">
+    <h3>Prochaines étapes Pack IA</h3>
+    <ul class="checklist success">
+      <li><strong>Phase 2 — Stratégie marketing</strong> : positionnement Dunford complet, canaux d'acquisition priorisés (Instagram ES, GMB, WhatsApp, réseau résidentiel), funnel détaillé</li>
+      <li><strong>Phase 3 — Landing page</strong> : hub bilingue FR/ES, intégration avis Google, formulaire contact + calendrier Élodie, version mobile-first</li>
+      <li><strong>Phase 4 — Automatisations</strong> : scraping prospects propriétaires, relance WhatsApp post-visite, nurturing email conciergerie, score de lead</li>
+    </ul>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid var(--border); padding-top:24px; margin-top:40px; display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--text-muted);">
+  <span>Michaël Lopez · MasterPrompt — masterprompt.fr</span>
+  <span>Audit confidentiel · Élodie Fleury · Juin 2026</span>
+</div>
+
+</main>
+</div>
+</body>
+</html>

@@ -320,6 +320,63 @@ export const proposals: ProposalConfig[] = [
     ],
   },
   {
+    slug: "elodie-fleury",
+    clientName: "Élodie Fleury",
+    title: "Pack IA complet (espace privé)",
+    subtitle:
+      "5 livrables HTML : audit 360, stratégie marketing, automatisations IA, guide acquéreur hispanophone et landing page.",
+    ogShareSubline: "immo_elo / YourBnB06 — Côte d'Azur (dossier confidentiel)",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Les cinq documents sont accessibles sur cette page ; le bouton ouvre le livrable en plein écran.",
+        deliverables: [
+          {
+            title: "Audit 360",
+            description:
+              "Diagnostic complet immo_elo / YourBnB06 — positionnement, marché et opportunités (HTML autonome).",
+            url: "/proposals/elodie-fleury/audit-360-elodie-fleury.html",
+            ctaLabel: "Ouvrir l'audit",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Stratégie marketing",
+            description: "Plan marketing & communication — canaux, messages et calendrier (HTML autonome).",
+            url: "/proposals/elodie-fleury/strategie-marketing-elodie-fleury.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Automatisations IA",
+            description: "Scénarios et architecture d'automatisation Pack IA (HTML autonome).",
+            url: "/proposals/elodie-fleury/automations-elodie-fleury.html",
+            ctaLabel: "Ouvrir l'automatisation",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Guide de l'acquéreur hispanophone",
+            description: "Lead magnet Côte d'Azur — parcours acquéreur hispanophone (HTML autonome).",
+            url: "/proposals/elodie-fleury/guide-acheteur-hispanophone-elodie-fleury.html",
+            ctaLabel: "Ouvrir le guide",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Landing page",
+            description: "Maquette landing agent immobilier & conciergerie — Côte d'Azur (HTML statique).",
+            url: "/proposals/elodie-fleury/landing-elodie-fleury-v3.html",
+            ctaLabel: "Ouvrir la landing",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Un seul lien client : les cinq livrables s'affichent ci-dessous en aperçu intégré.",
+      "Ce lien est réservé aux personnes autorisées.",
+    ],
+  },
+  {
     slug: "dgimmo",
     clientName: "DGIMMO",
     title: "Audit stratégique (espace privé)",

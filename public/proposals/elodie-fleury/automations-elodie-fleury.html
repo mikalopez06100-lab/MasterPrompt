@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatisations IA — Élodie Fleury · Pack IA Phase 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-page:#fafafa;--bg-card:#fff;--bg-subtle:#f1f5f9;--border:#e2e8f0;--border-strong:#cbd5e1;
+  --text-primary:#0a2540;--text-body:#1a202c;--text-muted:#64748b;--text-inverse:#fff;
+  --accent:#d4a574;--accent-dark:#a67c4f;--accent-soft:#faf3e8;
+  --success:#15803d;--success-soft:#f0fdf4;--warning:#b45309;--warning-soft:#fffbeb;
+  --danger:#b91c1c;--danger-soft:#fef2f2;--info:#0369a1;--info-soft:#f0f9ff;
+  --chart-1:#0a2540;--chart-2:#0ea5e9;--chart-3:#d4a574;--chart-4:#15803d;--chart-5:#b91c1c;--chart-muted:#94a3b8;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-serif:'Source Serif 4',Georgia,serif;
+  --font-mono:'JetBrains Mono',Menlo,monospace;
+  --shadow-sm:0 1px 2px rgba(10,37,64,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--bg-page);color:var(--text-body);font-size:1rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+.layout{display:grid;grid-template-columns:220px 1fr;max-width:1240px;margin:0 auto;gap:48px;padding:48px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:24px}.toc{display:none}}
+.toc{position:sticky;top:32px;align-self:start;font-size:.875rem}
+.toc-title{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:16px}
+.toc ol{list-style:none;border-left:1px solid var(--border)}
+.toc li{margin-bottom:4px}
+.toc a{display:block;padding:6px 16px;color:var(--text-muted);text-decoration:none;border-left:2px solid transparent;margin-left:-1px}
+.toc a:hover{color:var(--text-primary);border-left-color:var(--accent)}
+.main{max-width:920px}
+.cover{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:64px 48px;margin-bottom:64px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;background:var(--text-primary)}
+.cover-kicker{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-dark);margin-bottom:16px}
+.cover h1{font-size:2.75rem;font-weight:700;color:var(--text-primary);line-height:1.1;margin-bottom:12px;letter-spacing:-.02em}
+.cover-tagline{font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:var(--text-muted);margin-bottom:40px;max-width:600px}
+.cover-meta{display:flex;gap:40px;border-top:1px solid var(--border);padding-top:24px;font-size:.875rem;flex-wrap:wrap}
+.cover-meta-item .label{color:var(--text-muted);text-transform:uppercase;font-size:.7rem;letter-spacing:.05em;margin-bottom:4px}
+.cover-meta-item .value{color:var(--text-primary);font-weight:600}
+.section{margin-bottom:80px;scroll-margin-top:32px}
+.section-header{margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--text-primary)}
+.kicker{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px}
+.section-header h2{font-size:1.75rem;color:var(--text-primary);margin:0 0 10px;font-weight:600;line-height:1.2}
+.section-header .lead{font-size:1.05rem;color:var(--text-muted);margin:0}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:28px 32px;box-shadow:var(--shadow-sm);margin-bottom:20px}
+.card h3{font-size:1.05rem;color:var(--text-primary);margin-bottom:12px;font-weight:600}
+.callout{padding:16px 20px;border-left:4px solid var(--text-primary);background:var(--bg-subtle);border-radius:0 8px 8px 0;margin:20px 0;font-size:.95rem}
+.callout-warning{border-color:var(--warning);background:var(--warning-soft)}
+.callout-success{border-color:var(--success);background:var(--success-soft)}
+.callout-danger{border-color:var(--danger);background:var(--danger-soft)}
+.callout-accent{border-color:var(--accent);background:var(--accent-soft)}
+.callout strong{display:block;margin-bottom:4px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:16px;margin:24px 0}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:20px 22px}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);display:block;margin-bottom:6px}
+.kpi-value{font-size:2rem;font-weight:700;color:var(--text-primary);display:block;line-height:1;font-variant-numeric:tabular-nums}
+.kpi-sub{font-size:.8rem;color:var(--text-muted);margin-top:6px;display:block}
+.delta-up{color:var(--success)}.delta-down{color:var(--danger)}.delta-warn{color:var(--warning)}
+.data-table{width:100%;border-collapse:collapse;font-size:.875rem;margin:20px 0}
+.data-table th{text-align:left;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-size:.7rem;padding:10px 14px;border-bottom:2px solid var(--text-primary)}
+.data-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text-body);vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:700px){.grid-2{grid-template-columns:1fr}}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;margin-right:6px;margin-bottom:4px}
+.tag-success{background:var(--success-soft);color:var(--success)}
+.tag-warning{background:var(--warning-soft);color:var(--warning)}
+.tag-danger{background:var(--danger-soft);color:var(--danger)}
+.tag-info{background:var(--info-soft);color:var(--info)}
+.tag-neutral{background:var(--bg-subtle);color:var(--text-muted)}
+.tag-accent{background:var(--accent-soft);color:var(--accent-dark)}
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:28px 32px;box-shadow:var(--shadow-sm);margin-bottom:20px}
+.chart-title{font-size:1rem;font-weight:600;color:var(--text-primary);margin-bottom:6px}
+.chart-caption{font-size:.8rem;color:var(--text-muted);margin-bottom:20px}
+ul.checklist{list-style:none;margin:12px 0}
+ul.checklist li{padding:6px 0 6px 28px;position:relative;border-bottom:1px solid var(--border);font-size:.95rem}
+ul.checklist li:last-child{border-bottom:none}
+ul.checklist li::before{content:'→';position:absolute;left:0;color:var(--accent-dark);font-weight:700}
+ul.checklist.success li::before{content:'✓';color:var(--success)}
+
+/* Workflow diagram */
+.workflow{display:flex;flex-direction:column;gap:0;margin:20px 0}
+.wf-step{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.wf-step:last-child{border-bottom:none}
+.wf-num{min-width:32px;height:32px;border-radius:50%;background:var(--text-primary);color:white;font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.wf-num.accent{background:var(--accent)}
+.wf-num.success{background:var(--success)}
+.wf-num.info{background:var(--info)}
+.wf-content{flex:1}
+.wf-title{font-weight:600;color:var(--text-primary);font-size:.95rem;margin-bottom:4px}
+.wf-desc{font-size:.88rem;color:var(--text-muted)}
+.wf-tool{font-family:var(--font-mono);font-size:.75rem;background:var(--bg-subtle);padding:2px 8px;border-radius:4px;color:var(--text-primary);margin-top:6px;display:inline-block}
+
+/* Automation card */
+.auto-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;margin-bottom:32px;overflow:hidden}
+.auto-header{background:var(--text-primary);color:white;padding:24px 32px;display:flex;align-items:center;gap:16px}
+.auto-num{font-size:2.5rem;font-weight:700;color:var(--accent);line-height:1;flex-shrink:0}
+.auto-header-text h3{font-size:1.15rem;font-weight:600;margin-bottom:4px}
+.auto-header-text p{font-size:.85rem;opacity:.7}
+.auto-body{padding:28px 32px}
+.auto-roi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:var(--bg-subtle);padding:16px;border-radius:8px;margin-bottom:20px}
+.roi-item .roi-val{font-size:1.4rem;font-weight:700;color:var(--text-primary);display:block;line-height:1}
+.roi-item .roi-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-top:4px;display:block}
+@media(max-width:600px){.auto-roi{grid-template-columns:1fr 1fr}}
+
+.score-badge{display:inline-flex;align-items:baseline;gap:4px;padding:8px 16px;border-radius:8px;font-variant-numeric:tabular-nums}
+.score-value{font-size:2.2rem;font-weight:700}.score-label{font-size:.9rem;opacity:.7}
+.score-good{background:var(--success-soft);color:var(--success)}
+.score-medium{background:var(--warning-soft);color:var(--warning)}
+
+@media print{body{background:white}.toc{display:none}.layout{display:block;padding:24px}.main{max-width:100%}.auto-card{break-inside:avoid}.section{margin-bottom:48px}}
+@page{size:A4;margin:16mm 14mm}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#exec">Résumé exécutif</a></li>
+    <li><a href="#processus">Cartographie processus</a></li>
+    <li><a href="#readiness">IA-Readiness</a></li>
+    <li><a href="#stack">Stack technique</a></li>
+    <li><a href="#auto1">Auto. 1 — Nurturing ES</a></li>
+    <li><a href="#auto2">Auto. 2 — Pipeline mandats</a></li>
+    <li><a href="#auto3">Auto. 3 — Rapport mensuel</a></li>
+    <li><a href="#roadmap">Feuille de route</a></li>
+    <li><a href="#roi">Synthèse ROI</a></li>
+  </ol>
+</nav>
+
+<main class="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-kicker">Plan d'Implémentation IA & Automatisations</div>
+  <h1>Élodie Fleury</h1>
+  <p class="cover-tagline">3 automatisations prioritaires pour libérer du temps, convertir plus de mandats, et scaler la conciergerie sans recruter.</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><div class="label">Préparé par</div><div class="value">Michaël Lopez · MasterPrompt</div></div>
+    <div class="cover-meta-item"><div class="label">Date</div><div class="value">Juin 2026</div></div>
+    <div class="cover-meta-item"><div class="label">Pack IA</div><div class="value">Phase 4/4</div></div>
+    <div class="cover-meta-item"><div class="label">ROI projeté</div><div class="value">+12h/mois récupérées</div></div>
+  </div>
+</div>
+
+<!-- EXEC -->
+<section class="section" id="exec">
+  <div class="section-header">
+    <span class="kicker">Résumé exécutif</span>
+    <h2>L'IA au service d'une solopreneure, pas d'une ESN</h2>
+    <p class="lead">3 automatisations, stack minimale, ROI mesurable. Rien de plus.</p>
+  </div>
+
+  <div style="background:var(--text-primary);color:white;border-radius:12px;padding:40px 48px;margin-bottom:32px">
+    <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.5;margin-bottom:8px">Principe directeur</div>
+    <p style="font-size:1.1rem;line-height:1.75;opacity:.9">Élodie est une solopreneure avec deux activités. Chaque heure passée à faire du traitement manuel est une heure non consacrée à des visites, à des prospects ou à des propriétaires. L'objectif n'est pas de "faire de l'IA" — c'est de récupérer 10-15 heures par mois sur des tâches répétitives à faible valeur ajoutée, pour les réinvestir sur des actes commerciaux à haute valeur.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">Heures récupérées/mois</span>
+      <strong class="kpi-value">12h</strong>
+      <span class="kpi-sub delta-up">Projection conservative</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Coût stack mensuel</span>
+      <strong class="kpi-value">~35€</strong>
+      <span class="kpi-sub delta-up">Tout compris</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Setup total estimé</span>
+      <strong class="kpi-value">18h</strong>
+      <span class="kpi-sub">MasterPrompt + Élodie</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Payback</span>
+      <strong class="kpi-value">1 mois</strong>
+      <span class="kpi-sub delta-up">Dès le 1er mandat converti</span>
+    </div>
+  </div>
+
+  <div class="callout callout-accent">
+    <strong>Ce que l'IA ne fera PAS pour Élodie.</strong>
+    L'IA ne remplacera pas l'accompagnement humain lors des visites, les négociations, les appels clients, ou la relation de confiance qui fait la différence sur un mandat. Ces tâches restent humaines — c'est même le cœur du différenciateur "hispanophone". L'IA automatise le support administratif, la communication répétitive et le reporting.
+  </div>
+</section>
+
+<!-- PROCESSUS -->
+<section class="section" id="processus">
+  <div class="section-header">
+    <span class="kicker">Bloc 01</span>
+    <h2>Cartographie des processus métier</h2>
+    <p class="lead">12 processus identifiés, classés par volume et douleur. Seuls 3 justifient une automatisation immédiate.</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Matrice Impact × Faisabilité — 12 processus candidats</div>
+    <div class="chart-caption">Quadrant "Quick wins" (haut-droite) : automatiser maintenant. Quadrant "Low hanging fruit" : automatiser en V2.</div>
+    <svg viewBox="0 0 580 420" xmlns="http://www.w3.org/2000/svg">
+      <!-- background quadrants -->
+      <rect x="60" y="40" width="240" height="185" fill="#fafafa" stroke="#e2e8f0"/>
+      <rect x="300" y="40" width="240" height="185" fill="#f0fdf4" stroke="#e2e8f0"/>
+      <rect x="60" y="225" width="240" height="165" fill="#fafafa" stroke="#e2e8f0"/>
+      <rect x="300" y="225" width="240" height="165" fill="#fffbeb" stroke="#e2e8f0"/>
+      <!-- axes -->
+      <line x1="60" y1="390" x2="540" y2="390" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="60" y1="40" x2="60" y2="390" stroke="#cbd5e1" stroke-width="1.5"/>
+      <!-- dividers -->
+      <line x1="300" y1="40" x2="300" y2="390" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="60" y1="225" x2="540" y2="225" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- axis labels -->
+      <text x="300" y="408" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b">Faisabilité →</text>
+      <text x="30" y="225" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b" transform="rotate(-90 30 225)">Impact →</text>
+      <!-- quadrant labels -->
+      <text x="180" y="56" text-anchor="middle" font-family="Inter" font-size="9" fill="#94a3b8" font-weight="600">COMPLEXE — V2</text>
+      <text x="420" y="56" text-anchor="middle" font-family="Inter" font-size="9" fill="#15803d" font-weight="600">QUICK WINS — Maintenant</text>
+      <text x="180" y="238" text-anchor="middle" font-family="Inter" font-size="9" fill="#94a3b8" font-weight="600">DÉPRIORITISER</text>
+      <text x="420" y="238" text-anchor="middle" font-family="Inter" font-size="9" fill="#b45309" font-weight="600">LOW HANGING — V1.5</text>
+
+      <!-- Processus candidats -->
+      <!-- A1: Nurturing ES leads (quick win) -->
+      <circle cx="420" cy="90" r="14" fill="#15803d"/>
+      <text x="420" y="94" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="white">A1</text>
+      <text x="440" y="83" font-family="Inter" font-size="10" fill="#15803d" font-weight="600">Nurturing ES</text>
+
+      <!-- A2: Pipeline mandats proprio (quick win) -->
+      <circle cx="460" cy="130" r="14" fill="#15803d"/>
+      <text x="460" y="134" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="white">A2</text>
+      <text x="388" y="148" font-family="Inter" font-size="10" fill="#15803d" font-weight="600">Pipeline mandats</text>
+
+      <!-- A3: Rapport mensuel proprio (quick win) -->
+      <circle cx="390" cy="170" r="14" fill="#15803d"/>
+      <text x="390" y="174" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="white">A3</text>
+      <text x="410" y="170" font-family="Inter" font-size="10" fill="#15803d" font-weight="600">Rapport mensuel</text>
+
+      <!-- B: Réponse auto Instagram (low hanging) -->
+      <circle cx="350" cy="290" r="10" fill="#b45309"/>
+      <text x="350" y="294" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="white">B1</text>
+      <text x="365" y="290" font-family="Inter" font-size="9" fill="#b45309">DM Instagram auto</text>
+
+      <!-- B2: Relance avis Google -->
+      <circle cx="430" cy="320" r="10" fill="#b45309"/>
+      <text x="430" y="324" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="white">B2</text>
+      <text x="445" y="320" font-family="Inter" font-size="9" fill="#b45309">Demande avis Google</text>
+
+      <!-- C: Scoring leads (complexe) -->
+      <circle cx="170" cy="100" r="10" fill="#94a3b8"/>
+      <text x="170" y="104" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="white">C1</text>
+      <text x="185" y="100" font-family="Inter" font-size="9" fill="#64748b">Scoring leads IA</text>
+
+      <!-- D: Admin manuelle -->
+      <circle cx="150" cy="310" r="10" fill="#e2e8f0"/>
+      <text x="150" y="314" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="#94a3b8">D</text>
+      <text x="165" y="310" font-family="Inter" font-size="9" fill="#94a3b8">Comptabilité manuelle</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h3>Inventaire complet — 12 processus</h3>
+    <table class="data-table">
+      <thead><tr><th>Processus</th><th>Famille</th><th>Volume/mois</th><th>Temps actuel</th><th>Douleur /5</th><th>Candidat auto.</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--success-soft)"><td><strong>Nurturing leads ES entrants</strong></td><td>Acquisition</td><td>5-20 contacts</td><td>45 min/contact</td><td>★★★★★</td><td><span class="tag tag-success">A1 — Maintenant</span></td></tr>
+        <tr style="background:var(--success-soft)"><td><strong>Relance propriétaires YourBnB06 → mandat</strong></td><td>Vente</td><td>10 proprio.</td><td>30 min/contact</td><td>★★★★☆</td><td><span class="tag tag-success">A2 — Maintenant</span></td></tr>
+        <tr style="background:var(--success-soft)"><td><strong>Rapport mensuel propriétaires conciergerie</strong></td><td>Opérations</td><td>10 rapports</td><td>25 min/rapport</td><td>★★★★☆</td><td><span class="tag tag-success">A3 — Maintenant</span></td></tr>
+        <tr><td>DM Instagram — réponse aux questions fréquentes</td><td>Acquisition</td><td>20-50 DM</td><td>5 min/DM</td><td>★★★☆☆</td><td><span class="tag tag-warning">B1 — V1.5</span></td></tr>
+        <tr><td>Demande automatique d'avis Google post-transaction</td><td>Marketing</td><td>2-5/mois</td><td>10 min/envoi</td><td>★★★☆☆</td><td><span class="tag tag-warning">B2 — V1.5</span></td></tr>
+        <tr><td>Scoring et qualification leads entrants (IA)</td><td>Vente</td><td>20+/mois cible</td><td>20 min/lead</td><td>★★★★☆</td><td><span class="tag tag-info">C1 — V2</span></td></tr>
+        <tr><td>Création annonces Airbnb / Booking (LLM)</td><td>Opérations</td><td>1-2/mois</td><td>60 min/annonce</td><td>★★☆☆☆</td><td><span class="tag tag-neutral">Ponctuel</span></td></tr>
+        <tr><td>Rédaction descriptions biens IAD (LLM)</td><td>Marketing</td><td>3-5/mois</td><td>40 min/bien</td><td>★★★☆☆</td><td><span class="tag tag-neutral">Ponctuel</span></td></tr>
+        <tr><td>Calendrier réservations saisonnières</td><td>Opérations</td><td>Continu</td><td>2h/mois</td><td>★★☆☆☆</td><td><span class="tag tag-neutral">Airbnb natif</span></td></tr>
+        <tr><td>Suivi facturation / comptabilité</td><td>Admin</td><td>Mensuel</td><td>3h/mois</td><td>★★☆☆☆</td><td><span class="tag tag-neutral">Pennylane</span></td></tr>
+        <tr><td>Coordination ménage / blanchisserie</td><td>Opérations</td><td>40-80/mois</td><td>5 min/inter.</td><td>★★★☆☆</td><td><span class="tag tag-neutral">WhatsApp groupes</span></td></tr>
+        <tr><td>Publication contenu Instagram</td><td>Marketing</td><td>12 posts</td><td>30 min/post</td><td>★★★☆☆</td><td><span class="tag tag-neutral">Buffer/Later</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- READINESS -->
+<section class="section" id="readiness">
+  <div class="section-header">
+    <span class="kicker">Bloc 02</span>
+    <h2>Audit IA-Readiness</h2>
+    <p class="lead">Score honnête avant de déployer quoi que ce soit. Les prérequis non levés sabotent l'automatisation.</p>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">Data readiness</span>
+      <strong class="kpi-value" style="color:var(--warning)">55</strong>
+      <span class="kpi-sub">Contacts non centralisés</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Stack maturity</span>
+      <strong class="kpi-value" style="color:var(--warning)">40</strong>
+      <span class="kpi-sub">WhatsApp + Wix seulement</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Compétences</span>
+      <strong class="kpi-value" style="color:var(--warning)">50</strong>
+      <span class="kpi-sub">Non-technique, motivation haute</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Budget</span>
+      <strong class="kpi-value" style="color:var(--success)">75</strong>
+      <span class="kpi-sub">0-50€/mois OK</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>3 prérequis à lever avant de déployer</h3>
+    <div class="workflow">
+      <div class="wf-step">
+        <div class="wf-num accent">P1</div>
+        <div class="wf-content">
+          <div class="wf-title">Centraliser les contacts dans un Google Sheets maître</div>
+          <div class="wf-desc">Tous les contacts (propriétaires YourBnB06, prospects immo, leads Instagram) dans un seul fichier avec colonnes standardisées : Nom, Email, Téléphone, Langue (FR/ES), Type (propriétaire/acheteur/vendeur), Statut, Date dernier contact. C'est la base de données qui alimente toutes les automatisations.</div>
+          <span class="wf-tool">Google Sheets · 2h de travail · 0€</span>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num accent">P2</div>
+        <div class="wf-content">
+          <div class="wf-title">Créer un compte Brevo (email) et configurer les templates</div>
+          <div class="wf-desc">Brevo est l'outil email qui s'intègre nativement avec n8n. Plan gratuit suffisant pour démarrer (300 emails/jour). Créer 3 templates de base : bienvenue lead ES, relance propriétaire, rapport mensuel.</div>
+          <span class="wf-tool">Brevo Free → Pro 8€/mois si >300 emails/jour</span>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num accent">P3</div>
+        <div class="wf-content">
+          <div class="wf-title">Accès n8n cloud ou instance MasterPrompt</div>
+          <div class="wf-desc">Les 3 automatisations tournent sur n8n. Deux options : n8n cloud (20€/mois, zéro maintenance) ou utiliser l'instance n8n self-hosted MasterPrompt (inclus dans l'abonnement). Recommandation : instance MasterPrompt pour simplifier.</div>
+          <span class="wf-tool">n8n self-hosted MasterPrompt (inclus) ou n8n cloud 20€/mois</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="section" id="stack">
+  <div class="section-header">
+    <span class="kicker">Bloc 03</span>
+    <h2>Stack technique recommandée</h2>
+    <p class="lead">Principe : la plus simple stack qui résout 80% du besoin. Pas de complexité inutile.</p>
+  </div>
+
+  <div class="card">
+    <table class="data-table">
+      <thead><tr><th>Rôle</th><th>Outil retenu</th><th>Alternative</th><th>Coût/mois</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Orchestration workflows</strong></td>
+          <td>n8n (instance MasterPrompt)</td>
+          <td>Make 9€/mois</td>
+          <td>Inclus Pack IA</td>
+          <td>Natif avec stack MasterPrompt, 0 coût additionnel</td>
+        </tr>
+        <tr>
+          <td><strong>LLM / IA générative</strong></td>
+          <td>Claude Haiku (API Anthropic)</td>
+          <td>GPT-4o-mini</td>
+          <td>~3-5€/mois</td>
+          <td>Haiku : parfait pour les tâches bornées (email drafting, résumés). Coût marginal quasi nul sur volumes solopreneure.</td>
+        </tr>
+        <tr>
+          <td><strong>Base de données</strong></td>
+          <td>Google Sheets</td>
+          <td>Airtable (gratuit)</td>
+          <td>0€</td>
+          <td>Élodie connaît Sheets. Suffisant pour 100-500 contacts. Migration Supabase si scale.</td>
+        </tr>
+        <tr>
+          <td><strong>Email marketing</strong></td>
+          <td>Brevo (free)</td>
+          <td>Mailchimp</td>
+          <td>0-8€/mois</td>
+          <td>300 emails/jour gratuits. API propre, templates HTML. Déjà dans l'écosystème MasterPrompt.</td>
+        </tr>
+        <tr>
+          <td><strong>CRM léger</strong></td>
+          <td>Google Sheets + n8n</td>
+          <td>Notion DB</td>
+          <td>0€</td>
+          <td>Pas de CRM propriétaire nécessaire à ce stade. Surcoût de complexité injustifié.</td>
+        </tr>
+        <tr>
+          <td><strong>Analytics</strong></td>
+          <td>Google Analytics 4</td>
+          <td>Plausible 9€/mois</td>
+          <td>0€</td>
+          <td>Suffit pour suivre le trafic landing page. Gratuit.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout callout-success" style="margin-top:16px">
+      <strong>Coût stack total : 3-13€/mois.</strong> Claude Haiku (3-5€) + Brevo (0-8€) = 3 à 13€/mois selon volume. N8n inclus dans le Pack IA MasterPrompt. Payback immédiat dès le premier email automatisé qui déclenche un contact qualifié.
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATION 1 -->
+<section class="section" id="auto1">
+  <div class="section-header">
+    <span class="kicker">Automatisation 1/3</span>
+    <h2>Nurturing leads hispanophones entrants</h2>
+    <p class="lead">Le premier contact avec un prospect ES est le moment le plus critique. L'automatiser garantit une réponse en moins de 5 minutes, 7j/7.</p>
+  </div>
+
+  <div class="auto-card">
+    <div class="auto-header">
+      <div class="auto-num">A1</div>
+      <div class="auto-header-text">
+        <h3>Séquence de nurturing bilingue FR/ES — Leads entrants</h3>
+        <p>Objectif : convertir chaque contact entrant (landing page, WhatsApp, Instagram) en rendez-vous visio qualifié dans les 14 jours.</p>
+      </div>
+    </div>
+    <div class="auto-body">
+      <div class="auto-roi">
+        <div class="roi-item"><span class="roi-val">15h</span><span class="roi-label">Setup estimé</span></div>
+        <div class="roi-item"><span class="roi-val">8h</span><span class="roi-label">Économisées/mois</span></div>
+        <div class="roi-item"><span class="roi-val">~3€</span><span class="roi-label">Coût récurrent/mois</span></div>
+        <div class="roi-item"><span class="roi-val" style="color:var(--success)">J+1</span><span class="roi-label">Payback</span></div>
+      </div>
+
+      <h3 style="margin-bottom:16px">Workflow détaillé</h3>
+      <div class="workflow">
+        <div class="wf-step">
+          <div class="wf-num info">1</div>
+          <div class="wf-content">
+            <div class="wf-title">Déclencheur — Nouveau contact entrant</div>
+            <div class="wf-desc">Formulaire landing page soumis (webhook n8n) OU message WhatsApp reçu avec mot-clé OU nouveau téléchargement guide PDF. Le contact est ajouté au Google Sheets maître avec statut "nouveau lead".</div>
+            <span class="wf-tool">n8n webhook · Google Sheets</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num info">2</div>
+          <div class="wf-content">
+            <div class="wf-title">Détection de langue (Claude Haiku)</div>
+            <div class="wf-desc">Claude Haiku analyse le message ou le champ "langue préférée" du formulaire. Classe le contact en FR, ES, ou EN. Met à jour la colonne "Langue" dans le Google Sheets.</div>
+            <span class="wf-tool">Claude Haiku API · Prompt : "Détecte la langue et retourne FR/ES/EN"</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num info">3</div>
+          <div class="wf-content">
+            <div class="wf-title">J+0 — Email de bienvenue personnalisé</div>
+            <div class="wf-desc">Brevo envoie l'email de bienvenue dans la langue détectée. Template FR : "Bonjour [Prénom], merci pour votre intérêt..." + guide PDF joint. Template ES : "Hola [Nombre], gracias por su interés..." + guide PDF. CTA : réserver une visio de 30 min (Calendly).</div>
+            <span class="wf-tool">Brevo · template FR/ES · guide PDF joint</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num info">4</div>
+          <div class="wf-content">
+            <div class="wf-title">J+3 — Email expertise marché</div>
+            <div class="wf-desc">"Les 3 erreurs des acheteurs [ES/FR] à Nice" — contenu bilingue, spécifique à la niche. Positionne Élodie comme experte avant toute rencontre. CTA : répondre à cet email avec votre projet.</div>
+            <span class="wf-tool">Brevo · délai automatique 3 jours</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num info">5</div>
+          <div class="wf-content">
+            <div class="wf-title">J+7 — Témoignage client + social proof</div>
+            <div class="wf-desc">Email avec un avis client contextuel (acheteur ES si lead ES, propriétaire si lead conciergerie). CTA renforcé : "Je prends 30 minutes pour vous expliquer le marché." Lien Calendly.</div>
+            <span class="wf-tool">Brevo · segmentation par type de lead</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num success">6</div>
+          <div class="wf-content">
+            <div class="wf-title">J+14 — CTA final + alerte manuelle Élodie</div>
+            <div class="wf-desc">Dernier email de la séquence. Si pas de réponse, n8n envoie une notification à Élodie sur WhatsApp : "Lead [Prénom] non converti après 14j — action manuelle recommandée." Élodie décide de relancer ou d'archiver.</div>
+            <span class="wf-tool">Brevo · n8n → WhatsApp notification Élodie</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-accent">
+        <strong>Garde-fou humain obligatoire.</strong>
+        La séquence s'arrête si le contact répond à un email. N8n détecte la réponse (webhook Brevo), archive la séquence automatique, et notifie Élodie pour reprendre en manuel. L'automatisation ne remplace pas la conversation — elle la prépare.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATION 2 -->
+<section class="section" id="auto2">
+  <div class="section-header">
+    <span class="kicker">Automatisation 2/3</span>
+    <h2>Pipeline mandats — Propriétaires YourBnB06</h2>
+    <p class="lead">10 propriétaires existants = 10 prospects mandats qualifiés. La relation de confiance est déjà là. L'automatisation active le pont.</p>
+  </div>
+
+  <div class="auto-card">
+    <div class="auto-header">
+      <div class="auto-num">A2</div>
+      <div class="auto-header-text">
+        <h3>Conversion propriétaires conciergerie → mandats immobiliers</h3>
+        <p>Objectif : déclencher 2 mandats supplémentaires dans les 90 jours en activant le portefeuille existant YourBnB06.</p>
+      </div>
+    </div>
+    <div class="auto-body">
+      <div class="auto-roi">
+        <div class="roi-item"><span class="roi-val">8h</span><span class="roi-label">Setup estimé</span></div>
+        <div class="roi-item"><span class="roi-val">5h</span><span class="roi-label">Économisées/mois</span></div>
+        <div class="roi-item"><span class="roi-val">0€</span><span class="roi-label">Coût récurrent</span></div>
+        <div class="roi-item"><span class="roi-val" style="color:var(--success)">×1 mandat</span><span class="roi-label">= payback total</span></div>
+      </div>
+
+      <h3 style="margin-bottom:16px">Workflow détaillé</h3>
+      <div class="workflow">
+        <div class="wf-step">
+          <div class="wf-num">1</div>
+          <div class="wf-content">
+            <div class="wf-title">Déclencheur — 1er du mois (mensuel)</div>
+            <div class="wf-desc">N8n se déclenche automatiquement le 1er de chaque mois. Lit le Google Sheets propriétaires YourBnB06 (10 contacts). Filtre les propriétaires dont le dernier contact mandat remonte à >60 jours.</div>
+            <span class="wf-tool">n8n cron · Google Sheets</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">2</div>
+          <div class="wf-content">
+            <div class="wf-title">Génération du bilan mensuel personnalisé (Claude Haiku)</div>
+            <div class="wf-desc">Claude Haiku génère un résumé personnalisé pour chaque propriétaire : "Votre bien rue X a généré N nuits ce mois, pour Y€ de revenus. Le marché local est en X." Données sources : Airbnb/Booking (si export CSV disponible) ou saisie manuelle dans Google Sheets.</div>
+            <span class="wf-tool">Claude Haiku API · prompt structuré · données Google Sheets</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">3</div>
+          <div class="wf-content">
+            <div class="wf-title">Email bilan + pont immo</div>
+            <div class="wf-desc">Brevo envoie l'email bilan mensuel. En fin d'email, un paragraphe contextuel : "À titre informatif, votre bien est estimé entre X et Y€ sur le marché actuel. Si vous souhaitez en discuter, je suis disponible." CTA discret, pas de vente forcée.</div>
+            <span class="wf-tool">Brevo · template bilan mensuel</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num success">4</div>
+          <div class="wf-content">
+            <div class="wf-title">Si réponse ou clic sur CTA → alerte Élodie</div>
+            <div class="wf-desc">N8n détecte un clic sur le CTA "Discussion estimation" ou une réponse email. Envoie immédiatement une notification WhatsApp à Élodie : "🏠 [Prénom] a cliqué sur l'estimation de son bien — contacter maintenant." Élodie prend la main.</div>
+            <span class="wf-tool">Brevo webhook · n8n · WhatsApp notification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-success">
+        <strong>Projection : 1-2 mandats sur 10 propriétaires = 8 000-16 000€ de commissions.</strong>
+        Sur 10 propriétaires contactés mensuellement avec un bilan de valeur + pont immo, un taux de conversion de 10-20% en mandat de vente est réaliste. La relation de confiance est déjà établie — c'est le meilleur pipeline imaginable.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATION 3 -->
+<section class="section" id="auto3">
+  <div class="section-header">
+    <span class="kicker">Automatisation 3/3</span>
+    <h2>Rapport mensuel automatisé — Propriétaires conciergerie</h2>
+    <p class="lead">10 rapports × 25 min = 4h/mois perdues sur une tâche sans valeur commerciale. L'automatiser libère ce temps pour des visites.</p>
+  </div>
+
+  <div class="auto-card">
+    <div class="auto-header">
+      <div class="auto-num">A3</div>
+      <div class="auto-header-text">
+        <h3>Génération et envoi automatique des rapports mensuels YourBnB06</h3>
+        <p>Objectif : produire et envoyer les 10 rapports propriétaires en moins de 10 minutes, le 1er de chaque mois.</p>
+      </div>
+    </div>
+    <div class="auto-body">
+      <div class="auto-roi">
+        <div class="roi-item"><span class="roi-val">5h</span><span class="roi-label">Setup estimé</span></div>
+        <div class="roi-item"><span class="roi-val">4h</span><span class="roi-label">Économisées/mois</span></div>
+        <div class="roi-item"><span class="roi-val">~2€</span><span class="roi-label">Coût récurrent/mois</span></div>
+        <div class="roi-item"><span class="roi-val" style="color:var(--success)">M+1</span><span class="roi-label">Payback</span></div>
+      </div>
+
+      <h3 style="margin-bottom:16px">Workflow détaillé</h3>
+      <div class="workflow">
+        <div class="wf-step">
+          <div class="wf-num accent">1</div>
+          <div class="wf-content">
+            <div class="wf-title">Saisie des données source (5 min/mois — Élodie)</div>
+            <div class="wf-desc">Élodie remplit ou importe les données mensuelles dans le Google Sheets : nuits louées, revenus bruts, incidents, notes pour chaque propriétaire. C'est la seule action manuelle de toute la chaîne.</div>
+            <span class="wf-tool">Google Sheets · onglet "Données_mois_MMYY"</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num accent">2</div>
+          <div class="wf-content">
+            <div class="wf-title">N8n lit les données et génère les rapports (Claude Haiku)</div>
+            <div class="wf-desc">N8n boucle sur chaque ligne (10 propriétaires). Pour chacun, appelle Claude Haiku avec les données brutes. Haiku génère un texte de rapport personnalisé, professionnel et chaleureux en FR ou ES selon la langue du propriétaire.</div>
+            <span class="wf-tool">n8n loop · Claude Haiku API · ~2 min pour 10 rapports</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num accent">3</div>
+          <div class="wf-content">
+            <div class="wf-title">Validation optionnelle par Élodie</div>
+            <div class="wf-desc">N8n envoie les 10 drafts à Élodie par email groupé (ou Google Sheets onglet "À valider"). Elle a 24h pour corriger si besoin, sinon envoi automatique. C'est le garde-fou qualité.</div>
+            <span class="wf-tool">Brevo email draft · délai 24h avant envoi auto</span>
+          </div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num success">4</div>
+          <div class="wf-content">
+            <div class="wf-title">Envoi automatique à chaque propriétaire</div>
+            <div class="wf-desc">Brevo envoie chaque rapport personnalisé au bon propriétaire, depuis l'adresse elodie@yourbnb06.fr. En pied de rapport : "Avez-vous des questions ? Répondez à cet email ou écrivez-moi sur WhatsApp." Renforce la relation mensuelle.</div>
+            <span class="wf-tool">Brevo · envoi individuel · 10 emails</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+  <div class="section-header">
+    <span class="kicker">Bloc 04</span>
+    <h2>Feuille de route d'implémentation</h2>
+    <p class="lead">Séquençage MasterPrompt. Les automatisations les plus impactantes d'abord, les prérequis avant tout.</p>
+  </div>
+
+  <div class="card">
+    <h3>Semaine 1-2 — Prérequis</h3>
+    <table class="data-table">
+      <thead><tr><th>Tâche</th><th>Owner</th><th>Durée</th><th>Sortie</th></tr></thead>
+      <tbody>
+        <tr><td>Google Sheets maître contacts (propriétaires + leads)</td><td>Élodie</td><td>2h</td><td>Fichier structuré prêt</td></tr>
+        <tr><td>Compte Brevo créé + domaine email configuré</td><td>MasterPrompt</td><td>1h</td><td>Brevo opérationnel</td></tr>
+        <tr><td>N8n instance configurée (ou cloud)</td><td>MasterPrompt</td><td>1h</td><td>Credentials API en place</td></tr>
+        <tr><td>Templates email FR + ES rédigés (bienvenue, expertise, social proof)</td><td>MasterPrompt</td><td>3h</td><td>3 templates Brevo live</td></tr>
+        <tr><td>Clé API Claude Haiku configurée dans n8n</td><td>MasterPrompt</td><td>30min</td><td>API testée</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Semaine 3-4 — Automatisation A1 (Nurturing ES)</h3>
+    <table class="data-table">
+      <thead><tr><th>Tâche</th><th>Owner</th><th>Durée</th><th>Sortie</th></tr></thead>
+      <tbody>
+        <tr><td>Webhook landing page → n8n → Sheets</td><td>MasterPrompt</td><td>2h</td><td>Test formulaire fonctionnel</td></tr>
+        <tr><td>Nœud détection langue Claude Haiku</td><td>MasterPrompt</td><td>1h</td><td>Classification FR/ES testée</td></tr>
+        <tr><td>Séquence Brevo 4 emails activée + délais</td><td>MasterPrompt</td><td>2h</td><td>Séquence live</td></tr>
+        <tr><td>Notification WhatsApp Élodie si non-converti J14</td><td>MasterPrompt</td><td>1h</td><td>Test notification reçue</td></tr>
+        <tr><td>Test end-to-end avec faux lead ES</td><td>MasterPrompt + Élodie</td><td>30min</td><td>Validation qualité email</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Semaine 5-6 — Automatisations A2 + A3</h3>
+    <table class="data-table">
+      <thead><tr><th>Tâche</th><th>Owner</th><th>Durée</th><th>Sortie</th></tr></thead>
+      <tbody>
+        <tr><td>Workflow mensuel A2 (bilan + pont immo) + test propriétaire pilote</td><td>MasterPrompt</td><td>4h</td><td>Premier bilan envoyé</td></tr>
+        <tr><td>Template rapport mensuel YourBnB06 (Claude Haiku)</td><td>MasterPrompt</td><td>3h</td><td>10 rapports générés en 2 min</td></tr>
+        <tr><td>Test complet A3 avec données réelles mois précédent</td><td>MasterPrompt + Élodie</td><td>1h</td><td>Validation qualité rapports</td></tr>
+        <tr><td>Documentation Élodie : comment modifier les données sources</td><td>MasterPrompt</td><td>1h</td><td>Guide 1 page + vidéo Loom</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ROI SYNTHÈSE -->
+<section class="section" id="roi">
+  <div class="section-header">
+    <span class="kicker">Bloc 05</span>
+    <h2>Synthèse ROI — Les 3 automatisations</h2>
+    <p class="lead">Chiffres conservateurs. Hypothèse : taux horaire Élodie = 80€/h (valeur d'un acte commercial, pas d'un email rédigé).</p>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Heures économisées par automatisation — mois type</div>
+    <svg viewBox="0 0 580 260" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="220" x2="560" y2="220" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="40" x2="60" y2="220" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="100" x2="560" y2="100" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+      <g font-family="Inter" font-size="10" fill="#64748b">
+        <text x="52" y="224" text-anchor="end">0h</text>
+        <text x="52" y="104" text-anchor="end">6h</text>
+        <text x="52" y="44" text-anchor="end">12h</text>
+      </g>
+      <!-- A1: 8h -->
+      <rect x="110" y="87" width="90" height="133" fill="#0a2540" rx="4"/>
+      <text x="155" y="77" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#0a2540">8h</text>
+      <text x="155" y="238" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b">A1 — Nurturing ES</text>
+      <!-- A2: 5h -->
+      <rect x="240" y="137" width="90" height="83" fill="#d4a574" rx="4"/>
+      <text x="285" y="127" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#a67c4f">5h</text>
+      <text x="285" y="238" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b">A2 — Pipeline mandats</text>
+      <!-- A3: 4h -->
+      <rect x="370" y="153" width="90" height="67" fill="#0ea5e9" rx="4"/>
+      <text x="415" y="143" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#0369a1">4h</text>
+      <text x="415" y="238" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b">A3 — Rapports YourBnB06</text>
+      <!-- total arrow -->
+      <text x="500" y="87" font-family="Inter" font-size="22" font-weight="700" fill="#15803d">17h</text>
+      <text x="500" y="103" font-family="Inter" font-size="10" fill="#15803d">/mois total</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h3>Tableau ROI consolidé</h3>
+    <table class="data-table">
+      <thead><tr><th>Auto.</th><th>Setup (h)</th><th>Coût mensuel</th><th>Heures libérées/mois</th><th>Valeur heures (80€/h)</th><th>ROI mois 1</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A1 — Nurturing ES</strong></td>
+          <td>15h (MasterPrompt)</td>
+          <td>~3€ (Haiku)</td>
+          <td>8h</td>
+          <td>640€</td>
+          <td><span class="tag tag-success">+637€/mois</span></td>
+        </tr>
+        <tr>
+          <td><strong>A2 — Pipeline mandats</strong></td>
+          <td>8h (MasterPrompt)</td>
+          <td>0€</td>
+          <td>5h + mandats</td>
+          <td>400€ + commissions</td>
+          <td><span class="tag tag-success">400€+ /mois</span></td>
+        </tr>
+        <tr>
+          <td><strong>A3 — Rapports YourBnB06</strong></td>
+          <td>5h (MasterPrompt)</td>
+          <td>~2€ (Haiku)</td>
+          <td>4h</td>
+          <td>320€</td>
+          <td><span class="tag tag-success">+318€/mois</span></td>
+        </tr>
+        <tr style="background:var(--success-soft)">
+          <td><strong>TOTAL</strong></td>
+          <td>28h</td>
+          <td>~5€/mois</td>
+          <td><strong>17h/mois</strong></td>
+          <td><strong>1 360€/mois</strong></td>
+          <td><span class="tag tag-success">+1 355€/mois</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:.85rem;color:var(--text-muted);margin-top:12px;">Note : ROI calculé sur la valeur du temps libéré (80€/h taux horaire d'une agente immobilière avec les actes commerciaux qu'elle peut réaliser à la place). Non inclus : les commissions supplémentaires générées par A2 (8-16K€ par mandat converti) qui représentent le vrai multiplicateur.</p>
+  </div>
+
+  <!-- Score final IA-readiness -->
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:40px;margin-top:32px">
+    <div class="kicker" style="margin-bottom:16px">Score IA-Readiness post-implémentation</div>
+    <div style="display:flex;align-items:center;gap:24px;margin-bottom:24px;flex-wrap:wrap">
+      <div class="score-badge score-medium"><span class="score-value">72</span><span class="score-label">/ 100</span></div>
+      <div>
+        <div style="font-size:1.1rem;font-weight:600;color:var(--text-primary)">Opérationnel · Prêt à scale en V2</div>
+        <div style="color:var(--text-muted);font-size:.9rem;margin-top:4px">Après 6 mois : +20 points si les données s'accumulent et que le scoring IA leads (C1) est déployé.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-accent">
+      <strong>Prochaine étape V2 à envisager en J+90.</strong>
+      Si le flux de leads ES dépasse 30/mois : ajouter le scoring Claude (C1 — qualification automatique des leads par budget, projet, délai) pour prioriser les relances d'Élodie. Budget additionnel : ~5€/mois de tokens supplémentaires.
+    </div>
+  </div>
+
+  <!-- Récap Pack IA complet -->
+  <div class="card" style="margin-top:24px;border-left:4px solid var(--accent);">
+    <h3>Pack IA — Livraison complète · Récapitulatif 4 phases</h3>
+    <ul class="checklist success">
+      <li><strong>Phase 1 — Audit 360°</strong> : diagnostic personal brand, conciergerie, présence digitale, risques et opportunités · Score 58/100 · Livré ✓</li>
+      <li><strong>Phase 2 — Stratégie marketing</strong> : positionnement Dunford ES, 3 personas, customer journey, mix canaux Bullseye, funnel FR/ES, roadmap 90j · Score 74/100 · Livré ✓</li>
+      <li><strong>Phase 3 — Landing page</strong> : hub bilingue FR/ES, mobile-first, avis intégrés, guide PDF, WhatsApp CTA · Livré ✓</li>
+      <li><strong>Phase 4 — Automatisations</strong> : 3 workflows n8n + Claude Haiku + Brevo, 17h/mois récupérées, ROI +1 355€/mois valeur temps · Livré ✓</li>
+    </ul>
+    <p style="margin-top:16px;font-size:.9rem;color:var(--text-muted);">La prochaine session avec Élodie : revue des résultats J30, ajustement des séquences email selon les taux d'ouverture, et activation de l'automatisation B1 (réponse DM Instagram) si le flux entrant le justifie.</p>
+  </div>
+</section>
+
+<div style="border-top:1px solid var(--border);padding-top:24px;margin-top:40px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--text-muted)">
+  <span>Michaël Lopez · MasterPrompt — masterprompt.fr</span>
+  <span>Automatisations confidentielles · Élodie Fleury · Juin 2026</span>
+</div>
+
+</main>
+</div>
+</body>
+</html>

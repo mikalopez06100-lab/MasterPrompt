@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide de l'Acquéreur Hispanophone · Côte d'Azur — Élodie Fleury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════ */
+:root {
+  --marine:   #0E2C45;
+  --marine2:  #174268;
+  --sable:    #C8A97A;
+  --sable2:   #F0E6D5;
+  --blanc:    #FDFAF6;
+  --gris:     #64748b;
+  --gris-l:   #EEF2F7;
+  --noir:     #111820;
+  --danger:   #B91C1C;
+  --success:  #15803d;
+  --ff-d: 'Cormorant Garamond',Georgia,serif;
+  --ff-b: 'DM Sans',-apple-system,sans-serif;
+  --ff-m: 'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:var(--ff-b);background:var(--blanc);color:var(--noir);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* ═══════════════════════════════════
+   PRINT / PDF (A4)
+═══════════════════════════════════ */
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  body { background: white; font-size: 11pt; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: avoid; }
+  .no-break { page-break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+
+/* ═══════════════════════════════════
+   PAGE WRAPPER
+═══════════════════════════════════ */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--blanc);
+}
+
+/* ═══════════════════════════════════
+   PAGE 1 — COUVERTURE
+═══════════════════════════════════ */
+.cover-page {
+  background: var(--marine);
+  display: flex;
+  flex-direction: column;
+  min-height: 297mm;
+}
+.cover-top {
+  flex: 1;
+  padding: 52px 52px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cover-logo-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cover-brand {
+  font-family: var(--ff-d);
+  font-size: 1.1rem;
+  color: var(--sable);
+  letter-spacing: .04em;
+}
+.cover-brand span { color: rgba(255,255,255,.4); font-weight: 300; font-size: .85rem; margin-left: 6px; }
+.cover-badge {
+  background: var(--sable);
+  color: var(--marine);
+  font-size: .65rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 99px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.cover-center { margin-top: 60px; }
+.cover-eyebrow {
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sable);
+  opacity: .8;
+  margin-bottom: 20px;
+}
+.cover-h1-fr {
+  font-family: var(--ff-d);
+  font-size: 3.4rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  margin-bottom: 12px;
+}
+.cover-h1-es {
+  font-family: var(--ff-d);
+  font-size: 2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--sable);
+  opacity: .85;
+  line-height: 1.3;
+  margin-bottom: 32px;
+}
+.cover-subtitle {
+  font-size: .92rem;
+  color: rgba(255,255,255,.6);
+  line-height: 1.75;
+  max-width: 460px;
+}
+.cover-subtitle em { color: var(--sable); font-style: normal; font-weight: 500; }
+
+.cover-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+.cpill {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(200,169,122,.25);
+  color: rgba(255,255,255,.7);
+  font-size: .72rem;
+  padding: 7px 15px;
+  border-radius: 99px;
+  letter-spacing: .04em;
+}
+
+.cover-footer {
+  padding: 28px 52px;
+  background: rgba(0,0,0,.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cover-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cover-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sable);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-d);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--marine);
+  flex-shrink: 0;
+}
+.cover-author-info .name { color: #fff; font-size: .88rem; font-weight: 600; }
+.cover-author-info .title { color: var(--sable); font-size: .72rem; opacity: .8; }
+.cover-contact { font-size: .72rem; color: rgba(255,255,255,.45); text-align: right; }
+.cover-contact a { color: var(--sable); }
+
+/* Decorative arc */
+.cover-arc {
+  position: absolute;
+  bottom: 80px;
+  right: -60px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,169,122,.08);
+  pointer-events: none;
+}
+.cover-arc-2 {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,169,122,.05);
+}
+
+/* ═══════════════════════════════════
+   INNER PAGES — LAYOUT
+═══════════════════════════════════ */
+.inner-page {
+  padding: 44px 52px;
+  min-height: 297mm;
+  display: flex;
+  flex-direction: column;
+}
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--marine);
+  margin-bottom: 36px;
+}
+.ph-brand { font-family: var(--ff-d); font-size: .95rem; color: var(--marine); font-weight: 600; }
+.ph-page { font-size: .65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gris); }
+
+.page-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--gris-l);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .65rem;
+  color: var(--gris);
+}
+.pf-sable { color: var(--sable); font-weight: 600; }
+
+/* ═══════════════════════════════════
+   TYPOGRAPHY INNER
+═══════════════════════════════════ */
+.chapter-label {
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--sable);
+  margin-bottom: 10px;
+  display: block;
+}
+.chapter-title {
+  font-family: var(--ff-d);
+  font-size: 2.1rem;
+  font-weight: 600;
+  color: var(--marine);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.chapter-title-es {
+  font-family: var(--ff-d);
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--sable);
+  opacity: .9;
+  margin-bottom: 24px;
+  display: block;
+}
+.chapter-lead {
+  font-size: .95rem;
+  color: var(--gris);
+  line-height: 1.8;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gris-l);
+}
+
+/* ═══════════════════════════════════
+   COMPONENTS
+═══════════════════════════════════ */
+.step-list { display: flex; flex-direction: column; gap: 16px; }
+.step-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--blanc);
+  border: 1px solid var(--gris-l);
+  border-radius: 8px;
+  page-break-inside: avoid;
+}
+.step-num {
+  min-width: 36px;
+  height: 36px;
+  background: var(--marine);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-num.sable { background: var(--sable); color: var(--marine); }
+.step-content h4 { font-size: .92rem; font-weight: 600; color: var(--marine); margin-bottom: 5px; }
+.step-content h4 .es { font-size: .78rem; color: var(--sable); font-weight: 400; font-style: italic; margin-left: 6px; }
+.step-content p { font-size: .84rem; color: var(--gris); line-height: 1.75; }
+.step-content .note { font-size: .78rem; color: var(--sable); font-style: italic; margin-top: 6px; display: block; }
+
+.callout {
+  padding: 16px 20px;
+  border-left: 4px solid var(--marine);
+  background: rgba(14,44,69,.05);
+  border-radius: 0 6px 6px 0;
+  margin: 20px 0;
+  page-break-inside: avoid;
+}
+.callout.warning { border-color: #b45309; background: #fffbeb; }
+.callout.danger { border-color: var(--danger); background: #fef2f2; }
+.callout.success { border-color: var(--success); background: #f0fdf4; }
+.callout.accent { border-color: var(--sable); background: var(--sable2); }
+.callout strong { display: block; margin-bottom: 4px; color: var(--marine); font-size: .85rem; }
+.callout p { font-size: .84rem; color: #374151; line-height: 1.7; }
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .8rem;
+  margin: 20px 0;
+  page-break-inside: avoid;
+}
+.data-table th {
+  text-align: left;
+  font-weight: 600;
+  color: white;
+  background: var(--marine);
+  padding: 9px 13px;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.data-table td {
+  padding: 10px 13px;
+  border-bottom: 1px solid var(--gris-l);
+  color: var(--noir);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: var(--gris-l); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+.info-card {
+  background: var(--marine);
+  color: white;
+  border-radius: 8px;
+  padding: 20px 22px;
+  page-break-inside: avoid;
+}
+.info-card .ic-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; opacity: .5; margin-bottom: 6px; display: block; }
+.info-card .ic-val { font-family: var(--ff-d); font-size: 2rem; font-weight: 600; color: var(--sable); line-height: 1; display: block; }
+.info-card .ic-desc { font-size: .78rem; opacity: .65; margin-top: 6px; line-height: 1.6; }
+
+.checklist-block { margin: 16px 0; }
+.checklist-block h4 { font-size: .88rem; font-weight: 600; color: var(--marine); margin-bottom: 12px; }
+.cl-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gris-l);
+  font-size: .84rem;
+  color: var(--noir);
+}
+.cl-item:last-child { border-bottom: none; }
+.cl-check { color: var(--success); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.cl-check.danger { color: var(--danger); }
+
+.error-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 7px;
+  margin-bottom: 12px;
+  background: #fef2f2;
+  border-left: 3px solid var(--danger);
+  page-break-inside: avoid;
+}
+.error-num { font-size: 1.2rem; font-weight: 700; color: var(--danger); flex-shrink: 0; font-family: var(--ff-d); }
+.error-content h4 { font-size: .88rem; font-weight: 600; color: var(--danger); margin-bottom: 4px; }
+.error-content p { font-size: .82rem; color: #374151; line-height: 1.7; }
+.error-tip { background: #f0fdf4; border-left: 3px solid var(--success); padding: 6px 12px; border-radius: 0 4px 4px 0; margin-top: 8px; font-size: .78rem; color: var(--success); }
+.error-tip strong { display: inline; color: var(--success); }
+
+.highlight-box {
+  background: var(--marine);
+  color: white;
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin: 24px 0;
+  page-break-inside: avoid;
+}
+.hb-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; opacity: .5; margin-bottom: 10px; display: block; }
+.hb-quote { font-family: var(--ff-d); font-size: 1.3rem; font-style: italic; color: var(--sable); line-height: 1.55; margin-bottom: 12px; }
+.hb-source { font-size: .75rem; opacity: .5; }
+
+/* ═══════════════════════════════════
+   SOMMAIRE
+═══════════════════════════════════ */
+.toc-list { margin-top: 24px; }
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gris-l);
+}
+.toc-item:last-child { border-bottom: none; }
+.toc-num {
+  width: 32px;
+  height: 32px;
+  background: var(--marine);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.toc-text h4 { font-size: .92rem; font-weight: 600; color: var(--marine); margin-bottom: 2px; }
+.toc-text .sub { font-size: .78rem; color: var(--gris); font-style: italic; }
+.toc-page { margin-left: auto; font-size: .78rem; color: var(--sable); font-weight: 600; font-family: var(--ff-m); }
+
+/* ═══════════════════════════════════
+   CTA PAGE FINALE
+═══════════════════════════════════ */
+.cta-page {
+  background: var(--marine);
+  min-height: 297mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 52px;
+  text-align: center;
+}
+.cta-title {
+  font-family: var(--ff-d);
+  font-size: 3rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 10px;
+}
+.cta-es {
+  font-family: var(--ff-d);
+  font-style: italic;
+  font-size: 1.8rem;
+  color: var(--sable);
+  opacity: .8;
+  margin-bottom: 32px;
+  display: block;
+}
+.cta-body {
+  color: rgba(255,255,255,.65);
+  font-size: .95rem;
+  line-height: 1.8;
+  max-width: 440px;
+  margin: 0 auto 44px;
+}
+.cta-contacts { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+.cta-contact-item {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(200,169,122,.25);
+  border-radius: 8px;
+  padding: 16px 32px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cci-icon { font-size: 1.3rem; }
+.cci-label { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; display: block; }
+.cci-val { font-size: .92rem; color: #fff; font-weight: 500; }
+.cta-footer-note {
+  margin-top: 48px;
+  font-size: .72rem;
+  color: rgba(255,255,255,.3);
+  text-align: center;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ PAGE 1 — COUVERTURE ═══════ -->
+<div class="page cover-page">
+  <div class="cover-arc"></div>
+  <div class="cover-arc-2"></div>
+  <div class="cover-top">
+    <div class="cover-logo-line">
+      <div class="cover-brand">Élodie Fleury<span>· Côte d'Azur</span></div>
+      <div class="cover-badge">Guide gratuit · Guía gratuita</div>
+    </div>
+    <div class="cover-center">
+      <div class="cover-eyebrow">Pour les acquéreurs hispanophones · Para compradores hispanohablantes</div>
+      <h1 class="cover-h1-fr">Guide de l'acquéreur<br>sur la Côte d'Azur</h1>
+      <div class="cover-h1-es">Guía del comprador en la Costa Azul</div>
+      <p class="cover-subtitle">
+        Tout ce que vous devez savoir avant d'acheter un bien immobilier en France —
+        <em>rédigé pour les non-résidents hispanophones</em>, sans jargon, sans langue de bois.
+        8 pages bilingues.
+      </p>
+      <div class="cover-pills">
+        <div class="cpill">🇫🇷 Français · 🇪🇸 Español</div>
+        <div class="cpill">8 pages · Édition 2026</div>
+        <div class="cpill">Nice · Antibes · Cagnes · Biot</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-author">
+      <div class="cover-avatar">EF</div>
+      <div class="cover-author-info">
+        <div class="name">Élodie Fleury</div>
+        <div class="title">Agent immobilier IAD · Conciergerie YourBnB06 · Nice 06</div>
+      </div>
+    </div>
+    <div class="cover-contact">
+      <div>+33 7 78 23 54 86</div>
+      <div><a href="mailto:elodie@yourbnb06.fr">elodie@yourbnb06.fr</a></div>
+      <div>@immo_elo</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 2 — SOMMAIRE ═══════ -->
+<div class="page inner-page">
+  <div class="page-header">
+    <div class="ph-brand">Élodie Fleury · Guide Acquéreur</div>
+    <div class="ph-page">Sommaire</div>
+  </div>
+
+  <span class="chapter-label">Table des matières · Índice</span>
+  <h2 class="chapter-title">Ce que vous allez apprendre</h2>
+  <div class="chapter-title-es">Lo que va a aprender</div>
+  <p class="chapter-lead">Ce guide couvre l'intégralité du parcours d'achat immobilier en France pour un acquéreur hispanophone non-résident — de la recherche du bien jusqu'à la remise des clés, en passant par les spécificités juridiques et fiscales françaises.</p>
+
+  <div class="toc-list">
+    <div class="toc-item">
+      <div class="toc-num">1</div>
+      <div class="toc-text">
+        <h4>Le marché immobilier niçois en 2026</h4>
+        <div class="sub">El mercado inmobiliario de Niza · Prix, tendances, opportunités</div>
+      </div>
+      <div class="toc-page">p.3</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">2</div>
+      <div class="toc-text">
+        <h4>La procédure d'achat étape par étape</h4>
+        <div class="sub">El proceso de compra paso a paso · De la recherche à l'acte</div>
+      </div>
+      <div class="toc-page">p.4</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">3</div>
+      <div class="toc-text">
+        <h4>Les frais réels à anticiper</h4>
+        <div class="sub">Los costes reales a anticipar · Notaire, agence, impôts</div>
+      </div>
+      <div class="toc-page">p.5</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">4</div>
+      <div class="toc-text">
+        <h4>Réglementation pour les non-résidents européens</h4>
+        <div class="sub">Normativa para no residentes · Financement, fiscalité, statuts</div>
+      </div>
+      <div class="toc-page">p.6</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">5</div>
+      <div class="toc-text">
+        <h4>Les 5 erreurs des acquéreurs hispanophones à Nice</h4>
+        <div class="sub">Los 5 errores frecuentes · Ce qui fait perdre un bien ou de l'argent</div>
+      </div>
+      <div class="toc-page">p.7</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">6</div>
+      <div class="toc-text">
+        <h4>Checklist complète avant de signer</h4>
+        <div class="sub">Lista de verificación antes de firmar · Les 20 points à vérifier</div>
+      </div>
+      <div class="toc-page">p.8</div>
+    </div>
+  </div>
+
+  <div class="callout accent" style="margin-top:28px">
+    <strong>Comment utiliser ce guide</strong>
+    <p>Chaque section est rédigée en français avec les termes-clés traduits en espagnol entre crochets <em>[entre corchetes]</em>. Si vous avez des questions à tout moment, écrivez-moi directement sur WhatsApp (+33 7 78 23 54 86) — je réponds en espagnol ou en français.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>Élodie Fleury · Agent immobilier IAD · Nice 06</span>
+    <span class="pf-sable">Guide Acquéreur · Côte d'Azur · 2026</span>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 3 — MARCHÉ ═══════ -->
+<div class="page inner-page">
+  <div class="page-header">
+    <div class="ph-brand">Élodie Fleury · Guide Acquéreur</div>
+    <div class="ph-page">Chapitre 1 — Le marché 2026</div>
+  </div>
+
+  <span class="chapter-label">Capítulo 1 · Chapitre 1</span>
+  <h2 class="chapter-title">Le marché immobilier<br>niçois en 2026</h2>
+  <div class="chapter-title-es">El mercado inmobiliario de Niza en 2026</div>
+  <p class="chapter-lead">Nice est l'une des rares grandes villes françaises où les prix n'ont pas reculé depuis 3 ans. Le marché attire une clientèle internationale croissante — dont les acheteurs hispanophones représentent une part significative et sous-adressée.</p>
+
+  <div class="two-col">
+    <div class="info-card">
+      <span class="ic-label">Prix moyen appartement [precio promedio]</span>
+      <strong class="ic-val">5 800 €</strong>
+      <span class="ic-desc">par m² · Nice centre<br>+18,7% depuis 2021</span>
+    </div>
+    <div class="info-card">
+      <span class="ic-label">Acheteurs étrangers [compradores extranjeros]</span>
+      <strong class="ic-val">50%</strong>
+      <span class="ic-desc">des transactions >2M€<br>60% achètent cash</span>
+    </div>
+  </div>
+
+  <div class="data-table no-break">
+    <table>
+      <thead><tr><th>Quartier [Barrio]</th><th>Prix moyen/m² [Precio/m²]</th><th>Profil idéal [Perfil ideal]</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Carré d'Or</strong></td><td>8 000 – 12 000 €</td><td>Investisseur patrimonial, budget élevé</td></tr>
+        <tr><td><strong>Vieux-Nice / Port</strong></td><td>6 500 – 9 000 €</td><td>Résidence secondaire, LCD touristique</td></tr>
+        <tr><td><strong>Cimiez / Fabron</strong></td><td>4 500 – 6 500 €</td><td>Famille, résidence principale expatrié</td></tr>
+        <tr><td><strong>Promenade des Anglais</strong></td><td>7 000 – 12 000 €</td><td>Vue mer, prestige, rendement locatif</td></tr>
+        <tr><td><strong>St-Roch / Libération</strong></td><td>3 500 – 4 800 €</td><td>Premier investissement, primo-accédant</td></tr>
+        <tr><td><strong>Antibes / Juan-les-Pins</strong></td><td>5 500 – 9 000 €</td><td>Qualité de vie, portée de Nice</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout success">
+    <strong>Fenêtre d'opportunité 2026 [Ventana de oportunidad]</strong>
+    <p>Après une stabilisation des taux de crédit sous 3,5%, le marché repart à la hausse au printemps 2026. Les acquéreurs hispanophones qui achètent aujourd'hui bénéficient d'une valorisation projetée de +2,5% à +3,5% sur 12 mois. Les biens sous 400 000 € se négocient encore à 3-5%.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>Élodie Fleury · +33 7 78 23 54 86 · elodie@yourbnb06.fr</span>
+    <span class="pf-sable">Page 3</span>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 4 — PROCÉDURE ═══════ -->
+<div class="page inner-page">
+  <div class="page-header">
+    <div class="ph-brand">Élodie Fleury · Guide Acquéreur</div>
+    <div class="ph-page">Chapitre 2 — La procédure d'achat</div>
+  </div>
+
+  <span class="chapter-label">Capítulo 2 · Chapitre 2</span>
+  <h2 class="chapter-title">La procédure d'achat<br>étape par étape</h2>
+  <div class="chapter-title-es">El proceso de compra paso a paso</div>
+  <p class="chapter-lead">En France, l'achat immobilier est encadré par une procédure légale stricte en deux temps : le compromis de vente [contrato de arras] puis l'acte authentique chez le notaire [escritura pública]. Durée totale : 3 à 5 mois.</p>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Définir votre projet et votre budget <span class="es">[Definir su proyecto]</span></h4>
+        <p>Budget total = prix du bien + frais de notaire (7-8% dans l'ancien) + éventuels travaux. Précisez : usage (résidence principale, secondaire, investissement locatif) et délai souhaité.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Recherche et visites <span class="es">[Búsqueda y visitas]</span></h4>
+        <p>Je diffuse votre profil de recherche sur mon réseau avant publication. Les biens "off-market" représentent 15-20% des transactions — accessibles uniquement via un agent avec réseau local.</p>
+        <span class="note">💡 Pour les acheteurs non-résidents : les visites virtuelles (vidéo WhatsApp, visite 3D) sont disponibles avant le déplacement.</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num sable">3</div>
+      <div class="step-content">
+        <h4>Offre d'achat <span class="es">[Oferta de compra]</span></h4>
+        <p>Document écrit soumis au vendeur avec prix proposé et délai de réponse (48-72h). Non contraignante, mais signal fort. Je vous aide à calibrer l'offre selon les données du marché pour maximiser vos chances sans surpayer.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num sable">4</div>
+      <div class="step-content">
+        <h4>Compromis de vente <span class="es">[Contrato de arras / Contrato de reserva]</span></h4>
+        <p>Signé chez le notaire ou sous seing privé. Vous versez un dépôt de garantie [depósito de garantía] de 5-10% du prix. Vous disposez d'un délai de rétractation de 10 jours. Si vous avez un prêt, la clause suspensive [condición suspensiva] vous protège en cas de refus bancaire.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>Délai de 2 à 3 mois <span class="es">[Período de espera]</span></h4>
+        <p>Période de montage du financement (si prêt), de réalisation des diagnostics obligatoires, de vérification juridique du bien par le notaire. Je coordonne tout ce processus.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h4>Acte authentique chez le notaire <span class="es">[Escritura pública de compraventa]</span></h4>
+        <p>Signature finale chez le notaire [notario]. Paiement du solde, remise des clés [entrega de llaves]. Le notaire est garant de la légalité de la transaction pour les deux parties — son rôle est plus étendu qu'en Espagne.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Élodie Fleury · +33 7 78 23 54 86 · elodie@yourbnb06.fr</span>
+    <span class="pf-sable">Page 4</span>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 5 — FRAIS ═══════ -->
+<div class="page inner-page">
+  <div class="page-header">
+    <div class="ph-brand">Élodie Fleury · Guide Acquéreur</div>
+    <div class="ph-page">Chapitre 3 — Les frais réels</div>
+  </div>
+
+  <span class="chapter-label">Capítulo 3 · Chapitre 3</span>
+  <h2 class="chapter-title">Les frais réels<br>à anticiper</h2>
+  <div class="chapter-title-es">Los costes reales que debe anticipar</div>
+  <p class="chapter-lead">C'est souvent la mauvaise surprise des acheteurs étrangers : le prix affiché est loin du coût total réel. Voici le calcul complet pour un bien à 400 000 € dans l'ancien à Nice.</p>
+
+  <div class="data-table no-break">
+    <table>
+      <thead><tr><th>Poste de frais [Concepto]</th><th>Montant estimé [Importe estimado]</th><th>Commentaire</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Prix du bien [Precio del inmueble]</strong></td><td>400 000 €</td><td>Prix négocié, acté</td></tr>
+        <tr><td>Frais de notaire [Gastos de notaría] — ancien</td><td>28 000 – 32 000 €</td><td>7-8% du prix · Taxes, émoluments, débours</td></tr>
+        <tr><td>Honoraires d'agence [Honorarios de agencia]</td><td>0 – 16 000 €</td><td>Si FAI (frais inclus) : déjà dans le prix. Si hors FAI : 3-5% à charge acquéreur.</td></tr>
+        <tr><td>Garantie bancaire ou hypothèque [Garantía bancaria]</td><td>3 000 – 8 000 €</td><td>Si financement par emprunt</td></tr>
+        <tr><td>Diagnostics immobiliers [Diagnósticos obligatorios]</td><td>À charge du vendeur</td><td>DPE, plomb, amiante, électricité, gaz</td></tr>
+        <tr><td>Charges de copropriété [Gastos de comunidad]</td><td>1 500 – 4 000 €/an</td><td>À vérifier avant achat (solde appelé)</td></tr>
+        <tr><td>Taxe foncière [Impuesto sobre bienes inmuebles]</td><td>1 000 – 3 500 €/an</td><td>Payée par le propriétaire au 1er octobre</td></tr>
+        <tr style="background:rgba(200,169,122,.12)"><td><strong>TOTAL acquisition estimé</strong></td><td><strong>430 000 – 456 000 €</strong></td><td>Pour un bien à 400 000 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warning">
+    <strong>Attention — Frais de notaire dans le neuf [IVA en obra nueva]</strong>
+    <p>Pour un bien neuf, les frais de notaire sont réduits à 2-3% (pas de droits de mutation). En contrepartie, vous payez la TVA (20%) sur le prix TTC. Les frais d'agence peuvent également être différents. Posez la question systématiquement.</p>
+  </div>
+
+  <div class="highlight-box no-break">
+    <span class="hb-label">Mon conseil · Mi consejo</span>
+    <p class="hb-quote">"Prévoyez toujours 10% au-dessus du prix affiché dans votre budget global. C'est la règle d'or pour éviter les mauvaises surprises au moment de la signature."</p>
+    <div class="hb-source">— Élodie Fleury · Agent immobilier Nice</div>
+  </div>
+
+  <div class="page-footer">
+    <span>Élodie Fleury · +33 7 78 23 54 86 · elodie@yourbnb06.fr</span>
+    <span class="pf-sable">Page 5</span>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 6 — NON-RÉSIDENTS ═══════ -->
+<div class="page inner-page">
+  <div class="page-header">
+    <div class="ph-brand">Élodie Fleury · Guide Acquéreur</div>
+    <div class="ph-page">Chapitre 4 — Non-résidents</div>
+  </div>
+
+  <span class="chapter-label">Capítulo 4 · Chapitre 4</span>
+  <h2 class="chapter-title">Réglementation<br>pour les non-résidents</h2>
+  <div class="chapter-title-es">Normativa para no residentes europeos</div>
+  <p class="chapter-lead">Un ressortissant espagnol ou latino-américain peut acheter librement un bien immobilier en France. Il n'existe aucune restriction à l'achat pour les ressortissants de l'UE. Pour les non-UE, quelques démarches supplémentaires s'appliquent.</p>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">A</div>
+      <div class="step-content">
+        <h4>Ressortissants UE (Espagne, Portugal, etc.) <span class="es">[Ciudadanos de la UE]</span></h4>
+        <p>Aucune restriction. Achat identique à un acheteur français. Vous aurez besoin d'un compte bancaire en France (ouverture facilitée en ligne : BNP, Société Générale, Hello Bank). Le notaire peut accepter un virement depuis l'étranger.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">B</div>
+      <div class="step-content">
+        <h4>Ressortissants hors-UE (Mexique, Argentine, etc.) <span class="es">[Ciudadanos no-UE]</span></h4>
+        <p>Achat libre également. Justificatif d'origine des fonds obligatoire (anti-blanchiment). Conseillé : ouvrir un compte dans une banque française ou faire appel à un avocat fiscaliste franco-espagnol pour structurer correctement l'acquisition.</p>
+        <span class="note">⚠️ Implications fiscales spécifiques selon conventions bilatérales France-pays d'origine.</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num sable">C</div>
+      <div class="step-content">
+        <h4>Financement bancaire depuis l'étranger <span class="es">[Financiación bancaria desde el extranjero]</span></h4>
+        <p>Les banques françaises prêtent aux non-résidents sous conditions : apport de 20-30% minimum, justificatifs de revenus étrangers traduits et apostillés. Taux souvent moins favorables qu'un résident. Alternative : prêt in fine ou financement participatif si achat patrimonial.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num sable">D</div>
+      <div class="step-content">
+        <h4>Fiscalité du propriétaire non-résident <span class="es">[Fiscalidad del propietario no residente]</span></h4>
+        <p>Si vous louez votre bien en votre absence, les revenus locatifs français sont imposés en France (prélèvements sociaux 17,2% + IR 20% minimum pour non-résidents UE). Convention fiscale France-Espagne : les revenus sont déclarés dans les deux pays mais non doublement taxés. Consultez un fiscaliste.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout accent">
+    <strong>SCI — La société civile immobilière [Sociedad Civil Inmobiliaria]</strong>
+    <p>Pour un investissement patrimonial ou en famille, la SCI est souvent recommandée. Elle simplifie la transmission, optimise la fiscalité, et facilite la gestion multi-associés. Budget de constitution : 1 500 – 3 000 €. À discuter avec votre notaire.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>Élodie Fleury · +33 7 78 23 54 86 · elodie@yourbnb06.fr</span>
+    <span class="pf-sable">Page 6</span>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 7 — 5 ERREURS ═══════ -->
+<div class="page inner-page">
+  <div class="page-header">
+    <div class="ph-brand">Élodie Fleury · Guide Acquéreur</div>
+    <div class="ph-page">Chapitre 5 — Les 5 erreurs</div>
+  </div>
+
+  <span class="chapter-label">Capítulo 5 · Chapitre 5</span>
+  <h2 class="chapter-title">Les 5 erreurs des acquéreurs<br>hispanophones à Nice</h2>
+  <div class="chapter-title-es">Los 5 errores más frecuentes en Niza</div>
+  <p class="chapter-lead">J'accompagne des acheteurs espagnols et latino-américains depuis plusieurs années. Voici les 5 pièges que j'ai vus se répéter — et comment les éviter.</p>
+
+  <div class="error-card">
+    <div class="error-num">1</div>
+    <div class="error-content">
+      <h4>Sous-estimer le budget total <em>[Subestimar el presupuesto total]</em></h4>
+      <p>Beaucoup d'acheteurs étrangers négocient sur la base du prix affiché et découvrent au compromis que les frais de notaire représentent 7-8% de plus. La mauvaise surprise coince la transaction ou force une renégociation humiliante.</p>
+      <div class="error-tip"><strong>Solution :</strong> Dès le départ, définissez votre budget all-in. Si vous avez 400 000 € à dépenser, cherchez des biens à 360-370 000 €.</div>
+    </div>
+  </div>
+
+  <div class="error-card">
+    <div class="error-num">2</div>
+    <div class="error-content">
+      <h4>Signer sans lire le diagnostic de performance énergétique <em>[DPE — Certificado de eficiencia energética]</em></h4>
+      <p>La France impose depuis 2025 des restrictions de location sur les biens classés G (et bientôt F). Un appartement DPE G est désormais impossible à louer légalement. Certains acheteurs étrangers ignorent cette règle et achètent sans vérifier.</p>
+      <div class="error-tip"><strong>Solution :</strong> Vérifier systématiquement la classe énergétique. Biens D ou mieux = sécurisés.</div>
+    </div>
+  </div>
+
+  <div class="error-card">
+    <div class="error-num">3</div>
+    <div class="error-content">
+      <h4>Acheter sans visiter physiquement <em>[Comprar sin visitar presencialmente]</em></h4>
+      <p>Des photos flatteuses peuvent cacher un vis-à-vis gênant, un bruit de voisinage, ou un immeuble mal entretenu. J'ai vu des acheteurs espagnols regretter un achat fait à distance sur vidéo, une fois sur place.</p>
+      <div class="error-tip"><strong>Solution :</strong> Au minimum, déplacez-vous pour la visite décisive. Je peux organiser un programme de visites sur 2 jours pour maximiser votre déplacement.</div>
+    </div>
+  </div>
+
+  <div class="error-card">
+    <div class="error-num">4</div>
+    <div class="error-content">
+      <h4>Négliger les charges de copropriété <em>[Ignorar los gastos de comunidad]</em></h4>
+      <p>Un immeuble avec ascenseur, gardien et travaux de ravalement peut afficher des charges de 4 000-6 000 €/an. Non vérifiées avant achat, elles peuvent sérieusement impacter la rentabilité d'un investissement locatif.</p>
+      <div class="error-tip"><strong>Solution :</strong> Demander systématiquement les 3 derniers procès-verbaux d'assemblée générale et le carnet d'entretien de l'immeuble.</div>
+    </div>
+  </div>
+
+  <div class="error-card">
+    <div class="error-num">5</div>
+    <div class="error-content">
+      <h4>Travailler avec un agent qui ne parle pas espagnol <em>[Trabajar con un agente que no habla español]</em></h4>
+      <p>Les subtilités d'un contrat immobilier français — clauses suspensives, modalités de rétractation, servitudes — se perdent dans la traduction approximative. Une incompréhension peut coûter le dépôt de garantie.</p>
+      <div class="error-tip"><strong>Solution :</strong> Exigez un interlocuteur bilingue. Je rédige et explique tous les documents en français et en espagnol.</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Élodie Fleury · +33 7 78 23 54 86 · elodie@yourbnb06.fr</span>
+    <span class="pf-sable">Page 7</span>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 8 — CHECKLIST ═══════ -->
+<div class="page inner-page">
+  <div class="page-header">
+    <div class="ph-brand">Élodie Fleury · Guide Acquéreur</div>
+    <div class="ph-page">Chapitre 6 — Checklist</div>
+  </div>
+
+  <span class="chapter-label">Capítulo 6 · Chapitre 6</span>
+  <h2 class="chapter-title">Checklist complète<br>avant de signer</h2>
+  <div class="chapter-title-es">Lista de verificación completa antes de firmar</div>
+  <p class="chapter-lead">20 points à vérifier avant de vous engager. Imprimez et cochez au fur et à mesure de l'avancement de votre dossier.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="checklist-block">
+      <h4>📋 Sur le bien [Sobre el inmueble]</h4>
+      <div class="cl-item"><div class="cl-check">☐</div> DPE vérifié (classe D ou mieux recommandé)</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Diagnostics plomb, amiante, termites, gaz fournis</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Surface loi Carrez vérifiée (surface privative exacte)</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Travaux en copropriété votés ou en cours consultés</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Risques naturels / inondations consultés (ERRIAL)</div>
+    </div>
+    <div class="checklist-block">
+      <h4>🏛️ Sur la copropriété [Sobre la comunidad]</h4>
+      <div class="cl-item"><div class="cl-check">☐</div> 3 derniers PV d'AG lus et compris</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Charges annuelles précises demandées</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Fonds de travaux (loi Alur) vérifié</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Dettes du lot vendeur soldées</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Règlement de copropriété relu (activités autorisées)</div>
+    </div>
+    <div class="checklist-block">
+      <h4>💶 Sur le financement [Sobre la financiación]</h4>
+      <div class="cl-item"><div class="cl-check">☐</div> Budget total calculé (prix + frais de notaire + travaux)</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Accord de principe bancaire obtenu (si prêt)</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Clause suspensive de financement incluse au compromis</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Origine des fonds justifiée (virement international OK)</div>
+    </div>
+    <div class="checklist-block">
+      <h4>⚖️ Sur le juridique [Sobre lo jurídico]</h4>
+      <div class="cl-item"><div class="cl-check">☐</div> Titre de propriété du vendeur vérifié par le notaire</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Servitudes et droits de passage vérifiés</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Situation locative vérifiée (bien libre ou occupé)</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Délai de rétractation 10 jours activé (SRU)</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Traduction/explication du compromis en espagnol effectuée</div>
+      <div class="cl-item"><div class="cl-check">☐</div> Conseiller fiscal non-résidents consulté</div>
+    </div>
+  </div>
+
+  <div class="callout accent" style="margin-top:20px">
+    <strong>Cette checklist vous semble complexe ? C'est normal — c'est pour ça que je suis là.</strong>
+    <p>Je vérifie chacun de ces points pour vous, en français et en espagnol, avant que vous ne signiez quoi que ce soit. Contactez-moi pour un premier échange gratuit de 30 minutes.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>Élodie Fleury · +33 7 78 23 54 86 · elodie@yourbnb06.fr</span>
+    <span class="pf-sable">Page 8</span>
+  </div>
+</div>
+
+<!-- ═══════ PAGE 9 — CTA FINALE ═══════ -->
+<div class="page cta-page">
+  <div class="cover-arc"></div>
+  <h2 class="cta-title">Votre projet mérite<br>un expert.</h2>
+  <span class="cta-es">Su proyecto merece un experto.</span>
+  <p class="cta-body">
+    Vous avez lu ce guide — vous savez maintenant ce que la plupart des acheteurs étrangers ignorent.
+    L'étape suivante ? Une conversation de 30 minutes pour évaluer votre projet, sans engagement.
+    En français ou en espagnol, selon votre préférence.
+  </p>
+  <div class="cta-contacts">
+    <div class="cta-contact-item">
+      <span class="cci-icon">💬</span>
+      <div><span class="cci-label">WhatsApp (FR · ES · disponible 7j/7)</span><span class="cci-val">+33 7 78 23 54 86</span></div>
+    </div>
+    <div class="cta-contact-item">
+      <span class="cci-icon">✉️</span>
+      <div><span class="cci-label">Email</span><span class="cci-val">elodie@yourbnb06.fr</span></div>
+    </div>
+    <div class="cta-contact-item">
+      <span class="cci-icon">📸</span>
+      <div><span class="cci-label">Instagram · House Tours · Conseils marché</span><span class="cci-val">@immo_elo</span></div>
+    </div>
+  </div>
+  <div class="cta-footer-note">
+    Élodie Fleury — Agente commerciale EI · RSAC Nice n° 925 155 855 · Réseau IAD France<br>
+    YourBnB06 — Conciergerie premium Nice · yourbnb06.fr<br>
+    Ce guide est fourni à titre informatif. Il ne constitue pas un conseil juridique ou fiscal.
+    Pour toute situation spécifique, consultez un notaire ou un avocat fiscaliste.
+  </div>
+</div>
+
+</body>
+</html>
