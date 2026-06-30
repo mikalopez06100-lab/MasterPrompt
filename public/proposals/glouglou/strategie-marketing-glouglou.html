@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratégie Marketing & Communication — Cave GlouGlou</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --bg-page: #fafafa;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-primary: #0a2540;
+  --text-body: #1a202c;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  --accent: #d4a574;
+  --accent-dark: #a67c4f;
+  --accent-soft: #faf3e8;
+  --success: #15803d;
+  --success-soft: #f0fdf4;
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+  --danger: #b91c1c;
+  --danger-soft: #fef2f2;
+  --info: #0369a1;
+  --info-soft: #f0f9ff;
+  --chart-1: #0a2540;
+  --chart-2: #0ea5e9;
+  --chart-3: #d4a574;
+  --chart-4: #15803d;
+  --chart-5: #b91c1c;
+  --chart-6: #7c3aed;
+  --chart-muted: #94a3b8;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --sp-1: 0.25rem; --sp-2: 0.5rem; --sp-3: 0.75rem; --sp-4: 1rem;
+  --sp-6: 1.5rem; --sp-8: 2rem; --sp-12: 3rem; --sp-16: 4rem;
+  --radius: 8px; --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px rgba(10,37,64,0.04);
+  --shadow: 0 1px 3px rgba(10,37,64,0.06), 0 1px 2px rgba(10,37,64,0.04);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: 920px; margin: 0 auto; padding: 48px 48px 80px; }
+
+/* ── COVER ── */
+.cover {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  padding: 64px 56px 56px;
+  margin-bottom: 0;
+}
+.cover-kicker { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: var(--sp-4); }
+.cover h1 { font-size: 2.8rem; font-weight: 700; line-height: 1.1; color: #fff; margin-bottom: var(--sp-4); }
+.cover-sub { font-size: 1.1rem; color: #94a3b8; margin-bottom: var(--sp-8); line-height: 1.5; }
+.cover-meta { display: flex; gap: var(--sp-8); border-top: 1px solid rgba(255,255,255,0.12); padding-top: var(--sp-6); }
+.cover-meta-item { font-size: 0.8rem; }
+.cover-meta-item strong { display: block; color: var(--accent); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+
+/* ── TOC ── */
+.toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-8); margin: var(--sp-8) 0 var(--sp-12); }
+.toc h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: var(--sp-4); }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { display: flex; align-items: baseline; gap: var(--sp-3); padding: var(--sp-2) 0; border-bottom: 1px dotted var(--border); font-size: 0.9rem; }
+.toc li:last-child { border-bottom: none; }
+.toc li a { color: var(--text-primary); text-decoration: none; font-weight: 500; }
+.toc li a:hover { color: var(--accent-dark); }
+.toc-num { color: var(--text-muted); font-size: 0.75rem; min-width: 24px; }
+
+/* ── SECTION ── */
+.section { margin-bottom: var(--sp-16); padding-top: var(--sp-12); border-top: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: var(--sp-2); }
+.section h2 { font-size: 1.75rem; font-weight: 600; color: var(--text-primary); line-height: 1.2; margin-bottom: var(--sp-3); }
+.section .lead { font-size: 1.05rem; color: var(--text-muted); margin-bottom: var(--sp-8); }
+h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin: var(--sp-8) 0 var(--sp-4); }
+h4 { font-size: 0.875rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: var(--sp-6) 0 var(--sp-3); }
+
+/* ── EXECUTIVE SUMMARY ── */
+.exec-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sp-4); margin: var(--sp-6) 0 var(--sp-8); }
+.exec-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-6); border-top: 3px solid var(--text-primary); }
+.exec-card.accent-top { border-top-color: var(--accent); }
+.exec-card.success-top { border-top-color: var(--success); }
+.exec-card h4 { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 var(--sp-2); }
+.exec-card p { font-size: 0.875rem; color: var(--text-body); line-height: 1.5; }
+
+/* ── KPI GRID ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); margin: var(--sp-6) 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-6); }
+.kpi-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: var(--sp-2); }
+.kpi-value { font-size: 2.5rem; font-weight: 600; color: var(--text-primary); display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: var(--sp-1); display: block; }
+
+/* ── SCORE ── */
+.score-badge { display: inline-flex; align-items: baseline; gap: 4px; padding: var(--sp-2) var(--sp-4); border-radius: var(--radius); }
+.score-value { font-size: 1.75rem; font-weight: 700; }
+.score-label { font-size: 0.875rem; opacity: 0.7; }
+.score-good { background: var(--success-soft); color: var(--success); }
+.score-medium { background: var(--warning-soft); color: var(--warning); }
+.score-poor { background: var(--danger-soft); color: var(--danger); }
+
+/* ── CALLOUT ── */
+.callout { padding: var(--sp-4) var(--sp-6); border-left: 4px solid var(--text-primary); background: var(--bg-subtle); border-radius: 0 var(--radius) var(--radius) 0; margin: var(--sp-6) 0; font-size: 0.95rem; }
+.callout strong { display: block; margin-bottom: var(--sp-1); font-weight: 600; }
+.callout-warning { border-color: var(--warning); background: var(--warning-soft); }
+.callout-success { border-color: var(--success); background: var(--success-soft); }
+.callout-danger { border-color: var(--danger); background: var(--danger-soft); }
+.callout-accent { border-color: var(--accent); background: var(--accent-soft); }
+.callout-info { border-color: var(--info); background: var(--info-soft); }
+
+/* ── CARD ── */
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-8); box-shadow: var(--shadow-sm); margin-bottom: var(--sp-6); }
+.card h3 { margin-top: 0; }
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: var(--sp-6) 0; }
+.data-table th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; padding: var(--sp-3) var(--sp-4); border-bottom: 2px solid var(--text-primary); }
+.data-table td { padding: var(--sp-4); border-bottom: 1px solid var(--border); color: var(--text-body); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.td-num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+
+/* ── TAGS ── */
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.03em; }
+.tag-vert { background: var(--success-soft); color: var(--success); }
+.tag-orange { background: var(--warning-soft); color: var(--warning); }
+.tag-rouge { background: var(--danger-soft); color: var(--danger); }
+.tag-bleu { background: var(--info-soft); color: var(--info); }
+.tag-accent { background: var(--accent-soft); color: var(--accent-dark); }
+
+/* ── PERSONA CARDS ── */
+.persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); margin: var(--sp-6) 0; }
+.persona-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.persona-header { background: var(--text-primary); color: white; padding: var(--sp-6); }
+.persona-header .persona-name { font-size: 1.2rem; font-weight: 700; color: #fff; }
+.persona-header .persona-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-top: 2px; }
+.persona-body { padding: var(--sp-6); }
+.persona-row { margin-bottom: var(--sp-4); }
+.persona-row strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: var(--sp-1); }
+.persona-row p, .persona-row ul { font-size: 0.875rem; color: var(--text-body); }
+.persona-row ul { margin-left: var(--sp-4); }
+
+/* ── JOURNEY ── */
+.journey { margin: var(--sp-8) 0; }
+
+/* ── GANTT ── */
+.gantt-bar { height: 28px; border-radius: 4px; display: flex; align-items: center; padding: 0 10px; font-size: 0.75rem; font-weight: 500; color: white; }
+.gantt-row { display: grid; grid-template-columns: 200px 1fr; gap: var(--sp-4); align-items: center; margin-bottom: var(--sp-3); }
+.gantt-label { font-size: 0.8rem; color: var(--text-body); }
+
+/* ── POSITIONING STATEMENT ── */
+.positioning-box { background: var(--text-primary); color: white; border-radius: var(--radius-lg); padding: var(--sp-8) var(--sp-8) var(--sp-8); margin: var(--sp-6) 0; }
+.positioning-box .p-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: var(--sp-2); }
+.positioning-box p { font-family: var(--font-serif); font-size: 1.15rem; color: #e8e4dc; line-height: 1.7; }
+.positioning-box strong { color: var(--accent); font-style: normal; font-family: var(--font-sans); }
+
+/* ── CHANNEL MATRIX ── */
+.channel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin: var(--sp-6) 0; }
+.channel-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-6); position: relative; }
+.channel-card.priority-1 { border-top: 3px solid var(--success); }
+.channel-card.priority-2 { border-top: 3px solid var(--warning); }
+.channel-card.priority-off { border-top: 3px solid var(--chart-muted); opacity: 0.7; }
+.channel-card h4 { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); text-transform: none; letter-spacing: 0; margin-bottom: var(--sp-2); }
+.channel-card .c-budget { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+.channel-card .c-kpi { font-size: 0.75rem; color: var(--text-muted); margin-top: var(--sp-2); }
+.channel-card ul { font-size: 0.8rem; margin-left: var(--sp-4); margin-top: var(--sp-3); color: var(--text-body); }
+
+/* ── CONTENT PILLARS ── */
+.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); margin: var(--sp-6) 0; }
+.pillar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-6); }
+.pillar-num { font-size: 2.5rem; font-weight: 700; color: var(--border-strong); line-height: 1; margin-bottom: var(--sp-3); }
+.pillar-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); text-transform: none; letter-spacing: 0; margin-bottom: var(--sp-2); }
+.pillar-card p { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ── FUNNEL ── */
+.funnel-steps { display: flex; flex-direction: column; gap: var(--sp-3); margin: var(--sp-6) 0; }
+.funnel-step { display: grid; grid-template-columns: 100px 1fr auto; gap: var(--sp-4); align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-4) var(--sp-6); }
+.funnel-step-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; }
+.funnel-step-content h5 { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.funnel-step-content p { font-size: 0.8rem; color: var(--text-muted); }
+.funnel-step-rate { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); text-align: right; }
+.funnel-step-rate span { display: block; font-size: 0.7rem; font-weight: 400; color: var(--text-muted); }
+
+/* ── ROADMAP ── */
+.roadmap-phase { margin-bottom: var(--sp-8); }
+.roadmap-phase-header { background: var(--text-primary); color: white; padding: var(--sp-3) var(--sp-6); border-radius: var(--radius) var(--radius) 0 0; display: flex; justify-content: space-between; align-items: center; }
+.roadmap-phase-header h4 { font-size: 0.875rem; font-weight: 600; color: white; text-transform: none; letter-spacing: 0; margin: 0; }
+.roadmap-phase-header span { font-size: 0.75rem; color: var(--accent); }
+.roadmap-items { border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
+.roadmap-item { display: grid; grid-template-columns: 32px 1fr auto auto; gap: var(--sp-4); align-items: center; padding: var(--sp-4) var(--sp-6); border-bottom: 1px solid var(--border); font-size: 0.875rem; }
+.roadmap-item:last-child { border-bottom: none; }
+.roadmap-num { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
+.roadmap-item h5 { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.roadmap-item p { font-size: 0.8rem; color: var(--text-muted); }
+.roadmap-owner { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+.roadmap-effort { font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+
+/* ── BUDGET TABLE ── */
+.budget-total { background: var(--text-primary); color: white; border-radius: var(--radius); padding: var(--sp-4) var(--sp-6); display: flex; justify-content: space-between; align-items: center; margin-top: var(--sp-4); }
+.budget-total span { font-size: 0.875rem; color: #94a3b8; }
+.budget-total strong { font-size: 1.5rem; font-weight: 700; color: white; }
+
+/* ── FOOTER ── */
+.footer { margin-top: var(--sp-16); padding-top: var(--sp-8); border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; }
+
+/* ── PRINT ── */
+@page { size: A4; margin: 18mm 16mm; }
+@media print {
+  body { background: white; }
+  .container { max-width: 720px; padding: 24px; }
+  .cover { padding: 40px 36px; }
+  .section { page-break-before: auto; }
+  .card, .persona-card, .callout { break-inside: avoid; }
+  a { color: var(--text-body); text-decoration: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="container" style="padding-top:0; padding-bottom:0;">
+    <p class="cover-kicker">Pack IA · Livrable 1/3</p>
+    <h1>Stratégie Marketing<br>& Communication</h1>
+    <p class="cover-sub">Positionnement, acquisition, contenu et funnel —<br>Plan d'exécution 90 jours pour Cave GlouGlou</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><strong>Client</strong>Cave GlouGlou · Jérôme Sollazzo</div>
+      <div class="cover-meta-item"><strong>Secteur</strong>Caviste indépendant · Nice Ouest</div>
+      <div class="cover-meta-item"><strong>Date</strong>Juin 2026</div>
+      <div class="cover-meta-item"><strong>Consultant</strong>Michaël Lopez · MasterPrompt</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- TOC -->
+<nav class="toc">
+  <h3>Sommaire</h3>
+  <ol>
+    <li><span class="toc-num">01</span><a href="#exec">Résumé exécutif</a></li>
+    <li><span class="toc-num">02</span><a href="#positionnement">Positionnement stratégique & messaging</a></li>
+    <li><span class="toc-num">03</span><a href="#personas">Personas & Jobs-To-Be-Done</a></li>
+    <li><span class="toc-num">04</span><a href="#journey">Customer journey</a></li>
+    <li><span class="toc-num">05</span><a href="#canaux">Mix d'acquisition multicanal</a></li>
+    <li><span class="toc-num">06</span><a href="#contenu">Stratégie de contenu</a></li>
+    <li><span class="toc-num">07</span><a href="#funnel">Funnel & conversion</a></li>
+    <li><span class="toc-num">08</span><a href="#roadmap">Roadmap 90 jours & budget</a></li>
+  </ol>
+</nav>
+
+<!-- EXEC SUMMARY -->
+<section class="section" id="exec">
+  <span class="kicker">Résumé exécutif</span>
+  <h2>3 décisions stratégiques, 1 priorité absolue</h2>
+  <p class="lead">Cave GlouGlou a moins d'un an d'existence. Le marché existe, la clientèle affinitaire aussi. Le problème n'est pas le produit — c'est l'invisibilité et la dépendance au flux piéton.</p>
+
+  <div class="exec-grid">
+    <div class="exec-card">
+      <h4>Décision 1 — Positionnement</h4>
+      <p>Assumer le créneau vin nature/biodynamie et le revendiquer explicitement. Ne pas essayer de concurrencer Caprioglio sur le volume ni La Cave de Nice sur la proximité. Le terrain libre est la curation militante.</p>
+    </div>
+    <div class="exec-card accent-top">
+      <h4>Décision 2 — Canaux</h4>
+      <p>Concentrer 90 % de l'énergie sur 3 canaux : Google Business Profile (trafic local immédiat), Instagram/TikTok (contenu IA-assisté pour résoudre la douleur contenu de Jérôme), et GEO/SEO (citabilité LLM sur vin nature Nice).</p>
+    </div>
+    <div class="exec-card success-top">
+      <h4>Décision 3 — Monétisation</h4>
+      <p>Formaliser les 3 offres informelles existantes : coffrets (gammes + prix fixes), ateliers (calendrier + réservation en ligne), livraison <strong>hors horaires d'ouverture</strong> (conditions claires + revendiqué comme avantage solopreneur — impossible pour les caves avec salariés). Chaque offre formalisée = un canal de revenus supplémentaire sans nouvel investissement produit.</p>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <span class="kpi-label">Trafic actuel/mois</span>
+      <span class="kpi-value">70</span>
+      <span class="kpi-sub">visites site web estimées</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Objectif trafic J+90</span>
+      <span class="kpi-value">250</span>
+      <span class="kpi-sub">+250 % réaliste avec correctifs SEO/GEO</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Panier moyen</span>
+      <span class="kpi-value">35€</span>
+      <span class="kpi-sub">cible médiane 20-50€ déclarée</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Score viabilité strat.</span>
+      <span class="kpi-value">67</span>
+      <span class="kpi-sub">/ 100 — solide si exécution concentrée</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warning">
+    <strong>Angle mort principal.</strong> La douleur déclarée par Jérôme est "créer du contenu pour les réseaux" — c'est un symptôme, pas la cause. La cause : aucun système de production de contenu, tout repose sur l'improvisation. La stratégie ci-dessous installe un système reproductible IA-assisté, pas une liste de sujets à traiter manuellement.
+  </div>
+</section>
+
+<!-- POSITIONNEMENT -->
+<section class="section" id="positionnement">
+  <span class="kicker">Bloc 01</span>
+  <h2>Positionnement stratégique & messaging</h2>
+  <p class="lead">Framework Dunford appliqué à Cave GlouGlou — un positionnement qui assume d'exclure une partie du marché pour dominer un segment précis.</p>
+
+  <h3>Analyse concurrentielle — périmètre correct</h3>
+  <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:var(--sp-4);">3 niveaux de concurrence à distinguer : (1) proximité immédiate Saint-Isidore (~500m), (2) même zone de chalandise collines Nice Ouest (~5km), (3) cavistes centre Nice pour le SEO uniquement.</p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Concurrent</th><th>Distance / zone</th><th>Positionnement</th><th>Force réelle</th><th>Faille exploitable</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:#fef2f2;">
+        <td><strong>Aperitiv — Canta Galet</strong> <span class="tag tag-rouge" style="margin-left:4px;">Concurrent #1 stratégique</span></td>
+        <td>~3km · Collines Nice Ouest · même clientèle</td>
+        <td>Épicerie fine premium + cave + fromagerie + charcuterie. "Tout pour l'apéro" haut de gamme. Fondée 2013, 3 boutiques Nice + Cannes, 8 salariés, 1 200 références, concept lifestyle très élaboré.</td>
+        <td>Notoriété locale forte (5★ Google), concept multi-produits, clientèle CSP+ collines fidélisée, communication Instagram active (2 800 abonnés, 745 posts), coffrets cadeaux sur mesure, spiritueux haut de gamme (350 réf. dont collections 1 000-10 000€).</td>
+        <td><strong>Pas de spécialisation vin nature/biodynamie revendiquée — catalogue large mais non militant.</strong> Prix plus élevés (concept épicerie fine). Taille (8 salariés) = moins de souplesse, moins d'incarnation par un fondateur visible. Livraison hors horaires impossible structurellement.</td>
+      </tr>
+      <tr>
+        <td><strong>V and B Nice Stade</strong> <span class="tag tag-orange" style="margin-left:4px;">Concurrent #2 local</span></td>
+        <td>~500m · Saint-Isidore</td>
+        <td>Bar + cave franchise, convivialité, événements sportifs, bière en priorité</td>
+        <td>300 vins + 350 bières, bar sur place, click & collect 2h, événements récurrents (Oktoberfest, matchs)</td>
+        <td>Franchise impersonnelle, aucun vin nature/bio, public "bar entre amis" ≠ amateur sérieux.</td>
+      </tr>
+      <tr>
+        <td><strong>Ma Cave E.Leclerc Saint-Isidore</strong> <span class="tag tag-orange" style="margin-left:4px;">Concurrent #3 local</span></td>
+        <td>~500m · Saint-Isidore</td>
+        <td>Rayon hypermarché, volume, prix Leclerc, Guide Hachette</td>
+        <td>Horaires étendus (8h30-20h45), prix bas, flux client hypermarché captif</td>
+        <td>Zéro conseil humain, zéro vin nature, zéro relation client. Achat par défaut, pas par choix.</td>
+      </tr>
+      <tr>
+        <td><strong>Caprioglio, Berco, La Cave de Nice</strong></td>
+        <td>8-15 km · Centre Nice</td>
+        <td>Cavistes historiques centre Nice</td>
+        <td>Ancienneté, e-commerce, ateliers (Berco)</td>
+        <td>Hors zone de chalandise piéton — pertinents uniquement pour le SEO/GEO sur requêtes "Nice" génériques.</td>
+      </tr>
+      <tr style="background:#f0fdf4;">
+        <td><strong>Cave GlouGlou</strong></td>
+        <td>—</td>
+        <td>À construire explicitement</td>
+        <td>Sélection atypique vin nature/bio, Jérôme incarné, livraison hors horaires, ateliers</td>
+        <td>Invisible digitalement, offres non formalisées — corrigeable rapidement</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Espace blanc identifié</h3>
+  <div class="callout callout-accent">
+    <strong>Positionnement à affiner face à Aperitiv — le vrai concurrent stratégique.</strong> Aperitiv Canta Galet cible la même clientèle CSP+ des collines avec un concept premium fort (épicerie fine + cave + fromagerie). Ce n'est <em>pas</em> un espace vide. La différenciation de GlouGlou face à Aperitiv n'est pas sur le niveau de gamme mais sur la <strong>spécialisation vin nature/biodynamie</strong> (Aperitiv fait du large spectre, pas du militant), sur l'<strong>incarnation par Jérôme seul</strong> (vs concept lifestyle à 8 salariés), et sur la <strong>livraison hors horaires</strong> (impossible pour une structure multi-boutiques). Face à V and B et Leclerc, le terrain est libre. Face à Aperitiv, il faut un positionnement tranchant.
+  </div>
+
+  <div class="card">
+    <h4 style="text-transform:none;letter-spacing:0;font-size:0.9rem;margin-bottom:4px;">Canvas de positionnement — Saint-Isidore & Nice Ouest</h4>
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:var(--sp-4);">Axe X : généraliste/prix → spécialisé vin nature · Axe Y : impersonnel/franchise → incarné/expert</p>
+    <svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+      <!-- fond quadrants -->
+      <rect x="60" y="40" width="240" height="190" fill="#f8fafc" rx="4"/>
+      <rect x="300" y="40" width="280" height="190" fill="#faf9f6" rx="4"/>
+      <rect x="60" y="230" width="240" height="170" fill="#f8fafc" rx="4"/>
+      <rect x="300" y="230" width="280" height="170" fill="#f0fdf4" rx="4"/>
+      <!-- axes -->
+      <line x1="60" y1="400" x2="580" y2="400" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="60" y1="40" x2="60" y2="400" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="320" y1="40" x2="320" y2="400" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="60" y1="220" x2="580" y2="220" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+      <!-- labels axes -->
+      <text x="150" y="425" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b">← Généraliste / prix</text>
+      <text x="490" y="425" text-anchor="end" font-family="Inter" font-size="11" fill="#64748b">Spécialisé nature →</text>
+      <text x="18" y="330" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b" transform="rotate(-90 18 330)">← Impersonnel</text>
+      <text x="18" y="120" text-anchor="middle" font-family="Inter" font-size="11" fill="#64748b" transform="rotate(-90 18 120)">Incarné →</text>
+      <!-- label zones -->
+      <text x="180" y="58" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8" font-style="italic">Zone "conseil classique"</text>
+      <text x="440" y="58" text-anchor="middle" font-family="Inter" font-size="10" fill="#15803d" font-style="italic">Zone dominable par GlouGlou</text>
+      <!-- Ma Cave Leclerc -->
+      <circle cx="130" cy="340" r="26" fill="#0a2540" opacity="0.12"/>
+      <text x="130" y="333" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" fill="#0a2540">Ma Cave</text>
+      <text x="130" y="347" text-anchor="middle" font-family="Inter" font-size="9" fill="#64748b">E.Leclerc</text>
+      <text x="130" y="359" text-anchor="middle" font-family="Inter" font-size="8" fill="#94a3b8">rayon / prix</text>
+      <!-- V and B -->
+      <circle cx="210" cy="165" r="22" fill="#0ea5e9" opacity="0.2"/>
+      <text x="210" y="159" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" fill="#0369a1">V and B</text>
+      <text x="210" y="172" text-anchor="middle" font-family="Inter" font-size="9" fill="#64748b">franchise / bar</text>
+      <!-- Caprioglio (éloigné) -->
+      <circle cx="160" cy="290" r="18" fill="#94a3b8" opacity="0.3"/>
+      <text x="160" y="285" text-anchor="middle" font-family="Inter" font-size="9" fill="#64748b">Caprioglio</text>
+      <text x="160" y="296" text-anchor="middle" font-family="Inter" font-size="8" fill="#94a3b8">~12km</text>
+      <!-- Soiffard (online) -->
+      <circle cx="490" cy="320" r="14" fill="#7c3aed" opacity="0.15"/>
+      <text x="490" y="315" text-anchor="middle" font-family="Inter" font-size="9" font-weight="600" fill="#7c3aed">Soiffard</text>
+      <text x="490" y="327" text-anchor="middle" font-family="Inter" font-size="8" fill="#94a3b8">online seulement</text>
+      <!-- Aperitiv Canta Galet -->
+      <circle cx="310" cy="130" r="24" fill="#b45309" opacity="0.2" stroke="#b45309" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="310" y="124" text-anchor="middle" font-family="Inter" font-size="10" font-weight="600" fill="#b45309">Aperitiv</text>
+      <text x="310" y="137" text-anchor="middle" font-family="Inter" font-size="9" fill="#b45309">Canta Galet</text>
+      <text x="310" y="149" text-anchor="middle" font-family="Inter" font-size="8" fill="#94a3b8">épicerie fine / large spectre</text>
+      <!-- GLOUGLOU CIBLE -->
+      <circle cx="460" cy="110" r="30" fill="#15803d" opacity="0.15" stroke="#15803d" stroke-width="2.5"/>
+      <text x="460" y="103" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#15803d">GlouGlou</text>
+      <text x="460" y="120" text-anchor="middle" font-family="Inter" font-size="9" fill="#15803d" font-weight="600">SEUL SUR CE TERRAIN</text>
+    </svg>
+  </div>
+
+  <h3>Déclaration de positionnement (framework Dunford)</h3>
+  <div class="positioning-box">
+    <p class="p-label">Positioning Statement</p>
+    <p>Pour les <strong>amateurs de vin vivant dans les quartiers collines et périphérie de Nice Ouest</strong>, qui cherchent des bouteilles hors des sentiers battus — nature, bio, biodynamie — et veulent un conseil humain plutôt qu'un rayon de supermarché,<br><br>
+    <strong>Cave GlouGlou</strong> est le <strong>caviste de proximité spécialisé en références atypiques et vivantes</strong> qui offre ce qu'aucune grande cave généraliste ne peut donner : la sélection militante de Jérôme, testée, assumée, expliquée — en boutique, en atelier, ou livrée à domicile <em>en dehors des heures d'ouverture</em>, parce qu'un solopreneur passionné s'organise comme aucune cave avec salariés ne peut le faire.<br><br>
+    Contrairement à <strong>V and B (franchise bar/bière), Ma Cave E.Leclerc (rayon hypermarché) et Aperitiv Canta Galet (épicerie fine généraliste)</strong>, GlouGlou ne cherche pas à tout avoir pour tout le monde. Il a ce que les amateurs d'App Raisin cherchent et ne trouvent pas dans leur quartier : un expert qui a testé, choisi, et assume chaque bouteille.</p>
+  </div>
+
+  <h3>Tagline proposée & brand voice</h3>
+  <div class="card">
+    <table class="data-table">
+      <thead><tr><th>Élément</th><th>Définition</th><th>Exemple concret</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tagline principale</strong></td><td>"Les vins qui ont quelque chose à dire."</td><td>Sous le logo, en bio Instagram, en pied de carte de visite</td></tr>
+        <tr><td><strong>Tagline alternative</strong></td><td>"Votre caviste du bout de la colline."</td><td>Pour les communications de proximité / quartier</td></tr>
+        <tr><td><strong>Ton — Attribut 1</strong></td><td>Expert sans être pontifiant</td><td>❌ "Ce vin exprime une belle complexité aromatique aux notes de cerise noire" ✅ "C'est le rouge que tu ouvres quand t'as envie de rien expliquer"</td></tr>
+        <tr><td><strong>Ton — Attribut 2</strong></td><td>Militant sans être élitiste</td><td>❌ "Seuls les vrais connaisseurs apprécient le vin nature" ✅ "Le vin nature, c'est juste du vin fait sans tricher — le goût, c'est toi qui décides"</td></tr>
+        <tr><td><strong>Ton — Attribut 3</strong></td><td>Local et incarné</td><td>Jérôme parle en "je", mentionne les vignerons par prénom, raconte d'où vient chaque bouteille</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PERSONAS -->
+<section class="section" id="personas">
+  <span class="kicker">Bloc 02</span>
+  <h2>Personas & Jobs-To-Be-Done</h2>
+  <p class="lead">Deux personas prioritaires. Pas plus — sinon dispersion. Chaque décision de contenu et de canal se lit à travers ces deux profils.</p>
+
+  <div class="persona-grid">
+    <!-- PERSONA 1 -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-name">Sophie & Laurent</div>
+        <div class="persona-tag">Persona primaire · 80 % du CA</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <strong>Profil</strong>
+          <p>Couple 35-50 ans, habitant les quartiers collines (Saint-Isidore, Colomars, Gairaut, La Manda). CSP+, utilisateurs d'App Raisin ou similaire, suivent quelques comptes vin nature sur Instagram. Panier 30-60€.</p>
+        </div>
+        <div class="persona-row">
+          <strong>Job fonctionnel</strong>
+          <p>Trouver un bon vin pour le dîner du week-end ou un cadeau qui sort de l'ordinaire, sans passer 30 min sur internet.</p>
+        </div>
+        <div class="persona-row">
+          <strong>Job émotionnel</strong>
+          <p>Se sentir dans le vrai — acheter à quelqu'un qui connaît son sujet, pas à une chaîne.</p>
+        </div>
+        <div class="persona-row">
+          <strong>Job social</strong>
+          <p>Pouvoir raconter la bouteille à ses invités ("c'est un vigneron en biodynamie en Ardèche, Jérôme me l'a conseillé").</p>
+        </div>
+        <div class="persona-row">
+          <strong>Déclencheurs d'achat</strong>
+          <ul>
+            <li>Invitation ou dîner prévu ce week-end</li>
+            <li>Envie de cadeau original (anniversaire, pendaison)</li>
+            <li>Curiosité après avoir vu un post ou une story</li>
+            <li>Recommandation d'un voisin ou ami</li>
+          </ul>
+        </div>
+        <div class="persona-row">
+          <strong>Frictions</strong>
+          <ul>
+            <li>Ne sait pas si la cave est ouverte quand il passe</li>
+            <li>Ne sait pas ce qu'il va trouver ce jour-là</li>
+            <li>Pas de commande en ligne possible</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSONA 2 -->
+    <div class="persona-card">
+      <div class="persona-header" style="background:#1e4d2b;">
+        <div class="persona-name">Marc</div>
+        <div class="persona-tag">Persona secondaire · 20 % du CA, fort potentiel atelier</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <strong>Profil</strong>
+          <p>Homme 40-55 ans, passionné vin, utilise déjà Vivino ou App Raisin, suit des vignerons sur Instagram. Connaît bien le vin nature, cherche des pépites. Prêt à dépenser 50-100€ par visite.</p>
+        </div>
+        <div class="persona-row">
+          <strong>Job fonctionnel</strong>
+          <p>Découvrir des références introuvables ailleurs, creuser ses connaissances, trouver un caviste qui parle le même langage.</p>
+        </div>
+        <div class="persona-row">
+          <strong>Job émotionnel</strong>
+          <p>Sentir qu'il a une longueur d'avance, être dans la confidence des "bonnes adresses".</p>
+        </div>
+        <div class="persona-row">
+          <strong>Job social</strong>
+          <p>Organiser des dégustations à la maison, impressionner son entourage avec des bouteilles dont personne n'a entendu parler.</p>
+        </div>
+        <div class="persona-row">
+          <strong>Déclencheurs d'achat</strong>
+          <ul>
+            <li>Arrivée d'un nouveau producteur dans la cave</li>
+            <li>Annonce d'un atelier dégustation thématique</li>
+            <li>Publication d'une dégustation ou d'un accord mets/vin</li>
+          </ul>
+        </div>
+        <div class="persona-row">
+          <strong>Frictions</strong>
+          <ul>
+            <li>Ne sait pas quand les nouveaux arrivages tombent</li>
+            <li>Pas d'atelier formalisé à réserver</li>
+            <li>Pas de newsletter ou d'alerte "nouveauté"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-info">
+    <strong>Insight JTBD clé.</strong> Les deux personas ne veulent pas "du vin" — ils veulent éviter la déception et avoir une histoire à raconter. Le contenu de Jérôme doit répondre à cette logique : chaque bouteille mérite 3 phrases qui racontent pourquoi elle est là et ce qu'elle dit de son vigneron — pas une fiche technique.
+  </div>
+</section>
+
+<!-- CUSTOMER JOURNEY -->
+<section class="section" id="journey">
+  <span class="kicker">Bloc 03</span>
+  <h2>Customer journey</h2>
+  <p class="lead">5 étapes du parcours client — avec les frictions actuelles et les interventions à déployer.</p>
+
+  <div class="funnel-steps">
+    <div class="funnel-step">
+      <div class="funnel-step-label">1. Awareness</div>
+      <div class="funnel-step-content">
+        <h5>Découverte — "Je ne connaissais pas cette cave"</h5>
+        <p>Canal actuel : bouche-à-oreille, passage devant la boutique, rares citations LLM. <br><strong>Friction :</strong> zéro présence sur les requêtes catégorie ("vin nature Nice", "caviste collines Nice"). <br><strong>Action :</strong> SEO/GEO, posts Instagram géolocalisés, Google Business actif.</p>
+      </div>
+      <div class="funnel-step-rate">~70<span>visites/mois</span></div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-step-label">2. Consideration</div>
+      <div class="funnel-step-content">
+        <h5>Évaluation — "Est-ce que c'est pour moi ?"</h5>
+        <p>Canal actuel : site web + avis Google. <br><strong>Friction :</strong> site sans contenu citable, aucun CTA visible, aucun aperçu de la sélection. <br><strong>Action :</strong> réécriture site (pyramide inversée), page /notre-cave/ avec sélections nommées, FAQ.</p>
+      </div>
+      <div class="funnel-step-rate">~40%<span>qui restent sur site</span></div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-step-label">3. Decision</div>
+      <div class="funnel-step-content">
+        <h5>Passage à l'acte — "J'y vais / je commande"</h5>
+        <p>Canal actuel : déplacement physique uniquement. <br><strong>Friction :</strong> pas de coffret avec prix fixe, pas de réservation atelier, livraison existante mais non communiquée. <br><strong>Action :</strong> formaliser les 3 offres + CTA clairs (appel, itinéraire, formulaire coffret) + mention explicite "livraison hors horaires d'ouverture" — c'est un avantage concurrentiel, pas une contrainte.</p>
+      </div>
+      <div class="funnel-step-rate">~15%<span>en visiteurs physiques</span></div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-step-label">4. Fidélisation</div>
+      <div class="funnel-step-content">
+        <h5>Retour — "Je reviens et j'achète plus"</h5>
+        <p>Canal actuel : relation en boutique uniquement. <br><strong>Friction :</strong> aucune capture email, aucune newsletter, aucune alerte arrivages. <br><strong>Action :</strong> inscription newsletter en boutique + formulaire site, email mensuel "arrivages du mois".</p>
+      </div>
+      <div class="funnel-step-rate">?<span>non mesuré</span></div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-step-label">5. Referral</div>
+      <div class="funnel-step-content">
+        <h5>Recommandation — "J'en parle autour de moi"</h5>
+        <p>Canal actuel : déjà partiellement actif (avis Google, visites depuis ChatGPT). <br><strong>Friction :</strong> aucune mécanique de stimulation (demande d'avis post-achat, partage sur réseaux). <br><strong>Action :</strong> QR code en caisse → avis Google + follow Instagram, stories "partagez votre bouteille".</p>
+      </div>
+      <div class="funnel-step-rate">3<span>visites/sem. depuis LLM</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CANAUX -->
+<section class="section" id="canaux">
+  <span class="kicker">Bloc 04</span>
+  <h2>Mix d'acquisition multicanal</h2>
+  <p class="lead">Framework Bullseye appliqué. Concentration sur 3 canaux actifs — tout le reste est écarté avec justification.</p>
+
+  <h3>Canaux retenus (Core — à activer immédiatement)</h3>
+  <div class="channel-grid">
+    <div class="channel-card priority-1">
+      <h4>Google Business Profile</h4>
+      <div class="c-budget">0 €/mois</div>
+      <div class="c-kpi">KPI : +50 % de vues fiche · 20 appels/mois</div>
+      <ul>
+        <li>Posts hebdomadaires (arrivages, événements)</li>
+        <li>Réponse systématique aux avis sous 24h</li>
+        <li>Photos datées de la cave et des bouteilles</li>
+        <li>Horaires et services à jour (livraison hors horaires d'ouverture, ateliers)</li>
+      </ul>
+    </div>
+    <div class="channel-card priority-1">
+      <h4>Instagram + TikTok (organique)</h4>
+      <div class="c-budget">0 € + 2h/sem.</div>
+      <div class="c-kpi">KPI : +500 abonnés J+90 · 15 % engagement rate</div>
+      <ul>
+        <li>3 formats récurrents (voir Bloc 06)</li>
+        <li>Géolocalisation systématique Nice/Saint-Isidore</li>
+        <li>Reels courts IA-assistés (scripts Claude)</li>
+        <li>Stories quotidiennes informelles depuis la cave</li>
+      </ul>
+    </div>
+    <div class="channel-card priority-1">
+      <h4>SEO local + GEO/LLM</h4>
+      <div class="c-budget">0 € (DIY) ou 500 €</div>
+      <div class="c-kpi">KPI : top 3 "caviste Nice Ouest" · SOV LLM +30 %</div>
+      <ul>
+        <li>Correction robots.txt (priorité absolue)</li>
+        <li>Réécriture pages site (pyramide inversée)</li>
+        <li>Schema LocalBusiness + FAQPage</li>
+        <li>Référencement Soiffard.fr / Raisin.digital</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Canaux de second rang (Promising — à activer J+60)</h3>
+  <div class="channel-grid">
+    <div class="channel-card priority-2">
+      <h4>Newsletter email mensuelle</h4>
+      <div class="c-budget">0 € (Brevo gratuit)</div>
+      <div class="c-kpi">KPI : 150 abonnés J+90 · taux ouverture > 40 %</div>
+      <ul>
+        <li>Capture email en boutique (QR code + tablette)</li>
+        <li>Formulaire site + incentive (bon de 5 € à J+3)</li>
+        <li>1 email/mois : arrivages + histoire du mois + atelier</li>
+      </ul>
+    </div>
+    <div class="channel-card priority-2">
+      <h4>Partenariats locaux</h4>
+      <div class="c-budget">0 € (échange)</div>
+      <div class="c-kpi">KPI : 3 partenaires actifs · 20 visites attribuées</div>
+      <ul>
+        <li>Restaurants locaux (vin nature au verre, mention)</li>
+        <li>Épiceries fines / fromageries collines Nice</li>
+        <li>Guides locaux (Nice Matin, Urbanne, Visit Nice)</li>
+      </ul>
+    </div>
+    <div class="channel-card priority-2">
+      <h4>Ateliers dégustation</h4>
+      <div class="c-budget">Investissement 0 € (en boutique)</div>
+      <div class="c-kpi">KPI : 2 ateliers/mois · 10 participants · CA 300 €/atelier</div>
+      <ul>
+        <li>Format 1h30 · 5-8 personnes · 30-40 €/pers.</li>
+        <li>Réservation via formulaire site (Tally ou Typeform)</li>
+        <li>Promotion via Instagram + newsletter + GBP</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Canaux explicitement écartés (et pourquoi)</h3>
+  <table class="data-table">
+    <thead><tr><th>Canal</th><th>Pourquoi non</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Facebook Ads / Meta Ads</strong></td><td>Budget trop faible pour être compétitif sur CPM local. ROI incertain pour un commerce de proximité avec panier 35€. À réévaluer si budget > 500€/mois.</td></tr>
+      <tr><td><strong>LinkedIn</strong></td><td>Aucune pertinence pour un caviste BtoC de quartier. Ni les personas ni les partenaires locaux n'y sont actifs.</td></tr>
+      <tr><td><strong>YouTube</strong></td><td>Coût de production disproportionné pour la bande passante de Jérôme. TikTok et Reels couvrent le format vidéo court avec 10x moins d'effort.</td></tr>
+      <tr><td><strong>Google Ads (SEA)</strong></td><td>Inutile tant que le SEO local n'est pas activé. Le coût par clic sur "caviste Nice" est trop élevé pour un ROI positif avec un panier 35€.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CONTENU -->
+<section class="section" id="contenu">
+  <span class="kicker">Bloc 05</span>
+  <h2>Stratégie de contenu</h2>
+  <p class="lead">3 piliers maximum. Un système de production IA-assisté pour résoudre la douleur principale de Jérôme : créer du contenu sans y passer ses soirées.</p>
+
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-num">01</div>
+      <h4>La bouteille du moment</h4>
+      <p>Une référence, son vigneron, pourquoi elle est là. Format : photo bouteille + 5 lignes + hashtags vin nature Nice. Fréquence : 3x/semaine. Production : 8 min avec le prompt PACO (livrable 3/3).</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-num">02</div>
+      <h4>La vie de la cave</h4>
+      <p>Arrivages, rangement, clients, événements — le quotidien authentique. Format : Reels 15-30s ou Stories. Fréquence : 2x/semaine. Production : filmé en live, pas de montage élaboré.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-num">03</div>
+      <h4>Le savoir de Jérôme</h4>
+      <p>Accord mets/vin, démystification vin nature, question FAQ. Format : carousel 4-6 slides ou Reel face caméra. Fréquence : 1x/semaine. Production : script IA, tournage 10 min.</p>
+    </div>
+  </div>
+
+  <h3>Calendrier éditorial type — 1 semaine</h3>
+  <table class="data-table">
+    <thead><tr><th>Jour</th><th>Format</th><th>Pilier</th><th>Contenu exemple</th><th>Temps estimé</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lundi</strong></td><td>Post Instagram + TikTok</td><td>Pilier 01</td><td>"Ce rosé de Provence qui ne ressemble à aucun autre — [nom vigneron], vinifié sans sulfites"</td><td>8 min</td></tr>
+      <tr><td><strong>Mardi</strong></td><td>Story</td><td>Pilier 02</td><td>Unboxing d'un arrivage, 3 bouteilles montrées rapidement</td><td>3 min</td></tr>
+      <tr><td><strong>Jeudi</strong></td><td>Post Instagram + TikTok</td><td>Pilier 01</td><td>"Le blanc idéal pour le week-end — [nom bouteille], [région]"</td><td>8 min</td></tr>
+      <tr><td><strong>Vendredi</strong></td><td>Reel 20s</td><td>Pilier 02</td><td>"Ce que j'ai reçu cette semaine" — montré en 3 plans rapides</td><td>10 min</td></tr>
+      <tr><td><strong>Samedi</strong></td><td>Carousel ou Reel conseil</td><td>Pilier 03</td><td>"Vin nature : 3 idées reçues que je démonte" — script IA</td><td>15 min</td></tr>
+      <tr><td><strong>GBP</strong></td><td>Post Google Business</td><td>Pilier 01 ou 02</td><td>Même contenu recyclé du post lundi ou jeudi</td><td>2 min</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-success">
+    <strong>Règle des 2 minutes.</strong> Chaque post du Pilier 01 sera généré en moins de 8 minutes grâce aux prompts PACO livrés en Livrable 3/3. Jérôme remplit 4 champs (nom bouteille, région, cépage, 1 mot qui décrit le goût) — Claude produit le texte. Jérôme valide ou ajuste en 2 minutes. C'est le seul système de contenu qui tient sur la durée pour un solopreneur.
+  </div>
+
+  <h3>Modèle PESO appliqué</h3>
+  <table class="data-table">
+    <thead><tr><th>Type</th><th>Actions</th><th>Fréquence</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag tag-bleu">Owned</span></td><td>Site web, blog /actus, newsletter</td><td>Site : 1x/mois MAJ · Newsletter : 1x/mois · Blog : 1x/mois</td></tr>
+      <tr><td><span class="tag tag-vert">Shared</span></td><td>Instagram, TikTok, GBP</td><td>5-6 posts/semaine (système IA-assisté)</td></tr>
+      <tr><td><span class="tag tag-accent">Earned</span></td><td>Référencement Soiffard/Raisin, Nice Matin, avis Google</td><td>Campagne de référencement : 1x · Avis : sollicitation mensuelle</td></tr>
+      <tr><td><span class="tag tag-orange">Paid</span></td><td>Aucun à court terme</td><td>À réévaluer à J+90 si budget disponible</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FUNNEL -->
+<section class="section" id="funnel">
+  <span class="kicker">Bloc 06</span>
+  <h2>Funnel & stratégie commerciale</h2>
+  <p class="lead">3 offres à formaliser, 1 funnel à construire. Actuellement tout repose sur la vente en boutique — chaque formalisation d'offre crée un canal de revenus supplémentaire sans coût produit.</p>
+
+  <h3>Architecture des offres</h3>
+  <table class="data-table">
+    <thead><tr><th>Offre</th><th>Statut actuel</th><th>Formalisation requise</th><th>Prix cible</th><th>CA mensuel potentiel</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Bouteilles en boutique</strong></td>
+        <td><span class="tag tag-vert">Actif</span></td>
+        <td>Aucune — optimiser le trafic entrant</td>
+        <td>35 € moy.</td>
+        <td>Base existante</td>
+      </tr>
+      <tr>
+        <td><strong>Coffrets cadeaux</strong></td>
+        <td><span class="tag tag-orange">Informel</span></td>
+        <td>3 gammes avec prix fixes + page site + formulaire commande</td>
+        <td>35 € / 60 € / 100 €</td>
+        <td>+400 à 800 €/mois (8-10 coffrets)</td>
+      </tr>
+      <tr>
+        <td><strong>Ateliers dégustation</strong></td>
+        <td><span class="tag tag-orange">Informel</span></td>
+        <td>Calendrier fixe (1 par quinzaine) + page réservation + prix affiché</td>
+        <td>35 €/pers · 6-8 pers.</td>
+        <td>+400 à 560 €/mois (2 ateliers)</td>
+      </tr>
+      <tr>
+        <td><strong>Livraison à domicile</strong></td>
+        <td><span class="tag tag-orange">Informel</span></td>
+        <td>Conditions claires (zones, franco à partir de 80 €, créneaux hors horaires cave), mention site + GBP. <strong>Différenciateur clé à revendiquer explicitement</strong> : Jérôme livre en dehors des heures d'ouverture — souplesse impossible pour les caves avec salariés.</td>
+        <td>Incluse > 80 € / 5 € dessous</td>
+        <td>+200 à 400 €/mois (incrément)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Projection CA — scénario réaliste à J+90</h3>
+  <div class="card">
+    <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
+      <!-- axes -->
+      <line x1="60" y1="260" x2="560" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="30" x2="60" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <!-- ticks Y -->
+      <g font-family="Inter" font-size="10" fill="#64748b">
+        <text x="50" y="264" text-anchor="end">0</text>
+        <text x="50" y="197" text-anchor="end">500€</text>
+        <text x="50" y="130" text-anchor="end">1 000€</text>
+        <text x="50" y="63" text-anchor="end">1 500€</text>
+      </g>
+      <!-- grille -->
+      <line x1="60" y1="197" x2="560" y2="197" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="60" y1="130" x2="560" y2="130" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="60" y1="63" x2="560" y2="63" stroke="#f1f5f9" stroke-width="1"/>
+      <!-- bars — Bouteilles base -->
+      <rect x="90" y="130" width="50" height="130" fill="#0a2540"/>
+      <rect x="210" y="110" width="50" height="150" fill="#0a2540"/>
+      <rect x="330" y="90" width="50" height="170" fill="#0a2540"/>
+      <rect x="450" y="70" width="50" height="190" fill="#0a2540"/>
+      <!-- bars — Incréments offres -->
+      <rect x="140" y="197" width="30" height="63" fill="#d4a574" opacity="0.8"/>
+      <rect x="260" y="150" width="30" height="110" fill="#d4a574" opacity="0.8"/>
+      <rect x="380" y="100" width="30" height="163" fill="#d4a574" opacity="0.8"/>
+      <rect x="500" y="80" width="30" height="180" fill="#d4a574" opacity="0.8"/>
+      <!-- labels X -->
+      <g font-family="Inter" font-size="11" fill="#64748b" text-anchor="middle">
+        <text x="115" y="280">Mois 1</text>
+        <text x="235" y="280">Mois 2</text>
+        <text x="355" y="280">Mois 3</text>
+        <text x="475" y="280">Mois 4+</text>
+      </g>
+      <!-- valeurs -->
+      <g font-family="Inter" font-size="11" font-weight="600" fill="white" text-anchor="middle">
+        <text x="115" y="120">+300€</text>
+        <text x="235" y="100">+600€</text>
+        <text x="355" y="83">+1 000€</text>
+        <text x="475" y="63">+1 400€</text>
+      </g>
+      <!-- légende -->
+      <rect x="80" y="290" width="12" height="8" fill="#0a2540" rx="2"/>
+      <text x="96" y="297" font-family="Inter" font-size="10" fill="#64748b">Boutique (base)</text>
+      <rect x="200" y="290" width="12" height="8" fill="#d4a574" rx="2"/>
+      <text x="216" y="297" font-family="Inter" font-size="10" fill="#64748b">Incrément coffrets + ateliers + livraison</text>
+    </svg>
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-top:var(--sp-3);">Incrément mensuel estimé au-dessus du CA boutique existant. Hypothèses : 6 coffrets/mois (moy. 60 €), 1 atelier quinzaine (6 pers. × 35 €), 8 livraisons hors horaires (franco 80 €). Conservateur.</p>
+  </div>
+
+  <h3>Top 3 leviers de conversion immédiats</h3>
+  <ol style="margin-left:var(--sp-6);font-size:0.9rem;line-height:2;">
+    <li><strong>CTA "Appeler Jérôme" et "Itinéraire" visibles dans le hero</strong> — le plus simple, impact immédiat sur les visites mobiles.</li>
+    <li><strong>QR code en caisse → avis Google + follow Instagram</strong> — transforme chaque client satisfait en amplificateur, coût : 0€.</li>
+    <li><strong>Annonce d'un premier atelier sur Instagram + GBP</strong> — teste la demande, génère de l'engagement, crée un événement sur le profil.</li>
+  </ol>
+</section>
+
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+  <span class="kicker">Bloc 07</span>
+  <h2>Roadmap 90 jours & budget</h2>
+  <p class="lead">Séquencé en 3 phases. Tout est faisable par Jérôme seul ou avec l'aide de Vincent Ravera (dev WordPress) pour les points techniques.</p>
+
+  <!-- PHASE 1 -->
+  <div class="roadmap-phase">
+    <div class="roadmap-phase-header">
+      <h4>Phase 1 — Quick wins · J1 à J30</h4>
+      <span>Objectif : corriger le technique, rendre chaque visite actionnable</span>
+    </div>
+    <div class="roadmap-items">
+      <div class="roadmap-item">
+        <div class="roadmap-num">01</div>
+        <div>
+          <h5>Corriger robots.txt (Vincent Ravera)</h5>
+          <p>Autoriser GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot · Créer llms.txt</p>
+        </div>
+        <div class="roadmap-owner">Vincent / 1h</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">02</div>
+        <div>
+          <h5>Ajouter CTAs dans le hero du site</h5>
+          <p>"Appeler" + "Itinéraire" visibles above the fold · Corriger bannière cookies</p>
+        </div>
+        <div class="roadmap-owner">Vincent / 1h</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">03</div>
+        <div>
+          <h5>Réécrire la page d'accueil + /notre-cave/</h5>
+          <p>Pyramide inversée · Faits chiffrés (250+ réf., année création, spécialisation) · Texte citable par LLM</p>
+        </div>
+        <div class="roadmap-owner">Jérôme + IA / 2h</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">04</div>
+        <div>
+          <h5>Optimiser la fiche Google Business Profile</h5>
+          <p>Horaires à jour · Mention livraison + ateliers · 5 photos récentes · Réponse aux avis existants</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 1h</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">05</div>
+        <div>
+          <h5>Lancer les posts Instagram systématiques (3/semaine)</h5>
+          <p>Utiliser les prompts PACO du Livrable 3/3 · Géolocalisation · Hashtags vin nature Nice</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 8min/post</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">06</div>
+        <div>
+          <h5>QR code en caisse → avis Google + Instagram</h5>
+          <p>Générer le QR sur qr-code-generator.com · Imprimer et plastifier · 30 secondes de pitch client</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 30min</div>
+        <div class="roadmap-effort" style="color:var(--danger);">5 €</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="roadmap-phase">
+    <div class="roadmap-phase-header" style="background:#1e4d2b;">
+      <h4>Phase 2 — Setup pérenne · J31 à J60</h4>
+      <span>Objectif : formaliser les offres, installer le système de contenu</span>
+    </div>
+    <div class="roadmap-items">
+      <div class="roadmap-item">
+        <div class="roadmap-num">07</div>
+        <div>
+          <h5>Créer la page "À propos" incarnée</h5>
+          <p>Jérôme nommé · Photo · Parcours · Vision de la cave · Philosophie vin nature — signal E-E-A-T fort</p>
+        </div>
+        <div class="roadmap-owner">Jérôme + IA / 2h</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">08</div>
+        <div>
+          <h5>Formaliser les coffrets (3 gammes)</h5>
+          <p>Découverte 35€ · Plaisir 60€ · Prestige 100€ · Formulaire commande Tally (gratuit) · Page dédiée</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 3h</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">09</div>
+        <div>
+          <h5>Lancer le premier atelier dégustation</h5>
+          <p>Fixer la date · Créer la page réservation (Tally) · Annoncer sur Instagram + GBP · Max 8 personnes</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 4h total</div>
+        <div class="roadmap-effort" style="color:var(--warning);">35 €/pers.</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">10</div>
+        <div>
+          <h5>Installer Schema.org + FAQPage (Vincent)</h5>
+          <p>LocalBusiness + NAP · FAQPage 8 questions · Plugin Yoast SEO ou WP Schema Pro</p>
+        </div>
+        <div class="roadmap-owner">Vincent / 2h</div>
+        <div class="roadmap-effort" style="color:var(--warning);">0-50 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">11</div>
+        <div>
+          <h5>Lancer la newsletter mensuelle (Brevo)</h5>
+          <p>Compte Brevo gratuit · Formulaire d'inscription site + QR boutique · Template email simple</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 2h setup</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="roadmap-phase">
+    <div class="roadmap-phase-header" style="background:#0369a1;">
+      <h4>Phase 3 — Scale · J61 à J90</h4>
+      <span>Objectif : amplifier ce qui fonctionne, mesurer, ajuster</span>
+    </div>
+    <div class="roadmap-items">
+      <div class="roadmap-item">
+        <div class="roadmap-num">12</div>
+        <div>
+          <h5>Référencement Soiffard.fr + Raisin.digital</h5>
+          <p>Contacter les éditeurs pour listing "cavistes vin nature Nice" · Mail en 5 lignes suffit</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 30min</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">13</div>
+        <div>
+          <h5>Activer le blog /actus/ (1 article/mois)</h5>
+          <p>Thèmes : arrivage du mois, vigneron du mois, accord mets/vin · Dates visibles · Schema Article</p>
+        </div>
+        <div class="roadmap-owner">Jérôme + IA / 45min/article</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">14</div>
+        <div>
+          <h5>Mesurer et ajuster — bilan J+90</h5>
+          <p>Trafic site (GA4) · Vues GBP · Abonnés Instagram · CA coffrets + ateliers · Prompts LLM (8 requêtes test)</p>
+        </div>
+        <div class="roadmap-owner">Jérôme / 1h</div>
+        <div class="roadmap-effort" style="color:var(--danger);">0 €</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUDGET -->
+  <h3>Budget total 90 jours</h3>
+  <table class="data-table">
+    <thead><tr><th>Poste</th><th>Coût estimé</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Corrections techniques WordPress (Vincent Ravera · 4h)</td><td class="td-num">0-200 €</td><td>Selon tarif horaire Vincent — à négocier, souvent gratuit entre proches</td></tr>
+      <tr><td>Plugin Schema WP (WP Schema Pro)</td><td class="td-num">0-50 €</td><td>Plugin Yoast gratuit suffit pour le schema de base</td></tr>
+      <tr><td>QR codes imprimés</td><td class="td-num">5 €</td><td>Impression locale</td></tr>
+      <tr><td>Brevo (newsletter, 0-500 contacts)</td><td class="td-num">0 €</td><td>Plan gratuit suffisant pour démarrer</td></tr>
+      <tr><td>Tally (formulaires coffrets + ateliers)</td><td class="td-num">0 €</td><td>Plan gratuit illimité</td></tr>
+      <tr><td>Outils IA (Claude pour les scripts)</td><td class="td-num">20 €/mois</td><td>Abonnement Claude Pro ou inclus dans l'usage existant</td></tr>
+    </tbody>
+  </table>
+  <div class="budget-total">
+    <span>Budget total 90 jours (hors CA ateliers)</span>
+    <strong>25 à 270 €</strong>
+  </div>
+
+  <!-- NORTH STAR + KPIs -->
+  <h3>North Star Metric & KPIs</h3>
+  <div class="callout callout-accent">
+    <strong>North Star Metric — Visites clients physiques en boutique (traçables via GBP "Itinéraires demandés").</strong> C'est la seule métrique qui relie directement tous les efforts digitaux à la caisse. Une visite GBP "itinéraire" = intention de visite très qualifiée.
+  </div>
+  <table class="data-table">
+    <thead><tr><th>KPI</th><th>Baseline estimée</th><th>Objectif J+90</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Vues fiche Google Business Profile / mois</td><td>~200</td><td>500</td><td>GBP Insights</td></tr>
+      <tr><td>Trafic site web / mois</td><td>~70</td><td>250</td><td>Google Analytics 4</td></tr>
+      <tr><td>Abonnés Instagram</td><td>~X actuel</td><td>+500</td><td>Instagram Insights</td></tr>
+      <tr><td>Share of voice LLM (8 prompts)</td><td>~12 %</td><td>35 %</td><td>Test manuel mensuel</td></tr>
+      <tr><td>CA incrémental mensuel (coffrets + ateliers)</td><td>0 €</td><td>700 €</td><td>Caisse + Tally</td></tr>
+      <tr><td>Abonnés newsletter</td><td>0</td><td>100</td><td>Brevo Dashboard</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Cave GlouGlou · Stratégie Marketing & Communication · Juin 2026</span>
+  <span>Michaël Lopez · MasterPrompt · Livrable 1/3</span>
+</div>
+
+</div>
+</body>
+</html>

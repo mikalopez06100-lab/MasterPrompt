@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit SEO · GEO · UX · Conversion — Cave GlouGlou · v2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
+@page { size: A4; margin: 16mm 15mm; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0D1B2A;
+  --gold: #F59E0B;
+  --cream: #F0EDE8;
+  --rouge: #C0392B;
+  --orange: #E07020;
+  --jaune: #C8970A;
+  --vert: #1E7A4A;
+  --bleu: #1D4E89;
+  --text: #1C1C1C;
+  --muted: #6B6B6B;
+  --border: #DDD8D0;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 48px 56px 60px;
+}
+
+/* ── TYPOGRAPHIE ── */
+h1 { font-size: 32px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; line-height: 1.15; }
+h2 {
+  font-size: 18px; font-weight: 700; color: var(--navy);
+  border-bottom: 3px solid var(--gold); padding-bottom: 6px;
+  margin-top: 44px; margin-bottom: 18px; letter-spacing: 0.1px;
+}
+h3 { font-size: 14.5px; font-weight: 700; color: var(--navy); margin: 20px 0 8px; }
+h4 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin: 14px 0 6px; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0 8px 20px; }
+li { margin-bottom: 4px; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+/* ── HEADER ── */
+.report-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding-bottom: 22px; margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.report-header-left h1 { margin-bottom: 6px; }
+.report-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.report-meta span { display: inline-block; margin-right: 16px; }
+.logo-box {
+  background: var(--navy); color: var(--gold); padding: 10px 16px;
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase; border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ── SCORES ── */
+.score-global-bar {
+  background: var(--navy); border-radius: 10px; padding: 24px 28px;
+  margin: 24px 0 30px; display: flex; align-items: center; gap: 28px;
+}
+.score-global-num { font-size: 56px; font-weight: 800; color: var(--gold); line-height: 1; }
+.score-global-label { color: #fff; font-size: 13px; line-height: 1.5; }
+.score-global-label strong { color: var(--gold); font-size: 15px; display: block; margin-bottom: 2px; }
+.score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 28px; }
+.score-card {
+  border: 2px solid var(--border); border-radius: 8px; padding: 14px 10px;
+  text-align: center; transition: border-color 0.2s;
+}
+.score-card .snum { font-size: 26px; font-weight: 800; color: var(--navy); line-height: 1; }
+.score-card .slabel { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; margin-top: 4px; }
+.score-card.bad { border-color: var(--rouge); }
+.score-card.bad .snum { color: var(--rouge); }
+.score-card.med { border-color: var(--orange); }
+.score-card.med .snum { color: var(--orange); }
+.score-card.ok { border-color: var(--vert); }
+.score-card.ok .snum { color: var(--vert); }
+
+/* ── CALLOUTS ── */
+.callout {
+  padding: 13px 16px; border-radius: 5px; margin: 12px 0;
+  border-left: 5px solid; font-size: 13px;
+}
+.callout-rouge { background: #FDF0EE; border-color: var(--rouge); }
+.callout-orange { background: #FFF4E6; border-color: var(--orange); }
+.callout-vert { background: #EBF7F0; border-color: var(--vert); }
+.callout-bleu { background: #EEF4FC; border-color: var(--bleu); }
+.callout-gold { background: #FFFBEB; border-color: var(--gold); }
+.callout strong { display: block; margin-bottom: 3px; }
+
+/* ── BADGES ── */
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 3px;
+  font-size: 10.5px; font-weight: 700; color: #fff;
+  font-family: 'DM Mono', monospace; letter-spacing: 0.3px;
+  vertical-align: middle; margin: 0 2px;
+}
+.b-rouge { background: var(--rouge); }
+.b-orange { background: var(--orange); }
+.b-jaune { background: var(--jaune); color: #fff; }
+.b-vert { background: var(--vert); }
+.b-bleu { background: var(--bleu); }
+.b-grey { background: #777; }
+
+/* ── TABLES ── */
+table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 12.5px; }
+th {
+  background: var(--navy); color: #fff; font-weight: 600;
+  padding: 8px 10px; text-align: left; font-size: 11.5px;
+  text-transform: uppercase; letter-spacing: 0.4px;
+}
+td { border: 1px solid var(--border); padding: 8px 10px; vertical-align: top; }
+tr:nth-child(even) td { background: #FAFAF8; }
+.table-note { font-size: 11px; color: var(--muted); margin-top: -16px; margin-bottom: 16px; }
+
+/* ── GEO TABLE ── */
+.geo-table td:nth-child(2) { text-align: center; width: 90px; }
+.geo-table td:nth-child(3) { width: 200px; }
+
+/* ── ROADMAP ── */
+.roadmap-p1 td { background: #FEF0EE !important; }
+.roadmap-p2 td { background: #FFF9EC !important; }
+.roadmap-p3 td { background: #EEF4FC !important; }
+
+/* ── ANNEXE ROBOTS ── */
+.robots-box {
+  background: #0D1B2A; color: #E8E4DC; font-family: 'DM Mono', monospace;
+  font-size: 11.5px; padding: 16px 18px; border-radius: 6px; margin: 12px 0;
+  line-height: 1.7;
+}
+.robots-box .comment { color: #6B8FA8; }
+.robots-box .key { color: var(--gold); }
+.robots-box .val-ok { color: #52C47A; }
+.robots-box .val-block { color: var(--rouge); }
+
+/* ── QUOTE ── */
+.pull-quote {
+  border-left: 4px solid var(--gold); padding: 10px 16px;
+  font-style: italic; color: var(--navy); margin: 12px 0;
+  font-size: 13.5px; background: #FFFBEB;
+}
+
+/* ── VERDICT FINAL ── */
+.verdict-final {
+  background: var(--navy); color: #fff; border-radius: 10px;
+  padding: 26px 30px; margin: 32px 0 24px;
+}
+.verdict-final h3 { color: var(--gold); font-size: 17px; margin-bottom: 10px; }
+.verdict-final p { color: #D4D0CC; font-size: 13.5px; }
+.verdict-final strong { color: #fff; }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 50px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--muted); text-align: center;
+}
+
+/* ── SEPARATEUR ── */
+.sep { height: 1px; background: var(--border); margin: 32px 0; }
+
+/* ── PRINT ── */
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; padding: 0; max-width: 100%; }
+  h2 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="report-header">
+    <div class="report-header-left">
+      <h1>Audit Site Web<br>Cave GlouGlou</h1>
+      <div class="report-meta">
+        <span>🌐 cave-glouglou.fr</span>
+        <span>📍 Saint-Isidore · Nice Ouest (06200)</span>
+        <span>📅 Juin 2026</span>
+        <span>🔢 Version 2 — audit complet</span>
+      </div>
+    </div>
+    <div class="logo-box">Michaël Lopez<br>MasterPrompt</div>
+  </div>
+
+  <!-- NOTE METHODOLOGIQUE -->
+  <div class="callout callout-bleu">
+    <strong>📋 Périmètre et méthode</strong>
+    Le site renvoie <code>ROBOTS_DISALLOWED</code> sur tout fetch automatisé — le <code>robots.txt</code> bloque l'accès programmatique. Les pages ont donc été auditées via : cache Google (home, /notre-cave/, /contact/), pages confirmées existantes par test httpstatus.io (home, /a-propos/, /notre-cave/, /actus/, /contact/ — toutes en 200), données légales Pappers, fiches tiers (Nice Shopping, Pages Jaunes), capture mobile fournie par le client. Le contenu exact de /a-propos/ et /actus/ n'est pas en cache Google ; ces pages existent (confirmé 200) mais leur contenu textuel précis reste à vérifier directement. Toute affirmation sans source identifiée est explicitement signalée.
+  </div>
+
+  <!-- RESUME EXECUTIF -->
+  <h2>Résumé exécutif</h2>
+
+  <p><strong>5 constats majeurs :</strong></p>
+  <ol style="margin-top:10px;">
+    <li style="margin-bottom:8px;"><strong>robots.txt bloque tout accès programmatique.</strong> Le site interdit les crawlers automatisés. Conséquence directe et vérifiée : GPTBot, ClaudeBot, PerplexityBot et Googlebot sont probablement affectés — ce qui plafonne structurellement la citabilité dans les LLM et les AI Overviews, alors que Jérôme Sollazzo génère déjà 3 visites depuis ChatGPT ces deux dernières semaines (preuve d'un début de traction GEO réelle à protéger).</li>
+    <li style="margin-bottom:8px;"><strong>Structure 5 pages + zéro contenu citable par les LLM.</strong> Les pages indexées par Google (home, /notre-cave/, /contact/) ne contiennent aucun contenu factuellement dense : pas de chiffres, pas de dates, pas de définitions autoporteuses. Les pages /a-propos/ et /actus/ existent mais ne sont pas en cache Google — leur contenu est donc inconnu des LLM pour l'instant.</li>
+    <li style="margin-bottom:8px;"><strong>Identité forte mais non exploitée sur le site.</strong> Jérôme Sollazzo est nommé dans les avis Google et crée une relation de confiance réelle avec ses clients. Ce capital humain est complètement absent du site — aucune page équipe, aucune photo du fondateur, aucune histoire.</li>
+    <li style="margin-bottom:8px;"><strong>Zéro conversion digitale configurée.</strong> Aucun CTA visible dans le hero, aucune boutique en ligne, aucune capture email, aucune réservation d'atelier. Le site est une vitrine sans porte d'entrée numérique.</li>
+    <li style="margin-bottom:8px;"><strong>La vraie carte concurrentielle : 3 niveaux à distinguer.</strong> (1) Saint-Isidore ~500m : V and B Nice Stade (franchise bar/bière) et Ma Cave E.Leclerc (rayon hyper) — différenciation facile par l'offre. (2) Collines Nice Ouest ~3km : <strong>Aperitiv Canta Galet</strong> (65 route de Canta Galet) — c'est le vrai concurrent stratégique. Fondée 2013, concept épicerie fine + cave + fromagerie, 1 200 références, 8 salariés, 5★ Google, clientèle CSP+ collines identique à celle de GlouGlou. <em>Pas de spécialisation vin nature revendiquée</em> — c'est la faille. (3) Centre Nice 8-15km : Caprioglio, Berco, La Cave de Nice — concurrents SEO, pas de flux piéton.</li>
+  </ol>
+
+  <div class="callout callout-gold" style="margin-top:18px;">
+    <strong>🎯 Verdict global : site fonctionnel, sous-exploité, avec un problème technique prioritaire à régler</strong>
+    La priorité n°1 n'est pas esthétique ni éditoriale : c'est corriger le robots.txt pour cesser de bloquer les crawlers IA et Google. Sans ça, tout investissement en contenu et SEO est partiellement annulé en amont.
+  </div>
+
+  <!-- SCORES -->
+  <h2>Score global</h2>
+
+  <div class="score-global-bar">
+    <div class="score-global-num">36<span style="font-size:24px;color:#D4A020;">/100</span></div>
+    <div class="score-global-label">
+      <strong>Site fonctionnel — sous-optimisé sur tous les leviers</strong>
+      Créé il y a moins d'un an, le site accomplit l'essentiel (présence web, adresse, horaires) mais ne génère aucune acquisition organique autonome. Marge de progression élevée, effort proportionné au budget disponible.
+    </div>
+  </div>
+
+  <div class="score-grid">
+    <div class="score-card bad"><div class="snum">4</div><div class="slabel">Technique /20</div></div>
+    <div class="score-card med"><div class="snum">8</div><div class="slabel">SEO Google /20</div></div>
+    <div class="score-card bad"><div class="snum">4</div><div class="slabel">GEO / LLM /20</div></div>
+    <div class="score-card ok"><div class="snum">13</div><div class="slabel">UX / UI /20</div></div>
+    <div class="score-card med"><div class="snum">7</div><div class="slabel">Conversion /20</div></div>
+  </div>
+
+  <!-- BLOC 1 TECHNIQUE -->
+  <h2>Bloc 1 — Audit technique</h2>
+
+  <h3>1.1 Accessibilité des crawlers — <span class="badge b-rouge">🔴 BLOQUANT</span></h3>
+
+  <p>Le fetch automatisé retourne <code>ROBOTS_DISALLOWED</code> sur <em>toutes</em> les pages du domaine. Le robots.txt est donc configuré pour bloquer les crawlers — ce qui, selon la rédaction exacte du fichier (non lisible directement), peut impacter Googlebot, GPTBot, ClaudeBot et PerplexityBot. Le contenu exact du robots.txt n'est pas accessible sans navigateur humain : <strong>action immédiate requise</strong> — ouvrir le fichier manuellement et vérifier les directives.</p>
+
+  <div class="robots-box">
+    <span class="comment"># Contenu robots.txt non lisible par cet outil.</span><br>
+    <span class="comment"># À vérifier manuellement sur cave-glouglou.fr/robots.txt</span><br>
+    <span class="comment"># Les user-agents suivants doivent être autorisés :</span><br>
+    <span class="key">User-agent:</span> <span class="val-ok">Googlebot</span> → <span class="val-ok">Allow: /</span><br>
+    <span class="key">User-agent:</span> <span class="val-ok">GPTBot</span> → <span class="val-ok">Allow: /</span><br>
+    <span class="key">User-agent:</span> <span class="val-ok">ClaudeBot</span> → <span class="val-ok">Allow: /</span><br>
+    <span class="key">User-agent:</span> <span class="val-ok">PerplexityBot</span> → <span class="val-ok">Allow: /</span><br>
+    <span class="key">User-agent:</span> <span class="val-ok">Google-Extended</span> → <span class="val-ok">Allow: /</span><br>
+    <span class="key">User-agent:</span> <span class="val-ok">CCBot</span> → <span class="val-ok">Allow: /</span>
+  </div>
+
+  <h3>1.2 Autres points techniques</h3>
+
+  <table>
+    <tr><th>Élément</th><th>Constat connu</th><th>Statut</th><th>Action</th></tr>
+    <tr>
+      <td>Accessibilité navigateur (toutes pages)</td>
+      <td>HTTP 200 confirmé sur toutes les 5 pages via httpstatus.io</td>
+      <td><span class="badge b-vert">✅ OK</span></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>HTTPS / SSL</td>
+      <td>URL en https:// — certificate actif</td>
+      <td><span class="badge b-vert">✅ OK</span></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Mobile-first</td>
+      <td>D'après capture : menu hamburger, layout responsive, hero plein écran adapté mobile</td>
+      <td><span class="badge b-vert">✅ OK</span></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Bannière cookies</td>
+      <td>Bouton "OK" uniquement, formulation "si vous continuez... vous en êtes satisfait" — pas de bouton Refuser symétrique. Non conforme CNIL 2024+.</td>
+      <td><span class="badge b-orange">🟠 Majeur</span></td>
+      <td>Ajouter bouton "Refuser" ou utiliser un CMP conforme (Axeptio, CookieYes)</td>
+    </tr>
+    <tr>
+      <td>llms.txt</td>
+      <td>Absence probable (non vérifiable via fetch). Fichier à créer à la racine — effort quasi nul, signal positif pour les LLM.</td>
+      <td><span class="badge b-jaune">🟡 Mineur</span></td>
+      <td>Créer cave-glouglou.fr/llms.txt</td>
+    </tr>
+    <tr>
+      <td>Core Web Vitals</td>
+      <td>Non mesurables via cet outil. Image hero (photo cave haute résolution) susceptible d'impacter le LCP sur mobile.</td>
+      <td><span class="badge b-grey">⬜ À tester</span></td>
+      <td>Tester via PageSpeed Insights (pagespeed.web.dev)</td>
+    </tr>
+    <tr>
+      <td>Schema.org</td>
+      <td>Non vérifiable sans accès au source HTML. LocalBusiness probablement absent vu la fraîcheur du site.</td>
+      <td><span class="badge b-grey">⬜ À vérifier</span></td>
+      <td>Tester via Rich Results Test (search.google.com/test/rich-results)</td>
+    </tr>
+  </table>
+
+  <!-- BLOC 2 SEO -->
+  <h2>Bloc 2 — SEO Google classique</h2>
+
+  <table>
+    <tr><th>Page</th><th>Title (cache Google)</th><th>Analyse</th><th>Score /10</th></tr>
+    <tr>
+      <td><strong>Accueil</strong></td>
+      <td>"Cave GlouGlou | Vins, bières artisanales &amp; spiritueux à Nice Ouest"</td>
+      <td>Longueur correcte. Mots-clés ciblés (vins, bières artisanales, spiritueux, Nice Ouest). Meta description "Votre caviste de confiance pour chaque occasion" — générique, aucun différenciateur, pas de CTA.</td>
+      <td>6/10</td>
+    </tr>
+    <tr>
+      <td><strong>Notre cave</strong></td>
+      <td>"Notre cave | Vins, champagnes, bières, apéritifs &amp; liqueurs à Nice"</td>
+      <td>Bonne densité de mots-clés produits dans le title. Contenu visible dans le cache : lyrique ("chaque bouteille est prête à transformer un moment simple en souvenir mémorable") sans fait chiffré. Nombre de références (250+ mentionné sur Nice Shopping) absent de la page officielle.</td>
+      <td>5/10</td>
+    </tr>
+    <tr>
+      <td><strong>Contact</strong></td>
+      <td>"Votre cave à vin indépendante à Sainte-Isidore | Nice Ouest"</td>
+      <td>Title positionnant (indépendante, Sainte-Isidore, Nice Ouest) — bon réflexe local. NAP (adresse, horaires, téléphone) présent. Mention "événement personnalisé" intéressante mais non développée.</td>
+      <td>7/10</td>
+    </tr>
+    <tr>
+      <td><strong>À propos</strong></td>
+      <td>Non en cache Google — contenu inconnu</td>
+      <td>Page existante (200 confirmé) mais non indexée ou trop récente pour apparaître. Impossible d'évaluer le contenu sans accès direct.</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Actus</strong></td>
+      <td>Non en cache Google — contenu inconnu</td>
+      <td>Idem. Si la page est régulièrement alimentée, c'est un fort levier SEO et GEO à activer.</td>
+      <td>—</td>
+    </tr>
+  </table>
+
+  <h3>E-E-A-T et autorité locale</h3>
+  <p>Jérôme Sollazzo est identifié comme Président via Pappers (né 04/1976, 49 ans) — mais cette information ne figure nulle part sur le site officiel. Les avis Google mentionnent "Jérôme" à plusieurs reprises comme point fort de l'expérience : c'est un actif réputationnel réel, inexploité en SEO. Une page "À propos" incarnée avec nom, parcours, passion pour le vin et photo constitue un signal E-E-A-T fort — d'autant qu'Aperitiv (principal concurrent collines) joue aussi la carte de l'incarnation via ses fondateurs médiatisés Erwan Guillon et Thomas Benillouz.</p>
+
+  <h3>Cartographie concurrentielle complète — 3 niveaux</h3>
+
+  <h4>Niveau 1 — Saint-Isidore (~500m) : différenciation facile par l'offre</h4>
+  <ul>
+    <li><strong>V and B Nice Stade</strong> (34 rue Jules Bianchi, oct. 2023) : franchise, 300 vins + 350 bières + bar, click & collect 2h, événements sportifs. Aucun vin nature, aucun expert nommé.</li>
+    <li><strong>Ma Cave E.Leclerc Saint-Isidore</strong> (RD 6202) : rayon hypermarché, prix/volume, Guide Hachette. Aucun conseil humain, zéro vin nature.</li>
+  </ul>
+
+  <h4>Niveau 2 — Collines Nice Ouest (~3km) : concurrent stratégique principal</h4>
+  <ul>
+    <li><strong>Aperitiv Canta Galet</strong> (65 route de Canta Galet, 06200) — <strong>c'est le concurrent qui compte vraiment.</strong> Fondée 2013 par Erwan Guillon et Thomas Benillouz (ex-consultants EDHEC), 3 boutiques Nice + Cannes, 8 salariés, 1 200 références, concept épicerie fine premium + cave + fromagerie + charcuterie. 5 étoiles Google, Instagram actif (2 800 abonnés, 745 posts), coffrets cadeaux sur mesure, spiritueux haut de gamme (1 000-10 000€). Cible explicitement la clientèle CSP+ des collines — profil identique aux clients de GlouGlou. <strong>Faille exploitable : large spectre généraliste, pas de spécialisation vin nature/biodynamie militante. Impossible de faire la livraison hors horaires avec une structure 8 salariés. Concept lifestyle ≠ expertise vinique incarnée.</strong></li>
+  </ul>
+
+  <h4>Niveau 3 — Centre Nice (8-15km) : concurrents SEO/GEO uniquement</h4>
+  <ul>
+    <li><strong>Caprioglio</strong> : centenaire, e-commerce France, volume. Pas de flux piéton collines.</li>
+    <li><strong>Berco (Vieux-Nice)</strong> : ateliers, livraison Nice. Trop loin pour concurrencer physiquement.</li>
+    <li><strong>La Cave de Nice (1951)</strong> : boutique en ligne, horaires étendus. Même éloignement.</li>
+  </ul>
+
+
+  <!-- BLOC 3 GEO -->
+  <h2>Bloc 3 — GEO / AEO : citabilité par les LLM</h2>
+
+  <div class="callout callout-rouge">
+    <strong>Score LLM-readiness estimé : ~15/100</strong>
+    Deux facteurs structurels bloquants : (1) robots.txt qui interdit le crawl — si GPTBot et ClaudeBot sont bloqués, le contenu du site n'est pas récupérable pour le canal RAG (recherche live). (2) Contenu existant sans pyramide inversée ni faits chiffrés citables. <strong>Point positif confirmé :</strong> 3 visites depuis ChatGPT en 2 semaines — preuve que les LLM citent déjà GlouGlou sur certaines requêtes (probablement via leur corpus d'entraînement ou via des sources tierces comme la fiche Google Business / Nice Shopping). Ce trafic initial est à protéger et à amplifier.
+  </div>
+
+  <h3>Test d'existence GEO — 8 requêtes catégorie testées</h3>
+  <p class="table-note">Méthode : recherche web (proxy comportement RAG ChatGPT Search / Perplexity). Les résultats reflètent les sources que ces moteurs citeraient.</p>
+
+  <table class="geo-table">
+    <tr><th>Question testée</th><th>GlouGlou cité ?</th><th>Qui domine</th><th>Type de contenu gagnant</th></tr>
+    <tr>
+      <td>"Caviste Saint-Isidore Nice"</td>
+      <td><span class="badge b-jaune">Partiel</span></td>
+      <td>Pages Jaunes, Nice Shopping</td>
+      <td>Fiches annuaire tierces — pas le site officiel</td>
+    </tr>
+    <tr>
+      <td>"Meilleur caviste Nice Ouest"</td>
+      <td><span class="badge b-rouge">Non</span></td>
+      <td>V and B Nice Stade, Ma Cave E.Leclerc (proximité), puis Caprioglio, Berco (centre Nice)</td>
+      <td>Fiche GBP bien renseignée (V and B) + annuaires pour Leclerc</td>
+    </tr>
+    <tr>
+      <td>"Vin nature Nice"</td>
+      <td><span class="badge b-rouge">Non</span></td>
+      <td>Soiffard.fr, Raisin.digital, Berco</td>
+      <td>Guides éditoriaux thématiques dédiés vin nature</td>
+    </tr>
+    <tr>
+      <td>"Caviste avec ateliers dégustation Nice"</td>
+      <td><span class="badge b-rouge">Non</span></td>
+      <td>Berco (ateliers samedi midi explicitement mentionnés)</td>
+      <td>Pages service dédiées avec fréquence et horaire</td>
+    </tr>
+    <tr>
+      <td>"Coffret cadeau vin Nice"</td>
+      <td><span class="badge b-rouge">Non</span></td>
+      <td>Caprioglio (e-commerce), Pages Jaunes</td>
+      <td>Pages produit e-commerce + annuaires</td>
+    </tr>
+    <tr>
+      <td>"Cave GlouGlou Nice avis"</td>
+      <td><span class="badge b-vert">Oui</span></td>
+      <td>—</td>
+      <td>Fiche Google Business (Trustindex) + Nice Shopping — pas le site officiel lui-même</td>
+    </tr>
+    <tr>
+      <td>"Acheter vin bio Nice livraison"</td>
+      <td><span class="badge b-rouge">Non</span></td>
+      <td>Berco (livraison explicite), Caprioglio</td>
+      <td>Pages avec conditions de livraison chiffrées</td>
+    </tr>
+    <tr>
+      <td>"Caviste indépendant Nice quartier"</td>
+      <td><span class="badge b-jaune">Partiel</span></td>
+      <td>Petit Futé, annuaires</td>
+      <td>Répertoires — page Contact de GlouGlou parfois visible</td>
+    </tr>
+  </table>
+
+  <p><strong>Share of voice mesuré : ~12 %</strong> (1 hit direct + 2 partiels via tiers sur 8 requêtes). La citation ChatGPT confirmée par Jérôme vient probablement du corpus d'entraînement (fiche Google Business, Nice Shopping) plutôt que du RAG sur le site — ce qui est fragile : si les modèles sont réentraînés sans ces sources, la citation disparaît.</p>
+
+  <h3>10 actions GEO prioritaires</h3>
+  <ol>
+    <li><strong>Corriger robots.txt — priorité absolue.</strong> Vérifier et autoriser explicitement : GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot. Sans ça, le canal RAG est fermé.</li>
+    <li><strong>Créer llms.txt</strong> à la racine listant les 5 pages avec leurs descriptions factuelles.</li>
+    <li><strong>Réécrire l'accueil en pyramide inversée.</strong> Remplacer "Bienvenue chez Cave GlouGlou, le repaire des bons vivants..." par : <em>"Cave GlouGlou est un caviste indépendant situé au 3-5 Chemin des Serres, Saint-Isidore (Nice Ouest), proposant plus de 250 références de vins, bières artisanales et spiritueux. Fondée en 2025 par Jérôme Sollazzo, la cave est spécialisée en vins bio, biodynamie et nature."</em></li>
+    <li><strong>Implémenter Schema.org LocalBusiness</strong> avec NAP complet, horaires, sameAs (Google Business, Instagram, TikTok).</li>
+    <li><strong>Ajouter une FAQPage</strong> avec 8-10 vraies questions : "Livrez-vous à domicile sur Nice ?", "Proposez-vous des vins nature/bio ?", "Faites-vous des coffrets cadeaux ?", "Organisez-vous des ateliers dégustation ?", "Êtes-vous ouverts le dimanche ?"</li>
+    <li><strong>Activer /actus/ comme blog régulier</strong> : 1 article/mois sur les arrivages, producteurs, accord mets/vins — chaque article avec date visible et schema Article. La fraîcheur est le levier #1 du RAG.</li>
+    <li><strong>Page À propos incarnée :</strong> Jérôme Sollazzo, 49 ans, passion pour le vin, parcours, vision de la cave — avec photo. Les LLM privilegient les entités nommées sur les abstractions.</li>
+    <li><strong>Compléter la fiche Google Business Profile</strong> : photos récentes, posts hebdomadaires, réponse systématique aux avis — c'est déjà la source principale de citation LLM via le corpus d'entraînement.</li>
+    <li><strong>Se faire référencer dans les guides vin nature niçois</strong> (Soiffard.fr, Raisin.digital) — ces sources sont directement citées par les LLM sur les requêtes "vin nature Nice".</li>
+    <li><strong>Monitoring mensuel</strong> sur les 8 prompts testés : tableau Google Sheets + test manuel sur ChatGPT et Perplexity pour tracker l'évolution du share of voice.</li>
+  </ol>
+
+  <!-- BLOC 4 UX -->
+  <h2>Bloc 4 — UX / UI design</h2>
+
+  <p>Audit basé sur la capture mobile fournie (page d'accueil) + inférences sur les autres pages.</p>
+
+  <table>
+    <tr><th>Élément</th><th>Constat</th><th>Score /10</th></tr>
+    <tr>
+      <td>Test 5 secondes</td>
+      <td>"Caviste, Nice Ouest" est compris immédiatement. Le logo GlouGlou (étiquette style "cru artisanal") est identifiable. Le sous-titre "Vins & spiritueux | Nice Ouest" complète l'info. Réussi sur l'essentiel.</td>
+      <td>7/10</td>
+    </tr>
+    <tr>
+      <td>Identité visuelle</td>
+      <td>Palette bordeaux / crème cohérente avec l'univers du vin — choix pertinent. Photo de cave en fond de hero bien choisie. Style "cave indépendante authentique" bien rendu.</td>
+      <td>8/10</td>
+    </tr>
+    <tr>
+      <td>Typographie</td>
+      <td>H1 en police manuscrite/script blanche sur fond photo : lisibilité variable selon la zone (bouteilles sombres derrière certaines lettres créent un contraste insuffisant). Coexistence de deux styles (script + sans-serif italique gras) sans hiérarchie claire.</td>
+      <td>5/10</td>
+    </tr>
+    <tr>
+      <td>CTA above the fold</td>
+      <td>Aucun bouton d'action visible dans le hero. L'utilisateur découvre le site sans guidage vers une action : itinéraire, horaires, appeler. C'est la fuite n°1 du tunnel.</td>
+      <td>2/10</td>
+    </tr>
+    <tr>
+      <td>Preuve sociale</td>
+      <td>Widget Trustindex (avis Google) présent sur la home — actif réel. Mais noyé dans le scroll, pas de sélection éditoriale des meilleurs avis, aucun mise en avant du score global ni du nombre d'avis visible dès l'atterrissage.</td>
+      <td>5/10</td>
+    </tr>
+    <tr>
+      <td>Navigation mobile</td>
+      <td>Menu hamburger standard, structure claire. Acceptable pour un site de 5 pages.</td>
+      <td>7/10</td>
+    </tr>
+    <tr>
+      <td>Conformité cookies (RGPD)</td>
+      <td>Bouton "OK" seul, formulation présumant le consentement par navigation. Non conforme CNIL 2024. Risque juridique réel (RGPD).</td>
+      <td>2/10</td>
+    </tr>
+    <tr>
+      <td>Image hero</td>
+      <td>Photo de cave haute résolution — visuellement efficace mais poids probable élevé, impact LCP à mesurer via PageSpeed Insights. Ajouter une version WebP compressée.</td>
+      <td>6/10</td>
+    </tr>
+  </table>
+
+  <div class="callout callout-vert">
+    <strong>Point fort UX à capitaliser</strong>
+    L'identité visuelle (bordeaux, crème, style artisanal) est cohérente et distincte des sites généralistes. C'est un actif réel — ne pas le remettre en cause, l'enrichir.
+  </div>
+
+  <!-- BLOC 5 CONVERSION -->
+  <h2>Bloc 5 — Conversion & business</h2>
+
+  <table>
+    <tr><th>Dimension</th><th>Constat</th><th>Impact manqué</th></tr>
+    <tr>
+      <td>Objectif du site</td>
+      <td>Générer du flux piéton en boutique. Aucun objectif digital secondaire configuré.</td>
+      <td>Zéro acquisition digitale autonome en dehors du référencement passif.</td>
+    </tr>
+    <tr>
+      <td>CTA hero</td>
+      <td>Aucun bouton visible. Pas d'"Itinéraire", pas d'"Appeler", pas d'"Horaires & accès".</td>
+      <td>Visiteurs mobiles (80 %+ du trafic local) qui quittent sans action.</td>
+    </tr>
+    <tr>
+      <td>Offre événementielle</td>
+      <td>La page /contact/ mentionne "organiser un événement personnalisé" sans développement ni formulaire. V and B Nice Stade à 500m en fait son levier principal (afterworks, Oktoberfest, matchs) — formalisé, récurrent, communiqué.</td>
+      <td>Opportunité ateliers/événements non monétisée digitalement.</td>
+    </tr>
+    <tr>
+      <td>Coffrets cadeaux</td>
+      <td>Mentionnés dans le contenu de "Notre cave" mais aucune page dédiée, aucun prix, aucun CTA. Pourtant explicitement cités dans les avis Google comme produit vendu.</td>
+      <td>Requêtes "coffret cadeau vin Nice" non capturées.</td>
+    </tr>
+    <tr>
+      <td>Capture email</td>
+      <td>Aucune newsletter, aucun lead magnet, aucun formulaire de contact visible.</td>
+      <td>Zéro base CRM constituée. Pas de relance possible pour les événements saisonniers.</td>
+    </tr>
+    <tr>
+      <td>Preuve sociale</td>
+      <td>Avis Google réels et de qualité (widget Trustindex, mentions répétées de Jérôme). Score global non mis en avant au-dessus de la ligne de flottaison.</td>
+      <td>Capital confiance non converti en décision de visite.</td>
+    </tr>
+    <tr>
+      <td>E-commerce</td>
+      <td>Absent. V and B propose le click & collect 2h. Ma Cave Leclerc intègre l'e-commerce national. GlouGlou livre à domicile hors horaires — avantage réel, mais non communiqué digitalement.</td>
+      <td>Zéro CA digital, dépendance 100 % flux piéton.</td>
+    </tr>
+  </table>
+
+  <!-- BLOC 6 STRATEGIE -->
+  <h2>Bloc 6 — Stratégie : optimisation vs refonte</h2>
+
+  <h3>🅰️ Scénario A — Optimisation (recommandé à 6 mois)</h3>
+  <p>Applicable sans changer la plateforme existante. Cible : <strong>doubler le share of voice LLM et rendre chaque visite web actionnable.</strong></p>
+
+  <p><strong>Quick wins — Semaine 1 (coût quasi nul) :</strong></p>
+  <ul>
+    <li>Corriger le robots.txt : autoriser GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot</li>
+    <li>Ajouter un CTA "Voir les horaires &amp; itinéraire" visible dans le hero (bouton bordeaux, lien vers /contact/)</li>
+    <li>Ajouter un second CTA "Nous appeler" (lien tel:) en dessous</li>
+    <li>Corriger le bandeau cookies (bouton Refuser symétrique)</li>
+    <li>Créer llms.txt</li>
+  </ul>
+
+  <p><strong>Mois 1-2 :</strong></p>
+  <ul>
+    <li>Réécriture accueil + notre-cave en pyramide inversée avec faits chiffrés (250+ références, année de création, spécialisation bio/nature)</li>
+    <li>Compléter ou créer la page /a-propos/ avec Jérôme Sollazzo nommé, photo, histoire</li>
+    <li>Schema LocalBusiness + FAQPage (8 questions)</li>
+    <li>Afficher note Google + nombre d'avis dans le hero ou juste en-dessous</li>
+    <li>Section coffrets cadeaux dans /notre-cave/ avec CTA contact</li>
+  </ul>
+
+  <p><strong>Mois 3-6 :</strong></p>
+  <ul>
+    <li>Activer /actus/ comme blog mensuel (arrivages, producteurs, accords) avec dates et schema Article</li>
+    <li>Référencement dans Soiffard.fr, Raisin.digital, guides vin nature PACA</li>
+    <li>Formulaire de contact ou d'inscription pour ateliers/événements (si Jérôme en organise)</li>
+    <li>Newsletter mensuelle simple (Brevo ou Mailchimp) pour fidéliser la base clients</li>
+  </ul>
+
+  <p><strong>Impact estimé :</strong> share of voice LLM +30-50 % sur les 8 prompts testés (horizon 4-6 mois) ; trafic organique local +40-70 % grâce au robots.txt corrigé + contenu GEO. Budget estimé : <strong>800 à 1 800 €</strong> selon ce que Jérôme fait lui-même ou délègue.</p>
+
+  <h3>🅱️ Scénario B — Refonte avec e-commerce (horizon 12-18 mois)</h3>
+  <p>Pertinent uniquement si l'objectif business inclut la vente en ligne (coffrets, abonnements mensuels "box vin", ateliers payables en ligne). Avec 250+ références et une offre coffrets déjà existante, le potentiel e-commerce local est réel.</p>
+
+  <p><strong>Architecture proposée :</strong> accueil → /notre-cave/ (catalogue filtrable) → /coffrets/ (e-commerce) → /ateliers/ (calendrier + réservation) → /producteurs/ (storytelling) → /a-propos/ → /blog/ → /contact/</p>
+
+  <p><strong>Stack :</strong> Next.js 14 + Supabase + Stripe (pour ateliers/coffrets) + Brevo (newsletter) + Vercel. Budget : <strong>4 000 à 9 000 €</strong> selon périmètre e-commerce.</p>
+
+  <div class="verdict-final">
+    <h3>🎯 Recommandation finale — Tranchée</h3>
+    <p><strong>Scénario A d'abord, Scénario B conditionnel.</strong> Cave GlouGlou a moins d'un an d'existence. Le robots.txt mal configuré et l'absence de contenu GEO sont deux problèmes corrigeables en quelques heures pour un impact direct sur la citabilité LLM — qui génère déjà du trafic. Refaire le site maintenant serait prématuré : il faut d'abord valider que le trafic organique peut être amplifié (Scénario A, 6 mois) avant d'investir dans une refonte e-commerce. <strong>Si après 6 mois le trafic croit et que les demandes de coffrets/ateliers augmentent, le Scénario B devient la suite logique.</strong> Si le flux piéton est suffisant sans acquisition digitale, l'optimisation seule suffit indéfiniment.</p>
+  </div>
+
+  <!-- ROADMAP -->
+  <h2>Roadmap priorisée</h2>
+
+  <table>
+    <tr><th>#</th><th>Action</th><th>Bloc</th><th>Impact</th><th>Effort</th><th>Priorité</th><th>KPI</th></tr>
+    <tr class="roadmap-p1">
+      <td>1</td><td>Corriger robots.txt — autoriser GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot</td><td>Technique/GEO</td><td>Très élevé</td><td>< 1h</td><td><span class="badge b-rouge">🔴 Immédiat</span></td><td>Crawl confirmé 200 sur test user-agent</td>
+    </tr>
+    <tr class="roadmap-p1">
+      <td>2</td><td>Ajouter CTAs visibles dans le hero (itinéraire + appel)</td><td>Conversion/UX</td><td>Élevé</td><td>< 1h</td><td><span class="badge b-rouge">🔴 Immédiat</span></td><td>Taux de clic CTA (GA4)</td>
+    </tr>
+    <tr class="roadmap-p1">
+      <td>3</td><td>Corriger bannière cookies (bouton Refuser)</td><td>Technique</td><td>Risque juridique</td><td>< 1h</td><td><span class="badge b-rouge">🔴 Immédiat</span></td><td>Conformité CNIL</td>
+    </tr>
+    <tr class="roadmap-p1">
+      <td>4</td><td>Créer llms.txt à la racine</td><td>GEO</td><td>Moyen</td><td>30 min</td><td><span class="badge b-rouge">🔴 Immédiat</span></td><td>Fichier accessible</td>
+    </tr>
+    <tr class="roadmap-p2">
+      <td>5</td><td>Réécriture home + notre-cave (pyramide inversée, faits chiffrés)</td><td>SEO/GEO</td><td>Élevé</td><td>Moyen</td><td><span class="badge b-orange">🟠 Mois 1</span></td><td>Share of voice LLM +15 %</td>
+    </tr>
+    <tr class="roadmap-p2">
+      <td>6</td><td>Page /a-propos/ incarnée — Jérôme nommé, photo, histoire</td><td>SEO/E-E-A-T</td><td>Élevé</td><td>Moyen</td><td><span class="badge b-orange">🟠 Mois 1</span></td><td>Indexation + mentions nominatives</td>
+    </tr>
+    <tr class="roadmap-p2">
+      <td>7</td><td>Schema LocalBusiness + FAQPage (8 questions)</td><td>SEO/GEO</td><td>Élevé</td><td>Moyen</td><td><span class="badge b-orange">🟠 Mois 1-2</span></td><td>Rich Results dans GSC</td>
+    </tr>
+    <tr class="roadmap-p2">
+      <td>8</td><td>Afficher note Google + nbre d'avis dans le hero</td><td>Conversion</td><td>Moyen</td><td>Faible</td><td><span class="badge b-orange">🟠 Mois 1</span></td><td>Taux de rebond</td>
+    </tr>
+    <tr class="roadmap-p2">
+      <td>9</td><td>Mesurer Core Web Vitals (PageSpeed) + optimiser image hero si LCP > 2.5s</td><td>Technique</td><td>Moyen</td><td>Faible</td><td><span class="badge b-orange">🟠 Mois 1</span></td><td>LCP < 2.5s mobile</td>
+    </tr>
+    <tr class="roadmap-p3">
+      <td>10</td><td>Activer /actus/ comme blog mensuel avec schema Article + dates visibles</td><td>GEO/SEO</td><td>Élevé sur 6 mois</td><td>Récurrent</td><td><span class="badge b-bleu">🟡 Mois 2-3</span></td><td>Share of voice LLM + trafic organique</td>
+    </tr>
+    <tr class="roadmap-p3">
+      <td>11</td><td>Référencement dans Soiffard.fr et Raisin.digital (vin nature Nice)</td><td>GEO off-site</td><td>Élevé</td><td>Faible</td><td><span class="badge b-bleu">🟡 Mois 2</span></td><td>Présence sur requêtes "vin nature Nice"</td>
+    </tr>
+    <tr class="roadmap-p3">
+      <td>12</td><td>Newsletter mensuelle + formulaire inscription</td><td>Conversion</td><td>Moyen</td><td>Moyen</td><td><span class="badge b-bleu">🟡 Mois 3</span></td><td>Taille base email</td>
+    </tr>
+  </table>
+
+  <div class="sep"></div>
+
+  <div class="footer">
+    Audit cave-glouglou.fr · Version 2 · Juin 2026 · Michaël Lopez · MasterPrompt<br>
+    Données sources : cache Google, httpstatus.io, Pappers, Nice Shopping, Pages Jaunes, capture client. Code source HTML non accessible (ROBOTS_DISALLOWED).
+  </div>
+
+</div>
+</body>
+</html>

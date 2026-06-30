@@ -277,6 +277,49 @@ export const proposals: ProposalConfig[] = [
     ],
   },
   {
+    slug: "glouglou",
+    clientName: "Cave GlouGlou",
+    title: "Pack IA complet (espace privé)",
+    subtitle:
+      "3 livrables HTML hébergés sur votre domaine : audit SEO · GEO · UX · Conversion, plan IA & automatisations, et stratégie marketing.",
+    ogShareSubline: "Cave GlouGlou — audit, IA & stratégie marketing (dossier confidentiel)",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Les trois documents sont accessibles sur cette même page ; le bouton ouvre le plein écran.",
+        deliverables: [
+          {
+            title: "Audit SEO · GEO · UX · Conversion",
+            description:
+              "Audit complet de cave-glouglou.fr : SEO, GEO, UX, conversion et performance.",
+            url: "/proposals/glouglou/audit-v2-cave-glouglou.html",
+            ctaLabel: "Ouvrir l'audit",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Plan IA & automatisations",
+            description: "Scénarios et architecture d'automatisation Pack IA (HTML autonome).",
+            url: "/proposals/glouglou/automations-glouglou.html",
+            ctaLabel: "Ouvrir l'automatisation",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Stratégie marketing",
+            description: "Plan marketing & communication (HTML autonome).",
+            url: "/proposals/glouglou/strategie-marketing-glouglou.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Un seul lien client : les trois livrables s'affichent ci-dessous.",
+      "Ce lien est réservé aux personnes autorisées.",
+    ],
+  },
+  {
     slug: "dgimmo",
     clientName: "DGIMMO",
     title: "Audit stratégique (espace privé)",

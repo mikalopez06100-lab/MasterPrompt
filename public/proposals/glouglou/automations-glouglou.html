@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan IA & Automations — Cave GlouGlou</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg-page: #fafafa;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-primary: #0a2540;
+  --text-body: #1a202c;
+  --text-muted: #64748b;
+  --accent: #d4a574;
+  --accent-dark: #a67c4f;
+  --accent-soft: #faf3e8;
+  --success: #15803d;
+  --success-soft: #f0fdf4;
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+  --danger: #b91c1c;
+  --danger-soft: #fef2f2;
+  --info: #0369a1;
+  --info-soft: #f0f9ff;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.container { max-width: 920px; margin: 0 auto; padding: 48px 48px 80px; }
+
+/* COVER */
+.cover { background: var(--text-primary); color: #fff; padding: 64px 56px 56px; }
+.cover-kicker { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+.cover h1 { font-size: 2.6rem; font-weight: 700; line-height: 1.1; color: #fff; margin-bottom: 1rem; }
+.cover-sub { font-size: 1rem; color: #94a3b8; margin-bottom: 2rem; line-height: 1.5; }
+.cover-meta { display: flex; gap: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; flex-wrap: wrap; }
+.cover-meta-item strong { display: block; color: var(--accent); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+.cover-meta-item span { font-size: 0.8rem; color: #cbd5e1; }
+
+/* TYPOGRAPHY */
+h2 { font-size: 1.6rem; font-weight: 600; color: var(--text-primary); line-height: 1.2; margin-bottom: 0.75rem; }
+h3 { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin: 1.75rem 0 0.75rem; }
+h4 { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 1.25rem 0 0.5rem; }
+p { margin: 0.5rem 0; }
+ul, ol { margin: 0.5rem 0 0.5rem 1.25rem; }
+li { margin-bottom: 0.25rem; }
+
+/* SECTION */
+.section { margin-bottom: 4rem; padding-top: 3rem; border-top: 2px solid var(--text-primary); }
+.kicker { display: inline-block; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 0.35rem; }
+.lead { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+/* CALLOUTS */
+.callout { padding: 0.85rem 1rem; border-left: 4px solid; border-radius: 0 var(--radius) var(--radius) 0; margin: 1rem 0; font-size: 0.875rem; }
+.callout strong { display: block; margin-bottom: 0.2rem; font-weight: 600; }
+.c-warning { background: var(--warning-soft); border-color: var(--warning); }
+.c-success { background: var(--success-soft); border-color: var(--success); }
+.c-danger { background: var(--danger-soft); border-color: var(--danger); }
+.c-accent { background: var(--accent-soft); border-color: var(--accent); }
+.c-info { background: var(--info-soft); border-color: var(--info); }
+
+/* TAGS */
+.tag { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: 0.68rem; font-weight: 600; font-family: var(--font-mono); }
+.t-vert { background: var(--success-soft); color: var(--success); }
+.t-orange { background: var(--warning-soft); color: var(--warning); }
+.t-rouge { background: var(--danger-soft); color: var(--danger); }
+.t-bleu { background: var(--info-soft); color: var(--info); }
+.t-accent { background: var(--accent-soft); color: var(--accent-dark); }
+.t-grey { background: #f1f5f9; color: #475569; }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0 1.5rem; }
+th { text-align: left; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.68rem; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--text-primary); }
+td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+.td-r { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+.td-center { text-align: center; }
+
+/* KPIs */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin: 1.5rem 0; }
+.kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+.kpi-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 0.35rem; }
+.kpi-value { font-size: 2rem; font-weight: 700; color: var(--text-primary); display: block; line-height: 1; }
+.kpi-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; display: block; }
+
+/* SCORE GLOBAL */
+.score-bar { background: var(--text-primary); border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin: 1.5rem 0; display: flex; align-items: center; gap: 2rem; }
+.score-num { font-size: 3.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.score-label { color: #94a3b8; font-size: 0.85rem; line-height: 1.5; }
+.score-label strong { color: #fff; display: block; font-size: 1rem; margin-bottom: 0.25rem; }
+
+/* RADAR IA-READINESS */
+.readiness-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin: 1.25rem 0; }
+.readiness-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
+.readiness-card .r-num { font-size: 1.6rem; font-weight: 700; color: var(--text-primary); }
+.readiness-card .r-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
+.readiness-card .r-bar { height: 4px; border-radius: 2px; margin-top: 0.5rem; background: var(--border); overflow: hidden; }
+.readiness-card .r-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+
+/* PROCESS MATRIX */
+.process-row-high td { background: #f0fdf4 !important; }
+.process-row-med td { background: #fffbeb !important; }
+.process-row-low td { background: #f8fafc !important; }
+
+/* AUTOMATION CARDS */
+.auto-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2.5rem; }
+.auto-header { background: var(--text-primary); color: #fff; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; }
+.auto-header h3 { color: #fff; font-size: 1.05rem; margin: 0; }
+.auto-header .auto-type { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+.auto-roi-pill { background: rgba(255,255,255,0.12); border-radius: 6px; padding: 0.5rem 0.75rem; text-align: right; white-space: nowrap; }
+.auto-roi-pill .roi-val { font-size: 1.4rem; font-weight: 700; color: var(--accent); display: block; line-height: 1; }
+.auto-roi-pill .roi-label { font-size: 0.65rem; color: #94a3b8; }
+.auto-body { padding: 1.5rem; }
+.auto-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin: 1.25rem 0; }
+.auto-metric { background: var(--bg-subtle); border-radius: var(--radius); padding: 0.75rem; }
+.auto-metric .m-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+.auto-metric .m-val { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-top: 2px; }
+
+/* WORKFLOW STEPS */
+.workflow { display: flex; flex-direction: column; gap: 0; margin: 1.25rem 0; }
+.wf-step { display: grid; grid-template-columns: 28px 1fr auto; gap: 0.75rem; align-items: start; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+.wf-step:last-child { border-bottom: none; }
+.wf-num { width: 24px; height: 24px; border-radius: 50%; background: var(--text-primary); color: #fff; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.wf-step h5 { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.wf-step p { font-size: 0.8rem; color: var(--text-muted); }
+.wf-tool { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-dark); background: var(--accent-soft); padding: 2px 6px; border-radius: 3px; white-space: nowrap; margin-top: 2px; }
+
+/* ROADMAP */
+.roadmap-phase { margin-bottom: 1.5rem; }
+.roadmap-phase-hdr { background: var(--text-primary); color: #fff; padding: 0.6rem 1rem; border-radius: var(--radius) var(--radius) 0 0; display: flex; justify-content: space-between; }
+.roadmap-phase-hdr h4 { color: #fff; text-transform: none; letter-spacing: 0; margin: 0; font-size: 0.875rem; }
+.roadmap-phase-hdr span { font-size: 0.72rem; color: var(--accent); }
+.roadmap-items { border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); }
+.roadmap-item { display: grid; grid-template-columns: 28px 1fr auto auto; gap: 0.75rem; align-items: center; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+.roadmap-item:last-child { border-bottom: none; }
+.rn { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); }
+.roadmap-item h5 { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1px; }
+.roadmap-item p { font-size: 0.75rem; color: var(--text-muted); }
+.r-owner { font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; }
+.r-effort { font-size: 0.72rem; font-weight: 600; white-space: nowrap; }
+
+/* STACK */
+.stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.25rem 0; }
+.stack-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+.stack-card h4 { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.stack-tool { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); }
+.stack-why { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+.stack-cost { font-size: 0.75rem; color: var(--warning); font-weight: 600; margin-top: 4px; }
+
+/* ROI CHART */
+.roi-summary { background: var(--text-primary); border-radius: var(--radius); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+.roi-summary span { font-size: 0.82rem; color: #94a3b8; }
+.roi-summary strong { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+
+/* FOOTER */
+.footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between; }
+
+/* PRINT */
+@page { size: A4; margin: 16mm 14mm; }
+@media print {
+  body { background: #fff; font-size: 0.82rem; }
+  .container { max-width: 680px; padding: 20px; }
+  .cover { padding: 36px; }
+  .auto-card, table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="container" style="padding-top:0;padding-bottom:0;">
+    <p class="cover-kicker">Pack IA · Livrable 2/3</p>
+    <h1>Plan IA & Automations</h1>
+    <p class="cover-sub">Cartographie des processus, audit IA-readiness, top 3 automatisations chiffrées<br>et feuille de route 90 jours — Cave GlouGlou</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><strong>Client</strong><span>Cave GlouGlou · Jérôme Sollazzo</span></div>
+      <div class="cover-meta-item"><strong>Secteur</strong><span>Caviste indépendant · Saint-Isidore, Nice</span></div>
+      <div class="cover-meta-item"><strong>Stack actuelle</strong><span>WordPress + Instagram + TikTok</span></div>
+      <div class="cover-meta-item"><strong>Date</strong><span>Juin 2026</span></div>
+      <div class="cover-meta-item"><strong>Consultant</strong><span>Michaël Lopez · MasterPrompt</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- CONTEXTE EXTRAIT DES LIVRABLES PRÉCÉDENTS -->
+<div class="callout c-info" style="margin-top:2rem;">
+  <strong>Mode : chaîné complet — inputs issus des Livrables 1/3 et Audit v2</strong>
+  Douleur principale déclarée : "créer du contenu pour les réseaux" (temps). Trafic site : ~70 visites/mois. Panier moyen : 35 €. 3 offres informelles à formaliser (coffrets, ateliers, livraison hors horaires). Stack : WordPress, Instagram, TikTok. Zéro CRM, zéro capture email. Jérôme seul = calibrage strict sur 1 personne sans DevOps.
+</div>
+
+<!-- EXEC SUMMARY -->
+<section class="section">
+  <span class="kicker">Résumé exécutif</span>
+  <h2>3 automatisations, 1 seule priorité réelle</h2>
+  <p class="lead">Jérôme passe aujourd'hui l'essentiel de son temps hors boutique à improviser du contenu sur les réseaux. L'IA règle ce problème en 8 minutes par post. Le reste — newsletter, réservation ateliers, commande coffrets — est de l'automation classique sans IA, à coût quasi nul.</p>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <span class="kpi-label">Heures gagnées/mois</span>
+      <span class="kpi-value">~12h</span>
+      <span class="kpi-sub">sur contenu + admin si les 3 automations sont en place</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Coût récurrent mensuel</span>
+      <span class="kpi-value">20€</span>
+      <span class="kpi-sub">Claude Pro uniquement — tout le reste est gratuit</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">CA incrémental potentiel</span>
+      <span class="kpi-value">+700€</span>
+      <span class="kpi-sub">/mois si coffrets + ateliers formalisés (cf. Livrable 1)</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi-label">Score IA-readiness</span>
+      <span class="kpi-value">54</span>
+      <span class="kpi-sub">/100 · Quick wins immédiatement accessibles</span>
+    </div>
+  </div>
+
+  <div class="callout c-warning">
+    <strong>Avertissement de calibrage — solopreneur.</strong> Ce plan est calibré pour 1 personne seule, sans compétence DevOps, sans budget outil. Aucune recommandation de stack complexe (n8n self-hosted, Supabase, agents autonomes). Si une automatisation demande plus de 2h de setup à Jérôme sans aide technique, elle ne rentre pas dans ce plan. Chaque euro et chaque heure comptent.
+  </div>
+</section>
+
+<!-- IA READINESS -->
+<section class="section">
+  <span class="kicker">Bloc 01</span>
+  <h2>Audit IA-readiness</h2>
+  <p class="lead">Score sur 5 axes avant tout déploiement. Il détermine ce qu'on peut faire maintenant vs ce qu'il faut préparer d'abord.</p>
+
+  <div class="score-bar">
+    <div class="score-num">54<span style="font-size:1.5rem;color:#6b7280;">/100</span></div>
+    <div class="score-label">
+      <strong>Prêt aux quick wins — automation classique + IA générative sur cas simples</strong>
+      Jérôme est ouvert à l'IA (il utilise déjà ChatGPT), mais zéro infrastructure data, zéro CRM, zéro email capturé. Le prérequis n°1 est la mise en place d'outils de base (formulaires, newsletter) avant d'envisager des workflows complexes.
+    </div>
+  </div>
+
+  <div class="readiness-grid">
+    <div class="readiness-card">
+      <div class="r-num">8<span style="font-size:1rem;color:var(--text-muted);">/25</span></div>
+      <div class="r-label">Data readiness</div>
+      <div class="r-bar"><div class="r-fill" style="width:32%;"></div></div>
+      <p style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;">Pas de CRM, pas de base email, pas d'historique transactionnel structuré. Toute la data est dans la tête de Jérôme.</p>
+    </div>
+    <div class="readiness-card">
+      <div class="r-num">10<span style="font-size:1rem;color:var(--text-muted);">/20</span></div>
+      <div class="r-label">Stack maturity</div>
+      <div class="r-bar"><div class="r-fill" style="width:50%;"></div></div>
+      <p style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;">WordPress administrable, Instagram + TikTok actifs. Pas d'outil de gestion, pas d'API connectée.</p>
+    </div>
+    <div class="readiness-card">
+      <div class="r-num">14<span style="font-size:1rem;color:var(--text-muted);">/20</span></div>
+      <div class="r-label">Équipe & compétences</div>
+      <div class="r-bar"><div class="r-fill" style="width:70%;"></div></div>
+      <p style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;">Jérôme utilise ChatGPT, est ouvert au no-code. Pas de compétence technique avancée — suffit pour les outils recommandés.</p>
+    </div>
+    <div class="readiness-card">
+      <div class="r-num">16<span style="font-size:1rem;color:var(--text-muted);">/20</span></div>
+      <div class="r-label">Culture & adoption</div>
+      <div class="r-bar"><div class="r-fill" style="width:80%;"></div></div>
+      <p style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;">Forte appétence IA déclarée. Douleur réelle identifiée (contenu). Motivation de départ solide.</p>
+    </div>
+    <div class="readiness-card">
+      <div class="r-num">6<span style="font-size:1rem;color:var(--text-muted);">/15</span></div>
+      <div class="r-label">Budget & ROI</div>
+      <div class="r-bar"><div class="r-fill" style="width:40%;"></div></div>
+      <p style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;">Budget très contraint. ROI doit être visible en moins de 30 jours pour maintenir la motivation. Horizon payback court obligatoire.</p>
+    </div>
+  </div>
+
+  <h3>3 prérequis à lever avant tout déploiement complexe</h3>
+  <table>
+    <thead><tr><th>#</th><th>Prérequis</th><th>Pourquoi bloquant</th><th>Action</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Base email inexistante</strong></td>
+        <td>Impossible de faire du nurturing ou des alertes arrivages sans liste de contacts</td>
+        <td>Ouvrir compte Brevo gratuit + formulaire Tally sur le site + QR boutique</td>
+        <td>2h setup</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Formulaires commande/réservation absents</strong></td>
+        <td>Coffrets et ateliers ne peuvent pas être commandés sans friction (appel/SMS)</td>
+        <td>Créer 2 formulaires Tally (coffret + atelier) intégrés sur WordPress</td>
+        <td>1h setup</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Pas de compte Google Analytics 4</strong></td>
+        <td>Impossible de mesurer le trafic et l'attribution (dont les 3 visites ChatGPT)</td>
+        <td>Installer GA4 via plugin WordPress (Site Kit by Google — gratuit, 10 min)</td>
+        <td>10 min</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CARTOGRAPHIE PROCESSUS -->
+<section class="section">
+  <span class="kicker">Bloc 02</span>
+  <h2>Cartographie des processus</h2>
+  <p class="lead">10 processus candidats identifiés sur 4 familles. Évaluation par volume, temps, douleur et potentiel d'automation.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Famille</th>
+        <th>Processus</th>
+        <th>Vol./mois</th>
+        <th>Temps/occ.</th>
+        <th>Total/mois</th>
+        <th>Douleur</th>
+        <th>Standardisable</th>
+        <th>Potentiel IA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="process-row-high">
+        <td>Acq. & Marketing</td>
+        <td><strong>Rédaction posts Instagram/TikTok</strong></td>
+        <td>15-20</td>
+        <td>20-30 min</td>
+        <td>~8h</td>
+        <td>⚡⚡⚡⚡⚡ 5/5</td>
+        <td>⭐⭐⭐⭐ 4/5</td>
+        <td><span class="tag t-accent">IA générative</span></td>
+      </tr>
+      <tr class="process-row-high">
+        <td>Acq. & Marketing</td>
+        <td><strong>Email newsletter mensuelle</strong></td>
+        <td>1</td>
+        <td>2-3h</td>
+        <td>~2.5h</td>
+        <td>⚡⚡⚡⚡ 4/5</td>
+        <td>⭐⭐⭐⭐ 4/5</td>
+        <td><span class="tag t-accent">IA générative</span></td>
+      </tr>
+      <tr class="process-row-high">
+        <td>Vente & Conversion</td>
+        <td><strong>Commande coffret cadeau</strong></td>
+        <td>6-10</td>
+        <td>15 min (SMS/appel)</td>
+        <td>~1.5h</td>
+        <td>⚡⚡⚡ 3/5</td>
+        <td>⭐⭐⭐⭐⭐ 5/5</td>
+        <td><span class="tag t-bleu">Automation classique</span></td>
+      </tr>
+      <tr class="process-row-high">
+        <td>Vente & Conversion</td>
+        <td><strong>Réservation atelier dégustation</strong></td>
+        <td>5-12</td>
+        <td>10 min (coordination)</td>
+        <td>~1.5h</td>
+        <td>⚡⚡⚡ 3/5</td>
+        <td>⭐⭐⭐⭐⭐ 5/5</td>
+        <td><span class="tag t-bleu">Automation classique</span></td>
+      </tr>
+      <tr class="process-row-med">
+        <td>Acq. & Marketing</td>
+        <td>Réponse aux avis Google</td>
+        <td>4-6</td>
+        <td>5-10 min</td>
+        <td>~45 min</td>
+        <td>⚡⚡ 2/5</td>
+        <td>⭐⭐⭐ 3/5</td>
+        <td><span class="tag t-accent">IA générative</span></td>
+      </tr>
+      <tr class="process-row-med">
+        <td>Acq. & Marketing</td>
+        <td>Post Google Business Profile</td>
+        <td>4</td>
+        <td>5 min</td>
+        <td>~20 min</td>
+        <td>⚡⚡ 2/5</td>
+        <td>⭐⭐⭐⭐⭐ 5/5</td>
+        <td><span class="tag t-bleu">Recyclage contenu</span></td>
+      </tr>
+      <tr class="process-row-med">
+        <td>Vente & Conversion</td>
+        <td>Prise de RDV livraison hors horaires</td>
+        <td>8-12</td>
+        <td>5-8 min (SMS back-and-forth)</td>
+        <td>~1h</td>
+        <td>⚡⚡⚡ 3/5</td>
+        <td>⭐⭐⭐ 3/5</td>
+        <td><span class="tag t-bleu">Automation classique</span></td>
+      </tr>
+      <tr class="process-row-med">
+        <td>Delivery & Ops</td>
+        <td>Suivi arrivages producteurs</td>
+        <td>4-6</td>
+        <td>10 min</td>
+        <td>~45 min</td>
+        <td>⚡⚡ 2/5</td>
+        <td>⭐⭐ 2/5</td>
+        <td><span class="tag t-grey">Manuel conseillé</span></td>
+      </tr>
+      <tr class="process-row-low">
+        <td>Support & Admin</td>
+        <td>Réponse messages Instagram/DM</td>
+        <td>15-25</td>
+        <td>2-3 min</td>
+        <td>~1h</td>
+        <td>⚡⚡ 2/5</td>
+        <td>⭐⭐ 2/5</td>
+        <td><span class="tag t-grey">Manuel — trop personnalisé</span></td>
+      </tr>
+      <tr class="process-row-low">
+        <td>Support & Admin</td>
+        <td>Facturation / compta</td>
+        <td>20-30</td>
+        <td>2 min</td>
+        <td>~1h</td>
+        <td>⚡ 1/5</td>
+        <td>⭐⭐⭐ 3/5</td>
+        <td><span class="tag t-grey">Hors scope — Phase 2</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout c-success">
+    <strong>Insight principal.</strong> 8 heures/mois sont consommées par la seule rédaction de posts — sur un solopreneur, c'est colossal. C'est 1 journée de travail entière par mois. Ramener ça à 1h30 avec l'IA (8 min/post × 12 posts/mois au lieu de 25 min × 20 posts) libère 6h30 productives immédiatement. C'est l'unique priorité n°1.
+  </div>
+
+  <!-- MATRICE SVG -->
+  <h3>Matrice Impact × Faisabilité — positionnement des 10 processus</h3>
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;">
+    <svg viewBox="0 0 580 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+      <!-- fond quadrants -->
+      <rect x="50" y="30" width="240" height="185" fill="#fef2f2" rx="4"/>
+      <rect x="290" y="30" width="270" height="185" fill="#f0fdf4" rx="4"/>
+      <rect x="50" y="215" width="240" height="175" fill="#f8fafc" rx="4"/>
+      <rect x="290" y="215" width="270" height="175" fill="#fffbeb" rx="4"/>
+      <!-- labels quadrants -->
+      <text x="170" y="52" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8" font-style="italic">Reconsidérer</text>
+      <text x="425" y="52" text-anchor="middle" font-family="Inter" font-size="10" fill="#15803d" font-style="italic" font-weight="600">🎯 Quick wins</text>
+      <text x="170" y="400" text-anchor="middle" font-family="Inter" font-size="10" fill="#94a3b8" font-style="italic">Ignorer</text>
+      <text x="425" y="400" text-anchor="middle" font-family="Inter" font-size="10" fill="#b45309" font-style="italic">Planifier</text>
+      <!-- axes -->
+      <line x1="50" y1="390" x2="560" y2="390" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="50" y1="30" x2="50" y2="390" stroke="#cbd5e1" stroke-width="1.5"/>
+      <line x1="290" y1="30" x2="290" y2="390" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="50" y1="215" x2="560" y2="215" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- axes labels -->
+      <text x="305" y="410" font-family="Inter" font-size="10" fill="#64748b">Faisabilité →</text>
+      <text x="30" y="215" text-anchor="middle" font-family="Inter" font-size="10" fill="#64748b" transform="rotate(-90 30 215)">Impact →</text>
+      <!-- POINTS -->
+      <!-- Posts IG/TT -->
+      <circle cx="460" cy="70" r="14" fill="#d4a574" opacity="0.9"/>
+      <text x="460" y="66" text-anchor="middle" font-family="Inter" font-size="9" font-weight="700" fill="#fff">Posts</text>
+      <text x="460" y="78" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">IG/TT</text>
+      <!-- Newsletter -->
+      <circle cx="400" cy="100" r="12" fill="#d4a574" opacity="0.8"/>
+      <text x="400" y="96" text-anchor="middle" font-family="Inter" font-size="8" font-weight="700" fill="#fff">News-</text>
+      <text x="400" y="106" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">letter</text>
+      <!-- Coffret commande -->
+      <circle cx="500" cy="90" r="12" fill="#15803d" opacity="0.8"/>
+      <text x="500" y="86" text-anchor="middle" font-family="Inter" font-size="8" font-weight="700" fill="#fff">Coffret</text>
+      <text x="500" y="97" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">cmd</text>
+      <!-- Atelier résa -->
+      <circle cx="520" cy="115" r="12" fill="#15803d" opacity="0.7"/>
+      <text x="520" y="111" text-anchor="middle" font-family="Inter" font-size="8" font-weight="700" fill="#fff">Atelier</text>
+      <text x="520" y="122" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">résa</text>
+      <!-- GBP posts -->
+      <circle cx="500" cy="250" r="10" fill="#b45309" opacity="0.7"/>
+      <text x="500" y="246" text-anchor="middle" font-family="Inter" font-size="8" font-weight="700" fill="#fff">GBP</text>
+      <text x="500" y="256" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">posts</text>
+      <!-- Avis Google -->
+      <circle cx="380" cy="260" r="10" fill="#b45309" opacity="0.6"/>
+      <text x="380" y="257" text-anchor="middle" font-family="Inter" font-size="8" font-weight="700" fill="#fff">Avis</text>
+      <!-- Livraison RDV -->
+      <circle cx="340" cy="240" r="10" fill="#b45309" opacity="0.6"/>
+      <text x="340" y="240" text-anchor="middle" font-family="Inter" font-size="8" font-weight="700" fill="#fff">Livr.</text>
+      <!-- DMs -->
+      <circle cx="160" cy="310" r="9" fill="#94a3b8"/>
+      <text x="160" y="307" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">DMs</text>
+      <!-- Arrivages -->
+      <circle cx="180" cy="270" r="9" fill="#94a3b8"/>
+      <text x="180" y="267" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">Arriv.</text>
+      <!-- Compta -->
+      <circle cx="310" cy="340" r="9" fill="#94a3b8"/>
+      <text x="310" y="337" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff">Cpta</text>
+      <!-- légende -->
+      <circle cx="65" cy="418" r="7" fill="#d4a574"/>
+      <text x="76" y="421" font-family="Inter" font-size="9" fill="#64748b">Top 3 automations</text>
+      <circle cx="160" cy="418" r="7" fill="#15803d" opacity="0.7"/>
+      <text x="171" y="421" font-family="Inter" font-size="9" fill="#64748b">Quick wins classiques</text>
+      <circle cx="265" cy="418" r="7" fill="#b45309" opacity="0.6"/>
+      <text x="276" y="421" font-family="Inter" font-size="9" fill="#64748b">Phase 2</text>
+      <circle cx="330" cy="418" r="7" fill="#94a3b8"/>
+      <text x="341" y="421" font-family="Inter" font-size="9" fill="#64748b">À ignorer / différer</text>
+    </svg>
+  </div>
+</section>
+
+<!-- STACK RECOMMANDÉE -->
+<section class="section">
+  <span class="kicker">Bloc 03</span>
+  <h2>Stack recommandée</h2>
+  <p class="lead">Principe : la plus simple solution qui résout 80 % du besoin. Budget total : 20 €/mois (Claude Pro uniquement). Tout le reste est gratuit.</p>
+
+  <div class="stack-grid">
+    <div class="stack-card">
+      <h4>IA générative</h4>
+      <div class="stack-tool">Claude (Anthropic)</div>
+      <div class="stack-why">Interface web claude.ai — pas d'API nécessaire à ce stade. Jérôme utilise l'interface comme assistant de rédaction avec des prompts PACO fournis en Livrable 3/3.</div>
+      <div class="stack-cost">20 €/mois (Pro)</div>
+    </div>
+    <div class="stack-card">
+      <h4>Formulaires & réservations</h4>
+      <div class="stack-tool">Tally</div>
+      <div class="stack-why">No-code, gratuit illimité, intégration WordPress native par embed. Couvre commandes coffrets + réservations ateliers + inscription newsletter.</div>
+      <div class="stack-cost">0 €/mois</div>
+    </div>
+    <div class="stack-card">
+      <h4>Email marketing</h4>
+      <div class="stack-tool">Brevo</div>
+      <div class="stack-why">Plan gratuit jusqu'à 300 emails/jour, 100 000 contacts. Suffisant pour démarrer. Automatisation basique (confirmation réservation, bienvenue) incluse en gratuit.</div>
+      <div class="stack-cost">0 €/mois</div>
+    </div>
+    <div class="stack-card">
+      <h4>Programmation réseaux sociaux</h4>
+      <div class="stack-tool">Meta Business Suite</div>
+      <div class="stack-why">Natif Instagram/Facebook, gratuit, planification posts à l'avance. Jérôme prépare les posts le lundi avec Claude, les programme sur la semaine en 10 min.</div>
+      <div class="stack-cost">0 €/mois</div>
+    </div>
+    <div class="stack-card">
+      <h4>Analytics</h4>
+      <div class="stack-tool">GA4 + Site Kit (WP)</div>
+      <div class="stack-why">Plugin Google officiel, installation 10 min depuis l'admin WordPress. Permet enfin de tracker les sources (dont ChatGPT) et mesurer les CTAs.</div>
+      <div class="stack-cost">0 €/mois</div>
+    </div>
+    <div class="stack-card">
+      <h4>Automatisations légères</h4>
+      <div class="stack-tool">Brevo Automations</div>
+      <div class="stack-why">Email de confirmation automatique sur soumission Tally, séquence bienvenue newsletter 2 emails. Inclus dans le plan gratuit Brevo. Évite Zapier/Make pour ces cas simples.</div>
+      <div class="stack-cost">0 €/mois</div>
+    </div>
+  </div>
+
+  <div class="callout c-warning">
+    <strong>Ce qui est explicitement écarté et pourquoi.</strong>
+    <ul style="margin-top:0.5rem;">
+      <li><strong>n8n self-hosted</strong> : requiert un VPS à administrer. Hors compétences et budget pour un solopreneur sans DevOps. Pertinent uniquement si GlouGlou embauche ou si un partenaire technique prend en charge l'infra.</li>
+      <li><strong>Make / Zapier</strong> : payant dès les workflows un peu sérieux. Brevo Automations couvre 100 % des besoins identifiés à ce stade, gratuitement.</li>
+      <li><strong>Chatbot sur le site</strong> : volume de questions répétitives insuffisant (&lt; 50/semaine), base de connaissance non structurée. Gadget à ce stade.</li>
+      <li><strong>Agent IA autonome</strong> : prématuré avant que les workflows manuels soient stabilisés. Le risque d'erreur dépasse le gain sur 1 personne sans supervision.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TOP 3 AUTOMATIONS -->
+<section class="section">
+  <span class="kicker">Bloc 04</span>
+  <h2>Top 3 automatisations détaillées</h2>
+  <p class="lead">3 automatisations chiffrées, par ordre de priorité. Chaque ROI est calculé sur la base d'un taux horaire de 25 €/h pour Jérôme (valeur du temps libéré pour la boutique ou la livraison).</p>
+
+  <!-- AUTOMATION 1 -->
+  <div class="auto-card">
+    <div class="auto-header">
+      <div>
+        <h3>🍷 Système de contenu IA-assisté — Posts Instagram & TikTok</h3>
+        <div class="auto-type">IA générative · Priorité absolue · Résout la douleur #1 déclarée</div>
+      </div>
+      <div class="auto-roi-pill">
+        <span class="roi-val">+163%</span>
+        <span class="roi-label">ROI annuel net</span>
+      </div>
+    </div>
+    <div class="auto-body">
+      <p><strong>Objectif business :</strong> Réduire de 8h à 1h30/mois le temps de création de contenu réseaux sociaux, en maintenant une fréquence de 3 posts/semaine avec la qualité éditoriale définie dans le Livrable 1.</p>
+
+      <div class="auto-metrics">
+        <div class="auto-metric"><div class="m-label">Setup</div><div class="m-val">2h</div></div>
+        <div class="auto-metric"><div class="m-label">Coût mensuel</div><div class="m-val">20€</div></div>
+        <div class="auto-metric"><div class="m-label">Heures économisées</div><div class="m-val">6h30/mois</div></div>
+        <div class="auto-metric"><div class="m-label">Payback</div><div class="m-val">&lt; 1 mois</div></div>
+      </div>
+
+      <h4>Workflow en 5 étapes</h4>
+      <div class="workflow">
+        <div class="wf-step">
+          <div class="wf-num">1</div>
+          <div>
+            <h5>Jérôme remplit une fiche bouteille (4 champs)</h5>
+            <p>Nom de la bouteille · Région/appellation · Cépage · 1 mot qui décrit le goût (ex : "framboise", "minéral", "soleil"). Temps : 2 minutes.</p>
+          </div>
+          <div class="wf-tool">Manuel · Notes iPhone</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">2</div>
+          <div>
+            <h5>Coller la fiche dans le prompt PACO Pilier 01</h5>
+            <p>Le prompt (livré en Livrable 3/3) génère : caption Instagram + caption TikTok + 3 hashtags ciblés Nice + suggestion de visuel. Temps : 30 secondes.</p>
+          </div>
+          <div class="wf-tool">Claude Pro · claude.ai</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">3</div>
+          <div>
+            <h5>Jérôme valide ou ajuste en 2 minutes</h5>
+            <p>Relecture rapide, ajout éventuel d'un détail personnel ("je l'ai goûté avec Mathieu hier..."). Authenticité préservée — Claude rédige, Jérôme signe.</p>
+          </div>
+          <div class="wf-tool">Manuel · 2 min</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">4</div>
+          <div>
+            <h5>Photo bouteille + programmation sur Meta Business Suite</h5>
+            <p>Photo faite en boutique (pas de setup photo — c'est volontairement authentique). Programmation du post à l'heure optimale (18h30-19h30 en semaine). Temps : 3 minutes.</p>
+          </div>
+          <div class="wf-tool">Meta Business Suite · Gratuit</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">5</div>
+          <div>
+            <h5>Recyclage automatique sur Google Business Profile</h5>
+            <p>Copier-coller du post Instagram → GBP en 2 min supplémentaires, 1 fois/semaine. Le même contenu travaille sur 3 canaux pour le même effort.</p>
+          </div>
+          <div class="wf-tool">GBP · Gratuit</div>
+        </div>
+      </div>
+
+      <h4>Calcul ROI</h4>
+      <table>
+        <thead><tr><th>Poste</th><th>Avant</th><th>Après</th><th>Gain</th></tr></thead>
+        <tbody>
+          <tr><td>Temps rédaction posts (20/mois × 25 min)</td><td>500 min</td><td>80 min (12 posts × ~7 min)</td><td class="td-r" style="color:var(--success);">420 min = 7h</td></tr>
+          <tr><td>Temps programmation (déjà inclus partiellement)</td><td>60 min</td><td>30 min</td><td class="td-r" style="color:var(--success);">30 min</td></tr>
+          <tr><td><strong>Total heures libérées/mois</strong></td><td>~8h</td><td>~1h30</td><td class="td-r" style="color:var(--success);font-weight:700;">~6h30</td></tr>
+          <tr><td><strong>Valeur mensuelle (25€/h)</strong></td><td>—</td><td>—</td><td class="td-r" style="color:var(--success);font-weight:700;">+162€/mois</td></tr>
+          <tr><td>Coût mensuel Claude Pro</td><td>0€</td><td>20€</td><td class="td-r" style="color:var(--danger);">−20€/mois</td></tr>
+          <tr><td><strong>Gain net mensuel</strong></td><td>—</td><td>—</td><td class="td-r" style="font-weight:700;">142€/mois</td></tr>
+          <tr><td>Setup (2h × 25€)</td><td>—</td><td>—</td><td class="td-r" style="color:var(--danger);">−50€ (one-shot)</td></tr>
+          <tr><td><strong>ROI annuel net</strong></td><td>—</td><td>—</td><td class="td-r" style="color:var(--success);font-weight:700;">+163% ((1704-290-50)/290)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout c-accent">
+        <strong>Bénéfice non chiffré mais réel.</strong> La régularité (3 posts/semaine systématiques vs contenu improvisé) amplifie l'algorithme Instagram et la citabilité GEO. Le ROI réel est plus élevé que le calcul ci-dessus — il inclut le trafic supplémentaire généré par la consistance éditoriale.
+      </div>
+
+      <h4>Risques & garde-fous</h4>
+      <ul>
+        <li><strong>Risque de généricité :</strong> si Jérôme applique le prompt sans ajouter sa touche personnelle, le contenu devient indifférencié. Règle : toujours ajouter 1 phrase personnelle avant publication.</li>
+        <li><strong>Risque de déshumanisation :</strong> ne jamais publier un post sans avoir vu et goûté la bouteille. L'IA rédige — Jérôme authentifie.</li>
+        <li><strong>Loi Évin :</strong> les posts doivent inclure la mention obligatoire "L'abus d'alcool est dangereux pour la santé" ou équivalent. À intégrer en fin de caption systématiquement. Le prompt PACO l'inclura automatiquement.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AUTOMATION 2 -->
+  <div class="auto-card">
+    <div class="auto-header" style="background:#1e4d2b;">
+      <div>
+        <h3>📦 Formulaire coffret cadeau + confirmation automatique</h3>
+        <div class="auto-type">Automation classique · Sans IA · Formalise une offre informelle existante</div>
+      </div>
+      <div class="auto-roi-pill">
+        <span class="roi-val">+980%</span>
+        <span class="roi-label">ROI annuel (CA généré)</span>
+      </div>
+    </div>
+    <div class="auto-body">
+      <p><strong>Objectif business :</strong> Transformer les commandes de coffrets cadeaux (actuellement par SMS/appel informels) en flux structuré avec confirmation automatique, libérant Jérôme des allers-retours et créant une offre achetable 24h/24.</p>
+
+      <div class="auto-metrics">
+        <div class="auto-metric"><div class="m-label">Setup</div><div class="m-val">3h</div></div>
+        <div class="auto-metric"><div class="m-label">Coût mensuel</div><div class="m-val">0€</div></div>
+        <div class="auto-metric"><div class="m-label">Heures économisées</div><div class="m-val">1h30/mois</div></div>
+        <div class="auto-metric"><div class="m-label">CA incrémental</div><div class="m-val">+350€/mois</div></div>
+      </div>
+
+      <h4>Workflow en 4 étapes</h4>
+      <div class="workflow">
+        <div class="wf-step">
+          <div class="wf-num">1</div>
+          <div>
+            <h5>Client remplit le formulaire Tally (page /coffrets/ du site)</h5>
+            <p>Champs : Prénom · Email · Téléphone · Gamme choisie (Découverte 35€ / Plaisir 60€ / Prestige 100€) · Occasion · Préférences éventuelles · Mode récupération (boutique ou livraison hors horaires) · Date souhaitée.</p>
+          </div>
+          <div class="wf-tool">Tally · Gratuit</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">2</div>
+          <div>
+            <h5>Email de confirmation automatique envoyé au client</h5>
+            <p>Via Brevo Automations (déclencheur : soumission Tally via webhook). Contenu : récapitulatif de la commande + "Jérôme vous contactera dans les 4h pour confirmer la composition et le créneau". Profesionnel, rassurant, sans intervention de Jérôme.</p>
+          </div>
+          <div class="wf-tool">Brevo Automations · Gratuit</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">3</div>
+          <div>
+            <h5>Notification SMS/email à Jérôme avec récap</h5>
+            <p>Brevo envoie un email récapitulatif formaté à Jérôme : client + gamme + occasion + créneau demandé. Il voit tout d'un coup d'œil sans chercher dans ses SMS. Temps de traitement : 3 min au lieu de 15 min d'allers-retours.</p>
+          </div>
+          <div class="wf-tool">Brevo · Gratuit</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">4</div>
+          <div>
+            <h5>Jérôme confirme par SMS et prépare le coffret</h5>
+            <p>1 SMS de confirmation du créneau (livraison hors horaires ou retrait boutique). La composition du coffret reste à son choix — c'est sa valeur ajoutée. L'automation gère l'administratif, pas la curation.</p>
+          </div>
+          <div class="wf-tool">SMS · Manuel · 2 min</div>
+        </div>
+      </div>
+
+      <h4>Calcul ROI</h4>
+      <table>
+        <thead><tr><th>Poste</th><th>Valeur</th></tr></thead>
+        <tbody>
+          <tr><td>Coffrets/mois estimés (avec offre formalisée + page dédiée)</td><td class="td-r">6-8</td></tr>
+          <tr><td>Panier moyen coffret</td><td class="td-r">60€</td></tr>
+          <tr><td><strong>CA mensuel incrémental estimé</strong></td><td class="td-r" style="color:var(--success);font-weight:700;">360-480€/mois</td></tr>
+          <tr><td>Heures admin économisées (15 min → 3 min × 7 coffrets)</td><td class="td-r" style="color:var(--success);">~1h30/mois</td></tr>
+          <tr><td>Coût setup (3h × 25€)</td><td class="td-r" style="color:var(--danger);">75€ one-shot</td></tr>
+          <tr><td>Coût récurrent mensuel</td><td class="td-r">0€</td></tr>
+          <tr><td><strong>ROI annuel net (CA seul)</strong></td><td class="td-r" style="color:var(--success);font-weight:700;">>980% si 7 coffrets/mois</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Risques & garde-fous</h4>
+      <ul>
+        <li><strong>Paiement :</strong> cette automation ne gère pas le paiement en ligne — le règlement se fait à la livraison ou en boutique. Ajout Stripe uniquement en Phase 2 si le volume le justifie.</li>
+        <li><strong>Surbooking :</strong> si Jérôme reçoit 5 commandes le même week-end, le formulaire ne vérifie pas les disponibilités. Ajouter un champ "dates non disponibles" ou limiter à 3 coffrets/semaine au démarrage.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AUTOMATION 3 -->
+  <div class="auto-card">
+    <div class="auto-header" style="background:#0369a1;">
+      <div>
+        <h3>📅 Réservation ateliers dégustation + newsletter mensuelle IA-assistée</h3>
+        <div class="auto-type">Automation classique + IA générative · 2 sous-systèmes liés</div>
+      </div>
+      <div class="auto-roi-pill">
+        <span class="roi-val">+420%</span>
+        <span class="roi-label">ROI annuel net</span>
+      </div>
+    </div>
+    <div class="auto-body">
+      <p><strong>Objectif business :</strong> (A) Permettre la réservation d'ateliers dégustation sans intervention de Jérôme pour la prise de contact initiale. (B) Produire la newsletter mensuelle en 45 minutes au lieu de 2h30, avec un contenu de qualité professionnelle.</p>
+
+      <div class="auto-metrics">
+        <div class="auto-metric"><div class="m-label">Setup total</div><div class="m-val">4h</div></div>
+        <div class="auto-metric"><div class="m-label">Coût mensuel</div><div class="m-val">0€</div></div>
+        <div class="auto-metric"><div class="m-label">Heures économisées</div><div class="m-val">3h/mois</div></div>
+        <div class="auto-metric"><div class="m-label">CA atelier ×2</div><div class="m-val">+400-560€/mois</div></div>
+      </div>
+
+      <h4>Sous-système A — Réservation atelier (workflow)</h4>
+      <div class="workflow">
+        <div class="wf-step">
+          <div class="wf-num">1</div>
+          <div>
+            <h5>Page /ateliers/ sur le site avec calendrier et formulaire Tally</h5>
+            <p>Jérôme fixe 2 dates/mois (ex. 1er et 3e samedi, 18h30). Formulaire : Prénom + Email + Date choisie + "Comment avez-vous entendu parler de nous ?". Max 8 personnes par atelier.</p>
+          </div>
+          <div class="wf-tool">Tally · WordPress · Gratuit</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">2</div>
+          <div>
+            <h5>Confirmation automatique + instructions pratiques</h5>
+            <p>Email Brevo : date confirmée, adresse, "prévoir 35€ à régler sur place", ce qu'on va déguster (thème), "réservation ferme à partir de 5 participants". Professionnel, sans effort.</p>
+          </div>
+          <div class="wf-tool">Brevo Automations · Gratuit</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">3</div>
+          <div>
+            <h5>Rappel automatique J-2</h5>
+            <p>Email de rappel automatique 48h avant l'atelier : "On vous attend samedi à 18h30 — voici comment venir". Réduit les no-shows sans aucune action de Jérôme.</p>
+          </div>
+          <div class="wf-tool">Brevo Automations · Gratuit</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">4</div>
+          <div>
+            <h5>Email de suivi J+1 avec prochaine date</h5>
+            <p>"Merci d'être venu hier soir — voici les 3 bouteilles qu'on a dégustées [à remplir manuellement en 2 min] et la date du prochain atelier." Fidélise sans effort.</p>
+          </div>
+          <div class="wf-tool">Brevo · 2 min de personnalisation</div>
+        </div>
+      </div>
+
+      <h4>Sous-système B — Newsletter mensuelle IA-assistée</h4>
+      <div class="workflow">
+        <div class="wf-step">
+          <div class="wf-num">1</div>
+          <div>
+            <h5>Jérôme dicte 5 éléments du mois en vrac (5 min)</h5>
+            <p>3 nouvelles bouteilles arrivées · 1 producteur du mois · Date atelier suivant · Offre coffret si pertinent. Voice note ou texte brut — peu importe le format.</p>
+          </div>
+          <div class="wf-tool">Notes iPhone · 5 min</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">2</div>
+          <div>
+            <h5>Prompt PACO Newsletter → Claude génère le draft complet</h5>
+            <p>Email structuré en 4 blocs : Intro du mois (ton Jérôme) · 3 coups de cœur (une phrase chacun) · Atelier du mois (CTA) · Mot de fin. Temps : 2 min de prompt + 30 sec de génération.</p>
+          </div>
+          <div class="wf-tool">Claude Pro · claude.ai</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">3</div>
+          <div>
+            <h5>Jérôme valide, ajuste, envoie via Brevo</h5>
+            <p>Relecture 10 min, ajout d'une anecdote personnelle si l'envie est là, envoi à toute la liste. Template visuel préconfiguré dans Brevo — pas de mise en page à refaire.</p>
+          </div>
+          <div class="wf-tool">Brevo · Gratuit</div>
+        </div>
+      </div>
+
+      <h4>Calcul ROI combiné</h4>
+      <table>
+        <thead><tr><th>Poste</th><th>Gain mensuel</th></tr></thead>
+        <tbody>
+          <tr><td>Heures économisées sur admin atelier (2h → 30 min/mois)</td><td class="td-r" style="color:var(--success);">+37€ (1h30 × 25€)</td></tr>
+          <tr><td>Heures économisées sur newsletter (2h30 → 20 min)</td><td class="td-r" style="color:var(--success);">+52€ (2h10 × 25€)</td></tr>
+          <tr><td>CA atelier (2 ateliers × 6 pers. × 35€)</td><td class="td-r" style="color:var(--success);">+420€/mois</td></tr>
+          <tr><td>Effet newsletter sur fidélisation (coffrets réachat estimé +1/mois)</td><td class="td-r" style="color:var(--success);">+60€/mois</td></tr>
+          <tr><td>Coût setup (4h × 25€)</td><td class="td-r" style="color:var(--danger);">−100€ one-shot</td></tr>
+          <tr><td>Coût récurrent</td><td class="td-r">0€</td></tr>
+          <tr><td><strong>ROI annuel net</strong></td><td class="td-r" style="color:var(--success);font-weight:700;">+420% ((6ˇ1ˇ08-100)/100 approx.)</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Risques & garde-fous</h4>
+      <ul>
+        <li><strong>Taux de remplissage atelier :</strong> le système ne remplit pas les ateliers tout seul — il faut annoncer sur Instagram + GBP. La machine de contenu (Automation 1) est le carburant de celle-ci.</li>
+        <li><strong>Délivrabilité newsletter :</strong> sur Brevo, s'assurer de configurer le SPF/DKIM du domaine cave-glouglou.fr — Vincent Ravera peut le faire en 30 min. Sans ça, les emails tombent en spam.</li>
+        <li><strong>Qualité de la liste :</strong> ne pas acheter ou scraper des contacts. Uniquement des opt-ins volontaires. Une liste de 100 contacts engagés vaut plus qu'une liste de 1 000 non qualifiés.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section">
+  <span class="kicker">Bloc 05</span>
+  <h2>Feuille de route 90 jours</h2>
+  <p class="lead">3 phases. Chaque phase a un livrable tangible et mesurable. Rien n'est ajouté si le précédent n'est pas en place.</p>
+
+  <div class="roadmap-phase">
+    <div class="roadmap-phase-hdr">
+      <h4>Phase 1 — Foundations · J1 à J30</h4>
+      <span>Objectif : prérequis en place + Automation 1 active</span>
+    </div>
+    <div class="roadmap-items">
+      <div class="roadmap-item">
+        <div class="rn">01</div>
+        <div><h5>Installer GA4 via Site Kit (WordPress)</h5><p>10 minutes depuis l'admin WP. Enfin mesurer le trafic et les sources (ChatGPT inclus).</p></div>
+        <div class="r-owner">Jérôme / 10 min</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">02</div>
+        <div><h5>Ouvrir compte Brevo + configurer SPF/DKIM (Vincent)</h5><p>Prérequis technique pour la délivrabilité email. 30 min pour Vincent.</p></div>
+        <div class="r-owner">Vincent / 30 min</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">03</div>
+        <div><h5>Apprendre et tester le système de contenu IA (Automation 1)</h5><p>Utiliser les prompts PACO du Livrable 3/3. Produire les 3 premiers posts de la semaine en moins de 30 min total.</p></div>
+        <div class="r-owner">Jérôme / 2h setup</div>
+        <div class="r-effort" style="color:var(--warning);">20€/mois</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">04</div>
+        <div><h5>Programmer les posts semaine 1 sur Meta Business Suite</h5><p>Valider que le flux "Claude → Meta Business Suite" fonctionne fluidement avant de passer à la suite.</p></div>
+        <div class="r-owner">Jérôme / 30 min</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">05</div>
+        <div><h5>Créer formulaire Tally inscription newsletter + QR code boutique</h5><p>Formulaire simple (prénom + email). Embed sur le site + QR code imprimé en caisse. Début de construction de la liste.</p></div>
+        <div class="r-owner">Jérôme / 1h</div>
+        <div class="r-effort" style="color:var(--success);">5€ (impression)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="roadmap-phase">
+    <div class="roadmap-phase-hdr" style="background:#1e4d2b;">
+      <h4>Phase 2 — First Automations · J31 à J60</h4>
+      <span>Objectif : Automations 2 et 3 actives + 1er atelier lancé</span>
+    </div>
+    <div class="roadmap-items">
+      <div class="roadmap-item">
+        <div class="rn">06</div>
+        <div><h5>Créer le formulaire Tally coffret + intégration Brevo (Automation 2)</h5><p>Formulaire coffret avec 3 gammes. Connexion Tally → Brevo via webhook natif. Email de confirmation auto configuré.</p></div>
+        <div class="r-owner">Jérôme / 2h</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">07</div>
+        <div><h5>Créer la page /coffrets/ sur WordPress + CTA visible</h5><p>Embed du formulaire Tally. Texte descriptif des 3 gammes (Claude génère en 5 min). Lien depuis le menu principal.</p></div>
+        <div class="r-owner">Vincent ou Jérôme / 1h</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">08</div>
+        <div><h5>Créer le formulaire Tally atelier + séquence Brevo (Automation 3A)</h5><p>Formulaire atelier, confirmation auto + rappel J-2. Fixer les 2 premières dates. Annoncer sur Instagram + GBP.</p></div>
+        <div class="r-owner">Jérôme / 3h</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">09</div>
+        <div><h5>Envoyer la 1ère newsletter IA-assistée (Automation 3B)</h5><p>Tester le workflow complet : 5 min de dictée → Claude → validation → envoi Brevo. Mesurer taux d'ouverture.</p></div>
+        <div class="r-owner">Jérôme / 45 min</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="roadmap-phase">
+    <div class="roadmap-phase-hdr" style="background:#0369a1;">
+      <h4>Phase 3 — Scale & Mesure · J61 à J90</h4>
+      <span>Objectif : mesurer ce qui fonctionne, ajuster, décider de la Phase 2 IA</span>
+    </div>
+    <div class="roadmap-items">
+      <div class="roadmap-item">
+        <div class="rn">10</div>
+        <div><h5>Bilan J+60 : trafic, abonnés, coffrets commandés, atelier rempli ?</h5><p>GA4 + Brevo + Tally + Meta Insights. Comparer aux KPIs du Livrable 1. Identifier ce qui performe.</p></div>
+        <div class="r-owner">Jérôme / 1h</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">11</div>
+        <div><h5>Optimiser les prompts PACO selon les posts les plus performants</h5><p>Regarder les 3 posts avec le plus d'engagement — identifier le pattern. Affiner les prompts en conséquence.</p></div>
+        <div class="r-owner">Jérôme / 30 min</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">12</div>
+        <div><h5>Décision : paiement en ligne (Stripe) sur coffrets/ateliers ?</h5><p>Si le volume coffrets > 8/mois ou ateliers > 2 pleins consécutifs : intégrer Stripe. Sinon, rester sur paiement à la livraison.</p></div>
+        <div class="r-owner">Jérôme + Vincent</div>
+        <div class="r-effort" style="color:var(--warning);">0-200€ setup</div>
+      </div>
+      <div class="roadmap-item">
+        <div class="rn">13</div>
+        <div><h5>Test LLM share of voice (8 prompts du Livrable Audit)</h5><p>Tester manuellement sur ChatGPT et Perplexity : "meilleur caviste vin nature Nice Ouest". GlouGlou apparaît-il maintenant que robots.txt est corrigé et le contenu réécrit ?</p></div>
+        <div class="r-owner">Jérôme / 20 min</div>
+        <div class="r-effort" style="color:var(--success);">0€</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTION ROI -->
+<section class="section">
+  <span class="kicker">Bloc 06</span>
+  <h2>Projection ROI à 12 mois</h2>
+
+  <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;">
+    <svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
+      <!-- grille -->
+      <line x1="60" y1="260" x2="560" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="30" x2="60" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="60" y1="205" x2="560" y2="205" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="60" y1="150" x2="560" y2="150" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="60" y1="95" x2="560" y2="95" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="60" y1="40" x2="560" y2="40" stroke="#f1f5f9" stroke-width="1"/>
+      <!-- labels Y -->
+      <text x="50" y="264" text-anchor="end" font-family="Inter" font-size="9" fill="#64748b">0</text>
+      <text x="50" y="209" text-anchor="end" font-family="Inter" font-size="9" fill="#64748b">500€</text>
+      <text x="50" y="154" text-anchor="end" font-family="Inter" font-size="9" fill="#64748b">1 000€</text>
+      <text x="50" y="99" text-anchor="end" font-family="Inter" font-size="9" fill="#64748b">1 500€</text>
+      <text x="50" y="44" text-anchor="end" font-family="Inter" font-size="9" fill="#64748b">2 000€</text>
+      <!-- COÛTS (ligne rouge) -->
+      <polyline points="60,235 102,218 144,212 186,207 228,204 270,202 312,201 354,200 396,200 438,199 480,199 522,198 560,198"
+        fill="none" stroke="#b91c1c" stroke-width="2" stroke-dasharray="5 3"/>
+      <!-- GAINS CUMULÉS (ligne verte) -->
+      <polyline points="60,260 102,238 144,215 186,192 228,170 270,148 312,127 354,107 396,88 438,70 480,53 522,37 560,32"
+        fill="none" stroke="#15803d" stroke-width="2.5"/>
+      <!-- ZONE GAIN -->
+      <polygon points="60,260 102,238 144,215 186,192 228,170 270,148 312,127 354,107 396,88 438,70 480,53 522,37 560,32 560,198 522,198 480,199 438,199 396,200 354,200 312,201 270,202 228,204 186,207 144,212 102,218 60,235"
+        fill="#15803d" opacity="0.08"/>
+      <!-- POINT D'ÉQUILIBRE -->
+      <circle cx="155" cy="213" r="5" fill="#b45309"/>
+      <line x1="155" y1="213" x2="155" y2="260" stroke="#b45309" stroke-width="1" stroke-dasharray="3 2"/>
+      <text x="155" y="275" text-anchor="middle" font-family="Inter" font-size="9" fill="#b45309" font-weight="600">~J+45</text>
+      <text x="155" y="285" text-anchor="middle" font-family="Inter" font-size="8" fill="#94a3b8">Point d'équilibre</text>
+      <!-- Labels X -->
+      <g font-family="Inter" font-size="9" fill="#64748b" text-anchor="middle">
+        <text x="102" y="275">J+1</text>
+        <text x="186" y="275">J+30</text>
+        <text x="270" y="275">J+60</text>
+        <text x="354" y="275">J+90</text>
+        <text x="480" y="275">J+180</text>
+        <text x="560" y="275">J+365</text>
+      </g>
+      <!-- Valeurs sur la courbe gains -->
+      <text x="354" y="100" font-family="Inter" font-size="9" font-weight="600" fill="#15803d">~1 100€</text>
+      <text x="480" y="46" font-family="Inter" font-size="9" font-weight="600" fill="#15803d">~1 700€</text>
+      <text x="545" y="25" font-family="Inter" font-size="9" font-weight="600" fill="#15803d">~2 000€+</text>
+      <!-- Légende -->
+      <line x1="65" y1="295" x2="85" y2="295" stroke="#15803d" stroke-width="2.5"/>
+      <text x="90" y="298" font-family="Inter" font-size="9" fill="#64748b">Gains cumulés (€ économisés + CA incrémental)</text>
+      <line x1="250" y1="295" x2="270" y2="295" stroke="#b91c1c" stroke-width="2" stroke-dasharray="4 2"/>
+      <text x="275" y="298" font-family="Inter" font-size="9" fill="#64748b">Coûts cumulés (setup + récurrent)</text>
+    </svg>
+  </div>
+
+  <div class="roi-summary">
+    <span>Gains cumulés à 12 mois (CA coffrets + ateliers + heures libérées)</span>
+    <strong>~2 000 € / mois</strong>
+  </div>
+  <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Base : 7 coffrets × 60€ + 2 ateliers × 6 pers. × 35€ + 6h30 économisées × 25€. Point d'équilibre atteint vers J+45 (après setup et premiers coffrets commandés). Hypothèses conservatrices — ne comprend pas l'effet amplificateur du contenu régulier sur le trafic et la notoriété.</p>
+
+  <!-- GOUVERNANCE -->
+  <h3>Gouvernance & sécurité</h3>
+  <table>
+    <thead><tr><th>Dimension</th><th>Règle</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>RGPD</strong></td>
+        <td>Tous les formulaires Tally mentionnent explicitement l'utilisation des données. Brevo permet le désabonnement en 1 clic. Ne pas utiliser les emails clients pour autre chose que la relation GlouGlou.</td>
+      </tr>
+      <tr>
+        <td><strong>Loi Évin</strong></td>
+        <td>Chaque post Instagram/TikTok/newsletter doit inclure la mention "L'abus d'alcool est dangereux pour la santé". Les prompts PACO l'intègrent automatiquement en pied de caption.</td>
+      </tr>
+      <tr>
+        <td><strong>Confidentialité IA</strong></td>
+        <td>Ne jamais coller dans Claude des données personnelles clients (noms, emails, numéros de commande). Les prompts PACO sont génériques — seul le contenu produit (texte du post) est traité par l'IA.</td>
+      </tr>
+      <tr>
+        <td><strong>Validation humaine</strong></td>
+        <td>Jérôme valide chaque post avant publication. Aucune publication automatique sans relecture. L'IA est un assistant, pas un éditeur autonome.</td>
+      </tr>
+      <tr>
+        <td><strong>Monitoring</strong></td>
+        <td>1 vérification mensuelle : Brevo (taux d'ouverture, désabonnements), GA4 (trafic, sources), Meta Insights (engagement). 30 minutes max. Pas de tableau de bord complexe à ce stade.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="footer">
+  <span>Cave GlouGlou · Plan IA & Automations · Juin 2026</span>
+  <span>Michaël Lopez · MasterPrompt · Livrable 2/3</span>
+</div>
+
+</div>
+</body>
+</html>
