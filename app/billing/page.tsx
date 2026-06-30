@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { PriceFigure } from "@/components/PriceFigure";
-import { FormationAccessCodeRedeem } from "@/components/formation/FormationAccessCodeRedeem";
 
 function BillingPageContent() {
   const searchParams = useSearchParams();
@@ -128,8 +127,6 @@ function BillingPageContent() {
           <p className="mt-3 text-xs text-slate-400 text-center">
             Paiement sécurisé Stripe · TVA incluse · Accès immédiat après paiement · Garantie 14 jours
           </p>
-
-          <FormationAccessCodeRedeem />
         </form>
       </div>
     </div>
