@@ -34,8 +34,7 @@ export default function CGVPage() {
               Conditions Générales de Vente
             </h1>
             <p className="mt-2 text-sm text-muted">
-              En vigueur au 1<sup>er</sup> juillet 2026 — applicables à tout achat effectué sur
-              masterprompt.fr.
+              Applicables à tout achat effectué sur masterprompt.fr.
             </p>
           </header>
 
@@ -67,13 +66,15 @@ export default function CGVPage() {
               <li>
                 <strong>Niveau 1 — Formation Master Prompt :</strong> formation en ligne composée de 7
                 modules vidéo, bibliothèque de prompts, exercices et accès à la plateforme de formation.
-                Accès à vie. Prix : 97 € TTC (tarif de lancement : 49 € TTC jusqu&apos;au 30/06/2026).
+                Accès à vie. Prix : 49 € TTC (prix public : 97 € TTC).
               </li>
               <li>
                 <strong>Niveau 2 — Pack IA Activité :</strong> prestation de conseil et de développement
-                comprenant un audit stratégique, une landing page HTML, 20 prompts métier personnalisés,
-                3 automatisations documentées, une session visio de 60 minutes et un plan d&apos;action 30
-                jours. Livraison en 5 jours ouvrés. Prix : 397 € TTC.
+                comprenant, en socle systématique : audit business model, stratégie marketing,
+                automatisations IA documentées, session visio de cadrage (60 minutes) et espace privé de
+                livraison. Selon le profil validé au brief : audit du site existant ou landing HTML (l&apos;un
+                ou l&apos;autre), 20 prompts métier personnalisés et/ou lead magnet avec tunnel d&apos;acquisition
+                uniquement si pertinents pour l&apos;activité du Client. Livraison en 5 jours ouvrés à compter du brief. Prix : 397 € TTC.
               </li>
               <li>
                 <strong>Niveau 3 — Accompagnement IA Transformation :</strong> programme d&apos;accompagnement
@@ -109,8 +110,7 @@ export default function CGVPage() {
             <h2 className={`${syne.className} text-xl font-bold`}>Article 4 — Délais de livraison</h2>
             <ul className="space-y-2 text-sm text-slate-700">
               <li>
-                <strong>Formation :</strong> accès immédiat à la plateforme après paiement (ou au 1<sup>er</sup>{" "}
-                juillet 2026 pour les précommandes effectuées avant cette date).
+                <strong>Formation :</strong> accès immédiat à la plateforme après paiement.
               </li>
               <li>
                 <strong>Pack IA :</strong> livraison des livrables dans un délai de 5 jours ouvrés à compter
@@ -136,13 +136,8 @@ export default function CGVPage() {
             <ul className="space-y-2 text-sm text-slate-700">
               <li>
                 <strong>Formation :</strong> garantie satisfait ou remboursé pendant 14 jours calendaires
-                à compter de la date d&apos;accès, sans justification. Au-delà, aucun remboursement ne
+                à compter de la date d&apos;achat, sans justification. Au-delà, aucun remboursement ne
                 sera accordé.
-              </li>
-              <li>
-                <strong>Formation (précommande) :</strong> si la formation n&apos;est pas livrée à la date
-                prévue du 1<sup>er</sup> juillet 2026, remboursement intégral automatique, sans démarche du
-                Client.
               </li>
               <li>
                 <strong>Pack IA :</strong> prestation sur-mesure. Aucun remboursement une fois la mission
@@ -165,26 +160,7 @@ export default function CGVPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className={`${syne.className} text-xl font-bold`}>Article 6 — Précommande</h2>
-            <p className="text-sm leading-relaxed text-slate-700">
-              La Formation Master Prompt est commercialisée en précommande jusqu&apos;au 30 juin 2026 inclus
-              au tarif de 49 € TTC. En achetant en précommande, le Client :
-            </p>
-            <ul className="list-inside list-disc space-y-1 text-sm text-slate-700">
-              <li>
-                reconnaît que la formation n&apos;est pas encore disponible et sera livrée le 1<sup>er</sup>{" "}
-                juillet 2026 ;
-              </li>
-              <li>bénéficie d&apos;un tarif préférentiel réservé aux précommandants ;</li>
-              <li>
-                bénéficie d&apos;un remboursement intégral automatique si la livraison n&apos;intervient
-                pas à la date prévue.
-              </li>
-            </ul>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className={`${syne.className} text-xl font-bold`}>Article 7 — Obligations du Client</h2>
+            <h2 className={`${syne.className} text-xl font-bold`}>Article 6 — Obligations du Client</h2>
             <p className="text-sm leading-relaxed text-slate-700">
               Le Client s&apos;engage à utiliser les contenus et livrables acquis dans le cadre d&apos;un
               usage personnel ou professionnel licite. Toute revente, reproduction ou diffusion des
@@ -193,7 +169,7 @@ export default function CGVPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className={`${syne.className} text-xl font-bold`}>Article 8 — Responsabilité</h2>
+            <h2 className={`${syne.className} text-xl font-bold`}>Article 7 — Responsabilité</h2>
             <p className="text-sm leading-relaxed text-slate-700">
               Les formations, prompts et conseils fournis constituent des outils de travail. Les résultats
               obtenus par le Client dépendent de sa mise en œuvre propre. Le Vendeur ne saurait être tenu
@@ -203,7 +179,7 @@ export default function CGVPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className={`${syne.className} text-xl font-bold`}>Article 9 — Données personnelles</h2>
+            <h2 className={`${syne.className} text-xl font-bold`}>Article 8 — Données personnelles</h2>
             <p className="text-sm leading-relaxed text-slate-700">
               Le traitement des données personnelles collectées lors de la commande est décrit dans la{" "}
               <Link href="/politique-confidentialite" className="underline underline-offset-4">
@@ -215,7 +191,7 @@ export default function CGVPage() {
 
           <section className="space-y-3">
             <h2 className={`${syne.className} text-xl font-bold`}>
-              Article 10 — Droit applicable et litiges
+              Article 9 — Droit applicable et litiges
             </h2>
             <p className="text-sm leading-relaxed text-slate-700">
               Les présentes CGV sont soumises au droit français. En cas de litige, le Client peut recourir
@@ -236,7 +212,7 @@ export default function CGVPage() {
           </section>
 
           <p className="border-t border-border pt-6 text-xs text-muted">
-            Version en vigueur au 1<sup>er</sup> juillet 2026
+            Dernière mise à jour : juillet 2026
           </p>
         </article>
       </section>

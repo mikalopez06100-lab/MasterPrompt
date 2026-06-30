@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { ensureFormationPublishedIfLaunched } from "@/lib/formation-launch-server";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
 export default async function CoursesPage() {
+  await ensureFormationPublishedIfLaunched();
+
   const modules = await prisma.module.findMany({
     where: { isPublished: true },
     orderBy: { order: "asc" },
@@ -19,20 +22,13 @@ export default async function CoursesPage() {
       {modules.length === 0 ? (
         <div className="card space-y-4 border border-amber-200 bg-amber-50 p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
-            Précommande active
+            Publication imminente
           </p>
           <h2 className="font-heading text-2xl font-bold text-amber-950">
-            Votre accès complet ouvre le 1<sup>er</sup> juillet 2026
+            Les modules arrivent dans cet espace
           </h2>
           <p className="text-sm text-amber-900">
-            Les 7 modules vidéo, la bibliothèque de 300 prompts, les exercices et
-            l&apos;éditeur intelligent seront débloqués automatiquement à cette date dans
-            cet espace. Vous recevrez un email de notification.
-          </p>
-          <p className="text-sm text-amber-900">
-            En attendant, vous pouvez parcourir un aperçu détaillé de l&apos;espace
-            formation et visionner la vidéo de présentation ainsi que les 2 premiers
-            modules déjà disponibles.
+            La mise en ligne est en cours. Rechargez la page ou consultez l&apos;espace formation en attendant.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Link

@@ -18,12 +18,8 @@ const SOCIAL_LINKS = [
   },
 ] as const;
 
-type Props = {
-  launchPriceActive?: boolean;
-};
-
-export function SiteFooter({ launchPriceActive = true }: Props) {
-  const formationLabel = launchPriceActive ? "Formation — 49€ (97€)" : "Formation — 97€";
+export function SiteFooter() {
+  const formationLabel = "Formation — 49€ (97€)";
 
   return (
     <footer className="bg-navy px-4 py-10 text-slate-400 sm:px-6">

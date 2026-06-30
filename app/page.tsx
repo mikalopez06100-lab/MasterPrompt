@@ -6,8 +6,10 @@ import { Navbar } from "@/components/Navbar";
 import { AvatarStack } from "@/components/AvatarStack";
 import { TestimonialsVideo } from "@/components/TestimonialsVideo";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { WhatsAppHelpSection } from "@/components/WhatsAppContact";
 import { ClientCaseCards } from "@/components/landing/ClientCaseCards";
 import { PriceFigure } from "@/components/PriceFigure";
+import { ogImageMeta, SITE_OG } from "@/lib/site-og";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -16,7 +18,7 @@ const headingClass = `${syne.className} tracking-normal [font-stretch:100%] [fon
 const faqs = [
   {
     q: "Par quoi commencer ?",
-    a: "Si vous voulez avancer seul à votre rythme, commencez par la Formation à 97€. Si vous voulez un livrable concret en 5 jours pour structurer votre activité, le Pack IA à 397€ est l'option directe. Si votre activité est déjà installée et que vous cherchez une transformation profonde sur 90 jours, l'Accompagnement se fait sur candidature.",
+    a: "Si vous voulez avancer seul à votre rythme, commencez par la Formation à 49€. Si vous voulez un livrable concret en 5 jours pour structurer votre activité, le Pack IA à 397€ est l'option directe. Si votre activité est déjà installée et que vous cherchez une transformation profonde sur 90 jours, l'Accompagnement se fait sur candidature.",
   },
   {
     q: "Faut-il connaître l'IA ?",
@@ -24,11 +26,11 @@ const faqs = [
   },
   {
     q: "Que couvre le Pack IA ?",
-    a: "Livré en 5 jours ouvrés : un audit stratégique de votre activité, une landing page optimisée, 20 prompts métier personnalisés, 3 automatisations documentées (Zapier ou n8n), une session de travail de 60 minutes en visio, et un plan d'action sur 30 jours.",
+    a: "Un socle identique pour tous : audit business model, stratégie marketing, automatisations IA et espace privé. Ensuite, selon votre profil : audit de votre site existant ou landing HTML si vous n'en avez pas ; 20 prompts métier et/ou lead magnet avec tunnel uniquement si c'est pertinent pour votre activité. Le périmètre exact est validé au brief de cadrage (visio 60 min). Livraison en 5 jours ouvrés.",
   },
   {
     q: "Quelle politique de remboursement ?",
-    a: "La Formation à 97€ est garantie satisfait ou remboursé pendant 14 jours, sans condition. Le Pack IA et l'Accompagnement, étant des prestations sur-mesure démarrées immédiatement, ne sont pas remboursables une fois la mission lancée — mais un appel de cadrage gratuit a lieu avant tout engagement.",
+    a: "La Formation à 49€ est garantie satisfait ou remboursé pendant 14 jours, sans condition. Le Pack IA et l'Accompagnement, étant des prestations sur-mesure démarrées immédiatement, ne sont pas remboursables une fois la mission lancée — mais un appel de cadrage gratuit a lieu avant tout engagement.",
   },
   {
     q: "À qui s'adresse l'Accompagnement (niveau 3) ?",
@@ -43,34 +45,26 @@ const faqs = [
 export const metadata: Metadata = {
   title: "Master Prompt | L'IA utile pour votre activité",
   description:
-    "Maîtrisez l'IA pour votre activité avec la méthode PACO : Formation 97€, Pack IA 397€ et Accompagnement 90 jours. Résultats concrets dès la première semaine.",
+    "Maîtrisez l'IA pour votre activité avec la méthode PACO : Formation 49€, Pack IA 397€ et Accompagnement 90 jours. Résultats concrets dès la première semaine.",
   alternates: { canonical: "https://www.masterprompt.fr/" },
   openGraph: {
     title: "Master Prompt | L'IA utile pour votre activité",
     description:
-      "Méthode PACO, Formation 97€, Pack IA 397€, Accompagnement 90 jours. Des résultats concrets pour votre activité dès la première semaine.",
+      "Méthode PACO, Formation 49€, Pack IA 397€, Accompagnement 90 jours. Des résultats concrets pour votre activité dès la première semaine.",
     url: "https://www.masterprompt.fr/",
     type: "website",
-    images: [
-      {
-        url: "/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Master Prompt",
-      },
-    ],
+    images: ogImageMeta(SITE_OG.default),
   },
   twitter: {
     card: "summary_large_image",
     title: "Master Prompt | L'IA utile pour votre activité",
     description:
-      "Méthode PACO, Formation 97€, Pack IA 397€, Accompagnement 90 jours. Des résultats concrets pour votre activité dès la première semaine.",
-    images: ["/logo.png"],
+      "Méthode PACO, Formation 49€, Pack IA 397€, Accompagnement 90 jours. Des résultats concrets pour votre activité dès la première semaine.",
+    images: ogImageMeta(SITE_OG.default),
   },
 };
 
 export default function LandingPage() {
-  const launchPriceActive = process.env.NEXT_PUBLIC_LAUNCH_PRICE_ACTIVE !== "false";
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -125,6 +119,12 @@ export default function LandingPage() {
             </Link>
             <Link href="/diagnostic" className={`${headingClass} rounded-md border border-white/20 px-6 py-3 text-center text-sm`}>
               Diagnostic gratuit
+            </Link>
+            <Link
+              href="/appel"
+              className={`${headingClass} rounded-md border border-amber-500/60 bg-amber-500/10 px-6 py-3 text-center text-sm font-semibold text-amber-300 transition hover:bg-amber-500/20`}
+            >
+              Choisir un créneau — 30 min
             </Link>
           </div>
         </div>
@@ -241,25 +241,12 @@ export default function LandingPage() {
           >
             <div className="flex items-start justify-between gap-3">
               <p className={`${headingClass} text-xs uppercase tracking-[0.2em] text-muted`}>Niveau 1</p>
-              {launchPriceActive && (
-                <span className="inline-block rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-                  Précommande · 1er juillet
-                </span>
-              )}
             </div>
             <h3 className={`${headingClass} mt-2 text-2xl font-bold`}>Formation</h3>
-            {launchPriceActive ? (
-              <>
-                <p className="mt-4 text-sm text-muted line-through">97€</p>
-                <PriceFigure as="p" className="mt-1 text-4xl font-bold text-amber-600">
-                  49€
-                </PriceFigure>
-              </>
-            ) : (
-              <PriceFigure as="p" className="mt-4 text-4xl font-bold text-navy">
-                97€
-              </PriceFigure>
-            )}
+            <p className="mt-4 text-sm text-muted line-through">97€</p>
+            <PriceFigure as="p" className="mt-1 text-4xl font-bold text-amber-600">
+              49€
+            </PriceFigure>
           </Link>
           <Link
             href="/pack-ia"
@@ -370,11 +357,6 @@ export default function LandingPage() {
                 97€
               </PriceFigure>
             </span>
-            {launchPriceActive && (
-              <span className="rounded-full border border-amber-300/60 bg-amber-100/90 px-2 py-0.5 text-[10px] font-semibold text-amber-900">
-                Précommande
-              </span>
-            )}
           </Link>
           <Link href="/pack-ia" className="inline-flex items-center gap-1 rounded-md bg-amber-500 px-5 py-3 text-sm font-sans font-bold text-navy">
             <span>Pack IA —</span>
@@ -388,7 +370,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <SiteFooter launchPriceActive={launchPriceActive} />
+      <WhatsAppHelpSection
+        context="default"
+        title="Pas sûr quelle offre choisir ?"
+        description="Formation, Pack IA ou Accompagnement — décrivez votre situation en deux lignes, je vous oriente sans engagement."
+      />
+
+      <SiteFooter />
     </main>
   );
 }

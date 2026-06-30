@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { Resend } from "resend";
 import { LEAD_PDF_EMAIL_HTML } from "./email-lead-pdf-html";
+import type { BookingLeadRow } from "@/lib/booking-leads";
 import { getInboundNotificationEmail, getResendFromHeader } from "./resend-addresses";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -107,7 +108,7 @@ function describePreview(source: string, redirectTo: string): {
     ctaUrl: `${APP_URL}/espace-formation`,
     ctaLabel: "Accéder à l'espace formation",
     intro:
-      "Vous avez débloqué l'aperçu de l'espace formation Master Prompt : 7 modules, bibliothèque de prompts, exercices, éditeur intelligent. Les modules complets seront accessibles le 1er juillet 2026 après précommande.",
+      "Vous avez débloqué l'aperçu de l'espace formation Master Prompt : 7 modules, bibliothèque de prompts, exercices, éditeur intelligent. Commandez la formation pour débloquer l'accès complet à tout le contenu.",
   };
 }
 
@@ -322,6 +323,67 @@ export async function sendPreviewAdminNotification({
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erreur inconnue";
     console.error("[sendPreviewAdminNotification]", err);
+    return { ok: false, error: message };
+  }
+}
+
+type DiscoveryBookingContext = {
+  lead: BookingLeadRow;
+  startsAt: string;
+};
+
+function formatParisDateTime(iso: string): string {
+  return new Intl.DateTimeFormat("fr-FR", {
+    timeZone: "Europe/Paris",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(iso));
+}
+
+export async function sendDiscoveryBookingEmails({
+  lead,
+  startsAt,
+}: DiscoveryBookingContext): Promise<{ ok: boolean; error?: string }> {
+  const { notifyAdminBookingReserved } = await import("@/lib/booking-notifications");
+
+  if (!resend) return { ok: false, error: "RESEND_API_KEY non configuré" };
+
+  const when = formatParisDateTime(startsAt);
+  const userHtml = `
+    <p>Bonjour ${lead.prenom},</p>
+    <p>Votre appel discovery Master Prompt est confirmé :</p>
+    <p><strong>${when}</strong> (heure de Paris) · 30 minutes</p>
+    <p>Je vous appellerai ou vous enverrai le lien visio avant le créneau.</p>
+    <p>En attendant, notez 2–3 tâches concrètes où l'IA pourrait vous faire gagner du temps.</p>
+    <p>À très bientôt,<br>Michaël Lopez — Master Prompt</p>
+  `;
+
+  try {
+    const [userRes, adminNotif] = await Promise.all([
+      resend.emails.send({
+        from: FROM_EMAIL,
+        to: [lead.email],
+        subject: `Appel discovery confirmé — ${when}`,
+        html: userHtml,
+      }),
+      notifyAdminBookingReserved({ lead, startsAt }),
+    ]);
+
+    if (userRes.error) {
+      console.error("[sendDiscoveryBookingEmails] user", userRes.error);
+      return { ok: false, error: String(userRes.error.message ?? userRes.error) };
+    }
+    if (!adminNotif.ok) {
+      console.warn("[sendDiscoveryBookingEmails] admin notif partielle ou échouée");
+    }
+    return { ok: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Erreur inconnue";
+    console.error("[sendDiscoveryBookingEmails]", err);
     return { ok: false, error: message };
   }
 }

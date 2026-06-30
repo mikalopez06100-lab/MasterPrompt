@@ -1,13 +1,23 @@
 import Link from "next/link";
 import { getPrismaUserFromSupabase } from "@/lib/auth-server";
+import { hasFormationAccess } from "@/lib/formation-access";
+import { FORMATION_MEMBER_HOME } from "@/lib/formation-member-home";
+import { redirect } from "next/navigation";
+import { ensureFormationPublishedIfLaunched } from "@/lib/formation-launch-server";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const user = await getPrismaUserFromSupabase();
+  if (user && hasFormationAccess(user.subscriptionStatus)) {
+    redirect(FORMATION_MEMBER_HOME);
+  }
+
   const userId = user?.id;
   const firstName = user?.name?.split(" ")[0] ?? "Vous";
+
+  await ensureFormationPublishedIfLaunched();
 
   const [recentPrompts, progressCount, publishedModuleCount] = await Promise.all([
     userId
@@ -34,16 +44,13 @@ export default async function DashboardPage() {
       {formationPending && (
         <section className="rounded-card border border-amber-200 bg-amber-50 p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
-            Précommande active
+            Mise en ligne en cours
           </p>
           <h2 className="mt-2 font-heading text-xl font-bold text-amber-950">
-            Votre accès complet ouvre le 1<sup>er</sup> juillet 2026
+            Les modules sont en cours de publication
           </h2>
           <p className="mt-2 text-sm text-amber-900">
-            Les 7 modules de formation, la bibliothèque de 300 prompts et les exercices
-            seront ajoutés dans cet espace à la livraison. En attendant, vous pouvez
-            visualiser un aperçu de l&apos;espace formation et regarder la vidéo de
-            présentation ainsi que les 2 premiers modules déjà disponibles.
+            Rafraîchissez cette page dans quelques instants ou contactez le support si le contenu n&apos;apparaît pas.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link
@@ -97,7 +104,7 @@ export default async function DashboardPage() {
             </ul>
           )}
           <Link
-            href="/library"
+            href="/espace-formation?tab=bibliotheque"
             className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
           >
             Voir la bibliothèque →
@@ -120,12 +127,12 @@ export default async function DashboardPage() {
             </span>
           </Link>
           <Link
-            href="/exercises"
+            href="/quiz"
             className="card-hover flex min-w-[220px] flex-1 flex-col border border-slate-200/80"
           >
-            <span className="font-semibold text-slate-900">Exercices</span>
+            <span className="font-semibold text-slate-900">Quiz de validation</span>
             <span className="mt-1 text-sm text-slate-500">
-              S&apos;entraîner avec des briefs
+              Tester vos connaissances sur la formation
             </span>
           </Link>
         </div>

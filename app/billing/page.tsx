@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { PriceFigure } from "@/components/PriceFigure";
+import { FormationAccessCodeRedeem } from "@/components/formation/FormationAccessCodeRedeem";
 
 function BillingPageContent() {
   const searchParams = useSearchParams();
@@ -56,16 +57,15 @@ function BillingPageContent() {
       <div className="card p-8 space-y-6">
         <div>
           <p className="text-sm uppercase tracking-[0.16em] text-slate-500 font-semibold mb-2">
-            Offre de lancement — Précommande
+            Formation Master Prompt
           </p>
           <div className="flex items-baseline gap-2">
             <PriceFigure className="text-4xl font-bold text-slate-900">49€</PriceFigure>
             <PriceFigure className="text-sm font-medium text-slate-400 line-through">97€</PriceFigure>
           </div>
           <p className="mt-2 text-sm text-slate-500">
-            Vous réservez dès maintenant votre accès à la formation Master
-            Prompt au tarif de lancement. L&apos;accès complet à la plateforme
-            sera ouvert en avant-première aux personnes ayant précommandé.
+            Accès immédiat à la formation : 7 modules vidéo, bibliothèque de prompts, quiz et
+            éditeur intelligent. Accès à vie.
           </p>
         </div>
 
@@ -77,12 +77,16 @@ function BillingPageContent() {
           )}
           {status === "success" && (
             <div className="rounded-md bg-emerald-50 border border-emerald-200 px-3 py-3 text-sm text-emerald-900 space-y-2">
-              <p className="font-medium">Paiement confirme. Votre acces est active.</p>
+              <p className="font-medium">Paiement confirmé. Votre accès formation est activé.</p>
+              <p className="text-emerald-800">
+                Connectez-vous avec <strong>la même adresse email</strong> que sur Stripe pour
+                débloquer l&apos;espace formation et l&apos;essai correcteur (3 mois).
+              </p>
               <p>
                 Prochaine etape: connectez-vous pour acceder a la plateforme.
               </p>
               {next === "login" && (
-                <Link href="/login?callbackUrl=/dashboard" className="inline-flex text-emerald-900 underline underline-offset-2 font-semibold">
+                <Link href="/login?callbackUrl=/espace-formation" className="inline-flex text-emerald-900 underline underline-offset-2 font-semibold">
                   Se connecter a la plateforme
                 </Link>
               )}
@@ -107,8 +111,7 @@ function BillingPageContent() {
               placeholder="vous@exemple.com"
             />
             <p className="text-xs text-slate-400">
-              L&apos;email utilisé pour recevoir votre reçu et, dès l&apos;ouverture,
-              vos identifiants d&apos;accès à la formation.
+              L&apos;email utilisé pour recevoir votre reçu et activer votre accès à la formation.
             </p>
           </div>
 
@@ -119,14 +122,14 @@ function BillingPageContent() {
           >
             {loading
               ? "Redirection vers Stripe…"
-              : "Valider ma précommande à 49€"}
+              : "Commander à 49€"}
           </button>
 
           <p className="mt-3 text-xs text-slate-400 text-center">
-            Paiement sécurisé Stripe · TVA incluse · Vous serez redirigé vers
-            une page de paiement sécurisée. Accès à la formation dès son
-            ouverture officielle (vous serez prévenu par email en priorité).
+            Paiement sécurisé Stripe · TVA incluse · Accès immédiat après paiement · Garantie 14 jours
           </p>
+
+          <FormationAccessCodeRedeem />
         </form>
       </div>
     </div>
