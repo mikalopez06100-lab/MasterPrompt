@@ -45,6 +45,7 @@ const MODULES: ModuleConfig[] = [
   { num: 5, title: "Ateliers pratiques", duration: "55 min", lessons: 9 },
   { num: 6, title: "Enchaînements IA, vers l'automatisation", duration: "47 min", lessons: 8 },
   { num: 7, title: "Éthique, RGPD et veille continue", duration: "29 min", lessons: 5 },
+  { num: 8, title: "Comment devenir l'entreprise que l'IA recommande", duration: "40 min", lessons: 6, videoEnvVar: "NEXT_PUBLIC_MODULE_8_VIDEO_URL" },
 ];
 
 function resolveModuleVideoUrl(envVar: string | undefined): string | undefined {
@@ -202,7 +203,7 @@ function ModulesTab({ accessLevel }: { accessLevel: AccessLevel }) {
   return (
     <>
       <header>
-        <h2 className={`${syne.className} text-2xl font-bold`}>Présentation + 7 modules vidéo</h2>
+        <h2 className={`${syne.className} text-2xl font-bold`}>Présentation + 7 modules + 1 bonus</h2>
         <p className="mt-1 text-sm text-muted">
           50 leçons · 4h30 de contenu · Captions FR · Téléchargement hors-ligne
         </p>
@@ -222,6 +223,7 @@ function ModulesTab({ accessLevel }: { accessLevel: AccessLevel }) {
           <ModuleVideoCard
             key={mod.num}
             moduleNumber={mod.num}
+            badgeLabel={mod.num === 8 ? "Module 8 bonus" : undefined}
             title={mod.title}
             videoUrl={resolveModuleVideoUrl(mod.videoEnvVar)}
             accessLevel={accessLevel}

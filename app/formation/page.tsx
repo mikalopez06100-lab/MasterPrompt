@@ -183,7 +183,7 @@ export default function FormationPage() {
               ["Module 5 — Ateliers pratiques", "Application sur des cas réels avec retour immédiat. De la pratique pure, pas de théorie."],
               ["Module 6 — Enchaînements IA, vers l'automatisation", "Combiner plusieurs prompts pour créer des flux de travail. Le module différenciant."],
               ["Module 7 — Éthique, RGPD et veille continue", "Ce qu'on ne doit jamais confier à une IA. Protection des données, hallucinations, risques légaux."],
-              ["Bonus — Correcteur PACO", "Analyse et amélioration de vos prompts en temps réel (3 mois inclus)."],
+              ["Module 8 bonus — Comment devenir l'entreprise que l'IA recommande", "Positionnement, contenus et signaux de confiance pour être recommandé par ChatGPT, Perplexity et les moteurs de demain."],
             ].map(([title, desc]) => (
               <article key={title} className="rounded-xl border border-border bg-white p-5">
                 <h3 className="text-base font-semibold text-navy">{title}</h3>
