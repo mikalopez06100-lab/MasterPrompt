@@ -6,42 +6,52 @@ import { Navbar } from "@/components/Navbar";
 import { LockedContent } from "@/components/preview/LockedContent";
 import { ModuleVideoCard } from "@/components/preview/ModuleVideoCard";
 import { PriceFigure } from "@/components/PriceFigure";
-import { getAccessLevel, hasFormationVideoAccess, type AccessLevel } from "@/lib/access-level";
-import { getPrismaUserFromSupabase } from "@/lib/auth-server";
-import { formationVideoApiPath } from "@/lib/formation-video-server";
-import { QuizLauncher } from "@/components/quiz/QuizLauncher";
-import { LibraryContent } from "@/components/library/LibraryContent";
-import { EditorContent } from "@/components/editor/EditorContent";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+import { getAccessLevel, type AccessLevel } from "@/lib/access-level";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
 export const metadata: Metadata = {
-  title: "Espace Formation — Master Prompt",
+  title: "Espace Formation — Aperçu Master Prompt",
   description:
-    "Découvrez en avant-première l'espace formation Master Prompt : 7 modules vidéo + 1 bonus, bibliothèque de prompts, quiz de validation et éditeur intelligent.",
+    "Découvrez en avant-première l'espace formation Master Prompt : 7 modules vidéo, bibliothèque de prompts, exercices et éditeur intelligent.",
   robots: { index: false, follow: false },
   alternates: { canonical: "https://www.masterprompt.fr/espace-formation" },
 };
 
-type TabKey = "modules" | "bibliotheque" | "quiz" | "editeur" | "profil";
+type TabKey = "modules" | "bibliotheque" | "exercices" | "editeur" | "profil";
 
 const TABS: Array<{ key: TabKey; label: string; icon: string }> = [
   { key: "modules", label: "Modules vidéo", icon: "▶" },
   { key: "bibliotheque", label: "Bibliothèque prompts", icon: "✦" },
-  { key: "quiz", label: "Quiz de validation", icon: "?" },
+  { key: "exercices", label: "Exercices pratiques", icon: "✎" },
   { key: "editeur", label: "Éditeur de prompts", icon: "▤" },
   { key: "profil", label: "Mon profil", icon: "◉" },
 ];
 
-import {
-  FORMATION_BONUS_MODULE,
-  FORMATION_MODULES,
-  FORMATION_MODULE_COUNT,
-} from "@/lib/formation-modules";
+type ModuleConfig = {
+  num: number;
+  title: string;
+  duration: string;
+  lessons: number;
+  videoEnvVar?: string;
+};
+
+const MODULES: ModuleConfig[] = [
+  { num: 1, title: "Comprendre l'IA et le Prompt Engineering", duration: "32 min", lessons: 6, videoEnvVar: "NEXT_PUBLIC_MODULE_1_VIDEO_URL" },
+  { num: 2, title: "La méthode PACO", duration: "45 min", lessons: 8, videoEnvVar: "NEXT_PUBLIC_MODULE_2_VIDEO_URL" },
+  { num: 3, title: "Communication & Marketing", duration: "38 min", lessons: 7, videoEnvVar: "NEXT_PUBLIC_MODULE_3_VIDEO_URL" },
+  { num: 4, title: "Gestion & Productivité", duration: "41 min", lessons: 7 },
+  { num: 5, title: "Ateliers pratiques", duration: "55 min", lessons: 9 },
+  { num: 6, title: "Enchaînements IA, vers l'automatisation", duration: "47 min", lessons: 8 },
+  { num: 7, title: "Éthique, RGPD et veille continue", duration: "29 min", lessons: 5 },
+];
+
+function resolveModuleVideoUrl(envVar: string | undefined): string | undefined {
+  if (!envVar) return undefined;
+  const value = process.env[envVar];
+  return value && value.trim().length > 0 ? value : undefined;
+}
 
 const PROMPTS_PREVIEW = [
   { metier: "Coach sportif", title: "Programme personnalisé sur 4 semaines" },
@@ -55,10 +65,9 @@ const PROMPTS_PREVIEW = [
 export default async function EspaceFormationPreviewPage({
   searchParams,
 }: {
-  searchParams?: { tab?: string; metier?: string; template?: string; edit?: string };
+  searchParams?: { tab?: string };
 }) {
   const accessLevel = await getAccessLevel();
-  const member = accessLevel === "full" ? await getPrismaUserFromSupabase() : null;
   if (accessLevel === "none") {
     redirect("/formation#apercu");
   }
@@ -78,77 +87,36 @@ export default async function EspaceFormationPreviewPage({
         <div className="mx-auto max-w-6xl text-sm text-muted">
           <Link href="/">Accueil</Link> <span>›</span>{" "}
           <Link href="/formation">Formation</Link> <span>›</span>{" "}
-          <span>{accessLevel === "full" ? "Espace formation" : "Espace formation (aperçu)"}</span>
+          <span>Espace formation (aperçu)</span>
         </div>
       </section>
 
       <section className="px-4 pb-6 sm:px-6">
-        <div
-          className={`mx-auto max-w-6xl rounded-2xl border p-5 sm:p-6 ${
-            accessLevel === "full"
-              ? "border-emerald-300 bg-emerald-50"
-              : "border-amber-300 bg-amber-50"
-          }`}
-        >
+        <div className="mx-auto max-w-6xl rounded-2xl border border-amber-300 bg-amber-50 p-5 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              {accessLevel === "full" ? (
-                <>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
-                    Accès membre actif
-                  </p>
-                  <h1 className={`${syne.className} mt-1 text-2xl font-bold text-emerald-950 sm:text-3xl`}>
-                    Bienvenue{member?.name ? `, ${member.name.split(" ")[0]}` : ""} — votre espace formation
-                  </h1>
-                  <p className="mt-2 max-w-2xl text-sm text-emerald-900">
-                    Retrouvez ici vos {FORMATION_MODULE_COUNT} modules, le bonus, la bibliothèque et le
-                    quiz de validation. C&apos;est votre parcours principal — pas besoin du dashboard classique.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
-                    Mode aperçu — Accès limité
-                  </p>
-                  <h1 className={`${syne.className} mt-1 text-2xl font-bold text-amber-950 sm:text-3xl`}>
-                    Voici à quoi ressemble votre espace formation
-                  </h1>
-                  <p className="mt-2 max-w-2xl text-sm text-amber-900">
-                    Tous les contenus ci-dessous (vidéos, prompts, quiz, éditeur) sont floutés.
-                    Débloquez l&apos;accès complet en commandant la formation ou avec un code d&apos;accès, puis
-                    connectez-vous avec le même email.
-                  </p>
-                </>
-              )}
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
+                Mode aperçu — Accès limité
+              </p>
+              <h1 className={`${syne.className} mt-1 text-2xl font-bold text-amber-950 sm:text-3xl`}>
+                Voici à quoi ressemble votre espace formation
+              </h1>
+              <p className="mt-2 max-w-2xl text-sm text-amber-900">
+                Tous les contenus ci-dessous (vidéos, prompts, exercices, éditeur) sont floutés.
+                Commandez la formation pour débloquer l&apos;accès complet immédiatement.
+              </p>
             </div>
-            {accessLevel !== "full" ? (
-              <Link
-                href={stripeLink}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="rounded-md bg-amber-500 px-5 py-3 text-sm font-semibold text-navy shadow-sm transition hover:bg-amber-400"
-              >
-                Commander à{" "}
-                <PriceFigure as="span" className="font-semibold text-navy">
-                  49€
-                </PriceFigure>
-              </Link>
-            ) : (
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  href="/correcteur"
-                  className="rounded-md bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-500"
-                >
-                  Correcteur PACO →
-                </Link>
-                <Link
-                  href="/account"
-                  className="rounded-md border border-emerald-400 bg-white px-5 py-3 text-sm font-semibold text-emerald-900 transition hover:bg-emerald-50"
-                >
-                  Mon compte
-                </Link>
-              </div>
-            )}
+            <Link
+              href={stripeLink}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="rounded-md bg-amber-500 px-5 py-3 text-sm font-semibold text-navy shadow-sm transition hover:bg-amber-400"
+            >
+              Commander à{" "}
+              <PriceFigure as="span" className="font-semibold text-navy">
+                49€
+              </PriceFigure>
+            </Link>
           </div>
         </div>
       </section>
@@ -186,30 +154,21 @@ export default async function EspaceFormationPreviewPage({
               <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
                 <div className="h-full w-0 bg-emerald-500" />
               </div>
-              <p className="mt-2">0 / {FORMATION_MODULE_COUNT + 1} modules complétés</p>
-              {accessLevel !== "full" && (
-                <p className="mt-1 italic">Débloqué après achat ou code d&apos;accès</p>
-              )}
+              <p className="mt-2">0 / 50 leçons complétées</p>
+              <p className="mt-1 italic">Débloqué après achat</p>
             </div>
           </aside>
 
           <div className="space-y-6">
             {activeTab === "modules" && <ModulesTab accessLevel={accessLevel} />}
-            {activeTab === "bibliotheque" && (
-              <BibliothequeTab
-                accessLevel={accessLevel}
-                memberId={member?.id}
-                metier={searchParams?.metier}
-              />
-            )}
-            {activeTab === "quiz" && <QuizTab accessLevel={accessLevel} />}
-            {activeTab === "editeur" && <EditeurTab accessLevel={accessLevel} />}
-            {activeTab === "profil" && <ProfilTab accessLevel={accessLevel} member={member} />}
+            {activeTab === "bibliotheque" && <BibliothequeTab />}
+            {activeTab === "exercices" && <ExercicesTab />}
+            {activeTab === "editeur" && <EditeurTab />}
+            {activeTab === "profil" && <ProfilTab />}
           </div>
         </div>
       </section>
 
-      {accessLevel !== "full" && (
       <section className="px-4 pb-16 sm:px-6">
         <div className="mx-auto max-w-6xl rounded-2xl bg-navy p-6 text-white sm:p-8">
           <div className="flex flex-wrap items-center justify-between gap-5">
@@ -234,68 +193,46 @@ export default async function EspaceFormationPreviewPage({
           </div>
         </div>
       </section>
-      )}
     </main>
   );
 }
 
 function ModulesTab({ accessLevel }: { accessLevel: AccessLevel }) {
-  const canWatch = hasFormationVideoAccess(accessLevel);
+  const presentationVideoUrl = process.env.NEXT_PUBLIC_PRESENTATION_VIDEO_URL || undefined;
   return (
     <>
       <header>
-        <h2 className={`${syne.className} text-2xl font-bold`}>
-          Présentation + {FORMATION_MODULE_COUNT} modules + bonus
-        </h2>
-      </header>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <ModuleVideoCard
-          moduleNumber={0}
-          badgeLabel="Présentation"
-          title="Bienvenue dans Master Prompt"
-          videoUrl={canWatch ? formationVideoApiPath(0) : undefined}
-          accessLevel={accessLevel}
-        />
-        {FORMATION_MODULES.map((mod) => (
-          <ModuleVideoCard
-            key={mod.order}
-            moduleNumber={mod.order}
-            title={mod.title}
-            videoUrl={canWatch ? formationVideoApiPath(mod.order) : undefined}
-            accessLevel={accessLevel}
-          />
-        ))}
-      </div>
-
-      <header className="pt-4">
-        <h3 className={`${syne.className} text-xl font-bold`}>Module bonus</h3>
+        <h2 className={`${syne.className} text-2xl font-bold`}>Présentation + 7 modules vidéo</h2>
         <p className="mt-1 text-sm text-muted">
-          Réservé aux membres — {FORMATION_BONUS_MODULE.title}
+          50 leçons · 4h30 de contenu · Captions FR · Téléchargement hors-ligne
         </p>
       </header>
       <div className="grid gap-4 sm:grid-cols-2">
-        <ModuleVideoCard
-          moduleNumber={FORMATION_BONUS_MODULE.order}
-          badgeLabel="Bonus"
-          title={FORMATION_BONUS_MODULE.title}
-          videoUrl={canWatch ? formationVideoApiPath(FORMATION_BONUS_MODULE.order) : undefined}
-          accessLevel={accessLevel}
-        />
+        {presentationVideoUrl && (
+          <ModuleVideoCard
+            moduleNumber={0}
+            badgeLabel="Présentation"
+            title="Bienvenue dans Master Prompt"
+            videoUrl={presentationVideoUrl}
+            accessLevel={accessLevel}
+            alwaysUnlocked
+          />
+        )}
+        {MODULES.map((mod) => (
+          <ModuleVideoCard
+            key={mod.num}
+            moduleNumber={mod.num}
+            title={mod.title}
+            videoUrl={resolveModuleVideoUrl(mod.videoEnvVar)}
+            accessLevel={accessLevel}
+          />
+        ))}
       </div>
     </>
   );
 }
 
-function BibliothequeTab({
-  accessLevel,
-  memberId,
-  metier,
-}: {
-  accessLevel: AccessLevel;
-  memberId?: string;
-  metier?: string;
-}) {
-  const unlocked = accessLevel === "full" && memberId;
+function BibliothequeTab() {
   return (
     <>
       <header>
@@ -304,9 +241,6 @@ function BibliothequeTab({
           Classés par métier · Copiables en un clic · Mis à jour mensuellement
         </p>
       </header>
-      {unlocked ? (
-        <LibraryContent userId={memberId} metier={metier} embedded hideTitle />
-      ) : (
       <div className="grid gap-3 sm:grid-cols-2">
         {PROMPTS_PREVIEW.map((p) => (
           <article key={p.title} className="rounded-xl border border-border bg-white p-4">
@@ -332,44 +266,50 @@ function BibliothequeTab({
           </article>
         ))}
       </div>
-      )}
     </>
   );
 }
 
-function QuizTab({ accessLevel }: { accessLevel: AccessLevel }) {
-  const unlocked = accessLevel === "full";
+function ExercicesTab() {
   return (
     <>
       <header>
-        <h2 className={`${syne.className} text-2xl font-bold`}>Quiz de validation</h2>
+        <h2 className={`${syne.className} text-2xl font-bold`}>Exercices pratiques</h2>
         <p className="mt-1 text-sm text-muted">
-          10 questions QCM · Tirage transversal sur les 7 modules · Score et correction détaillée
+          Briefs réels d&apos;entrepreneurs · Retour automatique sur votre prompt · Niveau progressif
         </p>
       </header>
-      {unlocked ? (
-        <QuizLauncher unlocked />
-      ) : (
-        <article className="rounded-2xl border border-border bg-white p-4">
-          <LockedContent
-            title="Quiz réservé aux membres"
-            subtitle="10 questions · ~3 minutes · Nouveau tirage à chaque tentative"
-            aspect="auto"
-            className="h-48"
-          >
-            <div className="space-y-2 p-5 text-sm text-slate-700">
-              <p>Module 03 · Que signifie l&apos;acronyme PACO ?</p>
-              <p className="text-xs text-muted">4 choix · Correction à la fin du quiz</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {[
+          "Brief 1 : Email de relance impayé",
+          "Brief 2 : Description produit Etsy",
+          "Brief 3 : Post LinkedIn cas client",
+          "Brief 4 : Compte-rendu réunion équipe",
+          "Brief 5 : Argumentaire commercial téléphone",
+          "Brief 6 : Newsletter mensuelle abonnés",
+        ].map((b) => (
+          <article key={b} className="rounded-xl border border-border bg-white p-4">
+            <h3 className="text-sm font-semibold text-navy">{b}</h3>
+            <p className="mt-1 text-xs text-muted">≈ 8 min · Difficulté progressive</p>
+            <div className="mt-3">
+              <LockedContent
+                title="Exercice verrouillé"
+                aspect="auto"
+                className="h-24"
+              >
+                <div className="p-3 text-xs text-slate-700">
+                  Consigne détaillée, contexte client, attendu de livraison, grille d&apos;auto-évaluation…
+                </div>
+              </LockedContent>
             </div>
-          </LockedContent>
-        </article>
-      )}
+          </article>
+        ))}
+      </div>
     </>
   );
 }
 
-function EditeurTab({ accessLevel }: { accessLevel: AccessLevel }) {
-  const unlocked = accessLevel === "full";
+function EditeurTab() {
   return (
     <>
       <header>
@@ -378,9 +318,6 @@ function EditeurTab({ accessLevel }: { accessLevel: AccessLevel }) {
           Analyse votre prompt en temps réel selon la méthode PACO et suggère des améliorations.
         </p>
       </header>
-      {unlocked ? (
-        <EditorContent embedded hideTitle />
-      ) : (
       <article className="rounded-2xl border border-border bg-white p-4">
         <LockedContent
           title="Éditeur réservé aux membres"
@@ -406,19 +343,11 @@ function EditeurTab({ accessLevel }: { accessLevel: AccessLevel }) {
           </div>
         </LockedContent>
       </article>
-      )}
     </>
   );
 }
 
-function ProfilTab({
-  accessLevel,
-  member,
-}: {
-  accessLevel: AccessLevel;
-  member: { name: string | null; email: string } | null;
-}) {
-  const unlocked = accessLevel === "full" && member;
+function ProfilTab() {
   return (
     <>
       <header>
@@ -427,26 +356,6 @@ function ProfilTab({
           Vos paramètres, votre métier, vos préférences de personnalisation des prompts.
         </p>
       </header>
-      {unlocked ? (
-        <article className="rounded-2xl border border-border bg-white p-6">
-          <div className="grid gap-4 text-sm sm:grid-cols-2">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">Nom</p>
-              <p className="mt-1 font-medium text-navy">{member.name ?? "—"}</p>
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">Email</p>
-              <p className="mt-1 font-medium text-navy">{member.email}</p>
-            </div>
-          </div>
-          <Link
-            href="/account"
-            className="mt-6 inline-flex rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90"
-          >
-            Gérer mon compte →
-          </Link>
-        </article>
-      ) : (
       <article className="rounded-2xl border border-border bg-white p-4">
         <LockedContent
           title="Profil verrouillé"
@@ -474,7 +383,6 @@ function ProfilTab({
           </div>
         </LockedContent>
       </article>
-      )}
     </>
   );
 }

@@ -1,12 +1,9 @@
 import Link from "next/link";
-import { ensureFormationPublishedIfLaunched } from "@/lib/formation-launch-server";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
 export default async function CoursesPage() {
-  await ensureFormationPublishedIfLaunched();
-
   const modules = await prisma.module.findMany({
     where: { isPublished: true },
     orderBy: { order: "asc" },
@@ -28,7 +25,8 @@ export default async function CoursesPage() {
             Les modules arrivent dans cet espace
           </h2>
           <p className="text-sm text-amber-900">
-            La mise en ligne est en cours. Rechargez la page ou consultez l&apos;espace formation en attendant.
+            La mise en ligne est en cours. Rechargez la page ou consultez l&apos;espace
+            formation en attendant.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Link

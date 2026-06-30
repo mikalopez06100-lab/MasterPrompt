@@ -1,23 +1,13 @@
 import Link from "next/link";
 import { getPrismaUserFromSupabase } from "@/lib/auth-server";
-import { hasFormationAccess } from "@/lib/formation-access";
-import { FORMATION_MEMBER_HOME } from "@/lib/formation-member-home";
-import { redirect } from "next/navigation";
-import { ensureFormationPublishedIfLaunched } from "@/lib/formation-launch-server";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const user = await getPrismaUserFromSupabase();
-  if (user && hasFormationAccess(user.subscriptionStatus)) {
-    redirect(FORMATION_MEMBER_HOME);
-  }
-
   const userId = user?.id;
   const firstName = user?.name?.split(" ")[0] ?? "Vous";
-
-  await ensureFormationPublishedIfLaunched();
 
   const [recentPrompts, progressCount, publishedModuleCount] = await Promise.all([
     userId
@@ -50,7 +40,9 @@ export default async function DashboardPage() {
             Les modules sont en cours de publication
           </h2>
           <p className="mt-2 text-sm text-amber-900">
-            Rafraîchissez cette page dans quelques instants ou contactez le support si le contenu n&apos;apparaît pas.
+            Les 7 modules de formation, la bibliothèque de 300 prompts et les exercices
+            seront ajoutés dans cet espace très prochainement. En attendant, vous pouvez
+            visualiser un aperçu de l&apos;espace formation.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link
@@ -104,7 +96,7 @@ export default async function DashboardPage() {
             </ul>
           )}
           <Link
-            href="/espace-formation?tab=bibliotheque"
+            href="/library"
             className="mt-4 inline-block text-sm font-semibold text-primary hover:underline"
           >
             Voir la bibliothèque →
@@ -127,12 +119,12 @@ export default async function DashboardPage() {
             </span>
           </Link>
           <Link
-            href="/quiz"
+            href="/exercises"
             className="card-hover flex min-w-[220px] flex-1 flex-col border border-slate-200/80"
           >
-            <span className="font-semibold text-slate-900">Quiz de validation</span>
+            <span className="font-semibold text-slate-900">Exercices</span>
             <span className="mt-1 text-sm text-slate-500">
-              Tester vos connaissances sur la formation
+              S&apos;entraîner avec des briefs
             </span>
           </Link>
         </div>
