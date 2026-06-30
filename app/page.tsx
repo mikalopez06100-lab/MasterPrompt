@@ -9,7 +9,6 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { WhatsAppHelpSection } from "@/components/WhatsAppContact";
 import { ClientCaseCards } from "@/components/landing/ClientCaseCards";
 import { PriceFigure } from "@/components/PriceFigure";
-import { ogImageMeta, SITE_OG } from "@/lib/site-og";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -53,14 +52,21 @@ export const metadata: Metadata = {
       "Méthode PACO, Formation 49€, Pack IA 397€, Accompagnement 90 jours. Des résultats concrets pour votre activité dès la première semaine.",
     url: "https://www.masterprompt.fr/",
     type: "website",
-    images: ogImageMeta(SITE_OG.default),
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Master Prompt",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Master Prompt | L'IA utile pour votre activité",
     description:
       "Méthode PACO, Formation 49€, Pack IA 397€, Accompagnement 90 jours. Des résultats concrets pour votre activité dès la première semaine.",
-    images: ogImageMeta(SITE_OG.default),
+    images: ["/logo.png"],
   },
 };
 

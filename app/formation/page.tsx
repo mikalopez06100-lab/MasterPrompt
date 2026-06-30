@@ -11,11 +11,6 @@ import { UnlockPreviewGate } from "@/components/landing/UnlockPreviewGate";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { WhatsAppHelpSection, WhatsAppButton } from "@/components/WhatsAppContact";
 import { PriceFigure } from "@/components/PriceFigure";
-import {
-  ALL_FORMATION_MODULES,
-  formationProgrammeTitle,
-} from "@/lib/formation-modules";
-import { ogImageMeta, SITE_OG } from "@/lib/site-og";
 
 const syne = Syne({ subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["300", "400", "500"] });
@@ -31,14 +26,14 @@ export const metadata: Metadata = {
       "7 modules, méthode PACO, 300 prompts métier. Accès à vie, garantie 14 jours.",
     type: "website",
     url: "https://www.masterprompt.fr/formation",
-    images: ogImageMeta(SITE_OG.formation),
+    images: ["https://www.masterprompt.fr/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Formation Master Prompt — 49€",
     description:
       "7 modules, méthode PACO, 300 prompts métier. Accès à vie, garantie 14 jours.",
-    images: ogImageMeta(SITE_OG.formation),
+    images: ["https://www.masterprompt.fr/logo.png"],
   },
 };
 
@@ -180,10 +175,19 @@ export default function FormationPage() {
         <div className="mx-auto max-w-6xl">
           <h2 className={`${syne.className} mb-6 text-3xl font-bold`}>Le programme</h2>
           <div className="grid gap-4 md:grid-cols-2">
-            {ALL_FORMATION_MODULES.map((mod) => (
-              <article key={mod.slug} className="rounded-xl border border-border bg-white p-5">
-                <h3 className="text-base font-semibold text-navy">{formationProgrammeTitle(mod)}</h3>
-                <p className="mt-1 text-sm text-muted">{mod.programBlurb}</p>
+            {[
+              ["Module 1 — Comprendre l'IA et le Prompt Engineering", "Comment fonctionnent vraiment les LLMs, pourquoi vos prompts actuels échouent, ce que l'IA peut et ne peut pas faire."],
+              ["Module 2 — La méthode PACO", "Le seul framework dont vous avez besoin. Persona, Action, Contexte, Output appliqués à votre quotidien."],
+              ["Module 3 — Communication & Marketing", "Emails, posts, pages de vente, newsletters, biographies. Templates réutilisables."],
+              ["Module 4 — Gestion & Productivité", "Devis, comptes-rendus, plans d'action, analyse de données, organisation du temps."],
+              ["Module 5 — Ateliers pratiques", "Application sur des cas réels avec retour immédiat. De la pratique pure, pas de théorie."],
+              ["Module 6 — Enchaînements IA, vers l'automatisation", "Combiner plusieurs prompts pour créer des flux de travail. Le module différenciant."],
+              ["Module 7 — Éthique, RGPD et veille continue", "Ce qu'on ne doit jamais confier à une IA. Protection des données, hallucinations, risques légaux."],
+              ["Bonus — Correcteur PACO", "Analyse et amélioration de vos prompts en temps réel (3 mois inclus)."],
+            ].map(([title, desc]) => (
+              <article key={title} className="rounded-xl border border-border bg-white p-5">
+                <h3 className="text-base font-semibold text-navy">{title}</h3>
+                <p className="mt-1 text-sm text-muted">{desc}</p>
               </article>
             ))}
           </div>
