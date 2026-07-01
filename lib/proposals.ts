@@ -68,7 +68,7 @@ export const proposals: ProposalConfig[] = [
     clientName: "Heliotoit",
     title: "Pack IA complet (espace privé)",
     subtitle:
-      "4 livrables HTML hébergés sur votre domaine : audit business model, stratégie marketing, automatisations IA et landing page.",
+      "5 livrables HTML hébergés sur votre domaine : audit business model, stratégie marketing, automatisations IA, focus devis et landing page.",
     deliverables: [
       {
         title: "Audit business model",
@@ -92,15 +92,22 @@ export const proposals: ProposalConfig[] = [
         ctaVariant: "navy",
       },
       {
+        title: "Focus devis — audit & automatisation",
+        description: "Audit ciblé du processus devis et plan d'automatisation HelioToit énergie.",
+        url: "/proposals/heliotoit/focus-devis-automatisation.html",
+        ctaLabel: "Ouvrir le focus devis",
+        ctaVariant: "amber",
+      },
+      {
         title: "Landing page",
         description: "Maquette de landing page (HTML statique).",
         url: "/proposals/heliotoit/landing-page.html",
         ctaLabel: "Ouvrir la landing",
-        ctaVariant: "amber",
+        ctaVariant: "navy",
       },
     ],
     notes: [
-      "Cet espace privé centralise les 4 livrables du Pack IA pour validation client.",
+      "Cet espace privé centralise les 5 livrables du Pack IA pour validation client.",
       "Chaque document peut être ouvert en plein écran via le bouton d'ouverture.",
     ],
   },
@@ -221,6 +228,63 @@ export const proposals: ProposalConfig[] = [
     ],
   },
   {
+    slug: "natibox",
+    clientName: "Natibox",
+    title: "Projet Natibox — Outdoor Living Premium Côte d'Azur",
+    subtitle:
+      "5 livrables HTML : diagnostic, stratégie d'acquisition, dossier direction, landing et simulateur (aperçu ci-dessous).",
+    ogShareSubline: "Natibox · Outdoor Living Premium — dossier confidentiel",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Les cinq documents sont accessibles sur cette page ; le bouton ouvre le livrable en plein écran.",
+        deliverables: [
+          {
+            title: "Diagnostic stratégique",
+            description:
+              "Audit marché, positionnement et opportunités Outdoor Living Premium (HTML autonome).",
+            url: "/proposals/natibox/diagnostic-natibox-outdoor-living.html",
+            ctaLabel: "Ouvrir le diagnostic",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Stratégie d'acquisition",
+            description: "Plan d'acquisition et canaux de croissance (HTML autonome).",
+            url: "/proposals/natibox/strategie-acquisition-natibox-outdoor-living.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Dossier de présentation direction",
+            description: "Synthèse exécutive pour la direction (HTML autonome).",
+            url: "/proposals/natibox/dossier-presentation-direction-natibox.html",
+            ctaLabel: "Ouvrir le dossier",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Landing Azur Outdoor Living",
+            description: "Maquette de landing page (HTML statique).",
+            url: "/proposals/natibox/landing-azur-outdoor-living.html",
+            ctaLabel: "Ouvrir la landing",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Simulateur de projet",
+            description: "Outil interactif de simulation projet (HTML autonome).",
+            url: "/proposals/natibox/simulateur-projet-azur-outdoor-living.html",
+            ctaLabel: "Ouvrir le simulateur",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Un seul lien client : les cinq livrables s'affichent ci-dessous en aperçu intégré.",
+      "Ce lien est réservé aux personnes autorisées.",
+    ],
+  },
+  {
     slug: "interface",
     clientName: "Olivier Colombani — SARL INTERFACE",
     title: "Pack IA complet (espace privé)",
@@ -277,6 +341,72 @@ export const proposals: ProposalConfig[] = [
     ],
   },
   {
+    slug: "aline-malherbe",
+    clientName: "Aline Malherbe",
+    title: "Pack IA — Diagnostic & stratégie marketing",
+    subtitle:
+      "2 livrables HTML : audit stratégique (business model) et stratégie marketing & communication (créatrice-autrice).",
+    ogShareSubline: "Aline Malherbe — diagnostic & stratégie (dossier confidentiel)",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Les deux documents sont accessibles ci-dessous en aperçu intégré ; chaque bouton ouvre le livrable en plein écran.",
+        deliverables: [
+          {
+            title: "Audit stratégique",
+            description:
+              "Diagnostic business model, pivot créatrice-autrice, unit economics et plan 90 jours (HTML autonome).",
+            url: "/proposals/aline-malherbe/audit.html",
+            ctaLabel: "Ouvrir l'audit",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Stratégie marketing",
+            description:
+              "Positionnement, personae, canaux, calendrier éditorial et KPIs (HTML autonome).",
+            url: "/proposals/aline-malherbe/strategie-marketing.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "amber",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Espace privé réservé à Aline Malherbe — lien transmis par Master Prompt.",
+      "Les livrables sont consultables en aperçu intégré ou en plein écran.",
+    ],
+  },
+  {
+    slug: "mondialfeu",
+    clientName: "Mondial Feu",
+    title: "Pack IA — Audit site web",
+    subtitle:
+      "Premier livrable : audit UX, SEO, conversion et citabilité IA de mondialfeu.com (HTML autonome).",
+    ogShareSubline: "Mondial Feu — audit site web (dossier confidentiel)",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Livrable 1 — audit site web. Les prochains livrables Pack IA seront ajoutés ici au fil de la livraison.",
+        deliverables: [
+          {
+            title: "Audit site web",
+            description:
+              "Audit complet de mondialfeu.com : UX, SEO, conversion, performance et citabilité IA.",
+            url: "/proposals/mondialfeu/audit-site-web.html",
+            ctaLabel: "Ouvrir l'audit",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Espace privé réservé à Mondial Feu — lien transmis par Master Prompt.",
+      "Document consultable en aperçu intégré ou en plein écran.",
+    ],
+  },
+  {
     slug: "glouglou",
     clientName: "Cave GlouGlou",
     title: "Pack IA complet (espace privé)",
@@ -317,6 +447,62 @@ export const proposals: ProposalConfig[] = [
     notes: [
       "Un seul lien client : les trois livrables s'affichent ci-dessous.",
       "Ce lien est réservé aux personnes autorisées.",
+    ],
+  },
+  {
+    slug: "hydric",
+    clientName: "HYDRIC",
+    title: "Pack IA — Dossier complet (espace privé)",
+    subtitle:
+      "5 livrables HTML : audit stratégique, stratégie marketing, identité visuelle, landing page et maquettes app.",
+    ogShareSubline: "HYDRIC — dossier Pack IA (confidentiel)",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Les cinq livrables sont accessibles ci-dessous en aperçu intégré ; chaque bouton ouvre le document en plein écran.",
+        deliverables: [
+          {
+            title: "Audit stratégique",
+            description: "Diagnostic stratégique HYDRIC — positionnement, marché et opportunités (HTML autonome).",
+            url: "/proposals/hydric/audit-strategique.html",
+            ctaLabel: "Ouvrir l'audit",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Stratégie marketing",
+            description: "Plan marketing & communication — canaux, messages, calendrier et KPIs.",
+            url: "/proposals/hydric/strategie-marketing.html",
+            ctaLabel: "Ouvrir la stratégie",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Identité visuelle",
+            description: "Brand system v2 — palette, typographies, composants et guidelines.",
+            url: "/proposals/hydric/identite-visuelle.html",
+            ctaLabel: "Ouvrir l'identité",
+            ctaVariant: "navy",
+          },
+          {
+            title: "Landing page",
+            description: "Maquette landing page v2 — proposition de page d'accueil.",
+            url: "/proposals/hydric/landing-page.html",
+            ctaLabel: "Ouvrir la landing",
+            ctaVariant: "amber",
+          },
+          {
+            title: "Maquettes app",
+            description: "Écrans application mobile v2 — parcours et UI HYDRIC.",
+            url: "/proposals/hydric/maquettes-app.html",
+            ctaLabel: "Ouvrir les maquettes",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Espace privé réservé à la cliente HYDRIC — lien transmis par Master Prompt / Safia.",
+      "Documents consultables en aperçu intégré ou en plein écran.",
     ],
   },
   {
@@ -498,6 +684,35 @@ export const proposals: ProposalConfig[] = [
     notes: [
       "Cet espace prive centralise les livrables de deux projets distincts pour le meme client.",
       "Chaque projet est presente dans une section separee pour simplifier la lecture et la validation.",
+    ],
+  },
+  {
+    slug: "wild-spirit-safari",
+    clientName: "Wild Spirit Safari",
+    title: "Audit opérationnel & ROI IA",
+    subtitle:
+      "Premier livrable : audit opérationnel, gisements de productivité et chiffrage du coût d'inaction face à l'automatisation IA (HTML autonome).",
+    ogShareSubline: "Wild Spirit Safari — audit opérationnel & ROI IA (dossier confidentiel)",
+    deliverableGroups: [
+      {
+        title: "Dossier client",
+        description:
+          "Livrable 1 — audit stratégique. Les prochains livrables seront ajoutés ici au fil de la livraison.",
+        deliverables: [
+          {
+            title: "Audit opérationnel & ROI IA",
+            description:
+              "Analyse des gisements de productivité, chiffrage du coût d'inaction et positionnement de l'automatisation IA face au recrutement administratif.",
+            url: "/proposals/wild-spirit-safari/audit-wild-spirit-safari.html",
+            ctaLabel: "Ouvrir l'audit",
+            ctaVariant: "navy",
+          },
+        ],
+      },
+    ],
+    notes: [
+      "Espace privé réservé à Wild Spirit Safari — lien transmis par Master Prompt.",
+      "Document consultable en aperçu intégré ou en plein écran.",
     ],
   },
   {

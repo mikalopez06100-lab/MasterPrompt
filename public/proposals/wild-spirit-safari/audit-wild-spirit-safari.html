@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Audit Stratégique — Wild Spirit Safari</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap');
+:root{
+  --bg-page:#fafafa;--bg-card:#ffffff;--bg-subtle:#f1f5f9;
+  --border:#e2e8f0;--border-strong:#cbd5e1;
+  --text-primary:#0a2540;--text-body:#1a202c;--text-muted:#64748b;--text-inverse:#ffffff;
+  --accent:#d4a574;--accent-dark:#a67c4f;--accent-soft:#faf3e8;
+  --success:#15803d;--success-soft:#f0fdf4;
+  --warning:#b45309;--warning-soft:#fffbeb;
+  --danger:#b91c1c;--danger-soft:#fef2f2;
+  --info:#0369a1;--info-soft:#f0f9ff;
+  --chart-1:#0a2540;--chart-2:#0ea5e9;--chart-3:#d4a574;--chart-4:#15803d;--chart-5:#b91c1c;--chart-muted:#94a3b8;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-serif:'Source Serif 4',Georgia,serif;
+  --fs-xs:.75rem;--fs-sm:.875rem;--fs-base:1rem;--fs-lg:1.125rem;--fs-xl:1.375rem;--fs-2xl:1.75rem;--fs-3xl:2.5rem;--fs-4xl:3.75rem;
+  --sp-1:.25rem;--sp-2:.5rem;--sp-3:.75rem;--sp-4:1rem;--sp-6:1.5rem;--sp-8:2rem;--sp-12:3rem;--sp-16:4rem;--sp-24:6rem;
+  --radius-sm:4px;--radius:8px;--radius-lg:12px;
+  --shadow-sm:0 1px 2px rgba(10,37,64,.04);--shadow:0 1px 3px rgba(10,37,64,.06),0 1px 2px rgba(10,37,64,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);font-size:var(--fs-base);line-height:1.65;color:var(--text-body);background:var(--bg-page);}
+.container{max-width:920px;margin:0 auto;padding:0 var(--sp-12);}
+
+/* COVER */
+.cover{background:var(--text-primary);color:var(--text-inverse);padding:var(--sp-24) var(--sp-12);min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;top:-60px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(212,165,116,.08);}
+.cover::after{content:'';position:absolute;bottom:-40px;left:-60px;width:280px;height:280px;border-radius:50%;background:rgba(14,165,233,.06);}
+.cover-eyebrow{font-size:var(--fs-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--sp-4);}
+.cover-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:var(--sp-6);}
+.cover-subtitle{font-size:var(--fs-lg);color:rgba(255,255,255,.7);max-width:560px;margin-bottom:var(--sp-12);}
+.cover-meta{display:flex;gap:var(--sp-8);font-size:var(--fs-sm);color:rgba(255,255,255,.5);border-top:1px solid rgba(255,255,255,.12);padding-top:var(--sp-6);}
+.cover-meta strong{color:rgba(255,255,255,.85);display:block;margin-bottom:2px;}
+
+/* TOC */
+.toc{background:var(--bg-card);border-bottom:2px solid var(--text-primary);padding:var(--sp-8) 0;}
+.toc-inner{display:flex;gap:var(--sp-6);flex-wrap:wrap;align-items:center;}
+.toc-label{font-size:var(--fs-xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-right:var(--sp-2);}
+.toc a{font-size:var(--fs-sm);color:var(--text-primary);text-decoration:none;font-weight:500;white-space:nowrap;padding:var(--sp-2) var(--sp-3);border-radius:var(--radius-sm);transition:background .15s;}
+.toc a:hover{background:var(--bg-subtle);}
+
+/* SECTIONS */
+section{padding:var(--sp-16) 0;border-bottom:1px solid var(--border);}
+section:last-of-type{border-bottom:none;}
+.section-header{margin-bottom:var(--sp-8);padding-bottom:var(--sp-6);border-bottom:2px solid var(--text-primary);}
+.kicker{display:inline-block;font-size:var(--fs-xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:var(--sp-2);}
+.section-header h2{font-size:var(--fs-2xl);color:var(--text-primary);margin:0 0 var(--sp-3);font-weight:600;line-height:1.2;}
+.section-header .lead{font-size:var(--fs-lg);color:var(--text-muted);}
+
+/* GRILLES KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--sp-4);margin:var(--sp-8) 0;}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:var(--sp-6);box-shadow:var(--shadow-sm);}
+.kpi-label{font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);display:block;margin-bottom:var(--sp-2);}
+.kpi-value{font-size:var(--fs-3xl);font-weight:700;color:var(--text-primary);display:block;line-height:1;font-variant-numeric:tabular-nums;}
+.kpi-sub{font-size:var(--fs-sm);color:var(--text-muted);margin-top:var(--sp-2);display:block;}
+.kpi-delta{font-size:var(--fs-sm);margin-top:var(--sp-2);display:inline-block;font-weight:600;}
+.delta-up{color:var(--success);}
+.delta-down{color:var(--danger);}
+.kpi.kpi-danger{border-color:var(--danger);background:var(--danger-soft);}
+.kpi.kpi-danger .kpi-value{color:var(--danger);}
+.kpi.kpi-warning{border-color:var(--warning);background:var(--warning-soft);}
+.kpi.kpi-warning .kpi-value{color:var(--warning);}
+.kpi.kpi-success{border-color:var(--success);background:var(--success-soft);}
+.kpi.kpi-success .kpi-value{color:var(--success);}
+
+/* CARDS */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:var(--sp-8);box-shadow:var(--shadow-sm);margin:var(--sp-6) 0;}
+.card h3{font-size:var(--fs-xl);color:var(--text-primary);margin-bottom:var(--sp-4);font-weight:600;}
+.card h4{font-size:var(--fs-lg);color:var(--text-primary);margin-bottom:var(--sp-3);font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);margin:var(--sp-6) 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--sp-6);margin:var(--sp-6) 0;}
+
+/* CALLOUTS */
+.callout{padding:var(--sp-4) var(--sp-6);border-left:4px solid var(--text-primary);background:var(--bg-subtle);border-radius:0 var(--radius) var(--radius) 0;margin:var(--sp-6) 0;font-size:var(--fs-base);}
+.callout-warning{border-color:var(--warning);background:var(--warning-soft);}
+.callout-success{border-color:var(--success);background:var(--success-soft);}
+.callout-danger{border-color:var(--danger);background:var(--danger-soft);}
+.callout-accent{border-color:var(--accent);background:var(--accent-soft);}
+
+/* TABLEAU */
+.data-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm);margin:var(--sp-6) 0;}
+.data-table th{text-align:left;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-size:var(--fs-xs);padding:var(--sp-3) var(--sp-4);border-bottom:2px solid var(--text-primary);}
+.data-table td{padding:var(--sp-4);border-bottom:1px solid var(--border);color:var(--text-body);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td.numeric{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
+.tag{display:inline-block;font-size:var(--fs-xs);padding:2px 8px;border-radius:9999px;font-weight:600;}
+.tag-danger{background:var(--danger-soft);color:var(--danger);}
+.tag-success{background:var(--success-soft);color:var(--success);}
+.tag-warning{background:var(--warning-soft);color:var(--warning);}
+.tag-neutral{background:var(--bg-subtle);color:var(--text-muted);}
+
+/* SCORE */
+.score-badge{display:inline-flex;align-items:baseline;gap:var(--sp-1);padding:var(--sp-2) var(--sp-4);border-radius:var(--radius);font-variant-numeric:tabular-nums;}
+.score-value{font-size:var(--fs-2xl);font-weight:700;}
+.score-label{font-size:var(--fs-sm);opacity:.7;}
+.score-good{background:var(--success-soft);color:var(--success);}
+.score-medium{background:var(--warning-soft);color:var(--warning);}
+.score-poor{background:var(--danger-soft);color:var(--danger);}
+
+/* CHART CARD */
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:var(--sp-8);box-shadow:var(--shadow-sm);margin:var(--sp-6) 0;}
+.chart-title{font-size:var(--fs-base);font-weight:600;color:var(--text-primary);margin-bottom:var(--sp-2);}
+.chart-caption{font-size:var(--fs-sm);color:var(--text-muted);margin-bottom:var(--sp-6);}
+
+/* ROADMAP */
+.roadmap{display:flex;flex-direction:column;gap:var(--sp-4);margin:var(--sp-8) 0;}
+.roadmap-item{display:flex;gap:var(--sp-6);align-items:flex-start;}
+.roadmap-step{min-width:36px;height:36px;border-radius:50%;background:var(--text-primary);color:var(--text-inverse);display:flex;align-items:center;justify-content:center;font-size:var(--fs-sm);font-weight:700;flex-shrink:0;}
+.roadmap-step.active{background:var(--accent);}
+.roadmap-content{flex:1;}
+.roadmap-content strong{display:block;font-size:var(--fs-base);color:var(--text-primary);margin-bottom:var(--sp-1);}
+.roadmap-content p{font-size:var(--fs-sm);color:var(--text-muted);}
+.roadmap-content .roadmap-meta{font-size:var(--fs-xs);color:var(--accent-dark);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--sp-2);}
+
+/* ICE TABLE */
+.ice-row-1{background:rgba(212,165,116,.12);}
+.ice-row-2{background:rgba(14,165,233,.08);}
+.ice-row-3{background:rgba(21,128,61,.08);}
+
+/* FOOTER */
+footer{background:var(--text-primary);color:rgba(255,255,255,.6);padding:var(--sp-8) var(--sp-12);font-size:var(--fs-sm);display:flex;justify-content:space-between;align-items:center;}
+footer strong{color:var(--accent);}
+
+/* HYPOTHÈSE BADGE */
+.hyp{font-size:var(--fs-xs);font-style:italic;color:var(--text-muted);}
+
+@media print{
+  body{background:white;}
+  .container{max-width:720px;padding:24px;}
+  .no-print{display:none!important;}
+  .toc{position:static!important;}
+  .cover{min-height:280px;}
+  .page-break{page-break-after:always;}
+  .avoid-break{page-break-inside:avoid;}
+  .card,.chart-card,.callout{break-inside:avoid;box-shadow:none;}
+  a{color:var(--text-body);text-decoration:none;}
+}
+@page{size:A4;margin:18mm 16mm;}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="container">
+    <p class="cover-eyebrow">Diagnostic stratégique confidentiel</p>
+    <h1 class="cover-title">Wild Spirit Safari<br>Audit opérationnel & ROI IA</h1>
+    <p class="cover-subtitle">Analyse des gisements de productivité, chiffrage du coût d'inaction et positionnement de l'automatisation IA face au recrutement administratif.</p>
+    <div class="cover-meta">
+      <div><strong>Client</strong>Wild Spirit Safari — Paris / Arusha</div>
+      <div><strong>Produit par</strong>Michaël Lopez · MasterPrompt</div>
+      <div><strong>Date</strong>Juillet 2026</div>
+      <div><strong>Statut</strong>Hypothèses pré-call — à affiner</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOC -->
+<nav class="toc no-print">
+  <div class="container">
+    <div class="toc-inner">
+      <span class="toc-label">Sommaire</span>
+      <a href="#exec">Résumé exécutif</a>
+      <a href="#diagnostic">Diagnostic</a>
+      <a href="#hemorragies">Hémorragies</a>
+      <a href="#benchmark">IA vs Recrutement</a>
+      <a href="#scenarios">Scénarios ROI</a>
+      <a href="#roadmap">Feuille de route</a>
+      <a href="#ice">Priorisation ICE</a>
+      <a href="#annexes">Annexes</a>
+    </div>
+  </div>
+</nav>
+
+<!-- RÉSUMÉ EXÉCUTIF -->
+<section id="exec">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">01 · Résumé exécutif</span>
+      <h2>Verdict global</h2>
+      <p class="lead">Cinq constats, un verdict, une direction.</p>
+    </div>
+
+    <div class="two-col avoid-break">
+      <div>
+        <p style="font-size:var(--fs-lg);line-height:1.7;margin-bottom:var(--sp-6);">Wild Spirit Safari est une agence de safari luxe avec 30 ans d'actifs accumulés — expertise, réseau prestataires, flotte propre — mais son modèle opérationnel est structurellement déficitaire : elle consomme plus de valeur en temps qu'elle n'en produit en CA chaque mois.</p>
+        <p style="font-size:var(--fs-base);color:var(--text-muted);line-height:1.7;">Le recrutement administratif envisagé accélérerait l'hémorragie sans la résoudre. L'automatisation IA est la seule option qui agit sur la cause (absence de qualification et de réactivité) plutôt que sur le symptôme (surcharge de production).</p>
+      </div>
+      <div>
+        <div style="background:var(--text-primary);color:white;border-radius:var(--radius-lg);padding:var(--sp-8);">
+          <p style="font-size:var(--fs-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:var(--sp-4);">Score de viabilité actuel</p>
+          <div class="score-badge score-medium" style="background:rgba(180,83,9,.2);color:#fbbf24;margin-bottom:var(--sp-6);">
+            <span class="score-value">42</span><span class="score-label">/ 100</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:var(--sp-3);">
+            <div style="display:flex;justify-content:space-between;font-size:var(--fs-sm);"><span style="color:rgba(255,255,255,.7);">Offre & différenciation</span><strong>78/100</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--fs-sm);"><span style="color:rgba(255,255,255,.7);">Efficacité commerciale</span><strong style="color:#f87171;">12/100</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--fs-sm);"><span style="color:rgba(255,255,255,.7);">Scalabilité opérationnelle</span><strong style="color:#f87171;">8/100</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--fs-sm);"><span style="color:rgba(255,255,255,.7);">Infrastructure digitale</span><strong style="color:#f87171;">15/100</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--fs-sm);"><span style="color:rgba(255,255,255,.7);">Réactivité commerciale</span><strong style="color:#f87171;">20/100</strong></div>
+            <div style="display:flex;justify-content:space-between;font-size:var(--fs-sm);"><span style="color:rgba(255,255,255,.7);">Notoriété & réputation</span><strong style="color:#86efac;">82/100</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-8);">
+      <h3 style="font-size:var(--fs-xl);color:var(--text-primary);margin-bottom:var(--sp-6);font-weight:600;">5 constats clés</h3>
+      <div style="display:flex;flex-direction:column;gap:var(--sp-4);">
+        <div class="callout callout-danger avoid-break"><strong>Constat 1 — Déficit de valeur chronique.</strong> Sur 100 demandes mensuelles traitées, 97 à 98 ne génèrent aucun revenu. Le coût implicite en temps dépasse le CA mensuel moyen. Wild Spirit Safari travaille à perte sur son temps chaque mois depuis des années.</div>
+        <div class="callout callout-danger avoid-break"><strong>Constat 2 — Absence totale de qualification en amont.</strong> Marie produit des proposals complètes (2 à 10h/dossier) pour des prospects non filtrés — budget inconnu, horizon flou, destination hors scope inclus. Aucun process commercial de tri n'existe.</div>
+        <div class="callout callout-warning avoid-break"><strong>Constat 3 — Perte de leads chauds par délai de réponse.</strong> Sur un marché luxe où 3 agences se comparent simultanément, le délai de réponse est un signal de qualité. Les prospects à budget confirmé partent chez le concurrent le plus rapide.</div>
+        <div class="callout callout-warning avoid-break"><strong>Constat 4 — Actifs différenciants sous-exploités.</strong> La flotte propre de 16 véhicules et les 30 ans de data prestataires constituent un avantage concurrentiel réel — mais invisible dans la communication actuelle. La réputation client (avis TripAdvisor/Routard) nomme les guides individuellement, un matériau de preuve sociale inexploité.</div>
+        <div class="callout callout-success avoid-break"><strong>Constat 5 — Potentiel de scaling élevé sans recrutement.</strong> Le business model luxe sur-mesure à 10-15k€ de ticket moyen n'a pas besoin de volume — il a besoin d'efficacité. Doubler les closings (4-5/mois) sans augmenter le volume de demandes suffit à scaler de 60 à 100% le CA.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNOSTIC OPÉRATIONNEL -->
+<section id="diagnostic">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">02 · Diagnostic opérationnel</span>
+      <h2>Le coût réel de l'inaction</h2>
+      <p class="lead">Ce que les chiffres actuels impliquent concrètement.</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi kpi-warning">
+        <span class="kpi-label">Demandes mensuelles</span>
+        <strong class="kpi-value">100</strong>
+        <span class="kpi-sub">Quasi toutes reçoivent une offre</span>
+      </div>
+      <div class="kpi kpi-danger">
+        <span class="kpi-label">Taux de conversion</span>
+        <strong class="kpi-value">2,5%</strong>
+        <span class="kpi-sub">2-3 closings / mois</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Ticket moyen</span>
+        <strong class="kpi-value">12,5k€</strong>
+        <span class="kpi-sub">Fourchette 10-15k€</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">CA annuel</span>
+        <strong class="kpi-value">300k€</strong>
+        <span class="kpi-sub">20-30 clients actifs/an</span>
+      </div>
+      <div class="kpi kpi-danger">
+        <span class="kpi-label">Temps/dossier (moy.)</span>
+        <strong class="kpi-value">5h</strong>
+        <span class="kpi-sub">Fourchette 2-10h</span>
+      </div>
+      <div class="kpi kpi-danger">
+        <span class="kpi-label">Temps production/mois</span>
+        <strong class="kpi-value">~350h</strong>
+        <span class="kpi-sub">Sur devis non convertis à 97%</span>
+      </div>
+    </div>
+
+    <div class="callout callout-danger avoid-break">
+      <strong>Calcul du coût d'inaction.</strong> Si Marie valorise son heure à 150€ (300k€/an ÷ 2 000h travaillées), elle dépense <strong>~52 500€/mois en temps de production</strong> pour générer 25 000€ de CA mensuel moyen. Elle est en déficit de valeur de l'ordre de 27 000€/mois sur son seul temps de devis. Ce chiffre seul justifie une intervention immédiate.
+    </div>
+
+    <div class="chart-card avoid-break">
+      <p class="chart-title">Répartition du temps mensuel — état actuel</p>
+      <p class="chart-caption">Sur 350h estimées de production mensuelle, 340h concernent des dossiers non convertis. <span class="hyp">Hypothèse : 70 proposals complets × 5h moy. = 350h/mois.</span></p>
+      <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Fond -->
+        <line x1="60" y1="240" x2="580" y2="240" stroke="#cbd5e1" stroke-width="1"/>
+        <line x1="60" y1="40" x2="60" y2="240" stroke="#cbd5e1" stroke-width="1"/>
+        <!-- Ticks Y -->
+        <g font-family="Inter" font-size="11" fill="#64748b">
+          <text x="52" y="244" text-anchor="end">0</text>
+          <text x="52" y="194" text-anchor="end">50h</text>
+          <text x="52" y="144" text-anchor="end">150h</text>
+          <text x="52" y="94" text-anchor="end">250h</text>
+          <text x="52" y="44" text-anchor="end">350h</text>
+        </g>
+        <!-- Lignes grille -->
+        <line x1="60" y1="194" x2="580" y2="194" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="60" y1="144" x2="580" y2="144" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="60" y1="94" x2="580" y2="94" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4 4"/>
+        <!-- Barre : temps sur non-convertis (340h) -->
+        <rect x="120" y="44" width="120" height="196" fill="#b91c1c" rx="4"/>
+        <text x="180" y="38" font-family="Inter" font-size="13" font-weight="700" fill="#b91c1c" text-anchor="middle">340h perdues</text>
+        <!-- Barre : temps sur ventes (10h) -->
+        <rect x="280" y="230" width="120" height="10" fill="#15803d" rx="4"/>
+        <text x="340" y="225" font-family="Inter" font-size="13" font-weight="700" fill="#15803d" text-anchor="middle">~10h productives</text>
+        <!-- Barre : autres (admin, etc.) 60h -->
+        <rect x="440" y="184" width="120" height="56" fill="#0a2540" rx="4" opacity=".5"/>
+        <text x="500" y="178" font-family="Inter" font-size="13" font-weight="700" fill="#0a2540" text-anchor="middle">~60h admin</text>
+        <!-- X labels -->
+        <g font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">
+          <text x="180" y="262">Production devis perdus</text>
+          <text x="340" y="262">Devis convertis</text>
+          <text x="500" y="262">Admin / autres</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="two-col avoid-break">
+      <div class="card">
+        <h4>Infrastructure actuelle</h4>
+        <table class="data-table">
+          <thead><tr><th>Outil</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td>Site WordPress</td><td><span class="tag tag-warning">Basique</span></td></tr>
+            <tr><td>Email (contact)</td><td><span class="tag tag-neutral">Manuel</span></td></tr>
+            <tr><td>CRM</td><td><span class="tag tag-danger">Inexistant</span></td></tr>
+            <tr><td>Qualification leads</td><td><span class="tag tag-danger">Inexistante</span></td></tr>
+            <tr><td>Génération devis</td><td><span class="tag tag-danger">100% manuel</span></td></tr>
+            <tr><td>Suivi dossiers</td><td><span class="tag tag-danger">Mémoire / mail</span></td></tr>
+            <tr><td>Coût infra mensuel</td><td><span class="tag tag-success">~0€</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4>Actifs différenciants réels</h4>
+        <table class="data-table">
+          <thead><tr><th>Actif</th><th>Valeur</th></tr></thead>
+          <tbody>
+            <tr><td>Ancienneté (1995)</td><td><span class="tag tag-warning">Standard marché</span></td></tr>
+            <tr><td>16 véhicules en propre</td><td><span class="tag tag-success">Rare, fort</span></td></tr>
+            <tr><td>Bureau physique Arusha</td><td><span class="tag tag-success">Contrôle qualité</span></td></tr>
+            <tr><td>Guides maison (nommés)</td><td><span class="tag tag-success">Preuve sociale</span></td></tr>
+            <tr><td>30 ans de data prestataires</td><td><span class="tag tag-success">Capital irréplicable</span></td></tr>
+            <tr><td>Réputation Routard/LP</td><td><span class="tag tag-success">Autorité éditoriale</span></td></tr>
+            <tr><td>Communication digitale</td><td><span class="tag tag-danger">Nulle</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HÉMORRAGIES -->
+<section id="hemorragies">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">03 · Analyse des pertes</span>
+      <h2>Deux hémorragies distinctes</h2>
+      <p class="lead">Chacune appelle un outil différent, dans un ordre précis.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card" style="border-top:4px solid var(--danger);">
+        <span class="kicker" style="color:var(--danger);">Hémorragie A — Réactivité</span>
+        <h3>Leads chauds perdus par délai</h3>
+        <p style="margin-bottom:var(--sp-4);">Un prospect luxe voyage sur-mesure compare simultanément 2 à 4 agences. Il envoie sa demande à toutes. La première qui répond de manière personnalisée et structurée remporte l'attention — pas nécessairement la meilleure offre.</p>
+        <p style="margin-bottom:var(--sp-4);color:var(--text-muted);">Marie, saturée de production, répond probablement sous 24 à 72h. Sur ce type de ticket (10-15k€), 1 à 2 leads chauds perdus/mois = 10 000 à 30 000€ de CA évaporé.</p>
+        <div class="callout callout-danger" style="margin:var(--sp-4) 0;">
+          <strong>Impact estimé :</strong> -1 à 2 closings/mois par délai seul, soit -10 000 à 30 000€/mois de CA non réalisé.
+        </div>
+        <p style="font-size:var(--fs-sm);color:var(--text-muted);font-style:italic;">Solution : réponse IA automatique en moins de 5 min, 24h/24, personnalisée et signée Marie.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--warning);">
+        <span class="kicker" style="color:var(--warning);">Hémorragie B — Qualification</span>
+        <h3>Proposals produits pour des non-acheteurs</h3>
+        <p style="margin-bottom:var(--sp-4);">Sans filtre en amont, Marie produit des dossiers complets de 2 à 10h pour des prospects avec budget sous-dimensionné, horizon trop proche, ou destination hors scope.</p>
+        <p style="margin-bottom:var(--sp-4);color:var(--text-muted);">Un formulaire de pré-qualification bien calibré (budget, horizon, destination, groupe) peut éliminer 60 à 70% des demandes non-acheteurs avant tout contact humain — sans perte de leads réels.</p>
+        <div class="callout callout-warning" style="margin:var(--sp-4) 0;">
+          <strong>Impact estimé :</strong> -200 à 280h/mois de production inutile récupérables, soit 30 000 à 42 000€ de valeur temps libérée mensuellement.
+        </div>
+        <p style="font-size:var(--fs-sm);color:var(--text-muted);font-style:italic;">Solution : formulaire scoring automatique → tri leads → accès calendrier conditionnel.</p>
+      </div>
+    </div>
+
+    <div class="chart-card avoid-break">
+      <p class="chart-title">Funnel de conversion — état actuel vs cible avec automatisation</p>
+      <p class="chart-caption">Projection sur hypothèse de qualification à 65% + amélioration réactivité. <span class="hyp">Toutes les valeurs "cible" sont des hypothèses de travail.</span></p>
+      <svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- Actuel -->
+        <g>
+          <text x="150" y="25" font-family="Inter" font-size="13" font-weight="700" fill="#0a2540" text-anchor="middle">ÉTAT ACTUEL</text>
+          <!-- Étape 1 -->
+          <polygon points="50,40 250,40 230,90 70,90" fill="#0a2540" opacity=".15"/>
+          <text x="150" y="70" font-family="Inter" font-size="12" fill="#0a2540" text-anchor="middle" font-weight="600">100 demandes</text>
+          <!-- Étape 2 -->
+          <polygon points="70,95 230,95 210,145 90,145" fill="#0a2540" opacity=".25"/>
+          <text x="150" y="125" font-family="Inter" font-size="12" fill="#0a2540" text-anchor="middle" font-weight="600">~70 proposals produits</text>
+          <!-- Étape 3 -->
+          <polygon points="90,150 210,150 195,200 105,200" fill="#0a2540" opacity=".4"/>
+          <text x="150" y="180" font-family="Inter" font-size="12" fill="#0a2540" text-anchor="middle" font-weight="600">~10 réponses prospects</text>
+          <!-- Étape 4 -->
+          <polygon points="110,205 190,205 180,255 120,255" fill="#b91c1c" opacity=".8"/>
+          <text x="150" y="235" font-family="Inter" font-size="12" fill="white" text-anchor="middle" font-weight="700">2-3 closings (2,5%)</text>
+        </g>
+        <!-- Flèche séparateur -->
+        <text x="310" y="155" font-family="Inter" font-size="28" fill="#d4a574" text-anchor="middle">→</text>
+        <!-- Cible -->
+        <g>
+          <text x="480" y="25" font-family="Inter" font-size="13" font-weight="700" fill="#0a2540" text-anchor="middle">CIBLE AVEC IA</text>
+          <!-- Étape 1 -->
+          <polygon points="360,40 600,40 580,90 380,90" fill="#0a2540" opacity=".15"/>
+          <text x="480" y="70" font-family="Inter" font-size="12" fill="#0a2540" text-anchor="middle" font-weight="600">100 demandes</text>
+          <!-- Étape 2 - qualification filtre -->
+          <polygon points="380,95 580,95 550,145 410,145" fill="#d4a574" opacity=".4"/>
+          <text x="480" y="125" font-family="Inter" font-size="12" fill="#0a2540" text-anchor="middle" font-weight="600">35 leads qualifiés (score IA)</text>
+          <!-- Étape 3 -->
+          <polygon points="410,150 550,150 530,200 430,200" fill="#0a2540" opacity=".4"/>
+          <text x="480" y="180" font-family="Inter" font-size="12" fill="#0a2540" text-anchor="middle" font-weight="600">~20 réponses prospects</text>
+          <!-- Étape 4 -->
+          <polygon points="430,205 530,205 515,255 445,255" fill="#15803d" opacity=".85"/>
+          <text x="480" y="235" font-family="Inter" font-size="12" fill="white" text-anchor="middle" font-weight="700">5-7 closings (18-20%)</text>
+        </g>
+        <!-- Légende -->
+        <g font-family="Inter" font-size="11" fill="#64748b">
+          <rect x="50" y="280" width="12" height="12" fill="#b91c1c" rx="2"/>
+          <text x="68" y="291">Actuel : 2-3 closings = 25-37k€/mois</text>
+          <rect x="300" y="280" width="12" height="12" fill="#15803d" rx="2"/>
+          <text x="318" y="291">Cible : 5-7 closings = 62-87k€/mois</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARK IA VS RECRUTEMENT -->
+<section id="benchmark">
+  <div class="container page-break">
+    <div class="section-header">
+      <span class="kicker">04 · Analyse comparative</span>
+      <h2>IA + Automatisation vs Recrutement administratif</h2>
+      <p class="lead">Même problème, deux réponses. Une seule traite la cause.</p>
+    </div>
+
+    <div class="callout callout-danger avoid-break">
+      <strong>Le diagnostic brutal.</strong> Un assistant administratif accélérerait la production de devis non qualifiés. Il ne résoudrait pas le taux de conversion de 2,5%. Il ajouterait 26 000 à 30 000€ de charges fixes annuelles sans améliorer la marge. C'est un investissement pour produire plus vite ce qui ne se vend pas.
+    </div>
+
+    <table class="data-table avoid-break">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>Assistant administratif</th>
+          <th>Automatisation IA (MasterPrompt)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Coût mensuel</strong></td>
+          <td class="numeric"><span class="tag tag-danger">2 200 – 2 500€ fixes</span></td>
+          <td class="numeric"><span class="tag tag-success">150 – 400€ infra</span></td>
+        </tr>
+        <tr>
+          <td><strong>Coût annuel total</strong></td>
+          <td class="numeric"><span class="tag tag-danger">26 400 – 30 000€</span></td>
+          <td class="numeric"><span class="tag tag-success">1 800 – 4 800€ + setup</span></td>
+        </tr>
+        <tr>
+          <td><strong>Réactivité (délai réponse)</strong></td>
+          <td>Heures ouvrées uniquement</td>
+          <td>< 5 min, 24h/24, 7j/7</td>
+        </tr>
+        <tr>
+          <td><strong>Qualification des leads</strong></td>
+          <td>Lit et transfère, ne filtre pas</td>
+          <td>Score automatique, trie sans consommer Marie</td>
+        </tr>
+        <tr>
+          <td><strong>Production devis</strong></td>
+          <td>Manuel, même rythme</td>
+          <td>Draft depuis base Notion en 10-15 min</td>
+        </tr>
+        <tr>
+          <td><strong>Résout le taux de conversion ?</strong></td>
+          <td><span class="tag tag-danger">Non</span></td>
+          <td><span class="tag tag-success">Oui — sur la cause</span></td>
+        </tr>
+        <tr>
+          <td><strong>Montée en compétence</strong></td>
+          <td>3 à 6 mois pour être opérationnel</td>
+          <td>Déployé en 4 à 8 semaines</td>
+        </tr>
+        <tr>
+          <td><strong>Scalabilité</strong></td>
+          <td>1 personne = 1 capacité</td>
+          <td>100 ou 300 demandes, même coût</td>
+        </tr>
+        <tr>
+          <td><strong>Connaissance métier initiale</strong></td>
+          <td>Nulle, à construire</td>
+          <td>Alimentée par la base Marie dès le départ</td>
+        </tr>
+        <tr>
+          <td><strong>Risque de dépendance</strong></td>
+          <td>Élevé (arrêt = régression immédiate)</td>
+          <td>Faible (automatisations documentées)</td>
+        </tr>
+        <tr>
+          <td><strong>Valorise les actifs existants ?</strong></td>
+          <td>Non</td>
+          <td>Oui — capitalise sur la data et l'expertise</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="kpi-grid">
+      <div class="kpi kpi-danger">
+        <span class="kpi-label">Coût recrutement / 3 ans</span>
+        <strong class="kpi-value">79k€</strong>
+        <span class="kpi-sub">Sans résoudre la conversion</span>
+      </div>
+      <div class="kpi kpi-success">
+        <span class="kpi-label">Coût IA / 3 ans (infra)</span>
+        <strong class="kpi-value">~8k€</strong>
+        <span class="kpi-sub">Setup one-shot + infra mensuelle</span>
+      </div>
+      <div class="kpi kpi-success">
+        <span class="kpi-label">Économie sur 3 ans</span>
+        <strong class="kpi-value">~71k€</strong>
+        <span class="kpi-sub">Hors gains CA additionnel</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">ROI break-even IA</span>
+        <strong class="kpi-value">< 1 mois</strong>
+        <span class="kpi-sub">Dès le 1er closing récupéré</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCÉNARIOS ROI -->
+<section id="scenarios">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">05 · Projections financières</span>
+      <h2>3 scénarios sur 12 mois</h2>
+      <p class="lead">Fourchette conservatrice à agressive selon la vitesse d'implémentation.</p>
+    </div>
+
+    <div class="three-col avoid-break">
+      <div class="card" style="border-top:4px solid var(--chart-muted);">
+        <span class="kicker">Scénario conservateur</span>
+        <h3>+50% CA</h3>
+        <p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-4);">Réactivité seule améliorée (réponse auto rapide), pas encore de qualification complète ni de génération de devis.</p>
+        <table class="data-table">
+          <tbody>
+            <tr><td>Closings/mois</td><td class="numeric"><strong>3-4</strong></td></tr>
+            <tr><td>CA mensuel moy.</td><td class="numeric"><strong>37-50k€</strong></td></tr>
+            <tr><td>CA annuel</td><td class="numeric"><strong>~440k€</strong></td></tr>
+            <tr><td>Gain vs actuel</td><td class="numeric"><span class="delta-up">+140k€</span></td></tr>
+            <tr><td>Temps prod. Marie</td><td class="numeric">-30%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="border-top:4px solid var(--accent);">
+        <span class="kicker">Scénario médian</span>
+        <h3>+130% CA</h3>
+        <p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-4);">Qualification complète + génération devis assistée depuis base Notion. Marie se concentre sur les leads qualifiés.</p>
+        <table class="data-table">
+          <tbody>
+            <tr><td>Closings/mois</td><td class="numeric"><strong>5-6</strong></td></tr>
+            <tr><td>CA mensuel moy.</td><td class="numeric"><strong>62-75k€</strong></td></tr>
+            <tr><td>CA annuel</td><td class="numeric"><strong>~810k€</strong></td></tr>
+            <tr><td>Gain vs actuel</td><td class="numeric"><span class="delta-up">+510k€</span></td></tr>
+            <tr><td>Temps prod. Marie</td><td class="numeric">-70%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="border-top:4px solid var(--chart-2);">
+        <span class="kicker">Scénario agressif</span>
+        <h3>+200% CA</h3>
+        <p style="color:var(--text-muted);font-size:var(--fs-sm);margin-bottom:var(--sp-4);">Full stack automatisé + stratégie d'acquisition digitale activée (SEO/GEO). Volume de demandes qualifiées doublé.</p>
+        <table class="data-table">
+          <tbody>
+            <tr><td>Closings/mois</td><td class="numeric"><strong>8-10</strong></td></tr>
+            <tr><td>CA mensuel moy.</td><td class="numeric"><strong>100-125k€</strong></td></tr>
+            <tr><td>CA annuel</td><td class="numeric"><strong>~1,3M€</strong></td></tr>
+            <tr><td>Gain vs actuel</td><td class="numeric"><span class="delta-up">+1M€</span></td></tr>
+            <tr><td>Temps prod. Marie</td><td class="numeric">-85%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout callout-accent avoid-break">
+      <strong>Note méthodologique.</strong> Ces projections sont construites sur hypothèses pré-call. Les chiffres réels (marge nette, taux de refus actuel, répartition du temps de Marie) les affineront après le rendez-vous. Ce qui ne change pas : la direction et l'ordre de grandeur.
+    </div>
+
+    <div class="chart-card avoid-break">
+      <p class="chart-title">CA projeté par scénario (12 mois post-implémentation)</p>
+      <p class="chart-caption">Comparaison avec situation actuelle (base 300k€/an).</p>
+      <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg">
+        <line x1="60" y1="260" x2="580" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+        <line x1="60" y1="40" x2="60" y2="260" stroke="#cbd5e1" stroke-width="1"/>
+        <!-- Grille -->
+        <line x1="60" y1="216" x2="580" y2="216" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+        <line x1="60" y1="172" x2="580" y2="172" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+        <line x1="60" y1="128" x2="580" y2="128" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+        <line x1="60" y1="84" x2="580" y2="84" stroke="#e2e8f0" stroke-dasharray="4 4"/>
+        <!-- Ticks Y -->
+        <g font-family="Inter" font-size="11" fill="#64748b" text-anchor="end">
+          <text x="52" y="264">0</text>
+          <text x="52" y="220">300k€</text>
+          <text x="52" y="176">600k€</text>
+          <text x="52" y="132">900k€</text>
+          <text x="52" y="88">1,2M€</text>
+        </g>
+        <!-- Actuel -->
+        <rect x="90" y="216" width="80" height="44" fill="#94a3b8" rx="4"/>
+        <text x="130" y="209" font-family="Inter" font-size="12" font-weight="700" fill="#0a2540" text-anchor="middle">300k€</text>
+        <!-- Conservateur -->
+        <rect x="230" y="171" width="80" height="89" fill="#0a2540" opacity=".6" rx="4"/>
+        <text x="270" y="164" font-family="Inter" font-size="12" font-weight="700" fill="#0a2540" text-anchor="middle">440k€</text>
+        <!-- Médian -->
+        <rect x="370" y="96" width="80" height="164" fill="#d4a574" rx="4"/>
+        <text x="410" y="89" font-family="Inter" font-size="12" font-weight="700" fill="#0a2540" text-anchor="middle">810k€</text>
+        <!-- Agressif -->
+        <rect x="490" y="45" width="80" height="215" fill="#0ea5e9" rx="4"/>
+        <text x="530" y="38" font-family="Inter" font-size="12" font-weight="700" fill="#0369a1" text-anchor="middle">1,3M€</text>
+        <!-- Labels X -->
+        <g font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">
+          <text x="130" y="280">Actuel</text>
+          <text x="270" y="280">Conservateur</text>
+          <text x="410" y="280">Médian</text>
+          <text x="530" y="280">Agressif</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FEUILLE DE ROUTE -->
+<section id="roadmap">
+  <div class="container page-break">
+    <div class="section-header">
+      <span class="kicker">06 · Plan d'exécution</span>
+      <h2>Feuille de route 90 jours</h2>
+      <p class="lead">Séquencement strict — chaque sprint débloque le suivant.</p>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-item avoid-break">
+        <div class="roadmap-step active">1</div>
+        <div class="roadmap-content">
+          <div class="roadmap-meta">Semaines 1-2 · Impact immédiat</div>
+          <strong>Réactivité automatique — « Marie répond en 5 minutes »</strong>
+          <p>Formulaire de contact restructuré sur WordPress → déclenchement d'une réponse IA via n8n en moins de 5 minutes, personnalisée selon le type de demande détecté (destination, groupe, horizon). Signée Marie. Le prospect ne sait pas que c'est automatisé. Récupère immédiatement les leads perdus par délai. <em>Coût infra : ~50€/mois. Effort build : 1 semaine.</em></p>
+        </div>
+      </div>
+      <div class="roadmap-item avoid-break">
+        <div class="roadmap-step active">2</div>
+        <div class="roadmap-content">
+          <div class="roadmap-meta">Semaines 3-4 · Qualification</div>
+          <strong>Formulaire de scoring — élimine les non-acheteurs sans consommer Marie</strong>
+          <p>Questionnaire de pré-qualification (budget minimum, horizon, destination, taille groupe, expérience safari, niveau de confort attendu). Score automatique : lead froid → séquence nurturing email automatique, lead chaud → accès calendrier Cal.com pour call 30 min avec Marie. Réduit de 60 à 70% le volume de proposals à produire. <em>Coût infra : ~30€/mois. Effort build : 1 semaine.</em></p>
+        </div>
+      </div>
+      <div class="roadmap-item avoid-break">
+        <div class="roadmap-step">3</div>
+        <div class="roadmap-content">
+          <div class="roadmap-meta">Mois 2 · Base de données</div>
+          <strong>Structuration des 30 ans de data dans Notion</strong>
+          <p>Import et structuration de la base prestataires (lodges, guides, itinéraires, tarifs, activités) dans Notion. Interface simple pour Marie — elle peut alimenter et mettre à jour sans compétence technique. C'est le travail le plus long humainement : convaincre Marie de livrer ses données dans un format structuré. Adeline sera l'intermédiaire opérationnel. <em>Effort : 3 à 4 semaines selon richesse des données existantes.</em></p>
+        </div>
+      </div>
+      <div class="roadmap-item avoid-break">
+        <div class="roadmap-step">4</div>
+        <div class="roadmap-content">
+          <div class="roadmap-meta">Mois 2-3 · Production</div>
+          <strong>Moteur de génération de proposals — de 5h à 30 min</strong>
+          <p>Pipeline n8n : données formulaire qualifié → requête base Notion → assemblage draft proposal HTML/PDF branded Wild Spirit Safari → validation Marie en 15 min → envoi. Template luxe avec photos lodges, carte itinéraire, fiches guides nominatifs. La cohérence graphique et la vitesse de production deviennent des arguments de vente à part entière. <em>Effort build : 2 semaines.</em></p>
+        </div>
+      </div>
+      <div class="roadmap-item avoid-break">
+        <div class="roadmap-step">5</div>
+        <div class="roadmap-content">
+          <div class="roadmap-meta">Mois 3 · Acquisition</div>
+          <strong>Digital — SEO/GEO, refonte site, présence éditoriale</strong>
+          <p>Uniquement à cette étape, une fois le back-office stabilisé. Refonte WordPress ou migration Next.js, contenu GEO/AEO (Schema.org, llms.txt, FAQ structurée), activation LinkedIn/Instagram, valorisation des actifs différenciants (guides, véhicules, bureau Arusha). Ne pas activer l'acquisition avant que Marie puisse traiter un volume accru sans saturation. <em>Effort : 4 semaines build + ongoing.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIORISATION ICE -->
+<section id="ice">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">07 · Priorisation ICE</span>
+      <h2>10 actions candidates — classement par priorité</h2>
+      <p class="lead">Impact × Confidence × Ease. Score 1-10 par axe.</p>
+    </div>
+
+    <table class="data-table avoid-break">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th>Impact</th>
+          <th>Confidence</th>
+          <th>Ease</th>
+          <th>Score ICE</th>
+          <th>Priorité</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ice-row-1">
+          <td><strong>1</strong></td>
+          <td>Réponse IA automatique < 5 min</td>
+          <td class="numeric">9</td><td class="numeric">9</td><td class="numeric">9</td>
+          <td class="numeric"><strong>729</strong></td>
+          <td><span class="tag tag-danger">Sprint 1</span></td>
+        </tr>
+        <tr class="ice-row-1">
+          <td><strong>2</strong></td>
+          <td>Formulaire de scoring / qualification</td>
+          <td class="numeric">10</td><td class="numeric">8</td><td class="numeric">8</td>
+          <td class="numeric"><strong>640</strong></td>
+          <td><span class="tag tag-danger">Sprint 1</span></td>
+        </tr>
+        <tr class="ice-row-2">
+          <td><strong>3</strong></td>
+          <td>Structuration base Notion prestataires</td>
+          <td class="numeric">9</td><td class="numeric">9</td><td class="numeric">5</td>
+          <td class="numeric"><strong>405</strong></td>
+          <td><span class="tag tag-warning">Mois 2</span></td>
+        </tr>
+        <tr class="ice-row-2">
+          <td><strong>4</strong></td>
+          <td>Template proposal luxe branded</td>
+          <td class="numeric">8</td><td class="numeric">9</td><td class="numeric">6</td>
+          <td class="numeric"><strong>432</strong></td>
+          <td><span class="tag tag-warning">Mois 2</span></td>
+        </tr>
+        <tr class="ice-row-2">
+          <td><strong>5</strong></td>
+          <td>Moteur génération devis depuis Notion</td>
+          <td class="numeric">9</td><td class="numeric">8</td><td class="numeric">5</td>
+          <td class="numeric"><strong>360</strong></td>
+          <td><span class="tag tag-warning">Mois 2-3</span></td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Fiches guides individuels sur site</td>
+          <td class="numeric">7</td><td class="numeric">9</td><td class="numeric">7</td>
+          <td class="numeric"><strong>441</strong></td>
+          <td><span class="tag tag-neutral">Mois 3</span></td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Refonte site / SEO on-page</td>
+          <td class="numeric">8</td><td class="numeric">7</td><td class="numeric">5</td>
+          <td class="numeric"><strong>280</strong></td>
+          <td><span class="tag tag-neutral">Mois 3</span></td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>Contenu GEO/AEO (Schema, llms.txt)</td>
+          <td class="numeric">7</td><td class="numeric">7</td><td class="numeric">6</td>
+          <td class="numeric"><strong>294</strong></td>
+          <td><span class="tag tag-neutral">Mois 3</span></td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td>CRM simple (suivi dossiers actifs)</td>
+          <td class="numeric">6</td><td class="numeric">8</td><td class="numeric">7</td>
+          <td class="numeric"><strong>336</strong></td>
+          <td><span class="tag tag-neutral">Mois 3</span></td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td>Acquisition sociale (Instagram/LinkedIn)</td>
+          <td class="numeric">7</td><td class="numeric">6</td><td class="numeric">4</td>
+          <td class="numeric"><strong>168</strong></td>
+          <td><span class="tag tag-neutral">Phase 2</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-accent avoid-break">
+      <strong>Conclusion opérationnelle.</strong> Les deux actions à score ICE le plus élevé (729 et 640) peuvent être déployées en moins de 2 semaines pour un coût infra de moins de 100€/mois. Elles génèrent potentiellement 1 à 2 closings supplémentaires dès le premier mois, soit un ROI de 10 000 à 30 000€ sur le seul premier mois d'opération. Aucun recrutement ne peut proposer ce ratio.
+    </div>
+  </div>
+</section>
+
+<!-- ANNEXES -->
+<section id="annexes">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">08 · Annexes</span>
+      <h2>Hypothèses posées & sources</h2>
+      <p class="lead">Transparence méthodologique complète.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Hypothèses à confirmer (call à venir)</h4>
+        <table class="data-table">
+          <thead><tr><th>Hypothèse</th><th>Valeur posée</th></tr></thead>
+          <tbody>
+            <tr><td>Demandes mensuelles</td><td>~100 (confirmé)</td></tr>
+            <tr><td>Closings/mois</td><td>2-3 (confirmé)</td></tr>
+            <tr><td>Ticket moyen</td><td>10-15k€ (confirmé)</td></tr>
+            <tr><td>Temps moy. par dossier</td><td>5h (fourchette 2-10h, confirmé)</td></tr>
+            <tr><td>% demandes → proposal complet</td><td>70% (à confirmer)</td></tr>
+            <tr><td>Marge nette sur CA</td><td>Non fournie — à collecter</td></tr>
+            <tr><td>Délai moyen réponse actuel</td><td>Non fourni — à mesurer</td></tr>
+            <tr><td>Nb dossiers refusés/mois (capacité)</td><td>Non fourni — critique</td></tr>
+            <tr><td>Budget intervention MasterPrompt</td><td>À définir post-call</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4>Sources utilisées</h4>
+        <table class="data-table">
+          <thead><tr><th>Source</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td>TourMaG.com (fiche Wild Spirit)</td><td>Données structurelles (effectif, statut, TATO)</td></tr>
+            <tr><td>Routard.com (forum)</td><td>Flotte propre 16 véhicules</td></tr>
+            <tr><td>TripAdvisor / top-vacances.fr</td><td>Qualité perçue, guides nommés</td></tr>
+            <tr><td>Petit Futé UK</td><td>Positionnement concurrentiel Arusha</td></tr>
+            <tr><td>Adeline / Michaël Lopez (WhatsApp)</td><td>Données opérationnelles (CA, volume, temps)</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-warning" style="margin-top:var(--sp-4);">
+          <strong>Point réglementaire.</strong> Wild Spirit Safari opère en France sous statut de bureau de liaison (siège Tanzanie). Vérifier l'immatriculation Atout France et la garantie financière obligatoire pour toute agence vendant des voyages en France — indépendamment du projet IA.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <strong>Michaël Lopez · MasterPrompt</strong><br>
+    Audit stratégique confidentiel — Wild Spirit Safari — Juillet 2026
+  </div>
+  <div style="text-align:right;">
+    masterprompt.fr<br>
+    <span style="color:var(--accent);">hello@masterprompt.fr</span>
+  </div>
+</footer>
+
+</body>
+</html>
